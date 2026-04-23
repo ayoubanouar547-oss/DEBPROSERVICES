@@ -30,28 +30,31 @@ export function CookieBanner() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-0 left-0 right-0 z-[100] p-4 sm:p-6 pb-8"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="fixed inset-0 z-[999999] p-4 flex items-center justify-center bg-[#000814]/80 backdrop-blur-sm"
         >
-          <div className="max-w-4xl mx-auto bg-dark text-white rounded-2xl shadow-2xl p-6 sm:p-8 border border-white/10 flex flex-col sm:flex-row items-center gap-6 justify-between">
-            <div className="flex-1 text-center sm:text-left">
-              <h3 className="font-heading font-bold text-xl mb-2">Cookies & Confidentialité</h3>
-              <p className="text-gray-300 text-sm">
-                Nous utilisons des cookies pour améliorer votre expérience de navigation, analyser le trafic de notre site et garantir le bon fonctionnement des formulaires. En continuant votre navigation, vous acceptez notre <Link href="/privacy-policy" className="text-secondary hover:underline">politique de confidentialité</Link>.
+          <div className="max-w-xl mx-auto bg-slate-900 text-white rounded-3xl shadow-2xl p-8 border border-white/10 flex flex-col items-center text-center gap-6">
+            <div className="flex-1">
+              <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-500/30">
+                 <span className="text-3xl">🍪</span>
+              </div>
+              <h3 className="font-heading font-black text-2xl mb-3 text-white">Cookies & Confidentialité</h3>
+              <p className="text-slate-300 text-sm leading-relaxed">
+                Nous utilisons des cookies pour améliorer votre expérience de navigation, analyser le trafic de notre site et garantir le bon fonctionnement des formulaires. En continuant votre navigation, vous acceptez notre <Link href="/privacy-policy" className="text-blue-400 font-bold hover:underline">politique de confidentialité</Link>.
               </p>
             </div>
-            <div className="flex shrink-0 flex-col sm:flex-row w-full sm:w-auto gap-3">
+            <div className="flex w-full flex-col sm:flex-row gap-4 mt-2">
               <button 
                 onClick={declineCookies}
-                className="px-6 py-2.5 rounded-lg border border-white/20 text-gray-300 hover:bg-white/10 transition text-sm font-bold"
+                className="flex-1 px-6 py-3.5 rounded-xl border-2 border-white/10 text-slate-300 hover:bg-white/5 transition text-sm font-black uppercase tracking-wider"
               >
-                Refuser
+                Continuer sans accepter
               </button>
               <button 
                 onClick={acceptCookies}
-                className="px-6 py-2.5 rounded-lg bg-primary hover:bg-white hover:text-primary transition text-white text-sm font-bold shadow-lg"
+                className="flex-1 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 transition text-white text-sm font-black shadow-lg shadow-blue-600/30 uppercase tracking-wider"
               >
                 Accepter
               </button>

@@ -44,7 +44,7 @@ export function Navbar() {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 ${isMobileMenuOpen ? 'z-[999999]' : 'z-50'} ${
         isScrolled ? 'bg-slate-900/50 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'
       }`}
     >
@@ -201,7 +201,7 @@ export function Navbar() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
                 {navLinks.map((link, idx) => (
                   <motion.div
                     key={link.name}
@@ -212,8 +212,32 @@ export function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex flex-col items-center justify-center bg-white/5 border border-white/10 p-4 rounded-2xl hover:bg-blue-600/20 transition-colors"
+                      className="relative flex flex-col items-center justify-center bg-white/5 border border-white/10 p-4 rounded-2xl hover:bg-blue-600/20 transition-colors"
                     >
+                      {/* Fire for Chauffage in Mobile Menu */}
+                      {isMounted && link.name === 'Chauffage' && (
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-full h-4 flex justify-center items-end pointer-events-none overflow-visible">
+                          {[...Array(5)].map((_, i) => (
+                            <motion.div
+                              key={`fire-mobile-${i}`}
+                              animate={{ 
+                                y: [0, -6, -10],
+                                x: [0, (Math.random() - 0.5) * 4],
+                                scale: [1, 1.2, 0],
+                                opacity: [0.6, 0.3, 0]
+                              }}
+                              transition={{
+                                duration: Math.random() * 2 + 1.5,
+                                repeat: Infinity,
+                                repeatType: "loop",
+                                delay: Math.random() * 1.5
+                              }}
+                              className="w-1.5 h-1.5 rounded-full absolute bottom-0 bg-gradient-to-t from-orange-500 to-red-500 blur-[1px]"
+                              style={{ left: `${20 + i * 15}%` }}
+                            />
+                          ))}
+                        </div>
+                      )}
                       <span className="text-sm font-bold text-white uppercase tracking-tight">{link.name}</span>
                     </Link>
                   </motion.div>
