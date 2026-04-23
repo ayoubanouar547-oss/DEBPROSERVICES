@@ -1,4 +1,4 @@
-import type {Metadata} from 'next';
+import type {Metadata, Viewport} from 'next';
 import { Inter, Oswald } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
@@ -23,10 +23,17 @@ export const metadata: Metadata = {
   description: 'Intervention d\'urgence 24H/24 et 7J/7 en Belgique. Plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique.',
 };
 
+export const viewport: Viewport = {
+  themeColor: '#000814',
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="fr" className={`${inter.variable} ${oswald.variable}`} suppressHydrationWarning>
-      <body className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-slate-900 text-white" suppressHydrationWarning>
+      <body className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white" suppressHydrationWarning>
         {/* Advanced Background Animation blobs - Professional Blue/Cyan Palette */}
         <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#000814]">
           <div className="absolute top-[-20%] left-[-10%] w-[900px] h-[900px] bg-blue-700/20 rounded-full blur-[150px] animate-blob"></div>

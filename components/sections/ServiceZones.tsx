@@ -50,12 +50,33 @@ export function ServiceZones() {
              </div>
           </div>
 
-          <div className="relative h-full min-h-[400px] bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden flex items-center justify-center p-8">
-            <div className="text-center">
-              <div className="w-64 h-64 mx-auto bg-gradient-to-br from-blue-500/20 to-cyan-400/20 rounded-full blur-3xl absolute inset-0 m-auto"></div>
-              <MapPin className="w-24 h-24 text-blue-400 mx-auto opacity-50 relative z-10" />
-              <p className="mt-4 text-2xl font-black text-white relative z-10">Toute la Belgique</p>
-              <div className="inline-block mt-4 bg-white/10 border border-white/20 px-4 py-2 rounded-full text-sm font-bold text-blue-300 relative z-10 uppercase tracking-widest">
+          <div className="relative h-full min-h-[400px] bg-[#000814]/40 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden flex items-center justify-center p-8 group">
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-[#FDDA24]/20 to-[#EF3340]/40 z-0"></div>
+            
+            {/* Belgian Flag outline map via mask */}
+            <div 
+              className="absolute inset-0 z-0 opacity-80 mix-blend-screen bg-gradient-to-r from-slate-900 via-[#FDDA24] to-[#EF3340] group-hover:opacity-100 transition-opacity duration-700"
+              style={{
+                maskImage: 'url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_map_of_Belgium.svg/1024px-Flag_map_of_Belgium.svg.png")',
+                WebkitMaskImage: 'url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_map_of_Belgium.svg/1024px-Flag_map_of_Belgium.svg.png")',
+                maskSize: 'contain',
+                WebkitMaskSize: 'contain',
+                maskPosition: 'center',
+                WebkitMaskPosition: 'center',
+                maskRepeat: 'no-repeat',
+                WebkitMaskRepeat: 'no-repeat'
+              }}
+            ></div>
+
+            {/* Glowing effect behind map */}
+            <div className="w-64 h-64 mx-auto bg-gradient-to-br from-yellow-500/10 to-red-600/10 rounded-full blur-[80px] absolute inset-0 m-auto z-0 pointer-events-none"></div>
+            
+            <div className="text-center relative z-10 p-8 rounded-2xl bg-[#000814]/60 border border-white/10 shadow-2xl backdrop-blur-md">
+              <MapPin className="w-16 h-16 text-yellow-400 mx-auto mb-4 animate-bounce" />
+              <p className="mt-2 text-3xl font-black text-white relative z-10 drop-shadow-lg tracking-wide uppercase">
+                Toute la Belgique
+              </p>
+              <div className="inline-block mt-4 bg-gradient-to-r from-black via-yellow-500/20 to-red-600/20 border border-yellow-500/30 px-6 py-2 rounded-full text-xs font-black text-yellow-400 relative z-10 uppercase tracking-widest shadow-xl">
                 +45 Techniciens Actifs
               </div>
             </div>

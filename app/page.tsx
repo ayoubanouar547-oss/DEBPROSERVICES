@@ -5,6 +5,7 @@ import { ServiceZones } from '@/components/sections/ServiceZones';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { FAQ } from '@/components/sections/FAQ';
 import { ContactForm } from '@/components/sections/ContactForm';
+import { SEOContent } from '@/components/sections/SEOContent';
 
 export default function Home() {
   return (
@@ -45,6 +46,7 @@ export default function Home() {
       <Testimonials />
       <FAQ />
       <ContactForm />
+      <SEOContent />
     </>
   );
 }

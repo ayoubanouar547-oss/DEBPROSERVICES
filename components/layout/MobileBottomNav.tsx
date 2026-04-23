@@ -49,7 +49,7 @@ export function MobileBottomNav() {
                   <a 
                     key={item.name}
                     href={item.href}
-                    className="relative -top-6 bg-red-600 p-3 rounded-full border-4 border-[#000814] shadow-xl shadow-red-600/40"
+                    className="relative -top-6 bg-green-600 p-3 rounded-full border-4 border-[#000814] shadow-xl shadow-green-600/40"
                   >
                     <Icon className="w-6 h-6 text-white animate-pulse" />
                   </a>

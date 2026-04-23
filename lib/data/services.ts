@@ -6,6 +6,7 @@ export const services = [
     slug: 'plomberie',
     title: 'Plomberie',
     icon: Wrench,
+    imageUrl: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?q=80&w=1000&auto=format&fit=crop',
     description: 'Vous faites face à une canalisation bouchée, une fuite d\'eau ou un problème de plomberie urgent ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers certifiés disposent des équipements les plus modernes pour réparer vos fuites et résoudre tout problème de plomberie, quelle que soit la complexité.',
     features: ['Recherche et réparation de fuites', 'Remplacement de robinetterie', 'Installation sanitaire', 'Dépannage chauffe-eau'],
     subServices: [
@@ -22,6 +23,7 @@ export const services = [
     slug: 'debouchage-canalisation',
     title: 'Débouchage',
     icon: Droplets,
+    imageUrl: 'https://images.unsplash.com/photo-1542013936693-884638332954?q=80&w=1000&auto=format&fit=crop',
     description: 'Vous faites face à une canalisation bouchée ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers disposent des équipements les plus modernes pour déboucher vos canalisations.',
     features: ['Débouchage haute pression', 'Inspection par caméra', 'Évacuation des mauvaises odeurs', 'Entretien préventif'],
     subServices: [
@@ -39,6 +41,7 @@ export const services = [
     slug: 'chauffage',
     title: 'Chauffage',
     icon: Flame,
+    imageUrl: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1000&auto=format&fit=crop',
     description: 'Votre chaudière tombe en panne en plein hiver ? Vos radiateurs ne chauffent plus ? DEB PRO SERVICES, votre chauffagiste agréé en Belgique, intervient en urgence pour le dépannage, l\'entretien et l\'installation de tous types de chaudières et systèmes de chauffage.',
     features: ['Entretien chaudière', 'Dépannage urgent 24/7', 'Remplacement chaudière', 'Purge des radiateurs'],
     subServices: [
@@ -55,6 +58,7 @@ export const services = [
     slug: 'gaz',
     title: 'Gaz',
     icon: Flame,
+    imageUrl: 'https://images.unsplash.com/photo-1601569429768-b7eb123ccc8f?q=80&w=1000&auto=format&fit=crop',
     description: 'Vous suspectez une fuite de gaz ou avez besoin d\'une installation gaz conforme aux normes belges ? Nos techniciens certifiés CERGA interviennent rapidement pour assurer votre sécurité.',
     features: ['Détection fuite de gaz', 'Mise en conformité', 'Raccordement appareils', 'Attestation de sécurité'],
     subServices: [
@@ -71,6 +75,7 @@ export const services = [
     slug: 'electricite',
     title: 'Électricité',
     icon: Zap,
+    imageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1000&auto=format&fit=crop',
     description: 'Panne électrique, tableau défectueux, installation non conforme ? Nos électriciens agréés AREI interviennent pour tous vos travaux électriques en Belgique. Dépannage d\'urgence 24h/24.',
     features: ['Recherche de panne', 'Mise en conformité CEBI', 'Remplacement tableau', 'Éclairage et prises'],
     subServices: [
@@ -87,6 +92,7 @@ export const services = [
     slug: 'climatisation',
     title: 'Climatisation',
     icon: Wind,
+    imageUrl: 'https://images.unsplash.com/photo-1545648839-db3cddda1203?q=80&w=1000&auto=format&fit=crop',
     description: 'Installation, entretien et dépannage de tous systèmes de climatisation en Belgique. Nos techniciens certifiés F-Gas interviennent pour les particuliers et professionnels.',
     features: ['Installation split', 'Entretien annuel', 'Recharge gaz', 'Réparation compresseur'],
     subServices: [
@@ -103,6 +109,7 @@ export const services = [
     slug: 'vidange-fosse-septique',
     title: 'Vidange Fosse',
     icon: Truck,
+    imageUrl: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?q=80&w=1000&auto=format&fit=crop',
     description: 'Vidange, entretien et installation de fosses septiques en Belgique. Intervention rapide avec camion hydrocureur. Conforme aux normes.',
     features: ['Vidange urgente', 'Nettoyage bac à graisse', 'Débouchage égouts', 'Traitement des déchets'],
     subServices: [

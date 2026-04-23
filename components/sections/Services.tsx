@@ -38,14 +38,14 @@ export function Services() {
                 {/* Card Image */}
                 <div className="relative h-56 w-full overflow-hidden flex-shrink-0 z-10">
                   <img 
-                    src={`https://picsum.photos/seed/${service.slug}/600/400`} 
+                    src={service.imageUrl || `https://picsum.photos/seed/${service.slug}/600/400`} 
                     alt={`Service de ${service.title}`} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
                   
                   {/* Icon */}
-                  <div className={`absolute -bottom-2 left-6 w-16 h-16 rounded-2xl ${service.color.bg} ${service.color.text} flex items-center justify-center shadow-2xl border ${service.color.border} backdrop-blur-md`}>
+                  <div className={`absolute bottom-4 left-6 w-16 h-16 rounded-2xl ${service.color.bg} ${service.color.text} flex items-center justify-center shadow-2xl border ${service.color.border} backdrop-blur-md`}>
                     <Icon className="w-8 h-8" />
                   </div>
                 </div>

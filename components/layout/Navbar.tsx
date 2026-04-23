@@ -187,44 +187,56 @@ export function Navbar() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-[#000814]/95 backdrop-blur-2xl z-[60] md:hidden"
+            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            animate={{ opacity: 1, backdropFilter: 'blur(20px)' }}
+            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-[#000814]/95 z-[60] md:hidden overflow-y-auto"
           >
-            <div className="flex flex-col h-full pt-24 px-6 pb-20 overflow-y-auto">
-              <div className="flex justify-between items-center mb-10">
-                <span className="text-xl font-black text-blue-400 uppercase tracking-tighter">Navigation</span>
-                <button onClick={() => setIsMobileMenuOpen(false)} className="bg-white/10 p-2 rounded-full border border-white/10">
-                  <X className="w-6 h-6 text-white" />
+            <div className="flex flex-col min-h-screen px-6 py-8">
+              <div className="flex justify-between items-center mb-8">
+                <span className="text-sm font-black text-blue-500 uppercase tracking-widest">Menu Principal</span>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)} 
+                  className="bg-white/5 p-3 rounded-full border border-white/10 text-white hover:bg-white/10 active:scale-95 transition-all"
+                >
+                  <X className="w-6 h-6" />
                 </button>
               </div>
 
-            <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col space-y-2 mt-4">
                 {navLinks.map((link, idx) => (
                   <motion.div
                     key={link.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: idx * 0.05 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.08, ease: "easeOut" }}
                   >
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="relative flex flex-col items-center justify-center bg-white/5 border border-white/10 p-4 rounded-2xl hover:bg-blue-600/20 transition-colors"
+                      className="group relative flex items-center justify-between bg-transparent border-b border-white/5 py-5 transition-colors"
                     >
+                      <span className="text-2xl font-black text-slate-200 group-hover:text-blue-400 group-active:text-blue-500 tracking-tight transition-colors">
+                        {link.name}
+                      </span>
+                      <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-blue-500/50 group-hover:bg-blue-500/10 transition-all">
+                        <svg className="w-4 h-4 text-slate-500 group-hover:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+
                       {/* Fire for Chauffage in Mobile Menu */}
                       {isMounted && link.name === 'Chauffage' && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-full h-4 flex justify-center items-end pointer-events-none overflow-visible">
+                        <div className="absolute top-1/2 -translate-y-1/2 left-32 w-10 h-6 flex justify-center items-end pointer-events-none overflow-visible">
                           {[...Array(5)].map((_, i) => (
                             <motion.div
                               key={`fire-mobile-${i}`}
                               animate={{ 
-                                y: [0, -6, -10],
-                                x: [0, (Math.random() - 0.5) * 4],
-                                scale: [1, 1.2, 0],
-                                opacity: [0.6, 0.3, 0]
+                                y: [0, -8, -15],
+                                x: [0, (Math.random() - 0.5) * 6],
+                                scale: [1, 1.3, 0],
+                                opacity: [0.7, 0.4, 0]
                               }}
                               transition={{
                                 duration: Math.random() * 2 + 1.5,
@@ -232,34 +244,42 @@ export function Navbar() {
                                 repeatType: "loop",
                                 delay: Math.random() * 1.5
                               }}
-                              className="w-1.5 h-1.5 rounded-full absolute bottom-0 bg-gradient-to-t from-orange-500 to-red-500 blur-[1px]"
+                              className="w-2 h-2 rounded-full absolute bottom-0 bg-gradient-to-t from-orange-500 to-red-500 blur-[1px]"
                               style={{ left: `${20 + i * 15}%` }}
                             />
                           ))}
                         </div>
                       )}
-                      <span className="text-sm font-bold text-white uppercase tracking-tight">{link.name}</span>
                     </Link>
                   </motion.div>
                 ))}
               </div>
 
-              <div className="mt-12 space-y-4">
-                <motion.a 
-                  whileTap={{ scale: 0.95 }}
-                  href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
-                  className="w-full flex items-center justify-center gap-3 bg-red-600 text-white py-5 rounded-3xl font-black text-xl shadow-xl shadow-red-600/30"
+              <div className="mt-auto pt-10 pb-8 space-y-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
                 >
-                  <Phone className="w-6 h-6 fill-white" /> {PHONE_NUMBER}
-                </motion.a>
-                <motion.div whileTap={{ scale: 0.95 }}>
                   <Link 
                     href="/urgence"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-full flex items-center justify-center gap-3 bg-white/10 border border-white/20 text-white py-5 rounded-3xl font-black text-xl backdrop-blur-xl"
+                    className="w-full flex items-center justify-center gap-3 bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 py-4 rounded-2xl font-black text-lg transition-colors active:bg-yellow-500/20"
                   >
-                    <AlertTriangle className="w-6 h-6 text-yellow-500" /> URGENCE 24/7
+                    <AlertTriangle className="w-5 h-5" /> URGENCE 24J/7
                   </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <a 
+                    href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
+                    className="w-full flex items-center justify-center gap-3 bg-red-600 text-white py-4 rounded-2xl font-black text-xl shadow-lg shadow-red-600/20 active:scale-[0.98] transition-all"
+                  >
+                    <Phone className="w-5 h-5 fill-white" /> {PHONE_NUMBER}
+                  </a>
                 </motion.div>
               </div>
             </div>
