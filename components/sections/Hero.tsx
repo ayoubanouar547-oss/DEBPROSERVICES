@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { PhoneCall, ShieldCheck, Clock, MapPin, CheckCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -135,23 +136,21 @@ export function Hero() {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="col-span-1 lg:col-span-5 hidden lg:block"
+        className="col-span-1 lg:col-span-5 block mt-0 lg:mt-0"
       >
-        <div className="relative aspect-[4/5] w-full max-w-lg mx-auto flex items-end justify-center">
+        <div className="relative aspect-[4/5] w-full max-w-[320px] lg:max-w-lg mx-auto flex items-end justify-center">
            {/* Decorative background glow for the Technician */}
            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-500/30 blur-[100px] rounded-full -z-10"></div>
            
            {/* Technician Uploaded Image Container */}
-           <div className="relative z-10 w-full h-full flex items-end justify-center">
-               <img 
+           <div className="relative z-10 w-full h-[110%] flex items-end justify-center">
+               <Image 
                  src="/technician.png" 
                  alt="Technicien DEB PRO SERVICES" 
-                 className="w-auto h-[110%] object-contain object-bottom drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
-                 onError={(e) => {
-                   // Fallback visual in case image isn't uploaded yet
-                   e.currentTarget.style.display = 'none';
-                   e.currentTarget.parentElement!.innerHTML += '<div class="text-center p-6 border-2 border-dashed border-blue-500/50 rounded-3xl bg-blue-500/10 backdrop-blur-sm"><p class="text-blue-300 font-bold mb-2">Image Prête !</p><p class="text-sm text-blue-200/70">Glissez "technician.png" dans le dossier "public/"</p></div>';
-                 }}
+                 fill
+                 sizes="(max-width: 768px) 100vw, 50vw"
+                 priority={true}
+                 className="object-contain object-bottom drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] scale-110 md:scale-100"
                />
            </div>
         </div>
