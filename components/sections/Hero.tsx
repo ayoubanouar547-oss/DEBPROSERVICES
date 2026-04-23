@@ -6,19 +6,52 @@ import Image from 'next/image';
 import { PhoneCall, ShieldCheck, Clock, MapPin, CheckCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 
-const SERVICES = ['Débouchage Urgence', 'Plomberie', 'Chauffagiste', 'Fuite de Gaz', 'Électricité', 'Vidange Fosse'];
+const SERVICES = [
+  { text: 'Plomberie', gradient: 'from-blue-400 to-cyan-300' },
+  { text: 'Débouchage', gradient: 'from-blue-500 to-indigo-400' },
+  { text: 'Chauffage', gradient: 'from-orange-500 to-red-500' },
+  { text: 'Gaz', gradient: 'from-amber-400 to-orange-500' },
+  { text: 'Électricité', gradient: 'from-yellow-300 to-yellow-500' },
+  { text: 'Climatisation', gradient: 'from-sky-300 to-blue-400' }
+];
 
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [serviceIndex, setServiceIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(100);
 
   // Typewriter effect logic
   useEffect(() => {
-    const interval = setInterval(() => {
-      setServiceIndex((current) => (current + 1) % SERVICES.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    let timer: NodeJS.Timeout;
+    const currentService = SERVICES[serviceIndex].text.toUpperCase();
+    const fullText = currentService + ' EN BELGIQUE';
+
+    if (!isDeleting) {
+      if (displayedText.length < fullText.length) {
+        // Typing phase
+        timer = setTimeout(() => {
+          setDisplayedText(fullText.substring(0, displayedText.length + 1));
+        }, 90); // Normal typing speed
+      } else {
+        // Finished typing, pause for 3 seconds
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, 3000);
+      }
+    } else {
+      // Deleting phase - Different animation instead of backward typing
+      // Wait for the exit animation to finish (e.g., 500ms), then reset and move to next word
+      timer = setTimeout(() => {
+        setDisplayedText('');
+        setIsDeleting(false);
+        setServiceIndex((current) => (current + 1) % SERVICES.length);
+      }, 500); 
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, serviceIndex]);
 
   // Simple particle system for the background (Water effect)
   useEffect(() => {
@@ -81,9 +114,26 @@ export function Hero() {
         </div>
         
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-6">
-            Plombier & Débouchage en Belgique <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 block mt-2 text-shiny">
+          <h1 className="font-black leading-[1.1] mb-6">
+            <div className="text-4xl md:text-5xl lg:text-7xl min-h-[140px] flex flex-col justify-center">
+              <motion.div 
+                 className="flex flex-wrap items-center relative"
+                 animate={
+                   isDeleting 
+                     ? { opacity: 0, y: -20, scale: 0.95, filter: 'blur(10px)' } 
+                     : { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }
+                 }
+                 transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <span className={`bg-clip-text text-transparent bg-gradient-to-r ${SERVICES[serviceIndex].gradient}`}>
+                  {displayedText.substring(0, SERVICES[serviceIndex].text.length)}
+                </span>
+                <span className="text-white whitespace-pre-wrap">
+                  {displayedText.substring(SERVICES[serviceIndex].text.length)}
+                </span>
+              </motion.div>
+            </div>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 block mt-2 text-3xl md:text-4xl lg:text-5xl text-shiny">
               Intervention Express 24H/24
             </span>
           </h1>
