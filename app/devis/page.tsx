@@ -1,0 +1,18 @@
+import { ContactForm } from '@/components/sections/ContactForm';
+
+export const metadata = {
+  title: 'Demande de devis gratuit | DEB PRO SERVICES',
+  description: 'Obtenez un devis gratuit et sans engagement pour vos travaux de plomberie, chauffage, électricité et débouchage.',
+};
+
+export default function DevisPage() {
+  return (
+    <div className="pt-24 pb-12">
+      <div className="text-center py-8">
+        <h1 className="text-4xl font-heading font-bold text-dark">Devis 100% Gratuit</h1>
+        <p className="text-gray-600 max-w-2xl mx-auto mt-4">Un de nos experts examinera votre demande et vous répondra très rapidement avec une estimation précise, claire et sans mauvaise surprise.</p>
+      </div>
+      <ContactForm />
+    </div>
+  );
+}

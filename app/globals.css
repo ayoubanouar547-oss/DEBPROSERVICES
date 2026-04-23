@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1565c0;
+  --color-secondary: #00bcd4;
+  --color-accent: #d32f2f;
+  --color-dark: #010409;
+  --font-heading: var(--font-oswald), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: #000814;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@keyframes float-blob {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.animate-blob {
+  animation: float-blob 15s infinite ease-in-out;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 40px -10px rgba(220, 38, 38, 0.5);
+}
+
+.btn-luxury:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px -12px rgba(220, 38, 38, 0.6);
+  filter: brightness(1.1);
+}
+
+.text-shiny {
+  background: linear-gradient(120deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,1) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shiny 10s linear infinite;
+}
+
+@keyframes shiny {
+  to { background-position: 200% center; }
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
