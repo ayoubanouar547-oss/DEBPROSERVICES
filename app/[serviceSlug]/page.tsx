@@ -121,14 +121,10 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
             <div className="space-y-8">
               <h2 className="text-4xl font-black">Prestations de haute qualité pour votre {serviceInfo.title.toLowerCase()}</h2>
               
-              <div className="prose prose-lg prose-invert text-slate-300">
-                <p>
-                  Dans le domaine de la <strong>{serviceInfo.title.toLowerCase()}</strong>, l'improvisation n'a pas sa place. Un système mal entretenu ou rafistolé peut entraîner des dysfonctionnements, voire des dégâts importants dans votre habitation ou vos locaux commerciaux. En faisant appel à notre équipe, vous optez pour la sérénité.
-                </p>
-                <p>
-                  Nous prenons en charge toutes les étapes : du diagnostic précis à la résolution de la panne. Nous disposons des certifications nécessaires pour intervenir en toute sécurité.
-                </p>
-              </div>
+              <div 
+                className="prose prose-lg prose-invert text-slate-300"
+                dangerouslySetInnerHTML={{ __html: serviceInfo.contentHTML || serviceInfo.description }}
+              />
 
               <div>
                 <h3 className="text-2xl font-bold text-white mb-6">Nos garanties d'expert :</h3>
