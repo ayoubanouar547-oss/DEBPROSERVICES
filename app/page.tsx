@@ -18,10 +18,10 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "DEB PRO SERVICES",
-            "image": "https://debproservices.be/logo.png",
-            "@id": "https://debproservices.be",
-            "url": "https://debproservices.be",
-            "telephone": "+32470000000",
+            "image": "https://debservices.canalrose.be/logo.png",
+            "@id": "https://debservices.canalrose.be",
+            "url": "https://debservices.canalrose.be",
+            "telephone": "+32496325733",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Bruxelles",
@@ -29,7 +29,7 @@ export default function Home() {
             },
             "areaServed": "Belgium",
             "priceRange": "$$",
-            "description": "Entreprise de plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique intervenant partout en Belgique en urgence 24h/24.",
+            "description": "Entreprise de plomberie, débouchage de canalisation, chauffagiste, gaz, électricité et vidange de fosse septique intervenant partout en Belgique en urgence 24h/24.",
             "openingHoursSpecification": {
               "@type": "OpeningHoursSpecification",
               "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
