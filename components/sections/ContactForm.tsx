@@ -88,8 +88,9 @@ export function ContactForm() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Nom Complet *</label>
+                    <label htmlFor="nom-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Nom Complet *</label>
                     <input 
+                      id="nom-input"
                       type="text" 
                       {...register('nom')} 
                       className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.nom ? 'border-red-500/50' : 'border-white/10'} text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
@@ -98,8 +99,9 @@ export function ContactForm() {
                     {errors.nom && <p className="mt-2 text-xs text-red-400 font-bold">{errors.nom.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Téléphone *</label>
+                    <label htmlFor="telephone-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Téléphone *</label>
                     <input 
+                      id="telephone-input"
                       type="tel" 
                       {...register('telephone')} 
                       className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.telephone ? 'border-red-500/50' : 'border-white/10'} text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
@@ -111,8 +113,9 @@ export function ContactForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Service Demandé *</label>
+                    <label htmlFor="service-select" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Service Demandé *</label>
                     <select 
+                      id="service-select"
                       {...register('service')} 
                       className={`w-full px-4 py-3 rounded-xl bg-slate-900 border ${errors.service ? 'border-red-500/50' : 'border-white/10'} text-white focus:outline-none focus:border-blue-500/50 transition-colors appearance-none`}
                     >
@@ -126,8 +129,9 @@ export function ContactForm() {
                     {errors.service && <p className="mt-2 text-xs text-red-400 font-bold">{errors.service.message}</p>}
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Ville / Code Postal *</label>
+                    <label htmlFor="ville-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Ville / Code Postal *</label>
                     <input 
+                      id="ville-input"
                       type="text" 
                       {...register('ville')} 
                       className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.ville ? 'border-red-500/50' : 'border-white/10'} text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
@@ -138,8 +142,9 @@ export function ContactForm() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Email <span className="font-normal text-slate-500 lowercase">(Optionnel)</span></label>
+                  <label htmlFor="email-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Email <span className="font-normal text-slate-400 lowercase">(Optionnel)</span></label>
                   <input 
+                    id="email-input"
                     type="email" 
                     {...register('email')} 
                     className={`w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
@@ -148,8 +153,9 @@ export function ContactForm() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Détails de l'intervention *</label>
+                  <label htmlFor="message-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">Détails de l'intervention *</label>
                   <textarea 
+                    id="message-input"
                     {...register('message')} 
                     rows={4}
                     className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors resize-none`}

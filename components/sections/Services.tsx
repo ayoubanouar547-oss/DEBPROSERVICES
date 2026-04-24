@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { services } from '@/lib/data/services';
 import { motion } from 'motion/react';
@@ -37,12 +38,14 @@ export function Services() {
                 
                 {/* Card Image */}
                 <div className="relative h-56 w-full overflow-hidden flex-shrink-0 z-10">
-                  <img 
+                  <Image 
                     src={service.imageUrl || `https://picsum.photos/seed/${service.slug}/600/400`} 
                     alt={`Service de ${service.title}`} 
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent z-[1]"></div>
                   
                   {/* Icon */}
                   <div className={`absolute bottom-4 left-6 w-16 h-16 rounded-2xl ${service.color.bg} ${service.color.text} flex items-center justify-center shadow-2xl border ${service.color.border} backdrop-blur-md`}>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Menu, X, AlertTriangle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
@@ -13,10 +14,19 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [particles, setParticles] = useState<any[]>([]);
   const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);
+    setParticles([...Array(15)].map(() => ({
+      distanceX: Math.random() * 250 + 150,
+      distanceY: Math.random() * 250 + 100,
+      arcHeight: -(Math.random() * 40 + 20),
+      duration: Math.random() * 1.5 + 1,
+      delay: Math.random() * 2,
+      size: Math.random() * 4 + 2
+    })));
   }, []);
 
   useEffect(() => {
@@ -58,9 +68,11 @@ export function Navbar() {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <div className="relative z-10">
-              <img 
+              <Image 
                 src="https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c" 
                 alt="Deb PRO Services Logo" 
+                width={275}
+                height={84}
                 className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
@@ -68,43 +80,33 @@ export function Navbar() {
             
             {/* Water Spray Animation from the Nozzle (Right side of logo) */}
             <div className="absolute top-[40%] right-[5%] w-0 h-0 pointer-events-none overflow-visible z-[-1]">
-              {isMounted && [...Array(15)].map((_, i) => {
-                // Generate random trajectory for each water particle
-                const distanceX = Math.random() * 250 + 150; // Spray distance to the right
-                const distanceY = Math.random() * 250 + 100;  // Fall distance downwards
-                const arcHeight = -(Math.random() * 40 + 20); // Arc upwards before falling
-                const duration = Math.random() * 1.5 + 1; // 1 to 2.5 seconds
-                const delay = Math.random() * 2;
-                const size = Math.random() * 4 + 2; // 2px to 6px drops
-                
-                return (
+              {isMounted && particles.map((p, i) => (
                   <motion.div
                     key={i}
                     initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
                     animate={{ 
-                      x: [0, distanceX * 0.4, distanceX],
-                      y: [0, arcHeight, distanceY],
+                      x: [0, p.distanceX * 0.4, p.distanceX],
+                      y: [0, p.arcHeight, p.distanceY],
                       opacity: [0, 1, 0.8, 0],
                       scale: [0.2, 1, 0.8, 0.3],
                       rotate: [0, 45, 90]
                     }}
                     transition={{
-                      duration: duration,
+                      duration: p.duration,
                       repeat: Infinity,
-                      delay: delay,
+                      delay: p.delay,
                       ease: "linear"
                     }}
                     className="absolute rounded-full"
                     style={{ 
-                      width: size,
-                      height: size * 1.5,
+                      width: p.size,
+                      height: p.size * 1.5,
                       background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(59,130,246,0.7) 60%, rgba(29,78,216,0.2) 100%)",
                       boxShadow: "0 0 8px rgba(96,165,250,0.6)",
                       filter: "blur(0.5px)"
                     }}
                   />
-                );
-              })}
+              ))}
             </div>
           </Link>
 

@@ -21,7 +21,7 @@ export default function Home() {
             "image": "https://debproservices.be/logo.png",
             "@id": "https://debproservices.be",
             "url": "https://debproservices.be",
-            "telephone": "+32496325733",
+            "telephone": "+32470000000",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Bruxelles",

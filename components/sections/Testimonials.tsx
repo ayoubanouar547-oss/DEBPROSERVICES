@@ -66,7 +66,7 @@ export function Testimonials() {
   } : {
     bgConfig: "bg-white/5",
     border: "border-white/10",
-    textHighlight: "text-[#1565c0]",
+    textHighlight: "text-blue-400",
     glow: "shadow-[0_0_40px_rgba(21,101,192,0.15)]",
     star: "fill-yellow-400 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]",
     badge: "Avis vérifiés",
@@ -210,10 +210,18 @@ export function Testimonials() {
 
            {/* Mobile Handlers (Swipe indicators style) */}
            <div className="flex justify-center gap-4 mt-12 md:hidden">
-              <button onClick={handlePrev} className={`p-4 rounded-xl bg-white/5 border border-white/10 text-white ${theme.btnHover} glass-card`}>
+              <button 
+                onClick={handlePrev} 
+                aria-label="Témoignage précédent"
+                className={`p-4 rounded-xl bg-white/5 border border-white/10 text-white ${theme.btnHover} glass-card`}
+              >
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              <button onClick={handleNext} className={`p-4 rounded-xl bg-white/5 border border-white/10 text-white ${theme.btnHover} glass-card`}>
+              <button 
+                onClick={handleNext} 
+                aria-label="Témoignage suivant"
+                className={`p-4 rounded-xl bg-white/5 border border-white/10 text-white ${theme.btnHover} glass-card`}
+              >
                 <ChevronRight className="w-6 h-6" />
               </button>
            </div>
@@ -224,9 +232,11 @@ export function Testimonials() {
                <button 
                  key={idx} 
                  onClick={() => setCurrentIndex(idx)}
-                 className={`transition-all duration-500 rounded-full ${currentIndex === idx ? `w-10 h-2 ${isReturningUser ? 'bg-amber-500' : 'bg-blue-400'}` : 'w-2 h-2 bg-slate-700 hover:bg-slate-600'}`}
+                 className="p-2 -m-2 transition-all duration-300 group"
                  aria-label={`Aller au témoignage ${idx + 1}`}
-               />
+               >
+                 <div className={`transition-all duration-500 rounded-full ${currentIndex === idx ? `w-10 h-2 ${isReturningUser ? 'bg-amber-500' : 'bg-blue-400'}` : 'w-2 h-2 bg-slate-700 group-hover:bg-slate-600'}`} />
+               </button>
              ))}
            </div>
         </div>

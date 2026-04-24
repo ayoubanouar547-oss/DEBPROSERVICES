@@ -90,7 +90,7 @@ export const services = [
     slug: 'gaz',
     title: 'Gaz',
     icon: Flame,
-    imageUrl: 'https://images.unsplash.com/photo-1601569429768-b7eb123ccc8f?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://picsum.photos/seed/gaz/1000/800',
     description: 'Vous suspectez une fuite de gaz ou avez besoin d\'une installation gaz conforme aux normes belges ? Nos techniciens certifiés CERGA interviennent rapidement pour assurer votre sécurité.',
     contentHTML: `
       <p>L'utilisation domestique du <strong>gaz naturel ou propane</strong> demande une vigilance de tous les instants et surtout une installation totalement irréprochable. L'organisme CERGA régit les normes les plus strictes en matière de sécurité gazière en Belgique. DEB PRO SERVICES emploie des <em>techniciens agréés CERGA</em> capables de monter, vérifier et certifier l'ensemble de vos compteurs, conduites et appareils au gaz.</p>
@@ -146,7 +146,7 @@ export const services = [
     slug: 'climatisation',
     title: 'Climatisation',
     icon: Wind,
-    imageUrl: 'https://images.unsplash.com/photo-1545648839-db3cddda1203?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://picsum.photos/seed/climatisation/1000/800',
     description: 'Installation, entretien et dépannage de tous systèmes de climatisation en Belgique. Nos techniciens certifiés F-Gas interviennent pour les particuliers et professionnels.',
     contentHTML: `
       <p>Les vagues de chaleur devenant plus fréquentes en Belgique, le conditionnement d'air n'est plus une option. Disposer d'une <strong>climatisation performante</strong> permet de purifier l'air de votre domicile tout en maintenant une température rafraîchissante. Pour pallier tous soucis de gaz frigorigène, tous nos frigoristes installateurs détiennent un <em>agrément environnemental européen (F-gas)</em>.</p>

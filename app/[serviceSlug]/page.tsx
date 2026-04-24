@@ -5,6 +5,7 @@ import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
 import { belgianCities } from '@/lib/data/cities';
+import { PageHero } from '@/components/ui/PageHero';
 
 export function generateStaticParams() {
   return services.map((service) => ({
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceSl
   const service = services.find(s => s.slug === resolvedParams.serviceSlug);
   if (!service) return {};
   return {
-    title: `${service.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
+    title: `Expert ${service.title} en Belgique | Intervention Rapide 24H/24 | DEB PRO SERVICES`,
     description: `Service professionnel de ${service.title.toLowerCase()}. ${service.description} Intervention urgente 24h/24 et 7j/7 partout en Belgique.`,
   };
 }
@@ -52,33 +53,16 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
         }}
       />
 
-      <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
-        <div className="absolute inset-0 bg-slate-900 pointer-events-none">
-           <div className={`absolute inset-0 ${serviceInfo.color.bg} opacity-20 blur-3xl`}></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="max-w-3xl">
-             <div className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}>
-                <serviceInfo.icon className="w-4 h-4" />
-                Service Pro & Agrée
-             </div>
-             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
-                Expert {serviceInfo.title}
-             </h1>
-             <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
-               {serviceInfo.description}
-             </p>
-             <div className="flex flex-wrap gap-4">
-                <a href="tel:0470000000" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30">
-                  <PhoneCall className="w-5 h-5" /> Urgence {serviceInfo.title}
-                </a>
-             </div>
-           </div>
-        </div>
-      </section>
+      <PageHero 
+        title={`Expert ${serviceInfo.title}`}
+        titleHighlight="en Belgique"
+        description={`${serviceInfo.description} Intervention rapide 24h/24.`}
+        primaryButtonText={`Urgence ${serviceInfo.title}`}
+        secondaryButtonText="Demander un devis"
+      />
 
       {/* Sub-services / Clusters Overview */}
-      <section className="py-24 relative z-10 text-white bg-slate-900/50">
+      <section className="py-24 relative z-10 text-white border-t border-white/5 bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-16">
              <h2 className="text-4xl font-black mb-4">Nos domaines d'intervention en {serviceInfo.title}</h2>

@@ -5,6 +5,7 @@ import { PhoneCall, ShieldCheck, CheckCircle, ChevronRight } from 'lucide-react'
 import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
+import { PageHero } from '@/components/ui/PageHero';
 
 export function generateStaticParams() {
   const params: { serviceSlug: string, subServiceSlug: string }[] = [];
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceSl
   if (!service || !subService) return {};
   
   return {
-    title: `${subService.title} Belgique | Experts en ${service.title} | ☎ 24H/24`,
+    title: `Expert ${subService.title} en Belgique | Intervention Rapide 24H/24 | DEB PRO SERVICES`,
     description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} DEB PRO SERVICES intervient urgence 24h/24 et 7j/7 partout en Belgique.`,
   };
 }
@@ -76,10 +77,18 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
         }}
       />
 
-      <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 to-transparent pointer-events-none"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           
+      <PageHero 
+        title={`Expert ${subServiceInfo.title}`}
+        titleHighlight="en Belgique"
+        description={`${subServiceInfo.desc} Intervention rapide 24h/24 et devis gratuit partout en Belgique.`}
+        primaryButtonText="Intervention Urgente"
+        secondaryButtonText="Prendre rendez-vous"
+        imageSrc={`https://picsum.photos/seed/${subServiceInfo.slug}1/800/400`}
+      />
+
+      {/* Programmatic Cluster Content for SEO - Simulating 1000 words logic */}
+      <section className="py-20 bg-slate-900 text-white relative z-10 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            {/* Breadcrumb */}
            <div className="flex items-center gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
              <Link href="/" className="hover:text-blue-400">Accueil</Link>
@@ -89,29 +98,6 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
              <span className="text-white font-bold">{subServiceInfo.title}</span>
            </div>
 
-           <div className="max-w-4xl">
-             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-sm font-bold border border-white/20 mb-6 uppercase tracking-widest text-blue-300">
-                <serviceInfo.icon className="w-4 h-4" />
-                Service Spécialisé
-             </div>
-             <h1 className="text-4xl md:text-5xl lg:text-5xl font-black leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-                {subServiceInfo.title} en Belgique
-             </h1>
-             <p className="text-xl text-blue-100/80 mb-8 max-w-3xl leading-relaxed">
-               {subServiceInfo.desc} Disponibilité immédiate 24/7 partout en Belgique.
-             </p>
-             <div className="flex flex-wrap gap-4">
-                <a href="tel:0470000000" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
-                  <PhoneCall className="w-5 h-5" /> Intervention Urgente
-                </a>
-             </div>
-           </div>
-        </div>
-      </section>
-
-      {/* Programmatic Cluster Content for SEO - Simulating 1000 words logic */}
-      <section className="py-20 bg-slate-900 text-white relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-16">
             
             <div className="lg:col-span-8 space-y-10">
