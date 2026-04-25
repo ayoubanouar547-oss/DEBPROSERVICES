@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Phone, Menu, X, AlertTriangle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { PhoneButton } from '../ui/PhoneButton';
 
 const PHONE_NUMBER = "0496 32 57 33"; // Placeholder, can be changed easily

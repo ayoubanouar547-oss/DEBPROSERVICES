@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PhoneCall, ShieldCheck, Clock, MapPin, CheckCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const SERVICES = [
   { text: 'Plombier', gradient: 'from-blue-400 to-cyan-300' },
