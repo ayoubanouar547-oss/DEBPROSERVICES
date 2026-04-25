@@ -6,7 +6,7 @@ export const services = [
     slug: 'plomberie',
     title: 'Plomberie',
     icon: Wrench,
-    imageUrl: 'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3036-c57de4e7/image.png?q=80&w=1000&auto=format&fit=crop',
     description: 'Vous faites face à une canalisation bouchée, une fuite d\'eau ou un problème de plomberie urgent ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers certifiés disposent des équipements les plus modernes pour réparer vos fuites et résoudre tout problème de plomberie, quelle que soit la complexité.',
     contentHTML: `
       <p>La <strong>plomberie</strong> est le cœur même du confort de votre habitation. Qu'il s'agisse d'une fuite d'eau invisible qui fait gonfler vos factures, d'une rupture de canalisation soudaine ou simplement de l'envie de moderniser vos installations sanitaires, notre équipe de <em>plombiers chauffagistes certifiés</em> intervient partout en Belgique. Nous mettons à votre disposition une expertise technique poussée pour un diagnostic précis et une résolution rapide, sans destruction inutile.</p>
@@ -30,11 +30,11 @@ export const services = [
     }
   },
   {
-    id: 'debouchage',
+    id: 'débouchage canalisation',
     slug: 'debouchage-canalisation',
     title: 'Débouchage',
     icon: Droplets,
-    imageUrl: 'https://images.unsplash.com/photo-1542013936693-884638332954?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3043-f5b47ef0/image.png?q=80&w=1000&auto=format&fit=crop',
     description: 'Vous faites face à une canalisation bouchée ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers disposent des équipements les plus modernes pour déboucher vos canalisations.',
     contentHTML: `
       <p>Un problème de <strong>canalisation bouchée</strong> peut rapidement paralyser la vie de votre foyer et provoquer le refoulement d'eaux usées nauséabondes. Spécialistes du <em>débouchage express en Belgique</em>, nos équipes utilisent une logistique lourde (camions hydrocureurs 400 bars) pour pulvériser n'importe quel bouchon, qu'il soit constitué de graisse, de calcaire, de papier ou d'une intrusion de racines dans vos égouts extérieurs.</p>
@@ -62,7 +62,7 @@ export const services = [
     slug: 'chauffage',
     title: 'Chauffage',
     icon: Flame,
-    imageUrl: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3214-a1ab8a2e/image.png?q=80&w=400&auto=format&fit=crop',
     description: 'Votre chaudière tombe en panne en plein hiver ? Vos radiateurs ne chauffent plus ? DEB PRO SERVICES, votre chauffagiste agréé en Belgique, intervient en urgence pour le dépannage, l\'entretien et l\'installation de tous types de chaudières et systèmes de chauffage.',
     contentHTML: `
       <p>En plein hiver, le <strong>système de chauffage</strong> n'est pas un luxe, mais une nécessité absolue. En tant que chauffagistes experts certifiés G1/G2/L, nous intervenons sur toutes les marques de chaudières (Vaillant, Viessmann, Bulex, Junckers...) afin de sécuriser le chauffage et la production d'eau chaude de votre logement. Qu'il s'agisse d'un chauffage au gaz, au mazout ou d'une pompe à chaleur, notre savoir-faire s'étend à tous les dispositifs de thermique de l'habitat.</p>
@@ -90,7 +90,7 @@ export const services = [
     slug: 'gaz',
     title: 'Gaz',
     icon: Flame,
-    imageUrl: 'https://picsum.photos/seed/gaz/1000/800',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3546-e65b22f3/image.png?q=80&w=400&auto=format&fit=crop',
     description: 'Vous suspectez une fuite de gaz ou avez besoin d\'une installation gaz conforme aux normes belges ? Nos techniciens certifiés CERGA interviennent rapidement pour assurer votre sécurité.',
     contentHTML: `
       <p>L'utilisation domestique du <strong>gaz naturel ou propane</strong> demande une vigilance de tous les instants et surtout une installation totalement irréprochable. L'organisme CERGA régit les normes les plus strictes en matière de sécurité gazière en Belgique. DEB PRO SERVICES emploie des <em>techniciens agréés CERGA</em> capables de monter, vérifier et certifier l'ensemble de vos compteurs, conduites et appareils au gaz.</p>
@@ -146,7 +146,7 @@ export const services = [
     slug: 'climatisation',
     title: 'Climatisation',
     icon: Wind,
-    imageUrl: 'https://picsum.photos/seed/climatisation/1000/800',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3588-3c645e0c/image.png?q=80&w=400&auto=format&fit=crop',
     description: 'Installation, entretien et dépannage de tous systèmes de climatisation en Belgique. Nos techniciens certifiés F-Gas interviennent pour les particuliers et professionnels.',
     contentHTML: `
       <p>Les vagues de chaleur devenant plus fréquentes en Belgique, le conditionnement d'air n'est plus une option. Disposer d'une <strong>climatisation performante</strong> permet de purifier l'air de votre domicile tout en maintenant une température rafraîchissante. Pour pallier tous soucis de gaz frigorigène, tous nos frigoristes installateurs détiennent un <em>agrément environnemental européen (F-gas)</em>.</p>
@@ -174,7 +174,7 @@ export const services = [
     slug: 'vidange-fosse-septique',
     title: 'Vidange Fosse',
     icon: Truck,
-    imageUrl: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?q=80&w=1000&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3032-d634dd37/image.png?q=80&w=400&auto=format&fit=crop',
     description: 'Vidange, entretien et installation de fosses septiques en Belgique. Intervention rapide avec camion hydrocureur. Conforme aux normes.',
     contentHTML: `
       <p>Le bon état de votre zone d'assainissement non collectif est primordial pour votre hygiène de l'air comme pour l'environnement. Nos professionnels de l'assainissement organisent la <strong>vidange de fosses septiques</strong>, de puits perdus ou de micro-stations avec la plus haute réactivité, en évitant les surverses désagréables dans le jardin ou dans les sanitaires.</p>
