@@ -30,7 +30,7 @@ export function PageHero({
   ],
   imageSrc = "/technician.png",
   primaryButtonText = "Appeler Maintenant",
-  primaryButtonHref = "tel:0470000000",
+  primaryButtonHref = "tel:0496325733",
   secondaryButtonText = "Devis Gratuit en 2 min",
   secondaryButtonHref = "/devis"
 }: PageHeroProps) {
