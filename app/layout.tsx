@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CookieBanner } from '@/components/layout/CookieBanner';
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -53,6 +54,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <Footer />
         <CookieBanner />
         <MobileBottomNav />
+        <SpeedInsights />
       </body>
     </html>
   );
