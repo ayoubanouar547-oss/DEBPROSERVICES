@@ -5,6 +5,7 @@ import { Send, CheckCircle, Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { motion } from 'motion/react';
 
 const schema = z.object({
   nom: z.string().min(2, "Le nom est trop court").max(100),
