@@ -8,8 +8,8 @@ import { motion } from 'motion/react';
 
 const SERVICES = [
   { text: 'Plombier', gradient: 'from-blue-400 to-cyan-300' },
-  { text: 'Débouchage', gradient: 'from-blue-500 to-indigo-400' },
-  { text: 'Chauffage', gradient: 'from-orange-500 to-red-500' },
+  { text: 'Débouchage Canalisation', gradient: 'from-blue-500 to-indigo-400' },
+  { text: 'Chauffagiste', gradient: 'from-orange-500 to-red-500' },
   { text: 'Gaz', gradient: 'from-amber-400 to-orange-500' },
   { text: 'Électricité', gradient: 'from-yellow-300 to-yellow-500' },
   { text: 'Climatisation', gradient: 'from-sky-300 to-blue-400' }
@@ -136,7 +136,7 @@ export function Hero() {
             </span>
           </h1>
           <p className="text-lg text-slate-100 mb-8 max-w-lg leading-relaxed font-medium">
-            Débouchage, chauffage, gaz, électricité et fosse septique. Techniciens agréés, disponibles 7j/7 dans toute la Belgique.
+            Débouchage canalisation, chauffagiste, gaz, électricité et vidange fosse septique. Techniciens agréés, disponibles 7j/7 dans toute la Belgique.
           </p>
         </div>
 
@@ -144,7 +144,7 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row gap-6 pt-6">
           <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} className="flex-1 sm:flex-initial">
             <Link 
-              href="tel:0470000000"
+              href="tel:0496325733"
               className="w-full btn-luxury px-10 py-5 rounded-2xl font-black text-xl text-white flex items-center justify-center gap-3 transition-all border-b-4 border-red-950 active:border-b-0 active:translate-y-1"
             >
                <PhoneCall className="w-6 h-6 animate-pulse" />
