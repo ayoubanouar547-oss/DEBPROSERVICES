@@ -5,7 +5,7 @@ export function SEOContent() {
     <section className="py-20 relative z-10 bg-[#000814]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="prose prose-invert prose-blue max-w-none text-slate-300">
-          <h2 className="text-3xl font-black text-white mb-6">Expertise Complète en Débouchage, Plomberie et Chauffage en Belgique</h2>
+          <h2 className="text-3xl font-black text-white mb-6">Expertise Complète en Débouchage canalisations, Plomberie, Gaz, Électricité, Climatisation et Chauffage en Belgique</h2>
           
           <p className="mb-4 leading-relaxed">
             DEB PRO SERVICES représente le summum de l'intervention rapide et professionnelle à travers toute la Belgique. Conscient que les urgences de la maison ne préviennent jamais, notre réseau d'artisans plombiers, chauffagistes et experts en débouchage se tient prêt à intervenir 24 heures sur 24 et 7 jours sur 7. Notre entreprise s’est forgée une solide réputation en garantissant des prestations conformes aux normes belges en vigueur, qu'il s'agisse de la norme CERGA pour le gaz ou du standard AREI pour les installations électriques. Le fait de posséder un si grand nombre d'artisans déployés du Nord au Sud du pays nous permet non seulement de réduire le temps d'attente lors d'une intervention en urgence, mais aussi d'offrir une tarification juste et transparente dès la prise de premier contact.
