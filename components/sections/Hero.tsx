@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -8,7 +7,7 @@ import { PhoneCall, ShieldCheck, Clock, MapPin, CheckCircle } from 'lucide-react
 import { motion } from 'motion/react';
 
 const SERVICES = [
-  { text: 'Plombier', gradient: 'from-blue-400 to-cyan-300' },
+  { text: 'Plomberie', gradient: 'from-blue-400 to-cyan-300' },
   { text: 'Débouchage', gradient: 'from-blue-500 to-indigo-400' },
   { text: 'Chauffage', gradient: 'from-orange-500 to-red-500' },
   { text: 'Gaz', gradient: 'from-amber-400 to-orange-500' },
@@ -26,8 +25,8 @@ export function Hero() {
   // Typewriter effect logic
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    const currentService = SERVICES[serviceIndex].text;
-    const fullText = currentService + ' en Belgique';
+    const currentService = SERVICES[serviceIndex].text.toUpperCase();
+    const fullText = currentService + ' EN BELGIQUE';
 
     if (!isDeleting) {
       if (displayedText.length < fullText.length) {
@@ -115,25 +114,27 @@ export function Hero() {
         </div>
         
         <div className="space-y-4">
-          <h1 className="font-black leading-[1.1] mb-6 flex flex-col gap-y-2 text-[6vw] sm:text-4xl md:text-5xl lg:text-7xl">
-            <motion.span 
-               className="inline-block relative whitespace-nowrap overflow-visible"
-               animate={
-                 isDeleting 
-                   ? { opacity: 0, y: -20, scale: 0.95, filter: 'blur(10px)' } 
-                   : { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }
-               }
-               transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <span className={`bg-clip-text text-transparent bg-gradient-to-r ${SERVICES[serviceIndex].gradient}`}>
-                {displayedText.substring(0, SERVICES[serviceIndex].text.length)}
-              </span>
-              <span className="text-white ml-[0.3em]">
-                {displayedText.substring(SERVICES[serviceIndex].text.length)}
-              </span>
-            </motion.span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 text-shiny text-[9vw] sm:text-4xl md:text-5xl lg:text-7xl whitespace-normal border-t border-white/10 pt-2 lg:border-none lg:pt-0 pb-1">
-              Intervention Rapide 24H/24
+          <h1 className="font-black leading-[1.1] mb-6">
+            <div className="text-4xl md:text-5xl lg:text-7xl min-h-[140px] flex flex-col justify-center">
+              <motion.div 
+                 className="flex flex-wrap items-center relative"
+                 animate={
+                   isDeleting 
+                     ? { opacity: 0, y: -20, scale: 0.95, filter: 'blur(10px)' } 
+                     : { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }
+                 }
+                 transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <span className={`bg-clip-text text-transparent bg-gradient-to-r ${SERVICES[serviceIndex].gradient}`}>
+                  {displayedText.substring(0, SERVICES[serviceIndex].text.length)}
+                </span>
+                <span className="text-white whitespace-pre-wrap">
+                  {displayedText.substring(SERVICES[serviceIndex].text.length)}
+                </span>
+              </motion.div>
+            </div>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 block mt-2 text-3xl md:text-4xl lg:text-5xl text-shiny">
+              Intervention Express 24H/24
             </span>
           </h1>
           <p className="text-lg text-slate-100 mb-8 max-w-lg leading-relaxed font-medium">
@@ -145,7 +146,7 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row gap-6 pt-6">
           <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} className="flex-1 sm:flex-initial">
             <Link 
-              href="tel:0496325733"
+              href="tel:0470000000"
               className="w-full btn-luxury px-10 py-5 rounded-2xl font-black text-xl text-white flex items-center justify-center gap-3 transition-all border-b-4 border-red-950 active:border-b-0 active:translate-y-1"
             >
                <PhoneCall className="w-6 h-6 animate-pulse" />
@@ -217,7 +218,7 @@ export function Hero() {
                  src="/technician.png" 
                  alt="Technicien DEB PRO SERVICES" 
                  fill
-                 sizes="(max-width: 768px) 320px, 544px"
+                 sizes="(max-width: 768px) 100vw, 50vw"
                  priority={true}
                  className="object-contain object-bottom drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] scale-110 md:scale-100"
                />

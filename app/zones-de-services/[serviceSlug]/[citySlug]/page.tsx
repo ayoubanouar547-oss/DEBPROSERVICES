@@ -6,7 +6,6 @@ import { PhoneCall, MapPin, ChevronRight, CheckCircle, ShieldCheck } from 'lucid
 import Link from 'next/link';
 import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
-import { PageHero } from '@/components/ui/PageHero';
 
 export function generateStaticParams() {
   const params: { serviceSlug: string, citySlug: string }[] = [];
@@ -31,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceSl
   if (!service || !cityInfo) return {};
 
   return {
-    title: `Expert ${service.title} à ${cityInfo.name} | Intervention Rapide 24H/24 | DEB PRO SERVICES`,
+    title: `${service.title} ${cityInfo.name} | Urgence & Dépannage 24/7 | DEB PRO SERVICES`,
     description: `A la recherche d'un expert en ${service.title.toLowerCase()} à ${cityInfo.name} (${cityInfo.province}) ? Intervention rapide, agréée et garantie. Devis gratuit.`,
   };
 }
@@ -74,18 +73,13 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
         }}
       />
 
-      <PageHero 
-        title={`Expert ${serviceInfo.title}`}
-        titleHighlight={`à ${cityInfo.name}`}
-        description={`Techniciens de garde spécialisés en ${serviceInfo.title.toLowerCase()} disponibles immédiatement sur toute la commune de ${cityInfo.name}. Intervention rapide 24h/24 et devis gratuit.`}
-        primaryButtonText={`SOS Urgence ${cityInfo.name}`}
-        secondaryButtonText="Prendre rendez-vous"
-        imageSrc={`https://picsum.photos/seed/${cityInfo.slug}${serviceInfo.slug}/800/600`}
-      />
-
-      <section className="py-24 relative z-10 text-white border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+      <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 bg-slate-900 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/30 via-slate-900 to-slate-900"></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           
            <div className="flex items-center gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
              <Link href="/" className="hover:text-blue-400">Accueil</Link>
              <ChevronRight className="w-4 h-4" />
@@ -94,6 +88,48 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
              <span className="text-white font-bold">{serviceInfo.title} à {cityInfo.name}</span>
            </div>
 
+           <div className="grid lg:grid-cols-2 gap-12 items-center">
+             <div className="max-w-2xl">
+               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-xl rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest text-slate-300">
+                  <MapPin className="w-4 h-4 text-blue-400" />
+                  Intervention sur {cityInfo.name}
+               </div>
+               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-6">
+                  {serviceInfo.title} <br/> 
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                    {cityInfo.name}
+                  </span>
+               </h1>
+               <p className="text-lg text-slate-300 mb-8 leading-relaxed">
+                 Techniciens de garde spécialisés en <strong>{serviceInfo.title.toLowerCase()}</strong> disponibles immédiatement sur toute la commune de {cityInfo.name}. Déplacement express et devis gratuit.
+               </p>
+               <div className="flex flex-wrap gap-4">
+                  <a href="tel:0470000000" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
+                    <PhoneCall className="w-6 h-6" /> SOS Urgence {cityInfo.name}
+                  </a>
+               </div>
+             </div>
+             
+             <div className="relative hidden lg:block">
+                <div className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
+                  <img src={`https://picsum.photos/seed/${cityInfo.slug}${serviceInfo.slug}/800/600`} alt={`${serviceInfo.title} à ${cityInfo.name}`} className="w-full h-full object-cover" />
+                  <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex items-center justify-between">
+                    <div>
+                      <div className="text-white font-bold text-lg">Éligible Intervention Rapide</div>
+                      <div className="text-blue-300 text-sm">Zone: {cityInfo.province}</div>
+                    </div>
+                    <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center border border-blue-500/40">
+                      <CheckCircle className="w-6 h-6 text-blue-400" />
+                    </div>
+                  </div>
+                </div>
+             </div>
+           </div>
+        </div>
+      </section>
+
+      <section className="py-24 relative z-10 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-16">
             
             <div className="lg:col-span-8 space-y-12">

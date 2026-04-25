@@ -2,10 +2,9 @@ import Link from 'next/link';
 import { MapPin, ChevronRight } from 'lucide-react';
 import { belgianCities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
-import { PageHero } from '@/components/ui/PageHero';
 
 export const metadata = {
-  title: "Plombier en Belgique | Intervention Rapide 24H/24 | Zones d'Intervention",
+  title: 'Nos Zones d\'Intervention en Belgique | DEB PRO SERVICES',
   description: 'Découvrez toutes les villes de Belgique où nous proposons nos services d\'urgence 24h/24 en plomberie, chauffage, gaz, etc.',
 };
 
@@ -14,16 +13,19 @@ export default function ZonesDeServicesPage() {
 
   return (
     <>
-      <PageHero 
-        title="Zones d'Intervention"
-        titleHighlight="en Belgique"
-        description="Nous disposons de plusieurs équipes d'intervention réparties de manière stratégique sur l'ensemble du territoire belge pour garantir des délais très courts 24/7."
-        primaryButtonText="Contact URGENT"
-        secondaryButtonText="Voir les villes"
-        secondaryButtonHref="#villes"
-      />
+      <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 bg-slate-900 pointer-events-none"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+            Zones d'Intervention en Belgique
+          </h1>
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Nous disposons de plusieurs équipes d'intervention réparties de manière stratégique sur l'ensemble du territoire belge pour garantir des délais très courts 24/7.
+          </p>
+        </div>
+      </section>
 
-      <section className="py-24 relative z-10" id="villes">
+      <section className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="space-y-20">

@@ -1,27 +1,49 @@
-import { PageHero } from '@/components/ui/PageHero';
+import { ShieldCheck, History, Award } from 'lucide-react';
 import { WhyUs } from '@/components/sections/WhyUs';
 
 export const metadata = {
-  title: 'Plombier en Belgique | Intervention Rapide 24H/24 | À Propos',
+  title: 'À Propos de Nous | DEB PRO SERVICES',
   description: 'Découvrez DEB PRO SERVICES, votre expert belge en plomberie, chauffage, et débouchage avec plus de 15 ans d\'expérience.',
 };
 
 export default function AboutPage() {
   return (
-    <>
-      <PageHero 
-        title="L'Artisanat au service de"
-        titleHighlight="votre sérénité"
-        description="DEB PRO SERVICES est une entreprise belge spécialisée dans la plomberie, le débouchage, le chauffage, le gaz, l'électricité et la vidange de fosses septiques. Notre mission : résoudre vos problèmes rapidement, à des tarifs justes, avec des techniciens agréés et du matériel professionnel."
-        primaryButtonText="Contactez-nous"
-        primaryButtonHref="/devis"
-        secondaryButtonText="Découvrir nos services"
-        secondaryButtonHref="/#services"
-        imageSrc="https://picsum.photos/seed/aboutus/1000/800"
-      />
-      <div className="relative z-10 text-slate-300">
-        <WhyUs />
+    <div className="pt-32 relative z-10 text-slate-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-black mb-6 text-white leading-tight">L'Artisanat au service de votre sérénité</h1>
+            <p className="text-slate-300 text-lg mb-6 leading-relaxed">
+              DEB PRO SERVICES est une entreprise belge spécialisée dans la plomberie, le débouchage, le chauffage, le gaz, l'électricité et la vidange de fosses septiques. Fondée par des professionnels expérimentés, notre équipe intervient dans toute la Belgique avec réactivité, professionnalisme et transparence.
+            </p>
+             <p className="text-slate-300 text-lg mb-6 leading-relaxed">
+              Notre mission : résoudre vos problèmes rapidement, à des tarifs justes, avec des techniciens agréés et du matériel professionnel. Plus de 5000 clients nous font confiance chaque année.
+            </p>
+
+            <div className="flex gap-4 mt-8">
+              <div className="flex items-center gap-2 font-bold text-blue-400 bg-blue-500/20 border border-blue-500/30 px-4 py-2 rounded-full uppercase tracking-widest text-xs">
+                 <History className="w-5 h-5" /> 15 Ans Expérience
+              </div>
+              <div className="flex items-center gap-2 font-bold text-green-400 bg-green-500/20 border border-green-500/30 px-4 py-2 rounded-full uppercase tracking-widest text-xs">
+                 <Award className="w-5 h-5" /> Entreprise Agréée
+              </div>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative border border-white/10">
+              <img src="https://picsum.photos/seed/aboutdebpro/800/600" alt="Notre équipe en intervention" className="w-full h-full object-cover" />
+            </div>
+            <div className="absolute -bottom-6 -left-6 bg-white/10 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-white/10 flex items-center gap-4">
+              <div className="bg-blue-500/20 text-blue-400 border border-blue-500/30 p-3 rounded-xl"><ShieldCheck className="w-8 h-8" /></div>
+              <div>
+                <p className="font-bold uppercase tracking-wider text-sm text-white">Garantie 1 An</p>
+                <p className="text-xs text-slate-400">Sur toutes nos interventions</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+      <WhyUs />
+    </div>
   );
 }

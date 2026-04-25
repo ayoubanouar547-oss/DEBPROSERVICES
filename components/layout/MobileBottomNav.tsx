@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import { Home, Phone, MapPin, AlertTriangle, ShieldCheck } from 'lucide-react';
@@ -26,7 +25,7 @@ export function MobileBottomNav() {
   const navItems = [
     { name: 'Accueil', icon: Home, href: '/' },
     { name: 'Services', icon: ShieldCheck, href: '/#services' },
-    { name: 'Appeler', icon: Phone, href: 'tel:0496325733', isLarge: true },
+    { name: 'Appeler', icon: Phone, href: 'tel:0470000000', isLarge: true },
     { name: 'Zones', icon: MapPin, href: '/zones-de-services' },
     { name: 'Urgence', icon: AlertTriangle, href: '/urgence' },
   ];
@@ -63,14 +62,14 @@ export function MobileBottomNav() {
                   href={item.href}
                   className="flex flex-col items-center justify-center p-2 rounded-2xl transition-colors relative"
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? 'text-blue-400' : 'text-slate-200'}`} />
-                  <span className={`text-[9px] font-black mt-1 uppercase tracking-tighter ${isActive ? 'text-blue-400' : 'text-slate-100 opacity-70'}`}>
+                  <Icon className={`w-5 h-5 ${isActive ? 'text-[#1565c0]' : 'text-slate-200'}`} />
+                  <span className={`text-[9px] font-black mt-1 uppercase tracking-tighter ${isActive ? 'text-[#1565c0]' : 'text-slate-100 opacity-70'}`}>
                     {item.name}
                   </span>
                   {isActive && (
                     <motion.div 
                       layoutId="activeTab"
-                      className="absolute -bottom-0.5 w-1 h-1 bg-blue-400 rounded-full"
+                      className="absolute -bottom-0.5 w-1 h-1 bg-[#1565c0] rounded-full"
                     />
                   )}
                 </Link>

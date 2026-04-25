@@ -19,7 +19,7 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: 'DEB PRO SERVICES | Plombier en Belgique - Intervention Rapide 24H/24',
+  title: 'DEB PRO SERVICES | Plombier, Chauffage & Débouchage 24H/24',
   description: 'Intervention d\'urgence 24H/24 et 7J/7 en Belgique. Plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique.',
 };
 
@@ -33,10 +33,6 @@ export const viewport: Viewport = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="fr" className={`${inter.variable} ${oswald.variable}`} suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://www.debouchageexpress24-24h.be" />
-      </head>
       <body className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white" suppressHydrationWarning>
         {/* Advanced Background Animation blobs - Professional Blue/Cyan Palette */}
         <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#000814]">

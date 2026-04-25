@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Facebook, Instagram, ShieldCheck } from 'lucide-re
 import { belgianCities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 
-const PHONE = "0496 32 57 33";
+const PHONE = "0470 00 00 00";
 const EMAIL = "contact@debproservices.be";
 
 export function Footer() {
@@ -26,10 +26,10 @@ export function Footer() {
               Votre partenaire de confiance pour tous vos travaux et urgences de plomberie, chauffage, gaz, électricité et débouchage à travers toute la Belgique.
             </p>
             <div className="flex gap-4">
-              <a href="#" aria-label="Facebook (S'ouvre dans un nouvel onglet)" className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10">
+              <a href="#" className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" aria-label="Instagram (S'ouvre dans un nouvel onglet)" className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10">
+              <a href="#" className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
