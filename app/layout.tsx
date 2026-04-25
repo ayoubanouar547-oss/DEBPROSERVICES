@@ -19,7 +19,7 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: 'DEB PRO SERVICES | Expert Plombier en Belgique - Intervention Rapide 24H/24',
+  title: 'DEB PRO SERVICES | Plombier en Belgique - Intervention Rapide 24H/24',
   description: 'Intervention d\'urgence 24H/24 et 7J/7 en Belgique. Plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique.',
 };
 

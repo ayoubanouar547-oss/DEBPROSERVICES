@@ -2,7 +2,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { ContactForm } from '@/components/sections/ContactForm';
 
 export const metadata = {
-  title: 'Expert Plombier en Belgique | Intervention Rapide 24H/24 | Devis Gratuit',
+  title: 'Plombier en Belgique | Intervention Rapide 24H/24 | Devis Gratuit',
   description: 'Obtenez un devis gratuit et sans engagement pour vos travaux de plomberie, chauffage, électricité et débouchage.',
 };
 

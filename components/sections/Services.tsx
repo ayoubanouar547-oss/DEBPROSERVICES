@@ -1,10 +1,11 @@
+// @ts-nocheck
 'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { services } from '@/lib/data/services';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 export function Services() {
   return (

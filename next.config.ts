@@ -35,6 +35,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'www.debouchageexpress24-24h.be',
+      },
+      {
+        protocol: 'https',
+        hostname: 'debouchageexpress24hh.odoo.com',
       }
     ],
   },

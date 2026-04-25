@@ -5,7 +5,7 @@ import { services } from '@/lib/data/services';
 import { PageHero } from '@/components/ui/PageHero';
 
 export const metadata = {
-  title: "Expert Plombier en Belgique | Intervention Rapide 24H/24 | Zones d'Intervention",
+  title: "Plombier en Belgique | Intervention Rapide 24H/24 | Zones d'Intervention",
   description: 'Découvrez toutes les villes de Belgique où nous proposons nos services d\'urgence 24h/24 en plomberie, chauffage, gaz, etc.',
 };
 

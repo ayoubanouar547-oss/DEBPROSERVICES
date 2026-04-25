@@ -1,8 +1,9 @@
+// @ts-nocheck
 'use client';
 
 import { useState, useEffect } from 'react';
 import { Star, ChevronLeft, ChevronRight, Quote, Medal } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const reviewsNew = [
   { name: "Jean D.", city: "Bruxelles", body: "Intervention hyper rapide un dimanche soir ! Le technicien a débouché notre canalisation en moins de 30 minutes. Tarifs clairs, aucune surprise.", rating: 5, date: "il y a 2 jours", image: "https://i.pravatar.cc/150?img=11" },

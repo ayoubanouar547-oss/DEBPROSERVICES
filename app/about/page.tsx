@@ -2,7 +2,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { WhyUs } from '@/components/sections/WhyUs';
 
 export const metadata = {
-  title: 'Expert Plombier en Belgique | Intervention Rapide 24H/24 | À Propos',
+  title: 'Plombier en Belgique | Intervention Rapide 24H/24 | À Propos',
   description: 'Découvrez DEB PRO SERVICES, votre expert belge en plomberie, chauffage, et débouchage avec plus de 15 ans d\'expérience.',
 };
 

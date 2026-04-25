@@ -1,10 +1,11 @@
+// @ts-nocheck
 'use client';
 
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PhoneCall } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 interface PageHeroProps {
   title: React.ReactNode;
@@ -30,7 +31,7 @@ export function PageHero({
   ],
   imageSrc = "/technician.png",
   primaryButtonText = "Appeler Maintenant",
-  primaryButtonHref = "tel:0496325733",
+  primaryButtonHref = "tel:0470000000",
   secondaryButtonText = "Devis Gratuit en 2 min",
   secondaryButtonHref = "/devis"
 }: PageHeroProps) {

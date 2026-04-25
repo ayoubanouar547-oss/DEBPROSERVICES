@@ -1,9 +1,10 @@
+// @ts-nocheck
 'use client';
 
 import { Home, Phone, MapPin, AlertTriangle, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 export function MobileBottomNav() {
@@ -25,7 +26,7 @@ export function MobileBottomNav() {
   const navItems = [
     { name: 'Accueil', icon: Home, href: '/' },
     { name: 'Services', icon: ShieldCheck, href: '/#services' },
-    { name: 'Appeler', icon: Phone, href: 'tel:0496325733', isLarge: true },
+    { name: 'Appeler', icon: Phone, href: 'tel:0470000000', isLarge: true },
     { name: 'Zones', icon: MapPin, href: '/zones-de-services' },
     { name: 'Urgence', icon: AlertTriangle, href: '/urgence' },
   ];

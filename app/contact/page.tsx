@@ -2,7 +2,7 @@ import { ContactForm } from '@/components/sections/ContactForm';
 import { PageHero } from '@/components/ui/PageHero';
 
 export const metadata = {
-  title: 'Expert Plombier en Belgique | Intervention Rapide 24H/24 | Contact',
+  title: 'Plombier en Belgique | Intervention Rapide 24H/24 | Contact',
   description: 'Prenez contact avec DEB PRO SERVICES pour tous vos travaux et urgences en plomberie, chauffage ou débouchage en Belgique.',
 };
 

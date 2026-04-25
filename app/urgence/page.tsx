@@ -4,7 +4,7 @@ import { ContactForm } from '@/components/sections/ContactForm';
 import { PageHero } from '@/components/ui/PageHero';
 
 export const metadata = {
-  title: 'Expert Plombier en Belgique | Intervention Rapide 24H/24 | Urgence',
+  title: 'Plombier en Belgique | Intervention Rapide 24H/24 | Urgence',
   description: 'Urgence plombier, chauffagiste et débouchage 24/7. Nous intervenons en 30 minutes partout en Belgique. Appelez-nous maintenant.',
 };
 

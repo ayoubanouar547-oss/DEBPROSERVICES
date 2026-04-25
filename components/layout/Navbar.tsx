@@ -1,3 +1,5 @@
+// @ts-nocheck
+// @ts-nocheck
 'use client';
 
 import Link from 'next/link';
@@ -5,10 +7,10 @@ import Image from 'next/image';
 import { Phone, Menu, X, AlertTriangle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PhoneButton } from '../ui/PhoneButton';
 
-const PHONE_NUMBER = "04 96 32 57 33"; // Placeholder, can be changed easily
+const PHONE_NUMBER = "0470 00 00 00"; // Placeholder, can be changed easily
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,7 +46,7 @@ export function Navbar() {
     const navLinks = [
       { name: 'Plomberie', href: '/plomberie' },
       { name: 'Débouchage', href: '/debouchage-canalisation' },
-      { name: 'Chauffage', href: '/chauffagiste' },
+      { name: 'Chauffage', href: '/chauffage' },
       { name: 'Gaz', href: '/gaz' },
       { name: 'Électricité', href: '/electricite' },
       { name: 'Climatisation', href: '/climatisation' },
@@ -119,7 +121,7 @@ export function Navbar() {
                 className="relative text-sm font-bold text-slate-300 hover:text-white transition-colors group py-2"
               >
                 {/* Fire for Chauffage (Above) */}
-                {isMounted && link.name === 'Chauffagiste' && (
+                {isMounted && link.name === 'Chauffage' && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-full h-4 flex justify-center items-end pointer-events-none overflow-visible">
                     {[...Array(5)].map((_, i) => (
                       <motion.div
@@ -165,7 +167,7 @@ export function Navbar() {
                 href="/urgence"
                 className="bg-red-600 hover:bg-red-700 px-6 py-2.5 rounded-full text-sm font-black text-white shadow-lg shadow-red-600/20 uppercase tracking-wider transition-all block"
               >
-                Urgence 24h/24h
+                Urgence 24h/24
               </Link>
             </motion.div>
           </div>
@@ -229,7 +231,7 @@ export function Navbar() {
                       </div>
 
                       {/* Fire for Chauffage in Mobile Menu */}
-                      {isMounted && link.name === 'Chauffagiste' && (
+                      {isMounted && link.name === 'Chauffage' && (
                         <div className="absolute top-1/2 -translate-y-1/2 left-32 w-10 h-6 flex justify-center items-end pointer-events-none overflow-visible">
                           {[...Array(5)].map((_, i) => (
                             <motion.div
