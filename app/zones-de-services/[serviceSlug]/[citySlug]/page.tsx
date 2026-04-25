@@ -149,7 +149,7 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                 <h3 className="text-2xl font-black mb-6">Tous nos services de {serviceInfo.title.toLowerCase()} sur {cityInfo.name}</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {serviceInfo.subServices.map(sub => (
-                    <Link key={sub.slug} href={`/${serviceInfo.slug}/${sub.slug}`} className="group bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition overflow-hidden flex flex-col">
+                    <Link key={sub.slug} href={`/zones-de-services/${serviceInfo.slug}/${sub.slug}/${cityInfo.slug}`} className="group bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition overflow-hidden flex flex-col">
                       <div className="relative h-32 w-full overflow-hidden flex-shrink-0 z-10">
                         <img 
                           src={`https://picsum.photos/seed/${sub.slug}/600/400`} 
@@ -228,7 +228,7 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
         </div>
       </section>
 
-      <FAQ />
+      <FAQ city={cityInfo.name} />
     </>
   );
 }

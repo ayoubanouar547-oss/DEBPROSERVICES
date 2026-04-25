@@ -26,22 +26,30 @@ const faqs = [
   }
 ];
 
-export function FAQ() {
+export function FAQ({ city }: { city?: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const personalizedFaqs = faqs.map(faq => {
+    if (!city) return faq;
+    return {
+      question: faq.question.replace(/Belgique/g, city),
+      answer: faq.answer.replace(/Belgique/g, city)
+    };
+  });
 
   return (
     <section className="py-24 relative z-10 border-y border-white/10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-16">
-          <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">Foire Aux Questions</h2>
+          <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">Foire Aux Questions {city && `à ${city}`}</h2>
           <h3 className="text-3xl md:text-5xl font-black text-white">
-            Vous avez une question ? Nous avons les réponses.
+            {city ? `Expertise locale à ${city}` : "Vous avez une question ? Nous avons les réponses."}
           </h3>
         </div>
 
         <div className="space-y-4">
-          {faqs.map((faq, index) => {
+          {personalizedFaqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div 

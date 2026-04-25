@@ -5,6 +5,7 @@ import { PhoneCall, ShieldCheck, CheckCircle, ChevronRight } from 'lucide-react'
 import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
+import { belgianCities } from '@/lib/data/cities';
 
 export function generateStaticParams() {
   const params: { serviceSlug: string, subServiceSlug: string }[] = [];
@@ -176,6 +177,26 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white/5 border-t border-white/10 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-black text-white mb-4">Intervention {subServiceInfo.title} par ville</h2>
+            <p className="text-slate-400">Trouvez votre expert local pour un dépannage rapide.</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2">
+            {belgianCities.slice(0, 20).map(city => (
+              <Link 
+                key={city.slug} 
+                href={`/zones-de-services/${serviceInfo.slug}/${subServiceInfo.slug}/${city.slug}`}
+                className="px-3 py-1 bg-slate-800 border border-white/10 rounded-full text-xs text-slate-300 hover:text-white transition"
+              >
+                {city.name}
+              </Link>
+            ))}
           </div>
         </div>
       </section>

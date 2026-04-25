@@ -32,6 +32,7 @@ export function Navbar() {
   }, []);
 
     const navLinks = [
+      { name: 'Rénovation', href: '/renovation-maison' },
       { name: 'Plomberie', href: '/plomberie' },
       { name: 'Débouchage', href: '/debouchage-canalisation' },
       { name: 'Chauffage', href: '/chauffage' },

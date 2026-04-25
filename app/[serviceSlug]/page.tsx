@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceSl
     description = "Débouchage urgence 24/7: technicien agréé en Belgique. WC, égouts, éviers bouchés. Devis gratuit, action immédiate. Contactez DEB PRO SERVICES !";
   } else if (service.slug === 'chauffage') {
     description = "Chauffage urgence 24/7: chauffagiste et technicien agréé en Belgique. Dépannage chaudière, devis gratuit. Appelez DEB PRO SERVICES maintenant !";
+  } else if (service.slug === 'renovation-maison') {
+    description = "Rénovation maison & appartement en Belgique. Spécialiste douche italienne, salle de bain et rénovation totale. Devis gratuit, travail pro 24/7. Contactez-nous !";
   }
 
   return {
