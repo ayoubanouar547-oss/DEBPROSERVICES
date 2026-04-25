@@ -6,7 +6,7 @@ export const services = [
     slug: 'plomberie',
     title: 'Plomberie',
     icon: Wrench,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3036-c57de4e7/image.png?height=256',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3036-c57de4e7/image.png?height=80&w=1000&auto=format&fit=crop',
     description: 'Vous faites face à une canalisation bouchée, une fuite d\'eau ou un problème de plomberie urgent ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers certifiés disposent des équipements les plus modernes pour réparer vos fuites et résoudre tout problème de plomberie, quelle que soit la complexité.',
     contentHTML: `
       <p>La <strong>plomberie</strong> est le cœur même du confort de votre habitation. Qu'il s'agisse d'une fuite d'eau invisible qui fait gonfler vos factures, d'une rupture de canalisation soudaine ou simplement de l'envie de moderniser vos installations sanitaires, notre équipe de <em>plombiers chauffagistes certifiés</em> intervient partout en Belgique. Nous mettons à votre disposition une expertise technique poussée pour un diagnostic précis et une résolution rapide, sans destruction inutile.</p>
