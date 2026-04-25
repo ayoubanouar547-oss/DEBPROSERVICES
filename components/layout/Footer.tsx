@@ -3,8 +3,8 @@ import { Phone, Mail, MapPin, Facebook, Instagram, ShieldCheck } from 'lucide-re
 import { belgianCities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 
-const PHONE = "0470 00 00 00";
-const EMAIL = "contact@debproservices.be";
+const PHONE = "0496325733";
+const EMAIL = "Debproservices@canalrouse.be";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
