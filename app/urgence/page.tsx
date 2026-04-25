@@ -15,8 +15,8 @@ export default function UrgencePage() {
         title="Besoin d'une"
         titleHighlight="Urgence ?"
         description="Nos techniciens de garde interviennent en 30 minutes. Ne perdez pas de temps, appelez-nous directement. Service de Garde Actif 24h/24."
-        primaryButtonText="0470 00 00 00"
-        primaryButtonHref="tel:0470000000"
+        primaryButtonText="0496 32 57 33"
+        primaryButtonHref="tel:0496325733"
         secondaryButtonText=""
         badges={["✓ Service de garde", "✓ Intervention < 30min", "✓ 24H/24 - 7J/7"]}
       />

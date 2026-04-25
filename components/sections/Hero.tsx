@@ -145,7 +145,7 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row gap-6 pt-6">
           <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} className="flex-1 sm:flex-initial">
             <Link 
-              href="tel:0470000000"
+              href="tel:0496325733"
               className="w-full btn-luxury px-10 py-5 rounded-2xl font-black text-xl text-white flex items-center justify-center gap-3 transition-all border-b-4 border-red-950 active:border-b-0 active:translate-y-1"
             >
                <PhoneCall className="w-6 h-6 animate-pulse" />

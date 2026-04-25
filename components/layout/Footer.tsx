@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Facebook, Instagram, ShieldCheck } from 'lucide-re
 import { belgianCities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 
-const PHONE = "0470 00 00 00";
+const PHONE = "0496 32 57 33";
 const EMAIL = "contact@debproservices.be";
 
 export function Footer() {

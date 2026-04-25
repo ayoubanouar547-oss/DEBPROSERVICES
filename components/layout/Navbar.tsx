@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PhoneButton } from '../ui/PhoneButton';
 
-const PHONE_NUMBER = "0470 00 00 00"; // Placeholder, can be changed easily
+const PHONE_NUMBER = "0496 32 57 33"; // Placeholder, can be changed easily
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
