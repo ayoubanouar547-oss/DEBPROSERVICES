@@ -76,7 +76,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                   <serviceInfo.icon className="w-4 h-4" />
                   Technicien Agréé en Belgique
                </div>
-               <h1 className="text-5xl md:text-6xl lg:text-8xl font-black leading-[0.95] mb-8 text-white tracking-tighter uppercase font-oswald">
+               <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-8 text-white tracking-tighter uppercase font-oswald">
                   {serviceInfo.title} <br/>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Belgique</span>
                </h1>

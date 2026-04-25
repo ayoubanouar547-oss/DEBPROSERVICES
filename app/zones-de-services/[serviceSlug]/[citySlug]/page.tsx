@@ -72,7 +72,7 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                   <MapPin className="w-4 h-4" />
                   Service Express à {cityInfo.name}
                </div>
-               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] mb-10 uppercase font-oswald tracking-tighter">
+               <h1 className="text-5xl md:text-7xl lg:text-7xl font-black leading-[1.1] mb-10 uppercase font-oswald tracking-tighter">
                   {serviceInfo.title} <br/> 
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 italic">
                     {cityInfo.name}
@@ -240,7 +240,7 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
       <div className="py-32 border-t border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20 max-w-3xl mx-auto space-y-6">
-            <h2 className="text-5xl font-black text-white uppercase font-oswald tracking-tight leading-none leading-none leading-none leading-none overflow-visible">Besoin d'un expert à <br/><span className="text-blue-500">{cityInfo.name}</span> ?</h2>
+            <h2 className="text-5xl font-black text-white uppercase font-oswald tracking-tight leading-tight overflow-visible">Besoin d'un expert à <br/><span className="text-blue-500">{cityInfo.name}</span> ?</h2>
             <p className="text-xl text-slate-500 font-medium leading-relaxed">Dites adieu à vos soucis de {serviceInfo.title.toLowerCase()}. Nos experts locaux sont disponibles 24/7 pour un dépannage express.</p>
           </div>
           <div className="max-w-4xl mx-auto glassy-card p-1 md:p-12 rounded-[3.5rem] border border-white/5 shadow-2xl relative">
