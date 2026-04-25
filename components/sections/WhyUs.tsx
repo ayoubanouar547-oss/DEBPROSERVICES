@@ -20,37 +20,37 @@ export function WhyUs() {
   ];
 
   return (
-    <section className="py-24 relative z-10 border-t border-white/10 text-white overflow-hidden">
+    <section className="py-32 relative z-10 border-t border-white/5 text-white overflow-hidden bg-[#00040a]">
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">Pourquoi Choisir DEB PRO SERVICES ?</h2>
-          <h3 className="text-3xl md:text-5xl font-black mb-4">
-            L'Excellence au Service de Votre Confort
+        <div className="text-center max-w-4xl mx-auto mb-20">
+          <h2 className="text-blue-500 font-black tracking-[0.4em] uppercase mb-4 text-xs">Innovation & Fiabilité</h2>
+          <h3 className="text-4xl md:text-7xl font-black mb-8 font-oswald uppercase tracking-tighter leading-none">
+            L'Excellence au Service <br/><span className="text-blue-500">de Votre Confort</span>
           </h3>
-          <p className="text-slate-400 text-lg">
-            Nous faisons la différence grâce à notre réactivité, notre transparence, et notre maîtrise technique sur tout type de chantier.
+          <p className="text-slate-400 text-xl md:text-2xl font-medium leading-relaxed">
+            Nous faisons la différence grâce à notre réactivité foudroyante, notre totale transparence, et notre maîtrise technique absolue.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {reasons.map((reason, index) => {
             const Icon = reason.icon;
             return (
-              <div key={index} className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl hover:bg-blue-600/10 transition-colors">
-                <div className="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center mb-6 border border-blue-500/30">
-                  <Icon className="w-7 h-7 text-blue-400" />
+              <div key={index} className="bg-white/[0.02] backdrop-blur-2xl border border-white/5 p-12 rounded-[3rem] hover:bg-white/[0.05] transition-all duration-500 group shadow-2xl">
+                <div className="w-20 h-20 rounded-3xl bg-blue-600/10 flex items-center justify-center mb-8 border border-blue-500/20 group-hover:bg-blue-600 group-hover:scale-110 transition-all duration-500">
+                  <Icon className="w-10 h-10 text-blue-400 group-hover:text-white transition-colors" />
                 </div>
-                <h4 className="text-xl font-bold font-heading text-white mb-3">{reason.title}</h4>
-                <p className="text-slate-400 leading-relaxed text-sm">
+                <h4 className="text-2xl font-black font-oswald text-white mb-4 uppercase tracking-widest">{reason.title}</h4>
+                <p className="text-slate-400 leading-relaxed text-base font-medium">
                   {reason.desc}
                 </p>
               </div>
             );
           })}
         </div>
-
       </div>
     </section>
   );

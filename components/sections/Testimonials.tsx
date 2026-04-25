@@ -64,15 +64,15 @@ export function Testimonials() {
     subtitle: "Heureux de vous revoir sur DEB PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de la constance de nos prestations.",
     btnHover: "hover:bg-amber-500/20 hover:text-amber-300"
   } : {
-    bgConfig: "bg-white/5",
-    border: "border-white/10",
-    textHighlight: "text-[#1565c0]",
-    glow: "shadow-[0_0_40px_rgba(21,101,192,0.15)]",
-    star: "fill-yellow-400 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]",
-    badge: "Avis vérifiés",
-    title: "Ce que les particuliers et professionnels disent de nous",
-    subtitle: "La satisfaction client est au cœur de notre stratégie. Découvrez leurs expériences avec nos équipes d'urgence.",
-    btnHover: "hover:bg-[#1565c0]/20 hover:text-blue-300"
+    bgConfig: "bg-white/[0.02]",
+    border: "border-white/5",
+    textHighlight: "text-blue-500",
+    glow: "shadow-[0_0_80px_rgba(59,130,246,0.1)]",
+    star: "fill-blue-500 text-blue-500",
+    badge: "Avis Vérifiés Google",
+    title: "La Parole à Nos Clients",
+    subtitle: "Découvrez pourquoi DEB PRO SERVICES est le leader de l'intervention d'urgence en Belgique.",
+    btnHover: "hover:bg-blue-600/20 hover:text-blue-400"
   };
 
   const handleNext = () => {
@@ -116,10 +116,10 @@ export function Testimonials() {
                {isReturningUser && <Medal className={`w-5 h-5 ${theme.textHighlight}`} />}
                <h2 className={`${theme.textHighlight} font-bold tracking-widest uppercase text-sm transition-colors duration-500`}>{theme.badge}</h2>
             </div>
-            <h3 className="text-3xl md:text-5xl font-black text-white mb-4 transition-colors duration-500">
+            <h3 className="text-4xl md:text-7xl font-black text-white mb-8 font-oswald uppercase tracking-tighter leading-none transition-colors duration-500">
               {theme.title}
             </h3>
-            <p className="text-white opacity-90 text-lg transition-colors duration-500 font-medium">
+            <p className="text-slate-400 text-xl md:text-2xl transition-colors duration-500 font-medium leading-relaxed">
               {theme.subtitle}
             </p>
           </motion.div>

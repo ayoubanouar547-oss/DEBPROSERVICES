@@ -51,15 +51,15 @@ export function Services() {
                 </div>
 
                 <div className="p-8 pt-8 flex flex-col flex-grow relative z-10">
-                  <h4 className="text-2xl font-black font-heading text-white mb-3 mt-4 tracking-tight leading-none">{service.title}</h4>
-                  <p className="text-slate-100 font-medium mb-6 flex-grow text-sm leading-relaxed">
+                  <h4 className="text-3xl font-black font-oswald text-white mb-3 mt-4 tracking-tight leading-none uppercase">{service.title}</h4>
+                  <p className="text-slate-400 font-medium mb-6 flex-grow text-base leading-relaxed">
                     {service.description.slice(0, 100)}...
                   </p>
                   
                   <ul className="space-y-3 mb-8">
                     {service.features.slice(0, 3).map((feature, i) => (
-                      <li key={i} className="flex items-center text-[10px] font-black text-white uppercase tracking-widest bg-white/10 px-3 py-1.5 rounded-full border border-white/5 self-start">
-                        <span className={`w-1 h-1 ${service.color.glow} rounded-full mr-2 shadow-[0_0_8px_rgba(255,255,255,0.5)]`}></span>
+                      <li key={i} className="flex items-center text-[10px] font-black text-white uppercase tracking-[0.2em] bg-white/5 px-4 py-2 rounded-full border border-white/5 self-start transition-colors hover:bg-white/10">
+                         <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
                         {feature}
                       </li>
                     ))}
@@ -68,10 +68,10 @@ export function Services() {
                   <motion.div whileHover={{ x: 5 }}>
                     <Link 
                       href={`/${service.slug}`}
-                      className="mt-auto inline-flex items-center text-sm font-black text-white hover:bg-blue-600 transition-colors uppercase tracking-widest group/link bg-blue-600/20 px-6 py-3 rounded-xl border border-blue-500/30"
+                      className="mt-auto group inline-flex items-center text-sm font-black text-white transition-all uppercase tracking-[0.3em] bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-2xl shadow-xl shadow-blue-600/20"
                     >
                       DÉTAILS
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </motion.div>
                 </div>

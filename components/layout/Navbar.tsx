@@ -45,75 +45,69 @@ export function Navbar() {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 transition-all duration-300 ${isMobileMenuOpen ? 'z-[999999]' : 'z-50'} ${
-        isScrolled ? 'bg-slate-900/50 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 transition-all duration-500 ${isMobileMenuOpen ? 'z-[999999]' : 'z-50'} ${
+        isScrolled ? 'bg-[#000814]/90 backdrop-blur-xl border-b border-white/5 py-3' : 'bg-transparent py-6'
       }`}
     >
-      <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex justify-between items-center">
           
-          {/* Logo with Dripping Effect */}
+          {/* Logo */}
           <Link 
             href="/" 
-            className="relative group lg:-ml-6 xl:-ml-10 transition-all duration-300"
+            className="relative group transition-all duration-300"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <div className="relative z-10">
-              <img 
-                src="https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c" 
-                alt="Deb PRO Services Logo" 
-                className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-              />
-            </div>
+            <img 
+              src="https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c" 
+              alt="DEB PRO SERVICES" 
+              className="h-10 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              referrerPolicy="no-referrer"
+            />
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-4">
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
                 href={link.href}
-                className="relative text-sm font-bold text-slate-300 hover:text-white transition-colors group py-2"
+                className={`relative text-[11px] xl:text-[13px] font-black uppercase tracking-widest px-3 py-2 transition-all duration-300 ${pathname === link.href ? 'text-white' : 'text-slate-400 hover:text-white'}`}
               >
-                <span className="relative z-10">{link.name}</span>
+                {link.name}
+                {pathname === link.href && (
+                  <motion.div layoutId="nav-underline" className="absolute bottom-0 left-3 right-3 h-0.5 bg-blue-500 rounded-full" />
+                )}
               </Link>
             ))}
           </nav>
 
           {/* CTAs */}
-          <div className="hidden md:flex items-center gap-4">
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10"
+          <div className="hidden lg:flex items-center gap-6">
+            <a 
+               href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
+               className="flex items-center gap-3 text-white transition-transform hover:scale-105"
             >
-              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-              <span className="text-sm font-bold text-white">{PHONE_NUMBER}</span>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+               <div className="w-10 h-10 rounded-full bg-blue-600/10 border border-blue-500/20 flex items-center justify-center">
+                 <Phone className="w-4 h-4 text-blue-400" />
+               </div>
+               <span className="text-lg font-black tracking-tighter">{PHONE_NUMBER}</span>
+            </a>
+            <Link 
+              href="/urgence"
+              className="bg-[#CC1F1F] hover:bg-[#E52D2D] px-8 py-4 rounded-xl text-sm font-black text-white shadow-[0_10px_30px_rgba(204,31,31,0.3)] uppercase tracking-widest transition-all hover:scale-105 active:scale-95"
             >
-              <Link 
-                href="/urgence"
-                className="bg-red-600 hover:bg-red-700 px-6 py-2.5 rounded-full text-sm font-black text-white shadow-lg shadow-red-600/20 uppercase tracking-wider transition-all block"
-              >
-                Urgence 24h/24
-              </Link>
-            </motion.div>
+              Urgence 24H/24
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-white p-2"
+            className="lg:hidden text-white p-2 flex items-center gap-2 bg-white/5 rounded-xl border border-white/10"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-8 h-8 text-white" />
-            ) : (
-              <Menu className="w-8 h-8 text-white" />
-            )}
+            <span className="text-[10px] font-black uppercase tracking-widest px-2">Menu</span>
+            {isMobileMenuOpen ? <X className="w-6 h-6 px-1" /> : <Menu className="w-6 h-6 px-1" />}
           </button>
         </div>
       </div>
