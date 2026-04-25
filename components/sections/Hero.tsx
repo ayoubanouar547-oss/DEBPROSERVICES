@@ -17,152 +17,143 @@ const SERVICES = [
 
 export function Hero() {
   const [serviceIndex, setServiceIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState(SERVICES[0].text.toUpperCase());
+  const [displayedText, setDisplayedText] = useState(SERVICES[0].text.toUpperCase() + ' EN BELGIQUE');
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Typewriter effect logic
+  // Typewriter effect logic - optimized to not start from empty
   useEffect(() => {
     let timer: NodeJS.Timeout;
     const currentService = SERVICES[serviceIndex].text.toUpperCase();
+    const fullText = currentService + ' EN BELGIQUE';
 
     if (!isDeleting) {
-      if (displayedText.length < currentService.length) {
+      if (displayedText.length < fullText.length) {
+        // Typing phase
         timer = setTimeout(() => {
-          setDisplayedText(currentService.substring(0, displayedText.length + 1));
-        }, 80);
+          setDisplayedText(fullText.substring(0, displayedText.length + 1));
+        }, 90); // Normal typing speed
       } else {
+        // Finished typing, pause for 3 seconds
         timer = setTimeout(() => {
           setIsDeleting(true);
         }, 3000);
       }
     } else {
-      if (displayedText.length > 0) {
-        timer = setTimeout(() => {
-          setDisplayedText(displayedText.substring(0, displayedText.length - 1));
-        }, 40);
-      } else {
+      // Deleting phase
+      timer = setTimeout(() => {
+        setDisplayedText('');
         setIsDeleting(false);
         setServiceIndex((current) => (current + 1) % SERVICES.length);
-      }
+      }, 500); 
     }
 
     return () => clearTimeout(timer);
   }, [displayedText, isDeleting, serviceIndex]);
 
   return (
-    <section className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 sm:px-6 lg:px-16 py-10 pt-40 min-h-screen items-center overflow-hidden">
+    <section className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 sm:px-6 lg:px-12 py-10 pt-32 min-h-[90vh] items-center">
       <div className="col-span-1 lg:col-span-7 flex flex-col justify-center">
-        {/* Badges system from video */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2 bg-blue-900/40 backdrop-blur-md border border-blue-500/30 px-4 py-1.5 rounded-full"
-          >
-            <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-100">Disponible 24H/24</span>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className="flex items-center gap-2 bg-green-900/40 backdrop-blur-md border border-green-500/30 px-4 py-1.5 rounded-full"
-          >
-            <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-green-100">Agréés & Assurés</span>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center gap-2 bg-purple-900/40 backdrop-blur-md border border-purple-500/30 px-4 py-1.5 rounded-full"
-          >
-            <span className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-100">Devis Gratuit</span>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex items-center gap-2 bg-red-900/40 backdrop-blur-md border border-red-500/30 px-4 py-1.5 rounded-full"
-          >
-            <span className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-red-100">Intervention Rapide</span>
-          </motion.div>
+        <div className="flex flex-wrap gap-2 mb-6">
+          <span className="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-2 py-1 rounded border border-blue-500/30 uppercase tracking-widest">✓ Disponible 24H/24</span>
+          <span className="bg-green-600/20 text-green-400 text-[10px] font-bold px-2 py-1 rounded border border-green-500/30 uppercase tracking-widest">✓ Agréés & Assurés</span>
+          <span className="bg-purple-600/20 text-purple-400 text-[10px] font-bold px-2 py-1 rounded border border-purple-500/30 uppercase tracking-widest">✓ Devis Gratuit</span>
+          <span className="bg-red-600/20 text-red-400 text-[10px] font-bold px-2 py-1 rounded border border-red-500/30 uppercase tracking-widest">✓ Intervention Rapide</span>
         </div>
         
-        <div className="space-y-6">
-          <h1 className="font-oswald font-black leading-[0.9] mb-8 lg:text-left text-center">
-            <div className="text-6xl md:text-8xl lg:text-[110px] tracking-tighter uppercase mb-2">
-              <motion.span 
-                 key={serviceIndex}
-                 initial={{ opacity: 0, y: 20 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 exit={{ opacity: 0, y: -20 }}
-                 className="block"
+        <div className="space-y-4">
+          <h1 className="font-black leading-[1.1] mb-6">
+            <div className="text-4xl md:text-5xl lg:text-7xl min-h-[140px] flex flex-col justify-center">
+              <motion.div 
+                 className="flex flex-wrap items-center relative"
+                 animate={
+                   isDeleting 
+                     ? { opacity: 0, y: -20, scale: 0.95, filter: 'blur(10px)' } 
+                     : { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }
+                 }
+                 transition={{ duration: 0.4, ease: "easeInOut" }}
               >
-                {displayedText}
-              </motion.span>
-              <span className="text-white block mt-2">EN BELGIQUE</span>
+                <span className={`bg-clip-text text-transparent bg-gradient-to-r ${SERVICES[serviceIndex].gradient}`}>
+                  {displayedText.substring(0, SERVICES[serviceIndex].text.length)}
+                </span>
+                <span className="text-white whitespace-pre-wrap">
+                  {displayedText.substring(SERVICES[serviceIndex].text.length)}
+                </span>
+              </motion.div>
             </div>
-            <div className="flex items-center gap-4 lg:justify-start justify-center mt-6">
-               <div className="h-1 lg:w-24 w-12 bg-blue-500 rounded-full"></div>
-               <span className="text-2xl md:text-4xl text-blue-400 font-black uppercase tracking-widest">
-                 Intervention Express 24H/24
-               </span>
-            </div>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 block mt-2 text-3xl md:text-4xl lg:text-5xl text-shiny">
+              Intervention Express 24H/24
+            </span>
           </h1>
-          <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl leading-relaxed font-medium lg:text-left text-center mx-auto lg:mx-0">
-            Débouchage, plomberie, chauffage, gaz, électricité et fosse septique. Nos techniciens certifiés interviennent <span className="text-white">partout en Belgique</span> jour et nuit.
+          <p className="text-lg text-slate-100 mb-8 max-w-lg leading-relaxed font-medium">
+            Débouchage, chauffage, gaz, électricité et fosse septique. Techniciens agréés, disponibles 7j/7 dans toute la Belgique.
           </p>
         </div>
 
-        {/* CTA Buttons - Matching exactly the video style */}
-        <div className="flex flex-col sm:flex-row gap-6 pt-10 lg:justify-start justify-center">
-          <Link 
-            href="tel:0496325733"
-            className="group relative bg-[#CC1F1F] hover:bg-[#E52D2D] text-white font-black px-12 py-7 rounded-2xl flex items-center justify-center gap-4 transition-all duration-300 shadow-[0_20px_50px_rgba(204,31,31,0.4)] hover:scale-105 active:scale-95 border-b-4 border-[#8B1515]"
-          >
-             <PhoneCall className="w-8 h-8 animate-pulse" />
-             <span className="text-2xl uppercase tracking-tighter">Appeler Maintenant</span>
-          </Link>
-          <Link 
-            href="/devis"
-            className="group relative bg-[#0D1F4C] hover:bg-[#162D6D] text-white font-black px-12 py-7 rounded-2xl flex items-center justify-center transition-all duration-300 border border-white/10 shadow-[0_20px_50px_rgba(13,31,76,0.5)] hover:scale-105 active:scale-95"
-          >
-             <span className="text-2xl uppercase tracking-tighter">Devis Gratuit en 2 min</span>
-          </Link>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-6 pt-6">
+          <div className="flex-1 sm:flex-initial">
+             {/* Removed whileHover/whileTap to reduce JS TBT on mobile, kept purely CSS or lightweight */}
+            <Link 
+              href="tel:0496325733"
+              className="w-full btn-luxury px-10 py-5 rounded-2xl font-black text-xl text-white flex items-center justify-center gap-3 transition-all border-b-4 border-red-950 active:border-b-0 active:translate-y-1 hover:scale-105"
+            >
+               <PhoneCall className="w-6 h-6 animate-pulse" />
+               Appeler Maintenant
+            </Link>
+          </div>
+          <div className="flex-1 sm:flex-initial">
+            <Link 
+              href="/devis"
+              className="w-full glass-card hover:bg-white/10 px-10 py-5 rounded-2xl font-black text-xl text-white transition-all flex justify-center items-center h-full border border-white/20 hover:scale-105"
+            >
+               Devis Gratuit en 2 min
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-16 flex flex-wrap gap-10">
+          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center">
+            <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">5000+</div>
+            <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">Clients Satisfaits</div>
+          </div>
+          <div className="hidden sm:block w-px h-12 bg-white/10 self-center"></div>
+          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center" style={{ animationDelay: '100ms' }}>
+            <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">15 Ans</div>
+            <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">D'Expérience</div>
+          </div>
+          <div className="hidden sm:block w-px h-12 bg-white/10 self-center"></div>
+          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center" style={{ animationDelay: '200ms' }}>
+            <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 flex items-center gap-3">
+              4.9/5
+              <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+            </div>
+            <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">Note Avis Google</div>
+          </div>
         </div>
       </div>
 
-      <div className="col-span-1 lg:col-span-5 relative lg:block hidden">
-        <div className="relative aspect-[4/5] w-full flex items-end justify-center">
-           {/* Stronger glow effect behind technician */}
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-600/20 blur-[180px] rounded-full"></div>
+      {/* Trust Box area right side if needed, let's keep it minimal as in UI */}
+      <div className="col-span-1 lg:col-span-5 block mt-0 lg:mt-0">
+        <div className="relative aspect-[4/5] w-full max-w-[320px] lg:max-w-lg mx-auto flex items-end justify-center">
+           {/* Decorative background glow for the Technician */}
+           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-500/30 blur-[100px] rounded-full -z-10"></div>
            
-           <motion.div 
-             initial={{ opacity: 0, y: 100 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 1, ease: "easeOut" }}
-             className="relative z-10 w-[120%] h-[120%] flex items-end justify-center pointer-events-none"
-           >
-                <Image 
-                  src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&q=80&w=1200" 
-                  alt="Technicien Professional" 
-                  fill
-                  sizes="40vw"
-                  priority={true}
-                  className="object-contain object-bottom drop-shadow-[0_40px_60px_rgba(0,0,0,0.8)] filter brightness-110 contrast-110"
-                />
-                
-                {/* Floating labels for credibility */}
-                <div className="absolute top-[20%] -right-10 bg-[#FFD600] text-black px-6 py-3 rounded-2xl font-black rotate-12 shadow-2xl animate-float">
-                  AGRÉÉ BELGIQUE
-                </div>
-                <div className="absolute bottom-[40%] -left-10 bg-blue-500 text-white px-6 py-3 rounded-2xl font-black -rotate-6 shadow-2xl animate-float animation-delay-2000">
-                  ASSURANCE TOUS RISQUES
-                </div>
-           </motion.div>
+           {/* Technician Uploaded Image Container */}
+           <div className="relative z-10 w-full h-[110%] flex items-end justify-center">
+               <Image 
+                 src="/technician.png" 
+                 alt="Technicien DEB PRO SERVICES" 
+                 fill
+                 sizes="(max-width: 768px) 100vw, 50vw"
+                 priority={true}
+                 className="object-contain object-bottom drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] scale-110 md:scale-100"
+               />
+           </div>
         </div>
       </div>
     </section>

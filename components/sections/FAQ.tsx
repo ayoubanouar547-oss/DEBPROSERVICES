@@ -38,44 +38,43 @@ export function FAQ({ city }: { city?: string }) {
   });
 
   return (
-    <section className="py-32 relative z-10 border-y border-white/5 bg-[#00040a]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section className="py-24 relative z-10 border-y border-white/10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center mb-24 max-w-4xl mx-auto">
-          <h2 className="text-blue-500 font-black tracking-[0.4em] uppercase mb-6 text-xs italic">Guide Pratique</h2>
-          <h3 className="text-4xl md:text-7xl font-black text-white font-oswald uppercase tracking-tighter leading-none">
-            {city ? `Expertise à ${city}` : "Questions <br/><span className='text-blue-500'>Fréquentes</span>"}
+        <div className="text-center mb-16">
+          <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">Foire Aux Questions {city && `à ${city}`}</h2>
+          <h3 className="text-3xl md:text-5xl font-black text-white">
+            {city ? `Expertise locale à ${city}` : "Vous avez une question ? Nous avons les réponses."}
           </h3>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {personalizedFaqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div 
                 key={index} 
-                className={`rounded-[2rem] transition-all duration-500 overflow-hidden backdrop-blur-3xl border ${isOpen ? 'border-blue-500/30 bg-blue-600/[0.03] shadow-[0_20px_50px_rgba(59,130,246,0.1)]' : 'border-white/5 bg-white/[0.01] hover:bg-white/[0.03]'}`}
+                className={`border rounded-xl transition-all duration-200 overflow-hidden backdrop-blur-xl ${isOpen ? 'border-blue-500/50 bg-blue-600/10' : 'border-white/10 bg-white/5 hover:bg-white/10'}`}
               >
                 <button
-                  className="w-full px-10 py-8 flex items-center justify-between font-black text-left text-white transition-all focus:outline-none uppercase tracking-widest text-sm md:text-base font-oswald"
+                  className="w-full px-6 py-4 flex items-center justify-between font-bold text-left text-white transition-colors focus:outline-none"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   aria-expanded={isOpen}
                 >
                   {faq.question}
-                  <div className={`p-3 rounded-xl transition-all duration-500 ${isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-white/5 text-slate-500'}`}>
-                    <ChevronDown className="w-6 h-6" />
-                  </div>
+                  <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-blue-400' : 'text-slate-400'}`} />
                 </button>
                 <div 
-                  className={`px-10 pb-8 text-slate-400 transition-all duration-500 overflow-hidden text-lg font-medium leading-relaxed ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                  className={`px-6 pb-4 text-slate-300 transition-all duration-300 overflow-hidden text-sm leading-relaxed ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 pb-0'}`}
                   aria-hidden={!isOpen}
                 >
-                  <p className="pt-8 border-t border-white/10">{faq.answer}</p>
+                  <p className="pt-2 border-t border-white/10">{faq.answer}</p>
                 </div>
               </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );

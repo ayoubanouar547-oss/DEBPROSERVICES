@@ -8,36 +8,34 @@ export function ServiceZones() {
   const provinces = Array.from(new Set(belgianCities.map(c => c.province)));
 
   return (
-    <section className="py-32 relative z-10 border-t border-white/5 overflow-hidden bg-[#00040a]" id="zones">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
+    <section className="py-24 relative z-10 border-t border-white/10 overflow-hidden" id="zones">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid lg:grid-cols-2 gap-24 items-start">
-          <div className="space-y-12">
-             <div>
-               <h2 className="text-blue-500 font-black tracking-[0.4em] uppercase mb-6 text-xs italic">Couverture Totale</h2>
-               <h3 className="text-4xl md:text-7xl font-black text-white font-oswald uppercase tracking-tighter leading-none">
-                  Nos Zones d'Intervention <br/><span className="text-blue-500">en Belgique</span>
-               </h3>
-               <p className="text-slate-400 text-xl font-medium leading-relaxed mt-8">
-                 Nous disposons d'une flotte de techniciens experts répartis stratégiquement. Intervention garantie en moins de 60 minutes dans toutes les provinces belges.
-               </p>
-             </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div>
+             <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">Intervention Nationale</h2>
+             <h3 className="text-3xl md:text-5xl font-black text-white mb-4">
+                Nos Zones d'Interventions en Belgique
+             </h3>
+             <p className="text-slate-400 text-lg mb-8">
+               Nous disposons de techniciens répartis dans les grandes villes du pays. Cela nous permet d'assurer une présence rapide, généralement en moins d'une heure en fonction de votre région.
+             </p>
              
-             <div className="space-y-10">
+             <div className="space-y-6">
                 {provinces.slice(0, 3).map(province => {
                   const cities = belgianCities.filter(c => c.province === province);
                   return (
-                    <div key={province} className="group">
-                      <h4 className="font-black flex items-center text-white mb-6 uppercase tracking-[0.2em] text-sm md:text-base font-oswald italic transition-colors group-hover:text-blue-500">
-                        <MapPin className="w-5 h-5 mr-3 text-blue-500 animate-pulse" />
+                    <div key={province}>
+                      <h4 className="font-bold flex items-center text-white mb-3 uppercase tracking-wider text-sm">
+                        <MapPin className="w-5 h-5 mr-2 text-blue-400" />
                         {province}
                       </h4>
-                      <div className="flex flex-wrap gap-3">
+                      <div className="flex flex-wrap gap-2">
                         {cities.slice(0, 8).map(city => (
                           <Link 
                             key={city.slug} 
                             href={`/zones-de-services/plomberie/${city.slug}`}
-                            className="text-xs font-black bg-white/[0.03] backdrop-blur-3xl hover:bg-blue-600 text-slate-400 hover:text-white px-5 py-2.5 rounded-xl border border-white/5 transition-all duration-300 uppercase tracking-widest shadow-lg"
+                            className="text-sm bg-white/5 backdrop-blur-md hover:bg-blue-600/20 text-slate-300 hover:text-white px-3 py-1.5 rounded-full border border-white/10 transition-colors"
                           >
                             {city.name}
                           </Link>
@@ -47,17 +45,13 @@ export function ServiceZones() {
                   );
                 })}
              </div>
-             <div className="mt-12 pt-10 border-t border-white/5">
-               <Link href="/zones-de-services" className="group inline-flex items-center font-black text-blue-500 text-base tracking-[0.3em] uppercase hover:text-white transition-all">
-                  Explorer toutes les zones 
-                  <span className="ml-4 transition-transform group-hover:translate-x-2">→</span>
-               </Link>
+             <div className="mt-8 pt-6 border-t border-white/10">
+               <Link href="/zones-de-services" className="font-bold text-blue-400 text-sm tracking-widest uppercase hover:text-white transition-colors">Voir le reste des provinces &rarr;</Link>
              </div>
           </div>
 
-          <div className="relative h-full min-h-[500px] bg-white/[0.01] backdrop-blur-3xl rounded-[3rem] border border-white/5 overflow-hidden flex items-center justify-center p-12 group shadow-2xl">
-            <div className="absolute inset-0 bg-[#000814]/80 z-[-1]"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-blue-900/10 to-red-900/10 z-0"></div>
+          <div className="relative h-full min-h-[400px] bg-[#000814]/40 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden flex items-center justify-center p-8 group">
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-[#FDDA24]/20 to-[#EF3340]/40 z-0"></div>
             
             {/* Belgian Flag outline map via mask */}
             <div 

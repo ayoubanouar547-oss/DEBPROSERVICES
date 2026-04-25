@@ -1,11 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1A3A8F;
+  --color-primary: #1565c0;
   --color-secondary: #00bcd4;
-  --color-accent: #CC1F1F;
-  --color-dark: #0D1F4C;
-  --color-yellow: #FFD600;
+  --color-accent: #d32f2f;
+  --color-dark: #010409;
   --font-heading: var(--font-oswald), sans-serif;
   --font-body: var(--font-inter), sans-serif;
 }
@@ -20,18 +19,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    text-transform: uppercase;
-    font-weight: 700;
   }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float-blob {
@@ -43,10 +31,6 @@
 
 .animate-blob {
   animation: float-blob 15s infinite ease-in-out;
-}
-
-.animate-blob-slow {
-  animation: float-blob 25s infinite ease-in-out reverse;
 }
 
 .animation-delay-2000 {

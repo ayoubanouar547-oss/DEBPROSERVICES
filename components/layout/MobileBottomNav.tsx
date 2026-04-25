@@ -62,14 +62,14 @@ export function MobileBottomNav() {
                   href={item.href}
                   className="flex flex-col items-center justify-center p-2 rounded-2xl transition-colors relative"
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? 'text-blue-500' : 'text-slate-400'}`} />
-                  <span className={`text-[9px] font-black mt-1 uppercase tracking-tighter ${isActive ? 'text-white' : 'text-slate-500'}`}>
+                  <Icon className={`w-5 h-5 ${isActive ? 'text-[#1565c0]' : 'text-slate-200'}`} />
+                  <span className={`text-[9px] font-black mt-1 uppercase tracking-tighter ${isActive ? 'text-[#1565c0]' : 'text-slate-100 opacity-70'}`}>
                     {item.name}
                   </span>
                   {isActive && (
                     <motion.div 
                       layoutId="activeTab"
-                      className="absolute -bottom-0.5 w-1 h-1 bg-blue-500 rounded-full"
+                      className="absolute -bottom-0.5 w-1 h-1 bg-[#1565c0] rounded-full"
                     />
                   )}
                 </Link>
