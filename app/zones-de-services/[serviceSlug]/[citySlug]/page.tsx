@@ -90,11 +90,11 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
 
            <div className="grid lg:grid-cols-2 gap-12 items-center">
              <div className="max-w-2xl">
-               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-xl rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest text-slate-300">
-                  <MapPin className="w-4 h-4 text-blue-400" />
+               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 backdrop-blur-xl rounded-full text-xs font-black border border-blue-500/20 mb-8 uppercase tracking-[0.3em] text-blue-400">
+                  <MapPin className="w-4 h-4" />
                   Intervention sur {cityInfo.name}
                </div>
-               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-6">
+               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] mb-8 uppercase font-oswald tracking-tighter">
                   {serviceInfo.title} <br/> 
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
                     {cityInfo.name}

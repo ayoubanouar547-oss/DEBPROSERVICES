@@ -77,101 +77,112 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
         }}
       />
 
-      <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 to-transparent pointer-events-none"></div>
+      <section className="relative pt-40 pb-24 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 bg-[#000814] pointer-events-none">
+          <div className="absolute inset-0 bg-blue-900/20 blur-[150px] rounded-full"></div>
+        </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            
            {/* Breadcrumb */}
-           <div className="flex items-center gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
-             <Link href="/" className="hover:text-blue-400">Accueil</Link>
+           <div className="flex items-center gap-2 text-sm text-slate-500 mb-12 overflow-x-auto whitespace-nowrap bg-white/5 w-fit px-4 py-2 rounded-full border border-white/10">
+             <Link href="/" className="hover:text-white transition-colors">Accueil</Link>
              <ChevronRight className="w-4 h-4" />
-             <Link href={`/${serviceInfo.slug}`} className="hover:text-blue-400">{serviceInfo.title}</Link>
+             <Link href={`/${serviceInfo.slug}`} className="hover:text-white transition-colors uppercase font-bold text-xs tracking-widest">{serviceInfo.title}</Link>
              <ChevronRight className="w-4 h-4" />
-             <span className="text-white font-bold">{subServiceInfo.title}</span>
+             <span className="text-blue-400 font-black uppercase text-xs tracking-widest">{subServiceInfo.title}</span>
            </div>
 
            <div className="max-w-4xl">
-             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-sm font-bold border border-white/20 mb-6 uppercase tracking-widest text-blue-300">
+             <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 backdrop-blur-md rounded-full text-xs font-black border border-blue-500/20 mb-8 uppercase tracking-[0.3em] text-blue-400">
                 <serviceInfo.icon className="w-4 h-4" />
-                Service Spécialisé
+                Dépannage & Installation
              </div>
-             <h1 className="text-4xl md:text-5xl lg:text-5xl font-black leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-                {subServiceInfo.title} en Belgique
+             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-slate-500 uppercase font-oswald tracking-tighter">
+                {subServiceInfo.title}
              </h1>
-             <p className="text-xl text-blue-100/80 mb-8 max-w-3xl leading-relaxed">
-               {subServiceInfo.desc} Disponibilité immédiate 24/7 partout en Belgique.
+             <p className="text-2xl text-slate-400 mb-12 max-w-3xl leading-relaxed font-medium">
+               {subServiceInfo.desc} Intervention <span className="text-white">immédiate 24/7</span> partout en Belgique.
              </p>
-             <div className="flex flex-wrap gap-4">
-                <a href="tel:0496325733" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
-                  <PhoneCall className="w-5 h-5" /> Intervention Urgente
+             <div className="flex flex-wrap gap-6">
+                <a href="tel:0496325733" className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black text-xl px-12 py-5 rounded-2xl flex items-center justify-center gap-4 transition-all border-b-4 border-red-900 active:border-b-0 active:translate-y-1 shadow-2xl shadow-red-600/40">
+                  <PhoneCall className="w-6 h-6 animate-pulse" /> Appeler le service SOS
                 </a>
+                <Link href="/devis" className="w-full sm:w-auto glass border border-white/20 text-white font-black text-xl px-12 py-5 rounded-2xl flex items-center justify-center gap-4 hover:bg-white/10 transition-all">
+                  Devis Gratuit
+                </Link>
              </div>
            </div>
         </div>
       </section>
 
-      {/* Programmatic Cluster Content for SEO - Simulating 1000 words logic */}
-      <section className="py-20 bg-slate-900 text-white relative z-10">
+      {/* Programmatic Cluster Content for SEO */}
+      <section className="py-32 bg-[#000814] text-white relative z-10 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-16">
+          <div className="grid lg:grid-cols-12 gap-20">
             
-            <div className="lg:col-span-8 space-y-10">
-              <h2 className="text-3xl font-black text-white">L'Expertise {subServiceInfo.title} à votre portée</h2>
+            <div className="lg:col-span-8 space-y-16">
+              <div className="space-y-6">
+                <h2 className="text-4xl md:text-5xl font-black text-white uppercase font-oswald tracking-tight">Expertise Professionnelle</h2>
+                <div className="h-2 w-24 bg-blue-600 rounded-full"></div>
+              </div>
               
-              <div className="prose prose-lg prose-invert text-slate-300">
-                <p dangerouslySetInnerHTML={{ __html: paragraphs[0] }} />
+              <div className="prose prose-2xl prose-invert text-slate-400 font-medium">
+                <p className="leading-relaxed" dangerouslySetInnerHTML={{ __html: paragraphs[0] }} />
                 
                 {/* Image 1 */}
-                <div className="my-10 relative h-80 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                   <img src={`https://picsum.photos/seed/${subServiceInfo.slug}1/800/400`} alt={`${subServiceInfo.title} intervention`} className="w-full h-full object-cover" />
+                <div className="my-16 relative aspect-video rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group">
+                   <img src={`https://picsum.photos/seed/${subServiceInfo.slug}1/1000/600`} alt={`${subServiceInfo.title} intervention`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-transparent"></div>
                 </div>
 
                 <p dangerouslySetInnerHTML={{ __html: paragraphs[1] }} />
                 
-                <h3 className="text-2xl font-bold text-white mt-8 mb-4">Pourquoi une intervention rapide est cruciale ?</h3>
+                <h3 className="text-3xl font-black text-white mt-16 mb-8 uppercase font-oswald">Urgence {subServiceInfo.title} : Une priorité absolue</h3>
                 <p dangerouslySetInnerHTML={{ __html: paragraphs[2] }} />
 
                 {/* Image 2 */}
-                <div className="my-10 relative h-80 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                   <img src={`https://picsum.photos/seed/${subServiceInfo.slug}2/800/400`} alt={`Technicien pour ${subServiceInfo.title}`} className="w-full h-full object-cover" />
+                <div className="my-16 relative aspect-video rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl group">
+                   <img src={`https://picsum.photos/seed/${subServiceInfo.slug}2/1000/600`} alt={`Technicien pour ${subServiceInfo.title}`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-transparent"></div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mt-8 mb-4">Notre zone d'action rapide</h3>
+                <h3 className="text-3xl font-black text-white mt-16 mb-8 uppercase font-oswald">Zone de couverture étendue</h3>
                 <p dangerouslySetInnerHTML={{ __html: paragraphs[3] }} />
                 
                 {/* Massive Content */}
-                <div className="mt-16 border-t border-white/10 pt-16">
-                   <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.join('') }} />
+                <div className="mt-24 border-t border-white/10 pt-24 space-y-12">
+                   <div className="seo-dynamic-content text-lg text-slate-500 leading-relaxed" dangerouslySetInnerHTML={{ __html: massiveSEOContent.join('') }} />
                 </div>
               </div>
             </div>
             
             <div className="lg:col-span-4 relative">
-              <div className="sticky top-32 space-y-8">
+              <div className="sticky top-32 space-y-10">
                 {/* Sidebar Cluster Links */}
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl">
-                  <h3 className="font-bold text-xl mb-4 text-white">Autres services en {serviceInfo.title}</h3>
-                  <ul className="space-y-3">
+                <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-10 rounded-[2rem] shadow-2xl">
+                  <h3 className="font-black text-2xl mb-8 text-white uppercase font-oswald tracking-widest border-b border-white/10 pb-4">Services liés</h3>
+                  <ul className="space-y-4">
                     {serviceInfo.subServices.map(sub => (
                       <li key={sub.slug}>
                         <Link 
                           href={`/${serviceInfo.slug}/${sub.slug}`}
-                          className={`flex items-center gap-2 text-sm transition-colors ${sub.slug === subServiceInfo.slug ? 'text-blue-400 font-bold' : 'text-slate-400 hover:text-white'}`}
+                          className={`flex items-center justify-between p-4 rounded-xl border transition-all ${sub.slug === subServiceInfo.slug ? 'bg-blue-600/20 border-blue-500/50 text-white shadow-lg' : 'bg-white/5 border-transparent text-slate-400 hover:text-white hover:bg-white/10'}`}
                         >
-                          <ChevronRight className="w-4 h-4" />
-                          {sub.title}
+                          <span className="font-bold text-sm uppercase tracking-wider">{sub.title}</span>
+                          <ChevronRight className={`w-5 h-5 transition-transform ${sub.slug === subServiceInfo.slug ? 'translate-x-1' : ''}`} />
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Image 3 - Emergency Box */}
-                 <div className="bg-gradient-to-br from-red-600 to-red-900 p-6 rounded-2xl border border-red-500/30 text-white shadow-2xl">
-                   <h4 className="font-black text-2xl mb-2">Urgence 24/7</h4>
-                   <p className="text-red-100 text-sm mb-6">Nous sommes mobilisés pour toute urgence liée à : {subServiceInfo.title}.</p>
-                   <a href="tel:0496325733" className="bg-white text-red-700 w-full px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-50 transition">
-                     <PhoneCall className="w-5 h-5" /> Appeler le technicien
+                {/* Emergency Box */}
+                 <div className="bg-gradient-to-br from-red-600 to-red-900 p-10 rounded-[2rem] border border-red-500/30 text-white shadow-2xl relative overflow-hidden group">
+                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/20 to-transparent"></div>
+                   <h4 className="font-black text-3xl mb-4 relative z-10 uppercase font-oswald leading-none">Intervention <br/> SOS Directe</h4>
+                   <p className="text-red-100 text-sm mb-8 relative z-10 font-bold opacity-80 uppercase tracking-widest tracking-tight">Technicien disponible 24/7</p>
+                   <a href="tel:0496325733" className="relative z-10 bg-white text-red-700 w-full px-6 py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 hover:scale-105 transition-all shadow-xl">
+                     <PhoneCall className="w-6 h-6 animate-pulse" /> Appeler
                    </a>
                  </div>
               </div>
