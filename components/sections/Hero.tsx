@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PhoneCall, ShieldCheck, Clock, MapPin, CheckCircle } from 'lucide-react';
+import { PhoneCall } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const SERVICES = [
@@ -16,13 +16,11 @@ const SERVICES = [
 ];
 
 export function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [serviceIndex, setServiceIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState('');
+  const [displayedText, setDisplayedText] = useState(SERVICES[0].text.toUpperCase() + ' EN BELGIQUE');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(100);
 
-  // Typewriter effect logic
+  // Typewriter effect logic - optimized to not start from empty
   useEffect(() => {
     let timer: NodeJS.Timeout;
     const currentService = SERVICES[serviceIndex].text.toUpperCase();
@@ -41,8 +39,7 @@ export function Hero() {
         }, 3000);
       }
     } else {
-      // Deleting phase - Different animation instead of backward typing
-      // Wait for the exit animation to finish (e.g., 500ms), then reset and move to next word
+      // Deleting phase
       timer = setTimeout(() => {
         setDisplayedText('');
         setIsDeleting(false);
@@ -52,56 +49,6 @@ export function Hero() {
 
     return () => clearTimeout(timer);
   }, [displayedText, isDeleting, serviceIndex]);
-
-  // Simple particle system for the background (Water effect)
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let particles: { x: number, y: number, radius: number, vY: number, opacity: number }[] = [];
-    let animationFrameId: number;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', resize);
-    resize();
-
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 2 + 1,
-        vY: Math.random() * 1 + 0.5,
-        opacity: Math.random() * 0.5 + 0.1
-      });
-    }
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
-        ctx.fill();
-        p.y -= p.vY;
-        if (p.y < 0) {
-          p.y = canvas.height;
-          p.x = Math.random() * canvas.width;
-        }
-      });
-      animationFrameId = window.requestAnimationFrame(draw);
-    };
-    draw();
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      window.cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
 
   return (
     <section className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 sm:px-6 lg:px-12 py-10 pt-32 min-h-[90vh] items-center">
@@ -144,49 +91,38 @@ export function Hero() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 pt-6">
-          <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} className="flex-1 sm:flex-initial">
+          <div className="flex-1 sm:flex-initial">
+             {/* Removed whileHover/whileTap to reduce JS TBT on mobile, kept purely CSS or lightweight */}
             <Link 
-              href="tel:0470000000"
-              className="w-full btn-luxury px-10 py-5 rounded-2xl font-black text-xl text-white flex items-center justify-center gap-3 transition-all border-b-4 border-red-950 active:border-b-0 active:translate-y-1"
+              href="tel:0496325733"
+              className="w-full btn-luxury px-10 py-5 rounded-2xl font-black text-xl text-white flex items-center justify-center gap-3 transition-all border-b-4 border-red-950 active:border-b-0 active:translate-y-1 hover:scale-105"
             >
                <PhoneCall className="w-6 h-6 animate-pulse" />
                Appeler Maintenant
             </Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }} className="flex-1 sm:flex-initial">
+          </div>
+          <div className="flex-1 sm:flex-initial">
             <Link 
               href="/devis"
-              className="w-full glass-card hover:bg-white/10 px-10 py-5 rounded-2xl font-black text-xl text-white transition-all flex justify-center items-center h-full border border-white/20"
+              className="w-full glass-card hover:bg-white/10 px-10 py-5 rounded-2xl font-black text-xl text-white transition-all flex justify-center items-center h-full border border-white/20 hover:scale-105"
             >
                Devis Gratuit en 2 min
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         <div className="mt-16 flex flex-wrap gap-10">
-          <motion.div
-            initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
-          >
+          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center">
             <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">5000+</div>
             <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">Clients Satisfaits</div>
-          </motion.div>
+          </div>
           <div className="hidden sm:block w-px h-12 bg-white/10 self-center"></div>
-          <motion.div
-            initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
-          >
+          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center" style={{ animationDelay: '100ms' }}>
             <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">15 Ans</div>
             <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">D'Expérience</div>
-          </motion.div>
+          </div>
           <div className="hidden sm:block w-px h-12 bg-white/10 self-center"></div>
-          <motion.div
-             initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
-             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-             transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
-          >
+          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center" style={{ animationDelay: '200ms' }}>
             <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 flex items-center gap-3">
               4.9/5
               <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,17 +133,12 @@ export function Hero() {
               </svg>
             </div>
             <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">Note Avis Google</div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Trust Box area right side if needed, let's keep it minimal as in UI */}
-      <motion.div 
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="col-span-1 lg:col-span-5 block mt-0 lg:mt-0"
-      >
+      <div className="col-span-1 lg:col-span-5 block mt-0 lg:mt-0">
         <div className="relative aspect-[4/5] w-full max-w-[320px] lg:max-w-lg mx-auto flex items-end justify-center">
            {/* Decorative background glow for the Technician */}
            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-500/30 blur-[100px] rounded-full -z-10"></div>
@@ -224,7 +155,7 @@ export function Hero() {
                />
            </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

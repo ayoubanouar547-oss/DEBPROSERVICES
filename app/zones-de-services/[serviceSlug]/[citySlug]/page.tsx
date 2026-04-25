@@ -104,7 +104,7 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                  Techniciens de garde spécialisés en <strong>{serviceInfo.title.toLowerCase()}</strong> disponibles immédiatement sur toute la commune de {cityInfo.name}. Déplacement express et devis gratuit.
                </p>
                <div className="flex flex-wrap gap-4">
-                  <a href="tel:0470000000" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
+                  <a href="tel:0496325733" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
                     <PhoneCall className="w-6 h-6" /> SOS Urgence {cityInfo.name}
                   </a>
                </div>

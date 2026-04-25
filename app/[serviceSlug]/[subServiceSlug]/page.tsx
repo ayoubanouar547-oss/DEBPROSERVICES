@@ -101,7 +101,7 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
                {subServiceInfo.desc} Disponibilité immédiate 24/7 partout en Belgique.
              </p>
              <div className="flex flex-wrap gap-4">
-                <a href="tel:0470000000" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
+                <a href="tel:0496325733" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
                   <PhoneCall className="w-5 h-5" /> Intervention Urgente
                 </a>
              </div>
@@ -169,7 +169,7 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
                  <div className="bg-gradient-to-br from-red-600 to-red-900 p-6 rounded-2xl border border-red-500/30 text-white shadow-2xl">
                    <h4 className="font-black text-2xl mb-2">Urgence 24/7</h4>
                    <p className="text-red-100 text-sm mb-6">Nous sommes mobilisés pour toute urgence liée à : {subServiceInfo.title}.</p>
-                   <a href="tel:0470000000" className="bg-white text-red-700 w-full px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-50 transition">
+                   <a href="tel:0496325733" className="bg-white text-red-700 w-full px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-50 transition">
                      <PhoneCall className="w-5 h-5" /> Appeler le technicien
                    </a>
                  </div>

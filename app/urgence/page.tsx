@@ -19,8 +19,8 @@ export default function UrgencePage() {
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6">Besoin d'une Urgence ?</h1>
           <p className="text-xl mb-10 text-red-100">Nos techniciens de garde interviennent en 30 minutes. Ne perdez pas de temps, appelez-nous directement.</p>
           <div className="flex justify-center">
-            <a href="tel:0470000000" className="flex items-center gap-3 bg-white text-accent hover:bg-gray-100 px-10 py-5 rounded-full font-bold text-2xl md:text-3xl transition shadow-2xl">
-              <PhoneCall className="w-8 h-8" /> 0470 00 00 00
+            <a href="tel:0496325733" className="flex items-center gap-3 bg-white text-accent hover:bg-gray-100 px-10 py-5 rounded-full font-bold text-2xl md:text-3xl transition shadow-2xl">
+              <PhoneCall className="w-8 h-8" /> 0496 32 57 33
             </a>
           </div>
         </div>

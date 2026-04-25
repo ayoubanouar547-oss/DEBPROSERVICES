@@ -103,7 +103,7 @@ export function ContactForm() {
                       type="tel" 
                       {...register('telephone')} 
                       className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.telephone ? 'border-red-500/50' : 'border-white/10'} text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
-                      placeholder="0470 00 00 00"
+                      placeholder="0496 32 57 33"
                     />
                     {errors.telephone && <p className="mt-2 text-xs text-red-400 font-bold">{errors.telephone.message}</p>}
                   </div>

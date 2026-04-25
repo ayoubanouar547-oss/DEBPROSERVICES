@@ -16,9 +16,20 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceSl
   const resolvedParams = await params;
   const service = services.find(s => s.slug === resolvedParams.serviceSlug);
   if (!service) return {};
+
+  let description = `Service de ${service.title.toLowerCase()}. Intervention urgente 24h/24 et 7j/7 en Belgique. Devis gratuit.`;
+
+  if (service.slug === 'plomberie') {
+    description = "Plomberie urgence 24/7: technicien agréé en Belgique. Fuites ou installations. Devis gratuit et dépannage rapide. Contactez DEB PRO SERVICES !";
+  } else if (service.slug === 'debouchage-canalisation') {
+    description = "Débouchage urgence 24/7: technicien agréé en Belgique. WC, égouts, éviers bouchés. Devis gratuit, action immédiate. Contactez DEB PRO SERVICES !";
+  } else if (service.slug === 'chauffage') {
+    description = "Chauffage urgence 24/7: chauffagiste et technicien agréé en Belgique. Dépannage chaudière, devis gratuit. Appelez DEB PRO SERVICES maintenant !";
+  }
+
   return {
     title: `${service.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
-    description: `Service professionnel de ${service.title.toLowerCase()}. ${service.description} Intervention urgente 24h/24 et 7j/7 partout en Belgique.`,
+    description,
   };
 }
 
@@ -69,7 +80,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                {serviceInfo.description}
              </p>
              <div className="flex flex-wrap gap-4">
-                <a href="tel:0470000000" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30">
+                <a href="tel:0496325733" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30">
                   <PhoneCall className="w-5 h-5" /> Urgence {serviceInfo.title}
                 </a>
              </div>
@@ -158,7 +169,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                    <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl w-full">
                      <h4 className="text-white font-black text-2xl mb-3">Une urgence ?</h4>
                      <p className="text-slate-300 mb-6 font-medium">Les dégâts matériels peuvent s'aggraver rapidement. Appelez-nous avant que la situation ne devienne critique.</p>
-                     <a href="tel:0470000000" className="bg-white text-slate-900 w-full px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-200 transition">
+                     <a href="tel:0496325733" className="bg-white text-slate-900 w-full px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-200 transition">
                        Nous appeler <PhoneCall className="w-5 h-5" />
                      </a>
                    </div>

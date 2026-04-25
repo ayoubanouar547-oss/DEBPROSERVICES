@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { PhoneButton } from '../ui/PhoneButton';
 
-const PHONE_NUMBER = "0470 00 00 00"; // Placeholder, can be changed easily
+const PHONE_NUMBER = "0496 32 57 33"; // Placeholder, can be changed easily
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,47 +65,6 @@ export function Navbar() {
                 referrerPolicy="no-referrer"
               />
             </div>
-            
-            {/* Water Spray Animation from the Nozzle (Right side of logo) */}
-            <div className="absolute top-[40%] right-[5%] w-0 h-0 pointer-events-none overflow-visible z-[-1]">
-              {isMounted && [...Array(15)].map((_, i) => {
-                // Generate random trajectory for each water particle
-                const distanceX = Math.random() * 250 + 150; // Spray distance to the right
-                const distanceY = Math.random() * 250 + 100;  // Fall distance downwards
-                const arcHeight = -(Math.random() * 40 + 20); // Arc upwards before falling
-                const duration = Math.random() * 1.5 + 1; // 1 to 2.5 seconds
-                const delay = Math.random() * 2;
-                const size = Math.random() * 4 + 2; // 2px to 6px drops
-                
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
-                    animate={{ 
-                      x: [0, distanceX * 0.4, distanceX],
-                      y: [0, arcHeight, distanceY],
-                      opacity: [0, 1, 0.8, 0],
-                      scale: [0.2, 1, 0.8, 0.3],
-                      rotate: [0, 45, 90]
-                    }}
-                    transition={{
-                      duration: duration,
-                      repeat: Infinity,
-                      delay: delay,
-                      ease: "linear"
-                    }}
-                    className="absolute rounded-full"
-                    style={{ 
-                      width: size,
-                      height: size * 1.5,
-                      background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(59,130,246,0.7) 60%, rgba(29,78,216,0.2) 100%)",
-                      boxShadow: "0 0 8px rgba(96,165,250,0.6)",
-                      filter: "blur(0.5px)"
-                    }}
-                  />
-                );
-              })}
-            </div>
           </Link>
 
           {/* Desktop Nav */}
@@ -116,31 +75,6 @@ export function Navbar() {
                 href={link.href}
                 className="relative text-sm font-bold text-slate-300 hover:text-white transition-colors group py-2"
               >
-                {/* Fire for Chauffage (Above) */}
-                {isMounted && link.name === 'Chauffage' && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-full h-4 flex justify-center items-end pointer-events-none overflow-visible">
-                    {[...Array(5)].map((_, i) => (
-                      <motion.div
-                        key={`fire-${i}`}
-                        animate={{ 
-                          y: [0, -6, -10],
-                          x: [0, (Math.random() - 0.5) * 4],
-                          scale: [1, 1.2, 0],
-                          opacity: [0.6, 0.3, 0]
-                        }}
-                        transition={{
-                          duration: Math.random() * 2 + 1.5,
-                          repeat: Infinity,
-                          repeatType: "loop",
-                          delay: Math.random() * 1.5
-                        }}
-                        className="w-1.5 h-1.5 rounded-full absolute bottom-0 bg-gradient-to-t from-orange-500 to-red-500 blur-[1px]"
-                        style={{ left: `${10 + i * 20}%` }}
-                      />
-                    ))}
-                  </div>
-                )}
-
                 <span className="relative z-10">{link.name}</span>
               </Link>
             ))}
@@ -225,31 +159,6 @@ export function Navbar() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </div>
-
-                      {/* Fire for Chauffage in Mobile Menu */}
-                      {isMounted && link.name === 'Chauffage' && (
-                        <div className="absolute top-1/2 -translate-y-1/2 left-32 w-10 h-6 flex justify-center items-end pointer-events-none overflow-visible">
-                          {[...Array(5)].map((_, i) => (
-                            <motion.div
-                              key={`fire-mobile-${i}`}
-                              animate={{ 
-                                y: [0, -8, -15],
-                                x: [0, (Math.random() - 0.5) * 6],
-                                scale: [1, 1.3, 0],
-                                opacity: [0.7, 0.4, 0]
-                              }}
-                              transition={{
-                                duration: Math.random() * 2 + 1.5,
-                                repeat: Infinity,
-                                repeatType: "loop",
-                                delay: Math.random() * 1.5
-                              }}
-                              className="w-2 h-2 rounded-full absolute bottom-0 bg-gradient-to-t from-orange-500 to-red-500 blur-[1px]"
-                              style={{ left: `${20 + i * 15}%` }}
-                            />
-                          ))}
-                        </div>
-                      )}
                     </Link>
                   </motion.div>
                 ))}

@@ -5,7 +5,6 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { CookieBanner } from '@/components/layout/CookieBanner';
 import { MobileBottomNav } from '@/components/layout/MobileBottomNav';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -45,8 +44,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           {/* subtle grid pattern for a more technical/plumbing look */}
           <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: `radial-gradient(#ffffff 1px, transparent 1px)`, backgroundSize: '40px 40px' }}></div>
           
-          {/* Subtle noise pattern */}
-          <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay" style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }}></div>
+          {/* CSS noise pattern instead of an external SVG for performance */}
+          <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none bg-noise"></div>
         </div>
 
         <Navbar />
@@ -54,7 +53,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <Footer />
         <CookieBanner />
         <MobileBottomNav />
-        <SpeedInsights />
       </body>
     </html>
   );

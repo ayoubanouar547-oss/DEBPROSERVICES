@@ -71,6 +71,23 @@ export const services = [
     }
   },
   {
+    id: 'cng',
+    slug: 'gaz-naturel-comprime',
+    title: 'Gaz Naturel Comprimé (GNC)',
+    icon: Flame, // Using Flame as a suitable icon for natural gas
+    imageUrl: 'https://images.unsplash.com/photo-1629853925575-b9f1d07ec05a?q=80&w=1000&auto=format&fit=crop',
+    description: 'Services spécialisés pour les installations au Gaz Naturel Comprimé (GNC). Nos experts agréés assurent l\'installation, l\'entretien et la mise aux normes de vos systèmes GNC en toute sécurité.',
+    features: ['Installation système GNC', 'Maintenance préventive', 'Contrôle d\'étanchéité', 'Certification conformité'],
+    subServices: [
+      { slug: 'installation-gnc', title: 'Installation Système GNC', desc: 'Conception et pose de nouvelles installations au gaz naturel comprimé.' },
+      { slug: 'entretien-controle-gnc', title: 'Entretien et Contrôle GNC', desc: 'Maintenance régulière et vérification de la sécurité de vos équipements.' },
+      { slug: 'depannage-urgence-gnc', title: 'Dépannage d\'Urgence GNC', desc: 'Intervention rapide sur les systèmes GNC présentant des anomalies.' }
+    ],
+    color: {
+      bg: 'bg-emerald-500/20', text: 'text-emerald-500', border: 'border-emerald-500/30', glow: 'bg-emerald-500'
+    }
+  },
+  {
     id: 'electricite',
     slug: 'electricite',
     title: 'Électricité',
