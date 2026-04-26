@@ -62,9 +62,9 @@ export function Hero() {
         
         <div className="space-y-4">
           <h1 className="font-black leading-[1.1] mb-6">
-            <div className="text-4xl md:text-5xl lg:text-7xl min-h-[140px] flex flex-col justify-center">
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl min-h-[140px] flex flex-col justify-center">
               <motion.div 
-                 className="flex flex-wrap items-center relative"
+                 className="flex flex-nowrap items-center relative whitespace-nowrap overflow-visible"
                  animate={
                    isDeleting 
                      ? { opacity: 0, y: -20, scale: 0.95, filter: 'blur(10px)' } 
@@ -75,7 +75,7 @@ export function Hero() {
                 <span className={`bg-clip-text text-transparent bg-gradient-to-r ${SERVICES[serviceIndex].gradient}`}>
                   {displayedText.substring(0, SERVICES[serviceIndex].text.length)}
                 </span>
-                <span className="text-white whitespace-pre-wrap">
+                <span className="text-white whitespace-nowrap">
                   {displayedText.substring(SERVICES[serviceIndex].text.length)}
                 </span>
               </motion.div>
