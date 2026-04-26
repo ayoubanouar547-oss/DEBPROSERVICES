@@ -60,18 +60,19 @@ export function MobileBottomNav() {
                 <Link 
                   key={item.name} 
                   href={item.href}
-                  className="flex flex-col items-center justify-center p-2 rounded-2xl transition-colors relative"
+                  className="flex flex-col items-center justify-center py-2 px-1 rounded-2xl transition-all relative flex-1 group"
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? 'text-[#1565c0]' : 'text-slate-200'}`} />
-                  <span className={`text-[9px] font-black mt-1 uppercase tracking-tighter ${isActive ? 'text-[#1565c0]' : 'text-slate-100 opacity-70'}`}>
-                    {item.name}
-                  </span>
                   {isActive && (
                     <motion.div 
-                      layoutId="activeTab"
-                      className="absolute -bottom-0.5 w-1 h-1 bg-[#1565c0] rounded-full"
+                      layoutId="activeBackground"
+                      className="absolute inset-0 bg-blue-500/10 rounded-2xl border border-blue-500/20"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
+                  <Icon className={`w-5 h-5 relative z-10 transition-colors duration-300 ${isActive ? 'text-blue-400' : 'text-slate-400 group-hover:text-white'}`} />
+                  <span className={`text-[9px] font-bold mt-1 uppercase tracking-tighter relative z-10 transition-colors duration-300 ${isActive ? 'text-blue-400' : 'text-slate-400 group-hover:text-white'}`}>
+                    {item.name}
+                  </span>
                 </Link>
               );
             })}
