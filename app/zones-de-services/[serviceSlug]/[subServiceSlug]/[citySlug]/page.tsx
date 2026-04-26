@@ -10,12 +10,9 @@ import { FAQ } from '@/components/sections/FAQ';
 export async function generateStaticParams() {
   const params: { serviceSlug: string, subServiceSlug: string, citySlug: string }[] = [];
   
-  // Limiting to top cities to avoid build issues while maintaining key SEO reach
-  const topCities = belgianCities.slice(0, 15);
-
   services.forEach((service) => {
     service.subServices.forEach((sub) => {
-      topCities.forEach((city) => {
+      belgianCities.forEach((city) => {
         params.push({
           serviceSlug: service.slug,
           subServiceSlug: sub.slug,
