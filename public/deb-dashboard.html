@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEB PRO ADMIN — Dashboard</title>
+    <meta name="robots" content="noindex, nofollow">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deb-blue': '#1A3A8F',
+                        'deb-yellow': '#FFD600',
+                        'deb-red': '#CC1F1F',
+                        'deb-navy': '#0D1F4C',
+                        'dash-bg': '#0a0f1e',
+                        'dash-card': '#161d31',
+                    },
+                    fontFamily: {
+                        oswald: ['Oswald', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Security Check */
+        (function(){
+            const token = sessionStorage.getItem('deb_token');
+            const t = sessionStorage.getItem('deb_login_time');
+            if(!token || !t || (Date.now()-parseInt(t)) > 28800000){
+                window.location.replace('/deb-wp-user');
+            }
+        })();
+
+        body {
+            background-color: #0a0f1e;
+            color: #d0d2d6;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #161d31;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card {
+            background: rgba(22, 29, 49, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(118deg, #1A3A8F, rgba(26, 58, 143, 0.7));
+            box-shadow: 0 0 10px rgba(26, 58, 143, 0.4);
+            color: white !important;
+        }
+
+        .nav-link:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: #FFD600;
+            padding-left: 1.25rem;
+        }
+
+        .stat-card {
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .animate-bar {
+            animation: growUp 1.2s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        @keyframes growUp {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .animate-stroke {
+            animation: strokeAnim 2s ease-out forwards;
+        }
+
+        @keyframes strokeAnim {
+            from { stroke-dashoffset: 283; }
+            to { stroke-dashoffset: var(--target-offset); }
+        }
+
+        .pulse-online {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Custom Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #283046; border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #1A3A8F; }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col lg:flex-row">
+    <!-- Overlay for mobile sidebar -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar w-[240px] h-full flex flex-col border-r border-white/5 fixed lg:relative z-50">
+        <div class="p-6 flex flex-col h-full">
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-10 h-10 bg-gradient-to-br from-deb-blue to-deb-yellow rounded-lg flex items-center justify-center text-white font-oswald italic text-2xl shadow-lg">D</div>
+                <span class="text-white font-oswald text-xl tracking-wider">DEB PRO ADMIN</span>
+            </div>
+
+            <nav class="space-y-1 custom-scroll overflow-y-auto flex-1">
+                <button data-panel="dashboard" class="nav-link active w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium">
+                    <span class="text-lg">📊</span> Tableau de Bord
+                </button>
+                <button data-panel="traffic" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400">
+                    <span class="text-lg">👁️</span> Trafic & Visiteurs
+                </button>
+                <button data-panel="pages" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400">
+                    <span class="text-lg">📄</span> Pages du Site
+                </button>
+                <button data-panel="editor" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400">
+                    <span class="text-lg">✏️</span> Éditeur Visuel
+                </button>
+                <button data-panel="leads" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400">
+                    <span class="text-lg">📩</span> Formulaires & Leads
+                </button>
+                <button data-panel="reviews" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400">
+                    <span class="text-lg">⭐</span> Avis Clients
+                </button>
+                <button data-panel="seo" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400">
+                    <span class="text-lg">🔍</span> SEO & Mots-clés
+                </button>
+                <button data-panel="settings" class="nav-link w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400">
+                    <span class="text-lg">⚙️</span> Paramètres
+                </button>
+            </nav>
+
+            <div class="mt-6 pt-6 border-t border-white/5">
+                <div class="flex items-center gap-3 mb-4 px-2">
+                    <div class="w-10 h-10 rounded-full bg-deb-blue border border-white/10 overflow-hidden">
+                        <img src="https://ui-avatars.com/api/?name=Ayoub+N&background=1A3A8F&color=fff" alt="User">
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-white">Ayoub N.</p>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">Admin</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="w-full flex items-center justify-center gap-3 px-4 py-3 bg-deb-red/10 text-deb-red border border-deb-red/20 rounded-xl hover:bg-deb-red hover:text-white transition-all font-bold text-xs uppercase tracking-widest">
+                    <span>🚪</span> Déconnexion
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Content Area -->
+    <div class="flex-1 h-full flex flex-col relative overflow-hidden">
+        
+        <!-- Topbar -->
+        <header class="sticky top-0 z-40 bg-dash-bg/80 backdrop-blur-xl border-b border-white/5 py-4 px-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button id="mobile-toggle" class="lg:hidden text-white text-2xl">☰</button>
+                <h2 id="current-section-title" class="text-white font-oswald text-xl uppercase tracking-wider">Tableau de Bord</h2>
+                <div class="hidden md:flex items-center gap-2 ml-4 px-3 py-1 bg-green-500/10 rounded-full border border-green-500/20">
+                    <span class="relative flex h-2 w-2">
+                        <span class="pulse-online animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest">Page en ligne - debproservices.be</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div id="live-clock" class="hidden sm:block text-xs font-mono text-blue-300 bg-blue-500/10 px-3 py-1 rounded border border-blue-500/20">
+                    00:00:00
+                </div>
+                <button onclick="window.open('/', '_blank')" class="bg-deb-blue hover:bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-lg transition-all shadow-lg shadow-blue-900/20">
+                    🌐 Voir le site
+                </button>
+            </div>
+        </header>
+
+        <!-- Panels Container -->
+        <main id="panels-container" class="flex-1 overflow-y-auto p-4 lg:p-8 custom-scroll bg-dash-bg">
+            
+            <!-- PANEL 1: DASHBOARD -->
+            <div id="panel-dashboard" class="panel space-y-8 animate-fade-in">
+                <!-- Stats Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                    <div class="glass-card stat-card p-6 rounded-2xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-blue-500/10 rounded-xl text-blue-500 text-xl">📈</div>
+                            <span class="text-green-500 text-xs font-bold">+12%</span>
+                        </div>
+                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Visiteurs Aujourd'hui</h3>
+                        <p class="text-white text-3xl font-black count-up" data-target="247">0</p>
+                    </div>
+                    <div class="glass-card stat-card p-6 rounded-2xl border-b-2 border-deb-blue">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-deb-yellow/10 rounded-xl text-deb-yellow text-xl">👥</div>
+                            <span class="text-green-500 text-xs font-bold">+23%</span>
+                        </div>
+                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Visiteurs ce mois</h3>
+                        <p class="text-white text-3xl font-black count-up" data-target="8432">0</p>
+                    </div>
+                    <div class="glass-card stat-card p-6 rounded-2xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-deb-red/10 rounded-xl text-deb-red text-xl">📞</div>
+                            <span class="text-deb-red text-xs font-bold">Stable</span>
+                        </div>
+                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Appels générés</h3>
+                        <p class="text-white text-3xl font-black count-up" data-target="89">0</p>
+                    </div>
+                    <div class="glass-card stat-card p-6 rounded-2xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-yellow-400/10 rounded-xl text-yellow-400 text-xl">⭐</div>
+                            <span class="text-yellow-400 text-xs font-bold">Top Rating</span>
+                        </div>
+                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Note Google</h3>
+                        <p class="text-white text-3xl font-black">4.8/5</p>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Bar Chart -->
+                    <div class="lg:col-span-8 glass-card p-6 rounded-3xl">
+                        <div class="flex justify-between items-center mb-10">
+                            <h3 class="text-white font-oswald uppercase tracking-widest text-sm">Visiteurs 7 derniers jours</h3>
+                            <div class="flex gap-2">
+                                <span class="h-1 w-4 bg-deb-blue rounded"></span>
+                                <span class="text-[10px] text-gray-500 uppercase font-bold">Vues uniques</span>
+                            </div>
+                        </div>
+                        <div class="h-64 flex items-end justify-between px-4">
+                            <!-- Bars with real values -->
+                            <div class="w-[10%] group relative">
+                                <div class="bg-deb-blue/40 hover:bg-deb-blue rounded-t-lg transition-all animate-bar" style="height: 58%"></div>
+                                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-deb-blue text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">180</div>
+                                <p class="text-[10px] text-center mt-3 text-gray-500 italic">Lun</p>
+                            </div>
+                            <div class="w-[10%] group relative">
+                                <div class="bg-deb-blue/40 hover:bg-deb-blue rounded-t-lg transition-all animate-bar" style="height: 70%"></div>
+                                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-deb-blue text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">220</div>
+                                <p class="text-[10px] text-center mt-3 text-gray-500 italic">Mar</p>
+                            </div>
+                            <div class="w-[10%] group relative">
+                                <div class="bg-deb-blue/40 hover:bg-deb-blue rounded-t-lg transition-all animate-bar" style="height: 62%"></div>
+                                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-deb-blue text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">195</div>
+                                <p class="text-[10px] text-center mt-3 text-gray-500 italic">Mer</p>
+                            </div>
+                            <div class="w-[10%] group relative">
+                                <div class="bg-deb-blue rounded-t-lg transition-all animate-bar" style="height: 100%"></div>
+                                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-deb-blue text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">310</div>
+                                <p class="text-[10px] text-center mt-3 text-gray-500 font-bold text-white">Jeu</p>
+                            </div>
+                            <div class="w-[10%] group relative">
+                                <div class="bg-deb-blue/40 hover:bg-deb-blue rounded-t-lg transition-all animate-bar" style="height: 90%"></div>
+                                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-deb-blue text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">280</div>
+                                <p class="text-[10px] text-center mt-3 text-gray-500 italic">Ven</p>
+                            </div>
+                            <div class="w-[10%] group relative">
+                                <div class="bg-deb-blue/40 hover:bg-deb-blue rounded-t-lg transition-all animate-bar" style="height: 61%"></div>
+                                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-deb-blue text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">190</div>
+                                <p class="text-[10px] text-center mt-3 text-gray-500 italic">Sam</p>
+                            </div>
+                            <div class="w-[10%] group relative">
+                                <div class="bg-deb-blue/40 hover:bg-deb-blue rounded-t-lg transition-all animate-bar" style="height: 80%"></div>
+                                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-deb-blue text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">247</div>
+                                <p class="text-[10px] text-center mt-3 text-gray-500 italic">Dim</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Donut Chart -->
+                    <div class="lg:col-span-4 glass-card p-6 rounded-3xl flex flex-col items-center">
+                        <h3 class="text-white font-oswald uppercase tracking-widest text-sm self-start mb-10">Sources de trafic</h3>
+                        <div class="relative w-48 h-48 mb-8">
+                            <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
+                                <!-- Organic (68%) -->
+                                <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#1A3A8F" stroke-width="4" stroke-dasharray="68 32" stroke-dashoffset="0" class="animate-stroke" style="--target-offset: 0;"></circle>
+                                <!-- Direct (18%) -->
+                                <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#FFD600" stroke-width="4" stroke-dasharray="18 82" stroke-dashoffset="-68" class="animate-stroke" style="--target-offset: -68;"></circle>
+                                <!-- Social (9%) -->
+                                <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#CC1F1F" stroke-width="4" stroke-dasharray="9 91" stroke-dashoffset="-86" class="animate-stroke" style="--target-offset: -86;"></circle>
+                                <!-- Other (5%) -->
+                                <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#6b7280" stroke-width="4" stroke-dasharray="5 95" stroke-dashoffset="-95" class="animate-stroke" style="--target-offset: -95;"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <p class="text-2xl font-black text-white">68%</p>
+                                <p class="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Organique</p>
+                            </div>
+                        </div>
+                        <div class="w-full space-y-3">
+                            <div class="flex items-center justify-between text-xs">
+                                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-deb-blue"></span><span class="text-gray-400">Google Organic</span></div>
+                                <span class="font-bold text-white">68%</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs">
+                                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-deb-yellow"></span><span class="text-gray-400">Direct</span></div>
+                                <span class="font-bold text-white">18%</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs">
+                                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-deb-red"></span><span class="text-gray-400">Réseaux sociaux</span></div>
+                                <span class="font-bold text-white">9%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tables Row -->
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Top Pages -->
+                    <div class="glass-card p-6 rounded-3xl">
+                        <h3 class="text-white font-oswald uppercase tracking-widest text-sm mb-6">Top 5 Pages visitées</h3>
+                        <div class="space-y-6" id="top-pages-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Recent Leads -->
+                    <div class="glass-card p-6 rounded-3xl">
+                        <h3 class="text-white font-oswald uppercase tracking-widest text-sm mb-6">Dernières demandes</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead class="text-gray-500 uppercase tracking-wider border-b border-white/5">
+                                    <tr>
+                                        <th class="pb-3 pr-4">Client</th>
+                                        <th class="pb-3 pr-4">Service</th>
+                                        <th class="pb-3 pr-4">Ville</th>
+                                        <th class="pb-3">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/5 font-medium" id="recent-leads-body">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 3: PAGES DU SITE -->
+            <div id="panel-pages" class="panel hidden space-y-6 animate-fade-in">
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Liste des pages indexées</p>
+                    <button class="px-4 py-2 bg-deb-blue/10 text-deb-blue border border-deb-blue/20 rounded-xl text-[10px] font-bold uppercase hover:bg-deb-blue hover:text-white transition-all">
+                        + Ajouter une page
+                    </button>
+                </div>
+                <div class="glass-card rounded-3xl overflow-hidden overflow-x-auto">
+                    <table class="w-full text-left text-xs min-w-[800px]">
+                        <thead class="bg-white/5 text-gray-500 uppercase font-black">
+                            <tr>
+                                <th class="p-5">Titre Page</th>
+                                <th class="p-5">URL / Chemin</th>
+                                <th class="p-5">Dernière Modif</th>
+                                <th class="p-5">Statut SEO</th>
+                                <th class="p-5 text-right">Actions de gestion</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5" id="pages-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PANEL 5: LEADS -->
+            <div id="panel-leads" class="panel hidden space-y-6 animate-fade-in">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-dash-card/50 p-4 rounded-2xl border border-white/5">
+                    <div class="flex gap-3">
+                        <select id="filter-service" class="bg-dash-bg border border-white/10 text-white text-xs px-4 py-2 rounded-xl outline-none focus:border-deb-blue">
+                            <option value="all">Tous les services</option>
+                            <option value="débouchage">Débouchage</option>
+                            <option value="chauffage">Chauffage</option>
+                            <option value="gaz">Installation Gaz</option>
+                        </select>
+                        <select id="filter-status" class="bg-dash-bg border border-white/10 text-white text-xs px-4 py-2 rounded-xl outline-none focus:border-deb-blue">
+                            <option value="all">Tous les statuts</option>
+                            <option value="nouveau">Nouveau</option>
+                            <option value="traité">Traité</option>
+                        </select>
+                    </div>
+                    <button id="export-csv" class="px-6 py-2 bg-deb-yellow text-dash-bg font-bold text-xs uppercase tracking-widest rounded-xl hover:scale-105 transition-all">
+                        📥 Export CSV
+                    </button>
+                </div>
+                
+                <div class="glass-card rounded-3xl overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs whitespace-nowrap">
+                            <thead class="text-gray-500 uppercase tracking-widest font-black bg-white/5">
+                                <tr>
+                                    <th class="p-5">Client</th>
+                                    <th class="p-5">Téléphone</th>
+                                    <th class="p-5">Service</th>
+                                    <th class="p-5">Ville</th>
+                                    <th class="p-5">Date</th>
+                                    <th class="p-5">Status</th>
+                                    <th class="p-5 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5" id="leads-list">
+                                <!-- Populated by script -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 7: SEO -->
+            <div id="panel-seo" class="panel hidden space-y-6 animate-fade-in">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-2xl text-center">
+                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-6">Score SEO Global</h3>
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
+                                <circle cx="18" cy="18" r="16" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="3"></circle>
+                                <circle cx="18" cy="18" r="16" fill="transparent" stroke="#1A3A8F" stroke-width="3" stroke-dasharray="91 100" class="animate-stroke"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center font-black text-2xl text-white">91%</div>
+                        </div>
+                        <p class="text-[10px] text-green-500 font-bold uppercase tracking-widest">Excellente optimisation</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl lg:col-span-2">
+                        <h3 class="text-white font-oswald uppercase tracking-widest text-sm mb-6">Mots-clés en progression</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs text-blue-300">débouchage bruxelles urgence</span>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-[10px] text-gray-500 font-mono">Vol: 1.2k/m</span>
+                                    <span class="text-xs font-bold text-green-500">Pos. #2 (↑1)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-white/5 pt-4">
+                                <span class="text-xs text-blue-300">plombier liège pas cher</span>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-[10px] text-gray-500 font-mono">Vol: 850/m</span>
+                                    <span class="text-xs font-bold text-green-500">Pos. #4 (↑3)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-white/5 pt-4">
+                                <span class="text-xs text-blue-300">installation chaudière mons</span>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-[10px] text-gray-500 font-mono">Vol: 420/m</span>
+                                    <span class="text-xs font-bold text-deb-yellow">Pos. #7 (→)</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-white/5 pt-4">
+                                <span class="text-xs text-blue-300">réparation gaz namur</span>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-[10px] text-gray-500 font-mono">Vol: 310/m</span>
+                                    <span class="text-xs font-bold text-deb-red">Pos. #12 (↓2)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl">
+                    <h3 class="text-white font-oswald uppercase tracking-widest text-sm mb-6">Checklist Performances SEO</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-green-500 text-lg">✅</span>
+                            <div>
+                                <p class="text-xs text-white font-bold">Certificat SSL (HTTPS)</p>
+                                <p class="text-[9px] text-gray-500 uppercase">Activé et valide</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-green-500 text-lg">✅</span>
+                            <div>
+                                <p class="text-xs text-white font-bold">Balises Meta Titles</p>
+                                <p class="text-[9px] text-gray-500 uppercase">100% Optimisées</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-green-500 text-lg">✅</span>
+                            <div>
+                                <p class="text-xs text-white font-bold">Vitesse de chargement</p>
+                                <p class="text-[9px] text-gray-500 uppercase">Score Mobile: 94/100</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-deb-yellow text-lg">⚠️</span>
+                            <div>
+                                <p class="text-xs text-white font-bold">Images Alt Tags</p>
+                                <p class="text-[9px] text-gray-500 uppercase">12 images manquantes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 2: TRAFIC & VISITEURS -->
+            <div id="panel-traffic" class="panel hidden space-y-8 animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-2xl border-l-4 border-blue-500">
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Sessions Actives</p>
+                        <div class="flex items-end gap-2">
+                            <p class="text-3xl font-black text-white">12</p>
+                            <span class="text-green-500 text-[10px] font-bold mb-1">● Live</span>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border-l-4 border-green-500">
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Durée Moyenne</p>
+                        <p class="text-3xl font-black text-white">3m 42s</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border-l-4 border-deb-yellow">
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Taux de Rebond</p>
+                        <p class="text-3xl font-black text-white">24.8%</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="flex justify-between items-center mb-10">
+                        <h3 class="text-white font-oswald uppercase tracking-widest text-sm">Évolution du Trafic mensuel</h3>
+                        <div class="flex gap-4">
+                            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-500 rounded-full"></span> <span class="text-[10px] text-gray-400">2026</span></div>
+                            <div class="flex items-center gap-2"><span class="w-3 h-3 bg-white/10 rounded-full"></span> <span class="text-[10px] text-gray-400">2025</span></div>
+                        </div>
+                    </div>
+                    <div class="h-64 flex items-end justify-between px-4 relative">
+                        <!-- Background Grid -->
+                        <div class="absolute inset-0 flex flex-col justify-between pointer-events-none px-4 py-2 opacity-5">
+                            <div class="border-t border-white w-full"></div>
+                            <div class="border-t border-white w-full"></div>
+                            <div class="border-t border-white w-full"></div>
+                            <div class="border-t border-white w-full"></div>
+                        </div>
+                        <!-- Monthly Bars -->
+                        <div class="w-[6%] group relative">
+                            <div class="bg-blue-500/20 hover:bg-blue-500 w-full rounded-t-md transition-all animate-bar" style="height: 45%"></div>
+                            <p class="text-[9px] text-center mt-3 text-gray-500 uppercase">Jan</p>
+                        </div>
+                        <div class="w-[6%] group relative">
+                            <div class="bg-blue-500/20 hover:bg-blue-500 w-full rounded-t-md transition-all animate-bar" style="height: 55%"></div>
+                            <p class="text-[9px] text-center mt-3 text-gray-500 uppercase">Fév</p>
+                        </div>
+                        <div class="w-[6%] group relative">
+                            <div class="bg-blue-500/20 hover:bg-blue-500 w-full rounded-t-md transition-all animate-bar" style="height: 75%"></div>
+                            <p class="text-[9px] text-center mt-3 text-gray-500 uppercase">Mar</p>
+                        </div>
+                        <div class="w-[6%] group relative">
+                            <div class="bg-blue-500 w-full rounded-t-md transition-all animate-bar" style="height: 90%"></div>
+                            <p class="text-[9px] text-center mt-3 text-gray-500 font-bold text-white uppercase">Avr</p>
+                        </div>
+                        <div class="w-[6%] group relative">
+                            <div class="bg-white/5 w-full rounded-t-md transition-all h-2"></div>
+                            <p class="text-[9px] text-center mt-3 text-gray-500 uppercase">Mai</p>
+                        </div>
+                        <div class="w-[6%] group relative">
+                            <div class="bg-white/5 w-full rounded-t-md transition-all h-2"></div>
+                            <p class="text-[9px] text-center mt-3 text-gray-500 uppercase">Juin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 8: PARAMÈTRES -->
+            <div id="panel-settings" class="panel hidden space-y-6 animate-fade-in">
+                <div class="max-w-2xl mx-auto glass-card p-8 rounded-3xl">
+                    <h3 class="text-white font-oswald text-xl mb-8 uppercase tracking-widest">Informations Générales</h3>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Nom du site</label>
+                                <input type="text" value="DEB PRO SERVICES" class="w-full bg-dash-bg border border-white/10 rounded-xl p-3 text-sm text-white focus:border-deb-blue outline-none">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Téléphone</label>
+                                <input type="text" value="+32 496 32 57 33" class="w-full bg-dash-bg border border-white/10 rounded-xl p-3 text-sm text-white focus:border-deb-blue outline-none">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Email de contact</label>
+                            <input type="email" value="contact@deb-pro-services.be" class="w-full bg-dash-bg border border-white/10 rounded-xl p-3 text-sm text-white focus:border-deb-blue outline-none">
+                        </div>
+                        <div class="flex gap-4 pt-4">
+                            <button type="button" class="flex-1 bg-deb-blue py-3 rounded-xl text-white font-oswald uppercase tracking-widest text-sm hover:brightness-110 transition-all">Sauvegarder</button>
+                            <button type="button" class="px-6 border border-white/10 rounded-xl text-xs font-bold hover:bg-white/5 transition-all">Vider le cache</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PANEL 6: AVIS CLIENTS -->
+            <div id="panel-reviews" class="panel hidden space-y-6 animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="glass-card p-6 rounded-2xl text-center">
+                        <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Note Moyenne</p>
+                        <p class="text-white text-4xl font-black">4.8</p>
+                        <div class="flex justify-center gap-1 mt-2 text-yellow-400">★★★★★</div>
+                        <p class="text-[10px] text-gray-500 mt-2">Basé sur 312 avis Google</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-card p-6 rounded-2xl relative">
+                        <div class="flex justify-between mb-4">
+                            <span class="text-xs font-bold text-white">Marc Janssen</span>
+                            <span class="text-yellow-400 text-[10px]">★★★★★</span>
+                        </div>
+                        <p class="text-xs text-gray-400">"Intervention rapide pour un débouchage à Bruxelles. Prix honnête et travail soigné. Je recommande vivement !"</p>
+                        <div class="mt-4 flex gap-2">
+                            <button class="text-[10px] text-blue-300 font-bold hover:underline">Modifier</button>
+                            <button class="text-[10px] text-red-500 font-bold hover:underline">Supprimer</button>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl relative">
+                        <div class="flex justify-between mb-4">
+                            <span class="text-xs font-bold text-white">Lucia G.</span>
+                            <span class="text-yellow-400 text-[10px]">★★★★★</span>
+                        </div>
+                        <p class="text-xs text-gray-400">"Changement de chaudière effectué avec professionnalisme. Équipe très polie."</p>
+                        <div class="mt-4 flex gap-2">
+                            <button class="text-[10px] text-blue-300 font-bold hover:underline">Modifier</button>
+                            <button class="text-[10px] text-red-500 font-bold hover:underline">Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full py-4 border-2 border-dashed border-white/10 rounded-2xl text-gray-500 text-xs font-bold hover:bg-white/5 transition-all">
+                    + Ajouter un avis client
+                </button>
+            </div>
+
+            <!-- PANEL 4: ÉDITEUR VISUEL -->
+            <div id="panel-editor" class="panel hidden flex flex-col absolute inset-0 z-50 bg-dash-bg">
+                <!-- Editor Topbar -->
+                <div class="h-14 bg-dash-card border-b border-white/10 px-4 flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <button onclick="switchPanel('dashboard', document.querySelector('[data-panel=dashboard]'))" class="text-xs font-bold text-gray-500 hover:text-white uppercase tracking-widest flex items-center gap-2">
+                            <span>←</span> Retour
+                        </button>
+                        <div class="h-6 w-px bg-white/10"></div>
+                        <select id="editor-page-select" class="bg-dash-bg border border-white/10 text-white text-[10px] px-3 py-1.5 rounded-lg outline-none focus:border-deb-blue uppercase font-bold tracking-widest">
+                            <option value="/">Homepage</option>
+                            <option value="/plomberie">Plomberie</option>
+                            <option value="/chauffage">Chauffage</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-white/5 rounded-xl p-1">
+                        <button onclick="setPreviewSize('desktop')" class="p-2 rounded-lg hover:bg-white/10 text-blue-300" title="Desktop">🖥️</button>
+                        <button onclick="setPreviewSize('tablet')" class="p-2 rounded-lg hover:bg-white/10 text-gray-500" title="Tablette">📟</button>
+                        <button onclick="setPreviewSize('mobile')" class="p-2 rounded-lg hover:bg-white/10 text-gray-500" title="Mobile">📱</button>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="flex gap-1 mr-2 px-3 py-1.5 bg-white/5 rounded-lg border border-white/5">
+                            <button onclick="undo()" class="p-1 hover:text-white text-gray-500 transition-colors" title="Annuler (Ctrl+Z)">↩️</button>
+                            <button onclick="redo()" class="p-1 hover:text-white text-gray-500 transition-colors" title="Rétablir (Ctrl+Y)">↪️</button>
+                        </div>
+                        <button onclick="saveChanges()" class="bg-deb-blue text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2.5 rounded-xl shadow-lg shadow-blue-900/40">
+                            Enregistrer 💾
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex-1 flex overflow-hidden">
+                    <!-- Properties Panel -->
+                    <div class="w-[320px] bg-dash-card border-r border-white/10 overflow-y-auto custom-scroll flex flex-col">
+                        <div id="no-selection" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
+                            <div class="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center text-3xl mb-4">👆</div>
+                            <p class="text-xs text-gray-500 font-medium leading-relaxed">Cliquez sur un élément dans l'aperçu pour le modifier</p>
+                        </div>
+
+                        <div id="editor-controls" class="hidden p-6 space-y-8 pb-10">
+                            <div>
+                                <h4 class="text-[10px] text-blue-400 font-black uppercase tracking-widest mb-4">Élément sélectionné</h4>
+                                <div id="selected-tag-info" class="text-[10px] bg-deb-blue/20 text-white font-mono px-2 py-1 rounded inline-block">H1</div>
+                            </div>
+
+                            <!-- Text Content -->
+                            <div id="prop-text-group" class="space-y-3">
+                                <label class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Contenu Texte</label>
+                                <textarea id="prop-text" rows="3" class="w-full bg-dash-bg border border-white/10 rounded-xl p-3 text-xs text-white outline-none focus:border-deb-blue resize-none"></textarea>
+                            </div>
+
+                            <!-- Typography -->
+                            <div class="space-y-4 pt-4 border-t border-white/5">
+                                <label class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Style & Typographie</label>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <p class="text-[9px] text-gray-600 font-bold uppercase">Taille (px)</p>
+                                        <input type="number" id="prop-size" class="w-full bg-dash-bg border border-white/10 rounded-lg p-2 text-xs text-white">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <p class="text-[9px] text-gray-600 font-bold uppercase">Couleur</p>
+                                        <input type="color" id="prop-color" class="w-full h-8 bg-dash-bg border border-white/10 rounded-lg cursor-pointer">
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <button id="prop-bold" class="flex-1 bg-dash-bg border border-white/10 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-white/5">Gras</button>
+                                    <button id="prop-italic" class="flex-1 bg-dash-bg border border-white/10 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-white/5">Italique</button>
+                                </div>
+                                <div class="flex gap-1">
+                                    <button id="align-left" class="flex-1 bg-dash-bg border border-white/10 py-2 rounded-lg text-[10px] hover:bg-white/5">⇠</button>
+                                    <button id="align-center" class="flex-1 bg-dash-bg border border-white/10 py-2 rounded-lg text-[10px] hover:bg-white/5">⇡</button>
+                                    <button id="align-right" class="flex-1 bg-dash-bg border border-white/10 py-2 rounded-lg text-[10px] hover:bg-white/5">⇢</button>
+                                </div>
+                            </div>
+
+                            <!-- Spacing -->
+                            <div class="space-y-4 pt-4 border-t border-white/5">
+                                <label class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Espacement</label>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <p class="text-[9px] text-gray-600 font-bold uppercase">Padding V</p>
+                                        <input type="range" id="prop-padding-v" min="0" max="100" class="w-full accent-deb-blue">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <p class="text-[9px] text-gray-600 font-bold uppercase">Padding H</p>
+                                        <input type="range" id="prop-padding-h" min="0" max="100" class="w-full accent-deb-blue">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Border -->
+                            <div class="space-y-4 pt-4 border-t border-white/5">
+                                <label class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Bordures</label>
+                                <div class="space-y-2">
+                                    <p class="text-[9px] text-gray-600 font-bold uppercase">Radius (px)</p>
+                                    <input type="range" id="prop-radius" min="0" max="50" class="w-full accent-deb-blue">
+                                </div>
+                            </div>
+
+                            <div class="pt-6 border-t border-white/5 space-y-3">
+                                <button onclick="resetElement()" class="w-full py-3 bg-white/5 text-gray-400 text-[10px] font-bold uppercase tracking-widest rounded-xl hover:text-white transition-all">↩️ Annuler</button>
+                                <button onclick="applyVisualChanges()" class="w-full py-3 bg-deb-blue text-white text-[10px] font-bold uppercase tracking-widest rounded-xl hover:brightness-110 shadow-lg shadow-blue-900/20">Appliquer ✓</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview Area -->
+                    <div class="flex-1 bg-dash-bg relative p-8 flex items-start justify-center overflow-auto custom-scroll">
+                        <div id="preview-container" class="bg-white/5 rounded-2xl overflow-hidden shadow-2xl origin-top transition-all duration-500" style="width: 100%; height: 100%;">
+                            <iframe id="editor-iframe" src="/" class="w-full h-full border-none pointer-events-auto"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Tooltip or Modal could be added here -->
+    </div>
+
+    <!-- Main Logic -->
+    <script>
+        // SESSION CHECK
+        (function() {
+            const token = sessionStorage.getItem('deb_token');
+            const sessionStart = sessionStorage.getItem('deb_login_time');
+            const now = new Date().getTime();
+            const eightHours = 8 * 60 * 60 * 1000;
+
+            if (!token || !sessionStart || (now - parseInt(sessionStart) > eightHours)) {
+                sessionStorage.clear();
+                window.location.href = '/deb-wp-user';
+            }
+        })();
+
+        // Logout
+        function logout() {
+            sessionStorage.clear();
+            window.location.replace('/deb-wp-user');
+        }
+
+        // DOM Elements
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const panels = document.querySelectorAll('.panel');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sectionTitle = document.getElementById('current-section-title');
+        const liveClock = document.getElementById('live-clock');
+
+        // Navigation Management
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const target = link.dataset.panel;
+                switchPanel(target, link);
+            });
+        });
+
+        function switchPanel(panelId, activeLink) {
+            if(!activeLink) return;
+
+            // Update UI Active State
+            navLinks.forEach(l => l.classList.remove('active', 'text-white'));
+            navLinks.forEach(l => l.classList.add('text-gray-400'));
+            activeLink.classList.add('active', 'text-white');
+            activeLink.classList.remove('text-gray-400');
+
+            // Toggle Panels
+            panels.forEach(p => p.classList.add('hidden'));
+            const targetPanel = document.getElementById(`panel-${panelId}`);
+            
+            if(targetPanel) {
+                targetPanel.classList.remove('hidden');
+            }
+
+            // Update Title
+            const titleSpan = activeLink.querySelector('span');
+            const fullText = activeLink.innerText;
+            sectionTitle.innerText = fullText.replace(/[^\w\sàâäéèêëîïôöùûüç]/gi, '').trim();
+
+            // Close mobile sidebar
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        }
+
+        // Mobile Toggle
+        mobileToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        });
+
+        // Pages Data
+        const SITE_PAGES = [
+            { id: 'index', title: "Homepage", url: "/index.html", modif: "Hier", status: "online" },
+            { id: 'plomberie', title: "Plomberie", url: "/plomberie", modif: "24/01", status: "online" },
+            { id: 'chauffage', title: "Chauffage", url: "/chauffage", modif: "22/01", status: "online" },
+            { id: 'gaz', title: "Installation Gaz", url: "/gaz", modif: "20/01", status: "online" },
+            { id: 'electricite', title: "Électricité", url: "/electricite", modif: "18/01", status: "online" },
+            { id: 'clim', title: "Climatisation", url: "/climatisation", modif: "15/01", status: "online" },
+            { id: 'fosse', title: "Fosse Septique", url: "/fosse-septique", modif: "12/01", status: "online" },
+            { id: 'bx', title: "Zone Bruxelles", url: "/zones/bruxelles", modif: "10/01", status: "online" },
+            { id: 'lg', title: "Zone Liège", url: "/zones/liege", modif: "08/01", status: "online" },
+            { id: 'ms', title: "Zone Mons", url: "/zones/mons", modif: "05/01", status: "online" },
+            { id: 'nm', title: "Zone Namur", url: "/zones/namur", modif: "03/01", status: "online" },
+            { id: 'cl', title: "Zone Charleroi", url: "/zones/charleroi", modif: "01/01", status: "online" }
+        ];
+
+        function renderPagesList() {
+            const tbody = document.getElementById('pages-table-body');
+            if(!tbody) return;
+            tbody.innerHTML = SITE_PAGES.map(page => `
+                <tr class="hover:bg-white/5 transition-colors group">
+                    <td class="p-5 font-bold text-white">${page.title}</td>
+                    <td class="p-5 text-blue-300 opacity-70 italic font-mono text-[10px]">${page.url}</td>
+                    <td class="p-5 opacity-60">${page.modif}</td>
+                    <td class="p-5">
+                        <span class="text-green-500 font-bold flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                            En ligne
+                        </span>
+                    </td>
+                    <td class="p-5 text-right">
+                        <div class="flex justify-end gap-2">
+                            <button onclick="openInEditor('${page.url}')" class="px-4 py-1.5 bg-deb-blue rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-blue-900/40 hover:scale-105 active:scale-95 transition-all text-white">✏️ Editer</button>
+                            <button onclick="window.open('${page.url}', '_blank')" class="px-4 py-1.5 bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/20 transition-all text-white">👁️ Voir</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+
+            // Update editor select options as well
+            const select = document.getElementById('editor-page-select');
+            if(select) {
+                select.innerHTML = SITE_PAGES.map(p => `
+                    <option value="${p.url}">${p.title}</option>
+                `).join('');
+            }
+        }
+
+        function openInEditor(url) {
+            const editorPanel = document.getElementById('panel-editor');
+            const iframe = document.getElementById('editor-iframe');
+            const select = document.getElementById('editor-page-select');
+            
+            if(select) select.value = url;
+            if(iframe) iframe.src = url;
+            
+            switchPanel('editor', document.querySelector('[data-panel="editor"]'));
+        }
+
+        // Leads Data
+        const LEADS = [
+            { id: 1, name: "Marie Desmet", phone: "+32 478 12 34 56", service: "Débouchage", city: "Bruxelles", date: "Aujourd'hui 14:32", status: "nouveau" },
+            { id: 2, name: "Ahmed Kerroumi", phone: "+32 485 22 44 66", service: "Chauffage", city: "Liège", date: "Aujourd'hui 11:15", status: "attente" },
+            { id: 3, name: "Sophie Van Damme", phone: "+32 491 55 77 88", service: "Gaz", city: "Mons", date: "Hier 18:45", status: "traité" },
+            { id: 4, name: "Pierre Lemaire", phone: "+32 470 33 66 99", service: "Débouchage", city: "Namur", date: "Hier 09:22", status: "traité" },
+            { id: 5, name: "Nadia Belhaj", phone: "+32 482 11 00 22", service: "Plomberie", city: "Charleroi", date: "24/01", status: "traité" }
+        ];
+
+        function renderLeads() {
+            const list = document.getElementById('leads-list');
+            const recentBody = document.getElementById('recent-leads-body');
+            
+            const html = LEADS.map(lead => `
+                <tr class="hover:bg-white/5 transition-colors">
+                    <td class="p-5 font-bold text-white">${lead.name}</td>
+                    <td class="p-5 opacity-70">${lead.phone}</td>
+                    <td class="p-5 italic text-blue-300">${lead.service}</td>
+                    <td class="p-5">${lead.city}</td>
+                    <td class="p-5 opacity-60">${lead.date}</td>
+                    <td class="p-5">
+                        <span class="px-3 py-1 rounded-full font-bold ${
+                            lead.status === 'nouveau' ? 'bg-green-500/10 text-green-500' : 
+                            lead.status === 'attente' ? 'bg-deb-yellow/10 text-deb-yellow' : 
+                            'bg-blue-500/10 text-blue-500'
+                        }">
+                            ${lead.status.toUpperCase()}
+                        </span>
+                    </td>
+                    <td class="p-5 text-right">
+                        <button class="text-blue-500 hover:underline">Détails</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            if(list) list.innerHTML = html;
+            
+            if(recentBody) {
+                recentBody.innerHTML = LEADS.slice(0, 5).map(lead => `
+                    <tr>
+                        <td class="py-4 text-white">${lead.name}</td>
+                        <td class="py-4 text-blue-300 italic">${lead.service}</td>
+                        <td class="py-4">${lead.city}</td>
+                        <td class="py-4"><span class="px-2 py-1 ${
+                            lead.status === 'nouveau' ? 'bg-green-500/10 text-green-500' : 
+                            lead.status === 'attente' ? 'bg-deb-yellow/10 text-deb-yellow' : 
+                            'bg-blue-500/10 text-blue-500'
+                        } rounded border ${
+                            lead.status === 'nouveau' ? 'border-green-500/20' : 
+                            lead.status === 'attente' ? 'border-deb-yellow/20' : 
+                            'border-blue-500/20'
+                        }">
+                            ${lead.status === 'nouveau' ? '🟢 Nouveau' : lead.status === 'attente' ? '🟡 Attente' : '🔵 Traité'}
+                        </span></td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        const TOP_PAGES = [
+            { path: '/plomberie', views: '1,842', trend: '+15%', percent: 85 },
+            { path: '/zones/bruxelles', views: '1,204', trend: '+28%', percent: 65 },
+            { path: '/', views: '987', trend: '+8%', percent: 55 },
+            { path: '/chauffage', views: '743', trend: '+19%', percent: 45 },
+            { path: '/zones/liege', views: '612', trend: '+33%', percent: 35 }
+        ];
+
+        function renderTopPages() {
+            const container = document.getElementById('top-pages-list');
+            if(!container) return;
+            container.innerHTML = TOP_PAGES.map(page => `
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-bold">
+                        <span class="text-blue-300 italic">${page.path}</span>
+                        <div class="flex gap-4">
+                            <span class="text-white">${page.views} vues</span>
+                            <span class="text-green-500">${page.trend}</span>
+                        </div>
+                    </div>
+                    <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-deb-blue rounded-full transition-all duration-1000" style="width: ${page.percent}%"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Visual Editor Logic
+        let selectedElement = null;
+        let history = [];
+        let historyIndex = -1;
+        const iframe = document.getElementById('editor-iframe');
+        const noSelection = document.getElementById('no-selection');
+        const editorControls = document.getElementById('editor-controls');
+
+        iframe.onload = function() {
+            const iDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            // Inject Helper Styles
+            const style = iDoc.createElement('style');
+            style.textContent = `
+                .deb-editable:hover {
+                    outline: 2px dashed #1A3A8F !important;
+                    outline-offset: 2px;
+                    cursor: pointer !important;
+                }
+                .deb-selected {
+                    outline: 2px solid #FFD600 !important;
+                    outline-offset: 2px;
+                }
+            `;
+            iDoc.head.appendChild(style);
+
+            // Setup elements
+            const elements = iDoc.querySelectorAll('h1, h2, h3, h4, p, a, button, span, div, section, img');
+            elements.forEach(el => {
+                el.classList.add('deb-editable');
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    selectElement(el, iDoc);
+                });
+            });
+        };
+
+        function selectElement(el, iDoc) {
+            iDoc.querySelectorAll('.deb-selected').forEach(x => x.classList.remove('deb-selected'));
+            el.classList.add('deb-selected');
+            selectedElement = el;
+            
+            noSelection.classList.add('hidden');
+            editorControls.classList.remove('hidden');
+            
+            document.getElementById('selected-tag-info').innerText = el.tagName;
+            document.getElementById('prop-text').value = el.innerText || '';
+            
+            // Styles
+            const style = window.getComputedStyle(el);
+            document.getElementById('prop-size').value = parseInt(style.fontSize);
+            document.getElementById('prop-color').value = rgbToHex(style.color);
+        }
+
+        function rgbToHex(rgb) {
+            if(!rgb) return '#000000';
+            const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            if(!match) return '#000000';
+            function hex(x) { return ("0" + parseInt(x).toString(16)).slice(-2); }
+            return "#" + hex(match[1]) + hex(match[2]) + hex(match[3]);
+        }
+
+        function applyVisualChanges() {
+            if(!selectedElement) return;
+            
+            // Save state for undo
+            saveState();
+
+            selectedElement.innerText = document.getElementById('prop-text').value;
+            selectedElement.style.fontSize = document.getElementById('prop-size').value + 'px';
+            selectedElement.style.color = document.getElementById('prop-color').value;
+            
+            const radius = document.getElementById('prop-radius').value;
+            selectedElement.style.borderRadius = radius + 'px';
+            
+            const pv = document.getElementById('prop-padding-v').value;
+            const ph = document.getElementById('prop-padding-h').value;
+            selectedElement.style.paddingTop = pv + 'px';
+            selectedElement.style.paddingBottom = pv + 'px';
+            selectedElement.style.paddingLeft = ph + 'px';
+            selectedElement.style.paddingRight = ph + 'px';
+        }
+
+        function resetElement() {
+            if(!selectedElement) return;
+            // Optionally reload page or just clear selected state
+            const iDoc = iframe.contentDocument || iframe.contentWindow.document;
+            iDoc.querySelectorAll('.deb-selected').forEach(x => x.classList.remove('deb-selected'));
+            selectedElement = null;
+            noSelection.classList.remove('hidden');
+            editorControls.classList.add('hidden');
+        }
+
+        function saveState() {
+            if(!iframe.contentDocument) return;
+            const html = iframe.contentDocument.documentElement.outerHTML;
+            if(historyIndex < history.length - 1) {
+                history = history.slice(0, historyIndex + 1);
+            }
+            history.push(html);
+            if(history.length > 20) history.shift();
+            historyIndex = history.length - 1;
+        }
+
+        function undo() {
+            if(historyIndex > 0) {
+                historyIndex--;
+                iframe.contentDocument.documentElement.innerHTML = history[historyIndex];
+            }
+        }
+
+        function redo() {
+            if(historyIndex < history.length - 1) {
+                historyIndex++;
+                iframe.contentDocument.documentElement.innerHTML = history[historyIndex];
+            }
+        }
+
+        function setPreviewSize(mode) {
+            const container = document.getElementById('preview-container');
+            if(mode === 'mobile') {
+                container.style.width = '375px';
+                container.style.height = '667px';
+            } else if(mode === 'tablet') {
+                container.style.width = '768px';
+                container.style.height = '1024px';
+            } else {
+                container.style.width = '100%';
+                container.style.height = '100%';
+            }
+        }
+
+        function saveChanges() {
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            // Cleanup helper classes before save
+            const cleanDoc = doc.cloneNode(true);
+            cleanDoc.querySelectorAll('.deb-editable, .deb-selected').forEach(el => {
+                el.classList.remove('deb-editable', 'deb-selected');
+                if(el.classList.length === 0) el.removeAttribute('class');
+            });
+            
+            const html = cleanDoc.documentElement.outerHTML;
+            const blob = new Blob([html], {type: 'text/html'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'page-modifiee.html';
+            a.click();
+        }
+
+        // Initialize stuff
+        renderLeads();
+        renderPagesList();
+        renderTopPages();
+
+        // Editor Page Select change handler
+        document.getElementById('editor-page-select').addEventListener('change', function(e) {
+            iframe.src = e.target.value;
+        });
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            if(liveClock) liveClock.innerText = now.toLocaleTimeString('fr-FR', { hour12: false });
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // CountUp Animation
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = value.toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        document.querySelectorAll('.count-up').forEach(el => {
+            const target = parseInt(el.dataset.target);
+            animateValue(el, 0, target, 2000);
+        });
+
+        // Lead Export Simulation
+        document.getElementById('export-csv')?.addEventListener('click', () => {
+            const btn = document.getElementById('export-csv');
+            const originalText = btn.innerText;
+            btn.innerText = '⚙️ Génération...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                const csvContent = "data:text/csv;charset=utf-8,Nom,Service,Ville,Date\nMarie Desmet,Débouchage,Bruxelles,2024-04-26";
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "leads_debpro.csv");
+                document.body.appendChild(link);
+                link.click();
+                
+                btn.innerText = '✅ Exporté !';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }, 2000);
+            }, 1500);
+        });
+
+        // Final Cleanup
+        window.addEventListener('load', () => {
+            const initialPanel = 'dashboard';
+            const initialLink = document.querySelector(`[data-panel="${initialPanel}"]`);
+            if(initialLink) switchPanel(initialPanel, initialLink);
+        });
+    </script>
+</body>
+</html>

@@ -53,18 +53,82 @@ export function Hero() {
   return (
     <section className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 sm:px-6 lg:px-12 py-10 pt-32 min-h-[90vh] items-center">
       <div className="col-span-1 lg:col-span-7 flex flex-col justify-center">
-        <div className="flex flex-wrap gap-2 mb-6">
-          <span className="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-2 py-1 rounded border border-blue-500/30 uppercase tracking-widest">✓ Disponible 24H/24</span>
-          <span className="bg-green-600/20 text-green-400 text-[10px] font-bold px-2 py-1 rounded border border-green-500/30 uppercase tracking-widest">✓ Agréés & Assurés</span>
-          <span className="bg-purple-600/20 text-purple-400 text-[10px] font-bold px-2 py-1 rounded border border-purple-500/30 uppercase tracking-widest">✓ Devis Gratuit</span>
-          <span className="bg-red-600/20 text-red-400 text-[10px] font-bold px-2 py-1 rounded border border-red-500/30 uppercase tracking-widest">✓ Intervention Rapide</span>
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 mb-8">
+          <motion.span 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ 
+              opacity: [1, 0.5, 1],
+              scale: [1, 1.05, 1],
+              x: 0 
+            }}
+            transition={{ 
+              opacity: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.1 },
+              scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.1 },
+              x: { duration: 0.5, delay: 0.1 }
+            }}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(37, 99, 235, 0.4)' }}
+            className="bg-blue-600/20 text-blue-400 text-[9px] sm:text-[11px] font-bold px-2 py-1.5 sm:px-3 sm:py-1.5 rounded-full border border-blue-500/40 uppercase tracking-widest cursor-default shadow-[0_0_15px_rgba(37,99,235,0.3)] text-center flex items-center justify-center"
+          >
+            ✓ Disponible 24H/24
+          </motion.span>
+          <motion.span 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ 
+              opacity: [1, 0.5, 1],
+              scale: [1, 1.05, 1],
+              x: 0 
+            }}
+            transition={{ 
+              opacity: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.2 },
+              scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.2 },
+              x: { duration: 0.5, delay: 0.2 }
+            }}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(22, 163, 74, 0.4)' }}
+            className="bg-green-600/20 text-green-400 text-[9px] sm:text-[11px] font-bold px-2 py-1.5 sm:px-3 sm:py-1.5 rounded-full border border-green-500/40 uppercase tracking-widest cursor-default shadow-[0_0_15px_rgba(22,163,74,0.3)] text-center flex items-center justify-center"
+          >
+            ✓ Agréés & Assurés
+          </motion.span>
+          <motion.span 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ 
+              opacity: [1, 0.5, 1],
+              scale: [1, 1.05, 1],
+              x: 0 
+            }}
+            transition={{ 
+              opacity: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.3 },
+              scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.3 },
+              x: { duration: 0.5, delay: 0.3 }
+            }}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(147, 51, 234, 0.4)' }}
+            className="bg-purple-600/20 text-purple-400 text-[9px] sm:text-[11px] font-bold px-2 py-1.5 sm:px-3 sm:py-1.5 rounded-full border border-purple-500/40 uppercase tracking-widest cursor-default shadow-[0_0_15px_rgba(147,51,234,0.3)] text-center flex items-center justify-center"
+          >
+            ✓ Devis Gratuit
+          </motion.span>
+          <motion.span 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ 
+              opacity: [1, 0.5, 1],
+              scale: [1, 1.05, 1],
+              x: 0 
+            }}
+            transition={{ 
+              opacity: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
+              scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
+              x: { duration: 0.5, delay: 0.4 }
+            }}
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(220, 38, 38, 0.4)' }}
+            className="bg-red-600/20 text-red-400 text-[9px] sm:text-[11px] font-bold px-2 py-1.5 sm:px-3 sm:py-1.5 rounded-full border border-red-500/40 uppercase tracking-widest cursor-default shadow-[0_0_15px_rgba(220,38,38,0.3)] text-center flex items-center justify-center"
+          >
+            ✓ Intervention Rapide
+          </motion.span>
         </div>
         
         <div className="space-y-4">
-          <h1 className="font-black leading-[1.1] mb-6">
-            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl min-h-[140px] flex flex-col justify-center">
+          <h1 className="font-black leading-tight mb-8">
+            <div className="text-[15vw] sm:text-4xl md:text-5xl lg:text-7xl min-h-[220px] sm:min-h-[140px] flex flex-col justify-center">
               <motion.div 
-                 className="flex flex-nowrap items-center relative whitespace-nowrap overflow-visible"
+                 className="flex flex-col sm:flex-row sm:items-center gap-y-1 sm:gap-x-4 relative overflow-visible"
                  animate={
                    isDeleting 
                      ? { opacity: 0, y: -20, scale: 0.95, filter: 'blur(10px)' } 
@@ -72,12 +136,12 @@ export function Hero() {
                  }
                  transition={{ duration: 0.4, ease: "easeInOut" }}
               >
-                <span className={`bg-clip-text text-transparent bg-gradient-to-r ${SERVICES[serviceIndex].gradient}`}>
+                <div className={`bg-clip-text text-transparent bg-gradient-to-r ${SERVICES[serviceIndex].gradient} block sm:inline leading-[0.9]`}>
                   {displayedText.substring(0, SERVICES[serviceIndex].text.length)}
-                </span>
-                <span className="text-white whitespace-nowrap">
+                </div>
+                <div className="text-white opacity-90 block sm:inline leading-[0.9] sm:whitespace-nowrap">
                   {displayedText.substring(SERVICES[serviceIndex].text.length)}
-                </span>
+                </div>
               </motion.div>
             </div>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 block mt-2 text-3xl md:text-4xl lg:text-5xl text-shiny">

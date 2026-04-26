@@ -8,6 +8,18 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/deb-wp-user',
+        destination: '/deb-wp-user.html',
+      },
+      {
+        source: '/deb-dashboard',
+        destination: '/deb-dashboard.html',
+      },
+    ];
+  },
   async headers() {
     return [
       {
