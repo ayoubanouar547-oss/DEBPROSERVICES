@@ -9,11 +9,11 @@ export function WaterSplash() {
   useEffect(() => {
     const newParticles = Array.from({ length: 45 }).map((_, i) => ({
       id: i,
-      // Start near the right edge of the logo
-      startX: 80, 
+      // Start exactly at the new relative origin (right side of logo)
+      startX: 0, 
       startY: Math.random() * 30 - 15,
       // Shoot far to the right and spread up/down
-      endX: 80 + Math.random() * 400 + 50, 
+      endX: Math.random() * 400 + 50, 
       endY: (Math.random() - 0.5) * 300,
       size: Math.random() * 6 + 2,
       delay: Math.random() * 2,
@@ -23,26 +23,26 @@ export function WaterSplash() {
   }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-visible flex items-center justify-center -z-10">
+    <div className="absolute right-0 top-1/2 mt-2 pointer-events-none overflow-visible flex items-center justify-start z-0">
       
       {/* Simulation of the 3 main water jets shooting right */}
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: [0, 1.2, 0.8, 0], opacity: [0, 0.9, 0.5, 0], x: [80, 150, 200] }}
+        animate={{ scaleX: [0, 1.2, 0.8, 0], opacity: [0, 0.9, 0.5, 0], x: [0, 80, 150] }}
         transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
-        className="absolute w-24 h-5 rounded-[100%] bg-gradient-to-r from-blue-300 to-cyan-300 blur-[2px] origin-left top-1/2 -mt-4 -rotate-12"
+        className="absolute w-24 h-5 rounded-[100%] bg-gradient-to-r from-blue-300 to-cyan-300 blur-[2px] origin-left -rotate-12"
       />
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: [0, 1.5, 0.5, 0], opacity: [0, 1, 0.6, 0], x: [80, 180, 250] }}
+        animate={{ scaleX: [0, 1.5, 0.5, 0], opacity: [0, 1, 0.6, 0], x: [0, 100, 180] }}
         transition={{ duration: 1.5, repeat: Infinity, delay: 0.2, ease: "easeOut" }}
-        className="absolute w-32 h-6 rounded-[100%] bg-gradient-to-r from-cyan-200 to-blue-500 blur-[3px] origin-left top-1/2 -mt-1 rotate-2"
+        className="absolute w-32 h-6 rounded-[100%] bg-gradient-to-r from-cyan-200 to-blue-500 blur-[3px] origin-left rotate-2"
       />
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: [0, 1.1, 0.7, 0], opacity: [0, 0.8, 0.4, 0], x: [80, 130, 180] }}
+        animate={{ scaleX: [0, 1.1, 0.7, 0], opacity: [0, 0.8, 0.4, 0], x: [0, 60, 110] }}
         transition={{ duration: 1.1, repeat: Infinity, delay: 0.4, ease: "easeOut" }}
-        className="absolute w-20 h-4 rounded-[100%] bg-gradient-to-r from-blue-400 to-cyan-400 blur-[2px] origin-left top-1/2 mt-3 rotate-[15deg]"
+        className="absolute w-20 h-4 rounded-[100%] bg-gradient-to-r from-blue-400 to-cyan-400 blur-[2px] origin-left mt-2 rotate-[15deg]"
       />
 
       {/* Droplets spraying right */}
@@ -62,7 +62,7 @@ export function WaterSplash() {
              delay: p.delay,
              ease: "easeOut"
            }}
-           className="absolute w-2 h-2 top-1/2"
+           className="absolute w-2 h-2"
         >
           <div 
             className="rounded-full bg-cyan-200 blur-[1px] shadow-[0_0_12px_rgba(103,232,249,0.8)]"
