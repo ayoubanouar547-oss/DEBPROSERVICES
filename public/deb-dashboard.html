@@ -39,23 +39,71 @@
             }
         })();
 
-        body {
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
             background-color: #0a0f1e;
-            color: #d0d2d6;
+            color: #ffffff; /* Texte blanc pur par défaut */
             font-family: 'Inter', sans-serif;
             overflow: hidden;
-            height: 100vh;
         }
 
         .sidebar {
             background-color: #161d31;
+            color: #ffffff;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card {
-            background: rgba(22, 29, 49, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(22, 29, 49, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* TOTAL WHITE THEME - High contrast for all text */
+        h1, h2, h3, h4, label, p, span, td, th, li, strong, b, div:not(.bg-white):not(.bg-red-600) {
+            color: #ffffff !important;
+        }
+        
+        .text-gray-500, .text-gray-400, .text-gray-600, .text-slate-400, .text-slate-500, .text-slate-600 {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        .text-blue-300, .text-blue-400, .text-cyan-400 {
+            color: #ffffff !important;
+            text-decoration: underline;
+            text-decoration-color: #1A3A8F;
+            text-underline-offset: 4px;
+        }
+
+        .opacity-70, .opacity-60, .opacity-50 {
+            opacity: 1 !important; /* Force visibility */
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4) !important;
+        }
+
+        /* Online pulse */
+        .pulse-online {
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        .nav-link.active h3, .nav-link.active span {
+            color: #ffffff !important;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(118deg, #1A3A8F, rgba(26, 58, 143, 0.9));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            color: white !important;
         }
 
         .nav-link {
@@ -127,7 +175,7 @@
         }
     </style>
 </head>
-<body class="flex flex-col lg:flex-row">
+<body class="flex flex-col lg:flex-row min-h-screen">
     <!-- Overlay for mobile sidebar -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden"></div>
 
@@ -211,10 +259,10 @@
         </header>
 
         <!-- Panels Container -->
-        <main id="panels-container" class="flex-1 overflow-y-auto p-4 lg:p-8 custom-scroll bg-dash-bg">
+        <main id="panels-container" class="flex-1 overflow-y-auto custom-scroll bg-dash-bg relative">
             
             <!-- PANEL 1: DASHBOARD -->
-            <div id="panel-dashboard" class="panel space-y-8 animate-fade-in">
+            <div id="panel-dashboard" class="panel space-y-8 animate-fade-in p-4 lg:p-8">
                 <!-- Stats Row -->
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                     <div class="glass-card stat-card p-6 rounded-2xl">
@@ -222,7 +270,7 @@
                             <div class="p-3 bg-blue-500/10 rounded-xl text-blue-500 text-xl">📈</div>
                             <span class="text-green-500 text-xs font-bold">+12%</span>
                         </div>
-                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Visiteurs Aujourd'hui</h3>
+                        <h3 class="text-white text-[10px] font-black uppercase tracking-widest mb-1">Visiteurs Aujourd'hui</h3>
                         <p class="text-white text-3xl font-black count-up" data-target="247">0</p>
                     </div>
                     <div class="glass-card stat-card p-6 rounded-2xl border-b-2 border-deb-blue">
@@ -230,24 +278,24 @@
                             <div class="p-3 bg-deb-yellow/10 rounded-xl text-deb-yellow text-xl">👥</div>
                             <span class="text-green-500 text-xs font-bold">+23%</span>
                         </div>
-                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Visiteurs ce mois</h3>
-                        <p class="text-white text-3xl font-black count-up" data-target="8432">0</p>
+                        <h3 class="text-white text-[10px] font-black uppercase tracking-widest mb-1">Missions ce mois</h3>
+                        <p class="text-white text-3xl font-black count-up" data-target="152">0</p>
                     </div>
                     <div class="glass-card stat-card p-6 rounded-2xl">
                         <div class="flex justify-between items-start mb-4">
                             <div class="p-3 bg-deb-red/10 rounded-xl text-deb-red text-xl">📞</div>
-                            <span class="text-deb-red text-xs font-bold">Stable</span>
+                            <span class="text-deb-red text-xs font-bold">Live</span>
                         </div>
-                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Appels générés</h3>
-                        <p class="text-white text-3xl font-black count-up" data-target="89">0</p>
+                        <h3 class="text-white text-[10px] font-black uppercase tracking-widest mb-1">Leads en attente</h3>
+                        <p class="text-white text-3xl font-black count-up" data-target="12">0</p>
                     </div>
                     <div class="glass-card stat-card p-6 rounded-2xl">
                         <div class="flex justify-between items-start mb-4">
                             <div class="p-3 bg-yellow-400/10 rounded-xl text-yellow-400 text-xl">⭐</div>
                             <span class="text-yellow-400 text-xs font-bold">Top Rating</span>
                         </div>
-                        <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1">Note Google</h3>
-                        <p class="text-white text-3xl font-black">4.8/5</p>
+                        <h3 class="text-white text-[10px] font-black uppercase tracking-widest mb-1">Note de satisfaction</h3>
+                        <p class="text-white text-3xl font-black">4.9/5</p>
                     </div>
                 </div>
 
@@ -348,30 +396,34 @@
                         </div>
                     </div>
 
-                    <!-- Recent Leads -->
-                    <div class="glass-card p-6 rounded-3xl">
-                        <h3 class="text-white font-oswald uppercase tracking-widest text-sm mb-6">Dernières demandes</h3>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
-                                <thead class="text-gray-500 uppercase tracking-wider border-b border-white/5">
-                                    <tr>
-                                        <th class="pb-3 pr-4">Client</th>
-                                        <th class="pb-3 pr-4">Service</th>
-                                        <th class="pb-3 pr-4">Ville</th>
-                                        <th class="pb-3">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-white/5 font-medium" id="recent-leads-body">
-                                    <!-- Populated by JS -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                    <!-- Recent Leads -->
+                                    <div class="glass-card p-6 rounded-3xl">
+                                        <div class="flex justify-between items-center mb-6">
+                                            <h3 class="text-white font-oswald uppercase tracking-widest text-sm">Dernières demandes</h3>
+                                            <span class="px-2 py-1 bg-blue-500/10 text-blue-400 text-[9px] font-bold rounded animate-pulse">LIVE</span>
+                                        </div>
+                                        <div class="overflow-x-auto">
+                                            <table class="w-full text-left text-xs">
+                                                <thead class="text-white/40 uppercase tracking-wider border-b border-white/5">
+                                                    <tr>
+                                                        <th class="pb-3 pr-4">Client</th>
+                                                        <th class="pb-3 pr-4">Service</th>
+                                                        <th class="pb-3 pr-4">Ville</th>
+                                                        <th class="pb-3">Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-white/5 font-medium" id="recent-leads-body">
+                                                    <!-- Populated by JS -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End panel-dashboard -->
 
             <!-- PANEL 3: PAGES DU SITE -->
-            <div id="panel-pages" class="panel hidden space-y-6 animate-fade-in">
+            <div id="panel-pages" class="panel hidden space-y-6 animate-fade-in p-4 lg:p-8">
                 <div class="flex items-center justify-between mb-4">
                     <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Liste des pages indexées</p>
                     <button class="px-4 py-2 bg-deb-blue/10 text-deb-blue border border-deb-blue/20 rounded-xl text-[10px] font-bold uppercase hover:bg-deb-blue hover:text-white transition-all">
@@ -397,7 +449,7 @@
             </div>
 
             <!-- PANEL 5: LEADS -->
-            <div id="panel-leads" class="panel hidden space-y-6 animate-fade-in">
+            <div id="panel-leads" class="panel hidden space-y-6 animate-fade-in p-4 lg:p-8">
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-dash-card/50 p-4 rounded-2xl border border-white/5">
                     <div class="flex gap-3">
                         <select id="filter-service" class="bg-dash-bg border border-white/10 text-white text-xs px-4 py-2 rounded-xl outline-none focus:border-deb-blue">
@@ -440,7 +492,7 @@
             </div>
 
             <!-- PANEL 7: SEO -->
-            <div id="panel-seo" class="panel hidden space-y-6 animate-fade-in">
+            <div id="panel-seo" class="panel hidden space-y-6 animate-fade-in p-4 lg:p-8">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div class="glass-card p-6 rounded-2xl text-center">
                         <h3 class="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-6">Score SEO Global</h3>
@@ -524,7 +576,7 @@
             </div>
 
             <!-- PANEL 2: TRAFIC & VISITEURS -->
-            <div id="panel-traffic" class="panel hidden space-y-8 animate-fade-in">
+            <div id="panel-traffic" class="panel hidden space-y-8 animate-fade-in p-4 lg:p-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="glass-card p-6 rounded-2xl border-l-4 border-blue-500">
                         <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Sessions Actives</p>
@@ -589,7 +641,7 @@
             </div>
 
             <!-- PANEL 8: PARAMÈTRES -->
-            <div id="panel-settings" class="panel hidden space-y-6 animate-fade-in">
+            <div id="panel-settings" class="panel hidden space-y-6 animate-fade-in p-4 lg:p-8">
                 <div class="max-w-2xl mx-auto glass-card p-8 rounded-3xl">
                     <h3 class="text-white font-oswald text-xl mb-8 uppercase tracking-widest">Informations Générales</h3>
                     <form class="space-y-6">
@@ -616,7 +668,7 @@
             </div>
 
             <!-- PANEL 6: AVIS CLIENTS -->
-            <div id="panel-reviews" class="panel hidden space-y-6 animate-fade-in">
+            <div id="panel-reviews" class="panel hidden space-y-6 animate-fade-in p-4 lg:p-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div class="glass-card p-6 rounded-2xl text-center">
                         <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">Note Moyenne</p>
@@ -703,8 +755,26 @@
 
                             <!-- Text Content -->
                             <div id="prop-text-group" class="space-y-3">
-                                <label class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Contenu Texte</label>
-                                <textarea id="prop-text" rows="3" class="w-full bg-dash-bg border border-white/10 rounded-xl p-3 text-xs text-white outline-none focus:border-deb-blue resize-none"></textarea>
+                                <label class="text-[10px] text-white font-bold uppercase tracking-widest">Contenu Texte</label>
+                                <textarea id="prop-text" rows="3" class="w-full bg-dash-bg border border-white/20 rounded-xl p-3 text-xs text-white outline-none focus:border-deb-blue resize-none"></textarea>
+                            </div>
+
+                            <!-- Image Source (Hidden if not IMG) -->
+                            <div id="prop-img-group" class="hidden space-y-3">
+                                <label class="text-[10px] text-white font-bold uppercase tracking-widest">Image</label>
+                                <div class="flex flex-col gap-2">
+                                    <div id="img-preview-box" class="w-full h-32 bg-dash-bg border border-white/10 rounded-xl overflow-hidden mb-2 hidden">
+                                        <img id="editor-img-preview" src="" class="w-full h-full object-cover">
+                                    </div>
+                                    <input type="text" id="prop-img-src" placeholder="https://..." class="w-full bg-dash-bg border border-white/20 rounded-xl p-3 text-xs text-white outline-none focus:border-deb-blue">
+                                    <div class="relative">
+                                        <input type="file" id="prop-img-upload" class="hidden" accept="image/*">
+                                        <button onclick="document.getElementById('prop-img-upload').click()" class="w-full py-2 bg-white/5 border border-white/10 rounded-lg text-[10px] font-bold uppercase hover:bg-white/10 transition-all">
+                                            📁 Téléverser depuis PC
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="text-[9px] text-blue-300 italic">Format supporté: JPG, PNG, WEBP.</p>
                             </div>
 
                             <!-- Typography -->
@@ -765,9 +835,9 @@
                     </div>
 
                     <!-- Preview Area -->
-                    <div class="flex-1 bg-dash-bg relative p-8 flex items-start justify-center overflow-auto custom-scroll">
-                        <div id="preview-container" class="bg-white/5 rounded-2xl overflow-hidden shadow-2xl origin-top transition-all duration-500" style="width: 100%; height: 100%;">
-                            <iframe id="editor-iframe" src="/" class="w-full h-full border-none pointer-events-auto"></iframe>
+                    <div class="flex-1 bg-dash-bg relative p-8 flex items-stretch justify-center overflow-hidden">
+                        <div id="preview-container" class="bg-black rounded-2xl overflow-hidden shadow-2xl origin-top transition-all duration-500 w-full h-full">
+                            <iframe id="editor-iframe" src="/" class="w-full h-full border-none pointer-events-auto min-h-[600px]"></iframe>
                         </div>
                     </div>
                 </div>
@@ -854,38 +924,41 @@
 
         // Pages Data
         const SITE_PAGES = [
-            { id: 'index', title: "Homepage", url: "/index.html", modif: "Hier", status: "online" },
-            { id: 'plomberie', title: "Plomberie", url: "/plomberie", modif: "24/01", status: "online" },
-            { id: 'chauffage', title: "Chauffage", url: "/chauffage", modif: "22/01", status: "online" },
-            { id: 'gaz', title: "Installation Gaz", url: "/gaz", modif: "20/01", status: "online" },
-            { id: 'electricite', title: "Électricité", url: "/electricite", modif: "18/01", status: "online" },
-            { id: 'clim', title: "Climatisation", url: "/climatisation", modif: "15/01", status: "online" },
-            { id: 'fosse', title: "Fosse Septique", url: "/fosse-septique", modif: "12/01", status: "online" },
-            { id: 'bx', title: "Zone Bruxelles", url: "/zones/bruxelles", modif: "10/01", status: "online" },
-            { id: 'lg', title: "Zone Liège", url: "/zones/liege", modif: "08/01", status: "online" },
-            { id: 'ms', title: "Zone Mons", url: "/zones/mons", modif: "05/01", status: "online" },
-            { id: 'nm', title: "Zone Namur", url: "/zones/namur", modif: "03/01", status: "online" },
-            { id: 'cl', title: "Zone Charleroi", url: "/zones/charleroi", modif: "01/01", status: "online" }
+            { id: 'index', title: "Accueil / Homepage", url: "/", modif: "À l'instant", status: "online", priority: "Haute" },
+            { id: 'urgence', title: "Urgences 24/7", url: "/urgence", modif: "Hier à 22:40", status: "online", priority: "Critique" },
+            { id: 'contact', title: "Contact & Localisation", url: "/contact", modif: "Aujourd'hui à 09:05", status: "online", priority: "Haute" },
+            { id: 'devis', title: "Devis Gratuit", url: "/devis", modif: "Hier", status: "online", priority: "Moyenne" },
+            { id: 'zones', title: "Zones d'intervention", url: "/zones-de-services", modif: "24/01/2026", status: "online", priority: "Moyenne" },
+            { id: 'debouchage', title: "Débouchage Professionnel", url: "/debouchage-canalisation", modif: "15/01/2026", status: "online", priority: "Haute" },
+            { id: 'plomberie', title: "Plomberie Générale", url: "/plomberie", modif: "12/01/2026", status: "online", priority: "Haute" },
+            { id: 'chauffage', title: "Chauffage & Boiler", url: "/chauffage", modif: "Aujourd'hui", status: "online", priority: "Haute" },
+            { id: 'vidange', title: "Vidange Fosse Septique", url: "/vidange-fosse-septique", modif: "10/01/2026", status: "online", priority: "Moyenne" },
+            { id: 'gaz', title: "Contrôle & Installation Gaz", url: "/installation-gaz", modif: "08/01/2026", status: "online", priority: "Moyenne" },
+            { id: 'about', title: "À Propos de nous", url: "/about", modif: "20/01/2026", status: "online", priority: "Basse" },
+            { id: 'privacy', title: "Politique de confidentialité", url: "/privacy-policy", modif: "01/01/2026", status: "online", priority: "Basse" }
         ];
 
         function renderPagesList() {
             const tbody = document.getElementById('pages-table-body');
             if(!tbody) return;
             tbody.innerHTML = SITE_PAGES.map(page => `
-                <tr class="hover:bg-white/5 transition-colors group">
-                    <td class="p-5 font-bold text-white">${page.title}</td>
-                    <td class="p-5 text-blue-300 opacity-70 italic font-mono text-[10px]">${page.url}</td>
-                    <td class="p-5 opacity-60">${page.modif}</td>
+                <tr class="hover:bg-white/10 transition-colors group">
                     <td class="p-5">
-                        <span class="text-green-500 font-bold flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                            En ligne
+                        <div class="font-bold text-white">${page.title}</div>
+                        <div class="text-[9px] text-white opacity-50 uppercase tracking-tighter">Priorité: ${page.priority}</div>
+                    </td>
+                    <td class="p-5 text-white italic font-mono text-[10px] underline underline-offset-4 decoration-deb-blue">${page.url}</td>
+                    <td class="p-5 text-white opacity-80 font-medium">${page.modif}</td>
+                    <td class="p-5">
+                        <span class="text-green-500 font-black text-[10px] flex items-center gap-2 uppercase tracking-widest">
+                            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]"></span>
+                            Indexée
                         </span>
                     </td>
                     <td class="p-5 text-right">
-                        <div class="flex justify-end gap-2">
-                            <button onclick="openInEditor('${page.url}')" class="px-4 py-1.5 bg-deb-blue rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-blue-900/40 hover:scale-105 active:scale-95 transition-all text-white">✏️ Editer</button>
-                            <button onclick="window.open('${page.url}', '_blank')" class="px-4 py-1.5 bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/20 transition-all text-white">👁️ Voir</button>
+                        <div class="flex justify-end gap-3 translate-x-2 group-hover:translate-x-0 transition-transform">
+                            <button onclick="openInEditor('${page.url}')" class="px-5 py-2 bg-deb-blue rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-blue-900/60 hover:brightness-125 active:scale-95 transition-all text-white border border-white/10">✏️ Editer</button>
+                            <button onclick="window.open('${page.url}', '_blank')" class="px-5 py-2 bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/30 transition-all text-white border border-white/5">👁️ Voir</button>
                         </div>
                     </td>
                 </tr>
@@ -901,69 +974,82 @@
         }
 
         function openInEditor(url) {
-            const editorPanel = document.getElementById('panel-editor');
             const iframe = document.getElementById('editor-iframe');
             const select = document.getElementById('editor-page-select');
+            const editorLink = document.querySelector('[data-panel="editor"]');
             
             if(select) select.value = url;
             if(iframe) iframe.src = url;
             
-            switchPanel('editor', document.querySelector('[data-panel="editor"]'));
+            localStorage.setItem('deb_last_page', url);
+            switchPanel('editor', editorLink);
         }
 
         // Leads Data
-        const LEADS = [
-            { id: 1, name: "Marie Desmet", phone: "+32 478 12 34 56", service: "Débouchage", city: "Bruxelles", date: "Aujourd'hui 14:32", status: "nouveau" },
-            { id: 2, name: "Ahmed Kerroumi", phone: "+32 485 22 44 66", service: "Chauffage", city: "Liège", date: "Aujourd'hui 11:15", status: "attente" },
-            { id: 3, name: "Sophie Van Damme", phone: "+32 491 55 77 88", service: "Gaz", city: "Mons", date: "Hier 18:45", status: "traité" },
-            { id: 4, name: "Pierre Lemaire", phone: "+32 470 33 66 99", service: "Débouchage", city: "Namur", date: "Hier 09:22", status: "traité" },
-            { id: 5, name: "Nadia Belhaj", phone: "+32 482 11 00 22", service: "Plomberie", city: "Charleroi", date: "24/01", status: "traité" }
+        const DEFAULT_LEADS = [
+            { id: 1, name: "Marc Janssen", phone: "+32 478 12 34 56", service: "Débouchage", city: "Bruxelles 1000", date: "Il y a 2h", status: "nouveau" },
+            { id: 2, name: "Ahmed Kerroumi", phone: "+32 485 22 44 66", service: "Chauffage", city: "Liège 4000", date: "Il y a 5h", status: "nouveau" },
+            { id: 3, name: "Sophie Van Damme", phone: "+32 491 55 77 88", service: "Gaz", city: "Mons 7000", date: "Aujourd'hui 14:15", status: "attente" },
+            { id: 4, name: "Pierre Lemaire", phone: "+32 470 33 66 99", service: "Plomberie", city: "Namur 5000", date: "Hier 09:22", status: "traité" },
+            { id: 5, name: "Nadia Belhaj", phone: "+32 482 11 00 22", service: "Vidange Fosse", city: "Charleroi 6000", date: "24/01", status: "traité" },
+            { id: 6, name: "Luc De Smet", phone: "+32 495 88 11 33", service: "Débouchage", city: "Ixelles", date: "Hier", status: "nouveau" },
+            { id: 7, name: "Elena Moreno", phone: "+32 471 44 55 66", service: "Chauffage", city: "Anderlecht", date: "23/01", status: "attente" }
         ];
+
+        let LEADS = [...DEFAULT_LEADS];
+
+        // Sync with REAL leads from site
+        function syncLeads() {
+            try {
+                const stored = localStorage.getItem('deb_leads');
+                if(stored) {
+                    const realLeads = JSON.parse(stored);
+                    LEADS = [...realLeads, ...DEFAULT_LEADS];
+                }
+            } catch(e) {}
+        }
+        syncLeads();
 
         function renderLeads() {
             const list = document.getElementById('leads-list');
             const recentBody = document.getElementById('recent-leads-body');
             
-            const html = LEADS.map(lead => `
-                <tr class="hover:bg-white/5 transition-colors">
-                    <td class="p-5 font-bold text-white">${lead.name}</td>
-                    <td class="p-5 opacity-70">${lead.phone}</td>
-                    <td class="p-5 italic text-blue-300">${lead.service}</td>
-                    <td class="p-5">${lead.city}</td>
-                    <td class="p-5 opacity-60">${lead.date}</td>
-                    <td class="p-5">
-                        <span class="px-3 py-1 rounded-full font-bold ${
-                            lead.status === 'nouveau' ? 'bg-green-500/10 text-green-500' : 
-                            lead.status === 'attente' ? 'bg-deb-yellow/10 text-deb-yellow' : 
-                            'bg-blue-500/10 text-blue-500'
-                        }">
-                            ${lead.status.toUpperCase()}
-                        </span>
-                    </td>
-                    <td class="p-5 text-right">
-                        <button class="text-blue-500 hover:underline">Détails</button>
-                    </td>
-                </tr>
-            `).join('');
-
-            if(list) list.innerHTML = html;
+            if(list) {
+                list.innerHTML = LEADS.map(lead => `
+                    <tr class="hover:bg-white/10 transition-colors">
+                        <td class="p-5 font-bold text-white">${lead.name}</td>
+                        <td class="p-5 text-white font-mono">${lead.phone}</td>
+                        <td class="p-5 italic text-white font-bold">${lead.service}</td>
+                        <td class="p-5 text-white">${lead.city}</td>
+                        <td class="p-5 text-white opacity-80">${lead.date}</td>
+                        <td class="p-5">
+                            <span class="px-3 py-1 rounded-lg font-black text-[10px] tracking-widest ${
+                                lead.status === 'nouveau' ? 'bg-green-500 text-white shadow-lg shadow-green-900/40' : 
+                                lead.status === 'attente' ? 'bg-deb-yellow text-dash-bg shadow-lg shadow-yellow-900/40' : 
+                                'bg-blue-600 text-white shadow-lg shadow-blue-900/40'
+                            }">
+                                ${lead.status.toUpperCase()}
+                            </span>
+                        </td>
+                        <td class="p-5 text-right">
+                            <button class="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[10px] font-bold hover:bg-white/10 transition-all text-white">Détails</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
             
             if(recentBody) {
                 recentBody.innerHTML = LEADS.slice(0, 5).map(lead => `
-                    <tr>
-                        <td class="py-4 text-white">${lead.name}</td>
-                        <td class="py-4 text-blue-300 italic">${lead.service}</td>
-                        <td class="py-4">${lead.city}</td>
-                        <td class="py-4"><span class="px-2 py-1 ${
-                            lead.status === 'nouveau' ? 'bg-green-500/10 text-green-500' : 
-                            lead.status === 'attente' ? 'bg-deb-yellow/10 text-deb-yellow' : 
-                            'bg-blue-500/10 text-blue-500'
-                        } rounded border ${
-                            lead.status === 'nouveau' ? 'border-green-500/20' : 
-                            lead.status === 'attente' ? 'border-deb-yellow/20' : 
-                            'border-blue-500/20'
-                        }">
-                            ${lead.status === 'nouveau' ? '🟢 Nouveau' : lead.status === 'attente' ? '🟡 Attente' : '🔵 Traité'}
+                    <tr class="border-b border-white/5 last:border-0">
+                        <td class="py-4 text-white font-bold leading-none">${lead.name}<br><span class="text-[9px] font-normal opacity-60 italic">${lead.date}</span></td>
+                        <td class="py-4 text-white font-medium">${lead.service}</td>
+                        <td class="py-4 text-white opacity-90">${lead.city}</td>
+                        <td class="py-4"><span class="px-2 py-1 text-[9px] font-black tracking-tighter ${
+                            lead.status === 'nouveau' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 
+                            lead.status === 'attente' ? 'bg-deb-yellow/20 text-deb-yellow border border-deb-yellow/30' : 
+                            'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                        } rounded uppercase">
+                            ${lead.status === 'nouveau' ? 'Nouveau' : lead.status === 'attente' ? 'Attente' : 'Traité'}
                         </span></td>
                     </tr>
                 `).join('');
@@ -971,11 +1057,11 @@
         }
 
         const TOP_PAGES = [
-            { path: '/plomberie', views: '1,842', trend: '+15%', percent: 85 },
-            { path: '/zones/bruxelles', views: '1,204', trend: '+28%', percent: 65 },
+            { path: '/debouchage-canalisation', views: '1,842', trend: '+15%', percent: 85 },
+            { path: '/zones-de-services', views: '1,204', trend: '+28%', percent: 65 },
             { path: '/', views: '987', trend: '+8%', percent: 55 },
-            { path: '/chauffage', views: '743', trend: '+19%', percent: 45 },
-            { path: '/zones/liege', views: '612', trend: '+33%', percent: 35 }
+            { path: '/urgence', views: '743', trend: '+19%', percent: 45 },
+            { path: '/contact', views: '612', trend: '+33%', percent: 35 }
         ];
 
         function renderTopPages() {
@@ -1006,56 +1092,155 @@
         const editorControls = document.getElementById('editor-controls');
 
         iframe.onload = function() {
-            const iDoc = iframe.contentDocument || iframe.contentWindow.document;
-            
-            // Inject Helper Styles
-            const style = iDoc.createElement('style');
-            style.textContent = `
-                .deb-editable:hover {
-                    outline: 2px dashed #1A3A8F !important;
-                    outline-offset: 2px;
-                    cursor: pointer !important;
-                }
-                .deb-selected {
-                    outline: 2px solid #FFD600 !important;
-                    outline-offset: 2px;
-                }
-            `;
-            iDoc.head.appendChild(style);
+            function initEditor() {
+                try {
+                    const iDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (!iDoc || !iDoc.body) throw new Error("Document inaccessible");
 
-            // Setup elements
-            const elements = iDoc.querySelectorAll('h1, h2, h3, h4, p, a, button, span, div, section, img');
-            elements.forEach(el => {
-                el.classList.add('deb-editable');
-                el.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    selectElement(el, iDoc);
-                });
-            });
+                    // Inject Helper Styles
+                    let style = iDoc.getElementById('deb-editor-helpers');
+                    if(!style) {
+                        style = iDoc.createElement('style');
+                        style.id = 'deb-editor-helpers';
+                        iDoc.head.appendChild(style);
+                    }
+                    style.textContent = `
+                        .deb-editable:hover {
+                            outline: 3px solid #1A3A8F !important;
+                            outline-offset: -3px;
+                            cursor: pointer !important;
+                            background: rgba(26, 58, 143, 0.1) !important;
+                            z-index: 9999 !important;
+                        }
+                        .deb-selected {
+                            outline: 4px solid #FFD600 !important;
+                            outline-offset: -4px;
+                            box-shadow: 0 0 15px rgba(255, 214, 0, 0.5) !important;
+                            z-index: 10000 !important;
+                        }
+                        [class*="absolute"][class*="inset-0"] {
+                            pointer-events: none !important;
+                        }
+                        .deb-editable {
+                            pointer-events: auto !important;
+                        }
+                    `;
+
+                    // Setup elements
+                    const editableSelectors = 'h1, h2, h3, h4, p, a, button, span, img, li, strong, b, em, i';
+                    const elements = iDoc.querySelectorAll(editableSelectors);
+                    elements.forEach(el => {
+                        el.classList.add('deb-editable');
+                        el.onclick = (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            selectElement(el, iDoc);
+                        };
+                    });
+                    
+                    noSelection.innerHTML = `
+                        <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center text-3xl mb-4 border border-blue-500/20 pulse-online">🎨</div>
+                        <h3 class="text-white text-xs font-black uppercase mb-2">ÉDITION ACTIVÉE</h3>
+                        <p class="text-[10px] text-gray-500 font-medium leading-relaxed px-4">Interagissez avec le site à droite. Sélectionnez texte ou image pour modifier.</p>
+                    `;
+
+                } catch (err) {
+                    console.error("Iframe Security Error:", err);
+                    noSelection.innerHTML = `
+                        <div class="p-8 bg-blue-600/10 border border-blue-500/30 rounded-3xl text-center max-w-xs mx-auto animate-fade-in shadow-2xl">
+                            <div class="text-3xl mb-4">🛡️</div>
+                            <h4 class="text-white text-[11px] font-black uppercase mb-3 tracking-widest leading-tight">Sécurité Browser Active</h4>
+                            <p class="text-[10px] text-gray-400 leading-relaxed mb-6">L'accès au contenu est restreint par la politique CORS. Essayez de recharger ou d'ouvrir dans un nouvel onglet.</p>
+                            <button onclick="location.reload()" class="w-full py-3 bg-blue-600 rounded-xl text-[10px] font-black uppercase tracking-widest hover:brightness-110 mb-2">🔄 Réessayer</button>
+                            <button onclick="window.open('/', '_blank')" class="w-full py-3 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all">Ouvrir le site live →</button>
+                        </div>
+                    `;
+                }
+            }
+
+            // Initial init
+            initEditor();
+            // Retry after hydration
+            setTimeout(initEditor, 2500);
         };
 
+        // Live Simulation Logic
+        setInterval(() => {
+            const visitorsEl = document.querySelector('#panel-traffic .font-black');
+            if(visitorsEl) {
+                const current = parseInt(visitorsEl.innerText);
+                const diff = Math.random() > 0.5 ? 1 : -1;
+                visitorsEl.innerText = Math.max(12, current + diff);
+            }
+        }, 5000);
+
         function selectElement(el, iDoc) {
-            iDoc.querySelectorAll('.deb-selected').forEach(x => x.classList.remove('deb-selected'));
-            el.classList.add('deb-selected');
-            selectedElement = el;
-            
-            noSelection.classList.add('hidden');
-            editorControls.classList.remove('hidden');
-            
-            document.getElementById('selected-tag-info').innerText = el.tagName;
-            document.getElementById('prop-text').value = el.innerText || '';
-            
-            // Styles
-            const style = window.getComputedStyle(el);
-            document.getElementById('prop-size').value = parseInt(style.fontSize);
-            document.getElementById('prop-color').value = rgbToHex(style.color);
+            try {
+                iDoc.querySelectorAll('.deb-selected').forEach(x => x.classList.remove('deb-selected'));
+                el.classList.add('deb-selected');
+                selectedElement = el;
+                
+                noSelection.classList.add('hidden');
+                editorControls.classList.remove('hidden');
+                
+                document.getElementById('selected-tag-info').innerText = el.tagName;
+                
+                // Reset all controls visibility
+                document.getElementById('prop-text-group').classList.add('hidden');
+                document.getElementById('prop-img-group').classList.add('hidden');
+                document.getElementById('img-preview-box').classList.add('hidden');
+
+                if (el.tagName === 'IMG') {
+                    document.getElementById('prop-img-group').classList.remove('hidden');
+                    document.getElementById('prop-img-src').value = el.src || '';
+                    if(el.src) {
+                        document.getElementById('img-preview-box').classList.remove('hidden');
+                        document.getElementById('editor-img-preview').src = el.src;
+                    }
+                } else {
+                    document.getElementById('prop-text-group').classList.remove('hidden');
+                    document.getElementById('prop-text').value = (el.innerText || el.textContent || '').trim();
+                }
+                
+                // Styles
+                const style = iDoc.defaultView.getComputedStyle(el);
+                document.getElementById('prop-size').value = parseInt(style.fontSize) || 16;
+                document.getElementById('prop-color').value = rgbToHex(style.color);
+                
+                // Sync labels for spacing
+                document.getElementById('prop-radius').value = parseInt(style.borderRadius) || 0;
+                document.getElementById('prop-padding-v').value = parseInt(style.paddingTop) || 0;
+                document.getElementById('prop-padding-h').value = parseInt(style.paddingLeft) || 0;
+
+            } catch (err) {
+                console.warn("Selection failed due to cross-origin restriction.", err);
+            }
         }
 
+        // Image Upload Handler
+        document.getElementById('prop-img-upload')?.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const base64 = event.target.result;
+                document.getElementById('prop-img-src').value = base64;
+                document.getElementById('img-preview-box').classList.remove('hidden');
+                document.getElementById('editor-img-preview').src = base64;
+                
+                // Live apply if selected
+                if(selectedElement && selectedElement.tagName === 'IMG') {
+                    selectedElement.src = base64;
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+
         function rgbToHex(rgb) {
-            if(!rgb) return '#000000';
+            if(!rgb) return '#ffffff';
             const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-            if(!match) return '#000000';
+            if(!match) return '#ffffff';
             function hex(x) { return ("0" + parseInt(x).toString(16)).slice(-2); }
             return "#" + hex(match[1]) + hex(match[2]) + hex(match[3]);
         }
@@ -1066,7 +1251,12 @@
             // Save state for undo
             saveState();
 
-            selectedElement.innerText = document.getElementById('prop-text').value;
+            if (selectedElement.tagName === 'IMG') {
+                selectedElement.src = document.getElementById('prop-img-src').value;
+            } else {
+                selectedElement.innerText = document.getElementById('prop-text').value;
+            }
+
             selectedElement.style.fontSize = document.getElementById('prop-size').value + 'px';
             selectedElement.style.color = document.getElementById('prop-color').value;
             
@@ -1083,37 +1273,44 @@
 
         function resetElement() {
             if(!selectedElement) return;
-            // Optionally reload page or just clear selected state
-            const iDoc = iframe.contentDocument || iframe.contentWindow.document;
-            iDoc.querySelectorAll('.deb-selected').forEach(x => x.classList.remove('deb-selected'));
+            try {
+                const iDoc = iframe.contentDocument || iframe.contentWindow.document;
+                iDoc.querySelectorAll('.deb-selected').forEach(x => x.classList.remove('deb-selected'));
+            } catch (e) {}
             selectedElement = null;
             noSelection.classList.remove('hidden');
             editorControls.classList.add('hidden');
         }
 
         function saveState() {
-            if(!iframe.contentDocument) return;
-            const html = iframe.contentDocument.documentElement.outerHTML;
-            if(historyIndex < history.length - 1) {
-                history = history.slice(0, historyIndex + 1);
-            }
-            history.push(html);
-            if(history.length > 20) history.shift();
-            historyIndex = history.length - 1;
+            try {
+                if(!iframe.contentDocument) return;
+                const html = iframe.contentDocument.documentElement.outerHTML;
+                if(historyIndex < history.length - 1) {
+                    history = history.slice(0, historyIndex + 1);
+                }
+                history.push(html);
+                if(history.length > 20) history.shift();
+                historyIndex = history.length - 1;
+            } catch (e) {}
         }
 
         function undo() {
-            if(historyIndex > 0) {
-                historyIndex--;
-                iframe.contentDocument.documentElement.innerHTML = history[historyIndex];
-            }
+            try {
+                if(historyIndex > 0) {
+                    historyIndex--;
+                    iframe.contentDocument.documentElement.innerHTML = history[historyIndex];
+                }
+            } catch (e) {}
         }
 
         function redo() {
-            if(historyIndex < history.length - 1) {
-                historyIndex++;
-                iframe.contentDocument.documentElement.innerHTML = history[historyIndex];
-            }
+            try {
+                if(historyIndex < history.length - 1) {
+                    historyIndex++;
+                    iframe.contentDocument.documentElement.innerHTML = history[historyIndex];
+                }
+            } catch (e) {}
         }
 
         function setPreviewSize(mode) {
@@ -1131,24 +1328,43 @@
         }
 
         function saveChanges() {
-            const doc = iframe.contentDocument || iframe.contentWindow.document;
-            // Cleanup helper classes before save
-            const cleanDoc = doc.cloneNode(true);
-            cleanDoc.querySelectorAll('.deb-editable, .deb-selected').forEach(el => {
-                el.classList.remove('deb-editable', 'deb-selected');
-                if(el.classList.length === 0) el.removeAttribute('class');
-            });
-            
-            const html = cleanDoc.documentElement.outerHTML;
-            const blob = new Blob([html], {type: 'text/html'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'page-modifiee.html';
-            a.click();
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                // Cleanup helper classes before save
+                const cleanDoc = doc.cloneNode(true);
+                cleanDoc.querySelectorAll('.deb-editable, .deb-selected').forEach(el => {
+                    el.classList.remove('deb-editable', 'deb-selected');
+                    if(el.classList.length === 0) el.removeAttribute('class');
+                });
+                
+                const html = cleanDoc.documentElement.outerHTML;
+                
+                // Persist to localStorage
+                localStorage.setItem('deb_page_content_' + iframe.src, html);
+                
+                const blob = new Blob([html], {type: 'text/html'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'page-modifiee.html';
+                a.click();
+                
+                alert("Modifications enregistrées localement ! Pour les appliquer officiellement, veuillez me transmettre le fichier téléchargé ou me demander de mettre à jour le code source.");
+            } catch (e) {
+                alert("Impossible d'enregistrer les modifications via l'éditeur en raison de restrictions de sécurité.");
+            }
+        }
+
+        // Dashboard Init
+        function updateDashboardStats() {
+            const missions = document.getElementById('stat-missions');
+            const leads = document.getElementById('stat-leads');
+            if (missions) missions.setAttribute('data-target', "1042");
+            if (leads) leads.setAttribute('data-target', LEADS.length.toString());
         }
 
         // Initialize stuff
+        updateDashboardStats();
         renderLeads();
         renderPagesList();
         renderTopPages();

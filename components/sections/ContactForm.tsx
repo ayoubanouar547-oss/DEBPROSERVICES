@@ -39,6 +39,23 @@ export function ContactForm() {
         throw new Error('Erreur lors de l\'envois');
       }
 
+      // Persist to localStorage for Dashboard Real-time simulation
+      if (typeof window !== 'undefined') {
+        const existingLeads = JSON.parse(localStorage.getItem('deb_leads') || '[]');
+        const newLead = {
+          id: Date.now(),
+          name: data.nom,
+          phone: data.telephone,
+          service: data.service.charAt(0).toUpperCase() + data.service.slice(1),
+          city: data.ville,
+          date: "À l'instant",
+          status: "nouveau",
+          email: data.email,
+          message: data.message
+        };
+        localStorage.setItem('deb_leads', JSON.stringify([newLead, ...existingLeads]));
+      }
+
       setStatus('success');
       reset();
     } catch (e) {
