@@ -6,6 +6,7 @@ import { PhoneCall, MapPin, ChevronRight, CheckCircle, ShieldCheck } from 'lucid
 import Link from 'next/link';
 import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
+import Image from 'next/image';
 
 export function generateStaticParams() {
   const params: { serviceSlug: string, citySlug: string }[] = [];
@@ -94,13 +95,13 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                   <MapPin className="w-4 h-4 text-blue-400" />
                   Intervention sur {cityInfo.name}
                </div>
-               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-6">
+               <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-6">
                   {serviceInfo.title} <br/> 
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
                     {cityInfo.name}
                   </span>
                </h1>
-               <p className="text-lg text-slate-300 mb-8 leading-relaxed">
+               <p className="text-2xl text-white mb-10 leading-relaxed">
                  Techniciens de garde spécialisés en <strong>{serviceInfo.title.toLowerCase()}</strong> disponibles immédiatement sur toute la commune de {cityInfo.name}. Déplacement express et devis gratuit.
                </p>
                <div className="flex flex-wrap gap-4">
@@ -132,25 +133,25 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-16">
             
-            <div className="lg:col-span-8 space-y-12">
+             <div className="lg:col-span-8 space-y-16">
               <div>
-                <h2 className="text-3xl font-black mb-6">Expertise de Proximité en {serviceInfo.title} à {cityInfo.name}</h2>
-                <div className="prose prose-lg prose-invert text-slate-300">
+                <h2 className="text-5xl font-black mb-10 text-white">Expertise de Proximité en {serviceInfo.title} à {cityInfo.name}</h2>
+                <div className="prose prose-xl prose-invert text-white">
                   <p dangerouslySetInnerHTML={{ __html: localIntro }} />
                   <p dangerouslySetInnerHTML={{ __html: localSpeed }} />
                 </div>
               </div>
 
-              <div className="relative h-64 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                 <img src={`https://picsum.photos/seed/${cityInfo.name}ville/800/400`} alt={`Camion d'intervention à ${cityInfo.name}`} className="w-full h-full object-cover" />
+              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                 <Image src={`https://picsum.photos/seed/${cityInfo.slug}${serviceInfo.slug}/1200/600`} width={1200} height={600} alt={`Service ${serviceInfo.title} à ${cityInfo.name}`} className="w-full h-full object-cover" />
               </div>
 
               <div>
-                <h3 className="text-2xl font-black mb-6">Tous nos services de {serviceInfo.title.toLowerCase()} sur {cityInfo.name}</h3>
-                <div className="grid sm:grid-cols-2 gap-4">
+                <h3 className="text-4xl font-black mb-10 text-white">Tous nos services de {serviceInfo.title.toLowerCase()} sur {cityInfo.name}</h3>
+                <div className="grid sm:grid-cols-2 gap-6">
                   {serviceInfo.subServices.map(sub => (
-                    <Link key={sub.slug} href={`/zones-de-services/${serviceInfo.slug}/${sub.slug}/${cityInfo.slug}`} className="group bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition overflow-hidden flex flex-col">
-                      <div className="relative h-32 w-full overflow-hidden flex-shrink-0 z-10">
+                    <Link key={sub.slug} href={`/zones-de-services/${serviceInfo.slug}/${sub.slug}/${cityInfo.slug}`} className="group bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 transition overflow-hidden flex flex-col">
+                      <div className="relative h-40 w-full overflow-hidden flex-shrink-0 z-10">
                         <img 
                           src={`https://picsum.photos/seed/${sub.slug}/600/400`} 
                           alt={`Intervention ${sub.title} ${cityInfo.name}`} 
@@ -158,10 +159,10 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                       </div>
-                      <div className="p-4 flex items-start gap-4 flex-grow relative z-10">
-                        <serviceInfo.icon className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                      <div className="p-6 flex items-start gap-4 flex-grow relative z-10">
+                        <serviceInfo.icon className="w-8 h-8 text-blue-400 flex-shrink-0 mt-1" />
                         <div>
-                          <h4 className="font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">{sub.title}</h4>
+                          <h4 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors uppercase tracking-tight">{sub.title}</h4>
                           <p className="text-sm text-slate-400 line-clamp-2">{sub.desc}</p>
                         </div>
                       </div>
@@ -170,19 +171,23 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                 </div>
               </div>
               
-              <div className="bg-blue-600/10 border border-blue-500/20 rounded-2xl p-8">
-                <h3 className="text-2xl font-black mb-4">La Garantie DEB PRO SERVICES</h3>
-                <ul className="space-y-4">
-                  <li className="flex items-center gap-3"><ShieldCheck className="text-blue-400 w-6 h-6" /> <span className="text-slate-300">Devis gratuit et détaillé avant toute action.</span></li>
-                  <li className="flex items-center gap-3"><ShieldCheck className="text-blue-400 w-6 h-6" /> <span className="text-slate-300">Pièces et main-d'œuvre garanties 1 an minimum.</span></li>
-                  <li className="flex items-center gap-3"><ShieldCheck className="text-blue-400 w-6 h-6" /> <span className="text-slate-300">Intervenants certifiés.</span></li>
+              <div className="bg-blue-600/10 border border-blue-500/20 rounded-3xl p-10">
+                <h3 className="text-3xl font-black mb-6 text-white">La Garantie DEB PRO SERVICES</h3>
+                <ul className="space-y-6">
+                  <li className="flex items-center gap-4 text-xl"><ShieldCheck className="text-blue-400 w-8 h-8" /> <span className="text-white">Devis gratuit et détaillé avant toute action.</span></li>
+                  <li className="flex items-center gap-4 text-xl"><ShieldCheck className="text-blue-400 w-8 h-8" /> <span className="text-white">Pièces et main-d'œuvre garanties 1 an minimum.</span></li>
+                  <li className="flex items-center gap-4 text-xl"><ShieldCheck className="text-blue-400 w-8 h-8" /> <span className="text-white">Intervenants certifiés.</span></li>
                 </ul>
               </div>
 
               {/* Massive Programmatic SEO Text Block */}
-              <div className="mt-16 prose prose-lg prose-invert text-slate-400">
-                <h2 className="text-3xl font-black text-white mb-8 border-t border-white/10 pt-8">Expertise Approfondie pour {cityInfo.name}</h2>
-                <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.join('') }} />
+              <div className="mt-16 prose prose-xl prose-invert text-white">
+                <h2 className="text-5xl font-black text-white mb-10 border-t border-white/10 pt-10">Expertise Approfondie pour {cityInfo.name}</h2>
+                <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.slice(0, 3).join('') }} />
+                <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-12">
+                   <Image src={`https://picsum.photos/seed/${cityInfo.name}expert/1200/600`} width={1200} height={600} alt={`Expertise ${serviceInfo.title} ${cityInfo.name}`} className="w-full h-full object-cover" />
+                </div>
+                <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.slice(3).join('') }} />
               </div>
 
             </div>
