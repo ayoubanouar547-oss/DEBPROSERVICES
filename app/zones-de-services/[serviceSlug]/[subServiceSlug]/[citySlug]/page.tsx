@@ -6,6 +6,7 @@ import { PhoneCall, MapPin, ChevronRight, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
+import Image from 'next/image';
 
 export async function generateStaticParams() {
   const params: { serviceSlug: string, subServiceSlug: string, citySlug: string }[] = [];
@@ -87,6 +88,17 @@ export default async function ZoneSubServiceCityPage({ params }: { params: Promi
                   <PhoneCall className="w-5 h-5" /> SOS {cityInfo.name} : 0496 32 57 33
                 </a>
              </div>
+           </div>
+           
+           <div className="mt-12 relative h-64 md:h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+             <Image 
+               src={serviceInfo.imageUrl}
+               alt={`${subServiceInfo.title} à ${cityInfo.name}`}
+               fill
+               className="object-cover"
+               referrerPolicy="no-referrer"
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
            </div>
         </div>
       </section>
