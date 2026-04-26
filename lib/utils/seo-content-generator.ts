@@ -21,37 +21,27 @@ export function buildLongClusterText(serviceName: string, cityName: string): str
     
     // Multiply the templates to create a massive wall of structured text.
     // For 5000 words, we need about 40x thick paragraphs, ~125 words each.
-    for (let i = 0; i < 6; i++) {
-        textBlocks.push(`<h3 class="text-3xl font-bold mb-4 mt-8">Expertise en ${serviceName} à ${cityName}</h3>`);
+    for (let i = 0; i < 3; i++) {
+        textBlocks.push(`<h2 class="text-4xl font-black text-white mb-6 mt-12 uppercase tracking-tight">Expertise en ${serviceName} à ${cityName}</h2>`);
         let blockContent = "";
-        paragraphsTemplates.forEach((p, idx) => {
+        paragraphsTemplates.slice(0, 3).forEach((p, idx) => {
             const personalized = p
                 .replace(/urgences/g, `urgences en ${serviceName}`)
                 .replace(/diagnostic/g, `diagnostic de ${serviceName}`)
                 .replace(/locaux/g, `locaux situés à ${cityName}`);
-            blockContent += `<p class="mb-4 text-white">${personalized} En agissant sur le secteur de ${cityName}, nous nous assurons que notre intervention en ${serviceName} soit la plus rapide possible pour préserver vos infrastructures.</p>`;
+            blockContent += `<p class="mb-6 text-white text-lg leading-relaxed">${personalized} Sur le secteur de ${cityName}, nous garantissons une intervention rapide pour la catégorie ${serviceName}.</p>`;
             
             // Inject images every few paragraphs
             if (idx === 1) {
               blockContent += `
-                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-8 h-64 relative">
+                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-10 relative h-80">
                     <img 
                         src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecb?q=80&w=800&auto=format&fit=crop" 
-                        alt="Expertise ${serviceName}" 
+                        alt="Expertise professionnelle de ${serviceName} à ${cityName}" 
                         class="w-full h-full object-cover" 
+                        referrerpolicy="no-referrer"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-                </div>`;
-            }
-            if (idx === 3) {
-              blockContent += `
-                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-8 h-64 relative">
-                    <img 
-                        src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=800&auto=format&fit=crop" 
-                        alt="Intervention ${serviceName}" 
-                        class="w-full h-full object-cover" 
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
                 </div>`;
             }
         });
