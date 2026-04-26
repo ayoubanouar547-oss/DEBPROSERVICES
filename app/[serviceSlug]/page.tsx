@@ -94,8 +94,8 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
       <section className="py-24 relative z-10 text-white bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-16">
-             <h2 className="text-4xl font-black mb-4">Nos domaines d'intervention en {serviceInfo.title}</h2>
-             <p className="text-slate-400 max-w-2xl mx-auto">Découvrez en détail l'ensemble de nos champs d'expertise. Chaque problème a sa solution dédiée avec DEB PRO SERVICES.</p>
+             <h2 className="text-5xl font-black mb-10 text-white uppercase tracking-tight">Nos domaines d'intervention en {serviceInfo.title}</h2>
+             <p className="text-white text-xl max-w-2xl mx-auto font-medium">Découvrez en détail l'ensemble de nos champs d'expertise. Chaque problème a sa solution dédiée avec DEB PRO SERVICES.</p>
            </div>
            
            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -103,11 +103,11 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                <Link 
                  key={sub.slug}
                  href={`/${serviceInfo.slug}/${sub.slug}`}
-                 className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col"
+                 className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col"
                >
                  <div className="relative h-48 w-full overflow-hidden flex-shrink-0 z-10">
                    <img 
-                     src={`https://picsum.photos/seed/${sub.slug}/600/400`} 
+                     src={serviceInfo.imageUrl} 
                      alt={`Intervention ${sub.title}`} 
                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                    />
@@ -115,9 +115,9 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                  </div>
 
                  <div className="p-8 pt-6 flex flex-col flex-grow relative z-10">
-                   <h3 className={`text-2xl font-bold mb-3 group-hover:${serviceInfo.color.text} transition-colors`}>{sub.title}</h3>
-                   <p className="text-slate-400 mb-6 text-sm leading-relaxed flex-grow">{sub.desc}</p>
-                   <div className="flex items-center text-sm font-bold uppercase tracking-wider text-slate-300 group-hover:text-white mt-auto">
+                   <h3 className={`text-2xl font-bold mb-3 group-hover:${serviceInfo.color.text} transition-colors uppercase tracking-tight text-white`}>{sub.title}</h3>
+                   <p className="text-white mb-6 text-sm leading-relaxed flex-grow">{sub.desc}</p>
+                   <div className="flex items-center text-sm font-bold uppercase tracking-wider text-white group-hover:text-blue-400 mt-auto transition-colors">
                      En savoir plus <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                    </div>
                  </div>
@@ -132,47 +132,46 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <h2 className="text-4xl font-black">Prestations de haute qualité pour votre {serviceInfo.title.toLowerCase()}</h2>
+              <h2 className="text-5xl font-black text-white leading-tight uppercase">Prestations de haute qualité pour votre {serviceInfo.title.toLowerCase()}</h2>
               
-              <div className="prose prose-lg prose-invert text-slate-300">
+              <div className="prose prose-xl prose-invert text-white">
                 <p>
                   Dans le domaine de la <strong>{serviceInfo.title.toLowerCase()}</strong>, l'improvisation n'a pas sa place. Un système mal entretenu ou rafistolé peut entraîner des dysfonctionnements, voire des dégâts importants dans votre habitation ou vos locaux commerciaux. En faisant appel à notre équipe, vous optez pour la sérénité.
                 </p>
+                <div className="rounded-3xl overflow-hidden shadow-2xl my-8 relative h-64 border border-white/10">
+                  <img src={serviceInfo.imageUrl} alt="Service detail" className="w-full h-full object-cover" />
+                </div>
                 <p>
                   Nous prenons en charge toutes les étapes : du diagnostic précis à la résolution de la panne. Nous disposons des certifications nécessaires pour intervenir en toute sécurité.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Nos garanties d'expert :</h3>
+                <h3 className="text-3xl font-black text-white mb-8 border-b border-white/10 pb-4">Nos garanties d'expert :</h3>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {serviceInfo.features.map((feat, index) => (
-                    <li key={index} className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
-                      <CheckCircle className={`w-5 h-5 flex-shrink-0 ${serviceInfo.color.text}`} />
-                      <span className="font-medium text-slate-200">{feat}</span>
+                    <li key={index} className="flex items-center gap-3 bg-white/5 p-6 rounded-2xl border border-white/10">
+                      <CheckCircle className={`w-6 h-6 flex-shrink-0 ${serviceInfo.color.text}`} />
+                      <span className="font-bold text-white uppercase text-xs tracking-widest">{feat}</span>
                     </li>
                   ))}
-                  <li className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
-                    <ShieldCheck className={`w-5 h-5 flex-shrink-0 ${serviceInfo.color.text}`} />
-                    <span className="font-medium text-slate-200">Pièces certifiées d'origine</span>
-                  </li>
-                  <li className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
-                    <CheckCircle className={`w-5 h-5 flex-shrink-0 ${serviceInfo.color.text}`} />
-                    <span className="font-medium text-slate-200">Déplacement rapide</span>
+                  <li className="flex items-center gap-3 bg-white/5 p-6 rounded-2xl border border-white/10">
+                    <ShieldCheck className={`w-6 h-6 flex-shrink-0 ${serviceInfo.color.text}`} />
+                    <span className="font-bold text-white uppercase text-xs tracking-widest">Pièces certifiées d'origine</span>
                   </li>
                 </ul>
               </div>
             </div>
             
             <div className="relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl relative h-full min-h-[600px] border border-white/10">
-                 <img src={`https://picsum.photos/seed/${serviceInfo.slug}/800/1000`} alt={`${serviceInfo.title} service illustration`} className="absolute inset-0 w-full h-full object-cover" />
-                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent flex items-end p-8">
-                   <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-2xl w-full">
-                     <h4 className="text-white font-black text-2xl mb-3">Une urgence ?</h4>
-                     <p className="text-slate-300 mb-6 font-medium">Les dégâts matériels peuvent s'aggraver rapidement. Appelez-nous avant que la situation ne devienne critique.</p>
-                     <a href="tel:0496325733" className="bg-white text-slate-900 w-full px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-200 transition">
-                       Nous appeler <PhoneCall className="w-5 h-5" />
+              <div className="rounded-[3rem] overflow-hidden shadow-2xl relative h-full min-h-[700px] border border-white/10">
+                 <img src={serviceInfo.imageUrl} alt={`${serviceInfo.title} service illustration`} className="absolute inset-0 w-full h-full object-cover" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent flex items-end p-10">
+                   <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-10 rounded-3xl w-full translate-y-2 group">
+                     <h4 className="text-white font-black text-3xl mb-4 group-hover:text-blue-400 transition-colors uppercase tracking-tight">Une urgence ?</h4>
+                     <p className="text-white mb-8 font-medium text-lg leading-relaxed">Les dégâts matériels peuvent s'aggraver rapidement. Appelez-nous avant que la situation ne devienne critique.</p>
+                     <a href="tel:0496325733" className="bg-red-600 shadow-xl shadow-red-600/30 text-white w-full px-8 py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 hover:bg-red-700 transition-all uppercase tracking-widest">
+                       Nous appeler <PhoneCall className="w-6 h-6" />
                      </a>
                    </div>
                  </div>

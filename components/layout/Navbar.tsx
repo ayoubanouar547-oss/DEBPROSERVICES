@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { PhoneButton } from '../ui/PhoneButton';
+import { WaterSplash } from '../ui/WaterSplash';
 
 const PHONE_NUMBER = "0496 32 57 33"; // Placeholder, can be changed easily
 
@@ -58,14 +59,14 @@ export function Navbar() {
             className="relative group lg:-ml-6 xl:-ml-10 transition-all duration-300"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <div className="relative z-10">
+            <div className="relative z-10 flex items-center justify-center">
+              <WaterSplash />
               <img 
                 src="https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c" 
                 alt="Deb PRO Services Logo" 
-                className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 relative z-10"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute -bottom-2 right-4 w-1 h-3 bg-blue-500 rounded-full animate-bounce"></div>
             </div>
           </Link>
 

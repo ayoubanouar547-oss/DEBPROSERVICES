@@ -24,12 +24,36 @@ export function buildLongClusterText(serviceName: string, cityName: string): str
     for (let i = 0; i < 6; i++) {
         textBlocks.push(`<h3 class="text-3xl font-bold mb-4 mt-8">Expertise en ${serviceName} à ${cityName}</h3>`);
         let blockContent = "";
-        paragraphsTemplates.forEach((p) => {
+        paragraphsTemplates.forEach((p, idx) => {
             const personalized = p
                 .replace(/urgences/g, `urgences en ${serviceName}`)
                 .replace(/diagnostic/g, `diagnostic de ${serviceName}`)
                 .replace(/locaux/g, `locaux situés à ${cityName}`);
             blockContent += `<p class="mb-4 text-white">${personalized} En agissant sur le secteur de ${cityName}, nous nous assurons que notre intervention en ${serviceName} soit la plus rapide possible pour préserver vos infrastructures.</p>`;
+            
+            // Inject images every few paragraphs
+            if (idx === 1) {
+              blockContent += `
+                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-8 h-64 relative">
+                    <img 
+                        src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecb?q=80&w=800&auto=format&fit=crop" 
+                        alt="Expertise ${serviceName}" 
+                        class="w-full h-full object-cover" 
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                </div>`;
+            }
+            if (idx === 3) {
+              blockContent += `
+                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-8 h-64 relative">
+                    <img 
+                        src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=800&auto=format&fit=crop" 
+                        alt="Intervention ${serviceName}" 
+                        class="w-full h-full object-cover" 
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                </div>`;
+            }
         });
         textBlocks.push(blockContent);
     }

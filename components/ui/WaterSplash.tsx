@@ -7,13 +7,13 @@ export function WaterSplash() {
   const [particles, setParticles] = useState<{ id: number; x: number; y: number; size: number; delay: number; duration: number }[]>([]);
 
   useEffect(() => {
-    const newParticles = Array.from({ length: 12 }).map((_, i) => ({
+    const newParticles = Array.from({ length: 24 }).map((_, i) => ({
       id: i,
-      x: Math.random() * 40 - 20, // Variation horizontale
-      y: -Math.random() * 60 - 40, // Variation verticale (vers le haut)
-      size: Math.random() * 6 + 4,
+      x: Math.random() * 200 - 100, // Variation horizontale plus large
+      y: Math.random() * 200 + 50, // Variation verticale (tombe vers le bas)
+      size: Math.random() * 8 + 4,
       delay: Math.random() * 2,
-      duration: Math.random() * 1.5 + 1
+      duration: Math.random() * 2 + 1.5
     }));
     setParticles(newParticles);
   }, []);
@@ -23,12 +23,12 @@ export function WaterSplash() {
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          initial={{ opacity: 0, x: 0, y: 0, scale: 0 }}
+          initial={{ opacity: 0, x: 0, y: -20, scale: 0 }}
           animate={{
-            opacity: [0, 0.8, 0],
-            x: p.x * 3,
-            y: p.y * 2,
-            scale: [0, 1, 0.5],
+            opacity: [0, 1, 0.7, 0],
+            x: [0, p.x * 0.5, p.x],
+            y: [-20, -50, p.y],
+            scale: [0, 1.2, 1, 0.8],
           }}
           transition={{
             duration: p.duration,
@@ -36,10 +36,10 @@ export function WaterSplash() {
             delay: p.delay,
             ease: "easeOut"
           }}
-          className="absolute left-1/2 bottom-0 w-2 h-2"
+          className="absolute left-1/2 top-4 w-2 h-2"
         >
           <div 
-            className="rounded-full bg-blue-400 blur-[1px]"
+            className="rounded-full bg-blue-400/60 blur-[1px] border border-white/20 shadow-[0_0_10px_rgba(96,165,250,0.5)]"
             style={{ width: p.size, height: p.size }}
           />
         </motion.div>
@@ -48,14 +48,15 @@ export function WaterSplash() {
       {/* Jet principal continu simulé */}
       <motion.div
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
+          scaleY: [1, 1.5, 1],
+          opacity: [0.4, 0.7, 0.4],
+          y: [0, 5, 0]
         }}
         transition={{
-          duration: 0.5,
+          duration: 0.8,
           repeat: Infinity,
         }}
-        className="absolute left-1/2 bottom-0 -translate-x-1/2 w-4 h-8 bg-gradient-to-t from-blue-500/40 to-transparent blur-md rounded-t-full"
+        className="absolute left-1/2 top-4 -translate-x-1/2 w-6 h-12 bg-gradient-to-b from-blue-500/50 to-transparent blur-md rounded-b-full origin-top"
       />
     </div>
   );

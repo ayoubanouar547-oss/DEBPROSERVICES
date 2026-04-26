@@ -1,5 +1,6 @@
 import { ShieldCheck, History, Award } from 'lucide-react';
 import { WhyUs } from '@/components/sections/WhyUs';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'À Propos de Nous | DEB PRO SERVICES',
@@ -31,7 +32,13 @@ export default function AboutPage() {
           </div>
           <div className="relative">
             <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative border border-white/10">
-              <img src="https://picsum.photos/seed/aboutdebpro/800/600" alt="Notre équipe en intervention" className="w-full h-full object-cover" />
+              <Image 
+                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=800&auto=format&fit=crop" 
+                fill
+                alt="Notre équipe en intervention" 
+                className="object-cover" 
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white/10 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-white/10 flex items-center gap-4">
               <div className="bg-blue-500/20 text-blue-400 border border-blue-500/30 p-3 rounded-xl"><ShieldCheck className="w-8 h-8" /></div>

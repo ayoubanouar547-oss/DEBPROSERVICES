@@ -113,7 +113,13 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
              
              <div className="relative hidden lg:block">
                 <div className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
-                  <img src={`https://picsum.photos/seed/${cityInfo.slug}${serviceInfo.slug}/800/600`} alt={`${serviceInfo.title} à ${cityInfo.name}`} className="w-full h-full object-cover" />
+                  <Image 
+                    src={serviceInfo.imageUrl} 
+                    fill
+                    alt={`${serviceInfo.title} à ${cityInfo.name}`} 
+                    className="object-cover" 
+                    referrerPolicy="no-referrer"
+                  />
                   <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex items-center justify-between">
                     <div>
                       <div className="text-white font-bold text-lg">Éligible Intervention Rapide</div>
@@ -143,7 +149,7 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
               </div>
 
               <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                 <Image src={`https://picsum.photos/seed/${cityInfo.slug}${serviceInfo.slug}/1200/600`} width={1200} height={600} alt={`Service ${serviceInfo.title} à ${cityInfo.name}`} className="w-full h-full object-cover" />
+                 <Image src={serviceInfo.imageUrl} width={1200} height={600} alt={`Service ${serviceInfo.title} à ${cityInfo.name}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </div>
 
               <div>
@@ -152,10 +158,12 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                   {serviceInfo.subServices.map(sub => (
                     <Link key={sub.slug} href={`/zones-de-services/${serviceInfo.slug}/${sub.slug}/${cityInfo.slug}`} className="group bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 transition overflow-hidden flex flex-col">
                       <div className="relative h-40 w-full overflow-hidden flex-shrink-0 z-10">
-                        <img 
-                          src={`https://picsum.photos/seed/${sub.slug}/600/400`} 
+                        <Image 
+                          src={serviceInfo.imageUrl} 
+                          fill
                           alt={`Intervention ${sub.title} ${cityInfo.name}`} 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                          referrerPolicy="no-referrer"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                       </div>
@@ -185,7 +193,7 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                 <h2 className="text-5xl font-black text-white mb-10 border-t border-white/10 pt-10">Expertise Approfondie pour {cityInfo.name}</h2>
                 <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.slice(0, 3).join('') }} />
                 <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-12">
-                   <Image src={`https://picsum.photos/seed/${cityInfo.name}expert/1200/600`} width={1200} height={600} alt={`Expertise ${serviceInfo.title} ${cityInfo.name}`} className="w-full h-full object-cover" />
+                   <Image src={serviceInfo.imageUrl} width={1200} height={600} alt={`Expertise ${serviceInfo.title} ${cityInfo.name}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.slice(3).join('') }} />
               </div>
@@ -210,7 +218,7 @@ export default async function ZoneServiceCityPage({ params }: { params: Promise<
                 </div>
 
                 <div className="relative h-48 rounded-2xl overflow-hidden border border-white/10 shadow-lg flex items-center justify-center bg-slate-800">
-                   <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/map/400/300')] opacity-50 mix-blend-luminosity bg-cover bg-center"></div>
+                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=400&auto=format&fit=crop')] opacity-50 mix-blend-luminosity bg-cover bg-center"></div>
                    <div className="relative z-10 flex flex-col items-center">
                      <MapPin className="text-red-500 w-12 h-12 drop-shadow-lg" />
                      <div className="mt-2 font-bold text-white bg-dark/80 px-4 py-1 rounded-full backdrop-blur-md">Zone : {cityInfo.name}</div>

@@ -116,27 +116,29 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
           <div className="grid lg:grid-cols-12 gap-16">
             
             <div className="lg:col-span-8 space-y-10">
-              <h2 className="text-3xl font-black text-white">L'Expertise {subServiceInfo.title} à votre portée</h2>
+              <h2 className="text-5xl font-black text-white leading-tight uppercase tracking-tight">L'Expertise {subServiceInfo.title} à votre portée</h2>
               
-              <div className="prose prose-lg prose-invert text-slate-300">
+              <div className="prose prose-xl prose-invert text-white">
                 <p dangerouslySetInnerHTML={{ __html: paragraphs[0] }} />
                 
                 {/* Image 1 */}
-                <div className="my-10 relative h-80 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                   <img src={`https://picsum.photos/seed/${subServiceInfo.slug}1/800/400`} alt={`${subServiceInfo.title} intervention`} className="w-full h-full object-cover" />
+                <div className="my-10 relative h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                   <img src={serviceInfo.imageUrl} alt={`${subServiceInfo.title} intervention`} className="w-full h-full object-cover" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
                 </div>
 
                 <p dangerouslySetInnerHTML={{ __html: paragraphs[1] }} />
                 
-                <h3 className="text-2xl font-bold text-white mt-8 mb-4">Pourquoi une intervention rapide est cruciale ?</h3>
+                <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">Pourquoi une intervention rapide est cruciale ?</h3>
                 <p dangerouslySetInnerHTML={{ __html: paragraphs[2] }} />
 
                 {/* Image 2 */}
-                <div className="my-10 relative h-80 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                   <img src={`https://picsum.photos/seed/${subServiceInfo.slug}2/800/400`} alt={`Technicien pour ${subServiceInfo.title}`} className="w-full h-full object-cover" />
+                <div className="my-10 relative h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                   <img src={serviceInfo.imageUrl} alt={`Technicien pour ${subServiceInfo.title}`} className="w-full h-full object-cover" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mt-8 mb-4">Notre zone d'action rapide</h3>
+                <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">Notre zone d'action rapide</h3>
                 <p dangerouslySetInnerHTML={{ __html: paragraphs[3] }} />
                 
                 {/* Massive Content */}
