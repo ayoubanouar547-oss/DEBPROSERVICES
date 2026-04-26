@@ -76,11 +76,11 @@ export default async function ZoneSubServiceCityPage({ params }: { params: Promi
              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-sm font-bold border border-white/20 mb-6 uppercase tracking-widest text-blue-300">
                 <MapPin className="w-4 h-4" /> {cityInfo.name}
              </div>
-             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
+             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-tight mb-6">
                 {subServiceInfo.title} <br/>
                 <span className={serviceInfo.color.text}>{cityInfo.name}</span>
              </h1>
-             <p className="text-xl text-slate-300 mb-8 max-w-3xl leading-relaxed">
+             <p className="text-2xl text-white mb-10 max-w-3xl leading-relaxed">
                {subServiceInfo.desc} Intervention express 24h/24 et 7j/7 à <strong>{cityInfo.name}</strong> par nos techniciens agréés localement.
              </p>
              <div className="flex flex-wrap gap-4">
@@ -107,15 +107,16 @@ export default async function ZoneSubServiceCityPage({ params }: { params: Promi
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-16">
             
-            <div className="lg:col-span-8 space-y-12">
+            <div className="lg:col-span-8 space-y-16">
               <div>
-                <h2 className="text-3xl font-black mb-6">Pourquoi nous choisir pour votre {subServiceInfo.title.toLowerCase()} à {cityInfo.name} ?</h2>
-                <div className="prose prose-lg prose-invert text-slate-300">
+                <h2 className="text-5xl font-black mb-10 text-white">Pourquoi nous choisir pour votre {subServiceInfo.title.toLowerCase()} à {cityInfo.name} ?</h2>
+                <div className="prose prose-xl prose-invert text-white">
                   <p dangerouslySetInnerHTML={{ __html: localText }} />
-                  <p>
-                    Que vous soyez un particulier ou un professionnel à {cityInfo.name}, nous comprenons l'importance d'une intervention rapide et de qualité. C'est pourquoi nous garantissons un passage dans l'heure pour les urgences absolues.
-                  </p>
                 </div>
+              </div>
+
+              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                 <Image src={serviceInfo.imageUrl} width={1200} height={600} alt="Service detail" referrerPolicy="no-referrer" />
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
@@ -131,9 +132,13 @@ export default async function ZoneSubServiceCityPage({ params }: { params: Promi
                  </div>
               </div>
 
-              <div className="mt-16 prose prose-lg prose-invert text-slate-400">
-                <h3 className="text-2xl font-black text-white mb-8 border-t border-white/10 pt-8">Plus d'informations sur {subServiceInfo.title} à {cityInfo.name}</h3>
-                <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.join('') }} />
+              <div className="mt-16 prose prose-xl prose-invert text-white">
+                <h3 className="text-4xl font-black text-white mb-10 border-t border-white/10 pt-10">Plus d'informations sur {subServiceInfo.title} à {cityInfo.name}</h3>
+                <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.slice(0, 2).join('') }} />
+                <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-8">
+                   <Image src={serviceInfo.imageUrl} width={1200} height={600} alt="Service detail" referrerPolicy="no-referrer" />
+                </div>
+                <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.slice(2, 4).join('') }} />
               </div>
             </div>
 

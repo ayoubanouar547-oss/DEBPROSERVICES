@@ -65,6 +65,7 @@ export function Navbar() {
                 className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
+              <div className="absolute -bottom-2 right-4 w-1 h-3 bg-blue-500 rounded-full animate-bounce"></div>
             </div>
           </Link>
 

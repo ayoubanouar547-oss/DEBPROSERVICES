@@ -22,15 +22,14 @@ export function buildLongClusterText(serviceName: string, cityName: string): str
     // Multiply the templates to create a massive wall of structured text.
     // For 5000 words, we need about 40x thick paragraphs, ~125 words each.
     for (let i = 0; i < 6; i++) {
-        textBlocks.push(`<h3>L'importance de l'expertise en ${serviceName} à ${cityName} - Chapitre ${i+1}</h3>`);
+        textBlocks.push(`<h3 class="text-3xl font-bold mb-4 mt-8">Expertise en ${serviceName} à ${cityName}</h3>`);
         let blockContent = "";
-        paragraphsTemplates.forEach((p, idx) => {
-            // Replace generic words with specific city and service
+        paragraphsTemplates.forEach((p) => {
             const personalized = p
                 .replace(/urgences/g, `urgences en ${serviceName}`)
                 .replace(/diagnostic/g, `diagnostic de ${serviceName}`)
                 .replace(/locaux/g, `locaux situés à ${cityName}`);
-            blockContent += `<p class="mb-4">${personalized} En agissant sur le secteur de ${cityName}, nous nous assurons que notre intervention en ${serviceName} soit la plus rapide possible pour préserver vos infrastructures.</p>`;
+            blockContent += `<p class="mb-4 text-white">${personalized} En agissant sur le secteur de ${cityName}, nous nous assurons que notre intervention en ${serviceName} soit la plus rapide possible pour préserver vos infrastructures.</p>`;
         });
         textBlocks.push(blockContent);
     }
