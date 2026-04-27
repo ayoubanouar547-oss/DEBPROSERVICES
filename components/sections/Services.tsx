@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { services } from '@/lib/data/services';
 import { motion } from 'motion/react';
+import Image from 'next/image';
 
 export function Services() {
   return (
@@ -32,10 +33,12 @@ export function Services() {
                 
                 {/* Card Image */}
                 <div className="relative h-56 w-full overflow-hidden flex-shrink-0 z-10">
-                  <img 
+                  <Image 
                     src={service.imageUrl || `https://picsum.photos/seed/${service.slug}/600/400`} 
-                    alt={`Service de ${service.title}`} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    alt={`Expertise en ${service.title} par les techniciens de DEB PRO SERVICES`} 
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
                   

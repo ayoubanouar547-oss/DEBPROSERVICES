@@ -60,6 +60,18 @@ const nextConfig: NextConfig = {
         hostname: 'debouchageexpress24hh.odoo.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

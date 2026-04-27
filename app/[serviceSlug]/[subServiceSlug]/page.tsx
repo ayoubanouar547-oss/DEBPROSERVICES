@@ -6,6 +6,7 @@ import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
 import { belgianCities } from '@/lib/data/cities';
+import Image from 'next/image';
 
 export function generateStaticParams() {
   const params: { serviceSlug: string, subServiceSlug: string }[] = [];
@@ -123,7 +124,13 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
                 
                 {/* Image 1 */}
                 <div className="my-10 relative h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                   <img src={serviceInfo.imageUrl} alt={`${subServiceInfo.title} intervention`} className="w-full h-full object-cover" />
+                   <Image 
+                     src={serviceInfo.imageUrl} 
+                     alt={`Intervention professionnelle de ${subServiceInfo.title} par notre équipe`} 
+                     fill
+                     className="object-cover" 
+                     referrerPolicy="no-referrer"
+                   />
                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
                 </div>
 
@@ -134,7 +141,13 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
 
                 {/* Image 2 */}
                 <div className="my-10 relative h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                   <img src={serviceInfo.imageUrl} alt={`Technicien pour ${subServiceInfo.title}`} className="w-full h-full object-cover" />
+                   <Image 
+                     src={serviceInfo.imageUrl} 
+                     alt={`Technicien expert pour le service de ${subServiceInfo.title} en Belgique`} 
+                     fill
+                     className="object-cover" 
+                     referrerPolicy="no-referrer"
+                   />
                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
                 </div>
 

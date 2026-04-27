@@ -5,6 +5,7 @@ import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
 import { belgianCities } from '@/lib/data/cities';
+import Image from 'next/image';
 
 export function generateStaticParams() {
   return services.map((service) => ({
@@ -139,7 +140,13 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                   Dans le domaine de la <strong>{serviceInfo.title.toLowerCase()}</strong>, l'improvisation n'a pas sa place. Un système mal entretenu ou rafistolé peut entraîner des dysfonctionnements, voire des dégâts importants dans votre habitation ou vos locaux commerciaux. En faisant appel à notre équipe, vous optez pour la sérénité.
                 </p>
                 <div className="rounded-3xl overflow-hidden shadow-2xl my-8 relative h-64 border border-white/10">
-                  <img src={serviceInfo.imageUrl} alt="Service detail" className="w-full h-full object-cover" />
+                  <Image 
+                    src={serviceInfo.imageUrl} 
+                    alt={`Détail technique de notre service de ${serviceInfo.title}`} 
+                    fill
+                    className="object-cover" 
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
                 <p>
                   Nous prenons en charge toutes les étapes : du diagnostic précis à la résolution de la panne. Nous disposons des certifications nécessaires pour intervenir en toute sécurité.
@@ -165,7 +172,13 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
             
             <div className="relative">
               <div className="rounded-[3rem] overflow-hidden shadow-2xl relative h-full min-h-[700px] border border-white/10">
-                 <img src={serviceInfo.imageUrl} alt={`${serviceInfo.title} service illustration`} className="absolute inset-0 w-full h-full object-cover" />
+                 <Image 
+                   src={serviceInfo.imageUrl} 
+                   alt={`Illustration professionnelle du service ${serviceInfo.title}`} 
+                   fill
+                   className="absolute inset-0 object-cover" 
+                   referrerPolicy="no-referrer"
+                 />
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent flex items-end p-10">
                    <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-10 rounded-3xl w-full translate-y-2 group">
                      <h4 className="text-white font-black text-3xl mb-4 group-hover:text-blue-400 transition-colors uppercase tracking-tight">Une urgence ?</h4>

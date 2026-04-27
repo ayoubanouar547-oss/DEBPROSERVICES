@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Star, ChevronLeft, ChevronRight, Quote, Medal } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -193,8 +194,14 @@ export function Testimonials() {
                         </p>
                         
                         <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
-                          <div className={`w-12 h-12 rounded-full overflow-hidden border-2 ${theme.border} shadow-lg shrink-0`}>
-                            <img src={review.image} alt={review.name} className="w-full h-full object-cover" />
+                          <div className={`w-12 h-12 rounded-full overflow-hidden border-2 ${theme.border} shadow-lg shrink-0 relative`}>
+                            <Image 
+                              src={review.image} 
+                              alt={`Photo de profil de ${review.name}`} 
+                              fill
+                              className="object-cover" 
+                              referrerPolicy="no-referrer"
+                            />
                           </div>
                           <div className="min-w-0">
                             <h4 className="font-bold text-white text-base truncate">{review.name}</h4>
