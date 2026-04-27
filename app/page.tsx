@@ -1,3 +1,5 @@
+import { promises as fs } from 'fs';
+import path from 'path';
 import { Hero } from '@/components/sections/Hero';
 import dynamic from 'next/dynamic';
 
@@ -9,7 +11,24 @@ const FAQ = dynamic(() => import('@/components/sections/FAQ').then((mod) => mod.
 const ContactForm = dynamic(() => import('@/components/sections/ContactForm').then((mod) => mod.ContactForm), { ssr: true });
 const SEOContent = dynamic(() => import('@/components/sections/SEOContent').then((mod) => mod.SEOContent), { ssr: true });
 
-export default function Home() {
+async function getPersistedContent() {
+  try {
+    const filePath = path.join(process.cwd(), 'data', 'content.json');
+    const fileData = await fs.readFile(filePath, 'utf8');
+    const content = JSON.parse(fileData);
+    return content.homepage;
+  } catch (e) {
+    return null;
+  }
+}
+
+export default async function Home() {
+  const persistedContent = await getPersistedContent();
+
+  if (persistedContent) {
+    return <div dangerouslySetInnerHTML={{ __html: persistedContent.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gm, "") }} />;
+  }
+
   return (
     <>
       {/* Schema.org JSON-LD for LocalBusiness & Organization */}

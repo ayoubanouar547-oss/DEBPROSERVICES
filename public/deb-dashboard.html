@@ -1127,10 +1127,14 @@
                     `;
 
                     // Load persisted content if exists
-                    const persisted = localStorage.getItem('deb_page_content_' + iframe.src);
-                    if (persisted) {
-                        iDoc.body.innerHTML = persisted;
-                    }
+                    fetch(window.location.origin + '/api/page-content')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.homepage) {
+                            iDoc.documentElement.innerHTML = data.homepage;
+                        }
+                    })
+                    .catch(e => console.error('Failed to load content', e));
 
                     // Setup elements
                     const editableSelectors = 'h1, h2, h3, h4, p, a, button, span, img, li, strong, b, em, i';
