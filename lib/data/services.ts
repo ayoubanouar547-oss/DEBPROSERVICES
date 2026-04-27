@@ -6,7 +6,7 @@ export const services = [
     slug: 'renovation-maison',
     title: 'Rénovation',
     icon: Home,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/4067-97aaef8e/b27b7798-0f5b-4edc-9b34-9fa57677918a%20%282%29.webp?access_token=c5efd963-a29d-4838-a806-419532d33cd8',
+    imageUrl: '/regenerated_image_1777316391207.png',
     description: 'DEB PRO SERVICES réalise tous vos projets de rénovation de maison et appartement en Belgique. De la rénovation complète à la modernisation de votre salle de bain avec douche italienne, nos techniciens agréés vous garantissent un travail soigné, durable et au meilleur prix.',
     features: ['Rénovation complète', 'Douche italienne sur mesure', 'Aménagement intérieur', 'Devis gratuit'],
     subServices: [
@@ -30,7 +30,7 @@ export const services = [
     slug: 'plomberie',
     title: 'Plomberie',
     icon: Wrench,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/2996-c2e8d8f8/image.png?height=256',
+    imageUrl: '/regenerated_image_1777316390260.png',
     description: 'Vous faites face à une canalisation bouchée, une fuite d\'eau ou un problème de plomberie urgent ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers certifiés disposent des équipements les plus modernes pour réparer vos fuites et résoudre tout problème de plomberie, quelle que soit la complexité.',
     features: ['Recherche et réparation de fuites', 'Remplacement de robinetterie', 'Installation sanitaire', 'Dépannage chauffe-eau'],
     subServices: [
@@ -51,7 +51,7 @@ export const services = [
     slug: 'debouchage-canalisation',
     title: 'Débouchage',
     icon: Droplets,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3597-b28a5533/image.png?height=400',
+    imageUrl: '/regenerated_image_1777316393659.png',
     description: 'Vous faites face à une canalisation bouchée ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers disposent des équipements les plus modernes pour déboucher vos canalisations.',
     features: ['Débouchage haute pression', 'Inspection par caméra', 'Évacuation des mauvaises odeurs', 'Entretien préventif'],
     subServices: [
@@ -94,7 +94,7 @@ export const services = [
     slug: 'gaz',
     title: 'Gaz',
     icon: Flame,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3546-e65b22f3/image.png?height=256',
+    imageUrl: '/regenerated_image_1777316388823.png',
     description: 'Vous suspectez une fuite de gaz ou avez besoin d\'une installation gaz conforme aux normes belges ? Nos techniciens certifiés CERGA interviennent rapidement pour assurer votre sécurité.',
     features: ['Détection fuite de gaz', 'Mise en conformité', 'Raccordement appareils', 'Attestation de sécurité'],
     subServices: [
@@ -115,7 +115,7 @@ export const services = [
     slug: 'gaz-naturel-comprime',
     title: 'Gaz Naturel Comprimé (GNC)',
     icon: Flame, // Using Flame as a suitable icon for natural gas
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3587-e67ece73/image.png?height=256',
+    imageUrl: '/regenerated_image_1777316389611.png',
     description: 'Services spécialisés pour les installations au Gaz Naturel Comprimé (GNC). Nos experts agréés assurent l\'installation, l\'entretien et la mise aux normes de vos systèmes GNC en toute sécurité.',
     features: ['Installation système GNC', 'Maintenance préventive', 'Contrôle d\'étanchéité', 'Certification conformité'],
     subServices: [
@@ -136,7 +136,7 @@ export const services = [
     slug: 'electricite',
     title: 'Électricité',
     icon: Zap,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3450-3b9aca0e/image.png?height=256',
+    imageUrl: '/regenerated_image_1777316385571.png',
     description: 'Panne électrique, tableau défectueux, installation non conforme ? Nos électriciens agréés AREI interviennent pour tous vos travaux électriques en Belgique. Dépannage d\'urgence 24h/24.',
     features: ['Recherche de panne', 'Mise en conformité CEBI', 'Remplacement tableau', 'Éclairage et prises'],
     subServices: [
@@ -157,7 +157,7 @@ export const services = [
     slug: 'climatisation',
     title: 'Climatisation',
     icon: Wind,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3565-380b591a/image.png?height=800',
+    imageUrl: '/regenerated_image_1777316386639.png',
     description: 'Installation, entretien et dépannage de tous systèmes de climatisation en Belgique. Nos techniciens certifiés F-Gas interviennent pour les particuliers et professionnels.',
     features: ['Installation split', 'Entretien annuel', 'Recharge gaz', 'Réparation compresseur'],
     subServices: [
@@ -178,7 +178,7 @@ export const services = [
     slug: 'vidange-fosse-septique',
     title: 'Vidange Fosse',
     icon: Truck,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3489-b95e956d/image.png?height=800',
+    imageUrl: '/regenerated_image_1777316387949.png',
     description: 'Vidange, entretien et installation de fosses septiques en Belgique. Intervention rapide avec camion hydrocureur. Conforme aux normes.',
     features: ['Vidange urgente', 'Nettoyage bac à graisse', 'Débouchage égouts', 'Traitement des déchets'],
     subServices: [
