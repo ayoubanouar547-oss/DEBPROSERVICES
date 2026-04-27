@@ -106,13 +106,7 @@ export function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl"
-          >
+          <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-3">
                {isReturningUser && <Medal className={`w-5 h-5 ${theme.textHighlight}`} />}
                <h2 className={`${theme.textHighlight} font-bold tracking-widest uppercase text-sm transition-colors duration-500`}>{theme.badge}</h2>
@@ -123,12 +117,8 @@ export function Testimonials() {
             <p className="text-white opacity-90 text-lg transition-colors duration-500 font-medium">
               {theme.subtitle}
             </p>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+          </div>
+          <div 
             className={`backdrop-blur-xl px-6 py-4 rounded-xl border ${theme.border} flex items-center gap-4 bg-slate-950/80 shadow-2xl transition-all duration-500 glass-card`}
           >
             <div className="flex items-center gap-3">
@@ -150,7 +140,7 @@ export function Testimonials() {
               <div className="text-xs font-black text-white opacity-60 uppercase tracking-widest leading-none mb-1">Avis Clients</div>
               <div className="text-sm font-black text-white uppercase tracking-tight">{isReturningUser ? 'Membres VIP' : 'Vérifiés Google'}</div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Le Carousel Impressionnant (Multiple reviews on desktop) */}
@@ -175,10 +165,8 @@ export function Testimonials() {
                     return (
                       <motion.div 
                         key={`${currentIndex}-${idx}`}
-                        initial={{ opacity: 0, scale: 0.9, x: 20 }}
                         animate={{ opacity: 1, scale: 1, x: 0 }}
                         exit={{ opacity: 0, scale: 0.9, x: -20 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 30, delay: idx * 0.1 }}
                         className={`${isVisibleMobile ? 'flex' : 'hidden md:flex'} ${!isVisibleTablet && 'md:hidden lg:flex'} flex-col ${theme.bgConfig} backdrop-blur-3xl p-8 rounded-[2rem] border border-white/10 ${theme.glow} relative transition-all duration-500 hover:border-white/20 glass-card`}
                       >
                         <Quote className={`absolute top-6 right-8 w-12 h-12 opacity-[0.05] ${theme.textHighlight}`} />

@@ -1,14 +1,37 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { MapPin, ChevronRight, Search, X, Globe } from 'lucide-react';
+import { MapPin, ChevronRight, Search, X, Globe, Menu } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { belgianCities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 
 export default function ZonesDeServicesClient() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeService, setActiveService] = useState<string | null>(services[0]?.slug || null);
+
+  useEffect(() => {
+    if (searchTerm) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveService(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '-20% 0px -60% 0px' }
+    );
+
+    services.forEach((service) => {
+      const element = document.getElementById(service.slug);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [searchTerm]);
 
   const sortedProvinces = useMemo(() => {
     return Array.from(new Set(belgianCities.map(c => c.province))).sort();
@@ -102,8 +125,60 @@ export default function ZonesDeServicesClient() {
           
           <AnimatePresence mode="wait">
             {!searchTerm ? (
-              <div className="space-y-32">
-                {services.map(service => (
+              <div className="flex flex-col xl:flex-row gap-16">
+                {/* Fixed Mobile Navigation */}
+                <nav className="xl:hidden sticky top-[80px] z-30 bg-slate-900/95 backdrop-blur-xl border-b border-white/10 -mx-4 sm:-mx-6 px-4 py-4 mb-8 overflow-x-auto no-scrollbar flex items-center gap-3">
+                  {services.map(service => (
+                    <button 
+                      key={`mob-nav-${service.slug}`}
+                      onClick={() => document.getElementById(service.slug)?.scrollIntoView({ behavior: 'smooth' })}
+                      className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
+                        activeService === service.slug 
+                        ? `${service.color.border} ${service.color.bg} ${service.color.text} shadow-lg shadow-blue-500/10` 
+                        : 'border-white/5 text-slate-500 bg-white/5'
+                      }`}
+                    >
+                      <service.icon className="w-3.5 h-3.5" />
+                      {service.title}
+                    </button>
+                  ))}
+                </nav>
+
+                {/* Sticky Navigation (Desktop Sidebar) */}
+                <aside className="hidden xl:block w-72 shrink-0">
+                  <div className="sticky top-32 space-y-3">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[2rem] mb-6">
+                      <div className="flex items-center gap-3 text-blue-400 mb-4">
+                        <Menu className="w-5 h-5" />
+                        <span className="text-xs font-black uppercase tracking-[0.2em]">Navigation</span>
+                      </div>
+                      <h3 className="text-white font-bold text-lg leading-tight">Nos métiers par zones</h3>
+                    </div>
+
+                    {services.map(service => (
+                      <button 
+                        key={`nav-${service.slug}`}
+                        onClick={() => document.getElementById(service.slug)?.scrollIntoView({ behavior: 'smooth' })}
+                        className={`w-full flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 group ${
+                          activeService === service.slug 
+                          ? `${service.color.border} ${service.color.bg} ${service.color.text} shadow-xl shadow-blue-500/10 translate-x-2` 
+                          : 'border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/5'
+                        }`}
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className={`p-2 rounded-xl transition-colors ${activeService === service.slug ? 'bg-white/10' : 'bg-slate-800'}`}>
+                            <service.icon className="w-5 h-5" />
+                          </div>
+                          <span className="font-bold text-sm tracking-tight">{service.title}</span>
+                        </div>
+                        <ChevronRight className={`w-4 h-4 transition-transform ${activeService === service.slug ? 'translate-x-1 opacity-100' : 'opacity-0'}`} />
+                      </button>
+                    ))}
+                  </div>
+                </aside>
+
+                <div className="flex-1 space-y-40">
+                  {services.map(service => (
                   <div key={service.slug} className="scroll-mt-32" id={service.slug}>
                     {/* Service Header */}
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b border-white/10">
@@ -178,6 +253,7 @@ export default function ZonesDeServicesClient() {
                     </div>
                   </div>
                 ))}
+                </div>
               </div>
             ) : (
               <motion.div

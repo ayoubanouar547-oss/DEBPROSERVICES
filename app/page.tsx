@@ -1,13 +1,11 @@
 import { Hero } from '@/components/sections/Hero';
 import { Services } from '@/components/sections/Services';
 import { WhyUs } from '@/components/sections/WhyUs';
-import dynamic from 'next/dynamic';
-
-const ServiceZones = dynamic(() => import('@/components/sections/ServiceZones').then((mod) => mod.ServiceZones), { ssr: true });
-const Testimonials = dynamic(() => import('@/components/sections/Testimonials').then((mod) => mod.Testimonials), { ssr: true });
-const FAQ = dynamic(() => import('@/components/sections/FAQ').then((mod) => mod.FAQ), { ssr: true });
-const ContactForm = dynamic(() => import('@/components/sections/ContactForm').then((mod) => mod.ContactForm), { ssr: true });
-const SEOContent = dynamic(() => import('@/components/sections/SEOContent').then((mod) => mod.SEOContent), { ssr: true });
+import { ServiceZones } from '@/components/sections/ServiceZones';
+import { Testimonials } from '@/components/sections/Testimonials';
+import { FAQ } from '@/components/sections/FAQ';
+import { ContactForm } from '@/components/sections/ContactForm';
+import { SEOContent } from '@/components/sections/SEOContent';
 
 export default function Home() {
   return (

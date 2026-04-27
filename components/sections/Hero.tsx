@@ -164,17 +164,17 @@ export function Hero() {
         </div>
 
         <div className="mt-16 flex flex-wrap gap-10">
-          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center">
+          <div className="flex flex-col justify-center">
             <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">5000+</div>
             <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">Clients Satisfaits</div>
           </div>
           <div className="hidden sm:block w-px h-12 bg-white/10 self-center"></div>
-          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center" style={{ animationDelay: '100ms' }}>
+          <div className="flex flex-col justify-center">
             <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">15 Ans</div>
             <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">D'Expérience</div>
           </div>
           <div className="hidden sm:block w-px h-12 bg-white/10 self-center"></div>
-          <div className="animate-in fade-in slide-in-from-bottom flex flex-col justify-center" style={{ animationDelay: '200ms' }}>
+          <div className="flex flex-col justify-center">
             <div className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 flex items-center gap-3">
               4.9/5
               <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
