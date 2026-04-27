@@ -1346,7 +1346,7 @@
                 const html = cleanDoc.documentElement.outerHTML;
                 
                 // Persist to API
-                fetch('/api/page-content', {
+                fetch(window.location.origin + '/api/page-content', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: 'homepage', value: html })
