@@ -54,6 +54,12 @@ const nextConfig: NextConfig = {
         hostname: 'www.debouchageexpress24-24h.be', // logo hostname
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'debouchageexpress24hh.odoo.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
