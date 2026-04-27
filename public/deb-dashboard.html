@@ -1126,6 +1126,12 @@
                         }
                     `;
 
+                    // Load persisted content if exists
+                    const persisted = localStorage.getItem('deb_page_content_' + iframe.src);
+                    if (persisted) {
+                        iDoc.body.innerHTML = persisted;
+                    }
+
                     // Setup elements
                     const editableSelectors = 'h1, h2, h3, h4, p, a, button, span, img, li, strong, b, em, i';
                     const elements = iDoc.querySelectorAll(editableSelectors);
@@ -1342,14 +1348,21 @@
                 // Persist to localStorage
                 localStorage.setItem('deb_page_content_' + iframe.src, html);
                 
-                const blob = new Blob([html], {type: 'text/html'});
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'page-modifiee.html';
-                a.click();
+                // Show modal to copy code
+                const area = document.createElement('textarea');
+                area.value = html;
+                area.style.position = 'fixed';
+                area.style.top = '0';
+                area.style.left = '0';
+                area.style.width = '100vw';
+                area.style.height = '100vh';
+                area.style.zIndex = '99999';
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand('copy');
+                document.body.removeChild(area);
                 
-                alert("Modifications enregistrées localement ! Pour les appliquer officiellement, veuillez me transmettre le fichier téléchargé ou me demander de mettre à jour le code source.");
+                alert("Modifications enregistrées ! Le code HTML a été copié. Collez-le ici pour que je l'applique.");
             } catch (e) {
                 alert("Impossible d'enregistrer les modifications via l'éditeur en raison de restrictions de sécurité.");
             }
