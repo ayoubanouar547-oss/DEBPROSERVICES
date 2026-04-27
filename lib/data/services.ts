@@ -26,7 +26,7 @@ export const services = [
     slug: 'plomberie',
     title: 'Plomberie',
     icon: Wrench,
-    imageUrl: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/2996-c2e8d8f8/image.png?height=256',
     description: 'Vous faites face à une canalisation bouchée, une fuite d\'eau ou un problème de plomberie urgent ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers certifiés disposent des équipements les plus modernes pour réparer vos fuites et résoudre tout problème de plomberie, quelle que soit la complexité.',
     features: ['Recherche et réparation de fuites', 'Remplacement de robinetterie', 'Installation sanitaire', 'Dépannage chauffe-eau'],
     subServices: [
@@ -61,7 +61,7 @@ export const services = [
     slug: 'chauffage',
     title: 'Chauffage',
     icon: Flame,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3503-fd18b507/image.png?height=256',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3064-18b6714d/image.png?height=256',
     description: 'Votre chaudière tombe en panne en plein hiver ? Vos radiateurs ne chauffent plus ? DEB PRO SERVICES, votre chauffagiste agréé en Belgique, intervient en urgence pour le dépannage, l\'entretien et l\'installation de tous types de chaudières et systèmes de chauffage.',
     features: ['Entretien chaudière', 'Dépannage urgent 24/7', 'Remplacement chaudière', 'Purge des radiateurs'],
     subServices: [
@@ -146,7 +146,7 @@ export const services = [
     slug: 'vidange-fosse-septique',
     title: 'Vidange Fosse',
     icon: Truck,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3064-18b6714d/image.png?height=256',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3503-fd18b507/image.png?height=256',
     description: 'Vidange, entretien et installation de fosses septiques en Belgique. Intervention rapide avec camion hydrocureur. Conforme aux normes.',
     features: ['Vidange urgente', 'Nettoyage bac à graisse', 'Débouchage égouts', 'Traitement des déchets'],
     subServices: [
