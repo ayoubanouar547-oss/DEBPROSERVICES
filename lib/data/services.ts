@@ -6,7 +6,7 @@ export const services = [
     slug: 'renovation-maison',
     title: 'Rénovation',
     icon: Home,
-    imageUrl: 'https://images.unsplash.com/photo-1620626011761-9963d7b59a7a?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://raw.githubusercontent.com/ayoubanouar547-oss/DEBPROSERVICES/refs/heads/main/public/b27b7798-0f5b-4edc-9b34-9fa57677918a%20(2).png',
     description: 'DEB PRO SERVICES réalise tous vos projets de rénovation de maison et appartement en Belgique. De la rénovation complète à la modernisation de votre salle de bain avec douche italienne, nos techniciens agréés vous garantissent un travail soigné, durable et au meilleur prix.',
     features: ['Rénovation complète', 'Douche italienne sur mesure', 'Aménagement intérieur', 'Devis gratuit'],
     subServices: [
