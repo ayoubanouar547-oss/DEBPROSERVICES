@@ -6,7 +6,7 @@ export const services = [
     slug: 'renovation-maison',
     title: 'Rénovation',
     icon: Home,
-    imageUrl: 'https://raw.githubusercontent.com/ayoubanouar547-oss/DEBPROSERVICES/refs/heads/main/public/b27b7798-0f5b-4edc-9b34-9fa57677918a%20(2).png',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/4067-97aaef8e/b27b7798-0f5b-4edc-9b34-9fa57677918a%20%282%29.webp?access_token=c5efd963-a29d-4838-a806-419532d33cd8',
     description: 'DEB PRO SERVICES réalise tous vos projets de rénovation de maison et appartement en Belgique. De la rénovation complète à la modernisation de votre salle de bain avec douche italienne, nos techniciens agréés vous garantissent un travail soigné, durable et au meilleur prix.',
     features: ['Rénovation complète', 'Douche italienne sur mesure', 'Aménagement intérieur', 'Devis gratuit'],
     subServices: [
@@ -43,7 +43,7 @@ export const services = [
     slug: 'debouchage-canalisation',
     title: 'Débouchage',
     icon: Droplets,
-    imageUrl: 'https://images.unsplash.com/photo-1504148455328-c3972fbb7c65?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3597-b28a5533/image.png?height=256',
     description: 'Vous faites face à une canalisation bouchée ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers disposent des équipements les plus modernes pour déboucher vos canalisations.',
     features: ['Débouchage haute pression', 'Inspection par caméra', 'Évacuation des mauvaises odeurs', 'Entretien préventif'],
     subServices: [
@@ -61,7 +61,7 @@ export const services = [
     slug: 'chauffage',
     title: 'Chauffage',
     icon: Flame,
-    imageUrl: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecb?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3503-fd18b507/image.png?height=256',
     description: 'Votre chaudière tombe en panne en plein hiver ? Vos radiateurs ne chauffent plus ? DEB PRO SERVICES, votre chauffagiste agréé en Belgique, intervient en urgence pour le dépannage, l\'entretien et l\'installation de tous types de chaudières et systèmes de chauffage.',
     features: ['Entretien chaudière', 'Dépannage urgent 24/7', 'Remplacement chaudière', 'Purge des radiateurs'],
     subServices: [
@@ -129,7 +129,7 @@ export const services = [
     slug: 'climatisation',
     title: 'Climatisation',
     icon: Wind,
-    imageUrl: 'https://images.unsplash.com/photo-1631544266311-6677464303d8?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3588-3c645e0c/image.png?height=256',
     description: 'Installation, entretien et dépannage de tous systèmes de climatisation en Belgique. Nos techniciens certifiés F-Gas interviennent pour les particuliers et professionnels.',
     features: ['Installation split', 'Entretien annuel', 'Recharge gaz', 'Réparation compresseur'],
     subServices: [
@@ -146,7 +146,7 @@ export const services = [
     slug: 'vidange-fosse-septique',
     title: 'Vidange Fosse',
     icon: Truck,
-    imageUrl: 'https://images.unsplash.com/photo-1581092160562-40aa084788c0?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3064-18b6714d/image.png?height=256',
     description: 'Vidange, entretien et installation de fosses septiques en Belgique. Intervention rapide avec camion hydrocureur. Conforme aux normes.',
     features: ['Vidange urgente', 'Nettoyage bac à graisse', 'Débouchage égouts', 'Traitement des déchets'],
     subServices: [
