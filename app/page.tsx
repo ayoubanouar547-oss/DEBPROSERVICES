@@ -1,8 +1,8 @@
 import { Hero } from '@/components/sections/Hero';
+import { Services } from '@/components/sections/Services';
+import { WhyUs } from '@/components/sections/WhyUs';
 import dynamic from 'next/dynamic';
 
-const Services = dynamic(() => import('@/components/sections/Services').then((mod) => mod.Services), { ssr: true });
-const WhyUs = dynamic(() => import('@/components/sections/WhyUs').then((mod) => mod.WhyUs), { ssr: true });
 const ServiceZones = dynamic(() => import('@/components/sections/ServiceZones').then((mod) => mod.ServiceZones), { ssr: true });
 const Testimonials = dynamic(() => import('@/components/sections/Testimonials').then((mod) => mod.Testimonials), { ssr: true });
 const FAQ = dynamic(() => import('@/components/sections/FAQ').then((mod) => mod.FAQ), { ssr: true });
@@ -20,9 +20,9 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "DEB PRO SERVICES",
-            "image": "https://debproservices.be/logo.png",
-            "@id": "https://debproservices.be",
-            "url": "https://debproservices.be",
+            "image": "https://debservices.canalrose.be/logo.png",
+            "@id": "https://debservices.canalrose.be",
+            "url": "https://debservices.canalrose.be",
             "telephone": "+32470000000",
             "address": {
               "@type": "PostalAddress",

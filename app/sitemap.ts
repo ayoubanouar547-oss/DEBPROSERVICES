@@ -3,7 +3,7 @@ import { belgianCities } from '@/lib/data/cities'
 import { services } from '@/lib/data/services'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.APP_URL || 'https://debproservices.be';
+  const baseUrl = process.env.APP_URL || 'https://debservices.canalrose.be';
 
   const defaultPages = [
     {

@@ -24,13 +24,8 @@ export function Services() {
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <motion.div 
+              <div 
                 key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
                 className="group glass-card rounded-3xl hover:border-white/20 transition-all duration-300 relative overflow-hidden flex flex-col shadow-2xl"
               >
                 <div className={`absolute right-0 top-0 w-32 h-32 rounded-full opacity-10 ${service.color.glow} transition-transform group-hover:scale-[4] blur-3xl z-0 pointer-events-none`}></div>
@@ -75,7 +70,7 @@ export function Services() {
                     </Link>
                   </motion.div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
         <h1 className="font-heading font-black text-4xl mb-8 text-white">Politique de Confidentialité</h1>
         <p className="text-slate-400">Dernière mise à jour : {new Date().toLocaleDateString('fr-FR')}</p>
         
-        <p>Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi belge du 30 juillet 2018, DEB PRO SERVICES s'engage à protéger vos données personnelles. La présente politique de confidentialité vous informe sur la collecte, le traitement et la conservation de vos données dans le cadre de l'utilisation de notre site web debproservices.be.</p>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi belge du 30 juillet 2018, DEB PRO SERVICES s'engage à protéger vos données personnelles. La présente politique de confidentialité vous informe sur la collecte, le traitement et la conservation de vos données dans le cadre de l'utilisation de notre site web debservices.canalrose.be.</p>
 
         <h2 className="text-white">1. Collecte des données personnelles</h2>
         <p>Nous collectons les données suivantes via notre formulaire de contact : nom, adresse email, téléphone, ville et détails de votre demande. Ces informations sont nécessaires pour répondre à vos demandes d'intervention ou de devis.</p>
@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
         <p>Nous prenons les mesures techniques et organisationnelles nécessaires pour protéger vos données contre toute perte ou accès non autorisé.</p>
 
         <h2 className="text-white">4. Vos droits (RGPD)</h2>
-        <p>Conformément au RGPD européen, vous disposez d'un droit d'accès, de rectification, de suppression et de limitation concernant vos données. Pour exercer ce droit, veuillez nous contacter par email : contact@debproservices.be.</p>
+        <p>Conformément au RGPD européen, vous disposez d'un droit d'accès, de rectification, de suppression et de limitation concernant vos données. Pour exercer ce droit, veuillez nous contacter par email : contact@debservices.canalrose.be.</p>
       </div>
     </div>
   );

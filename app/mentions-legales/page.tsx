@@ -16,7 +16,7 @@ export default function MentionsLegalesPage() {
           <strong>Siège social :</strong> Rue de l'Exemple 123, 1000 Bruxelles, Belgique<br/>
           <strong>Numéro d'entreprise (BCE) :</strong> BE 0123.456.789<br/>
           <strong>Téléphone :</strong> 0496 32 57 33<br/>
-          <strong>Email :</strong> contact@debproservices.be
+          <strong>Email :</strong> contact@debservices.canalrose.be
         </p>
 
         <h2>Hébergement du site</h2>

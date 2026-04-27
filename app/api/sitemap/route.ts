@@ -2,6 +2,6 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const baseUrl = process.env.APP_URL || 'https://debproservices.be';
+  const baseUrl = process.env.APP_URL || 'https://debservices.canalrose.be';
   return NextResponse.redirect(`${baseUrl}/sitemap.xml`);
 }
