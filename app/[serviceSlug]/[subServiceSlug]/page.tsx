@@ -196,6 +196,39 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
         </div>
       </section>
 
+      {/* Galerie de réalisations */}
+      <section className="py-24 relative z-10 border-t border-white/10 overflow-hidden">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+               <div className="max-w-2xl">
+                  <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">Réalisations Récentes</h2>
+                  <h3 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Nos interventions en images</h3>
+                  <p className="text-slate-400 text-lg leading-relaxed">Aperçu de la qualité de finition et du matériel utilisé lors de nos travaux de {subServiceInfo.title.toLowerCase()}.</p>
+               </div>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                  <div 
+                    key={i} 
+                    className={`group relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 aspect-square transition-all duration-500 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 ${i > 4 ? 'hidden md:block' : ''} ${i > 6 ? 'hidden lg:block' : ''}`}
+                  >
+                     <Image 
+                        src={`https://picsum.photos/seed/${subServiceInfo.slug}-${i}/800/800`}
+                        alt={`Réalisation n°${i} pour ${subServiceInfo.title} en Belgique - DEB PRO SERVICES`}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        referrerPolicy="no-referrer"
+                     />
+                     <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent">
+                        <span className="text-[10px] font-black text-white uppercase tracking-widest bg-blue-600 px-2 py-1 rounded">DEB PRO SERVICES</span>
+                     </div>
+                  </div>
+               ))}
+            </div>
+         </div>
+      </section>
+
       <section className="py-20 bg-white/5 border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">

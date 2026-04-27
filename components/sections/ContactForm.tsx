@@ -1,10 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { Send, CheckCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle, Loader2, MapPin } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import dynamic from 'next/dynamic';
+
+const MapSelector = dynamic(() => import('@/components/ui/MapSelector'), { 
+  ssr: false, 
+  loading: () => <div className="h-[300px] w-full bg-slate-900 animate-pulse rounded-2xl flex items-center justify-center text-slate-500">Chargement de la carte...</div>
+});
 
 const schema = z.object({
   nom: z.string().min(2, "Le nom est trop court").max(100),
@@ -13,6 +19,8 @@ const schema = z.object({
   service: z.enum(['plomberie', 'chauffage', 'gaz', 'electricite', 'climatisation', 'fosse']),
   ville: z.string().min(2, "Veuillez entrer votre ville"),
   message: z.string().min(10, "Le message est trop court, merci de préciser.").max(1000),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
   honeypot: z.string().max(0, "Invalid field") // Anti-spam
 });
 
@@ -21,10 +29,14 @@ type FormData = z.infer<typeof schema>;
 export function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showMap, setShowMap] = useState(false);
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
+  const { register, handleSubmit, setValue, watch, formState: { errors }, reset } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
+
+  const lat = watch('latitude');
+  const lng = watch('longitude');
 
   const onSubmit = async (data: FormData) => {
     setStatus('loading');
@@ -51,7 +63,9 @@ export function ContactForm() {
           date: "À l'instant",
           status: "nouveau",
           email: data.email,
-          message: data.message
+          message: data.message,
+          latitude: data.latitude,
+          longitude: data.longitude
         };
         localStorage.setItem('deb_leads', JSON.stringify([newLead, ...existingLeads]));
       }
@@ -162,6 +176,53 @@ export function ContactForm() {
                     className={`w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
                     placeholder="adresse@email.com"
                   />
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">Localisation GPS <span className="font-normal text-slate-500 lowercase">(Optionnel)</span></label>
+                    <button 
+                      type="button"
+                      onClick={() => setShowMap(!showMap)}
+                      className="text-[10px] font-black text-blue-400 uppercase tracking-widest flex items-center gap-2 hover:text-white transition-colors"
+                    >
+                      <MapPin className="w-3 h-3" />
+                      {showMap ? "Masquer la carte" : "Utiliser la carte"}
+                    </button>
+                  </div>
+                  
+                  {showMap && (
+                    <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                      <MapSelector 
+                        onCoordsChange={(l, g) => {
+                          setValue('latitude', l);
+                          setValue('longitude', g);
+                        }}
+                        initialLat={lat}
+                        initialLng={lng}
+                      />
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="relative">
+                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-black text-slate-500 uppercase">Lat</span>
+                           <input 
+                            type="number" 
+                            step="any"
+                            {...register('latitude', { valueAsNumber: true })}
+                            className="w-full pl-12 pr-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white text-xs font-mono focus:outline-none focus:border-blue-500/50"
+                           />
+                        </div>
+                        <div className="relative">
+                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-black text-slate-500 uppercase">Lng</span>
+                           <input 
+                            type="number" 
+                            step="any"
+                            {...register('longitude', { valueAsNumber: true })}
+                            className="w-full pl-12 pr-4 py-2 rounded-lg bg-black/20 border border-white/10 text-white text-xs font-mono focus:outline-none focus:border-blue-500/50"
+                           />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div>

@@ -3,7 +3,7 @@
 import { Home, Phone, MapPin, AlertTriangle, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 export function MobileBottomNav() {

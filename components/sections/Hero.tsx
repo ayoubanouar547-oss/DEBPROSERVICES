@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PhoneCall } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 const SERVICES = [
   { text: 'Plomberie', gradient: 'from-blue-400 to-cyan-300' },

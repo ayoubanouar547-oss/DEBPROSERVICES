@@ -19,6 +19,10 @@ export const services = [
     ],
     color: {
       bg: 'bg-indigo-500/20', text: 'text-indigo-400', border: 'border-indigo-500/30', glow: 'bg-indigo-500'
+    },
+    testimonial: {
+      text: "La rénovation de notre salle de bain est une réussite totale. La douche italienne est sublime !",
+      author: "Marie L., Namur"
     }
   },
   {
@@ -36,6 +40,10 @@ export const services = [
     ],
     color: {
       bg: 'bg-blue-500/20', text: 'text-blue-400', border: 'border-blue-500/30', glow: 'bg-blue-500'
+    },
+    testimonial: {
+      text: "Fuite d'eau réparée en moins d'une heure un dimanche soir. Service impeccable et très pro.",
+      author: "Thomas D., Bruxelles"
     }
   },
   {
@@ -43,7 +51,7 @@ export const services = [
     slug: 'debouchage-canalisation',
     title: 'Débouchage',
     icon: Droplets,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3428-35bbc095/image.png?height=600',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3597-b28a5533/image.png?height=400',
     description: 'Vous faites face à une canalisation bouchée ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers disposent des équipements les plus modernes pour déboucher vos canalisations.',
     features: ['Débouchage haute pression', 'Inspection par caméra', 'Évacuation des mauvaises odeurs', 'Entretien préventif'],
     subServices: [
@@ -54,6 +62,10 @@ export const services = [
     ],
     color: {
       bg: 'bg-cyan-500/20', text: 'text-cyan-400', border: 'border-cyan-500/30', glow: 'bg-cyan-500'
+    },
+    testimonial: {
+      text: "WC débouché très proprement malgré la difficulté. Le technicien a utilisé une caméra, top !",
+      author: "Sarah M., Liège"
     }
   },
   {
@@ -61,7 +73,7 @@ export const services = [
     slug: 'chauffage',
     title: 'Chauffage',
     icon: Flame,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3403-4757d6a9/image.png?height=600',
+    imageUrl: '/regenerated_image_1777315741847.png',
     description: 'Votre chaudière tombe en panne en plein hiver ? Vos radiateurs ne chauffent plus ? DEB PRO SERVICES, votre chauffagiste agréé en Belgique, intervient en urgence pour le dépannage, l\'entretien et l\'installation de tous types de chaudières et systèmes de chauffage.',
     features: ['Entretien chaudière', 'Dépannage urgent 24/7', 'Remplacement chaudière', 'Purge des radiateurs'],
     subServices: [
@@ -71,6 +83,10 @@ export const services = [
     ],
     color: {
       bg: 'bg-orange-500/20', text: 'text-orange-400', border: 'border-orange-500/30', glow: 'bg-orange-500'
+    },
+    testimonial: {
+      text: "Chaudière réparée le jour même. Chauffagiste très compétent et prix honnête.",
+      author: "Jean P., Charleroi"
     }
   },
   {
@@ -88,6 +104,10 @@ export const services = [
     ],
     color: {
       bg: 'bg-blue-600/20', text: 'text-blue-500', border: 'border-blue-600/30', glow: 'bg-blue-600'
+    },
+    testimonial: {
+      text: "Suspicion de fuite de gaz gérée en 30 min. Une équipe qui prend la sécurité à cœur.",
+      author: "Lucie V., Mons"
     }
   },
   {
@@ -101,10 +121,14 @@ export const services = [
     subServices: [
       { slug: 'installation-gnc', title: 'Installation Système GNC', desc: 'Conception et pose de nouvelles installations au gaz naturel comprimé.' },
       { slug: 'entretien-controle-gnc', title: 'Entretien et Contrôle GNC', desc: 'Maintenance régulière et vérification de la sécurité de vos équipements.' },
-      { slug: 'depannage-urgence-gnc', title: 'Dépannage d\'Urgence GNC', desc: 'Intervention rapide sur les systèmes GNC présentant des anomalies.' }
+      { slug: 'depannage-urgence-gnc', title: 'Dépannage d\'Urgence GNC', desc: 'Intervention rapide on les systèmes GNC présentant des anomalies.' }
     ],
     color: {
       bg: 'bg-emerald-500/20', text: 'text-emerald-500', border: 'border-emerald-500/30', glow: 'bg-emerald-500'
+    },
+    testimonial: {
+      text: "Installation GNC conforme et sécurisée. Très satisfaite du suivi technique.",
+      author: "Hélène B., Wavre"
     }
   },
   {
@@ -122,6 +146,10 @@ export const services = [
     ],
     color: {
       bg: 'bg-yellow-500/20', text: 'text-yellow-400', border: 'border-yellow-500/30', glow: 'bg-yellow-500'
+    },
+    testimonial: {
+      text: "Remplacement de mon tableau électrique en urgence. Travail propre et électricien sympa.",
+      author: "Marc O., Anvers"
     }
   },
   {
@@ -139,6 +167,10 @@ export const services = [
     ],
     color: {
       bg: 'bg-sky-500/20', text: 'text-sky-400', border: 'border-sky-500/30', glow: 'bg-sky-500'
+    },
+    testimonial: {
+      text: "Climatisation installée juste avant la canicule. Quel soulagement, merci pour la rapidité !",
+      author: "Sophie G., Louvain"
     }
   },
   {
@@ -156,6 +188,10 @@ export const services = [
     ],
     color: {
       bg: 'bg-green-500/20', text: 'text-green-400', border: 'border-green-500/30', glow: 'bg-green-500'
+    },
+    testimonial: {
+      text: "Vidange de fosse septique rapide et efficace. Pas d'odeurs après l'intervention.",
+      author: "Benoît R., Tournai"
     }
   }
 ];

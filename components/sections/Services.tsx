@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { services } from '@/lib/data/services';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export function Services() {
@@ -42,6 +42,32 @@ export function Services() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
                   
+                  {/* Custom Watermark for Débouchage (selected element) */}
+                  {service.slug === 'debouchage-canalisation' && (
+                    <div className="absolute bottom-4 right-6 w-24 h-24 z-10 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
+                      <Image 
+                        src="https://debouchageexpress24hh.odoo.com/web/image/3597-b28a5533/image.png?height=400" 
+                        alt="Débouchage Express 24h/24h"
+                        fill
+                        className="object-contain drop-shadow-2xl"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  )}
+
+                  {/* Custom Watermark for Chauffage (new selected element) */}
+                  {service.slug === 'chauffage' && (
+                    <div className="absolute bottom-4 right-6 w-24 h-24 z-10 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
+                      <Image 
+                        src="https://debouchageexpress24hh.odoo.com/web/image/3555-e0aa4fcc/image.png?height=400" 
+                        alt="Chauffage Express"
+                        fill
+                        className="object-contain drop-shadow-2xl"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  )}
+                  
                   {/* Icon */}
                   <div className={`absolute bottom-4 left-6 w-16 h-16 rounded-2xl ${service.color.bg} ${service.color.text} flex items-center justify-center shadow-2xl border ${service.color.border} backdrop-blur-md`}>
                     <Icon className="w-8 h-8" />
@@ -63,7 +89,18 @@ export function Services() {
                     ))}
                   </ul>
 
-                  <motion.div whileHover={{ x: 5 }}>
+                  {(service as any).testimonial && (
+                    <div className="mb-8 p-4 rounded-2xl bg-white/5 border border-white/10 relative italic">
+                      <p className="text-slate-300 text-xs leading-relaxed mb-2">
+                        "{ (service as any).testimonial.text }"
+                      </p>
+                      <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest not-italic">
+                        — { (service as any).testimonial.author }
+                      </div>
+                    </div>
+                  )}
+
+                  <motion.div whileHover={{ x: 5 }} className="mt-auto">
                     <Link 
                       href={`/${service.slug}`}
                       className="mt-auto inline-flex items-center text-sm font-black text-white hover:bg-blue-600 transition-colors uppercase tracking-widest group/link bg-blue-600/20 px-6 py-3 rounded-xl border border-blue-500/30"

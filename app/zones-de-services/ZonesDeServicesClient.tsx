@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { MapPin, ChevronRight, Search, X, Globe, Menu } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { belgianCities } from '@/lib/data/cities';
 import { services } from '@/lib/data/services';
 

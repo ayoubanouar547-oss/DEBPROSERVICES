@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Phone, Menu, X, AlertTriangle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PhoneButton } from '../ui/PhoneButton';
 import { WaterSplash } from '../ui/WaterSplash';
 
