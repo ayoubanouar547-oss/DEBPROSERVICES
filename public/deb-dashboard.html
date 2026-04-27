@@ -1345,26 +1345,30 @@
                 
                 const html = cleanDoc.documentElement.outerHTML;
                 
-                // Persist to localStorage
-                localStorage.setItem('deb_page_content_' + iframe.src, html);
-                
-                // Show modal to copy code
-                const area = document.createElement('textarea');
-                area.value = html;
-                area.style.position = 'fixed';
-                area.style.top = '0';
-                area.style.left = '0';
-                area.style.width = '100vw';
-                area.style.height = '100vh';
-                area.style.zIndex = '99999';
-                document.body.appendChild(area);
-                area.select();
-                document.execCommand('copy');
-                document.body.removeChild(area);
-                
-                alert("Modifications enregistrées ! Le code HTML a été copié. Collez-le ici pour que je l'applique.");
+                // Persist to API
+                fetch('/api/page-content', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: 'homepage', value: html })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Modifications enregistrées sur le serveur !");
+                    } else {
+                        throw new Error("Failed to save");
+                    }
+                })
+                .catch(e => {
+                    console.error('Save error', e);
+                    // Fallback to localStorage if API fails
+                    localStorage.setItem('deb_page_content_' + iframe.src, html);
+                    alert("Modifications enregistrées localement (serveur indisponible).");
+                });
+
             } catch (e) {
-                alert("Impossible d'enregistrer les modifications via l'éditeur en raison de restrictions de sécurité.");
+                console.error("Save error:", e);
+                alert("Impossible d'enregistrer les modifications en raison de restrictions de sécurité.");
             }
         }
 
