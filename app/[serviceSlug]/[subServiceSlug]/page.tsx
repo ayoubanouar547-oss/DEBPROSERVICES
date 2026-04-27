@@ -208,14 +208,23 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+               {[
+                 '/regenerated_image_1777331517223.png',
+                 '/regenerated_image_1777331518139.png',
+                 '/regenerated_image_1777331518753.png',
+                 '/regenerated_image_1777331519368.png',
+                 `https://picsum.photos/seed/${subServiceInfo.slug}-5/800/800`,
+                 `https://picsum.photos/seed/${subServiceInfo.slug}-6/800/800`,
+                 `https://picsum.photos/seed/${subServiceInfo.slug}-7/800/800`,
+                 `https://picsum.photos/seed/${subServiceInfo.slug}-8/800/800`
+               ].map((src, i) => (
                   <div 
                     key={i} 
-                    className={`group relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 aspect-square transition-all duration-500 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 ${i > 4 ? 'hidden md:block' : ''} ${i > 6 ? 'hidden lg:block' : ''}`}
+                    className={`group relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 aspect-square transition-all duration-500 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 ${i > 3 ? 'hidden md:block' : ''} ${i > 5 ? 'hidden lg:block' : ''}`}
                   >
                      <Image 
-                        src={`https://picsum.photos/seed/${subServiceInfo.slug}-${i}/800/800`}
-                        alt={`Réalisation n°${i} pour ${subServiceInfo.title} en Belgique - DEB PRO SERVICES`}
+                        src={src}
+                        alt={`Réalisation n°${i + 1} pour ${subServiceInfo.title} en Belgique - DEB PRO SERVICES`}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                         referrerPolicy="no-referrer"

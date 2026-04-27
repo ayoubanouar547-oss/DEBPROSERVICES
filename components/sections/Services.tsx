@@ -46,7 +46,7 @@ export function Services() {
                   {service.slug === 'debouchage-canalisation' && (
                     <div className="absolute bottom-4 right-6 w-24 h-24 z-10 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
                       <Image 
-                        src="https://debouchageexpress24hh.odoo.com/web/image/3597-b28a5533/image.png?height=400" 
+                        src="/regenerated_image_1777316393659.png" 
                         alt="Débouchage Express 24h/24h"
                         fill
                         className="object-contain drop-shadow-2xl"
@@ -59,7 +59,7 @@ export function Services() {
                   {service.slug === 'chauffage' && (
                     <div className="absolute bottom-4 right-6 w-24 h-24 z-10 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
                       <Image 
-                        src="https://debouchageexpress24hh.odoo.com/web/image/3555-e0aa4fcc/image.png?height=400" 
+                        src="/regenerated_image_1777315741847.png" 
                         alt="Chauffage Express"
                         fill
                         className="object-contain drop-shadow-2xl"
