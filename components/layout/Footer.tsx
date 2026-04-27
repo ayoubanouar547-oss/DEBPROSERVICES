@@ -59,7 +59,7 @@ export function Footer() {
             <ul className="grid grid-cols-2 gap-3 text-sm">
               {belgianCities.slice(0, 10).map((city) => (
                 <li key={city.slug}>
-                  <Link href={`/zones-de-services/debouchage-${city.slug}`} className="hover:text-secondary transition">
+                  <Link href={`/zones-de-services/plomberie/${city.slug}`} className="hover:text-secondary transition">
                     {city.name}
                   </Link>
                 </li>

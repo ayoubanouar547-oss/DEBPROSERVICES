@@ -54,13 +54,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
        });
     });
 
-    // Cities
+    // Cities and SubService + City combinations
     belgianCities.forEach(city => {
+       // 2-level: service + city
        zonePages.push({
          url: `${baseUrl}/zones-de-services/${service.slug}/${city.slug}`,
          lastModified: new Date(),
          changeFrequency: 'monthly',
          priority: 0.7,
+       });
+
+       // 3-level: service + subservice + city
+       service.subServices.forEach(sub => {
+         zonePages.push({
+           url: `${baseUrl}/zones-de-services/${service.slug}/${sub.slug}/${city.slug}`,
+           lastModified: new Date(),
+           changeFrequency: 'monthly',
+           priority: 0.6,
+         });
        });
     });
   });

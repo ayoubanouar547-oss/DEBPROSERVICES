@@ -43,7 +43,7 @@ export const services = [
     slug: 'debouchage-canalisation',
     title: 'Débouchage',
     icon: Droplets,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3597-b28a5533/image.png?height=256',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3428-35bbc095/image.png?height=600',
     description: 'Vous faites face à une canalisation bouchée ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers disposent des équipements les plus modernes pour déboucher vos canalisations.',
     features: ['Débouchage haute pression', 'Inspection par caméra', 'Évacuation des mauvaises odeurs', 'Entretien préventif'],
     subServices: [
@@ -61,7 +61,7 @@ export const services = [
     slug: 'chauffage',
     title: 'Chauffage',
     icon: Flame,
-    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3064-18b6714d/image.png?height=256',
+    imageUrl: 'https://debouchageexpress24hh.odoo.com/web/image/3403-4757d6a9/image.png?height=600',
     description: 'Votre chaudière tombe en panne en plein hiver ? Vos radiateurs ne chauffent plus ? DEB PRO SERVICES, votre chauffagiste agréé en Belgique, intervient en urgence pour le dépannage, l\'entretien et l\'installation de tous types de chaudières et systèmes de chauffage.',
     features: ['Entretien chaudière', 'Dépannage urgent 24/7', 'Remplacement chaudière', 'Purge des radiateurs'],
     subServices: [
