@@ -10,12 +10,12 @@ export const services = [
     description: 'DEB PRO SERVICES réalise tous vos projets de rénovation de maison et appartement en Belgique. De la rénovation complète à la modernisation de votre salle de bain avec douche italienne, nos techniciens agréés vous garantissent un travail soigné, durable et au meilleur prix.',
     features: ['Rénovation complète', 'Douche italienne sur mesure', 'Aménagement intérieur', 'Devis gratuit'],
     subServices: [
-      { slug: 'renovation-salle-de-bain-douche-italienne', title: 'Salle de Bain & Douche Italienne', desc: 'Conception et installation de douches italiennes modernes et salles de bain clés en main.' },
-      { slug: 'renovation-cuisine-sur-mesure', title: 'Rénovation de Cuisine', desc: 'Modernisation complète de votre cuisine : plomberie, électricité, mobilier et finitions.' },
-      { slug: 'renovation-totale-maison-appartement', title: 'Rénovation Totale', desc: 'Remise à neuf complète de votre habitation, appartement ou surface commerciale.' },
-      { slug: 'pose-carrelage-et-revetement-sol', title: 'Carrelage & Revêtements de Sol', desc: 'Pose de carrelage, parquet et revêtements modernes pour toutes vos pièces.' },
-      { slug: 'peinture-et-plafonnage-interieur', title: 'Peinture & Plafonnage', desc: 'Travaux de peinture, plafonnage et finitions intérieures de haute qualité.' },
-      { slug: 'isolation-et-cloisons-gyproc', title: 'Isolation & Cloisons', desc: 'Amélioration thermique et acoustique, pose de cloisons Gyproc et faux plafonds.' }
+      { slug: 'renovation-salle-de-bain-douche-italienne', title: 'Salle de Bain & Douche Italienne', desc: 'Conception et installation de douches italiennes modernes et salles de bain clés en main.', imageUrl: '/regenerated_image_1777403020296.png' },
+      { slug: 'renovation-cuisine-sur-mesure', title: 'Rénovation de Cuisine', desc: 'Modernisation complète de votre cuisine : plomberie, électricité, mobilier et finitions.', imageUrl: '/regenerated_image_1777403021212.png' },
+      { slug: 'renovation-totale-maison-appartement', title: 'Rénovation Totale', desc: 'Remise à neuf complète de votre habitation, appartement ou surface commerciale.', imageUrl: '/regenerated_image_1777403022204.png' },
+      { slug: 'pose-carrelage-et-revetement-sol', title: 'Carrelage & Revêtements de Sol', desc: 'Pose de carrelage, parquet et révêtements modernes pour toutes vos pièces.', imageUrl: '/regenerated_image_1777403023028.png' },
+      { slug: 'peinture-et-plafonnage-interieur', title: 'Peinture & Plafonnage', desc: 'Travaux de peinture, plafonnage et finitions intérieures de haute qualité.', imageUrl: '/regenerated_image_1777403024435.png' },
+      { slug: 'isolation-et-cloisons-gyproc', title: 'Isolation & Cloisons', desc: 'Amélioration thermique et acoustique, pose de cloisons Gyproc et faux plafonds.', imageUrl: '/regenerated_image_1777403025501.png' }
     ],
     color: {
       bg: 'bg-indigo-500/20', text: 'text-indigo-400', border: 'border-indigo-500/30', glow: 'bg-indigo-500'
@@ -34,9 +34,9 @@ export const services = [
     description: 'Vous faites face à une canalisation bouchée, une fuite d\'eau ou un problème de plomberie urgent ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers certifiés disposent des équipements les plus modernes pour réparer vos fuites et résoudre tout problème de plomberie, quelle que soit la complexité.',
     features: ['Recherche et réparation de fuites', 'Remplacement de robinetterie', 'Installation sanitaire', 'Dépannage chauffe-eau'],
     subServices: [
-      { slug: 'recherche-et-reparation-de-fuite-d-eau', title: 'Recherche et Réparation de Fuite d\'Eau', desc: 'Détection non destructive et colmatage rapide de toutes fuites.' },
-      { slug: 'installation-sanitaire-et-robinetterie', title: 'Installation Sanitaire et Robinetterie', desc: 'Pose de WC, lavabos, douches, baignoires et robinetterie moderne.' },
-      { slug: 'remplacement-chauffe-eau-et-boiler', title: 'Remplacement Chauffe-eau et Boiler', desc: 'Dépannage et installation de chauffe-eau électrique ou thermodynamique.' }
+      { slug: 'recherche-et-reparation-de-fuite-d-eau', title: 'Recherche et Réparation de Fuite d\'Eau', desc: 'Détection non destructive et colmatage rapide de toutes fuites.', imageUrl: '/regenerated_image_1777412978596.png' },
+      { slug: 'installation-sanitaire-et-robinetterie', title: 'Installation Sanitaire et Robinetterie', desc: 'Pose de WC, lavabos, douches, baignoires et robinetterie moderne.', imageUrl: '/regenerated_image_1777412979547.png' },
+      { slug: 'remplacement-chauffe-eau-et-boiler', title: 'Remplacement Chauffe-eau et Boiler', desc: 'Dépannage and installation de chauffe-eau électrique ou thermodynamique.', imageUrl: '/regenerated_image_1777406464737.png' }
     ],
     color: {
       bg: 'bg-blue-500/20', text: 'text-blue-400', border: 'border-blue-500/30', glow: 'bg-blue-500'
@@ -51,14 +51,14 @@ export const services = [
     slug: 'debouchage-canalisation',
     title: 'Débouchage',
     icon: Droplets,
-    imageUrl: '/regenerated_image_1777316393659.png',
+    imageUrl: '/regenerated_image_1777411808057.png',
     description: 'Vous faites face à une canalisation bouchée ? DEB PRO SERVICES intervient rapidement chez vous, 24h/24 et 7j/7, dans toute la Belgique. Nos plombiers disposent des équipements les plus modernes pour déboucher vos canalisations.',
     features: ['Débouchage haute pression', 'Inspection par caméra', 'Évacuation des mauvaises odeurs', 'Entretien préventif'],
     subServices: [
-      { slug: 'debouchage-wc-toilettes', title: 'Débouchage WC et Toilettes', desc: 'Intervention d\'urgence pour déboucher vos toilettes bloquées.' },
-      { slug: 'debouchage-egout-et-canalisations', title: 'Débouchage Égout et Canalisations', desc: 'Curage haute pression pour les égouts et canalisations principales.' },
-      { slug: 'debouchage-evier-et-lavabo', title: 'Débouchage Évier et Lavabo', desc: 'Élimination des bouchons dans vos éviers de cuisine et lavabos.' },
-      { slug: 'inspection-camera-canalisation', title: 'Inspection Caméra Canalisation', desc: 'Diagnostic vidéo HD pour trouver l\'origine exacte des bouchons récurrents.' }
+      { slug: 'debouchage-wc-toilettes', title: 'Débouchage WC et Toilettes', desc: 'Intervention d\'urgence pour déboucher vos toilettes bloquées.', imageUrl: '/regenerated_image_1777407078207.png' },
+      { slug: 'debouchage-egout-et-canalisations', title: 'Débouchage Égout et Canalisations', desc: 'Curage haute pression pour les égouts et canalisations principales.', imageUrl: '/regenerated_image_1777407079232.png' },
+      { slug: 'debouchage-evier-et-lavabo', title: 'Débouchage Évier et Lavabo', desc: 'Élimination des bouchons dans vos éviers de cuisine et lavabos.', imageUrl: '/regenerated_image_1777407080255.png' },
+      { slug: 'inspection-camera-canalisation', title: 'Inspection Caméra Canalisation', desc: 'Diagnostic vidéo HD pour trouver l\'origine exacte des bouchons récurrents.', imageUrl: '/regenerated_image_1777407292666.png' }
     ],
     color: {
       bg: 'bg-cyan-500/20', text: 'text-cyan-400', border: 'border-cyan-500/30', glow: 'bg-cyan-500'
@@ -77,9 +77,9 @@ export const services = [
     description: 'Votre chaudière tombe en panne en plein hiver ? Vos radiateurs ne chauffent plus ? DEB PRO SERVICES, votre chauffagiste agréé en Belgique, intervient en urgence pour le dépannage, l\'entretien et l\'installation de tous types de chaudières et systèmes de chauffage.',
     features: ['Entretien chaudière', 'Dépannage urgent 24/7', 'Remplacement chaudière', 'Purge des radiateurs'],
     subServices: [
-      { slug: 'depannage-chaudiere', title: 'Dépannage Chaudière', desc: 'Réparation d\'urgence de votre chaudière en panne.' },
-      { slug: 'entretien-chaudiere-gaz-mazout', title: 'Entretien Chaudière', desc: 'Entretien légal et détartrage de vos installations de chauffage.' },
-      { slug: 'installation-nouveau-chauffage', title: 'Installation Nouveau Chauffage', desc: 'Pose de chaudières à condensation haute performance.' }
+      { slug: 'depannage-chaudiere', title: 'Dépannage Chaudière', desc: 'Réparation d\'urgence de votre chaudière en panne.', imageUrl: '/regenerated_image_1777407664530.png' },
+      { slug: 'entretien-chaudiere-gaz-mazout', title: 'Entretien Chaudière', desc: 'Entretien légal et détartrage de vos installations de chauffage.', imageUrl: '/regenerated_image_1777407665466.png' },
+      { slug: 'installation-nouveau-chauffage', title: 'Installation Nouveau Chauffage', desc: 'Pose de chaudières à condensation haute performance.', imageUrl: '/regenerated_image_1777407666286.png' }
     ],
     color: {
       bg: 'bg-orange-500/20', text: 'text-orange-400', border: 'border-orange-500/30', glow: 'bg-orange-500'

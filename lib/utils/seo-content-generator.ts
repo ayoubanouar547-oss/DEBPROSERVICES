@@ -31,19 +31,7 @@ export function buildLongClusterText(serviceName: string, cityName: string): str
                 .replace(/locaux/g, `locaux situés à ${cityName}`);
             blockContent += `<p class="mb-6 text-white text-lg leading-relaxed">${personalized} Sur le secteur de ${cityName}, nous garantissons une intervention rapide pour la catégorie ${serviceName}.</p>`;
             
-            // Inject images every few paragraphs
-            if (idx === 1) {
-              blockContent += `
-                <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-10 relative h-80">
-                    <img 
-                        src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecb?q=80&w=800&auto=format&fit=crop" 
-                        alt="Expertise professionnelle de ${serviceName} à ${cityName}" 
-                        class="w-full h-full object-cover" 
-                        referrerpolicy="no-referrer"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-                </div>`;
-            }
+            // No image injection needed here as per user request to remove them from all pages
         });
         textBlocks.push(blockContent);
     }

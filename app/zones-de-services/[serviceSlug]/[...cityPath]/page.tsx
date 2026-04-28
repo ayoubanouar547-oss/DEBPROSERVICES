@@ -246,6 +246,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
                   <Image 
                     src={serviceInfo.imageUrl} 
                     fill
+                    priority={true}
                     alt={`${titleToUse} à ${cityInfo.name}`} 
                     className="object-cover" 
                     referrerPolicy="no-referrer"
@@ -295,9 +296,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
                 </div>
               )}
 
-              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                 <Image src={serviceInfo.imageUrl} width={1200} height={600} alt={`${titleToUse} ${cityInfo.name}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              </div>
+
 
               <div>
                 <h3 className="text-4xl font-black mb-10 text-white">Pourquoi nous choisir à {cityInfo.name} ?</h3>
@@ -323,9 +322,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
               <div className="mt-16 prose prose-xl prose-invert text-white">
                 <h2 className="text-5xl font-black text-white mb-10 border-t border-white/10 pt-10">Détails techniques pour {cityInfo.name}</h2>
                 <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.slice(0, 3).join('') }} />
-                <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl my-12">
-                   <Image src={serviceInfo.imageUrl} width={1200} height={600} alt={`Détails ${titleToUse} ${cityInfo.name}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                </div>
+
                 <div dangerouslySetInnerHTML={{ __html: massiveSEOContent.slice(3).join('') }} />
               </div>
             </div>

@@ -32,41 +32,17 @@ export function Services() {
                 <div className={`absolute right-0 top-0 w-32 h-32 rounded-full opacity-10 ${service.color.glow} transition-transform group-hover:scale-[4] blur-3xl z-0 pointer-events-none`}></div>
                 
                 {/* Card Image */}
-                <div className="relative h-56 w-full overflow-hidden flex-shrink-0 z-10">
+                <div className="relative h-56 w-full overflow-hidden flex-shrink-0 z-10 bg-slate-900/50">
                   <Image 
                     src={service.imageUrl || `https://picsum.photos/seed/${service.slug}/600/400`} 
                     alt={`Expertise en ${service.title} par les techniciens de DEB PRO SERVICES`} 
                     fill
+                    priority={index < 3}
+                    loading={index < 3 ? undefined : "eager"}
                     className="object-cover transition-transform duration-700 group-hover:scale-110" 
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
-                  
-                  {/* Custom Watermark for Débouchage (selected element) */}
-                  {service.slug === 'debouchage-canalisation' && (
-                    <div className="absolute bottom-4 right-6 w-24 h-24 z-10 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
-                      <Image 
-                        src="/regenerated_image_1777316393659.png" 
-                        alt="Débouchage Express 24h/24h"
-                        fill
-                        className="object-contain drop-shadow-2xl"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                  )}
-
-                  {/* Custom Watermark for Chauffage (new selected element) */}
-                  {service.slug === 'chauffage' && (
-                    <div className="absolute bottom-4 right-6 w-24 h-24 z-10 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
-                      <Image 
-                        src="/regenerated_image_1777315741847.png" 
-                        alt="Chauffage Express"
-                        fill
-                        className="object-contain drop-shadow-2xl"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                  )}
                   
                   {/* Icon */}
                   <div className={`absolute bottom-4 left-6 w-16 h-16 rounded-2xl ${service.color.bg} ${service.color.text} flex items-center justify-center shadow-2xl border ${service.color.border} backdrop-blur-md`}>

@@ -49,22 +49,12 @@ export function Testimonials() {
     return () => clearInterval(timer);
   }, [currentIndex, isReturningUser, mounted]);
 
-  if (!mounted) return null; // Avoid hydration mismatch
+  // Removed if (!mounted) return null; to ensure immediate visibility
 
   const activeReviews = isReturningUser ? reviewsReturning : reviewsNew;
-
-  // Theme constants based on user state (Le style qui change dynamiquement pour le retour du client)
-  const theme = isReturningUser ? {
-    bgConfig: "bg-gradient-to-br from-amber-700/20 to-orange-900/40",
-    border: "border-amber-500/30",
-    textHighlight: "text-amber-400",
-    glow: "shadow-[0_0_40px_rgba(245,158,11,0.2)]",
-    star: "fill-amber-500 text-amber-500",
-    badge: "Accès Premium",
-    title: "Nos clients fidèles confirment notre excellence",
-    subtitle: "Heureux de vous revoir sur DEB PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de la constance de nos prestations.",
-    btnHover: "hover:bg-amber-500/20 hover:text-amber-300"
-  } : {
+  
+  // Theme constants based on user state
+  const themePrimary = {
     bgConfig: "bg-white/5",
     border: "border-white/10",
     textHighlight: "text-[#1565c0]",
@@ -75,6 +65,20 @@ export function Testimonials() {
     subtitle: "La satisfaction client est au cœur de notre stratégie. Découvrez leurs expériences avec nos équipes d'urgence.",
     btnHover: "hover:bg-[#1565c0]/20 hover:text-blue-300"
   };
+
+  const themeReturning = {
+    bgConfig: "bg-gradient-to-br from-amber-700/20 to-orange-900/40",
+    border: "border-amber-500/30",
+    textHighlight: "text-amber-400",
+    glow: "shadow-[0_0_40px_rgba(245,158,11,0.2)]",
+    star: "fill-amber-500 text-amber-500",
+    badge: "Accès Premium",
+    title: "Nos clients fidèles confirment notre excellence",
+    subtitle: "Heureux de vous revoir sur DEB PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de la constance de nos prestations.",
+    btnHover: "hover:bg-amber-500/20 hover:text-amber-300"
+  };
+
+  const theme = (mounted && isReturningUser) ? themeReturning : themePrimary;
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % activeReviews.length);

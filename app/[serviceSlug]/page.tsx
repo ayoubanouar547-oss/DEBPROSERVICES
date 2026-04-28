@@ -51,25 +51,93 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Service",
-            "serviceType": serviceInfo.title,
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "DEB PRO SERVICES"
-            },
-            "areaServed": {
-              "@type": "Country",
-              "name": "Belgium"
-            },
-            "description": serviceInfo.description
+            "@graph": [
+              {
+                "@type": "Service",
+                "@id": `https://debproservices.be/${serviceInfo.slug}#service`,
+                "name": serviceInfo.title,
+                "serviceType": serviceInfo.title,
+                "description": serviceInfo.description,
+                "provider": {
+                  "@id": "https://debproservices.be/#organization"
+                },
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "Belgium"
+                },
+                "hasOfferCatalog": {
+                  "@type": "OfferCatalog",
+                  "name": `Services de ${serviceInfo.title}`,
+                  "itemListElement": serviceInfo.subServices.map((sub, i) => ({
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": sub.title,
+                      "description": sub.desc
+                    },
+                    "position": i + 1
+                  }))
+                }
+              },
+              {
+                "@type": "LocalBusiness",
+                "@id": "https://debproservices.be/#organization",
+                "name": "DEB PRO SERVICES",
+                "image": "https://debproservices.be/logo.png",
+                "url": "https://debproservices.be",
+                "telephone": "0496325733",
+                "priceRange": "$$",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Brussels",
+                  "addressCountry": "BE"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": 50.8503,
+                  "longitude": 4.3517
+                },
+                "openingHoursSpecification": {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "opens": "00:00",
+                  "closes": "23:59"
+                },
+                "contactPoint": {
+                  "@type": "ContactPoint",
+                  "telephone": "0496325733",
+                  "contactType": "emergency",
+                  "areaServed": "BE",
+                  "availableLanguage": ["French", "Dutch", "English"]
+                }
+              }
+            ]
           })
         }}
       />
 
       <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
-        <div className="absolute inset-0 bg-slate-900 pointer-events-none">
-           <div className={`absolute inset-0 ${serviceInfo.color.bg} opacity-20 blur-3xl`}></div>
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src={serviceInfo.imageUrl}
+            alt={`DEB PRO SERVICES - ${serviceInfo.title}`}
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-[#000814]/80 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/40" />
         </div>
+        
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="max-w-3xl">
              <div className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}>
@@ -108,7 +176,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                >
                  <div className="relative h-48 w-full overflow-hidden flex-shrink-0 z-10">
                    <img 
-                     src={serviceInfo.imageUrl} 
+                     src={(sub as any).imageUrl || serviceInfo.imageUrl} 
                      alt={`Intervention ${sub.title}`} 
                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                    />
@@ -139,15 +207,6 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                 <p>
                   Dans le domaine de la <strong>{serviceInfo.title.toLowerCase()}</strong>, l'improvisation n'a pas sa place. Un système mal entretenu ou rafistolé peut entraîner des dysfonctionnements, voire des dégâts importants dans votre habitation ou vos locaux commerciaux. En faisant appel à notre équipe, vous optez pour la sérénité.
                 </p>
-                <div className="rounded-3xl overflow-hidden shadow-2xl my-8 relative h-64 border border-white/10">
-                  <Image 
-                    src={serviceInfo.imageUrl} 
-                    alt={`Détail technique de notre service de ${serviceInfo.title}`} 
-                    fill
-                    className="object-cover" 
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
                 <p>
                   Nous prenons en charge toutes les étapes : du diagnostic précis à la résolution de la panne. Nous disposons des certifications nécessaires pour intervenir en toute sécurité.
                 </p>
@@ -171,14 +230,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
             </div>
             
             <div className="relative">
-              <div className="rounded-[3rem] overflow-hidden shadow-2xl relative h-full min-h-[700px] border border-white/10">
-                 <Image 
-                   src={serviceInfo.imageUrl} 
-                   alt={`Illustration professionnelle du service ${serviceInfo.title}`} 
-                   fill
-                   className="absolute inset-0 object-cover" 
-                   referrerPolicy="no-referrer"
-                 />
+              <div className="rounded-[3rem] overflow-hidden shadow-2xl relative h-full min-h-[700px] border border-white/10 bg-slate-800/20 backdrop-blur-sm">
                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent flex items-end p-10">
                    <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-10 rounded-3xl w-full translate-y-2 group">
                      <h4 className="text-white font-black text-3xl mb-4 group-hover:text-blue-400 transition-colors uppercase tracking-tight">Une urgence ?</h4>

@@ -10,16 +10,9 @@ export function MobileBottomNav() {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
 
+  // Removed scroll dependency to make it persistent from start as per user request for "always loaded" feel
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    setIsVisible(true);
   }, []);
 
   const navItems = [
