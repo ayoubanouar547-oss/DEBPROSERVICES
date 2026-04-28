@@ -1,5 +1,4 @@
 import { ShieldCheck, History, Award } from 'lucide-react';
-import { WhyUs } from '@/components/sections/WhyUs';
 import Image from 'next/image';
 
 export const metadata = {
@@ -50,7 +49,6 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-      <WhyUs />
     </div>
   );
 }

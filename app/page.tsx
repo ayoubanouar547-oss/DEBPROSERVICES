@@ -1,6 +1,5 @@
 import { Hero } from '@/components/sections/Hero';
 import { Services } from '@/components/sections/Services';
-import { WhyUs } from '@/components/sections/WhyUs';
 import { ServiceZones } from '@/components/sections/ServiceZones';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { FAQ } from '@/components/sections/FAQ';
@@ -41,7 +40,6 @@ export default function Home() {
       />
       <Hero />
       <Services />
-      <WhyUs />
       <ServiceZones />
       <Testimonials />
       <FAQ />
