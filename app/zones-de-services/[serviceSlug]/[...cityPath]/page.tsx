@@ -188,7 +188,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
             "provider": {
               "@type": "LocalBusiness",
               "name": "DEB PRO SERVICES",
-              "image": "https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c",
+              "image": "/logo.png",
               "telephone": "+32496325733",
               "priceRange": "$$",
               "address": {

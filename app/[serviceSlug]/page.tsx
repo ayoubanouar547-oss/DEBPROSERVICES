@@ -83,7 +83,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
                 "name": "DEB PRO SERVICES",
-                "image": "https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c",
+                "image": "/logo.png",
                 "url": "https://debservices.canalrose.be",
                 "telephone": "+32496325733",
                 "priceRange": "$$",
