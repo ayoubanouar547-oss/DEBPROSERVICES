@@ -19,6 +19,50 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="pt-32 relative z-10 text-slate-300">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "LocalBusiness",
+                "@id": "https://debservices.canalrose.be/#organization",
+                "name": "DEB PRO SERVICES",
+                "image": "https://debservices.canalrose.be/logo.png",
+                "url": "https://debservices.canalrose.be",
+                "telephone": "+32496325733",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Brussels",
+                  "addressRegion": "Brussels",
+                  "postalCode": "1000",
+                  "streetAddress": "Centre",
+                  "addressCountry": "BE"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": "https://debservices.canalrose.be/about#breadcrumb",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Accueil",
+                    "item": "https://debservices.canalrose.be"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "À Propos",
+                    "item": "https://debservices.canalrose.be/about"
+                  }
+                ]
+              }
+            ]
+          })
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>

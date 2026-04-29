@@ -20,8 +20,52 @@ export const metadata: Metadata = {
 
 export default function UrgencePage() {
   return (
-    <div className="pt-24">
-      <section className="bg-accent text-white py-20 text-center relative overflow-hidden">
+    <div className="pt-24 h-event">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "LocalBusiness",
+                "@id": "https://debservices.canalrose.be/#organization",
+                "name": "DEB PRO SERVICES",
+                "image": "https://debservices.canalrose.be/logo.png",
+                "url": "https://debservices.canalrose.be",
+                "telephone": "+32496325733",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Brussels",
+                  "addressRegion": "Brussels",
+                  "postalCode": "1000",
+                  "streetAddress": "Centre",
+                  "addressCountry": "BE"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": "https://debservices.canalrose.be/urgence#breadcrumb",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Accueil",
+                    "item": "https://debservices.canalrose.be"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Urgence",
+                    "item": "https://debservices.canalrose.be/urgence"
+                  }
+                ]
+              }
+            ]
+          })
+        }}
+      />
+      <section className="bg-accent text-white py-20 text-center relative overflow-hidden summary">
         <div className="absolute inset-0 bg-dark/20 mix-blend-multiply"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-4">
           <div className="inline-block bg-white/20 px-4 py-1.5 rounded-full text-sm font-bold tracking-widest uppercase mb-6 animate-pulse">

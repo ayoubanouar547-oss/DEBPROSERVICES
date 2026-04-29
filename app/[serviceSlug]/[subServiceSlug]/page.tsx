@@ -132,6 +132,30 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
                   "opens": "00:00",
                   "closes": "23:59"
                 }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}#breadcrumb`,
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Accueil",
+                    "item": "https://debservices.canalrose.be"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": serviceInfo.title,
+                    "item": `https://debservices.canalrose.be/${serviceInfo.slug}`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": subServiceInfo.title,
+                    "item": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}`
+                  }
+                ]
               }
             ]
           })

@@ -132,14 +132,25 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                   ],
                   "opens": "00:00",
                   "closes": "23:59"
-                },
-                "contactPoint": {
-                  "@type": "ContactPoint",
-                  "telephone": "+32496325733",
-                  "contactType": "emergency",
-                  "areaServed": "BE",
-                  "availableLanguage": ["French", "Dutch", "English"]
                 }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}#breadcrumb`,
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Accueil",
+                    "item": "https://debservices.canalrose.be"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": serviceInfo.title,
+                    "item": `https://debservices.canalrose.be/${serviceInfo.slug}`
+                  }
+                ]
               }
             ]
           })

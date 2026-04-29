@@ -201,27 +201,88 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Service",
-            "name": titleToUse,
-            "serviceType": titleToUse,
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "DEB PRO SERVICES",
-              "image": "https://debservices.canalrose.be/logo.png",
-              "telephone": "+32496325733",
-              "priceRange": "$$",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": cityInfo.name,
-                "addressRegion": cityInfo.province,
-                "addressCountry": "BE"
+            "@graph": [
+              {
+                "@type": "Service",
+                "@id": `https://debservices.canalrose.be/zones-de-services/${serviceInfo.slug}/${cityPath.join("/")}#service`,
+                "name": `${titleToUse} à ${cityInfo.name}`,
+                "serviceType": titleToUse,
+                "description": `${titleToUse} à ${cityInfo.name}. Intervention urgente 24/7 partout en Belgique.`,
+                "provider": {
+                  "@id": "https://debservices.canalrose.be/#organization"
+                },
+                "areaServed": {
+                  "@type": "City",
+                  "name": cityInfo.name
+                }
               },
-              "areaServed": {
-                "@type": "City",
-                "name": cityInfo.name
+              {
+                "@type": "LocalBusiness",
+                "@id": "https://debservices.canalrose.be/#organization",
+                "name": "DEB PRO SERVICES",
+                "image": "https://debservices.canalrose.be/logo.png",
+                "url": "https://debservices.canalrose.be",
+                "telephone": "+32496325733",
+                "priceRange": "$$",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": cityInfo.name,
+                  "addressRegion": cityInfo.province,
+                  "postalCode": "1000",
+                  "streetAddress": "Centre",
+                  "addressCountry": "BE"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": 50.8503,
+                  "longitude": 4.3517
+                },
+                "openingHoursSpecification": {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "opens": "00:00",
+                  "closes": "23:59"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": `https://debservices.canalrose.be/zones-de-services/${serviceInfo.slug}/${cityPath.join("/")}#breadcrumb`,
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Accueil",
+                    "item": "https://debservices.canalrose.be"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Zones de Services",
+                    "item": "https://debservices.canalrose.be/zones-de-services"
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": serviceInfo.title,
+                    "item": `https://debservices.canalrose.be/zones-de-services/${serviceInfo.slug}`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 4,
+                    "name": titleToUse,
+                    "item": `https://debservices.canalrose.be/zones-de-services/${serviceInfo.slug}/${cityPath.join("/")}`
+                  }
+                ]
               }
-            },
-            "description": `${titleToUse} à ${cityInfo.name}. Intervention urgente 24/7.`
+            ]
           })
         }}
       />
