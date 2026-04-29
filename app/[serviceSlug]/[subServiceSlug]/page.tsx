@@ -127,6 +127,7 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
             fill
             priority
             className="object-cover object-center"
+            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-[#000814]/85 backdrop-blur-[2px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/50" />
@@ -161,9 +162,7 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
                     <span className="block text-xl">0496 32 57 33</span>
                   </div>
                 </a>
-                <Link href="#contact" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-10 py-6 rounded-2xl border border-white/20 transition text-lg flex items-center justify-center">
-                  Devis Rapide
-                </Link>
+
              </div>
            </div>
         </div>
@@ -206,6 +205,7 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
                     alt={`Intervention technique ${subServiceInfo.title}`} 
                     fill 
                     className="object-cover"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
@@ -214,6 +214,7 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
                     alt={`Dépannage professionnel ${subServiceInfo.title}`} 
                     fill 
                     className="object-cover"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
               </div>

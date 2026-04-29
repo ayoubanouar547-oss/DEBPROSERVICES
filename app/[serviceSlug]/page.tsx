@@ -136,6 +136,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
             fill
             priority
             className="object-cover object-center"
+            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-[#000814]/80 backdrop-blur-[2px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/40" />
@@ -207,39 +208,23 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
+                   <div className="pt-8 space-y-4">
+                  <div className="relative h-72 md:h-96 rounded-3xl overflow-hidden border border-white/10 group">
                     <Image 
                       src={serviceInfo.subServices[0]?.imageUrl || serviceInfo.imageUrl} 
-                      alt="Expertise DEB PRO SERVICES" 
+                      alt={`Expertise ${serviceInfo.title}`} 
                       fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
                     />
                   </div>
-                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
+                  <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10 group">
                     <Image 
                       src={serviceInfo.subServices[1]?.imageUrl || serviceInfo.imageUrl} 
-                      alt="Intervention technique" 
+                      alt={`Intervention ${serviceInfo.title}`} 
                       fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="pt-8 space-y-4">
-                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
-                    <Image 
-                      src={serviceInfo.subServices[2]?.imageUrl || serviceInfo.imageUrl} 
-                      alt="Équipement professionnel" 
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
-                    <Image 
-                      src={serviceInfo.imageUrl} 
-                      alt="Service client" 
-                      fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
                     />
                   </div>
                 </div>
