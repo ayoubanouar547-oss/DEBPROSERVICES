@@ -75,13 +75,12 @@ export function Navbar() {
             <div className="relative z-10 flex items-center justify-center">
               <WaterSplash />
               <Image 
-                src="/logo.png" 
+                src="https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c" 
                 alt="DEB PRO SERVICES - Logo officiel Plomberie et Débouchage en Belgique" 
                 width={160}
                 height={64}
                 className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 relative z-10"
                 referrerPolicy="no-referrer"
-                unoptimized={true}
                 priority
               />
             </div>

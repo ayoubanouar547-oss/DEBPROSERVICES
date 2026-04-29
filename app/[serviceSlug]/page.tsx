@@ -83,7 +83,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
                 "name": "DEB PRO SERVICES",
-                "image": "/logo.png",
+                "image": "https://debservices.canalrose.be/logo.png",
                 "url": "https://debservices.canalrose.be",
                 "telephone": "+32496325733",
                 "priceRange": "$$",
@@ -136,8 +136,6 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
             fill
             priority
             className="object-cover object-center"
-            referrerPolicy="no-referrer"
-            unoptimized={true}
           />
           <div className="absolute inset-0 bg-[#000814]/80 backdrop-blur-[2px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/40" />
@@ -186,7 +184,6 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       referrerPolicy="no-referrer"
-                      unoptimized={true}
                     />
                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                  </div>
@@ -210,25 +207,39 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
-                   <div className="pt-8 space-y-4">
-                  <div className="relative h-72 md:h-96 rounded-3xl overflow-hidden border border-white/10 group">
+                <div className="space-y-4">
+                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
                     <Image 
                       src={serviceInfo.subServices[0]?.imageUrl || serviceInfo.imageUrl} 
-                      alt={`Expertise ${serviceInfo.title}`} 
+                      alt="Expertise DEB PRO SERVICES" 
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                      unoptimized={true}
+                      className="object-cover"
                     />
                   </div>
-                  <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10 group">
+                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
                     <Image 
                       src={serviceInfo.subServices[1]?.imageUrl || serviceInfo.imageUrl} 
-                      alt={`Intervention ${serviceInfo.title}`} 
+                      alt="Intervention technique" 
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                      unoptimized={true}
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="pt-8 space-y-4">
+                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
+                    <Image 
+                      src={serviceInfo.subServices[2]?.imageUrl || serviceInfo.imageUrl} 
+                      alt="Équipement professionnel" 
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
+                    <Image 
+                      src={serviceInfo.imageUrl} 
+                      alt="Service client" 
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 </div>

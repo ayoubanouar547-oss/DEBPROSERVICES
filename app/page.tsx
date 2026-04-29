@@ -17,7 +17,7 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "DEB PRO SERVICES",
-            "image": "/logo.png",
+            "image": "https://debservices.canalrose.be/logo.png",
             "@id": "https://debservices.canalrose.be",
             "url": "https://debservices.canalrose.be",
             "telephone": "+32496325733",

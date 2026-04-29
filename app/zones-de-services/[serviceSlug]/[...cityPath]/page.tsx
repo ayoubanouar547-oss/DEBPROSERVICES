@@ -188,7 +188,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
             "provider": {
               "@type": "LocalBusiness",
               "name": "DEB PRO SERVICES",
-              "image": "/logo.png",
+              "image": "https://debservices.canalrose.be/logo.png",
               "telephone": "+32496325733",
               "priceRange": "$$",
               "address": {
@@ -215,8 +215,6 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
             fill
             priority
             className="object-cover object-center"
-            referrerPolicy="no-referrer"
-            unoptimized={true}
           />
           <div className="absolute inset-0 bg-[#000814]/85 backdrop-blur-[2px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/50" />
@@ -262,7 +260,9 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
                       <span className="block text-xl">0496 32 57 33</span>
                     </div>
                   </a>
-
+                  <a href="#contact" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-10 py-6 rounded-2xl border border-white/20 transition text-lg">
+                    Demander un Devis
+                  </a>
                </div>
              </div>
              
@@ -275,7 +275,6 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
                     alt={`${titleToUse} à ${cityInfo.name}`} 
                     className="object-cover" 
                     referrerPolicy="no-referrer"
-                    unoptimized={true}
                   />
                   <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex items-center justify-between">
                     <div>
@@ -347,28 +346,30 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
               {/* Multiple Images Gallery Section */}
               <div className="py-12 border-t border-white/10">
                 <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">Nos dernières interventions à {cityInfo.name}</h3>
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 group">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
                     <Image 
                       src={serviceInfo.subServices[0]?.imageUrl || serviceInfo.imageUrl} 
                       alt={`Intervention ${titleToUse} ${cityInfo.name}`} 
                       fill 
                       className="object-cover group-hover:scale-110 transition-transform duration-500" 
-                      referrerPolicy="no-referrer"
-                      unoptimized={true}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
-                  <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 group">
+                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
                     <Image 
                       src={serviceInfo.subServices[1]?.imageUrl || serviceInfo.imageUrl} 
                       alt={`Technicien ${serviceInfo.title} ${cityInfo.name}`} 
                       fill 
                       className="object-cover group-hover:scale-110 transition-transform duration-500" 
-                      referrerPolicy="no-referrer"
-                      unoptimized={true}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  </div>
+                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group hidden md:block">
+                    <Image 
+                      src={serviceInfo.subServices[2]?.imageUrl || serviceInfo.imageUrl} 
+                      alt={`Dépannage urgent ${cityInfo.name}`} 
+                      fill 
+                      className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                    />
                   </div>
                 </div>
               </div>

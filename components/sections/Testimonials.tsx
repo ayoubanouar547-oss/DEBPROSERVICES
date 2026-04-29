@@ -193,7 +193,6 @@ export function Testimonials() {
                               fill
                               className="object-cover" 
                               referrerPolicy="no-referrer"
-                              unoptimized={true}
                             />
                           </div>
                           <div className="min-w-0">
