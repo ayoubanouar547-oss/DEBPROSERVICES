@@ -19,12 +19,58 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: 'DEB PRO SERVICES | Plombier, Chauffage & Débouchage 24H/24',
-  description: 'Intervention d\'urgence 24H/24 et 7J/7 en Belgique. Plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique.',
+  metadataBase: new URL('https://debservices.canalrose.be'),
+  title: 'DEB PRO SERVICES | Plombier, Chauffage & Débouchage 24H/24 en Belgique',
+  description: 'Expertise en plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique. Intervention d\'urgence 24H/24 partout en Belgique. Devis gratuit.',
+  keywords: 'plombier Belgique, débouchage canalisation, chauffage urgence, vidange fosse septique, électricien urgent, gaz certifié, dépannage chaudière, Bruxelles, Wallonie, Flandre',
+  authors: [{ name: 'DEB PRO SERVICES' }],
+  creator: 'DEB PRO SERVICES',
+  publisher: 'DEB PRO SERVICES',
+  formatDetection: {
+    email: false,
+    address: true,
+    telephone: true,
+  },
+  alternates: {
+    canonical: 'https://debservices.canalrose.be',
+  },
+  openGraph: {
+    title: 'DEB PRO SERVICES | Solution d\'urgence Plomberie & Débouchage 24H/24',
+    description: 'Une urgence ? Nos plombiers et déboucheurs interviennent en 30 minutes partout en Belgique. Qualité garantie, tarifs transparents.',
+    url: 'https://debservices.canalrose.be',
+    siteName: 'DEB PRO SERVICES',
+    images: [
+      {
+        url: 'https://picsum.photos/seed/debpro/1200/630',
+        width: 1200,
+        height: 630,
+        alt: 'DEB PRO SERVICES - Plomberie et Débouchage en Belgique',
+      },
+    ],
+    locale: 'fr_BE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'DEB PRO SERVICES | Plombier & Débouchage 24H/24 en Belgique',
+    description: 'Dépannage d\'urgence 24/7 pour plomberie, chauffage et débouchage. Intervention rapide et efficace.',
+    images: ['https://picsum.photos/seed/debpro/1200/630'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#000814',
+  themeColor: '#1A3A8F',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',

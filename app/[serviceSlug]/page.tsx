@@ -2,6 +2,7 @@ import { services } from '@/lib/data/services';
 import { notFound } from 'next/navigation';
 import { PhoneCall, ChevronRight, CheckCircle } from 'lucide-react';
 import { ContactForm } from '@/components/sections/ContactForm';
+import { ServiceSeoText } from '@/components/sections/ServiceSeoText';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
 import { belgianCities } from '@/lib/data/cities';
@@ -13,7 +14,7 @@ export function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ serviceSlug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ serviceSlug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const service = services.find(s => s.slug === resolvedParams.serviceSlug);
   if (!service) return {};
@@ -33,6 +34,23 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceSl
   return {
     title: `${service.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
     description,
+    keywords: `${service.title} Belgique, ${service.title} urgent, ${service.title} 24h/24, expert ${service.title}, devis gratuit ${service.title}`,
+    alternates: {
+      canonical: `/${service.slug}`,
+    },
+    openGraph: {
+      title: `${service.title} Belgique | DEB PRO SERVICES`,
+      description,
+      url: `https://debservices.canalrose.be/${service.slug}`,
+      images: [
+        {
+          url: service.imageUrl,
+          width: 800,
+          height: 600,
+          alt: service.title,
+        }
+      ]
+    }
   };
 }
 
@@ -317,6 +335,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
       </section>
 
       <FAQ customFaqs={(serviceInfo as any).faqs} />
+      <ServiceSeoText serviceTitle={serviceInfo.title} />
 
     </>
   );

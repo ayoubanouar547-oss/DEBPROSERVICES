@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { PhoneCall, MapPin, ChevronRight, CheckCircle, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { ContactForm } from '@/components/sections/ContactForm';
+import { ServiceSeoText } from '@/components/sections/ServiceSeoText';
 import { FAQ } from '@/components/sections/FAQ';
 import Image from 'next/image';
 
@@ -45,7 +46,7 @@ export function generateStaticParams() {
   return params;
 }
 
-export async function generateMetadata({ params }: { params: Promise<UnifiedParams> }) {
+export async function generateMetadata({ params }: { params: Promise<UnifiedParams> }): Promise<Metadata> {
   const resolvedParams = await params;
   const { serviceSlug, cityPath } = resolvedParams;
   
@@ -56,7 +57,6 @@ export async function generateMetadata({ params }: { params: Promise<UnifiedPara
   let cityInfo = null;
 
   if (cityPath.length === 1) {
-    // Could be city OR subservice
     cityInfo = belgianCities.find(c => c.slug === cityPath[0]);
     subService = service.subServices.find(ss => ss.slug === cityPath[0]);
   } else if (cityPath.length === 2) {
@@ -64,24 +64,42 @@ export async function generateMetadata({ params }: { params: Promise<UnifiedPara
     cityInfo = belgianCities.find(c => c.slug === cityPath[1]);
   }
 
+  const path = `/zones-de-services/${serviceSlug}/${cityPath.join('/')}`;
+  const keywords = `${service.title}, ${subService ? subService.title : ''}, ${cityInfo ? cityInfo.name : 'Belgique'}, intervention urgente, dépannage 24/7`;
+
   if (subService && cityInfo) {
+    const title = `${subService.title} ${cityInfo.name} | DEB PRO SERVICES ☎ 24H/24`;
+    const description = `Besoin d'un expert pour ${subService.title.toLowerCase()} à ${cityInfo.name} (${cityInfo.province}) ? Intervention rapide, agréée et garantie. Devis gratuit au 0496 32 57 33.`;
     return {
-      title: `${subService.title} ${cityInfo.name} | DEB PRO SERVICES ☎ 24H/24`,
-      description: `Besoin d'un expert pour ${subService.title.toLowerCase()} à ${cityInfo.name} (${cityInfo.province}) ? Intervention rapide, agréée et garantie. Devis gratuit au 0496 32 57 33.`,
+      title,
+      description,
+      keywords,
+      alternates: { canonical: path },
+      openGraph: { title, description, url: `https://debservices.canalrose.be${path}` }
     };
   }
 
   if (subService) {
+    const title = `${subService.title} Belgique | DEB PRO SERVICES ☎ 24H/24`;
+    const description = `Découvrez toutes les villes en Belgique où nous intervenons pour votre ${subService.title.toLowerCase()}. Service rapide 24h/24 et 7j/7.`;
     return {
-      title: `${subService.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
-      description: `Découvrez toutes les villes en Belgique où nous intervenons pour votre ${subService.title.toLowerCase()}. Service rapide 24h/24 et 7j/7.`,
+      title,
+      description,
+      keywords,
+      alternates: { canonical: path },
+      openGraph: { title, description, url: `https://debservices.canalrose.be${path}` }
     };
   }
 
   if (cityInfo) {
+    const title = `${service.title} ${cityInfo.name} | DEB PRO SERVICES ☎ 24H/24`;
+    const description = `Service de ${service.title.toLowerCase()} professionnel à ${cityInfo.name} (${cityInfo.province}). Intervention rapide 24h/24 et 7j/7. Plombiers et chauffagistes agréés.`;
     return {
-      title: `${service.title} ${cityInfo.name} | DEB PRO SERVICES ☎ 24H/24`,
-      description: `Service de ${service.title.toLowerCase()} professionnel à ${cityInfo.name} (${cityInfo.province}). Intervention rapide 24h/24 et 7j/7. Plombiers et chauffagistes agréés.`,
+      title,
+      description,
+      keywords,
+      alternates: { canonical: path },
+      openGraph: { title, description, url: `https://debservices.canalrose.be${path}` }
     };
   }
 
@@ -433,6 +451,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
       </section>
 
       <FAQ city={cityInfo.name} customFaqs={(serviceInfo as any).faqs} />
+      <ServiceSeoText serviceTitle={`${titleToUse} à ${cityInfo.name}`} />
     </>
   );
 }

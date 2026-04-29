@@ -3,6 +3,7 @@ import { services } from '@/lib/data/services';
 import { notFound } from 'next/navigation';
 import { PhoneCall, ChevronRight, CheckCircle } from 'lucide-react';
 import { ContactForm } from '@/components/sections/ContactForm';
+import { ServiceSeoText } from '@/components/sections/ServiceSeoText';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
 import { belgianCities } from '@/lib/data/cities';
@@ -336,6 +337,7 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
       </section>
 
       <FAQ customFaqs={(serviceInfo as any).faqs} />
+      <ServiceSeoText serviceTitle={subServiceInfo.title} />
     </>
   );
 }

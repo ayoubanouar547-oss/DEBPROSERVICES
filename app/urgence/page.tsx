@@ -1,10 +1,21 @@
 import { PhoneCall, MapPin, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { ContactForm } from '@/components/sections/ContactForm';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Urgence Plombier 24H/24 | DEB PRO SERVICES',
-  description: 'Urgence plombier, chauffagiste et débouchage 24/7. Nous intervenons en 30 minutes partout en Belgique. Appelez-nous maintenant.',
+export const metadata: Metadata = {
+  title: 'Urgence Plombier 24H/24 | DEB PRO SERVICES ☎ 30 min Intervention',
+  description: 'Urgence plombier, chauffagiste et débouchage 24/7 partout en Belgique. Intervention locale en 30-60 minutes. Technicien agréé disponible immédiatement.',
+  keywords: 'urgence plombier Belgique, SOS débouchage canalisation, réparation chaudière nuit, électricien urgent 24h/24',
+  alternates: {
+    canonical: '/urgence',
+  },
+  openGraph: {
+    title: 'Dépannage d\'Urgence 24/7 | DEB PRO SERVICES',
+    description: 'Une fuite ? Une panne ? Un bouchon ? Nos experts de garde interviennent en moins d\'une heure en Belgique.',
+    url: 'https://debservices.canalrose.be/urgence',
+    type: 'website',
+  }
 };
 
 export default function UrgencePage() {

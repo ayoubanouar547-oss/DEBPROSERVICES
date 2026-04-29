@@ -1,8 +1,18 @@
 import { ContactForm } from '@/components/sections/ContactForm';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Demande de devis gratuit | DEB PRO SERVICES',
-  description: 'Obtenez un devis gratuit et sans engagement pour vos travaux de plomberie, chauffage, électricité et débouchage.',
+export const metadata: Metadata = {
+  title: 'Demande de devis gratuit | DEB PRO SERVICES ☎ Expert Belgique',
+  description: 'Obtenez un devis gratuit et sans engagement pour vos travaux de plomberie, chauffage, électricité et débouchage. Transparence totale et prix justes.',
+  keywords: 'devis gratuit plombier, estimation prix débouchage, prix chauffagiste Belgique, devis électricité rapide',
+  alternates: {
+    canonical: '/devis',
+  },
+  openGraph: {
+    title: 'Obtenez votre devis gratuit | DEB PRO SERVICES',
+    description: 'Estimation gratuite pour tous vos travaux de dépannage et rénovation en Belgique.',
+    url: 'https://debservices.canalrose.be/devis',
+  }
 };
 
 export default function DevisPage() {

@@ -1,9 +1,19 @@
 import { ShieldCheck, History, Award } from 'lucide-react';
 import Image from 'next/image';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'À Propos de Nous | DEB PRO SERVICES',
-  description: 'Découvrez DEB PRO SERVICES, votre expert belge en plomberie, chauffage, et débouchage avec plus de 15 ans d\'expérience.',
+export const metadata: Metadata = {
+  title: 'À Propos de Nous | DEB PRO SERVICES ☎ Plomberie & Chauffage Belgique',
+  description: 'Découvrez DEB PRO SERVICES, votre expert belge en plomberie, chauffage, et débouchage avec plus de 15 ans d\'expérience. Entreprise familiale agréée intervenant 24/7.',
+  keywords: 'entreprise plomberie Belgique, plombier Bruxelles expert, chauffagiste Wallonie certifié, DEB PRO SERVICES histoire',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'Qui sommes-nous ? | DEB PRO SERVICES',
+    description: 'Expertise, transparence et réactivité depuis plus de 15 ans partout en Belgique.',
+    url: 'https://debservices.canalrose.be/about',
+  }
 };
 
 export default function AboutPage() {
