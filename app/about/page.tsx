@@ -37,6 +37,7 @@ export default function AboutPage() {
                 alt="Notre équipe en intervention" 
                 className="object-cover" 
                 referrerPolicy="no-referrer"
+                unoptimized={true}
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white/10 backdrop-blur-xl p-6 rounded-2xl shadow-xl border border-white/10 flex items-center gap-4">

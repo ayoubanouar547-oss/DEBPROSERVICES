@@ -34,13 +34,14 @@ export function Services() {
                 {/* Card Image */}
                 <div className="relative h-56 w-full overflow-hidden flex-shrink-0 z-10 bg-slate-900/50">
                   <Image 
-                    src={service.imageUrl || `https://picsum.photos/seed/${service.slug}/600/400`} 
+                    src={service.imageUrl || `https://images.unsplash.com/photo-1581244277943-fe4a9c777189?q=80&w=600&auto=format&fit=crop`} 
                     alt={`Expertise en ${service.title} par les techniciens de DEB PRO SERVICES`} 
                     fill
                     priority={index < 3}
                     loading={index < 3 ? undefined : "eager"}
                     className="object-cover transition-transform duration-700 group-hover:scale-110" 
                     referrerPolicy="no-referrer"
+                    unoptimized={true}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
                   

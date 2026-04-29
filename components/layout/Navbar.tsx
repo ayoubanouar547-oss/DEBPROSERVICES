@@ -81,6 +81,7 @@ export function Navbar() {
                 height={64}
                 className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105 relative z-10"
                 referrerPolicy="no-referrer"
+                unoptimized={true}
                 priority
               />
             </div>

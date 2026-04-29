@@ -83,7 +83,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
                 "name": "DEB PRO SERVICES",
-                "image": "https://debservices.canalrose.be/logo.png",
+                "image": "https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c",
                 "url": "https://debservices.canalrose.be",
                 "telephone": "+32496325733",
                 "priceRange": "$$",
@@ -137,6 +137,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
             priority
             className="object-cover object-center"
             referrerPolicy="no-referrer"
+            unoptimized={true}
           />
           <div className="absolute inset-0 bg-[#000814]/80 backdrop-blur-[2px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/40" />
@@ -185,6 +186,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       referrerPolicy="no-referrer"
+                      unoptimized={true}
                     />
                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                  </div>
@@ -216,6 +218,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
+                      unoptimized={true}
                     />
                   </div>
                   <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10 group">
@@ -225,6 +228,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
+                      unoptimized={true}
                     />
                   </div>
                 </div>

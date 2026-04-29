@@ -17,7 +17,7 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "DEB PRO SERVICES",
-            "image": "https://debservices.canalrose.be/logo.png",
+            "image": "https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c",
             "@id": "https://debservices.canalrose.be",
             "url": "https://debservices.canalrose.be",
             "telephone": "+32496325733",

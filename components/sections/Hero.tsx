@@ -205,6 +205,7 @@ export function Hero() {
                  priority={true}
                  className="object-contain object-bottom drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] scale-110 md:scale-100"
                  referrerPolicy="no-referrer"
+                 unoptimized={true}
                />
            </div>
         </div>

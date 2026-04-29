@@ -188,7 +188,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
             "provider": {
               "@type": "LocalBusiness",
               "name": "DEB PRO SERVICES",
-              "image": "https://debservices.canalrose.be/logo.png",
+              "image": "https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c",
               "telephone": "+32496325733",
               "priceRange": "$$",
               "address": {
@@ -216,6 +216,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
             priority
             className="object-cover object-center"
             referrerPolicy="no-referrer"
+            unoptimized={true}
           />
           <div className="absolute inset-0 bg-[#000814]/85 backdrop-blur-[2px]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/50" />
@@ -274,6 +275,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
                     alt={`${titleToUse} à ${cityInfo.name}`} 
                     className="object-cover" 
                     referrerPolicy="no-referrer"
+                    unoptimized={true}
                   />
                   <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex items-center justify-between">
                     <div>
@@ -353,6 +355,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
                       fill 
                       className="object-cover group-hover:scale-110 transition-transform duration-500" 
                       referrerPolicy="no-referrer"
+                      unoptimized={true}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
@@ -363,6 +366,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
                       fill 
                       className="object-cover group-hover:scale-110 transition-transform duration-500" 
                       referrerPolicy="no-referrer"
+                      unoptimized={true}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
