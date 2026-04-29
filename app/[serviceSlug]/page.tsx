@@ -1,4 +1,5 @@
 import { services } from '@/lib/data/services';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PhoneCall, ChevronRight, CheckCircle } from 'lucide-react';
 import { ContactForm } from '@/components/sections/ContactForm';

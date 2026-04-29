@@ -1,4 +1,5 @@
 import { services } from '@/lib/data/services';
+import { Metadata } from 'next';
 import { belgianCities } from '@/lib/data/cities';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -10,15 +11,25 @@ export function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ serviceSlug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ serviceSlug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const service = services.find(s => s.slug === resolvedParams.serviceSlug);
   
   if (!service) return {};
 
+  const path = `/zones-de-services/${service.slug}`;
   return {
-    title: `Nos Zones d'Intervention en ${service.title} | DEB PRO SERVICES`,
-    description: `Découvrez toutes les villes en Belgique où nous intervenons pour votre ${service.title.toLowerCase()}. Service rapide 24h/24 et 7j/7.`,
+    title: `Zones d'Intervention ${service.title} | DEB PRO SERVICES ☎ 24h/24`,
+    description: `Découvrez toutes les villes en Belgique où nous intervenons pour votre ${service.title.toLowerCase()}. Service rapide 24h/24 et 7j/7. Plus de 300 villes couvertes par nos techniciens agréés.`,
+    keywords: `zones intervention ${service.title.toLowerCase()}, plombier ${service.title}, dépannage ${service.title} Belgique`,
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      title: `Zones d'Intervention ${service.title} | DEB PRO SERVICES`,
+      description: `Présence nationale pour vos besoins en ${service.title.toLowerCase()}. Intervention express en moins d'une heure.`,
+      url: `https://debservices.canalrose.be${path}`,
+    }
   };
 }
 

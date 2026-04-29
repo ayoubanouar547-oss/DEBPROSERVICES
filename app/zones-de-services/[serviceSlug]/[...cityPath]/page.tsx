@@ -1,4 +1,5 @@
 import { buildLongClusterText } from '@/lib/utils/seo-content-generator';
+import { Metadata } from 'next';
 import { services } from '@/lib/data/services';
 import { belgianCities } from '@/lib/data/cities';
 import { notFound } from 'next/navigation';

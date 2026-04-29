@@ -189,21 +189,21 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Trust Box area right side if needed, let's keep it minimal as in UI */}
-      <div className="col-span-1 lg:col-span-5 block mt-0 lg:mt-0">
-        <div className="relative aspect-[4/5] w-full max-w-[320px] lg:max-w-lg mx-auto flex items-end justify-center">
+      {/* Trust Box area right side - ensuring visibility on mobile */}
+      <div className="col-span-1 lg:col-span-5 flex items-center justify-center mt-12 lg:mt-0">
+        <div className="relative aspect-[4/5] w-full max-w-[280px] sm:max-w-[320px] lg:max-w-lg mx-auto flex items-end justify-center">
            {/* Decorative background glow for the Technician */}
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-500/30 blur-[100px] rounded-full -z-10"></div>
+           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-600/40 blur-[100px] rounded-full -z-10"></div>
            
            {/* Technician Uploaded Image Container */}
            <div className="relative z-10 w-full h-[110%] flex items-end justify-center">
                <Image 
                  src="/technician.png" 
-                 alt="Technicien DEB PRO SERVICES" 
+                 alt="Technicien DEB PRO SERVICES de garde" 
                  fill
                  sizes="(max-width: 768px) 100vw, 50vw"
                  priority={true}
-                 className="object-contain object-bottom drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] scale-110 md:scale-100"
+                 className="object-contain object-bottom drop-shadow-[20px_20px_40px_rgba(0,0,0,0.6)] scale-125 md:scale-100"
                />
            </div>
         </div>

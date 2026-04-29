@@ -1,6 +1,15 @@
-export const metadata = {
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
   title: 'Mentions Légales | DEB PRO SERVICES',
-  description: 'Informations juridiques légales sur la société DEB PRO SERVICES.',
+  description: 'Informations juridiques légales sur la société DEB PRO SERVICES, expert en dépannage en Belgique.',
+  alternates: {
+    canonical: '/mentions-legales',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function MentionsLegalesPage() {

@@ -1,4 +1,5 @@
 import { buildLongClusterText } from '@/lib/utils/seo-content-generator';
+import { Metadata } from 'next';
 import { services } from '@/lib/data/services';
 import { notFound } from 'next/navigation';
 import { PhoneCall, ChevronRight, CheckCircle } from 'lucide-react';
@@ -32,6 +33,23 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceSl
   return {
     title: `${subService.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
     description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} DEB PRO SERVICES intervient urgence 24h/24 et 7j/7 partout en Belgique.`,
+    keywords: `${subService.title} Belgique, ${subService.title} urgent, expert ${subService.title.toLowerCase()}, dépannage 24h/24, ${service.title} Belgique`,
+    alternates: {
+      canonical: `/${service.slug}/${subService.slug}`,
+    },
+    openGraph: {
+      title: `${subService.title} Belgique | DEB PRO SERVICES`,
+      description: `Expertise en ${subService.title.toLowerCase()} partout en Belgique. Intervention rapide 24/7.`,
+      url: `https://debservices.canalrose.be/${service.slug}/${subService.slug}`,
+      images: [
+        {
+          url: subService.imageUrl || service.imageUrl,
+          width: 800,
+          height: 600,
+          alt: subService.title,
+        }
+      ]
+    }
   };
 }
 
