@@ -66,21 +66,21 @@ export async function generateMetadata({ params }: { params: Promise<UnifiedPara
 
   if (subService && cityInfo) {
     return {
-      title: `${subService.title} ${cityInfo.name} | Urgence & Dépannage 24/7 | DEB PRO SERVICES`,
+      title: `${subService.title} ${cityInfo.name} | DEB PRO SERVICES ☎ 24H/24`,
       description: `Besoin d'un expert pour ${subService.title.toLowerCase()} à ${cityInfo.name} (${cityInfo.province}) ? Intervention rapide, agréée et garantie. Devis gratuit au 0496 32 57 33.`,
     };
   }
 
   if (subService) {
     return {
-      title: `Nos Zones d'Intervention en ${subService.title} | Belgique | DEB PRO SERVICES`,
+      title: `${subService.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
       description: `Découvrez toutes les villes en Belgique où nous intervenons pour votre ${subService.title.toLowerCase()}. Service rapide 24h/24 et 7j/7.`,
     };
   }
 
   if (cityInfo) {
     return {
-      title: `${service.title} à ${cityInfo.name} | Plombier & Chauffagiste 24/7 | DEB PRO SERVICES`,
+      title: `${service.title} ${cityInfo.name} | DEB PRO SERVICES ☎ 24H/24`,
       description: `Service de ${service.title.toLowerCase()} professionnel à ${cityInfo.name} (${cityInfo.province}). Intervention rapide 24h/24 et 7j/7. Plombiers et chauffagistes agréés.`,
     };
   }
@@ -183,10 +183,20 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
+            "name": titleToUse,
             "serviceType": titleToUse,
             "provider": {
               "@type": "LocalBusiness",
               "name": "DEB PRO SERVICES",
+              "image": "https://debservices.canalrose.be/logo.png",
+              "telephone": "+32496325733",
+              "priceRange": "$$",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": cityInfo.name,
+                "addressRegion": cityInfo.province,
+                "addressCountry": "BE"
+              },
               "areaServed": {
                 "@type": "City",
                 "name": cityInfo.name
@@ -197,22 +207,30 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
         }}
       />
 
-      <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
-        <div className="absolute inset-0 bg-slate-900 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/30 via-slate-900 to-slate-900"></div>
+      <section className="relative pt-32 pb-24 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src={subServiceInfo?.imageUrl || serviceInfo.imageUrl}
+            alt={`DEB PRO SERVICES - ${titleToUse} ${cityInfo.name}`}
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-[#000814]/85 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/50" />
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="flex items-center gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
-             <Link href="/" className="hover:text-blue-400">Accueil</Link>
+             <Link href="/" className="hover:text-blue-400 font-medium">Accueil</Link>
              <ChevronRight className="w-4 h-4" />
-             <Link href="/zones-de-services" className="hover:text-blue-400">Zones de Services</Link>
+             <Link href="/zones-de-services" className="hover:text-blue-400 font-medium">Zones</Link>
              <ChevronRight className="w-4 h-4" />
-             <Link href={`/zones-de-services/${serviceInfo.slug}`} className="hover:text-blue-400">{serviceInfo.title}</Link>
+             <Link href={`/zones-de-services/${serviceInfo.slug}`} className="hover:text-blue-400 font-medium">{serviceInfo.title}</Link>
              <ChevronRight className="w-4 h-4" />
              {subServiceInfo && (
                <>
-                 <Link href={`/zones-de-services/${serviceInfo.slug}/${cityInfo.slug}`} className="hover:text-blue-400">{cityInfo.name}</Link>
+                 <Link href={`/zones-de-services/${serviceInfo.slug}/${cityInfo.slug}`} className="hover:text-blue-400 font-medium">{cityInfo.name}</Link>
                  <ChevronRight className="w-4 h-4" />
                </>
              )}
@@ -220,23 +238,30 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
            </div>
 
            <div className="grid lg:grid-cols-2 gap-12 items-center">
-             <div className="max-w-2xl">
-               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-xl rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest text-slate-300">
-                  <MapPin className="w-4 h-4 text-blue-400" />
-                  Service Urgent à {cityInfo.name}
+             <div className="max-w-3xl">
+               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-widest text-white border border-blue-400/30 mb-8 shadow-2xl shadow-blue-600/30">
+                  <MapPin className="w-4 h-4" />
+                  Technicien local dispatché à {cityInfo.name}
                </div>
-               <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] mb-6">
+               <h1 className="text-5xl md:text-6xl lg:text-8xl font-black leading-[1.05] mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tighter">
                   {titleToUse} <br/> 
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                  <span className="text-blue-500">
                     {cityInfo.name}
                   </span>
                </h1>
-               <p className="text-2xl text-white mb-10 leading-relaxed">
-                 Experts en <strong>{titleToUse.toLowerCase()}</strong> disponibles immédiatement sur toute la ville de {cityInfo.name}. Solutions durables et prix transparents.
+               <p className="text-xl md:text-2xl text-blue-100/70 mb-10 leading-relaxed max-w-2xl">
+                 Besoin d'un expert pour <strong>{titleToUse.toLowerCase()}</strong> à {cityInfo.name} ? Nos techniciens interviennent chez vous en moins de 60 minutes, 24h/24 et 7j/7. Devis gratuit et sans engagement.
                </p>
-               <div className="flex flex-wrap gap-4">
-                  <a href="tel:0496325733" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
-                    <PhoneCall className="w-6 h-6" /> SOS Urgent {cityInfo.name}
+               <div className="flex flex-col sm:flex-row items-center gap-6">
+                  <a href="tel:0496325733" className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-10 py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-lg group">
+                    <PhoneCall className="w-7 h-7 animate-pulse group-hover:scale-110 transition-transform" /> 
+                    <div className="text-left">
+                      <span className="block text-xs opacity-80 uppercase tracking-widest font-bold">Dépannage Urgent</span>
+                      <span className="block text-xl">0496 32 57 33</span>
+                    </div>
+                  </a>
+                  <a href="#contact" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-10 py-6 rounded-2xl border border-white/20 transition text-lg">
+                    Demander un Devis
                   </a>
                </div>
              </div>
@@ -301,12 +326,51 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
               <div>
                 <h3 className="text-4xl font-black mb-10 text-white">Pourquoi nous choisir à {cityInfo.name} ?</h3>
                 <div className="grid sm:grid-cols-2 gap-6">
-                  {serviceInfo.features.map((feature, idx) => (
-                    <div key={idx} className="bg-white/5 border border-white/10 rounded-3xl p-6 flex items-start gap-4">
-                      <CheckCircle className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
-                      <span className="text-lg font-bold">{feature}</span>
+                  {[
+                    { title: "Rapidité Locale", desc: `Intervention en 30 min à ${cityInfo.name} grâce à nos techniciens de proximité.` },
+                    { title: "Savoir-faire Agrée", desc: "Plombiers et chauffagistes certifiés pour des travaux aux normes belges." },
+                    { title: "Prix Fixes", desc: "Devis gratuit et prix annoncé avant intervention. Pas de mauvaise surprise." },
+                    { title: "Disponibilité 24/7", desc: "Une équipe d'astreinte jour et nuit, même les jours fériés." }
+                  ].map((item, idx) => (
+                    <div key={idx} className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-blue-500/30 transition-colors">
+                      <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6 text-blue-400" />
+                      </div>
+                      <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                      <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              {/* Multiple Images Gallery Section */}
+              <div className="py-12 border-t border-white/10">
+                <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">Nos dernières interventions à {cityInfo.name}</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
+                    <Image 
+                      src={serviceInfo.subServices[0]?.imageUrl || serviceInfo.imageUrl} 
+                      alt={`Intervention ${titleToUse} ${cityInfo.name}`} 
+                      fill 
+                      className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
+                    <Image 
+                      src={serviceInfo.subServices[1]?.imageUrl || serviceInfo.imageUrl} 
+                      alt={`Technicien ${serviceInfo.title} ${cityInfo.name}`} 
+                      fill 
+                      className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group hidden md:block">
+                    <Image 
+                      src={serviceInfo.subServices[2]?.imageUrl || serviceInfo.imageUrl} 
+                      alt={`Dépannage urgent ${cityInfo.name}`} 
+                      fill 
+                      className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
                 </div>
               </div>
               
@@ -368,7 +432,7 @@ export default async function UnifiedZonePage({ params }: { params: Promise<Unif
         </div>
       </section>
 
-      <FAQ city={cityInfo.name} />
+      <FAQ city={cityInfo.name} customFaqs={(serviceInfo as any).faqs} />
     </>
   );
 }

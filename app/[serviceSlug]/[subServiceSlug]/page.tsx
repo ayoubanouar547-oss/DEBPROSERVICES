@@ -1,7 +1,7 @@
 import { buildLongClusterText } from '@/lib/utils/seo-content-generator';
 import { services } from '@/lib/data/services';
 import { notFound } from 'next/navigation';
-import { PhoneCall, ShieldCheck, CheckCircle, ChevronRight } from 'lucide-react';
+import { PhoneCall, ChevronRight, CheckCircle } from 'lucide-react';
 import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceSl
   if (!service || !subService) return {};
   
   return {
-    title: `${subService.title} Belgique | Experts en ${service.title} | ☎ 24H/24`,
+    title: `${subService.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
     description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} DEB PRO SERVICES intervient urgence 24h/24 et 7j/7 partout en Belgique.`,
   };
 }
@@ -66,12 +66,12 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
             "@graph": [
               {
                 "@type": "Service",
-                "@id": `https://debproservices.be/${serviceInfo.slug}/${subServiceInfo.slug}#service`,
+                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}#service`,
                 "name": `${subServiceInfo.title}`,
                 "serviceType": subServiceInfo.title,
                 "description": subServiceInfo.desc,
                 "provider": {
-                  "@id": "https://debproservices.be/#organization"
+                  "@id": "https://debservices.canalrose.be/#organization"
                 },
                 "areaServed": {
                   "@type": "Country",
@@ -80,15 +80,18 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
               },
               {
                 "@type": "LocalBusiness",
-                "@id": "https://debproservices.be/#organization",
+                "@id": "https://debservices.canalrose.be/#organization",
                 "name": "DEB PRO SERVICES",
-                "image": "https://debproservices.be/logo.png",
-                "url": "https://debproservices.be",
-                "telephone": "0496325733",
+                "image": "https://debservices.canalrose.be/logo.png",
+                "url": "https://debservices.canalrose.be",
+                "telephone": "+32496325733",
                 "priceRange": "$$",
                 "address": {
                   "@type": "PostalAddress",
                   "addressLocality": "Brussels",
+                  "addressRegion": "Brussels",
+                  "postalCode": "1000",
+                  "streetAddress": "Centre",
                   "addressCountry": "BE"
                 },
                 "geo": {
@@ -116,57 +119,150 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
         }}
       />
 
-      <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 to-transparent pointer-events-none"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           
+      <section className="relative pt-32 pb-24 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src={(subServiceInfo as any).imageUrl || serviceInfo.imageUrl}
+            alt={`DEB PRO SERVICES - ${subServiceInfo.title}`}
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-[#000814]/85 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/50" />
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
            {/* Breadcrumb */}
-           <div className="flex items-center gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
-             <Link href="/" className="hover:text-blue-400">Accueil</Link>
+           <div className="flex items-center justify-center lg:justify-start gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
+             <Link href="/" className="hover:text-blue-400 font-medium">Accueil</Link>
              <ChevronRight className="w-4 h-4" />
-             <Link href={`/${serviceInfo.slug}`} className="hover:text-blue-400">{serviceInfo.title}</Link>
+             <Link href={`/${serviceInfo.slug}`} className="hover:text-blue-400 font-medium">{serviceInfo.title}</Link>
              <ChevronRight className="w-4 h-4" />
              <span className="text-white font-bold">{subServiceInfo.title}</span>
            </div>
 
-           <div className="max-w-4xl">
-             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-sm font-bold border border-white/20 mb-6 uppercase tracking-widest text-blue-300">
+           <div className="max-w-4xl mx-auto lg:mx-0">
+             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-[0.2em] text-white mb-8 shadow-xl shadow-blue-600/20">
                 <serviceInfo.icon className="w-4 h-4" />
-                Service Spécialisé
+                Intervention Spécialisée 24/7
              </div>
-             <h1 className="text-4xl md:text-5xl lg:text-5xl font-black leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-                {subServiceInfo.title} en Belgique
+             <h1 className="text-4xl md:text-6xl lg:text-8xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
+                {subServiceInfo.title}
              </h1>
-             <p className="text-xl text-blue-100/80 mb-8 max-w-3xl leading-relaxed">
-               {subServiceInfo.desc} Disponibilité immédiate 24/7 partout en Belgique.
+             <p className="text-xl md:text-2xl text-blue-100/70 mb-10 max-w-3xl leading-relaxed mx-auto lg:mx-0">
+               {subServiceInfo.desc} Nos techniciens agréés interviennent en urgence 24h/24 et 7j/7 partout en Belgique avec le matériel adéquat. Solutions durables et travaux garantis.
              </p>
-             <div className="flex flex-wrap gap-4">
-                <a href="tel:0496325733" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/20">
-                  <PhoneCall className="w-5 h-5" /> Intervention Urgente
+             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
+                <a href="tel:0496325733" className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-10 py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-lg group">
+                  <PhoneCall className="w-7 h-7 animate-pulse group-hover:scale-110 transition-transform" /> 
+                  <div className="text-left">
+                    <span className="block text-xs opacity-80 uppercase tracking-widest font-bold">Appel SOS 24/7</span>
+                    <span className="block text-xl">0496 32 57 33</span>
+                  </div>
                 </a>
+                <Link href="#contact" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-10 py-6 rounded-2xl border border-white/20 transition text-lg flex items-center justify-center">
+                  Devis Rapide
+                </Link>
              </div>
            </div>
         </div>
       </section>
 
-      {/* Programmatic Cluster Content for SEO - Simulating 1000 words logic */}
+      {/* Trust Badges Bar */}
+      <div className="bg-white/5 border-b border-white/10 py-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: PhoneCall, text: "Intervention < 60 min" },
+              { icon: ChevronRight, text: "Devis Gratuit" },
+              { icon: ChevronRight, text: "Technicien Agrée" },
+              { icon: ChevronRight, text: "Travail Garanti 1 an" }
+            ].map((badge, i) => (
+              <div key={i} className="flex items-center justify-center gap-3 text-slate-300">
+                <div className="w-10 h-10 bg-blue-600/20 rounded-full flex items-center justify-center border border-blue-500/30">
+                  <badge.icon className="w-5 h-5 text-blue-400" />
+                </div>
+                <span className="font-bold text-sm uppercase tracking-wider">{badge.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Section with Images Gallery */}
       <section className="py-20 bg-slate-900 text-white relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-16">
             
             <div className="lg:col-span-8 space-y-10">
-              <h2 className="text-5xl font-black text-white leading-tight uppercase tracking-tight">L'Expertise {subServiceInfo.title} à votre portée</h2>
+              <h2 className="text-5xl font-black text-white leading-tight uppercase tracking-tight">Expertise professionnelle en {subServiceInfo.title}</h2>
               
-              <div className="prose prose-xl prose-invert text-white">
-                <p dangerouslySetInnerHTML={{ __html: paragraphs[0] }} />
+              {/* Secondary Images Gallery */}
+              <div className="grid grid-cols-2 gap-4 mb-12">
+                <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
+                  <Image 
+                    src={serviceInfo.subServices[0]?.imageUrl || serviceInfo.imageUrl} 
+                    alt={`Intervention technique ${subServiceInfo.title}`} 
+                    fill 
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
+                  <Image 
+                    src={serviceInfo.subServices[1]?.imageUrl || serviceInfo.imageUrl} 
+                    alt={`Dépannage professionnel ${subServiceInfo.title}`} 
+                    fill 
+                    className="object-cover"
+                  />
+                </div>
+              </div>
 
-                <p dangerouslySetInnerHTML={{ __html: paragraphs[1] }} />
+              <div className="prose prose-xl prose-invert text-white max-w-none">
+                <p className="text-2xl font-medium text-blue-200 mb-8 leading-relaxed">
+                  DEB PRO SERVICES est votre partenaire de confiance en Belgique pour tout besoin lié à la <strong>{subServiceInfo.title.toLowerCase()}</strong>. 
+                  Nous combinons rapidité d'intervention et excellence technique.
+                </p>
                 
-                <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">Pourquoi une intervention rapide est cruciale ?</h3>
-                <p dangerouslySetInnerHTML={{ __html: paragraphs[2] }} />
+                <div className="grid md:grid-cols-2 gap-8 not-prose mb-12">
+                  <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
+                    <h3 className="text-xl font-bold mb-4 text-blue-400">Ce que nous garantissons :</h3>
+                    <ul className="space-y-4">
+                      {serviceInfo.features.map((f, i) => (
+                        <li key={i} className="flex gap-3 text-slate-300">
+                          <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
+                    <h3 className="text-xl font-bold mb-4 text-blue-400">Pourquoi nous appeler ?</h3>
+                    <ul className="space-y-4">
+                      <li className="flex gap-3 text-slate-300">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span>Intervention urgente en moins d'une heure.</span>
+                      </li>
+                      <li className="flex gap-3 text-slate-300">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span>Techniciens certifiés et hautement qualifiés.</span>
+                      </li>
+                      <li className="flex gap-3 text-slate-300">
+                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <span>Matériel de diagnostic de pointe.</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
 
-                <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">Notre zone d'action rapide</h3>
-                <p dangerouslySetInnerHTML={{ __html: paragraphs[3] }} />
+                <div dangerouslySetInnerHTML={{ __html: paragraphs[0] }} />
+                <div dangerouslySetInnerHTML={{ __html: paragraphs[1] }} />
+                
+                <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">Sécurité et Transparence</h3>
+                <div dangerouslySetInnerHTML={{ __html: paragraphs[2] }} />
+
+                <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">Actif partout en Belgique</h3>
+                <div dangerouslySetInnerHTML={{ __html: paragraphs[3] }} />
                 
                 {/* Massive Content */}
                 <div className="mt-16 border-t border-white/10 pt-16">
@@ -210,39 +306,6 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
         </div>
       </section>
 
-      {/* Galerie de réalisations */}
-      <section className="py-24 relative z-10 border-t border-white/10 overflow-hidden">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-               <div className="max-w-2xl">
-                  <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">Réalisations Récentes</h2>
-                  <h3 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Nos interventions en images</h3>
-                  <p className="text-slate-400 text-lg leading-relaxed">Aperçu de la qualité de finition et du matériel utilisé lors de nos travaux de {subServiceInfo.title.toLowerCase()}.</p>
-               </div>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <div 
-                    key={i} 
-                    className={`group relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 aspect-square transition-all duration-500 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 ${i > 4 ? 'hidden md:block' : ''} ${i > 6 ? 'hidden lg:block' : ''}`}
-                  >
-                     <Image 
-                        src={`https://picsum.photos/seed/${subServiceInfo.slug}-gallery-${i}/800/800`}
-                        alt={`Réalisation n°${i} pour ${subServiceInfo.title} en Belgique - DEB PRO SERVICES`}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        referrerPolicy="no-referrer"
-                     />
-                     <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent">
-                        <span className="text-[10px] font-black text-white uppercase tracking-widest bg-blue-600 px-2 py-1 rounded">DEB PRO SERVICES</span>
-                     </div>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
-
       <section className="py-20 bg-white/5 border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
@@ -272,7 +335,7 @@ export default async function SubServicePage({ params }: { params: Promise<{ ser
         </div>
       </section>
 
-      <FAQ />
+      <FAQ customFaqs={(serviceInfo as any).faqs} />
     </>
   );
 }

@@ -20,10 +20,13 @@ export default function Home() {
             "image": "https://debservices.canalrose.be/logo.png",
             "@id": "https://debservices.canalrose.be",
             "url": "https://debservices.canalrose.be",
-            "telephone": "+32470000000",
+            "telephone": "+32496325733",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Bruxelles",
+              "addressRegion": "Brussels",
+              "postalCode": "1000",
+              "streetAddress": "Centre",
               "addressCountry": "BE"
             },
             "areaServed": "Belgium",
@@ -40,7 +43,6 @@ export default function Home() {
       />
       <Hero />
       <Services />
-      <ServiceZones />
       <Testimonials />
       <FAQ />
       <ContactForm />

@@ -1,6 +1,6 @@
 import { services } from '@/lib/data/services';
 import { notFound } from 'next/navigation';
-import { PhoneCall, ShieldCheck, CheckCircle, ChevronRight } from 'lucide-react';
+import { PhoneCall, ChevronRight, CheckCircle } from 'lucide-react';
 import { ContactForm } from '@/components/sections/ContactForm';
 import { FAQ } from '@/components/sections/FAQ';
 import Link from 'next/link';
@@ -54,12 +54,12 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
             "@graph": [
               {
                 "@type": "Service",
-                "@id": `https://debproservices.be/${serviceInfo.slug}#service`,
+                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}#service`,
                 "name": serviceInfo.title,
                 "serviceType": serviceInfo.title,
                 "description": serviceInfo.description,
                 "provider": {
-                  "@id": "https://debproservices.be/#organization"
+                  "@id": "https://debservices.canalrose.be/#organization"
                 },
                 "areaServed": {
                   "@type": "Country",
@@ -81,15 +81,18 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
               },
               {
                 "@type": "LocalBusiness",
-                "@id": "https://debproservices.be/#organization",
+                "@id": "https://debservices.canalrose.be/#organization",
                 "name": "DEB PRO SERVICES",
-                "image": "https://debproservices.be/logo.png",
-                "url": "https://debproservices.be",
-                "telephone": "0496325733",
+                "image": "https://debservices.canalrose.be/logo.png",
+                "url": "https://debservices.canalrose.be",
+                "telephone": "+32496325733",
                 "priceRange": "$$",
                 "address": {
                   "@type": "PostalAddress",
                   "addressLocality": "Brussels",
+                  "addressRegion": "Brussels",
+                  "postalCode": "1000",
+                  "streetAddress": "Centre",
                   "addressCountry": "BE"
                 },
                 "geo": {
@@ -113,7 +116,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                 },
                 "contactPoint": {
                   "@type": "ContactPoint",
-                  "telephone": "0496325733",
+                  "telephone": "+32496325733",
                   "contactType": "emergency",
                   "areaServed": "BE",
                   "availableLanguage": ["French", "Dutch", "English"]
@@ -175,11 +178,13 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
                  className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col"
                >
                  <div className="relative h-48 w-full overflow-hidden flex-shrink-0 z-10">
-                   <img 
-                     src={(sub as any).imageUrl || serviceInfo.imageUrl} 
-                     alt={`Intervention ${sub.title}`} 
-                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                   />
+                    <Image 
+                      src={(sub as any).imageUrl || serviceInfo.imageUrl} 
+                      alt={`Intervention ${sub.title}`} 
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      referrerPolicy="no-referrer"
+                    />
                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
                  </div>
 
@@ -196,53 +201,82 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
         </div>
       </section>
 
-      {/* SEO Text Core */}
-      <section className="py-24 relative z-10 text-white">
+      {/* Secondary Image & Trust Section */}
+      <section className="py-24 bg-[#000814] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <h2 className="text-5xl font-black text-white leading-tight uppercase">Prestations de haute qualité pour votre {serviceInfo.title.toLowerCase()}</h2>
-              
-              <div className="prose prose-xl prose-invert text-white">
-                <p>
-                  Dans le domaine de la <strong>{serviceInfo.title.toLowerCase()}</strong>, l'improvisation n'a pas sa place. Un système mal entretenu ou rafistolé peut entraîner des dysfonctionnements, voire des dégâts importants dans votre habitation ou vos locaux commerciaux. En faisant appel à notre équipe, vous optez pour la sérénité.
-                </p>
-                <p>
-                  Nous prenons en charge toutes les étapes : du diagnostic précis à la résolution de la panne. Nous disposons des certifications nécessaires pour intervenir en toute sécurité.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-3xl font-black text-white mb-8 border-b border-white/10 pb-4">Nos garanties d'expert :</h3>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {serviceInfo.features.map((feat, index) => (
-                    <li key={index} className="flex items-center gap-3 bg-white/5 p-6 rounded-2xl border border-white/10">
-                      <CheckCircle className={`w-6 h-6 flex-shrink-0 ${serviceInfo.color.text}`} />
-                      <span className="font-bold text-white uppercase text-xs tracking-widest">{feat}</span>
-                    </li>
-                  ))}
-                  <li className="flex items-center gap-3 bg-white/5 p-6 rounded-2xl border border-white/10">
-                    <ShieldCheck className={`w-6 h-6 flex-shrink-0 ${serviceInfo.color.text}`} />
-                    <span className="font-bold text-white uppercase text-xs tracking-widest">Pièces certifiées d'origine</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
             <div className="relative">
-              <div className="rounded-[3rem] overflow-hidden shadow-2xl relative h-full min-h-[700px] border border-white/10 bg-slate-800/20 backdrop-blur-sm">
-                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent flex items-end p-10">
-                   <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-10 rounded-3xl w-full translate-y-2 group">
-                     <h4 className="text-white font-black text-3xl mb-4 group-hover:text-blue-400 transition-colors uppercase tracking-tight">Une urgence ?</h4>
-                     <p className="text-white mb-8 font-medium text-lg leading-relaxed">Les dégâts matériels peuvent s'aggraver rapidement. Appelez-nous avant que la situation ne devienne critique.</p>
-                     <a href="tel:0496325733" className="bg-red-600 shadow-xl shadow-red-600/30 text-white w-full px-8 py-5 rounded-2xl font-black text-xl flex items-center justify-center gap-3 hover:bg-red-700 transition-all uppercase tracking-widest">
-                       Nous appeler <PhoneCall className="w-6 h-6" />
-                     </a>
-                   </div>
-                 </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
+                    <Image 
+                      src={serviceInfo.subServices[0]?.imageUrl || serviceInfo.imageUrl} 
+                      alt="Expertise DEB PRO SERVICES" 
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
+                    <Image 
+                      src={serviceInfo.subServices[1]?.imageUrl || serviceInfo.imageUrl} 
+                      alt="Intervention technique" 
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="pt-8 space-y-4">
+                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
+                    <Image 
+                      src={serviceInfo.subServices[2]?.imageUrl || serviceInfo.imageUrl} 
+                      alt="Équipement professionnel" 
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
+                    <Image 
+                      src={serviceInfo.imageUrl} 
+                      alt="Service client" 
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Trust Badge */}
+              <div className="absolute -bottom-6 -right-6 bg-blue-600 p-8 rounded-2xl shadow-2xl z-20 border-4 border-[#000814]">
+                <div className="text-4xl font-black text-white mb-1">15+</div>
+                <div className="text-blue-100 text-sm font-bold uppercase tracking-widest">Ans d'expérience</div>
               </div>
             </div>
 
+            <div className="text-white">
+              <h2 className="text-4xl font-black mb-8 leading-tight">Pourquoi faire confiance à DEB PRO SERVICES pour votre {serviceInfo.title} ?</h2>
+              <div className="space-y-6">
+                {[
+                  { title: "Intervention Express 24h/24", desc: "Nous arrivons chez vous en moins de 30 à 60 minutes pour toute urgence partout en Belgique." },
+                  { title: "Tarifs Fixes & Transparents", desc: "Aucun frais caché. Un devis clair vous est présenté avant chaque début de travaux." },
+                  { title: "Matériel High-Tech", desc: "Caméras HD, furets électriques et camions hydrocureurs pour des résultats impeccables." },
+                  { title: "Garantie de Satisfaction", desc: "Tous nos travaux sont garantis. Nous ne repartons que lorsque le problème est 100% résolu." }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-colors">
+                    <div className="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-blue-500/30">
+                      <CheckCircle className="w-6 h-6 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-xl mb-2">{item.title}</h3>
+                      <p className="text-slate-400 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-10">
+                <a href="tel:0496325733" className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-10 py-5 rounded-2xl hover:bg-slate-100 transition shadow-2xl">
+                  <PhoneCall className="w-6 h-6" /> APPELEZ VOTRE EXPERT : 0496 32 57 33
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -282,7 +316,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
          </div>
       </section>
 
-      <FAQ />
+      <FAQ customFaqs={(serviceInfo as any).faqs} />
 
     </>
   );

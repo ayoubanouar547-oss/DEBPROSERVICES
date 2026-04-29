@@ -26,10 +26,17 @@ const faqs = [
   }
 ];
 
-export function FAQ({ city }: { city?: string }) {
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export function FAQ({ city, customFaqs }: { city?: string, customFaqs?: FAQItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const personalizedFaqs = faqs.map(faq => {
+  const baseFaqs = customFaqs || faqs;
+
+  const personalizedFaqs = baseFaqs.map(faq => {
     if (!city) return faq;
     return {
       question: faq.question.replace(/Belgique/g, city),
