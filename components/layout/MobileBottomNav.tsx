@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { Home, Phone, MapPin, AlertTriangle, ShieldCheck } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { Home, Phone, MapPin, AlertTriangle, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export function MobileBottomNav() {
   const pathname = usePathname();
@@ -16,18 +16,18 @@ export function MobileBottomNav() {
   }, []);
 
   const navItems = [
-    { name: 'Accueil', icon: Home, href: '/' },
-    { name: 'Services', icon: ShieldCheck, href: '/#services' },
-    { name: 'Appeler', icon: Phone, href: 'tel:0496325733', isLarge: true },
-    { name: 'Zones', icon: MapPin, href: '/zones-de-services' },
-    { name: 'Urgence', icon: AlertTriangle, href: '/urgence' },
+    { name: "Accueil", icon: Home, href: "/" },
+    { name: "Services", icon: ShieldCheck, href: "/#services" },
+    { name: "Appeler", icon: Phone, href: "tel:0496325733", isLarge: true },
+    { name: "Zones", icon: MapPin, href: "/zones-de-services" },
+    { name: "Urgence", icon: AlertTriangle, href: "/urgence" },
   ];
 
   return (
     <AnimatePresence>
       {isVisible && (
         <div className="md:hidden fixed bottom-2 left-2 right-2 z-[9000]">
-          <motion.nav 
+          <motion.nav
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
@@ -39,7 +39,7 @@ export function MobileBottomNav() {
 
               if (item.isLarge) {
                 return (
-                  <a 
+                  <a
                     key={item.name}
                     href={item.href}
                     className="relative -top-6 bg-green-600 p-3 rounded-full border-4 border-[#000814] shadow-xl shadow-green-600/40"
@@ -50,20 +50,28 @@ export function MobileBottomNav() {
               }
 
               return (
-                <Link 
-                  key={item.name} 
+                <Link
+                  key={item.name}
                   href={item.href}
                   className="flex flex-col items-center justify-center py-2 px-1 rounded-2xl transition-all relative flex-1 group"
                 >
                   {isActive && (
-                    <motion.div 
+                    <motion.div
                       layoutId="activeBackground"
                       className="absolute inset-0 bg-blue-500/10 rounded-2xl border border-blue-500/20"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6,
+                      }}
                     />
                   )}
-                  <Icon className={`w-5 h-5 relative z-10 transition-colors duration-300 ${isActive ? 'text-blue-400' : 'text-slate-400 group-hover:text-white'}`} />
-                  <span className={`text-[9px] font-bold mt-1 uppercase tracking-tighter relative z-10 transition-colors duration-300 ${isActive ? 'text-blue-400' : 'text-slate-400 group-hover:text-white'}`}>
+                  <Icon
+                    className={`w-5 h-5 relative z-10 transition-colors duration-300 ${isActive ? "text-blue-400" : "text-slate-400 group-hover:text-white"}`}
+                  />
+                  <span
+                    className={`text-[9px] font-bold mt-1 uppercase tracking-tighter relative z-10 transition-colors duration-300 ${isActive ? "text-blue-400" : "text-slate-400 group-hover:text-white"}`}
+                  >
                     {item.name}
                   </span>
                 </Link>

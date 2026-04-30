@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface Particle {
   id: number;
@@ -36,26 +36,27 @@ export function WaterSplash() {
         <motion.div
           key={p.id}
           initial={{ x: 0, y: 0, opacity: 0, scale: 0 }}
-          animate={{ 
+          animate={{
             x: [0, p.distanceX * 0.4, p.distanceX],
             y: [0, p.arcHeight, p.distanceY],
             opacity: [0, 1, 0.8, 0],
             scale: [0.2, 1, 0.8, 0.3],
-            rotate: [0, 45, 90]
+            rotate: [0, 45, 90],
           }}
           transition={{
             duration: p.duration,
             repeat: Infinity,
             delay: p.delay,
-            ease: "linear"
+            ease: "linear",
           }}
           className="absolute rounded-full"
-          style={{ 
+          style={{
             width: p.size,
             height: p.size * 1.5,
-            background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(0,173,239,0.7) 60%, rgba(29,78,216,0.2) 100%)",
+            background:
+              "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(0,173,239,0.7) 60%, rgba(29,78,216,0.2) 100%)",
             boxShadow: "0 0 8px rgba(0,173,239,0.6)",
-            filter: "blur(0.5px)"
+            filter: "blur(0.5px)",
           }}
         />
       ))}
