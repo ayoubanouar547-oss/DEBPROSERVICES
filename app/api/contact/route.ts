@@ -63,6 +63,25 @@ export async function POST(req: Request) {
         console.log("No Resend API Key. Payload received:", data);
     }
 
+    // Google Sheets Integration
+    if (process.env.GOOGLE_SCRIPT_URL) {
+      try {
+        await fetch(process.env.GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...data,
+            date: new Date().toLocaleString('fr-BE', { timeZone: 'Europe/Brussels' }),
+          }),
+        });
+      } catch (sheetError) {
+        console.error('Error sending to Google Sheets:', sheetError);
+        // We don't block the response even if sheets fail
+      }
+    }
+
     return NextResponse.json({ success: true });
   } catch (err: any) {
     if (err instanceof z.ZodError) {

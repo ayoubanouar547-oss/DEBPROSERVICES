@@ -16,24 +16,24 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
           {/* Col 1: Brand & Desc */}
-          <div className="space-y-6 vcard">
-            <Link href="/" className="inline-block fn org">
+          <div className="space-y-6 h-card">
+            <Link href="/" className="inline-block u-url p-name p-org">
               <span className="text-2xl font-black tracking-tighter text-white">
                 DEB PRO<span className="text-blue-500">SERVICES</span>
               </span>
             </Link>
-            <p className="text-sm text-slate-100 font-medium opacity-80 note">
+            <p className="text-sm text-slate-100 font-medium opacity-80 p-note">
               Votre partenaire de confiance pour tous vos travaux et urgences de plomberie, chauffage, gaz, électricité et débouchage à travers toute la Belgique.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10 url">
+              <a href="https://facebook.com/debservices" className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10 u-url">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10 url">
+              <a href="https://instagram.com/debservices" className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10 u-url">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
-            <div className="flex items-center gap-2 text-xs font-bold text-blue-400 bg-blue-600/20 border border-blue-500/30 max-w-fit px-3 py-1.5 rounded uppercase tracking-widest category">
+            <div className="flex items-center gap-2 text-xs font-bold text-blue-400 bg-blue-600/20 border border-blue-500/30 max-w-fit px-3 py-1.5 rounded uppercase tracking-widest p-category">
               <ShieldCheck className="w-4 h-4" /> Entreprise Agréée
             </div>
           </div>
@@ -73,25 +73,25 @@ export function Footer() {
           </div>
 
           {/* Col 4: Contact */}
-          <div className="vcard">
+          <div className="h-card">
             <h3 className="text-lg font-bold text-white mb-6 font-heading">Contactez-nous</h3>
             <ul className="space-y-4">
               <li className="flex gap-3">
                 <Phone className="w-5 h-5 text-secondary flex-shrink-0" />
-                <a href={`tel:${PHONE.replace(/\s/g, '')}`} className="text-lg font-bold text-white hover:text-secondary transition tel">
+                <a href={`tel:${PHONE.replace(/\s/g, '')}`} className="text-lg font-bold text-white hover:text-secondary transition p-tel">
                   {PHONE}
                 </a>
               </li>
               <li className="flex gap-3">
                 <Mail className="w-5 h-5 text-secondary flex-shrink-0" />
-                <a href={`mailto:${EMAIL}`} className="hover:text-secondary transition email">
+                <a href={`mailto:${EMAIL}`} className="hover:text-secondary transition u-email">
                   {EMAIL}
                 </a>
               </li>
-              <li className="flex gap-3 adr">
+              <li className="flex gap-3 p-adr h-adr">
                 <MapPin className="w-5 h-5 text-secondary flex-shrink-0 mt-1" />
-                <span className="locality">Intervention 24/7<br />Toute la Belgique</span>
-                <span className="country-name hidden">Belgium</span>
+                <span className="p-locality">Intervention 24/7<br />Toute la Belgique</span>
+                <span className="p-country-name hidden">Belgium</span>
               </li>
             </ul>
           </div>

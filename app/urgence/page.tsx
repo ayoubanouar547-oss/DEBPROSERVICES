@@ -26,42 +26,21 @@ export default function UrgencePage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "LocalBusiness",
-                "@id": "https://debservices.canalrose.be/#organization",
-                "name": "DEB PRO SERVICES",
-                "image": "https://debservices.canalrose.be/logo.png",
-                "url": "https://debservices.canalrose.be",
-                "telephone": "+32496325733",
-                "address": {
-                  "@type": "PostalAddress",
-                  "addressLocality": "Brussels",
-                  "addressRegion": "Brussels",
-                  "postalCode": "1000",
-                  "streetAddress": "Centre",
-                  "addressCountry": "BE"
-                }
-              },
-              {
-                "@type": "BreadcrumbList",
-                "@id": "https://debservices.canalrose.be/urgence#breadcrumb",
-                "itemListElement": [
-                  {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Accueil",
-                    "item": "https://debservices.canalrose.be"
-                  },
-                  {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Urgence",
-                    "item": "https://debservices.canalrose.be/urgence"
-                  }
-                ]
-              }
-            ]
+            "@type": "LocalBusiness",
+            "name": "DEB PRO SERVICES - Urgence 24h/24",
+            "image": "https://debservices.canalrose.be/technician.png",
+            "@id": "https://debservices.canalrose.be/urgence",
+            "url": "https://debservices.canalrose.be/urgence",
+            "telephone": "+32496325733",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Centre-ville",
+              "addressLocality": "Bruxelles",
+              "postalCode": "1000",
+              "addressCountry": "BE"
+            },
+            "description": "Urgence plombier, chauffagiste et débouchage 24/7 partout en Belgique. Intervention locale en 30-60 minutes."
           })
         }}
       />
