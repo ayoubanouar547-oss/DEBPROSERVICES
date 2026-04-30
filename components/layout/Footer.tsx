@@ -6,6 +6,7 @@ import {
   Facebook,
   Instagram,
   ShieldCheck,
+  ChevronRight,
 } from "lucide-react";
 import { belgianCities } from "@/lib/data/cities";
 import { services } from "@/lib/data/services";
@@ -57,14 +58,14 @@ export function Footer() {
             <h3 className="text-lg font-bold text-white mb-6 font-heading">
               Nos Services
             </h3>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
               {services.map((service) => (
                 <li key={service.id}>
                   <Link
                     href={`/${service.slug}`}
-                    className="text-sm hover:text-secondary transition flex items-center gap-2"
+                    className="text-sm hover:text-secondary transition flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+                    <span className="w-1 h-1 bg-secondary rounded-full group-hover:scale-150 transition-transform"></span>
                     {service.title}
                   </Link>
                 </li>
@@ -77,24 +78,37 @@ export function Footer() {
             <h3 className="text-lg font-bold text-white mb-6 font-heading">
               Zones d'Intervention
             </h3>
-            <ul className="grid grid-cols-2 gap-3 text-sm">
-              {belgianCities.slice(0, 10).map((city) => (
+            <ul className="grid grid-cols-2 gap-2 text-xs">
+              {belgianCities.slice(0, 20).map((city) => (
                 <li key={city.slug}>
                   <Link
                     href={`/zones-de-services/plomberie/${city.slug}`}
-                    className="hover:text-secondary transition"
+                    className="hover:text-secondary transition opacity-80 hover:opacity-100"
                   >
                     {city.name}
                   </Link>
                 </li>
               ))}
             </ul>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {Array.from(new Set(belgianCities.map((c) => c.province)))
+                .slice(0, 5)
+                .map((province) => (
+                  <Link
+                    key={province}
+                    href={`/zones-de-services?province=${encodeURIComponent(province)}`}
+                    className="text-[10px] bg-white/5 border border-white/10 px-2 py-1 rounded hover:bg-secondary hover:text-black transition uppercase font-black tracking-tighter"
+                  >
+                    {province}
+                  </Link>
+                ))}
+            </div>
             <div className="mt-4">
               <Link
                 href="/zones-de-services"
-                className="text-secondary text-sm font-bold hover:underline"
+                className="text-secondary text-sm font-bold hover:underline flex items-center gap-2"
               >
-                Voir toutes les zones &rarr;
+                Toutes les zones et services <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

@@ -58,6 +58,7 @@ export default function Home() {
       />
       <Hero />
       <Services />
+      <ServiceZones />
       <Testimonials />
       <FAQ />
       <ContactForm />

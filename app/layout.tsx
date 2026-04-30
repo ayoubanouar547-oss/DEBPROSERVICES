@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { PreFooterLinks } from "@/components/layout/PreFooterLinks";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 
@@ -123,6 +124,7 @@ export default function RootLayout({
 
         <Navbar />
         <main className="flex-1 relative z-10">{children}</main>
+        <PreFooterLinks />
         <Footer />
         <CookieBanner />
         <MobileBottomNav />

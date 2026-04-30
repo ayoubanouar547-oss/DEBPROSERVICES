@@ -632,25 +632,48 @@ export default async function UnifiedZonePage({
             <div className="lg:col-span-4 relative">
               <div className="sticky top-32 space-y-8">
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl">
-                  <h3 className="font-bold text-xl mb-4 text-white">
-                    Autres zones à proximité
+                  <h3 className="font-bold text-xl mb-4 text-white uppercase tracking-tighter">
+                    Autres services à {cityInfo.name}
                   </h3>
-                  <div className="flex flex-col gap-3">
+                  <div className="grid grid-cols-1 gap-2">
+                    {services
+                      .filter((s) => s.slug !== serviceInfo.slug)
+                      .slice(0, 5)
+                      .map((s) => (
+                        <Link
+                          key={s.slug}
+                          href={`/zones-de-services/${s.slug}/${cityInfo.slug}`}
+                          className="text-xs bg-white/5 border border-white/10 p-3 rounded-xl text-slate-300 hover:text-white hover:border-blue-500/50 transition-all flex items-center justify-between group"
+                        >
+                          <span className="font-bold uppercase">
+                            {s.title} {cityInfo.name}
+                          </span>
+                          <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 transition-colors" />
+                        </Link>
+                      ))}
+                  </div>
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl">
+                  <h3 className="font-bold text-xl mb-4 text-white uppercase tracking-tighter">
+                    Villes de la province {cityInfo.province}
+                  </h3>
+                  <div className="grid grid-cols-1 gap-2">
                     {belgianCities
                       .filter(
                         (c) =>
                           c.province === cityInfo.province &&
                           c.slug !== cityInfo.slug,
                       )
-                      .slice(0, 6)
+                      .slice(0, 12)
                       .map((c) => (
                         <Link
                           key={c.slug}
                           href={`/zones-de-services/${serviceInfo.slug}/${subServiceInfo ? subServiceInfo.slug + "/" : ""}${c.slug}`}
-                          className="bg-white/5 border border-white/10 p-4 rounded-xl text-slate-300 hover:text-white hover:border-blue-500/50 transition-all flex items-center justify-between group"
+                          className="bg-white/5 border border-white/10 p-3 rounded-xl text-slate-300 hover:text-white hover:border-blue-500/50 transition-all flex items-center justify-between group"
                         >
-                          <span className="font-bold text-xs tracking-tight uppercase">
-                            {c.name}
+                          <span className="font-bold text-[10px] tracking-tight uppercase">
+                            {serviceInfo.title} {c.name}
                           </span>
                           <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 transition-colors" />
                         </Link>
