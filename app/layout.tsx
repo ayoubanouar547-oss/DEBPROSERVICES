@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Oswald } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -62,6 +63,9 @@ export const metadata: Metadata = {
       "Dépannage d'urgence 24/7 pour plomberie, chauffage et débouchage. Intervention rapide et efficace.",
     images: ["https://picsum.photos/seed/debpro/1200/630"],
   },
+  verification: {
+    google: "EzJCaAlzhQ39X0jWHXeJrMgF3-RDrFjKMTgx5bs0UGE",
+  },
   robots: {
     index: true,
     follow: true,
@@ -122,6 +126,19 @@ export default function RootLayout({
         <Footer />
         <CookieBanner />
         <MobileBottomNav />
+        <Script
+          id="microsoft-clarity"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "wjxyfzz68l");
+            `,
+          }}
+        />
       </body>
     </html>
   );
