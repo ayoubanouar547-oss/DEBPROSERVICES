@@ -286,7 +286,7 @@ export function Hero() {
           <div className="relative z-10 w-full h-[110%] flex items-end justify-center">
             <Image
               src="https://debouchageexpress24hh.odoo.com/web/image/4154-71fb4457/technician%20%282%29.webp"
-              alt="Technicien DEB PRO SERVICES de garde"
+              alt="Technicien agréé DEB PRO SERVICES prêt pour intervention urgente en Belgique"
               fill
               referrerPolicy="no-referrer"
               sizes="(max-width: 768px) 100vw, 50vw"

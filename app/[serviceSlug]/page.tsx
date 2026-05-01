@@ -24,39 +24,42 @@ export async function generateMetadata({
   const service = services.find((s) => s.slug === resolvedParams.serviceSlug);
   if (!service) return {};
 
-  let description = `Service de ${service.title.toLowerCase()}. Intervention urgente 24h/24 et 7j/7 en Belgique. Devis gratuit.`;
+  let description = `${service.title} Belgique : techniciens agréés pour toute intervention urgente. Dépannage 24h/24 & 7j/7. Devis gratuit immédiat ☎ 0496 32 57 33.`;
 
   if (service.slug === "plomberie") {
     description =
-      "Plomberie urgence 24/7: technicien agréé en Belgique. Fuites ou installations. Devis gratuit et dépannage rapide. Contactez DEB PRO SERVICES !";
+      "Plombier Belgique urgence 24/7 : techniciens agréés pour fuites, installations et dépannages rapides. Devis gratuit. Intervention immédiate au ☎ 0496 32 57 33 !";
   } else if (service.slug === "debouchage-canalisation") {
     description =
-      "Débouchage urgence 24/7: technicien agréé en Belgique. WC, égouts, éviers bouchés. Devis gratuit, action immédiate. Contactez DEB PRO SERVICES !";
+      "Débouchage canalisation Belgique 24/7 : expert pour WC, égouts et éviers bouchés. Devis gratuit, action immédiate et garantie. Appelez le ☎ 0496 32 57 33 !";
   } else if (service.slug === "chauffage") {
     description =
-      "Chauffage urgence 24/7: chauffagiste et technicien agréé en Belgique. Dépannage chaudière, devis gratuit. Appelez DEB PRO SERVICES maintenant !";
-  } else if (service.slug === "renovation-maison") {
-    description =
-      "Rénovation maison & appartement en Belgique. Spécialiste douche italienne, salle de bain et rénovation totale. Devis gratuit, travail pro 24/7. Contactez-nous !";
+      "Chauffagiste Belgique certifié : dépannage chaudière en urgence 24h/24. Entretien, installation et mise par DEB PRO SERVICES. Devis gratuit ☎ 0496 32 57 33.";
+  } else if (service.slug === "gaz") {
+    description = 
+      "Techniciens certifiés CERGA pour toute intervention gaz en Belgique. Détection de fuites, mise en conformité, raccordement. Urgence 24h/24 ☎ 0496 32 57 33";
+  } else if (service.slug === "electricite") {
+    description = 
+      "Électricien Belgique urgence 24/7 : mise en conformité, dépannage tableau électrique et installation. Expert agréé, devis gratuit. Appelez le ☎ 0496 32 57 33.";
   }
 
   return {
-    title: `${service.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
+    title: `Expert ${service.title} Belgique — Intervention Rapide 24h/24`,
     description,
     keywords: `${service.title} Belgique, ${service.title} urgent, ${service.title} 24h/24, expert ${service.title}, devis gratuit ${service.title}`,
     alternates: {
       canonical: `/${service.slug}`,
     },
     openGraph: {
-      title: `${service.title} Belgique | DEB PRO SERVICES`,
+      title: `Expert ${service.title} Belgique | DEB PRO SERVICES`,
       description,
       url: `https://debservices.canalrose.be/${service.slug}`,
       images: [
         {
           url: service.imageUrl,
-          width: 800,
-          height: 600,
-          alt: service.title,
+          width: 1200,
+          height: 630,
+          alt: `DEB PRO SERVICES - Expert ${service.title} en Belgique`,
         },
       ],
     },
@@ -76,6 +79,11 @@ export default async function ServicePage({
   if (!serviceInfo) {
     notFound();
   }
+
+  const isGasService = serviceInfo.slug === "gaz";
+  const h1Title = isGasService 
+    ? `Expert ${serviceInfo.title} Belgique — Techniciens Certifiés CERGA 24h/24`
+    : `Expert ${serviceInfo.title} Belgique — Techniciens Agréés 24h/24`;
 
   return (
     <>
@@ -125,7 +133,7 @@ export default async function ServicePage({
                   addressLocality: "Brussels",
                   addressRegion: "Brussels",
                   postalCode: "1000",
-                  streetAddress: "Centre",
+                  streetAddress: "Centre Ville",
                   addressCountry: "BE",
                 },
                 geo: {
@@ -133,56 +141,41 @@ export default async function ServicePage({
                   latitude: 50.8503,
                   longitude: 4.3517,
                 },
-                openingHoursSpecification: {
-                  "@type": "OpeningHoursSpecification",
-                  dayOfWeek: [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                    "Sunday",
-                  ],
-                  opens: "00:00",
-                  closes: "23:59",
-                },
-              },
-              {
-                "@type": "BreadcrumbList",
-                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}#breadcrumb`,
-                itemListElement: [
+                openingHoursSpecification: [
                   {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "Accueil",
-                    item: "https://debservices.canalrose.be",
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: serviceInfo.title,
-                    item: `https://debservices.canalrose.be/${serviceInfo.slug}`,
-                  },
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                    opens: "00:00",
+                    closes: "23:59",
+                  }
                 ],
               },
+              ...(serviceInfo.faqs ? [{
+                "@type": "FAQPage",
+                "mainEntity": serviceInfo.faqs.map(faq => ({
+                  "@type": "Question",
+                  "name": faq.question,
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.answer
+                  }
+                }))
+              }] : [])
             ],
           }),
         }}
       />
 
       <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
-        {/* Background Image with Overlay */}
         <div className="absolute inset-0 -z-10">
           <Image
             src={serviceInfo.imageUrl}
-            alt={`DEB PRO SERVICES - ${serviceInfo.title}`}
+            alt={`DEB PRO SERVICES - Dépannage ${serviceInfo.title} en Belgique`}
             fill
             priority
             className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-[#000814]/80 backdrop-blur-[2px]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/40" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -191,10 +184,10 @@ export default async function ServicePage({
               className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}
             >
               <serviceInfo.icon className="w-4 h-4" />
-              Service Pro & Agrée
+              Service Pro & Agrée en Belgique
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
-              Expert {serviceInfo.title}
+              {h1Title}
             </h1>
             <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
               {serviceInfo.description}

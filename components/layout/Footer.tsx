@@ -76,39 +76,27 @@ export function Footer() {
           {/* Col 3: Zones (SEO value) */}
           <div>
             <h3 className="text-lg font-bold text-white mb-6 font-heading">
-              Zones d'Intervention
+              Zones Principales
             </h3>
             <ul className="grid grid-cols-2 gap-2 text-xs">
-              {belgianCities.slice(0, 20).map((city) => (
+              {belgianCities.slice(0, 10).map((city) => (
                 <li key={city.slug}>
                   <Link
                     href={`/zones-de-services/plomberie/${city.slug}`}
-                    className="hover:text-secondary transition opacity-80 hover:opacity-100"
+                    className="hover:text-secondary transition opacity-80 hover:opacity-100 flex items-center gap-1"
                   >
+                    <ChevronRight className="w-2 h-2 text-secondary" />
                     {city.name}
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {Array.from(new Set(belgianCities.map((c) => c.province)))
-                .slice(0, 5)
-                .map((province) => (
-                  <Link
-                    key={province}
-                    href={`/zones-de-services?province=${encodeURIComponent(province)}`}
-                    className="text-[10px] bg-white/5 border border-white/10 px-2 py-1 rounded hover:bg-secondary hover:text-black transition uppercase font-black tracking-tighter"
-                  >
-                    {province}
-                  </Link>
-                ))}
-            </div>
-            <div className="mt-4">
+            <div className="mt-6">
               <Link
                 href="/zones-de-services"
                 className="text-secondary text-sm font-bold hover:underline flex items-center gap-2"
               >
-                Toutes les zones et services <ChevronRight className="w-4 h-4" />
+                Voir toutes les villes <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

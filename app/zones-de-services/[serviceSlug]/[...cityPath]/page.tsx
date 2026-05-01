@@ -250,8 +250,19 @@ export default async function UnifiedZonePage({
   if (!cityInfo) notFound();
 
   const titleToUse = subServiceInfo ? subServiceInfo.title : serviceInfo.title;
-  const localIntro = `Vous résidez à <strong>${cityInfo.name}</strong> (${cityInfo.province}) et vous cherchez un expert pour <strong>${titleToUse.toLowerCase()}</strong> ? DEB PRO SERVICES intervient en urgence 24h/24 et 7j/7. Nos techniciens spécialisés en ${serviceInfo.title.toLowerCase()} sont équipés pour résoudre votre problème de ${titleToUse.toLowerCase()} rapidement et durablement.`;
-  const localSpeed = `Grâce à notre présence locale à ${cityInfo.name}, nous garantissons une intervention en moins de 30 minutes après votre appel. Nous connaissons parfaitement les quartiers de ${cityInfo.name}, ce qui nous permet d'arriver chez vous sans délai pour votre ${titleToUse.toLowerCase()}.`;
+  
+  // Dynamic intro generation for unique content per city
+  const cityUniqueSentences = [
+    `Nos équipes sont régulièrement en intervention près de chez vous à ${cityInfo.name}, que ce soit à proximité du centre-ville ou dans les quartiers résidentiels périphériques de cette magnifique localité de ${cityInfo.province}.`,
+    `En tant qu'experts locaux à ${cityInfo.name}, nous comprenons parfaitement les spécificités des installations dans la région de ${cityInfo.province}, garantissant ainsi un service de ${titleToUse.toLowerCase()} parfaitement adapté à vos besoins.`,
+    `Que vous soyez un particulier ou un professionnel situé à ${cityInfo.name}, DEB PRO SERVICES mobilise ses meilleurs techniciens pour assurer la pérennité de vos installations de ${serviceInfo.title.toLowerCase()} avec un professionnalisme exemplaire.`,
+    `La satisfaction de nos clients à ${cityInfo.name} est notre priorité absolue, c'est pourquoi nous utilisons des technologies de pointe pour chaque dépannage de ${titleToUse.toLowerCase()} dans votre commune.`,
+  ];
+
+  const localIntro = `Vous résidez à <strong>${cityInfo.name}</strong> (${cityInfo.province}) et vous cherchez un expert pour <strong>${titleToUse.toLowerCase()}</strong> ? DEB PRO SERVICES intervient en urgence 24h/24 et 7j/7. Nos techniciens spécialisés en ${serviceInfo.title.toLowerCase()} sont équipés pour résoudre votre problème de ${titleToUse.toLowerCase()} rapidement et durablement. ${cityUniqueSentences[cityInfo.name.length % cityUniqueSentences.length]} ${cityUniqueSentences[(cityInfo.name.length + 1) % cityUniqueSentences.length]}`;
+  
+  const localSpeed = `Grâce à notre présence locale à ${cityInfo.name}, nous garantissons une intervention en moins de 30 minutes après votre appel. Nous connaissons parfaitement les quartiers de ${cityInfo.name}, ce qui nous permet d'arriver chez vous sans délai pour votre ${titleToUse.toLowerCase()}. Nos véhicules d'intervention sont géo-localisés en permanence dans la province de ${cityInfo.province} pour une réactivité maximale.`;
+  
   const massiveSEOContent = buildLongClusterText(
     titleToUse.toLowerCase(),
     cityInfo.name,
@@ -270,7 +281,7 @@ export default async function UnifiedZonePage({
                 "@id": `https://debservices.canalrose.be/zones-de-services/${serviceInfo.slug}/${cityPath.join("/")}#service`,
                 name: `${titleToUse} à ${cityInfo.name}`,
                 serviceType: titleToUse,
-                description: `${titleToUse} à ${cityInfo.name}. Intervention urgente 24/7 partout en Belgique.`,
+                description: `${titleToUse} à ${cityInfo.name}. Intervention urgente 24/7 partout en Belgique. Techniciens agréés et certifiés.`,
                 provider: {
                   "@id": "https://debservices.canalrose.be/#organization",
                 },
@@ -278,6 +289,20 @@ export default async function UnifiedZonePage({
                   "@type": "City",
                   name: cityInfo.name,
                 },
+                hasOfferCatalog: {
+                  "@type": "OfferCatalog",
+                  name: `Solutions de ${titleToUse} ${cityInfo.name}`,
+                  itemListElement: [
+                    {
+                      "@type": "Offer",
+                      itemOffered: {
+                        "@type": "Service",
+                        name: `Dépannage ${titleToUse} ${cityInfo.name} 24h/24`,
+                        description: `Intervention immédiate pour ${titleToUse.toLowerCase()} à ${cityInfo.name}.`
+                      }
+                    }
+                  ]
+                }
               },
               {
                 "@type": "LocalBusiness",
@@ -292,7 +317,7 @@ export default async function UnifiedZonePage({
                   addressLocality: cityInfo.name,
                   addressRegion: cityInfo.province,
                   postalCode: "1000",
-                  streetAddress: "Centre",
+                  streetAddress: "Service Local",
                   addressCountry: "BE",
                 },
                 geo: {
@@ -300,20 +325,35 @@ export default async function UnifiedZonePage({
                   latitude: 50.8503,
                   longitude: 4.3517,
                 },
-                openingHoursSpecification: {
-                  "@type": "OpeningHoursSpecification",
-                  dayOfWeek: [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                    "Sunday",
-                  ],
-                  opens: "00:00",
-                  closes: "23:59",
-                },
+                openingHoursSpecification: [
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                    opens: "00:00",
+                    closes: "23:59",
+                  }
+                ],
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": `Quel est le délai d'intervention pour un ${titleToUse.toLowerCase()} à ${cityInfo.name} ?`,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": `Nous intervenons en moins de 30 à 60 minutes à ${cityInfo.name} pour toute urgence liée à votre ${serviceInfo.title.toLowerCase()}.`
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": `Proposez-vous un devis gratuit à ${cityInfo.name} ?`,
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": `Oui, DEB PRO SERVICES propose des devis gratuits et sans engagement pour tous vos travaux de ${titleToUse.toLowerCase()} à ${cityInfo.name}.`
+                    }
+                  }
+                ]
               },
               {
                 "@type": "BreadcrumbList",

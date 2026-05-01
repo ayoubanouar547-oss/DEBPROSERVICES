@@ -46,10 +46,9 @@ export function Services() {
                       service.imageUrl ||
                       `https://picsum.photos/seed/${service.slug}/600/400`
                     }
-                    alt={`Expertise en ${service.title} par les techniciens de DEB PRO SERVICES`}
+                    alt={`Service de ${service.title} en Belgique - Intervention professionnelle par DEB PRO SERVICES`}
                     fill
-                    priority={index < 3}
-                    loading={index < 3 ? undefined : "eager"}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                     referrerPolicy="no-referrer"
                   />
