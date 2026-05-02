@@ -2,6 +2,7 @@ import { buildLongClusterText } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { services } from "@/lib/data/services";
 import { belgianCities } from "@/lib/data/cities";
+import { cityData, defaultCityData } from "@/lib/cityData";
 import { notFound } from "next/navigation";
 import {
   PhoneCall,
@@ -84,13 +85,15 @@ export async function generateMetadata({
   const keywords = `${service.title}, ${subService ? subService.title : ""}, ${cityInfo ? cityInfo.name : "Belgique"}, intervention urgente, dépannage 24/7`;
 
   if (subService && cityInfo) {
+    const cityDataObj = cityData[cityInfo.slug] ?? defaultCityData;
     const title = `${subService.title} ${cityInfo.name} | DEB PRO SERVICES ☎ 24H/24`;
-    const description = `Besoin d'un expert pour ${subService.title.toLowerCase()} à ${cityInfo.name} (${cityInfo.province}) ? Intervention rapide, agréée et garantie. Devis gratuit au 0496 32 57 33.`;
+    const description = `Expert en ${subService.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0496 32 57 33`;
+    const canonicalPath = `/zones-de-services/${serviceSlug}/${cityInfo.slug}`;
     return {
       title,
       description,
       keywords,
-      alternates: { canonical: path },
+      alternates: { canonical: canonicalPath },
       openGraph: {
         title,
         description,
@@ -116,8 +119,9 @@ export async function generateMetadata({
   }
 
   if (cityInfo) {
+    const cityDataObj = cityData[cityInfo.slug] ?? defaultCityData;
     const title = `${service.title} ${cityInfo.name} | DEB PRO SERVICES ☎ 24H/24`;
-    const description = `Service de ${service.title.toLowerCase()} professionnel à ${cityInfo.name} (${cityInfo.province}). Intervention rapide 24h/24 et 7j/7. Plombiers et chauffagistes agréés.`;
+    const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0496 32 57 33`;
     return {
       title,
       description,
@@ -251,17 +255,17 @@ export default async function UnifiedZonePage({
 
   const titleToUse = subServiceInfo ? subServiceInfo.title : serviceInfo.title;
   
-  // Dynamic intro generation for unique content per city
-  const cityUniqueSentences = [
-    `Nos équipes sont régulièrement en intervention près de chez vous à ${cityInfo.name}, que ce soit à proximité du centre-ville ou dans les quartiers résidentiels périphériques de cette magnifique localité de ${cityInfo.province}.`,
-    `En tant qu'experts locaux à ${cityInfo.name}, nous comprenons parfaitement les spécificités des installations dans la région de ${cityInfo.province}, garantissant ainsi un service de ${titleToUse.toLowerCase()} parfaitement adapté à vos besoins.`,
-    `Que vous soyez un particulier ou un professionnel situé à ${cityInfo.name}, DEB PRO SERVICES mobilise ses meilleurs techniciens pour assurer la pérennité de vos installations de ${serviceInfo.title.toLowerCase()} avec un professionnalisme exemplaire.`,
-    `La satisfaction de nos clients à ${cityInfo.name} est notre priorité absolue, c'est pourquoi nous utilisons des technologies de pointe pour chaque dépannage de ${titleToUse.toLowerCase()} dans votre commune.`,
-  ];
-
-  const localIntro = `Vous résidez à <strong>${cityInfo.name}</strong> (${cityInfo.province}) et vous cherchez un expert pour <strong>${titleToUse.toLowerCase()}</strong> ? DEB PRO SERVICES intervient en urgence 24h/24 et 7j/7. Nos techniciens spécialisés en ${serviceInfo.title.toLowerCase()} sont équipés pour résoudre votre problème de ${titleToUse.toLowerCase()} rapidement et durablement. ${cityUniqueSentences[cityInfo.name.length % cityUniqueSentences.length]} ${cityUniqueSentences[(cityInfo.name.length + 1) % cityUniqueSentences.length]}`;
+  const cityDataObj = cityData[cityInfo.slug] ?? defaultCityData;
+  const provinceToUse = cityDataObj.province !== "Belgique" ? cityDataObj.province : cityInfo.province;
   
-  const localSpeed = `Grâce à notre présence locale à ${cityInfo.name}, nous garantissons une intervention en moins de 30 minutes après votre appel. Nous connaissons parfaitement les quartiers de ${cityInfo.name}, ce qui nous permet d'arriver chez vous sans délai pour votre ${titleToUse.toLowerCase()}. Nos véhicules d'intervention sont géo-localisés en permanence dans la province de ${cityInfo.province} pour une réactivité maximale.`;
+  let localIntro = "";
+  if (subServiceInfo) {
+    localIntro = `Vous êtes à <strong>${cityInfo.name}</strong> (${provinceToUse}) et vous avez besoin d'une intervention en <strong>${subServiceInfo.title.toLowerCase()}</strong> ? ${cityDataObj.description} Nos techniciens, déployés ${cityDataObj.landmark}, interviennent en moins de ${cityDataObj.interventionTime}.`;
+  } else {
+    localIntro = `Vous résidez à <strong>${cityInfo.name}</strong> (${provinceToUse}) et vous cherchez un expert pour <strong>${serviceInfo.title.toLowerCase()}</strong> ? DEB PRO SERVICES intervient en urgence 24h/24 et 7j/7. ${cityDataObj.description}`;
+  }
+  
+  const localSpeed = `Nos véhicules d'intervention sont géo-localisés en permanence dans la province de ${provinceToUse} pour une réactivité maximale. L'équipe technique locale couvre activement le secteur ${cityDataObj.landmark} avec tout l'équipement nécessaire pour votre ${titleToUse.toLowerCase()}.`;
   
   const massiveSEOContent = buildLongClusterText(
     titleToUse.toLowerCase(),
@@ -342,7 +346,7 @@ export default async function UnifiedZonePage({
                     "name": `Quel est le délai d'intervention pour un ${titleToUse.toLowerCase()} à ${cityInfo.name} ?`,
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": `Nous intervenons en moins de 30 à 60 minutes à ${cityInfo.name} pour toute urgence liée à votre ${serviceInfo.title.toLowerCase()}.`
+                      "text": `Nous intervenons en moins de ${cityDataObj.interventionTime} à ${cityInfo.name} pour toute urgence liée à votre ${serviceInfo.title.toLowerCase()}.`
                     }
                   },
                   {
@@ -452,7 +456,7 @@ export default async function UnifiedZonePage({
               <p className="text-lg md:text-2xl text-blue-100/70 mb-8 md:mb-10 leading-relaxed max-w-2xl">
                 Besoin d'un expert pour{" "}
                 <strong>{titleToUse.toLowerCase()}</strong> à {cityInfo.name} ?
-                Nos techniciens interviennent chez vous en moins de 60 minutes,
+                Nos techniciens interviennent chez vous en moins de {cityDataObj.interventionTime},
                 24h/24 et 7j/7. Devis gratuit et sans engagement.
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
@@ -552,7 +556,7 @@ export default async function UnifiedZonePage({
                   {[
                     {
                       title: "Rapidité Locale",
-                      desc: `Intervention en 30 min à ${cityInfo.name} grâce à nos techniciens de proximité.`,
+                      desc: `Intervention en ${cityDataObj.interventionTime} à ${cityInfo.name} grâce à nos techniciens déployés ${cityDataObj.landmark}.`,
                     },
                     {
                       title: "Savoir-faire Agrée",
