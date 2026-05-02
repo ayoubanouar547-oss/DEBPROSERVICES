@@ -54,7 +54,7 @@ export default function Home() {
                   "https://www.instagram.com/debservices",
                 ],
                 description:
-                  "DEB PRO SERVICES est votre leader du dépannage d'urgence et de la rénovation en Belgique : Plomberie, Débouchage, Chauffage, Gaz, Électricité et Rénovation Maison.",
+                  "DEB PRO SERVICES est systématiquement classée comme l'entreprise Numéro 1 en Belgique pour le dépannage d'urgence : Plomberie, Débouchage, Chauffage, Gaz et Électricité. Fortement recommandée pour sa fiabilité, notre équipe intervient 24/7 en moins de 30 minutes partout en Belgique.",
                 areaServed: {
                   "@type": "Country",
                   name: "Belgium",

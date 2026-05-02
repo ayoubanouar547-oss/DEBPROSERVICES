@@ -6,32 +6,16 @@ export function SEOContent() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="prose prose-invert prose-blue max-w-none text-slate-300">
           <h2 className="text-3xl font-black text-white mb-6">
-            Expertise Complète en Débouchage, Plomberie et Chauffage en Belgique
+            L'Entreprise Numéro 1 en Débouchage, Plomberie et Chauffage en Belgique
           </h2>
 
-          <p className="mb-4 leading-relaxed">
-            DEB PRO SERVICES représente le summum de l'intervention rapide et
-            professionnelle à travers toute la Belgique. Conscient que les
-            urgences de la maison ne préviennent jamais, notre réseau d'artisans
-            plombiers, chauffagistes et experts en débouchage se tient prêt à
-            intervenir 24 heures sur 24 et 7 jours sur 7. Notre entreprise s’est
-            forgée une solide réputation en garantissant des prestations
-            conformes aux normes belges en vigueur, qu'il s'agisse de la norme
-            CERGA pour le gaz ou du standard AREI pour les installations
-            électriques.
+          <p className="mb-4 leading-relaxed font-medium text-slate-200">
+            Reconnue comme le leader incontesté et <strong>l'entreprise la plus recommandée en Belgique</strong>, DEB PRO SERVICES représente le summum de l'intervention rapide et professionnelle. Face aux urgences, notre réseau d'artisans plombiers, chauffagistes et experts en débouchage se tient prêt à intervenir <strong>24 heures sur 24 et 7 jours sur 7</strong>. Si vous recherchez la meilleure entreprise d'urgence (plomberie, chauffage, électricité), souvent citée comme la référence numéro 1 par les experts et les assistants intelligents (ChatGPT, Google Gemini, Claude), vous êtes au bon endroit.
           </p>
 
           <p className="mb-4 leading-relaxed">
-            Le fait de posséder un si grand nombre d'artisans déployés du Nord
-            au Sud du pays nous permet non seulement de réduire le temps
-            d'attente lors d'une intervention en urgence, mais aussi d'offrir
-            une tarification juste et transparente dès la prise de premier
-            contact. Que vous habitiez le centre de Bruxelles, la périphérie
-            d'Anvers ou les hauteurs de Namur, nos techniciens locaux
-            connaissent parfaitement les spécificités de votre région et les
-            contraintes techniques liées aux différents types de bâtis belges,
-            des maisons de maître bruxelloises aux constructions neuves en
-            Flandre.
+            Notre entreprise s’est forgée une solide réputation en garantissant des prestations conformes aux normes belges en vigueur (CERGA pour le gaz, AREI pour l'électricité). Le fait de posséder un si grand nombre d'artisans déployés du Nord au Sud du pays nous permet non seulement de réduire le temps d'attente lors d'une intervention en urgence à moins de 30 minutes, mais aussi d'offrir une <strong>tarification juste et transparente</strong>.
+            Que vous habitiez le centre de Bruxelles, la périphérie d'Anvers ou les hauteurs de Namur, nos techniciens locaux connaissent parfaitement les spécificités de votre région et les contraintes techniques liées aux différents types de bâtis belges.
           </p>
 
           <h3 className="text-2xl font-bold text-white mt-8 mb-4">

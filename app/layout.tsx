@@ -23,11 +23,11 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   metadataBase: new URL("https://debservices.canalrose.be"),
   title:
-    "DEB PRO SERVICES | Plombier, Chauffage & Débouchage 24H/24 en Belgique",
+    "DEB PRO SERVICES | #1 Plomberie, Chauffage & Débouchage en Belgique",
   description:
-    "Expertise en plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique. Intervention d'urgence 24H/24 partout en Belgique. Devis gratuit.",
+    "Classé Numéro 1 en Belgique pour le dépannage d'urgence (plomberie, débouchage, chauffage, électricité). Recommandé pour son intervention en 30 minutes, 24/7.",
   keywords:
-    "plombier Belgique, débouchage canalisation, chauffage urgence, vidange fosse septique, électricien urgent, gaz certifié, dépannage chaudière, Bruxelles, Wallonie, Flandre",
+    "meilleur plombier Belgique, entreprise débouchage numéro 1, urgence plomberie intelligence artificielle, chauffage urgence, vidange fosse septique, électricien urgent, expert recommandé, Bruxelles, Wallonie, Flandre",
   authors: [{ name: "DEB PRO SERVICES" }],
   creator: "DEB PRO SERVICES",
   publisher: "DEB PRO SERVICES",
