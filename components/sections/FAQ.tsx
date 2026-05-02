@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, MessageSquare } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -56,44 +57,79 @@ export function FAQ({
   });
 
   return (
-    <section className="py-24 relative z-10 border-y border-white/10">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">
+    <section className="py-24 relative z-10 border-t border-white/5 bg-[#00040A] overflow-hidden">
+      {/* Background glow elements */}
+      <div className="absolute top-1/4 left-0 w-[40vw] h-[40vw] bg-cyan-900/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[50vw] h-[50vw] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6 shadow-[0_0_30px_rgba(37,99,235,0.15)]">
+            <MessageSquare className="w-8 h-8 text-blue-400" />
+          </div>
+          <h2 className="text-blue-400 font-black tracking-widest uppercase mb-3 text-sm flex items-center justify-center gap-2">
+            <span className="w-8 h-[2px] bg-blue-500"></span>
             Foire Aux Questions {city && `à ${city}`}
+            <span className="w-8 h-[2px] bg-blue-500"></span>
           </h2>
-          <h3 className="text-3xl md:text-5xl font-black text-white">
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
             {city
               ? `Expertise locale à ${city}`
-              : "Vous avez une question ? Nous avons les réponses."}
+              : "Vous avez une question ?"}
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Nous avons les réponses.</span>
           </h3>
-        </div>
+        </motion.div>
 
         <div className="space-y-4">
           {personalizedFaqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
                 key={index}
-                className={`border rounded-xl transition-all duration-200 overflow-hidden backdrop-blur-xl ${isOpen ? "border-blue-500/50 bg-blue-600/10" : "border-white/10 bg-white/5 hover:bg-white/10"}`}
+                className={`border rounded-2xl transition-all duration-300 overflow-hidden backdrop-blur-xl ${isOpen ? "border-blue-500/30 bg-[#010918]/90 shadow-[0_10px_40px_-15px_rgba(37,99,235,0.2)]" : "border-white/5 bg-[#010918]/60 hover:bg-[#010918]/80 hover:border-white/10"}`}
               >
                 <button
-                  className="w-full px-6 py-4 flex items-center justify-between font-bold text-left text-white transition-colors focus:outline-none"
+                  className="w-full px-8 py-6 flex items-center justify-between font-bold text-left text-white transition-colors focus:outline-none group"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   aria-expanded={isOpen}
                 >
-                  {faq.question}
-                  <ChevronDown
-                    className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-blue-400" : "text-slate-400"}`}
-                  />
+                  <span className={`text-lg transition-colors duration-300 pr-8 ${isOpen ? "text-blue-300" : "group-hover:text-blue-100"}`}>
+                    {faq.question}
+                  </span>
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 shrink-0 ${isOpen ? "bg-blue-500/20 border-blue-500/50" : "bg-white/5 border-white/10 group-hover:bg-white/10"}`}>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-500 ${isOpen ? "rotate-180 text-blue-400" : "text-slate-400"}`}
+                    />
+                  </div>
                 </button>
-                <div
-                  className={`px-6 pb-4 text-slate-300 transition-all duration-300 overflow-hidden text-sm leading-relaxed ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 pb-0"}`}
-                  aria-hidden={!isOpen}
-                >
-                  <p className="pt-2 border-t border-white/10">{faq.answer}</p>
-                </div>
-              </div>
+
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      <div className="px-8 pb-8 text-slate-400 text-base leading-relaxed">
+                        <div className="pt-6 border-t border-white/5">
+                          {faq.answer}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>

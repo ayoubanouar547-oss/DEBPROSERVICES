@@ -54,6 +54,15 @@
   }
 }
 
+@keyframes bg-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
 .animate-blob {
   animation: float-blob 15s infinite ease-in-out;
 }

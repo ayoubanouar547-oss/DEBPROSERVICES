@@ -98,7 +98,6 @@ export function Testimonials() {
 
   useEffect(() => {
     setMounted(true);
-    // Vérification du localStorage pour savoir si le client est déjà venu
     const visited = localStorage.getItem("debpro_has_visited");
     if (visited) {
       setIsReturningUser(true);
@@ -107,7 +106,6 @@ export function Testimonials() {
     }
   }, []);
 
-  // Auto-play the carousel must be declared BEFORE the early return
   useEffect(() => {
     if (!mounted) return;
     const timer = setInterval(() => {
@@ -117,39 +115,36 @@ export function Testimonials() {
           : reviewsNew.length;
         return (prev + 1) % length;
       });
-    }, 6000); // 6 seconds per slide
+    }, 6000);
     return () => clearInterval(timer);
   }, [currentIndex, isReturningUser, mounted]);
 
-  // Removed if (!mounted) return null; to ensure immediate visibility
-
   const activeReviews = isReturningUser ? reviewsReturning : reviewsNew;
 
-  // Theme constants based on user state
   const themePrimary = {
-    bgConfig: "bg-white/5",
-    border: "border-white/10",
-    textHighlight: "text-[#1565c0]",
-    glow: "shadow-[0_0_40px_rgba(21,101,192,0.15)]",
-    star: "fill-yellow-400 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]",
+    bgConfig: "bg-[#010918]/80",
+    border: "border-blue-500/10",
+    textHighlight: "text-blue-400",
+    glow: "shadow-[0_20px_60px_-15px_rgba(37,99,235,0.15)]",
+    star: "fill-yellow-400 text-yellow-400",
     badge: "Avis vérifiés",
-    title: "Ce que les particuliers et professionnels disent de nous",
+    title: "Ce que les belges disent de nous",
     subtitle:
       "La satisfaction client est au cœur de notre stratégie. Découvrez leurs expériences avec nos équipes d'urgence.",
-    btnHover: "hover:bg-[#1565c0]/20 hover:text-blue-300",
+    btnHover: "hover:bg-blue-600/20 hover:text-blue-300 hover:border-blue-500/30",
   };
 
   const themeReturning = {
-    bgConfig: "bg-gradient-to-br from-amber-700/20 to-orange-900/40",
-    border: "border-amber-500/30",
+    bgConfig: "bg-[#010918]/80",
+    border: "border-amber-500/20",
     textHighlight: "text-amber-400",
-    glow: "shadow-[0_0_40px_rgba(245,158,11,0.2)]",
+    glow: "shadow-[0_20px_60px_-15px_rgba(245,158,11,0.15)]",
     star: "fill-amber-500 text-amber-500",
     badge: "Accès Premium",
     title: "Nos clients fidèles confirment notre excellence",
     subtitle:
-      "Heureux de vous revoir sur DEB PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de la constance de nos prestations.",
-    btnHover: "hover:bg-amber-500/20 hover:text-amber-300",
+      "Heureux de vous revoir sur DEB PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de nos prestations.",
+    btnHover: "hover:bg-amber-500/20 hover:text-amber-300 hover:border-amber-500/40",
   };
 
   const theme = mounted && isReturningUser ? themeReturning : themePrimary;
@@ -171,153 +166,152 @@ export function Testimonials() {
   };
 
   const getActiveSlides = () => {
-    // Return 3 slides for desktop, 1 for mobile
     return [getVisibleReview(0), getVisibleReview(1), getVisibleReview(2)];
   };
 
   return (
-    <section className="py-24 relative z-10 border-t border-white/5 overflow-hidden">
-      {/* Dynamic Background Glow based on theme */}
-      <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[140px] opacity-20 pointer-events-none transition-colors duration-1000 ${isReturningUser ? "bg-amber-600" : "bg-[#1565c0]"}`}
-      ></div>
-
+    <section className="py-24 relative z-10 border-t border-white/5 overflow-hidden bg-[#00040A]">
+      {/* Abstract Background Elements */}
+      <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-cyan-900/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-3">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-2xl"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className={`w-12 h-[2px] ${isReturningUser ? "bg-amber-500" : "bg-blue-500"}`}></span>
               {isReturningUser && (
-                <Medal className={`w-5 h-5 ${theme.textHighlight}`} />
+                <Medal className={`w-4 h-4 ${theme.textHighlight}`} />
               )}
               <h2
-                className={`${theme.textHighlight} font-bold tracking-widest uppercase text-sm transition-colors duration-500`}
+                className={`${theme.textHighlight} font-black tracking-widest uppercase text-sm`}
               >
                 {theme.badge}
               </h2>
             </div>
-            <h3 className="text-3xl md:text-5xl font-black text-white mb-4 transition-colors duration-500">
+            <h3 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
               {theme.title}
             </h3>
-            <p className="text-white opacity-90 text-lg transition-colors duration-500 font-medium">
+            <p className="text-slate-400 text-lg font-medium border-l-2 border-white/10 pl-6">
               {theme.subtitle}
             </p>
-          </div>
-          <div
-            className={`backdrop-blur-xl px-6 py-4 rounded-xl border ${theme.border} flex items-center gap-4 bg-slate-950/80 shadow-2xl transition-all duration-500 glass-card`}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className={`backdrop-blur-xl px-8 py-5 rounded-[2rem] border ${theme.border} flex items-center gap-5 bg-white/5 shadow-2xl relative overflow-hidden`}
           >
-            <div className="flex items-center gap-3">
-              <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
-                <path
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                  fill="#4285F4"
-                />
-                <path
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                  fill="#34A853"
-                />
-                <path
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                  fill="#FBBC05"
-                />
-                <path
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                  fill="#EA4335"
-                />
-              </svg>
+            <div className={`absolute inset-0 bg-gradient-to-r ${isReturningUser ? "from-amber-500/10 to-transparent" : "from-blue-500/10 to-transparent"} pointer-events-none`} />
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)] shrink-0">
+                <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+              </div>
               <div>
-                <div className="text-2xl font-black text-white leading-none">
-                  4.9/5
+                <div className="text-3xl font-black text-white leading-none tracking-tighter">
+                  4.9<span className="text-lg text-slate-500">/5</span>
                 </div>
-                <div className="flex mt-1">
+                <div className="flex mt-1.5 gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-4 h-4 ${i === 4 ? `opacity-50 ${theme.star}` : theme.star} transition-colors duration-500`}
+                      className={`w-4 h-4 ${i === 4 ? `opacity-50 ${theme.star}` : theme.star}`}
                     />
                   ))}
                 </div>
               </div>
             </div>
-            <div className="h-10 w-px bg-white/10 mx-2 hidden sm:block"></div>
-            <div className="hidden sm:block">
-              <div className="text-xs font-black text-white opacity-60 uppercase tracking-widest leading-none mb-1">
-                Avis Clients
+            <div className="h-12 w-px bg-white/10 mx-2 hidden sm:block"></div>
+            <div className="hidden sm:block relative z-10">
+              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1.5">
+                Note Globale
               </div>
-              <div className="text-sm font-black text-white uppercase tracking-tight">
-                {isReturningUser ? "Membres VIP" : "Vérifiés Google"}
+              <div className="text-sm font-black text-white uppercase tracking-wider">
+                {isReturningUser ? "Clients VIP" : "Vérifiés Google"}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Le Carousel Impressionnant (Multiple reviews on desktop) */}
-        <div className="relative w-full mx-auto mt-12 pb-12">
-          <div className="flex items-center justify-between absolute top-1/2 -translate-y-1/2 w-[calc(100%+4rem)] -ml-8 z-20 pointer-events-none px-4 hidden xl:flex">
+        {/* Carousel Area */}
+        <div className="relative w-full mx-auto pb-12">
+          {/* Desktop Navigation Overlays */}
+          <div className="absolute top-1/2 -translate-y-1/2 -left-6 -right-6 flex justify-between z-20 pointer-events-none hidden xl:flex">
             <button
-              onClick={() => {
-                handlePrev();
-              }}
-              className={`pointer-events-auto p-4 rounded-full bg-slate-900/90 border ${theme.border} text-white backdrop-blur-2xl transition-all duration-300 hover:scale-110 shadow-2xl ${theme.btnHover}`}
+              onClick={handlePrev}
+              className={`pointer-events-auto p-4 rounded-2xl bg-[#010918]/80 border ${theme.border} text-white backdrop-blur-xl transition-all duration-300 hover:scale-110 shadow-2xl ${theme.btnHover}`}
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
-              onClick={() => {
-                handleNext();
-              }}
-              className={`pointer-events-auto p-4 rounded-full bg-slate-900/90 border ${theme.border} text-white backdrop-blur-2xl transition-all duration-300 hover:scale-110 shadow-2xl ${theme.btnHover}`}
+              onClick={handleNext}
+              className={`pointer-events-auto p-4 rounded-2xl bg-[#010918]/80 border ${theme.border} text-white backdrop-blur-xl transition-all duration-300 hover:scale-110 shadow-2xl ${theme.btnHover}`}
             >
               <ChevronRight className="w-6 h-6" />
             </button>
           </div>
 
           <div className="relative">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <AnimatePresence mode="popLayout" initial={false}>
                 {getActiveSlides().map((review, idx) => {
-                  // Hidden secondary reviews on mobile
                   const isVisibleMobile = idx === 0;
                   const isVisibleTablet = idx < 2;
 
                   return (
                     <motion.div
                       key={`${currentIndex}-${idx}`}
-                      animate={{ opacity: 1, scale: 1, x: 0 }}
-                      exit={{ opacity: 0, scale: 0.9, x: -20 }}
-                      className={`${isVisibleMobile ? "flex" : "hidden md:flex"} ${!isVisibleTablet && "md:hidden lg:flex"} flex-col ${theme.bgConfig} backdrop-blur-3xl p-8 rounded-[2rem] border border-white/10 ${theme.glow} relative transition-all duration-500 hover:border-white/20 glass-card`}
+                      initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.9, y: -30 }}
+                      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                      className={`${isVisibleMobile ? "flex" : "hidden md:flex"} ${!isVisibleTablet && "md:hidden lg:flex"} flex-col ${theme.bgConfig} backdrop-blur-3xl p-10 rounded-[2.5rem] border ${theme.border} ${theme.glow} relative hover:border-white/20 transition-all duration-500 hover:-translate-y-2`}
                     >
                       <Quote
-                        className={`absolute top-6 right-8 w-12 h-12 opacity-[0.05] ${theme.textHighlight}`}
+                        className={`absolute top-8 right-8 w-12 h-12 opacity-[0.03] ${theme.textHighlight}`}
                       />
 
-                      <div className="flex mb-6 gap-1">
+                      <div className="flex mb-8 gap-1.5">
                         {[...Array(review.rating)].map((_, i) => (
                           <Star key={i} className={`w-4 h-4 ${theme.star}`} />
                         ))}
                       </div>
 
-                      <p className="text-lg text-white font-medium leading-relaxed mb-8 italic flex-grow">
+                      <p className="text-lg text-slate-300 font-medium leading-relaxed mb-10 italic flex-grow">
                         "{review.body}"
                       </p>
 
-                      <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5">
+                      <div className="flex items-center gap-5 mt-auto pt-6 border-t border-white/5">
                         <div
-                          className={`w-12 h-12 rounded-full overflow-hidden border-2 ${theme.border} shadow-lg shrink-0 relative`}
+                          className="w-14 h-14 rounded-[1.25rem] overflow-hidden border-2 border-white/10 shadow-lg shrink-0 relative p-1"
                         >
-                          <Image
-                            src={review.image}
-                            alt={`Photo de profil de ${review.name}`}
-                            fill
-                            className="object-cover"
-                            referrerPolicy="no-referrer"
-                          />
+                          <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                             <Image
+                               src={review.image}
+                               alt={`Photo de profil de ${review.name}`}
+                               fill
+                               className="object-cover"
+                               referrerPolicy="no-referrer"
+                             />
+                          </div>
                         </div>
                         <div className="min-w-0">
-                          <h4 className="font-bold text-white text-base truncate">
+                          <h4 className="font-black text-white text-base truncate mb-1">
                             {review.name}
                           </h4>
                           <p
-                            className={`text-xs font-extrabold uppercase tracking-widest ${theme.textHighlight} truncate`}
+                            className={`text-[10px] font-black uppercase tracking-widest ${theme.textHighlight} truncate`}
                           >
                             {review.city}
                           </p>
@@ -330,29 +324,29 @@ export function Testimonials() {
             </div>
           </div>
 
-          {/* Mobile Handlers (Swipe indicators style) */}
-          <div className="flex justify-center gap-4 mt-12 md:hidden">
+          {/* Mobile Handlers */}
+          <div className="flex justify-center gap-4 mt-12 xl:hidden">
             <button
               onClick={handlePrev}
-              className={`p-4 rounded-xl bg-white/5 border border-white/10 text-white ${theme.btnHover} glass-card`}
+              className={`p-4 rounded-2xl bg-white/5 border border-white/10 text-white ${theme.btnHover}`}
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={handleNext}
-              className={`p-4 rounded-xl bg-white/5 border border-white/10 text-white ${theme.btnHover} glass-card`}
+              className={`p-4 rounded-2xl bg-white/5 border border-white/10 text-white ${theme.btnHover}`}
             >
               <ChevronRight className="w-6 h-6" />
             </button>
           </div>
 
-          {/* Carousel Indicators */}
-          <div className="flex justify-center gap-3 mt-10">
+          {/* Indicators */}
+          <div className="flex justify-center gap-3 mt-12">
             {activeReviews.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`transition-all duration-500 rounded-full ${currentIndex === idx ? `w-10 h-2 ${isReturningUser ? "bg-amber-500" : "bg-blue-400"}` : "w-2 h-2 bg-slate-700 hover:bg-slate-600"}`}
+                className={`transition-all duration-500 rounded-full ${currentIndex === idx ? `w-12 h-2 ${isReturningUser ? "bg-amber-500" : "bg-blue-500"}` : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
                 aria-label={`Aller au témoignage ${idx + 1}`}
               />
             ))}

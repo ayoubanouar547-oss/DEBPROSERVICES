@@ -1,188 +1,168 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
 import { services } from "@/lib/data/services";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    filter: "blur(0px)",
+    transition: { type: "spring" as const, stiffness: 80, damping: 20 }
+  },
+};
+
 export function Services() {
   return (
     <section
-      className="py-24 relative z-10 border-t border-white/10"
+      className="py-24 relative z-10 border-t border-white/5 overflow-hidden bg-[#00040A]"
       id="services"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">
-            Nos Domaines d'Expertise
-          </h2>
-          <h3 className="text-3xl md:text-5xl font-black text-white mb-4">
-            Services Rapides et Professionnels
-          </h3>
-          <p className="text-white font-medium text-lg opacity-90">
-            Nous couvrons l'ensemble de vos besoins résidentiels et commerciaux.
-            Des urgences aux installations complètes, nos experts sont à votre
-            disposition.
-          </p>
+      {/* Background gradients */}
+      <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-blue-900/10 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-cyan-900/10 rounded-full blur-[100px] translate-y-1/2 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+          <div className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 mb-4"
+            >
+              <span className="w-12 h-[2px] bg-blue-500"></span>
+              <h2 className="text-blue-400 font-black tracking-widest uppercase text-sm">
+                Nos Domaines d'Expertise
+              </h2>
+            </motion.div>
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight"
+            >
+              Services Rapides <br className="hidden md:block"/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                et Professionnels
+              </span>
+            </motion.h3>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-slate-400 font-medium text-lg max-w-md border-l-2 border-white/10 pl-6 py-2">
+              Nous couvrons l'ensemble de vos besoins résidentiels et commerciaux. Des urgences aux installations complètes.
+            </p>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        >
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div
+              <motion.div
+                variants={itemVariants}
                 key={service.id}
-                className="group glass-card rounded-3xl hover:border-white/20 transition-all duration-300 relative overflow-hidden flex flex-col shadow-2xl"
+                viewport={{ once: true }}
+                className="group relative bg-[#010918]/80 backdrop-blur-xl rounded-[2rem] border border-white/5 hover:border-blue-500/30 overflow-hidden flex flex-col transition-all duration-500 shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(37,99,235,0.2)]"
               >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-b from-blue-500/0 via-blue-500/0 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
                 <div
-                  className={`absolute right-0 top-0 w-32 h-32 rounded-full opacity-10 ${service.color.glow} transition-transform group-hover:scale-[4] blur-3xl z-0 pointer-events-none`}
+                  className={`absolute right-0 top-0 w-40 h-40 rounded-full opacity-0 ${service.color.glow} transition-all duration-700 group-hover:opacity-20 group-hover:scale-[2.5] blur-[40px] z-0 pointer-events-none`}
                 ></div>
 
-                {/* Card Image */}
-                <div className="relative h-56 w-full overflow-hidden flex-shrink-0 z-10 bg-slate-900/50">
+                {/* Card Image Area */}
+                <div className="relative h-60 w-full overflow-hidden flex-shrink-0 z-10 mask-image-b group-hover:h-52 leading-none transition-all duration-500">
                   <Image
-                    src={
-                      service.imageUrl ||
-                      `https://picsum.photos/seed/${service.slug}/600/400`
-                    }
-                    alt={`Service de ${service.title} en Belgique - Intervention professionnelle par DEB PRO SERVICES`}
+                    src={service.imageUrl || `https://picsum.photos/seed/${service.slug}/600/400`}
+                    alt={`Service de ${service.title} en Belgique`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 filter group-hover:brightness-110"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#010918] via-[#010918]/80 to-transparent transition-opacity duration-500"></div>
 
-                  {/* Icon */}
                   <div
-                    className={`absolute bottom-4 left-6 w-16 h-16 rounded-2xl ${service.color.bg} ${service.color.text} flex items-center justify-center shadow-2xl border ${service.color.border} backdrop-blur-md`}
+                    className={`absolute bottom-4 left-6 w-14 h-14 rounded-2xl ${service.color.bg} ${service.color.text} flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-white/10 backdrop-blur-md transform group-hover:-translate-y-2 group-hover:scale-110 transition-all duration-500`}
                   >
-                    <Icon className="w-8 h-8" />
+                    <Icon className="w-7 h-7" />
                   </div>
                 </div>
 
-                <div className="p-8 pt-8 flex flex-col flex-grow relative z-10">
-                  <h4 className="text-2xl font-black font-heading text-white mb-3 mt-4 tracking-tight leading-none">
+                <div className="px-8 pb-8 flex flex-col flex-grow relative z-10">
+                  <h4 className="text-2xl font-black font-heading text-white mb-3 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-200 transition-all">
                     {service.title}
                   </h4>
-                  <p className="text-slate-100 font-medium mb-6 flex-grow text-sm leading-relaxed">
-                    {service.description.slice(0, 100)}...
+                  <p className="text-slate-400 font-medium mb-6 flex-grow text-sm leading-relaxed transition-colors duration-300 group-hover:text-slate-300">
+                    {service.description.slice(0, 110)}...
                   </p>
 
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-2.5 mb-8">
                     {service.features.slice(0, 3).map((feature, i) => (
                       <li
                         key={i}
-                        className="flex items-center text-[10px] font-black text-white uppercase tracking-widest bg-white/10 px-3 py-1.5 rounded-full border border-white/5 self-start"
+                        className="flex items-start text-xs font-bold text-slate-200"
                       >
-                        <span
-                          className={`w-1 h-1 ${service.color.glow} rounded-full mr-2 shadow-[0_0_8px_rgba(255,255,255,0.5)]`}
-                        ></span>
+                        <CheckCircle2 className={`w-4 h-4 mr-2 ${service.color.text} shrink-0 mt-0.5`} />
                         {feature}
                       </li>
                     ))}
                   </ul>
 
                   {(service as any).testimonial && (
-                    <div className="mb-8 p-4 rounded-2xl bg-white/5 border border-white/10 relative italic flex flex-col gap-3">
-                      <p className="text-slate-300 text-xs leading-relaxed">
-                        "{(service as any).testimonial.text}"
-                      </p>
-                      <div className="flex items-center gap-3 not-italic">
-                        <Image
-                          src={`https://i.pravatar.cc/150?u=${encodeURIComponent((service as any).testimonial.author)}`}
-                          alt={(service as any).testimonial.author}
-                          width={32}
-                          height={32}
-                          className="rounded-full w-8 h-8 object-cover border border-white/20 flex-shrink-0"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div>
-                          <div className="text-[10px] font-bold text-yellow-400 uppercase tracking-widest leading-none">
-                            {(service as any).testimonial.author}
-                          </div>
-                          <div className="flex text-yellow-500 gap-[2px] mt-1.5">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="w-3 h-3"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="w-3 h-3"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="w-3 h-3"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="w-3 h-3"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              className="w-3 h-3"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </div>
+                    <div className="mb-6 opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto overflow-hidden transition-all duration-500">
+                       <div className="p-4 rounded-xl bg-white/5 border border-white/5 relative italic flex flex-col gap-3">
+                        <p className="text-slate-300 text-xs">"{(service as any).testimonial.text}"</p>
+                        <div className="flex justify-between items-end">
+                           <span className="text-[9px] font-bold text-yellow-400 uppercase">{ (service as any).testimonial.author }</span>
+                           <div className="flex text-yellow-500 gap-[1px]">
+                             {[1,2,3,4,5].map(s => <svg key={s} className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}
+                           </div>
                         </div>
-                      </div>
+                       </div>
                     </div>
                   )}
 
-                  <motion.div whileHover={{ x: 5 }} className="mt-auto">
-                    <Link
-                      href={`/${service.slug}`}
-                      className="mt-auto inline-flex items-center text-sm font-black text-white hover:bg-blue-600 transition-colors uppercase tracking-widest group/link bg-blue-600/20 px-6 py-3 rounded-xl border border-blue-500/30"
-                    >
-                      DÉTAILS
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
-                    </Link>
-                  </motion.div>
+                  <Link
+                    href={`/${service.slug}`}
+                    className="mt-auto w-full inline-flex items-center justify-between text-sm font-black text-white group/link bg-white/5 px-6 py-4 rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all uppercase tracking-widest relative overflow-hidden"
+                  >
+                    <span className="relative z-10">Détails du Service</span>
+                    <div className="relative z-10 bg-white/10 p-1.5 rounded-lg group-hover/link:bg-blue-500 transition-colors">
+                       <ArrowRight className="w-4 h-4 group-hover/link:-rotate-45 transition-transform" />
+                    </div>
+                  </Link>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
