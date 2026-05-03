@@ -12,7 +12,7 @@ import { belgianCities } from "@/lib/data/cities";
 import { services } from "@/lib/data/services";
 
 const PHONE = "0496 32 57 33";
-const EMAIL = "contact@debservices.canalrose.be";
+const EMAIL = "debproservices@canalrose.be";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();

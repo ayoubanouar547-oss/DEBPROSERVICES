@@ -52,7 +52,7 @@ export async function POST(req: Request) {
     if (process.env.RESEND_API_KEY) {
       await resend.emails.send({
         from: "Contact Site <onboarding@resend.dev>", // Should be a verified domain in prod
-        to: "contact@debservices.canalrose.be", // Replace with real company email
+        to: "debproservices@canalrose.be", // Replace with real company email
         subject: `Nouvelle demande - ${data.service.toUpperCase()} - ${data.ville}`,
         html: `
           <h3>Nouvelle demande d'intervention</h3>

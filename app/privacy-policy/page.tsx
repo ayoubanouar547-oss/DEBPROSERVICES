@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
           Conformément au RGPD européen, vous disposez d'un droit d'accès, de
           rectification, de suppression et de limitation concernant vos données.
           Pour exercer ce droit, veuillez nous contacter par email :
-          contact@debservices.canalrose.be.
+          debproservices@canalrose.be.
         </p>
       </div>
     </div>

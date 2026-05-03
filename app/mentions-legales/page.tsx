@@ -35,7 +35,7 @@ export default function MentionsLegalesPage() {
           <br />
           <strong>Téléphone :</strong> 0496 32 57 33
           <br />
-          <strong>Email :</strong> contact@debservices.canalrose.be
+          <strong>Email :</strong> debproservices@canalrose.be
         </p>
 
         <h2>Hébergement du site</h2>
