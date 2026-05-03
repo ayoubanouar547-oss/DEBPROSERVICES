@@ -10,6 +10,12 @@ export const services = [
       "https://debouchageexpress24hh.odoo.com/web/image/4148-835ccca6/regenerated_image_1777316391207.jpg?height=600",
     description:
       "DEB PRO SERVICES réalise tous vos projets de rénovation de maison et appartement en Belgique. De la rénovation complète à la modernisation de votre salle de bain avec douche italienne, nos techniciens agréés vous garantissent un travail soigné, durable et au meilleur prix.",
+    trustPoints: [
+      { title: "Devis Détaillé Gratuit sous 48h", desc: "Visite technique sur site et chiffrage corps par corps sans engagement." },
+      { title: "Tous Corps de Métier", desc: "Plomberie, électricité, carrelage, peinture — un seul interlocuteur pour tout le chantier." },
+      { title: "Suivi de Chantier", desc: "Photos hebdomadaires et rapport d'avancement pour suivre votre rénovation à distance." },
+      { title: "Garantie Décennale", desc: "Tous nos travaux de rénovation sont couverts par notre assurance décennale." },
+    ],
     features: [
       "Rénovation complète",
       "Douche italienne sur mesure",
@@ -93,6 +99,12 @@ export const services = [
       "https://debouchageexpress24hh.odoo.com/web/image/4146-3c23cecf/regenerated_image_1777316390260%20%284%29.png?height=600",
     description:
       "Expert en plomberie en Belgique disponible 24h/24. Une fuite d'eau sous votre évier ? Un robinet qui goutte ou une chasse d'eau à réparer ? DEB PRO SERVICES propose des services de plomberie complets : de la recherche de fuite non destructive au remplacement de votre boiler ou chauffe-eau. Nos plombiers agréés vous assurent une intervention rapide et durable au meilleur prix.",
+    trustPoints: [
+      { title: "Détection Non Destructive", desc: "Caméras thermiques et détecteurs acoustiques pour localiser les fuites sans casser les murs." },
+      { title: "Intervention en 30 min", desc: "Nos plombiers agréés interviennent en moins de 30 minutes partout en Belgique." },
+      { title: "Pièces en Stock", desc: "Nos véhicules embarquent les pièces les plus courantes pour résoudre la panne en une seule visite." },
+      { title: "Garantie Étanchéité", desc: "Tous nos travaux de plomberie sont garantis. Satisfait ou on revient gratuitement." },
+    ],
     features: [
       "Réparation de fuite d'eau ultra-rapide",
       "Installation de sanitaires et robinets",
@@ -154,6 +166,12 @@ export const services = [
       "https://debouchageexpress24hh.odoo.com/web/image/4126-df5892ca/regenerated_image_1777411808057.png?height=600",
     description:
       "Débouchage canalisation en Belgique 24h/24. Vous faites face à un WC bouché, un évier qui ne s'écoule plus ou des égouts saturés ? DEB PRO SERVICES intervient rapidement, 7j/7, avec furet électrique et hydrocureur haute pression. Prix transparent : fini les surprises sur le coût d'un débouchage ! Que vous soyez locataire ou propriétaire, nous vous conseillons sur qui doit payer l'intervention.",
+    trustPoints: [
+      { title: "Hydrocureur 400 bars", desc: "Notre matériel haute pression dégage les canalisations les plus bouchées sans les endommager." },
+      { title: "Caméra Endoscopique HD", desc: "Diagnostic précis par inspection vidéo en temps réel pour cibler l'intervention." },
+      { title: "Débouchage Garanti", desc: "Résultat garanti ou on revient sans frais supplémentaires. Intervention en 45 minutes." },
+      { title: "Disponible 24h/24", desc: "Urgence bouchon le week-end ou la nuit ? Nos équipes sont disponibles 7j/7 sans surcoût." },
+    ],
     features: [
       "Débouchage WC & Évier au furet",
       "Curage égouts haute pression",
@@ -222,6 +240,12 @@ export const services = [
       "https://debouchageexpress24hh.odoo.com/web/image/4149-39dd8a88/regenerated_image_1777315741847.png?height=600",
     description:
       "Besoin d'un chauffagiste agréé en Belgique ? Qu'il s'agisse d'un dépannage chaudière urgent, d'un entretien obligatoire de chaudière gaz ou mazout, ou de l'installation d'un nouveau système de chauffage à condensation, nous sommes là 24h/24. Maximisez votre confort thermique et réduisez votre facture d'énergie avec nos solutions haute performance.",
+    trustPoints: [
+      { title: "Techniciens Toutes Marques", desc: "Agréés Vaillant, Bulex, Viessmann, Bosch, Junkers, De Dietrich et Ariston." },
+      { title: "Rapport d'Entretien Officiel", desc: "Attestation légale remise après chaque entretien annuel obligatoire en Belgique." },
+      { title: "Pièces en Stock Embarquées", desc: "Réparation en une seule visite dans la grande majorité des pannes de chaudière." },
+      { title: "Bilan Énergétique Gratuit", desc: "Évaluation gratuite de votre installation pour vous proposer la solution la plus économique." },
+    ],
     features: [
       "Entretien chaudière (Gaz / Mazout)",
       "Dépannage chaudière urgent 24/7",
@@ -292,6 +316,12 @@ export const services = [
       "https://debouchageexpress24hh.odoo.com/web/image/4151-7b1319fa/regenerated_image_1777316388823.png?height=600",
     description:
       "Vous suspectez une fuite de gaz ou avez besoin d'une installation gaz conforme aux normes belges ? Nos techniciens certifiés CERGA interviennent rapidement pour assurer votre sécurité.",
+    trustPoints: [
+      { title: "Certifiés CERGA", desc: "Attestation officielle délivrée sur place pour l'ouverture de votre compteur gaz." },
+      { title: "Intervention Fuite en 45 min", desc: "Détecteurs électroniques haute précision pour localiser et colmater toute fuite de gaz." },
+      { title: "Conformité NBN B61-002", desc: "Tous nos travaux respectent les normes belges en vigueur pour les installations gaz." },
+      { title: "Conversion Gaz Pauvre/Riche", desc: "Réglage certifié CERGA de tous vos appareils pour le passage au gaz riche en Belgique." },
+    ],
     features: [
       "Détection fuite de gaz",
       "Mise en conformité",
@@ -501,6 +531,12 @@ export const services = [
       "https://debouchageexpress24hh.odoo.com/web/image/4150-691b84a7/regenerated_image_1777316385571.png?height=600",
     description:
       "Panne de courant totale, court-circuit ou besoin de mise en conformité AREI ? Nos électriciens qualifiés interviennent partout en Belgique pour sécuriser votre installation. Du remplacement du tableau électrique à la pose de nouvelles prises, DEB PRO SERVICES garantit des travaux électriques certifiés et sûrs.",
+    trustPoints: [
+      { title: "Agréés AREI", desc: "Rapport de conformité officiel remis après chaque mise en conformité électrique." },
+      { title: "Tableau Électrique en 1 Jour", desc: "Remplacement complet avec remise du schéma unifilaire à jour le même jour." },
+      { title: "Borne de Recharge & Domotique", desc: "Installation de bornes EVSE, panneaux photovoltaïques et systèmes domotiques certifiés." },
+      { title: "Garantie Décennale", desc: "Tous nos travaux électriques sont couverts par notre garantie décennale." },
+    ],
     features: [
       "Dépannage panne de courant 24/7",
       "Mise en conformité électrique AREI",
@@ -563,6 +599,12 @@ export const services = [
       "https://debouchageexpress24hh.odoo.com/web/image/4145-8f04c0e3/regenerated_image_1777316386639%20%281%29.png?height=600",
     description:
       "Installation, entretien et dépannage de tous systèmes de climatisation en Belgique. Nos techniciens certifiés F-Gas interviennent pour les particuliers et professionnels.",
+    trustPoints: [
+      { title: "Frigoristes Certifiés F-Gas", desc: "Manipulation sécurisée des fluides frigorigènes selon le règlement européen 517/2014." },
+      { title: "Toutes Marques", desc: "Daikin, Mitsubishi, Samsung, LG, Panasonic — installation et entretien toutes marques." },
+      { title: "Entretien Annuel Certifié", desc: "Rapport d'entretien officiel remis. Un appareil entretenu consomme 25% d'énergie en moins." },
+      { title: "VMC Simple & Double Flux", desc: "Installation et entretien de systèmes VMC pour une qualité d'air optimale." },
+    ],
     features: [
       "Installation split",
       "Entretien annuel",
@@ -647,6 +689,12 @@ export const services = [
       "https://debouchageexpress24hh.odoo.com/web/image/4147-e633d2dc/regenerated_image_1777316387949%20%283%29.png?height=600",
     description:
       "Vidange fosse septique et entretien de micro-station en Belgique. Intervention rapide avec camion hydrocureur 24h/24. Qu'il s'agisse d'un pompage urgent, d'un curage d'égouts ou du nettoyage d'un bac à graisse pour restaurant, nous proposons des tarifs compétitifs. Nos experts vous guident également sur qui doit payer la vidange entre locataire et propriétaire.",
+    trustPoints: [
+      { title: "Camion Agréé 3 Régions", desc: "Nos camions vidangeurs sont agréés en Wallonie, Bruxelles et Flandre." },
+      { title: "Certificat de Traçabilité", desc: "Document officiel de traçabilité des boues remis après chaque vidange." },
+      { title: "Intervention en 24h", desc: "Planification rapide avec créneau garanti sous 24 heures ouvrables." },
+      { title: "Nettoyage Haute Pression Inclus", desc: "Curage complet de la fosse inclus dans chaque prestation de vidange." },
+    ],
     features: [
       "Vidange fosse septique urgente",
       "Nettoyage bac à graisse pro",

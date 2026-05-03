@@ -322,24 +322,12 @@ export default async function ServicePage({
                 {serviceInfo.title} ?
               </h2>
               <div className="space-y-6">
-                {[
-                  {
-                    title: "Intervention Express 24h/24",
-                    desc: "Nous arrivons chez vous en moins de 30 à 60 minutes pour toute urgence partout en Belgique.",
-                  },
-                  {
-                    title: "Tarifs Fixes & Transparents",
-                    desc: "Aucun frais caché. Un devis clair vous est présenté avant chaque début de travaux.",
-                  },
-                  {
-                    title: "Matériel High-Tech",
-                    desc: "Caméras HD, furets électriques et camions hydrocureurs pour des résultats impeccables.",
-                  },
-                  {
-                    title: "Garantie de Satisfaction",
-                    desc: "Tous nos travaux sont garantis. Nous ne repartons que lorsque le problème est 100% résolu.",
-                  },
-                ].map((item, i) => (
+                {((serviceInfo as any).trustPoints ?? [
+                  { title: "Intervention Express 24h/24", desc: "Nous arrivons chez vous en moins de 30 à 60 minutes pour toute urgence partout en Belgique." },
+                  { title: "Tarifs Fixes & Transparents", desc: "Aucun frais caché. Un devis clair vous est présenté avant chaque début de travaux." },
+                  { title: "Techniciens Agréés & Certifiés", desc: "Tous nos professionnels sont certifiés, assurés et formés aux dernières normes belges en vigueur." },
+                  { title: "Garantie de Satisfaction", desc: "Tous nos travaux sont garantis. Nous ne repartons que lorsque le problème est 100% résolu." },
+                ]).map((item: {title: string; desc: string}, i: number) => (
                   <div
                     key={i}
                     className="flex gap-4 p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-colors"

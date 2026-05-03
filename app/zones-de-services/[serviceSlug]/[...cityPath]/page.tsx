@@ -258,14 +258,9 @@ export default async function UnifiedZonePage({
   const cityDataObj = cityData[cityInfo.slug] ?? defaultCityData;
   const provinceToUse = cityDataObj.province !== "Belgique" ? cityDataObj.province : cityInfo.province;
   
-  let localIntro = "";
-  if (subServiceInfo) {
-    localIntro = `Vous êtes à <strong>${cityInfo.name}</strong> (${provinceToUse}) et vous avez besoin d'une intervention en <strong>${subServiceInfo.title.toLowerCase()}</strong> ? ${cityDataObj.description} Nos techniciens, déployés ${cityDataObj.landmark}, interviennent en moins de ${cityDataObj.interventionTime}.`;
-  } else {
-    localIntro = `Vous résidez à <strong>${cityInfo.name}</strong> (${provinceToUse}) et vous cherchez un expert pour <strong>${serviceInfo.title.toLowerCase()}</strong> ? DEB PRO SERVICES intervient en urgence 24h/24 et 7j/7. ${cityDataObj.description}`;
-  }
-  
-  const localSpeed = `Nos véhicules d'intervention sont géo-localisés en permanence dans la province de ${provinceToUse} pour une réactivité maximale. L'équipe technique locale couvre activement le secteur ${cityDataObj.landmark} avec tout l'équipement nécessaire pour votre ${titleToUse.toLowerCase()}.`;
+  const cityDetails = cityData[cityInfo.slug] ?? defaultCityData;
+  const localIntro = `Vous résidez à <strong>${cityInfo.name}</strong> (${cityInfo.province}) et vous cherchez un expert pour <strong>${titleToUse.toLowerCase()}</strong> ? ${cityDetails.description} Nos techniciens, déployés ${cityDetails.landmark}, interviennent en moins de ${cityDetails.interventionTime} après votre appel, 24h/24 et 7j/7.`;
+  const localSpeed = `Grâce à notre connaissance approfondie de ${cityInfo.name} et de ses ${cityDetails.landmark}, nous garantissons une intervention en moins de ${cityDetails.interventionTime}. Nos véhicules d'intervention sont géo-localisés en permanence dans la province de ${cityInfo.province} pour une réactivité maximale sur votre ${titleToUse.toLowerCase()}.`;
   
   const massiveSEOContent = buildLongClusterText(
     titleToUse.toLowerCase(),
@@ -553,7 +548,7 @@ export default async function UnifiedZonePage({
                   Pourquoi nous choisir à {cityInfo.name} ?
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-6">
-                  {[
+                  {(serviceInfo.trustPoints || [
                     {
                       title: "Rapidité Locale",
                       desc: `Intervention en ${cityDataObj.interventionTime} à ${cityInfo.name} grâce à nos techniciens déployés ${cityDataObj.landmark}.`,
@@ -570,7 +565,7 @@ export default async function UnifiedZonePage({
                       title: "Disponibilité 24/7",
                       desc: "Une équipe d'astreinte jour et nuit, même les jours fériés.",
                     },
-                  ].map((item, idx) => (
+                  ]).map((item, idx) => (
                     <div
                       key={idx}
                       className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-blue-500/30 transition-colors"
