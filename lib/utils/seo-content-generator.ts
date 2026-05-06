@@ -1,45 +1,81 @@
-// Simulate a robust long-form text generator for local pages
-export const paragraphsTemplates = [
-  // Intro
-  "L'intervention rapide est stratégique lorsqu'il s'agit d'urgences à domicile ou dans vos locaux professionnels. Que ce soit en pleine nuit, un dimanche ou un jour férié, nos équipes d'astreinte sont prêtes à se déplacer chez vous avec un matériel de pointe. La réparation rapide permet de circonscrire les dégâts, réduire les coûts de rénovation globale et rétablir le confort pour les occupants. Contrairement à une intervention classique, un service d'urgence exige une réactivité de chaque instant, un inventaire embarqué dans les fourgons d'intervention, et une certification mise à jour pour affronter les imprévus.",
-
-  // Core Problem
-  "Chaque problème requiert un diagnostic millimétré. Les méthodes traditionnelles ont été remplacées par des analyses fines utilisant la vidéo-inspection, l'imagerie ou les tests de compression selon le domaine d'expertise. Par exemple, une fuite invisible, un court-circuit complexe ou une perte de charge dans un système peuvent être localisés en quelques minutes. Les matériaux vieillissants se heurtent fréquemment aux exigences des nouvelles normes belges, nécessitant une mise en conformité radicale.",
-
-  // Norms
-  "Le secteur du bâtiment et des installations techniques en Belgique a considérablement évolué. Régions wallonne, flamande et bruxelloise imposent des normes environnementales strictes : gestion des déchets, efficacité énergétique et sécurité incendie. L'artisan d'aujourd'hui est un technicien hautement qualifié qui maîtrise autant l'électromécanique que la régulation thermique et les flux hydrauliques certifiés.",
-
-  // Process
-  "Voici notre parcours de prise en charge : d'abord, une évaluation téléphonique immédiate. Ensuite, la sécurisation du périmètre d'intervention (mise hors tension ou fermeture des vannes). Troisièmement, le diagnostic avec un chiffrage transparent avant toute action. Enfin, la réparation pérenne couplée à un nettoyage complet du chantier. Tout notre personnel signe une charte de qualité exigeante.",
-
-  // Quality & Trust
-  "Le bouche-à-oreille et les milliers de clients satisfaits témoignent de notre intégrité. Les syndics de copropriété, les commerces de proximité et les particuliers nous font confiance pour leur contrat de maintenance annuelle. Outre l'urgence, c'est l'entretien préventif qui assure une longévité maximale à vos installations et vous évite les mauvaises surprises financières à long terme.",
+// A robust long-form text generator for local pages with varied sections
+const intros = [
+  "Lorsque survient une urgence à domicile ou dans vos locaux professionnels, chaque minute compte. {serviceName} nécessite une approche rigoureuse et une réactivité sans faille. Les habitants de {cityName} peuvent compter sur notre équipe locale, prête à se déplacer avec tout le matériel nécessaire pour sécuriser les lieux.",
+  "Face à un besoin en {serviceName}, il est essentiel de faire appel à des techniciens certifiés. Sur {cityName} et ses environs, nous mettons un point d'honneur à allier rapidité d'intervention et qualité de finition. Évitez d'aggraver la situation en nous confiant vos installations immobilières.",
+  "La gestion professionnelle de votre {serviceName} est au cœur de notre métier. De jour comme de nuit, nos professionnels sillonnent les rues de {cityName} pour apporter des solutions pérennes, avec une tarification toujours transparente et annoncée avant travaux."
 ];
+
+const methodology = [
+  "Nos méthodes d'intervention s'appuient sur un équipement de pointe. Avant toute manipulation, nous réalisons un diagnostic précis de votre {serviceName} à {cityName}. Cela inclut, selon le cas, une inspection par caméra thermique ou un test de pression conforme aux normes en vigueur.",
+  "Chaque réparation est précédée d'un devis clair. Nous utilisons des pièces certifiées et respectons scrupuleusement les régulations environnementales locales. La qualité de notre intervention sur votre {serviceName} garantit la longévité de vos installations.",
+  "Le processus est simple : évaluation téléphonique, sécurisation rapide, diagnostic détaillé et réparation définitive. Nous laissons toujours le chantier de {cityName} propre, conscients que l'intégrité de vos biens, qu'il s'agisse de locaux résidentiels ou professionnels, est votre priorité."
+];
+
+const standards = [
+  "Le respect des normes environnementales et de sécurité est fondamental. En Région wallonne ou flamande, les régulations évoluent vite. Ainsi, notre prise en charge de {serviceName} est garantie 100% conforme, vous protégeant juridiquement tout en optimisant l'efficacité énergétique.",
+  "Toutes nos installations respectent les standards d'isolation et d'étanchéité actuels. Pour les urgences concernant {serviceName}, notre label de qualité rassure les syndics et assurances de {cityName}. Vous recevez un certificat de conformité à l'issue de notre prestation."
+];
+
+const conclusions = [
+  "N'attendez pas que les dégâts s'aggravent. Pour un dépannage ou une installation de {serviceName} sur {cityName}, contactez notre centre d'appel ouvert 24/7. Outre le caractère urgent, nous proposons des forfaits d'entretien préventif économiques sur le long terme.",
+  "Notre réputation à {cityName} s'est bâtie sur la confiance et l'efficacité de nos interventions. Que ce soit pour une réparation express ou un projet de {serviceName} complexe, nos experts sont à votre écoute pour restaurer rapidement votre confort quotidien."
+];
+
+function getRandomElement(arr: string[], seedHash: number) {
+  return arr[seedHash % arr.length];
+}
+
+function stringToHash(str: string) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash;
+  }
+  return Math.abs(hash);
+}
 
 export function buildLongClusterText(
   serviceName: string,
   cityName: string,
 ): string[] {
+  const seedPrefix = serviceName + cityName;
+  
+  // Create deterministic content based on the city+service name so SSR is consistent across requests
+  const h1 = stringToHash(seedPrefix + "1");
+  const h2 = stringToHash(seedPrefix + "2");
+  const h3 = stringToHash(seedPrefix + "3");
+  const h4 = stringToHash(seedPrefix + "4");
+
+  const introText = getRandomElement(intros, h1)
+    .replace(/{serviceName}/g, serviceName)
+    .replace(/{cityName}/g, cityName);
+    
+  const methdologyText = getRandomElement(methodology, h2)
+    .replace(/{serviceName}/g, serviceName)
+    .replace(/{cityName}/g, cityName);
+    
+  const standardsText = getRandomElement(standards, h3)
+    .replace(/{serviceName}/g, serviceName)
+    .replace(/{cityName}/g, cityName);
+    
+  const conclusionText = getRandomElement(conclusions, h4)
+    .replace(/{serviceName}/g, serviceName)
+    .replace(/{cityName}/g, cityName);
+
   const textBlocks: string[] = [];
 
-  // Multiply the templates to create a massive wall of structured text.
-  // For 5000 words, we need about 40x thick paragraphs, ~125 words each.
-  for (let i = 0; i < 3; i++) {
-    textBlocks.push(
-      `<h2 class="text-4xl font-black text-white mb-6 mt-12 uppercase tracking-tight">Expertise en ${serviceName} à ${cityName}</h2>`,
-    );
-    let blockContent = "";
-    paragraphsTemplates.slice(0, 3).forEach((p, idx) => {
-      const personalized = p
-        .replace(/urgences/g, `urgences en ${serviceName}`)
-        .replace(/diagnostic/g, `diagnostic de ${serviceName}`)
-        .replace(/locaux/g, `locaux situés à ${cityName}`);
-      blockContent += `<p class="mb-6 text-white text-lg leading-relaxed">${personalized} Sur le secteur de ${cityName}, nous garantissons une intervention rapide pour la catégorie ${serviceName}.</p>`;
-
-      // No image injection needed here as per user request to remove them from all pages
-    });
-    textBlocks.push(blockContent);
-  }
+  textBlocks.push(
+    `<h2 class="text-3xl font-black text-white mb-6 mt-12">Expertise locale en ${serviceName} à ${cityName}</h2>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">${introText}</p>`,
+    `<h3 class="text-2xl font-bold text-blue-300 mb-4 mt-8">Méthodologie de réparation professionnelle</h3>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">${methdologyText}</p>`,
+    `<h3 class="text-2xl font-bold text-blue-300 mb-4 mt-8">Respect des normes et conformité</h3>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">${standardsText}</p>`,
+    `<div class="bg-white/5 border border-white/10 p-6 rounded-xl mt-8 mb-8">`,
+    `<p class="text-white text-lg font-medium leading-relaxed">${conclusionText}</p>`,
+    `</div>`
+  );
 
   return textBlocks;
 }
