@@ -7,7 +7,6 @@ import { Footer } from "@/components/layout/Footer";
 import { PreFooterLinks } from "@/components/layout/PreFooterLinks";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
-import { FloatingChat } from "@/components/chat/FloatingChat";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -142,7 +141,6 @@ export default function RootLayout({
         <PreFooterLinks />
         <Footer />
         <CookieBanner />
-        <FloatingChat />
         <MobileBottomNav />
         <Script
           id="microsoft-clarity"
