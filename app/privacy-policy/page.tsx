@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politique de Confidentialité | DEB PRO SERVICES",
+  title: "Politique de Confidentialité — RGPD",
   description:
     "Notre politique de confidentialité et de gestion des données personnelles (RGPD) en Belgique.",
   alternates: {

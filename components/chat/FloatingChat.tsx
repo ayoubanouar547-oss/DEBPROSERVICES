@@ -14,13 +14,22 @@ import {
 import Link from "next/link";
 import { GoogleGenAI, Type, FunctionDeclaration } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY });
+const getAiClient = () => {
+  const key = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  if (!key || key === "dummy_key") return null;
+  try {
+    return new GoogleGenAI({ apiKey: key });
+  } catch (e) {
+    return null;
+  }
+};
+const ai = getAiClient();
 
 // Define the tool for booking appointments
 const bookAppointmentDeclaration: FunctionDeclaration = {
   name: "bookAppointment",
   description:
-    "Prendre un rendez-vous (book an appointment) et l'envoyer au système. Ask for nom, telephone, email, service (plomberie, chauffage, débouchage), ville, and a short message before calling this function.",
+    "Prendre un rendez-vous (book an appointment) et l'envoyer au système. Demandez nom, téléphone, service, ville et un court message.",
   parameters: {
     type: Type.OBJECT,
     properties: {
@@ -47,19 +56,29 @@ interface Message {
   id: string;
   role: Role;
   text: string;
-  image?: string; // base64 representation for UI display
+  image?: string; 
+  appointment?: {
+    nom: string;
+    telephone: string;
+    service: string;
+    ville: string;
+    message: string;
+  };
 }
 
 const SYSTEM_INSTRUCTION = `Tu es Sofia, l'assistante virtuelle de l'entreprise DEB PRO SERVICES en Belgique.
 Ton but est d'aider les clients avec leurs problèmes de plomberie, de chauffage et de débouchage, et de planifier des rendez-vous.
 Tu peux parler en Français (Belgique), en Néerlandais (Flamand) ou en Anglais, selon la langue de l'utilisateur.
-Utilise toujours un ton amical, professionnel et rassurant (ex: "Bonjour, je suis Sofia...").
+Utilise toujours un ton amical, professionnel et rassurant.
 
 Capacités :
-1. Prise de rendez-vous : Récupère TOUJOURS [nom, téléphone, service, ville, description du problème (message)] puis utilise la fonction bookAppointment pour l'enregistrer dans notre système (Google Sheets). Ne prends pas de rendez-vous sans avoir tous ces détails.
-2. Analyse de problème : Si l'utilisateur envoie une image, analyse-la soigneusement pour détecter le problème (fuite, tuyau cassé, etc.) et dis à l'utilisateur ce qui doit être réparé ou vérifié, tout en lui proposant d'organiser une intervention.
+1. Prise de rendez-vous : Récupère TOUJOURS [nom, téléphone, service, ville, message] puis utilise bookAppointment.
+2. Analyse de problème : Si l'utilisateur envoie une image, analyse-la.
 
-IMPORTANT: Ne discute pas avec toi-même. Donne une réponse courte, et n'oublie pas de demander les informations manquantes si tu souhaites faire appel à \`bookAppointment\`.
+IMPORTANT: 
+- Ne mets JAMAIS d'étoiles (**) dans tes réponses. Préfère un texte clair.
+- Pas de gras inutile.
+- Ne discute pas avec toi-même. Donne une réponse courte.
 `;
 
 export function FloatingChat() {
@@ -68,18 +87,15 @@ export function FloatingChat() {
     {
       id: "init-1",
       role: "model",
-      text: "Bonjour ! Je suis Sofia, votre assistante virtuelle. Comment puis-je vous aider aujourd'hui ? (FR/NL/EN) 👋",
+      text: "Bonjour ! Je suis Sofia, votre assistante virtuelle. Comment puis-je vous aider aujourd'hui ? 👋",
     },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // File upload state setup
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Scroll to bottom
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -87,7 +103,6 @@ export function FloatingChat() {
     scrollToBottom();
   }, [messages, isLoading]);
 
-  // Convert file to Base64
   const fileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -119,8 +134,6 @@ export function FloatingChat() {
     setIsLoading(true);
 
     try {
-      // Re-initialize chat/history inside since we need the correct structure
-      // For simplicity out of the box, we use generateContent and pass full history manually.
       const contents = messages
         .filter((m) => m.id !== "init-1")
         .map((m) => ({
@@ -128,22 +141,21 @@ export function FloatingChat() {
           parts: [{ text: m.text }],
         }));
       
-      const newParts: any[] = [{ text: input || "Veuillez analyser cette image." }];
+      const newParts: any[] = [{ text: input || "Analyse cette image." }];
       
       if (fileToProcess) {
         const base64Data = await fileToBase64(fileToProcess);
         newParts.push({
-          inlineData: {
-            mimeType: fileToProcess.type,
-            data: base64Data,
-          },
+          inlineData: { mimeType: fileToProcess.type, data: base64Data },
         });
       }
 
       contents.push({ role: "user", parts: newParts });
 
+      if (!ai) throw new Error("Client AI non initialisé");
+      
       const response = await ai.models.generateContent({
-        model: "gemini-3.1-pro-preview",
+        model: "gemini-1.5-flash",
         contents,
         config: {
           systemInstruction: SYSTEM_INSTRUCTION,
@@ -151,40 +163,31 @@ export function FloatingChat() {
         },
       });
 
-      // Handle function calls if any
       const functionCalls = response.functionCalls;
       if (functionCalls && functionCalls.length > 0) {
         const fc = functionCalls[0];
         if (fc.name === "bookAppointment") {
-          // Add system message saying we are booking
+          const appointmentArgs = fc.args as any;
           setMessages((prev) => [
             ...prev,
             {
               id: Date.now().toString(),
               role: "model",
-              text: "Un instant, j'enregistre votre rendez-vous...",
+              text: "Parfait ! J'ai bien enregistré vos informations. Voici le récapitulatif :",
+              appointment: appointmentArgs,
             },
           ]);
-
-          // Call our internal API forwarding to Google sheet
-          await fetch("/api/book", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(fc.args),
-          });
-
-          // Once done, let model know and generate a final response
-          // For simplicity in this demo, let's just append a static success message.
-           setMessages((prev) => [
-            ...prev,
-            {
-              id: Date.now().toString(),
-              role: "model",
-              text: "C'est noté ! Votre rendez-vous a bien été enregistré. Nos équipes reviendront vers vous au plus vite. Avez-vous besoin d'autre chose ?",
-            },
-          ]);
-           setIsLoading(false);
-           return;
+          try {
+            await fetch("/api/book", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(appointmentArgs),
+            });
+          } catch (err) {
+            console.error(err);
+          }
+          setIsLoading(false);
+          return;
         }
       }
 
@@ -192,22 +195,14 @@ export function FloatingChat() {
       if (textOutput) {
         setMessages((prev) => [
           ...prev,
-          {
-            id: Date.now().toString(),
-            role: "model",
-            text: textOutput,
-          },
+          { id: Date.now().toString(), role: "model", text: textOutput },
         ]);
       }
     } catch (error) {
       console.error(error);
       setMessages((prev) => [
         ...prev,
-        {
-          id: Date.now().toString(),
-          role: "model",
-          text: "Désolé, j'ai rencontré un problème réseau. Veuillez réessayer.",
-        },
+        { id: Date.now().toString(), role: "model", text: "Désolé, une erreur est survenue." },
       ]);
     } finally {
       setIsLoading(false);
@@ -226,9 +221,6 @@ export function FloatingChat() {
             className="fixed bottom-6 right-6 z-50 p-4 bg-primary text-white rounded-full shadow-2xl hover:bg-primary-dark transition-colors flex items-center justify-center group"
           >
             <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            <span className="absolute -top-10 right-0 bg-white text-gray-900 text-xs px-3 py-1.5 rounded shadow-lg font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-              Discutez avec Sofia
-            </span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -242,136 +234,73 @@ export function FloatingChat() {
             className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 w-[90vw] max-w-[400px] h-[600px] max-h-[80vh] bg-white text-gray-900 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200"
           >
             {/* Header */}
-            <div className="bg-primary p-4 text-white flex items-center justify-between shrink-0">
+            <div className="bg-primary p-4 text-white flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-500/20 border-2 border-white/20 flex items-center justify-center overflow-hidden">
+                <div className="w-10 h-10 rounded-full bg-blue-500/20 border-2 border-white/20 flex items-center justify-center">
                   <span className="text-xl">👩🏼‍💼</span>
                 </div>
                 <div>
-                  <h3 className="font-bold font-heading text-lg">Sofia IA</h3>
-                  <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                    <span className="text-xs text-blue-100">En ligne</span>
-                  </div>
+                  <h3 className="font-bold text-lg leading-none">Sofia IA</h3>
+                  <span className="text-xs text-blue-100 flex items-center gap-1 mt-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span> En ligne
+                  </span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Link
-                  href="/assistance-vocale"
-                  title="Appel vocal"
-                  className="p-2 hover:bg-white/20 rounded-full transition-colors flex items-center gap-2 text-sm bg-white/10"
-                >
+                <Link href="/assistance-vocale" className="p-2 hover:bg-white/20 rounded-full transition-colors">
                   <PhoneCall className="w-4 h-4" />
                 </Link>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                >
+                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/20 rounded-full transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
-            {/* Calling Action Notice */}
-            <Link
-              href="/assistance-vocale"
-              className="bg-blue-50 px-4 py-2 text-xs text-blue-700 mx-3 mt-3 rounded-lg border border-blue-100 flex items-center gap-2 hover:bg-blue-100 transition-colors"
-            >
-              <PhoneCall className="w-4 h-4" />
-              <span>Nouveau : Parlez à Sofia de vive voix (Voice API) !</span>
-            </Link>
-
             {/* Chat Body */}
-            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-gray-50/50">
               {messages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`flex ${
-                    msg.role === "user" ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-3 ${
-                      msg.role === "user"
-                        ? "bg-primary text-white rounded-br-sm"
-                        : "bg-gray-100 text-gray-800 rounded-bl-sm"
-                    }`}
-                  >
-                    {msg.image && (
-                      <img
-                        src={msg.image}
-                        alt="Image téléchargée"
-                        className="w-full rounded-lg mb-2 object-cover max-h-48"
-                      />
-                    )}
-                    <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                      {msg.text}
-                    </p>
+                <div key={msg.id} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
+                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                    msg.role === "user" ? "bg-primary text-white rounded-br-sm" : "bg-white text-gray-800 rounded-bl-sm border border-gray-200"
+                  }`}>
+                    {msg.image && <img src={msg.image} className="w-full rounded-lg mb-2" alt="upload" />}
+                    {msg.text}
                   </div>
+                  {msg.appointment && (
+                    <div className="mt-2 w-full bg-blue-50 border border-blue-200 rounded-xl p-4 text-xs">
+                      <h4 className="font-bold text-blue-900 uppercase mb-2">Confirmation de Rendez-vous</h4>
+                      <div className="space-y-1">
+                         <div className="flex justify-between"><span>Nom:</span> <span className="font-bold">{msg.appointment.nom}</span></div>
+                         <div className="flex justify-between"><span>Tél:</span> <span className="font-bold">{msg.appointment.telephone}</span></div>
+                         <div className="flex justify-between"><span>Service:</span> <span className="font-bold">{msg.appointment.service}</span></div>
+                         <div className="flex justify-between"><span>Ville:</span> <span className="font-bold">{msg.appointment.ville}</span></div>
+                         <div className="mt-1 pt-1 border-t border-blue-100 italic">"{msg.appointment.message}"</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
               {isLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-gray-100 rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin text-gray-500" />
-                    <span className="text-xs text-gray-500">Sofia réfléchit...</span>
-                  </div>
+                <div className="flex items-center gap-2 text-xs text-gray-400 px-2">
+                  <Loader2 className="w-3 h-3 animate-spin" /> Sofia écrit...
                 </div>
               )}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Preview Selected File */}
-            {selectedFile && (
-              <div className="px-4 py-2 border-t border-gray-100 flex items-center justify-between bg-gray-50">
-                <span className="text-xs text-gray-600 flex items-center gap-2 truncate">
-                  <ImageIcon className="w-4 h-4 shrink-0" />
-                  {selectedFile.name}
-                </span>
-                <button
-                  onClick={() => setSelectedFile(null)}
-                  className="p-1 hover:bg-gray-200 rounded-full"
-                >
-                  <X className="w-4 h-4 text-gray-500" />
-                </button>
-              </div>
-            )}
+            {/* Promo CTA */}
+            <Link href="/assistance-vocale" className="m-3 p-2 bg-blue-600 text-white rounded-xl text-[10px] items-center justify-center flex font-bold gap-2">
+              <PhoneCall className="w-3 h-3" /> APPELER SOFIA (LIVE VOICE)
+            </Link>
 
-            {/* Input Area */}
-            <form
-              onSubmit={handleSend}
-              className="p-3 border-t border-gray-100 bg-gray-50 flex items-center gap-2"
-            >
-              <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={(e) => {
-                  if (e.target.files && e.target.files[0]) {
-                    setSelectedFile(e.target.files[0]);
-                  }
-                }}
-                className="hidden"
-              />
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="p-2 text-gray-400 hover:text-primary transition-colors hover:bg-gray-200 rounded-full"
-              >
+            {/* Form */}
+            <form onSubmit={handleSend} className="p-3 bg-white border-t flex items-center gap-2">
+              <input type="file" ref={fileInputRef} className="hidden" onChange={(e) => e.target.files && setSelectedFile(e.target.files[0])} />
+              <button type="button" onClick={() => fileInputRef.current?.click()} className="p-2 text-gray-400 hover:text-primary">
                 <LinkIcon className="w-5 h-5" />
               </button>
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Écrivez votre message..."
-                className="flex-1 bg-white border border-gray-200 px-4 py-2 rounded-full text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
-              />
-              <button
-                type="submit"
-                disabled={isLoading || (!input.trim() && !selectedFile)}
-                className="p-2 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
+              <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Votre message..." className="flex-1 text-sm bg-gray-100 p-2.5 rounded-xl outline-none" />
+              <button type="submit" className="p-2.5 bg-primary text-white rounded-xl active:scale-95 transition-transform">
                 <Send className="w-5 h-5" />
               </button>
             </form>

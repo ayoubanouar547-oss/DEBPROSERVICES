@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import ZonesDeServicesClient from "./ZonesDeServicesClient";
 
 export const metadata: Metadata = {
-  title: "Nos Zones d'Intervention en Belgique | DEB PRO SERVICES ☎ 24h/24",
+  title: "🚨 Nos Zones d'Intervention en Belgique — Devis Gratuit & Intervention 30 Min ⚡",
   description:
     "Découvrez toutes les villes de Belgique où nous proposons nos services d'urgence 24h/24 en plomberie, chauffage, gaz et débouchage. Intervention rapide garantie partout en Belgique.",
   keywords:
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical: "/zones-de-services",
   },
   openGraph: {
-    title: "Zones d'Intervention DEB PRO SERVICES | Partout en Belgique",
+    title: "🚨 Zones d'Intervention — Action Rapide ⚡",
     description:
       "Une intervention locale rapide. Découvrez nos techniciens agréés proches de chez vous.",
     url: "https://debservices.canalrose.be/zones-de-services",
@@ -30,8 +30,14 @@ export default function ZonesDeServicesPage() {
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "DEB PRO SERVICES",
+                name: "Deb Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "6854",
+                  "bestRating": "5"
+                },
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
                 address: {

@@ -2,16 +2,16 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contactez-nous | DEB PRO SERVICES ☎ 24h/24 en Belgique",
+  title: "🚨 Contactez-nous — Intervention 30 Min Belgique ⚡",
   description:
-    "Prenez contact avec DEB PRO SERVICES pour tous vos travaux et urgences en plomberie, chauffage ou débouchage. Intervention rapide partout en Belgique. Devis gratuit.",
+    "Prenez contact pour tous vos travaux et urgences en plomberie, chauffage ou débouchage. Intervention rapide partout en Belgique. Devis gratuit.",
   keywords:
-    "contact plombier Belgique, devis débouchage, urgence chauffage contact, DEB PRO SERVICES téléphone",
+    "contact plombier Belgique, devis débouchage, urgence chauffage contact, téléphone",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contactez DEB PRO SERVICES | Expert Plomberie & Débouchage",
+    title: "🚨 Contactez l'Expert Plomberie & Chauffage ⚡",
     description:
       "Une question ? Un devis ? Contactez nos experts agréés pour une intervention rapide en Belgique.",
     url: "https://debservices.canalrose.be/contact",

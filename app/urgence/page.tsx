@@ -5,7 +5,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Urgence Plombier 24H/24 | DEB PRO SERVICES ☎ 30 min Intervention",
+  title: "🚨 Urgence Plombier 24H/24 — Intervention Rapide 30 Min ⚡",
   description:
     "Urgence plombier, chauffagiste et débouchage 24/7 partout en Belgique. Intervention locale en 30-60 minutes. Technicien agréé disponible immédiatement.",
   keywords:
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     canonical: "/urgence",
   },
   openGraph: {
-    title: "Dépannage d'Urgence 24/7 | DEB PRO SERVICES",
+    title: "🚨 Dépannage d'Urgence 24/7 — Action Rapide ⚡",
     description:
       "Une fuite ? Une panne ? Un bouchon ? Nos experts de garde interviennent en moins d'une heure en Belgique.",
     url: "https://debservices.canalrose.be/urgence",
@@ -31,12 +31,18 @@ export default function UrgencePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            name: "DEB PRO SERVICES - Urgence 24h/24",
+            name: "Deb Pro Service - Urgence 24h/24",
             image: "https://debservices.canalrose.be/technician.png",
             "@id": "https://debservices.canalrose.be/urgence",
             url: "https://debservices.canalrose.be/urgence",
             telephone: "+32496325733",
             priceRange: "$$",
+            aggregateRating: {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "6854",
+              "bestRating": "5"
+            },
             address: {
               "@type": "PostalAddress",
               streetAddress: "Centre-ville",

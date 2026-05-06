@@ -23,14 +23,14 @@ export async function generateMetadata({
 
   const path = `/zones-de-services/${service.slug}`;
   return {
-    title: `Zones d'Intervention ${service.title} | DEB PRO SERVICES ☎ 24h/24`,
+    title: `🚨 Devis Gratuit pour ${service.title} | Intervention en 30 Min ⚡`,
     description: `Découvrez toutes les villes en Belgique où nous intervenons pour votre ${service.title.toLowerCase()}. Service rapide 24h/24 et 7j/7. Plus de 300 villes couvertes par nos techniciens agréés.`,
     keywords: `zones intervention ${service.title.toLowerCase()}, plombier ${service.title}, dépannage ${service.title} Belgique`,
     alternates: {
       canonical: path,
     },
     openGraph: {
-      title: `Zones d'Intervention ${service.title} | DEB PRO SERVICES`,
+      title: `🚨 Zones d'Intervention ${service.title} - Dépannage Rapide`,
       description: `Présence nationale pour vos besoins en ${service.title.toLowerCase()}. Intervention express en moins d'une heure.`,
       url: `https://debservices.canalrose.be${path}`,
     },

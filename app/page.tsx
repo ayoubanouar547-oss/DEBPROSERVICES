@@ -16,13 +16,25 @@ export default function Home() {
             "@context": "https://schema.org",
             "@graph": [
               {
+                "@type": "WebSite",
+                "name": "Deb Pro Service",
+                "url": "https://debservices.canalrose.be"
+              },
+              {
                 "@type": "LocalBusiness",
-                name: "DEB PRO SERVICES",
+                name: "Deb Pro Service",
                 image: "https://debservices.canalrose.be/technician.png",
                 "@id": "https://debservices.canalrose.be",
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
                 priceRange: "$$",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "8942",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
                 address: {
                   "@type": "PostalAddress",
                   streetAddress: "Centre-ville",

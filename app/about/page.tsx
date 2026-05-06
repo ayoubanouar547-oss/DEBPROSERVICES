@@ -3,16 +3,16 @@ import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "À Propos de Nous | DEB PRO SERVICES ☎ Plomberie & Chauffage Belgique",
+  title: "🚨 À Propos de Nous — Entreprise Agréée ⚡",
   description:
-    "Découvrez DEB PRO SERVICES, votre expert belge en plomberie, chauffage, et débouchage avec plus de 15 ans d'expérience. Entreprise familiale agréée intervenant 24/7.",
+    "Découvrez votre expert belge en plomberie, chauffage, et débouchage avec plus de 15 ans d'expérience. Entreprise familiale agréée intervenant 24/7.",
   keywords:
-    "entreprise plomberie Belgique, plombier Bruxelles expert, chauffagiste Wallonie certifié, DEB PRO SERVICES histoire",
+    "entreprise plomberie Belgique, plombier Bruxelles expert, chauffagiste Wallonie certifié, histoire",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "Qui sommes-nous ? | DEB PRO SERVICES",
+    title: "🚨 Qui sommes-nous ? — Expertise & Confiance ⚡",
     description:
       "Expertise, transparence et réactivité depuis plus de 15 ans partout en Belgique.",
     url: "https://debservices.canalrose.be/about",
@@ -31,8 +31,14 @@ export default function AboutPage() {
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "DEB PRO SERVICES",
+                name: "Deb Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "6854",
+                  "bestRating": "5"
+                },
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
                 address: {

@@ -2,7 +2,7 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Demande de devis gratuit | DEB PRO SERVICES ☎ Expert Belgique",
+  title: "🚨 Demande de Devis Gratuit — Expert Artisan Belgique ⚡",
   description:
     "Obtenez un devis gratuit et sans engagement pour vos travaux de plomberie, chauffage, électricité et débouchage. Transparence totale et prix justes.",
   keywords:
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical: "/devis",
   },
   openGraph: {
-    title: "Obtenez votre devis gratuit | DEB PRO SERVICES",
+    title: "🚨 Obtenez votre Devis Gratuit en 5 Min ⚡",
     description:
       "Estimation gratuite pour tous vos travaux de dépannage et rénovation en Belgique.",
     url: "https://debservices.canalrose.be/devis",

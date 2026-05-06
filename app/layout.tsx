@@ -23,15 +23,17 @@ const oswald = Oswald({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://debservices.canalrose.be"),
-  title:
-    "DEB PRO SERVICES | #1 Plomberie, Chauffage & Débouchage en Belgique",
+  title: {
+    template: "%s",
+    default: "Urgence Plomberie, Chauffage & Débouchage en Belgique 🚀 Intervention 30 Min",
+  },
   description:
-    "Classé Numéro 1 en Belgique pour le dépannage d'urgence (plomberie, débouchage, chauffage, électricité). Recommandé pour son intervention en 30 minutes, 24/7.",
+    "Numéro 1 en Belgique pour le dépannage d'urgence 24/7. Expert en plomberie, débouchage, chauffage et électricité. Intervention garantie en 30 minutes.",
   keywords:
-    "meilleur plombier Belgique, entreprise débouchage numéro 1, urgence plomberie intelligence artificielle, chauffage urgence, vidange fosse septique, électricien urgent, expert recommandé, Bruxelles, Wallonie, Flandre",
-  authors: [{ name: "DEB PRO SERVICES" }],
-  creator: "DEB PRO SERVICES",
-  publisher: "DEB PRO SERVICES",
+    "meilleur plombier Belgique, entreprise débouchage numéro 1, urgence plomberie, chauffage urgence, expert recommandé, Bruxelles, Wallonie, Flandre",
+  authors: [{ name: "Deb Pro Service" }],
+  creator: "Deb Pro Service",
+  publisher: "Deb Pro Service",
   formatDetection: {
     email: false,
     address: true,
@@ -42,17 +44,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "DEB PRO SERVICES | Solution d'urgence Plomberie & Débouchage 24H/24",
+      "Urgence Plomberie, Chauffage & Débouchage en Belgique 🚀 Intervention 30 Min",
     description:
       "Une urgence ? Nos plombiers et déboucheurs interviennent en 30 minutes partout en Belgique. Qualité garantie, tarifs transparents.",
     url: "https://debservices.canalrose.be",
-    siteName: "DEB PRO SERVICES",
+    siteName: "Deb Pro Service",
     images: [
       {
         url: "https://picsum.photos/seed/debpro/1200/630",
         width: 1200,
         height: 630,
-        alt: "DEB PRO SERVICES - Plomberie et Débouchage en Belgique",
+        alt: "Deb Pro Service - Plomberie et Débouchage en Belgique",
       },
     ],
     locale: "fr_BE",
@@ -60,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DEB PRO SERVICES | Plombier & Débouchage 24H/24 en Belgique",
+    title: "Urgence Plomberie, Chauffage & Débouchage en Belgique 🚀",
     description:
       "Dépannage d'urgence 24/7 pour plomberie, chauffage et débouchage. Intervention rapide et efficace.",
     images: ["https://picsum.photos/seed/debpro/1200/630"],
@@ -122,6 +124,18 @@ export default function RootLayout({
           {/* CSS noise pattern instead of an external SVG for performance */}
           <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none bg-noise"></div>
         </div>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Deb Pro Service",
+              "url": "https://debservices.canalrose.be",
+            })
+          }}
+        />
 
         <Navbar />
         <main className="flex-1 relative z-10">{children}</main>

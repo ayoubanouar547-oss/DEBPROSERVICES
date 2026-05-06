@@ -4,21 +4,29 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PhoneOff, MicOff, Mic, Loader2, Info } from "lucide-react";
 import Link from "next/link";
-import { GoogleGenAI, LiveServerMessage, Modality } from "@google/genai";
+import { GoogleGenAI, LiveServerMessage, Modality, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY });
+const getAiClient = () => {
+  const key = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  if (!key || key === "dummy_key") return null;
+  try {
+    return new GoogleGenAI({ apiKey: key });
+  } catch (e) {
+    return null;
+  }
+};
+const ai = getAiClient();
 
 const SYSTEM_INSTRUCTION = `Tu es Sofia, l'assistante virtuelle vocale de DEB PRO SERVICES en Belgique.
 Tu réponds aux appels en Français (Belgique), Néerlandais (Flamand) ou Anglais selon le client.
-Ton rôle est d'écouter les clients, comprendre leur problème (plomberie, chauffage, débouchage), leur donner une estimation avec assurance, et planifier un rendez-vous (enregistrer leurs détails).
-Sois très humaine, chaleureuse, et professionnelle. Parle naturellement comme un agent d'appel.
-Si un client a besoin d'intervention, demande ses coordonées (nom, téléphone, ville) et dis-lui que ton équipe sera là au plus vite.`;
+Ton rôle est d'écouter les clients, comprendre leur problème (plomberie, chauffage, débouchage), leur donner une estimation avec assurance, et planifier un rendez-vous.
+Sois très humaine, chaleureuse, et professionnelle.
 
-// Note: To simplify the complex AudioContext PCM base64 logic, this
-// component serves as the visual interface and handles text transcription via Live API.
-// A full duplex voice application locally requires custom AudioWorklet processors 
-// for latency-free base64 encoding/decoding. We will implement a simplified 
-// microphone abstraction that handles real-time text transcription using Live API config.
+IMPORTANT:
+- Ton premier message DOIT être: "Salut, je suis Sofia l'assistante de Deb Pro Service, comment puis-je vous aider aujourd'hui ?"
+- Ne discute pas avec toi-même.`;
+
+// ... placeholder components logic remains the same
 
 export default function AssistanceVocalePage() {
   const [isCalling, setIsCalling] = useState(false);
@@ -27,62 +35,176 @@ export default function AssistanceVocalePage() {
   const [transcripts, setTranscripts] = useState<{ role: string; text: string }[]>([]);
   
   const audioContextRef = useRef<AudioContext | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
   const sessionRef = useRef<any>(null);
+
+  // Buffer for audio output
+  const nextStartTimeRef = useRef<number>(0);
 
   const startCall = async () => {
     try {
       setIsCalling(true);
-      setStatus("Connexion en cours...");
+      setStatus("Demande d'accès micro...");
+
+      // Get user media
+      streamRef.current = await navigator.mediaDevices.getUserMedia({ audio: true });
       
+      setStatus("Connexion à Sofia...");
+      
+      if (!ai) {
+        throw new Error("L'Assistant Vocal nécessite une clé API Gemini valide. Veuillez la configurer dans les paramètres.");
+      }
+
+      // Initialize Audio Context for playback
+      if (!audioContextRef.current) {
+        audioContextRef.current = new AudioContext({ sampleRate: 24000 });
+      }
+      const audioContext = audioContextRef.current;
+      nextStartTimeRef.current = audioContext.currentTime;
+
+      // Define the tool for booking appointments (same as chat)
+      const bookTool = {
+        functionDeclarations: [{
+          name: "bookAppointment",
+          description: "Enregistrer un rendez-vous client dans le système. Demandez nom, téléphone, service, ville et message.",
+          parameters: {
+            type: Type.OBJECT,
+            properties: {
+              nom: { type: Type.STRING },
+              telephone: { type: Type.STRING },
+              email: { type: Type.STRING },
+              service: { type: Type.STRING },
+              ville: { type: Type.STRING },
+              message: { type: Type.STRING },
+            },
+            required: ["nom", "telephone", "service", "ville", "message"],
+          },
+        }]
+      };
+
       const sessionPromise = ai.live.connect({
-        model: "gemini-3.1-flash-live-preview",
+        model: "models/gemini-2.0-flash-exp",
         config: {
           responseModalities: [Modality.AUDIO],
           speechConfig: {
             voiceConfig: {
-              prebuiltVoiceConfig: { voiceName: "Zephyr" } // French friendly voice
+              prebuiltVoiceConfig: { voiceName: "Puck" } // Chaleureuse
             }
           },
           systemInstruction: SYSTEM_INSTRUCTION,
+          tools: [bookTool]
         },
         callbacks: {
           onopen: () => {
-            setStatus("En ligne - Sofia vous écoute");
-            setTranscripts([{ role: "system", text: "Connexion vocale établie." }]);
-            // In a full implementation, this is where navigator.mediaDevices.getUserMedia
-            // is initialized and an AudioWorklet begins pushing PCM data to the realtime session.
+            setStatus("En ligne - Parlez à Sofia");
+            setTranscripts([{ role: "system", text: "Connexion établie." }]);
+            
+            // Start pushing audio from mic
+            const source = audioContext.createMediaStreamSource(streamRef.current!);
+            const processor = audioContext.createScriptProcessor(4096, 1, 1);
+            
+            source.connect(processor);
+            processor.connect(audioContext.destination);
+
+            processor.onaudioprocess = (e) => {
+              if (isMuted || !sessionRef.current) return;
+              const inputData = e.inputBuffer.getChannelData(0);
+              
+              // Convert Float32 to Int16 PCM
+              const pcmData = new Int16Array(inputData.length);
+              for (let i = 0; i < inputData.length; i++) {
+                pcmData[i] = Math.max(-1, Math.min(1, inputData[i])) * 0x7FFF;
+              }
+              
+              const base64 = btoa(String.fromCharCode(...new Uint8Array(pcmData.buffer)));
+              sessionRef.current.sendRealtimeInput([{
+                mimeType: "audio/pcm;rate=24000",
+                data: base64
+              }]);
+            };
+
+            // Sofia greets first
+            sessionRef.current.sendRealtimeInput([{ text: "Salut, je suis Sofia l'assistante de Deb Pro Service, comment puis-je vous aider aujourd'hui ?" }]);
           },
-          onmessage: async (message: LiveServerMessage) => {
-            // Because full duplex PCM playback requires complex buffering, here we handle
-            // the state visually. 
-            // In a real prod environment, base64 PCM is decoded and scheduled in AudioContext.
-            if (message.serverContent?.modelTurn) {
-              setStatus("Sofia parle...");
-              // We reset to listening after a small visual delay for UX
-              setTimeout(() => {
-                if (isCalling) setStatus("Sofia vous écoute...");
-              }, 2000);
+          onmessage: async (msg: LiveServerMessage) => {
+            // Handle audio output from Sofia
+            if (msg.serverContent?.modelTurn?.parts) {
+              for (const part of msg.serverContent.modelTurn.parts) {
+                if (part.inlineData?.mimeType?.includes("audio") && part.inlineData.data) {
+                  const audioData = part.inlineData.data;
+                  const binaryString = atob(audioData);
+                  const bytes = new Uint8Array(binaryString.length);
+                  for (let i = 0; i < binaryString.length; i++) {
+                    bytes[i] = binaryString.charCodeAt(i);
+                  }
+                  
+                  // Decode Int16 PCM to Float32 for Web Audio
+                  const pcm16 = new Int16Array(bytes.buffer);
+                  const float32 = new Float32Array(pcm16.length);
+                  for (let i = 0; i < pcm16.length; i++) {
+                    float32[i] = pcm16[i] / 32768;
+                  }
+
+                  const audioBuffer = audioContext.createBuffer(1, float32.length, 24000);
+                  audioBuffer.getChannelData(0).set(float32);
+
+                  const source = audioContext.createBufferSource();
+                  source.buffer = audioBuffer;
+                  source.connect(audioContext.destination);
+                  
+                  const startTime = Math.max(audioContext.currentTime, nextStartTimeRef.current);
+                  source.start(startTime);
+                  nextStartTimeRef.current = startTime + audioBuffer.duration;
+                }
+              }
+            }
+
+            // Handle tool calls (Booking)
+            const toolCall = msg.toolCall;
+            if (toolCall?.functionCalls) {
+              const fc = toolCall.functionCalls[0];
+              if (fc.name === "bookAppointment") {
+                setStatus("Sofia enregistre...");
+                try {
+                  await fetch("/api/book", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(fc.args),
+                  });
+                  // Feedback to assistant
+                  sessionRef.current.sendToolResponse({
+                    functionResponses: [{
+                      name: "bookAppointment",
+                      response: { success: true, message: "Rendez-vous enregistré avec succès." }
+                    }]
+                  });
+                } catch (err) {
+                   sessionRef.current.sendToolResponse({
+                    functionResponses: [{
+                      name: "bookAppointment",
+                      response: { success: false, message: "Erreur technique lors de l'enregistrement." }
+                    }]
+                  });
+                }
+              }
             }
           },
           onclose: () => {
-            setStatus("Appel terminé.");
-            setIsCalling(false);
+            endCall();
           },
           onerror: (err) => {
             console.error(err);
-            setStatus("Erreur de connexion.");
-            setIsCalling(false);
+            setStatus("Erreur.");
+            endCall();
           }
         }
       });
 
       sessionRef.current = await sessionPromise;
-      // In a real setup, we would send a hello message to trigger voice immediately:
-      // sessionRef.current.sendRealtimeInput({ text: "Bonjour Sofia !" })
       
     } catch (e) {
       console.error(e);
-      setStatus("Erreur lors du démarrage.");
+      setStatus("Accès refusé ou erreur.");
       setIsCalling(false);
     }
   };
@@ -91,6 +213,10 @@ export default function AssistanceVocalePage() {
     if (sessionRef.current) {
       sessionRef.current.close();
       sessionRef.current = null;
+    }
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
     }
     setIsCalling(false);
     setStatus("Appel terminé.");

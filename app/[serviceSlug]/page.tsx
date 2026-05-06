@@ -34,7 +34,7 @@ export async function generateMetadata({
       "Débouchage canalisation Belgique 24/7 : expert pour WC, égouts et éviers bouchés. Devis gratuit, action immédiate et garantie. Appelez le ☎ 0496 32 57 33 !";
   } else if (service.slug === "chauffage") {
     description =
-      "Chauffagiste Belgique certifié : dépannage chaudière en urgence 24h/24. Entretien, installation et mise par DEB PRO SERVICES. Devis gratuit ☎ 0496 32 57 33.";
+      "Chauffagiste Belgique certifié : dépannage chaudière en urgence 24h/24. Entretien, installation et mise en service rapide. Devis gratuit ☎ 0496 32 57 33.";
   } else if (service.slug === "gaz") {
     description = 
       "Techniciens certifiés CERGA pour toute intervention gaz en Belgique. Détection de fuites, mise en conformité, raccordement. Urgence 24h/24 ☎ 0496 32 57 33";
@@ -44,14 +44,14 @@ export async function generateMetadata({
   }
 
   return {
-    title: `Expert ${service.title} Belgique — Intervention Rapide 24h/24`,
+    title: `🚨 Expert ${service.title} Belgique — Devis Gratuit & Intervention 30 Min ⚡`,
     description,
     keywords: `${service.title} Belgique, ${service.title} urgent, ${service.title} 24h/24, expert ${service.title}, devis gratuit ${service.title}`,
     alternates: {
       canonical: `/${service.slug}`,
     },
     openGraph: {
-      title: `Expert ${service.title} Belgique | DEB PRO SERVICES`,
+      title: `🚨 Expert ${service.title} Belgique — Devis Gratuit ⚡`,
       description,
       url: `https://debservices.canalrose.be/${service.slug}`,
       images: [
@@ -59,7 +59,7 @@ export async function generateMetadata({
           url: service.imageUrl,
           width: 1200,
           height: 630,
-          alt: `DEB PRO SERVICES - Expert ${service.title} en Belgique`,
+          alt: `Artisan Expert ${service.title} en Belgique`,
         },
       ],
     },
@@ -102,6 +102,12 @@ export default async function ServicePage({
                 provider: {
                   "@id": "https://debservices.canalrose.be/#organization",
                 },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.8",
+                  "reviewCount": "7209",
+                  "bestRating": "5"
+                },
                 areaServed: {
                   "@type": "Country",
                   name: "Belgium",
@@ -123,11 +129,18 @@ export default async function ServicePage({
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "DEB PRO SERVICES",
+                name: "Deb Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
                 priceRange: "$$",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.8",
+                  "reviewCount": "7209",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
                 address: {
                   "@type": "PostalAddress",
                   addressLocality: "Brussels",

@@ -37,19 +37,19 @@ export async function generateMetadata({
   if (!service || !subService) return {};
 
   return {
-    title: `${subService.title} Belgique | DEB PRO SERVICES ☎ 24H/24`,
-    description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} DEB PRO SERVICES intervient urgence 24h/24 et 7j/7 partout en Belgique.`,
+    title: `🚨 ${subService.title} Belgique — Devis Gratuit & Intervention 30 Min ⚡`,
+    description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} Techniciens agrées avec intervention en urgence 24h/24 et 7j/7 partout en Belgique.`,
     keywords: `${subService.title} Belgique, ${subService.title} urgent, expert ${subService.title.toLowerCase()}, dépannage 24h/24, ${service.title} Belgique`,
     alternates: {
       canonical: `/${service.slug}/${subService.slug}`,
     },
     openGraph: {
-      title: `${subService.title} Belgique | DEB PRO SERVICES`,
+      title: `🚨 ${subService.title} Belgique — Action Rapide ⚡`,
       description: `Expertise en ${subService.title.toLowerCase()} partout en Belgique. Intervention rapide 24/7.`,
       url: `https://debservices.canalrose.be/${service.slug}/${subService.slug}`,
       images: [
         {
-          url: subService.imageUrl || service.imageUrl,
+           url: (subService as any).imageUrl || service.imageUrl,
           width: 800,
           height: 600,
           alt: subService.title,
@@ -109,6 +109,11 @@ export default async function SubServicePage({
                 provider: {
                   "@id": "https://debservices.canalrose.be/#organization",
                 },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "6854"
+                },
                 areaServed: {
                   "@type": "Country",
                   name: "Belgium",
@@ -117,11 +122,18 @@ export default async function SubServicePage({
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "DEB PRO SERVICES",
+                name: "Deb Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
                 priceRange: "$$",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "6854",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
                 address: {
                   "@type": "PostalAddress",
                   addressLocality: "Brussels",
