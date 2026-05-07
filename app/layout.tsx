@@ -100,6 +100,10 @@ export default function RootLayout({
       className={`${inter.variable} ${oswald.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preconnect" href="https://debouchageexpress24hh.odoo.com" />
+        <link rel="preconnect" href="https://www.debouchageexpress24-24h.be" />
+      </head>
       <body
         className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
         suppressHydrationWarning
@@ -144,7 +148,7 @@ export default function RootLayout({
         <MobileBottomNav />
         <Script
           id="microsoft-clarity"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(c,l,a,r,i,t,y){

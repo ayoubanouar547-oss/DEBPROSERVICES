@@ -169,6 +169,7 @@ export function Navbar() {
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 rounded-full text-slate-400 hover:text-white transition-colors"
+                    aria-label="Fermer le menu"
                   >
                     <X className="w-5 h-5" />
                   </button>

@@ -37,12 +37,14 @@ export function Footer() {
             <div className="flex gap-4">
               <a
                 href="https://facebook.com/debservices"
+                aria-label="Facebook"
                 className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10 u-url"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
                 href="https://instagram.com/debservices"
+                aria-label="Instagram"
                 className="w-10 h-10 bg-white/5 backdrop-blur-md rounded-xl flex items-center justify-center hover:bg-blue-600/20 text-white transition border border-white/10 u-url"
               >
                 <Instagram className="w-5 h-5" />

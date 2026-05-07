@@ -18,7 +18,7 @@ export function WaterSplash() {
 
   useEffect(() => {
     // Generate particles that match the user's requested animation behavior
-    const newParticles = Array.from({ length: 30 }).map((_, i) => ({
+    const newParticles = Array.from({ length: 15 }).map((_, i) => ({
       id: i,
       distanceX: Math.random() * 600 + 300,
       distanceY: (Math.random() - 0.5) * 400,
@@ -51,6 +51,7 @@ export function WaterSplash() {
           }}
           className="absolute rounded-full"
           style={{
+            willChange: "transform, opacity",
             width: p.size,
             height: p.size * 1.5,
             background:

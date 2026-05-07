@@ -6,6 +6,7 @@ export function PhoneButton({ phoneNumber }: { phoneNumber: string }) {
   return (
     <a
       href={`tel:${phoneNumber.replace(/\s/g, "")}`}
+      aria-label={`Appeler le ${phoneNumber}`}
       className="flex items-center gap-2 text-dark font-bold hover:text-primary transition-colors group relative"
     >
       <div className="relative flex items-center justify-center w-10 h-10 bg-secondary rounded-full">
