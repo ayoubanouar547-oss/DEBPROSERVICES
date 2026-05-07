@@ -2,7 +2,7 @@ import { buildLongClusterText } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { services } from "@/lib/data/services";
 import { belgianCities } from "@/lib/data/cities";
-import { cityData, defaultCityData } from "@/lib/cityData";
+import { cityData, defaultCityData, getFallbackCityData } from "@/lib/cityData";
 import { notFound } from "next/navigation";
 import {
   PhoneCall,
@@ -85,15 +85,14 @@ export async function generateMetadata({
   const keywords = `${service.title}, ${subService ? subService.title : ""}, ${cityInfo ? cityInfo.name : "Belgique"}, intervention urgente, dépannage 24/7`;
 
   if (subService && cityInfo) {
-    const cityDataObj = cityData[cityInfo.slug] ?? defaultCityData;
+    const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
     const title = `🚨 Devis Gratuit pour ${subService.title} à ${cityInfo.name} ⚡ Intervention 30 Min`;
     const description = `Expert en ${subService.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0496 32 57 33`;
-    const canonicalPath = `/zones-de-services/${serviceSlug}/${cityInfo.slug}`;
     return {
       title,
       description,
       keywords,
-      alternates: { canonical: canonicalPath },
+      alternates: { canonical: path },
       openGraph: {
         title,
         description,
@@ -119,7 +118,7 @@ export async function generateMetadata({
   }
 
   if (cityInfo) {
-    const cityDataObj = cityData[cityInfo.slug] ?? defaultCityData;
+    const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
     const title = `🚨 Devis Gratuit pour ${service.title} à ${cityInfo.name} ⚡ Intervention 30 Min`;
     const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0496 32 57 33`;
     return {
@@ -255,16 +254,17 @@ export default async function UnifiedZonePage({
 
   const titleToUse = subServiceInfo ? subServiceInfo.title : serviceInfo.title;
   
-  const cityDataObj = cityData[cityInfo.slug] ?? defaultCityData;
+  const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
   const provinceToUse = cityDataObj.province !== "Belgique" ? cityDataObj.province : cityInfo.province;
   
-  const cityDetails = cityData[cityInfo.slug] ?? defaultCityData;
+  const cityDetails = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
   const localIntro = `Vous résidez à <strong>${cityInfo.name}</strong> (${cityInfo.province}) et vous cherchez un expert pour <strong>${titleToUse.toLowerCase()}</strong> ? ${cityDetails.description} Nos techniciens, déployés ${cityDetails.landmark}, interviennent en moins de ${cityDetails.interventionTime} après votre appel, 24h/24 et 7j/7.`;
   const localSpeed = `Grâce à notre connaissance approfondie de ${cityInfo.name} et de ses ${cityDetails.landmark}, nous garantissons une intervention en moins de ${cityDetails.interventionTime}. Nos véhicules d'intervention sont géo-localisés en permanence dans la province de ${cityInfo.province} pour une réactivité maximale sur votre ${titleToUse.toLowerCase()}.`;
   
   const massiveSEOContent = buildLongClusterText(
     titleToUse.toLowerCase(),
     cityInfo.name,
+    subServiceInfo ? subServiceInfo.desc : serviceInfo.description
   );
 
   // Define a pseudo-random consistent review count based on city string length and characters

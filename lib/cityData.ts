@@ -102,4 +102,46 @@ export const defaultCityData = {
   description: "reconnue pour la qualité de vie de ses habitants et la densité de son bâti résidentiel",
   landmark: "dans toute la commune",
   interventionTime: "60 minutes"
+};
+
+// Generate deterministic diverse defaults for cities without explicit data
+export function getFallbackCityData(cityName: string, province: string = "Belgique") {
+  const descriptions = [
+    "reconnue pour son dynamisme local et la diversité de son parc immobilier",
+    "où les infrastructures résidentielles et commerciales demandent un entretien technique régulier",
+    "qui abrite de nombreux foyers nécessitant des interventions d'urgence fiables",
+    "caractérisée par une forte demande en dépannage rapide et professionnel",
+    "une commune active où la maintenance des installations est une priorité pour le confort de ses habitants",
+    "reconnue pour la qualité de vie de ses habitants et la densité de son bâti résidentiel"
+  ];
+  
+  const landmarks = [
+    "dans l'ensemble de la commune",
+    "du centre-ville aux quartiers périphériques",
+    "dans les différents secteurs résidentiels",
+    "sur tous les axes principaux de la ville",
+    "dans toute l'agglomération",
+    "au cœur de la municipalité et ses environs"
+  ];
+  
+  const times = [
+    "45 minutes",
+    "50 minutes",
+    "60 minutes"
+  ];
+  
+  // Simple hash for deterministic pseudo-random
+  let hash = 0;
+  for (let i = 0; i < cityName.length; i++) {
+    hash = (hash << 5) - hash + cityName.charCodeAt(i);
+    hash = hash & hash;
+  }
+  hash = Math.abs(hash);
+
+  return {
+    province,
+    description: descriptions[hash % descriptions.length],
+    landmark: landmarks[(hash + 1) % landmarks.length],
+    interventionTime: times[(hash + 2) % times.length]
+  };
 }

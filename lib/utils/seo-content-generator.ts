@@ -100,6 +100,7 @@ function stringToHash(str: string) {
 export function buildLongClusterText(
   serviceName: string,
   cityName: string,
+  serviceDesc?: string,
 ): string[] {
   const seedPrefix = serviceName + "-" + cityName;
   
@@ -136,17 +137,44 @@ export function buildLongClusterText(
   textBlocks.push(
     `<h2 class="text-3xl font-black text-white mb-6 mt-12">Action ciblée : ${serviceName} à ${cityName}</h2>`,
     `<p class="mb-6 text-white/90 text-lg leading-relaxed">${introText}</p>`,
-    
-    `<div class="bg-blue-900/10 border-l-4 border-blue-500 p-5 rounded-r-xl my-8">
-      <h3 class="text-xl font-semibold text-blue-200 mb-3">Pourquoi faire appel à nos services à ${cityName} ?</h3>
-      <ul class="list-disc pl-5 space-y-2 text-white/80">
-        ${selectedBenefits.map(b => `<li>${b}</li>`).join('\n')}
-      </ul>
-    </div>`,
+  );
 
+  // Inject unique service description if available to break duplicate content footprint
+  if (serviceDesc) {
+    textBlocks.push(
+      `<div class="bg-blue-600/10 border-l-4 border-blue-400 p-6 my-8 rounded-r-2xl">
+         <h3 class="text-xl font-bold text-blue-300 mb-3">Spécificités de notre intervention</h3>
+         <p class="text-white/90 text-lg leading-relaxed">${serviceDesc}</p>
+       </div>`
+    );
+  } else {
+    textBlocks.push(
+      `<div class="bg-blue-900/10 border-l-4 border-blue-500 p-5 rounded-r-xl my-8">
+        <h3 class="text-xl font-semibold text-blue-200 mb-3">Pourquoi faire appel à nos services à ${cityName} ?</h3>
+        <ul class="list-disc pl-5 space-y-2 text-white/80">
+          ${selectedBenefits.map(b => `<li>${b}</li>`).join('\n')}
+        </ul>
+      </div>`
+    );
+  }
+
+  textBlocks.push(
     `<h3 class="text-2xl font-bold text-blue-300 mb-4 mt-8">Méthodologie professionnelle</h3>`,
     `<p class="mb-6 text-white/90 text-lg leading-relaxed">${methdologyText}</p>`,
-    
+  );
+
+  if (serviceDesc) {
+    textBlocks.push(
+      `<div class="my-8">
+        <h3 class="text-xl font-bold text-white mb-4">Vos avantages garantis</h3>
+        <ul class="grid sm:grid-cols-2 gap-4">
+          ${selectedBenefits.map(b => `<li class="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10"><span class="w-2 h-2 rounded-full bg-blue-500"></span><span class="text-sm text-slate-300">${b}</span></li>`).join('\n')}
+        </ul>
+      </div>`
+    );
+  }
+
+  textBlocks.push(    
     `<h3 class="text-2xl font-bold text-emerald-300 mb-4 mt-8">Garantie & Normes de sécurité</h3>`,
     `<p class="mb-6 text-white/90 text-lg leading-relaxed">${standardsText}</p>`
   );

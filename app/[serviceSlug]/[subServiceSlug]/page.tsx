@@ -90,6 +90,7 @@ export default async function SubServicePage({
   const massiveSEOContent = buildLongClusterText(
     subServiceInfo.title.toLowerCase(),
     "Belgique",
+    subServiceInfo.desc
   );
 
   return (
