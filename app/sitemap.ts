@@ -14,6 +14,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zones-de-services",
     "/mentions-legales",
     "/privacy-policy",
+    "/loodgieter-grimbergen",
+    "/plombier-grimbergen",
+    "/chauffagiste-grimbergen",
+    "/electricien-grimbergen",
+    "/debouchage-grimbergen",
+    "/installateur-vmc",
+    "/vidange-fosse-septique-liege",
+    "/plombier-woluwe",
   ];
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
