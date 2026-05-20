@@ -102,29 +102,17 @@ export default async function ServicePage({
                 provider: {
                   "@id": "https://debservices.canalrose.be/#organization",
                 },
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.8",
-                  "reviewCount": "7209",
-                  "bestRating": "5"
-                },
                 areaServed: {
                   "@type": "Country",
                   name: "Belgium",
                 },
-                hasOfferCatalog: {
-                  "@type": "OfferCatalog",
-                  name: `Services de ${serviceInfo.title}`,
-                  itemListElement: serviceInfo.subServices.map((sub, i) => ({
-                    "@type": "Offer",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: sub.title,
-                      description: sub.desc,
-                    },
-                    position: i + 1,
-                  })),
-                },
+                offers: serviceInfo.subServices.map((sub, i) => ({
+                  "@type": "Offer",
+                  name: sub.title,
+                  description: sub.desc,
+                  price: "50.00",
+                  priceCurrency: "EUR"
+                })),
               },
               {
                 "@type": "LocalBusiness",

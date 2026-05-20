@@ -290,29 +290,16 @@ export default async function UnifiedZonePage({
                 provider: {
                   "@id": "https://debservices.canalrose.be/#organization",
                 },
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  "ratingValue": ratingValue,
-                  "reviewCount": reviewCount.toString(),
-                  "bestRating": "5"
-                },
                 areaServed: {
                   "@type": "City",
                   name: cityInfo.name,
                 },
-                hasOfferCatalog: {
-                  "@type": "OfferCatalog",
-                  name: `Solutions de ${titleToUse} ${cityInfo.name}`,
-                  itemListElement: [
-                    {
-                      "@type": "Offer",
-                      itemOffered: {
-                        "@type": "Service",
-                        name: `Dépannage ${titleToUse} ${cityInfo.name} 24h/24`,
-                        description: `Intervention immédiate pour ${titleToUse.toLowerCase()} à ${cityInfo.name}.`
-                      }
-                    }
-                  ]
+                offers: {
+                  "@type": "Offer",
+                  name: `Dépannage ${titleToUse} ${cityInfo.name} 24h/24`,
+                  description: `Intervention immédiate pour ${titleToUse.toLowerCase()} à ${cityInfo.name}.`,
+                  price: "50.00",
+                  priceCurrency: "EUR"
                 }
               },
               {

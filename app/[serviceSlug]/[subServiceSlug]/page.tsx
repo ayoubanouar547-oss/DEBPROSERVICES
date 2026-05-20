@@ -110,11 +110,6 @@ export default async function SubServicePage({
                 provider: {
                   "@id": "https://debservices.canalrose.be/#organization",
                 },
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.9",
-                  "reviewCount": "6854"
-                },
                 areaServed: {
                   "@type": "Country",
                   name: "Belgium",
