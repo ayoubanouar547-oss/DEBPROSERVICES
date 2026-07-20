@@ -1,13 +1,13 @@
 import { Metadata } from "next";
-import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin, ArrowRight } from "lucide-react";
+import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Débouchage Grimbergen : WC, Égout & Canalisation Bouchée | Deb Pro",
-  description: "Canalisation bouchée à Grimbergen ou Strombeek-Bever ? Nos déboucheurs professionnels interviennent en 30 min pour WC, évier, égouts bouchés. Devis gratuit.",
+  title: "Débouchage Grimbergen : WC, Évier & Égout Bouché | Deb Pro",
+  description: "Canalisation bouchée ou refoulement d'égout à Grimbergen, Strombeek-Bever & environs ? Nos techniciens interviennent d'urgence 24h/24 en 30 min. Devis gratuit.",
   alternates: {
     canonical: "/debouchage-grimbergen",
   },
@@ -16,20 +16,20 @@ export const metadata: Metadata = {
 export default function DebouchageGrimbergenPage() {
   const faqs = [
     {
-      question: "Quel est le prix d'un débouchage de canalisation à Grimbergen ?",
-      answer: "Le tarif dépend de la complexité (furet mécanique ou hydrocurage haute pression). Nous établissons toujours un diagnostic précis et vous donnons une offre de prix claire et fixe avant de commencer les travaux de débouchage."
+      question: "Combien coûte une intervention de débouchage à Grimbergen ?",
+      answer: "Un débouchage standard mécanique (au furet électrique professionnel) coûte généralement entre 90€ et 150€. Pour les engorgements sévères nécessitant un hydrocurage haute pression ou une inspection vidéo par caméra, nous réalisons systématiquement un devis gratuit avant toute intervention."
     },
     {
-      question: "Combien de temps faut-il pour déboucher un WC ou une canalisation principale ?",
-      answer: "La plupart des débouchages de WC ou d'éviers durent entre 30 et 60 minutes avec notre équipement professionnel."
+      question: "Combien de temps faut-il pour déboucher un WC récalcitrant ?",
+      answer: "Dans la majorité des cas, nos déboucheurs de garde basés à Grimbergen règlent le problème en moins de 30 à 45 minutes après leur arrivée grâce à des outils professionnels adaptés."
     },
     {
-      question: "Proposez-vous une inspection par caméra à Grimbergen ?",
-      answer: "Oui, nous utilisons des caméras d'inspection étanches haute définition pour visualiser l'intérieur de vos canalisations, repérer l'origine des bouchons fréquents (racines, tartre, fissures) et vérifier leur intégrité."
+      question: "Qui doit régler la facture du débouchage : le propriétaire ou le locataire ?",
+      answer: "Selon la loi belge, le locataire est responsable de l'entretien courant et doit régler les débouchages liés à l'usage quotidien (accumulation de cheveux, graisses, objets). Si le problème provient d'une cassure de canalisation extérieure ou d'un affaissement de terrain, les frais incombent alors au propriétaire."
     },
     {
-      question: "Entretenez-vous également les fosses septiques à Grimbergen ?",
-      answer: "Tout à fait. Nous prenons en charge la vidange de fosses septiques, le curage des chambres de visite et le nettoyage complet des réseaux d'égouttage à Grimbergen et Strombeek-Bever."
+      question: "Intervenez-vous également le week-end et la nuit à Strombeek-Bever ?",
+      answer: "Oui, notre centre d'appel d'urgence est joignable 24 heures sur 24 et 7 jours sur 7. Nos camions pompes circulent en permanence y compris les dimanches et jours fériés sans surcoût abusif."
     }
   ];
 
@@ -45,11 +45,13 @@ export default function DebouchageGrimbergenPage() {
                 "@type": "Service",
                 "name": "Débouchage Grimbergen",
                 "serviceType": "Débouchage",
-                "description": "Service de débouchage urgent de canalisation, égouts, toilettes (WC) et inspection caméra à Grimbergen.",
-                "areaServed": {
-                  "@type": "City",
-                  "name": "Grimbergen"
-                },
+                "description": "Dépannage débouchage canalisation, WC et égout urgent à Grimbergen par des experts agréés.",
+                "areaServed": [
+                  {
+                    "@type": "City",
+                    "name": "Grimbergen"
+                  }
+                ],
                 "provider": {
                   "@type": "LocalBusiness",
                   "name": "Deb Pro Service",
@@ -74,100 +76,101 @@ export default function DebouchageGrimbergenPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden text-white">
-        <div className="absolute inset-0 -z-10 bg-slate-900">
+      <section className="relative pt-36 pb-24 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
-            src="https://picsum.photos/seed/grimbergen-unclogging/1920/1080"
-            alt="Débouchage Grimbergen"
+            src="https://debouchageexpress24hh.odoo.com/web/image/4126-df5892ca/regenerated_image_1777411808057.png?height=600"
+            alt="Débouchage Grimbergen - Deb Pro Services"
             fill
             priority
-            className="object-cover opacity-40 mix-blend-overlay"
+            className="object-cover object-center opacity-40 mix-blend-overlay"
+            referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-[#000814]/85 to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-600/20 backdrop-blur-md rounded-full text-xs font-bold border border-blue-500/30 mb-6 uppercase tracking-widest text-blue-400">
-              <MapPin className="w-3 h-3" /> Débouchage & Égouttage Grimbergen / Strombeek
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-cyan-500/10 backdrop-blur-md rounded-full text-xs font-extrabold border border-cyan-500/30 mb-6 uppercase tracking-widest text-cyan-400">
+              <MapPin className="w-3.5 h-3.5" /> Province du Brabant Flamand
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
-              Débouchage à Grimbergen : Toilettes, Vannes & Égouts Bouchés
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 tracking-tight drop-shadow-xl font-oswald text-white">
+              Débouchage à Grimbergen : Intervention 30 Min
             </h1>
-            <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light">
-              Des mauvaises odeurs se dégagent de vos canalisations ou l&apos;eau stagne dans votre douche ? Deb Pro Services intervient en urgence 24/7 pour libérer vos sanitaires et égouts bouchés à Grimbergen et aux alentours.
+            <p className="text-xl text-slate-300 mb-8 leading-relaxed font-medium">
+              Votre évier déborde ? Vos toilettes sont condamnées ou des odeurs nauséabondes remontent de vos égouts ? Nos déboucheurs professionnels agréés à Grimbergen se déplacent en urgence 24h/24 pour libérer vos canalisations.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="tel:0496325733"
-                className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-blue-600/20"
+                className="group bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-black px-8 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] active:scale-95"
               >
-                <PhoneCall className="w-5 h-5" /> Urgence Débouchage : 0496 32 57 33
+                <PhoneCall className="w-5 h-5 animate-pulse" /> Urgence Débouchage : 0496 32 57 33
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Interventions list */}
-      <section className="py-20 bg-white">
+      {/* Services Section */}
+      <section className="py-24 relative z-10 bg-slate-950/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight">
-              Nos services de débouchage à Grimbergen
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">
+              Prestations Débouchage Professionnel à Grimbergen
             </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
-              Équipement d&apos;égouttage professionnel pour briser tous les bouchons, même les plus coriaces.
+            <p className="text-slate-300 max-w-2xl mx-auto font-medium">
+              Nous disposons d&apos;outils de pointe pour résoudre n&apos;importe quel cas d&apos;engorgement de canalisation.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="deb-wc">
-              <Wrench className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">Débouchage Toilettes & Éviers</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Intervention rapide de débouchage de toilettes, siphon d&apos;évier, de douche ou de baignoire obstrués par le calcaire, les cheveux ou des objets ménagers insolites.
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="serv-deb-wc">
+              <Droplet className="w-10 h-10 text-cyan-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-cyan-400">Débouchage WC & Toilettes</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
+                Toilettes bouchées ou refoulement d&apos;eau ? Nous intervenons avec des furets électriques et des hydro-propulseurs de sécurité pour pulvériser le bouchon instantanément sans rayer vos céramiques.
               </p>
             </div>
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="deb-egout">
-              <Building className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">Curage d&apos;Égouts & Canalisations</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Utilisation d&apos;hydro-cureuses professionnelles pour nettoyer l&apos;intégralité de vos égouts et chambres de visite, supprimant définitivement graisses et tartre accumulés.
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="serv-egouts">
+              <Wrench className="w-10 h-10 text-cyan-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-cyan-400">Curage Égouts & Chambres de Visite</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
+                Nettoyage à haute pression (jusqu&apos;à 400 bars) à l&apos;aide d&apos;un camion hydrocureur pour décaper les dépôts de calcaire, graisses solidifiées et racines bloquant vos tuyauteries principales.
               </p>
             </div>
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="deb-cam">
-              <Droplet className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">Inspection par Caméra</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Identification visuelle directe de la cause de refoulements répétés de vos eaux usées à l&apos;aide d&apos;un endoscope souple d&apos;égouttage.
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="serv-evier">
+              <Building className="w-10 h-10 text-cyan-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-cyan-400">Débouchage Évier & Douche</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
+                Écoulement extrêmement lent dans la cuisine ou la douche ? Notre équipe nettoie vos siphons, canalisations d&apos;évacuation secondaires et élimine définitivement les graisses accumulées.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Steps Section */}
-      <section className="py-20 bg-slate-900 text-white rounded-t-[3rem] sm:rounded-t-[4rem]">
+      {/* Process Section */}
+      <section className="py-24 bg-[#000814]/60 backdrop-blur-md border-t border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             
-            {/* Steps */}
+            {/* Steps list */}
             <div>
-              <h2 className="text-3xl font-black mb-8 uppercase tracking-tight text-blue-400">Débouchage en 4 étapes clés</h2>
+              <h2 className="text-3xl md:text-5xl font-black mb-10 uppercase tracking-tight text-cyan-400">Déroulement du dépannage</h2>
               <div className="space-y-8">
                 {[
-                  { title: "Prise d&apos;appel d&apos;urgence", desc: "Conseils immédiats de mise en sécurité pour éviter les refoulements et débordements destructeurs." },
-                  { title: "Arrivée du camion hydrocureur", desc: "Notre spécialiste égouttier arrive sur place avec le groupe haute pression adapté de jour comme de nuit." },
-                  { title: "Localisation du bouchon", desc: "Sondage des canalisations ou passage immédiat de la caméra d&apos;inspection si nécessaire." },
-                  { title: "Débouchage & Curage", desc: "Nettoyage haute performance des tuyaux et rincage complet pour garantir un écoulement parfait à long terme." }
+                  { title: "Appel & Conseil gratuit", desc: "Prise en charge téléphonique immédiate de votre problème avec tarification de base communiquée en toute honnêteté." },
+                  { title: "Déplacement ultra-rapide", desc: "Un déboucheur de garde mobile à Grimbergen ou Strombeek est dépêché en moins de 30-45 minutes chez vous." },
+                  { title: "Inspection & Diagnostic vidéo", desc: "Analyse interne des canalisations par caméra endoscopique HD si l&apos;origine du bouchon est difficile à cerner." },
+                  { title: "Débouchage & test de débit", desc: "Pulvérisation complète du bouchon au furet ou à la pression, suivi d&apos;un rinçage abondant et d&apos;un test de mise en eau." }
                 ].map((step, i) => (
                   <div key={i} className="flex gap-5">
-                    <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center font-black flex-shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-cyan-600/20 border border-cyan-500/30 text-cyan-400 flex items-center justify-center font-black flex-shrink-0">
                       {i + 1}
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg mb-1">{step.title}</h4>
+                      <h4 className="font-bold text-lg text-white mb-1">{step.title}</h4>
                       <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
@@ -175,21 +178,21 @@ export default function DebouchageGrimbergenPage() {
               </div>
             </div>
 
-            {/* Local points */}
-            <div className="bg-slate-800/50 border border-slate-700/50 rounded-3xl p-8 sm:p-10">
-              <h3 className="text-2xl font-black mb-6 uppercase">Expert en débouchage de proximité</h3>
-              <p className="text-slate-400 text-sm mb-8 leading-relaxed">
-                Grâce à notre implantation géographique près de Bruxelles / Hal-Vilvorde, nous intervenons dans les meilleures conditions.
+            {/* Quality details */}
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-10 flex flex-col justify-center">
+              <h3 className="text-2xl font-black mb-6 uppercase text-white tracking-tight">Un assainissement de confiance</h3>
+              <p className="text-slate-300 text-sm mb-8 leading-relaxed font-medium font-medium">
+                Notre entreprise d&apos;assainissement intervient dans le respect des règles environnementales belges les plus strictes.
               </p>
               <ul className="space-y-5">
                 {[
-                  "Disponibilité totale : un service d&apos;urgence 24/7 performant.",
-                  "Camions compacts d&apos;hydrocurage pensés pour tous types d&apos;accès résidentiels.",
-                  "Transparance absolue des tarifs : devis approuvé avant toute intervention.",
-                  "Utilisation de méthodes respectueuses de l&apos;environnement sans acides destructeurs."
+                  "Déboucheurs qualifiés utilisant des outils de pointe (furets ROTHENBERGER, caméra RIDGID).",
+                  "Pas d&apos;usage de produits chimiques nocifs pour vos tuyaux ou la faune aquatique.",
+                  "Transparence tarifaire absolue : devis écrit approuvé par vos soins avant intervention.",
+                  "Service joignable 24h/24 et 7j/7, pour particuliers, commerces et copropriétés."
                 ].map((point, i) => (
                   <li key={i} className="flex items-start gap-4">
-                    <CheckCircle className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" />
                     <span className="text-sm font-medium text-slate-300 leading-relaxed">{point}</span>
                   </li>
                 ))}
@@ -200,27 +203,27 @@ export default function DebouchageGrimbergenPage() {
         </div>
       </section>
 
-      {/* Local contextual information */}
-      <section className="py-16 bg-slate-50 border-b border-slate-200">
+      {/* Regional context */}
+      <section className="py-20 bg-slate-950/20 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h4 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Zones habituelles d&apos;intervention</h4>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              Nos ouvriers déboucheurs desservent en direct l&apos;agglomération de <strong>Grimbergen</strong>, avec des déplacements récurrents vers les communes de **Strombeek-Bever**, **Beigem** et **Humbeek**, ainsi que les raccordements principaux liant de Wemmel à Vilvorde. Proximité rime ici avec célérité.
+            <h4 className="text-2xl font-black text-white mb-4 tracking-tight uppercase">Couverture Locale d&apos;urgence</h4>
+            <p className="text-slate-300 text-sm leading-relaxed font-medium">
+              Nos camions pompes hydrocureurs circulent de jour comme de nuit à **Grimbergen**, **Strombeek-Bever**, **Humbeek**, **Beigem** ainsi que dans les communes voisines de Vilvorde, Wemmel, Meise et le nord de Bruxelles pour un assainissement rapide.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Internal Links */}
-      <section className="py-8 bg-white border-b border-slate-100">
+      {/* Links internal */}
+      <section className="py-8 bg-white/5 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ul className="flex flex-wrap lg:justify-center gap-4 text-xs font-bold text-slate-500">
-            <li><Link href="/loodgieter-grimbergen" className="underline hover:text-blue-600">Loodgieter Grimbergen (NL)</Link></li>
-            <li><Link href="/plombier-grimbergen" className="underline hover:text-blue-600">Plombier Grimbergen</Link></li>
-            <li><Link href="/zones-de-services/debouchage-canalisation/grimbergen" className="underline hover:text-blue-600">Débouchage Grimbergen Zone</Link></li>
-            <li><Link href="/debouchage-canalisation" className="underline hover:text-blue-600">Débouchage Belgique</Link></li>
-            <li><Link href="/contact" className="underline hover:text-blue-600">Demander un Dévis Débouchage</Link></li>
+          <ul className="flex flex-wrap lg:justify-center gap-6 text-xs font-bold text-slate-400">
+            <li><Link href="/loodgieter-grimbergen" className="hover:text-cyan-400 transition-colors">Loodgieter Grimbergen (NL)</Link></li>
+            <li><Link href="/plombier-grimbergen" className="hover:text-cyan-400 transition-colors">Plombier Grimbergen (FR)</Link></li>
+            <li><Link href="/chauffagiste-grimbergen" className="hover:text-cyan-400 transition-colors">Chauffagiste Grimbergen</Link></li>
+            <li><Link href="/debouchage-canalisation" className="hover:text-cyan-400 transition-colors">Nos Services Débouchage</Link></li>
+            <li><Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link></li>
           </ul>
         </div>
       </section>
@@ -228,11 +231,11 @@ export default function DebouchageGrimbergenPage() {
       {/* FAQ */}
       <FAQ customFaqs={faqs} />
 
-      {/* Contact Section */}
-      <section className="py-20 bg-slate-50">
+      {/* Contact Section Form */}
+      <section className="py-24 bg-slate-950/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
-          <h2 className="text-4xl font-black text-slate-900 mb-4 uppercase">Canalisation bouchée ? Agissez maintenant !</h2>
-          <p className="text-slate-600">N&apos;attendez pas que le refoulement provoque des inondations. Contactez nos déboucheurs ou remplissez le formulaire.</p>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight font-oswald text-white">Vos canalisations font face à un bouchon ?</h2>
+          <p className="text-slate-300 font-medium font-medium">N&apos;attendez pas que le problème s&apos;aggrave et cause des dégâts des eaux. Appelez-nous ou laissez un message.</p>
         </div>
         <ContactForm />
       </section>

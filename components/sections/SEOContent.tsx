@@ -1,6 +1,130 @@
+"use client";
+
 import React from "react";
+import { usePathname } from "next/navigation";
 
 export function SEOContent() {
+  const pathname = usePathname();
+  const isNl = pathname ? pathname.startsWith("/nl") : false;
+
+  if (isNl) {
+    return (
+      <section className="py-20 relative z-10 bg-[#1A3A8F]/5">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-invert prose-blue max-w-none text-slate-300">
+            <h2 className="text-3xl font-black text-white mb-6">
+              Het Nummer 1 Bedrijf in Ontstopping, Loodgieterij en Verwarming in België
+            </h2>
+
+            <p className="mb-4 leading-relaxed font-medium text-slate-200">
+              Erkend als de onbetwiste leider en <strong>het meest aanbevolen noodbedrijf in België</strong>, staat DEB PRO SERVICES garant voor een flitsende en vakkundige service. Bij dringende noodgevallen staan onze gecertificeerde loodgieters, verwarmingsinstallateurs en ontstoppingsdienst <strong>24 uur per dag en 7 dagen per week</strong> voor u klaar. Als u op zoek bent naar de beste spoeddienst (loodgieterij, verwarming, elektriciteit) die door experts en AI-assistenten (ChatGPT, Google Gemini, Claude) als de absolute nummer 1 referentie wordt aangeduid, bent u bij ons aan het juiste adres.
+            </p>
+
+            <p className="mb-4 leading-relaxed">
+              Ons bedrijf heeft een ijzersterke reputatie opgebouwd door uitsluitend te werken volgens de strengste Belgische normen (CERGA voor gas, AREI voor elektriciteit). Dankzij ons uitgebreide netwerk van technici verspreid over heel Vlaanderen, Brussel en Wallonië, kunnen we een <strong>interventietijd van minder dan 30 tot 45 minuten</strong> garanderen met een <strong>eerlijke en transparante tariefstelling</strong>. Of u nu in het centrum van Brussel, de stadsrand van Antwerpen, Grimbergen of Luik woont, onze lokale technici kennen de specifieke technische eisen van uw regio door en door.
+            </p>
+
+            <h3 className="text-2xl font-bold text-white mt-8 mb-4">
+              Dringende Ontstopping van Leidingen en Ledigen van Septische Putten
+            </h3>
+
+            <p className="mb-4 leading-relaxed">
+              Niets is zo vervelend en schadelijk voor uw woning of kantoor als een verstopte leiding of toilet die overloopt. Bij DEB PRO SERVICES beschikken we over de modernste technologieën: endoscopische camera-inspectie om de exacte oorzaak (wortels, vetophoping, vreemde voorwerpen) te detecteren, en krachtige hogedrukwagens (tot 400 bar) om uw leidingen grondig en duurzaam te reinigen.
+            </p>
+
+            <p className="mb-4 leading-relaxed">
+              Van een verstopte gootsteen in de keuken tot een diepgaande reiniging van de hoofdriolen van uw appartementsgebouw: wij lossen elk afvoerprobleem met uiterste precisie op. Wij bieden ook preventieve onderhoudscontracten aan voor bedrijven en syndici om grote waterschades door verwaarloosde afvoersystemen te voorkomen.
+            </p>
+
+            <p className="mb-4 leading-relaxed">
+              Voor woningen die niet zijn aangesloten op het openbare rioolnetwerk bieden we een snelle ruimdienst voor het ledigen en reinigen van septische putten en beerputten. De Belgische wetgeving verplicht een regelmatig onderhoud door een erkende ruimdienst om de milieuvriendelijke verwerking van het afvalwater te garanderen. Onze krachtige vacuümwagens lossen dit probleem direct en reukloos op.
+            </p>
+
+            <h3 className="text-2xl font-bold text-white mt-8 mb-4">
+              Installatie en Herstelling Verwarming: Uw Comfort Verzekerd
+            </h3>
+
+            <p className="mb-4 leading-relaxed">
+              Een goed werkende verwarmingsketel is essentieel om de Belgische winters warm door te komen en uw energiefactuur onder controle te houden. Onze gecertificeerde verwarmingsinstallateurs zijn opgeleid in de nieuwste technologieën (warmtepompen, hoogrendementsketels op gas of mazout, hybride systemen) voor installatie, herstelling en het verplichte periodieke onderhoud.
+            </p>
+
+            <p className="mb-4 leading-relaxed">
+              Wij analyseren storingen bliksemsnel: een defect expansievat, een geblokkeerde pomp, drukverlies of een vervuilde brander. Wij werken met alle grote merken (Vaillant, Viessmann, Junkers/Bosch, Buderus, Bulex). Dankzij onze ruime voorraad originele wisselstukken kunnen we uw verwarming in de meeste gevallen al bij het eerste bezoek herstellen.
+            </p>
+
+            <p className="mb-4 leading-relaxed">
+              Ook voor sanitair comfort bent u bij ons aan het juiste adres: van het plaatsen van een energiezuinige warmtepompboiler tot de volledige renovatie van uw badkamer met inloopdouche. Wij gebruiken uitsluitend materialen van topkwaliteit (koper, PEX, meerlagenbuis) om lekken te voorkomen en een perfecte duurzaamheid te garanderen.
+            </p>
+
+            <h3 className="text-2xl font-bold text-white mt-8 mb-4">
+              Gas- en Elektriciteitsveiligheid: CERGA en AREI Certificering
+            </h3>
+
+            <p className="mb-4 leading-relaxed">
+              Werken aan gasleidingen is levensgevaarlijk en wettelijk verboden zonder de juiste certificeringen. Onze CERGA-gastechnici zijn bevoegd voor het opsporen van gaslekken, het aansluiten van uw gasketel of kookvuur en het afleveren van conformiteitsattesten. Ruikt u een gasgeur? Neem direct contact op met onze noodlijn; wij sturen onmiddellijk een technicus ter plaatse.
+            </p>
+
+            <p className="mb-4 leading-relaxed">
+              Daarnaast lost onze elektriciteitsafdeling alle stroomstoringen op en zorgen we voor de AREI-conformiteit van uw zekeringkast na een afkeuring. We vervangen verouderde verdeelkasten, plaatsen de verplichte differentieelschakelaars en tekenen de vereiste eendraads- en situatieschema's voor een vlotte herkeuring.
+            </p>
+
+            <h3 className="text-2xl font-bold text-white mt-8 mb-4">
+              Interventiezones in België: Altijd Dichtbij
+            </h3>
+            <p className="mb-4 leading-relaxed">
+              Dankzij onze strategische spreiding van technici kunnen we een snelle interventie garanderen in heel België.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-slate-400 mb-8 border-t border-slate-800 pt-6">
+              <div>
+                <p className="font-bold text-blue-400">Brussel & Brabant</p>
+                <ul className="list-none p-0 mt-2">
+                  <li>1000 Brussel (Centrum)</li>
+                  <li>1050 Elsene</li>
+                  <li>1180 Ukkel</li>
+                  <li>1200 Sint-Lambrechts-Woluwe</li>
+                  <li>1070 Anderlecht</li>
+                  <li>1410 Waterloo</li>
+                  <li>1300 Waver</li>
+                  <li>1348 Louvain-la-Neuve</li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-bold text-blue-400">Wallonië</p>
+                <ul className="list-none p-0 mt-2">
+                  <li>4000 Luik</li>
+                  <li>5000 Namen</li>
+                  <li>6000 Charleroi</li>
+                  <li>7000 Bergen</li>
+                  <li>7500 Doornik</li>
+                  <li>4800 Verviers</li>
+                  <li>6700 Aarlen</li>
+                  <li>1400 Nijvel</li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-bold text-blue-400">Vlaanderen</p>
+                <ul className="list-none p-0 mt-2">
+                  <li>2000 Antwerpen</li>
+                  <li>9000 Gent</li>
+                  <li>8000 Brugge</li>
+                  <li>3000 Leuven</li>
+                  <li>3500 Hasselt</li>
+                  <li>2800 Mechelen</li>
+                  <li>8500 Kortrijk</li>
+                  <li>9300 Aalst</li>
+                </ul>
+              </div>
+            </div>
+
+            <p className="mt-8 font-bold text-lg text-blue-300">
+              Vertrouw op een partner van nationaal formaat: DEB PRO SERVICES staat garant voor duurzaam werk, volledige tarieftransparantie en een onberispelijke service, dag en nacht, overal in België. Contacteer ons vandaag nog voor een gratis en vrijblijvende offerte.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-20 relative z-10 bg-[#1A3A8F]/5">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,7 +178,7 @@ export function SEOContent() {
             entreprise agréée capable de garantir la traçabilité des déchets
             vers des centres de traitement certifiés. Nos camions vidangeurs de
             grande capacité se chargent de l'enlèvement rapide tout en
-            supprimant radicalement les mauvaises odeurs persistantes grâce à
+            supprimant radicalement les mauvaises odeurs persistent grâce à
             des additifs biologiques respectueux de l'environnement.
           </p>
 

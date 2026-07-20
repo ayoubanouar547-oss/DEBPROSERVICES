@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Send, CheckCircle, Loader2, MapPin } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,12 +17,12 @@ const MapSelector = dynamic(() => import("@/components/ui/MapSelector"), {
   ),
 });
 
-const schema = z.object({
-  nom: z.string().min(2, "Le nom est trop court").max(100),
-  telephone: z.string().min(8, "Numéro de téléphone invalide"),
+const createSchema = (isNl: boolean) => z.object({
+  nom: z.string().min(2, isNl ? "Naam is te kort" : "Le nom est trop court").max(100),
+  telephone: z.string().min(8, isNl ? "Ongeldig telefoonnummer" : "Numéro de téléphone invalide"),
   email: z
     .string()
-    .email("Adresse email invalide")
+    .email(isNl ? "Ongeldig e-mailadres" : "Adresse email invalide")
     .optional()
     .or(z.literal("")),
   service: z.enum([
@@ -31,25 +32,38 @@ const schema = z.object({
     "electricite",
     "climatisation",
     "fosse",
+    "construction",
+    "debouchage",
+    "toiture",
+    "panneaux-solaires",
+    "renovation",
+    "camera-surveillance",
+    "vitres",
+    "jardinage",
   ]),
-  ville: z.string().min(2, "Veuillez entrer votre ville"),
+  ville: z.string().min(2, isNl ? "Voer uw stad in" : "Veuillez entrer votre ville"),
   message: z
     .string()
-    .min(10, "Le message est trop court, merci de préciser.")
+    .min(10, isNl ? "Bericht is te kort, geef meer details." : "Le message est trop court, merci de préciser.")
     .max(1000),
   latitude: z.number().optional(),
   longitude: z.number().optional(),
   honeypot: z.string().max(0, "Invalid field"), // Anti-spam
 });
 
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<ReturnType<typeof createSchema>>;
 
 export function ContactForm() {
+  const pathname = usePathname();
+  const isNl = pathname ? pathname.startsWith("/nl") : false;
+
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [showMap, setShowMap] = useState(false);
+
+  const schema = createSchema(isNl);
 
   const {
     register,
@@ -65,6 +79,26 @@ export function ContactForm() {
   const lat = watch("latitude");
   const lng = watch("longitude");
 
+  useEffect(() => {
+    const handleCostEstimationApplied = (e: Event) => {
+      const customEvent = e as CustomEvent<{ service: any; message: string }>;
+      if (customEvent.detail) {
+        setValue("service", customEvent.detail.service);
+        setValue("message", customEvent.detail.message);
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("cost-estimation-applied", handleCostEstimationApplied);
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("cost-estimation-applied", handleCostEstimationApplied);
+      }
+    };
+  }, [setValue]);
+
   const onSubmit = async (data: FormData) => {
     setStatus("loading");
     try {
@@ -75,7 +109,7 @@ export function ContactForm() {
       });
 
       if (!res.ok) {
-        throw new Error("Erreur lors de l'envois");
+        throw new Error("Erreur lors de l'envoi");
       }
 
       // Persist to localStorage for Dashboard Real-time simulation
@@ -108,7 +142,11 @@ export function ContactForm() {
       console.error(e);
       setStatus("error");
       setErrorMessage(
-        "Une erreur est survenue lors de l'envoi. Veuillez nous contacter par téléphone.",
+        isNl ? (
+          "Er is een fout opgetreden bij het verzenden. Neem telefonisch contact met ons op."
+        ) : (
+          "Une erreur est survenue lors de l'envoi. Veuillez nous contacter par téléphone."
+        )
       );
     }
   };
@@ -119,26 +157,30 @@ export function ContactForm() {
         <div className="grid lg:grid-cols-2 gap-16">
           <div>
             <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-sm">
-              Devis Rapide
+              {isNl ? "Snelle Offerte" : "Devis Rapide"}
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white mb-4">
-              Demandez une intervention ou un devis gratuit
+              {isNl ? "Vraag een interventie of gratis offerte aan" : "Demandez une intervention ou un devis gratuit"}
             </h3>
             <p className="text-slate-400 mb-8 text-lg">
-              Remplissez le formulaire ci-dessous avec le maximum de détails.
-              Notre équipe vous recontactera très rapidement avec un diagnostic
-              ou un devis précis.
+              {isNl ? (
+                "Vul het onderstaande formulier in met zoveel mogelijk details. Ons team neemt zo snel mogelijk contact met u op voor een diagnose of een nauwkeurige offerte."
+              ) : (
+                "Remplissez le formulaire ci-dessous avec le maximum de détails. Notre équipe vous recontactera très rapidement avec un diagnostic ou un devis précis."
+              )}
             </p>
 
             <div className="space-y-6">
               <div className="bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10">
                 <h4 className="font-bold text-white uppercase tracking-wider text-sm mb-2">
-                  Notre Garantie
+                  {isNl ? "Onze Garantie" : "Notre Garantie"}
                 </h4>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  Vos données sont sécurisées et nous ne les communiquerons
-                  jamais à des tiers. Les devis envoyés via ce formulaire sont
-                  100% gratuits et sans aucun engagement.
+                  {isNl ? (
+                    "Uw gegevens zijn veilig en we zullen ze nooit met derden delen. Offertes die via dit formulier worden verzonden, zijn 100% gratis en volledig vrijblijvend."
+                  ) : (
+                    "Vos données sont sécurisées et nous ne les communiquerons jamais à des tiers. Les devis envoyés via ce formulaire sont 100% gratuits et sans aucun engagement."
+                  )}
                 </p>
               </div>
             </div>
@@ -151,17 +193,20 @@ export function ContactForm() {
                   <CheckCircle className="w-8 h-8" />
                 </div>
                 <h4 className="text-2xl font-black text-white">
-                  Message Envoyé !
+                  {isNl ? "Bericht Verzonden!" : "Message Envoyé !"}
                 </h4>
                 <p className="text-slate-400">
-                  Nous avons bien reçu votre demande et vous recontacterons dans
-                  les plus brefs délais.
+                  {isNl ? (
+                    "We hebben uw aanvraag goed ontvangen en nemen zo snel mogelijk contact met u op."
+                  ) : (
+                    "Nous avons bien reçu votre demande et vous recontacterons dans les plus brefs délais."
+                  )}
                 </p>
                 <button
                   onClick={() => setStatus("idle")}
                   className="mt-4 text-blue-400 font-bold uppercase tracking-wider text-sm hover:text-white transition-colors"
                 >
-                  Envoyer un autre message
+                  {isNl ? "Stuur nog een bericht" : "Envoyer un autre message"}
                 </button>
               </div>
             ) : (
@@ -177,13 +222,13 @@ export function ContactForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
-                      Nom Complet *
+                      {isNl ? "Volledige Naam *" : "Nom Complet *"}
                     </label>
                     <input
                       type="text"
                       {...register("nom")}
                       className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.nom ? "border-red-500/50" : "border-white/10"} text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
-                      placeholder="Jean Dupont"
+                      placeholder={isNl ? "Jan Dupont" : "Jean Dupont"}
                     />
                     {errors.nom && (
                       <p className="mt-2 text-xs text-red-400 font-bold">
@@ -193,7 +238,7 @@ export function ContactForm() {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
-                      Téléphone *
+                      {isNl ? "Telefoon *" : "Téléphone *"}
                     </label>
                     <input
                       type="tel"
@@ -211,19 +256,24 @@ export function ContactForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
-                      Service Demandé *
+                    <label htmlFor="service-select" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                      {isNl ? "Gevraagde Dienst *" : "Service Demandé *"}
                     </label>
                     <select
+                      id="service-select"
                       {...register("service")}
                       className={`w-full px-4 py-3 rounded-xl bg-slate-900 border ${errors.service ? "border-red-500/50" : "border-white/10"} text-white focus:outline-none focus:border-blue-500/50 transition-colors appearance-none`}
+                      aria-label={isNl ? "Gevraagde Dienst" : "Service Demandé"}
                     >
-                      <option value="plomberie">Plomberie</option>
-                      <option value="chauffage">Chauffage</option>
-                      <option value="gaz">Gaz</option>
-                      <option value="electricite">Électricité</option>
-                      <option value="climatisation">Climatisation</option>
-                      <option value="fosse">Vidange Fosse</option>
+                      <option value="plomberie">{isNl ? "Loodgieterij" : "Plomberie"}</option>
+                      <option value="chauffage">{isNl ? "Verwarming" : "Chauffage"}</option>
+                      <option value="gaz">{isNl ? "Gas" : "Gaz"}</option>
+                      <option value="electricite">{isNl ? "Elektriciteit" : "Électricité"}</option>
+                      <option value="climatisation">{isNl ? "Airco / Klimatisatie" : "Climatisation"}</option>
+                      <option value="fosse">{isNl ? "Septische Put Ledigen" : "Vidange Fosse"}</option>
+                      <option value="construction">{isNl ? "Ruwbouw & Constructie" : "Construction & Gros Œuvre"}</option>
+                      <option value="vitres">{isNl ? "Ruitenwassing" : "Nettoyage de Vitres"}</option>
+                      <option value="jardinage">{isNl ? "Tuinonderhoud & Snoei" : "Jardinage & Élagage"}</option>
                     </select>
                     {errors.service && (
                       <p className="mt-2 text-xs text-red-400 font-bold">
@@ -233,13 +283,13 @@ export function ContactForm() {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
-                      Ville / Code Postal *
+                      {isNl ? "Stad / Postcode *" : "Ville / Code Postal *"}
                     </label>
                     <input
                       type="text"
                       {...register("ville")}
                       className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.ville ? "border-red-500/50" : "border-white/10"} text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
-                      placeholder="1000 Bruxelles"
+                      placeholder={isNl ? "1000 Brussel" : "1000 Bruxelles"}
                     />
                     {errors.ville && (
                       <p className="mt-2 text-xs text-red-400 font-bold">
@@ -251,9 +301,9 @@ export function ContactForm() {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
-                    Email{" "}
+                    {isNl ? "E-mail " : "Email "}
                     <span className="font-normal text-slate-500 lowercase">
-                      (Optionnel)
+                      {isNl ? "(Optioneel)" : "(Optionnel)"}
                     </span>
                   </label>
                   <input
@@ -267,9 +317,9 @@ export function ContactForm() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
-                      Localisation GPS{" "}
+                      {isNl ? "GPS Locatie " : "Localisation GPS "}
                       <span className="font-normal text-slate-500 lowercase">
-                        (Optionnel)
+                        {isNl ? "(Optioneel)" : "(Optionnel)"}
                       </span>
                     </label>
                     <button
@@ -278,7 +328,7 @@ export function ContactForm() {
                       className="text-[10px] font-black text-blue-400 uppercase tracking-widest flex items-center gap-2 hover:text-white transition-colors"
                     >
                       <MapPin className="w-3 h-3" />
-                      {showMap ? "Masquer la carte" : "Utiliser la carte"}
+                      {showMap ? (isNl ? "Verberg de kaart" : "Masquer la carte") : (isNl ? "Gebruik de kaart" : "Utiliser la carte")}
                     </button>
                   </div>
 
@@ -322,13 +372,13 @@ export function ContactForm() {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
-                    Détails de l'intervention *
+                    {isNl ? "Details van de interventie *" : "Détails de l'intervention *"}
                   </label>
                   <textarea
                     {...register("message")}
                     rows={4}
                     className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.message ? "border-red-500/50" : "border-white/10"} text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors resize-none`}
-                    placeholder="Décrivez votre problème afin qu'on prépare le matériel adéquat..."
+                    placeholder={isNl ? "Beschrijf uw probleem zodat we de juiste apparatuur kunnen voorbereiden..." : "Décrivez votre problème afin qu'on prépare le matériel adéquat..."}
                   />
                   {errors.message && (
                     <p className="mt-2 text-xs text-red-400 font-bold">
@@ -350,12 +400,11 @@ export function ContactForm() {
                 >
                   {status === "loading" ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin" /> Envoi en
-                      cours...
+                      <Loader2 className="w-5 h-5 animate-spin" /> {isNl ? "Bezig met verzenden..." : "Envoi en cours..."}
                     </>
                   ) : (
                     <>
-                      Envoyer la demande{" "}
+                      {isNl ? "Aanvraag Verzenden" : "Envoyer la demande"}{" "}
                       <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}

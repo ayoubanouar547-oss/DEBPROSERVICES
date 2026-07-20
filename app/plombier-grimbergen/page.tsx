@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin, ArrowRight } from "lucide-react";
+import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
@@ -74,35 +74,36 @@ export default function PlombierGrimbergenPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden text-white">
-        <div className="absolute inset-0 -z-10 bg-slate-900">
+      <section className="relative pt-36 pb-24 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
-            src="https://picsum.photos/seed/grimbergen-plumber-fr/1920/1080"
-            alt="Plombier Grimbergen"
+            src="https://debouchageexpress24hh.odoo.com/web/image/4146-3c23cecf/regenerated_image_1777316390260%20%284%29.png?height=600"
+            alt="Plombier Grimbergen - Deb Pro Services"
             fill
             priority
-            className="object-cover opacity-40 mix-blend-overlay"
+            className="object-cover object-center opacity-40 mix-blend-overlay"
+            referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-[#000814]/85 to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-600/20 backdrop-blur-md rounded-full text-xs font-bold border border-blue-500/30 mb-6 uppercase tracking-widest text-blue-400">
-              <MapPin className="w-3 h-3" /> Région de Grimbergen & Strombeek
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-500/10 backdrop-blur-md rounded-full text-xs font-extrabold border border-blue-500/30 mb-6 uppercase tracking-widest text-blue-400">
+              <MapPin className="w-3.5 h-3.5" /> Région de Grimbergen & Strombeek
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
-              Plombier à Grimbergen : Dépannage Rapide 24h/24 & 7j/7
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 tracking-tight drop-shadow-xl">
+              Plombier à Grimbergen : Dépannage Rapide 24h/24
             </h1>
-            <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light">
+            <p className="text-xl text-slate-300 mb-8 leading-relaxed font-medium">
               Besoin d&apos;un plombier de confiance à Grimbergen, Strombeek-Bever ou Humbeek ? Fuite d&apos;eau à colmater, débouchage urgent ou remplacement de sanitaire : notre équipe d&apos;artisans locaux intervient sous 30 minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="tel:0496325733"
-                className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-blue-600/20"
+                className="group bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-black px-8 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] active:scale-95"
               >
-                <PhoneCall className="w-5 h-5" /> Urgence Grimbergen : 0496 32 57 33
+                <PhoneCall className="w-5 h-5 animate-pulse" /> Urgence Grimbergen : 0496 32 57 33
               </a>
             </div>
           </div>
@@ -110,37 +111,37 @@ export default function PlombierGrimbergenPage() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 relative z-10 bg-slate-950/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight">
-              Nos interventions de plomberie à Grimbergen
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">
+              Nos Interventions de Plomberie à Grimbergen
             </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
+            <p className="text-slate-300 max-w-2xl mx-auto font-medium">
               Une gamme de services complète réalisée par des professionnels qualifiés et à des tarifs compétitifs.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="serv-rep-fuite">
-              <Droplet className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">Recherche de Fuite d&apos;Eau</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="serv-rep-fuite">
+              <Droplet className="w-10 h-10 text-blue-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-blue-400">Recherche de fuite</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
                 Repérage précis et réparation rapide de toutes vos fuites sur canalisations en cuivre, Alpex ou PVC. Nous intervenons rapidement pour stopper les dégâts des eaux.
               </p>
             </div>
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="serv-deb">
-              <Building className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">Débouchage Urgent</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                WC bouché, douche ou évier obstrué ? Nos plombiers disposent d&apos;un matériel de pointe pour libérer vos canalisations en un temps record.
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="serv-deb">
+              <Wrench className="w-10 h-10 text-blue-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-blue-400">Dépannage Sanitaires</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
+                Remplacement de robinetterie défectueuse, mécanisme de chasse d&apos;eau encastrée, ou installation de nouveau boiler / chauffe-eau électrique.
               </p>
             </div>
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="serv-sanit">
-              <Wrench className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">Installation de Sanitaires</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Remplacement de robinetterie défectueuse, mécanisme de chasse d&apos;eau encastrée, ou installation de nouveau boiler / chauffe-eau électrique.
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="serv-sanit">
+              <Building className="w-10 h-10 text-blue-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-blue-400">Débouchage express</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
+                WC bouché, douche ou évier obstrué ? Nos plombiers disposent d&apos;un matériel de pointe pour libérer vos canalisations en un temps record.
               </p>
             </div>
           </div>
@@ -148,13 +149,13 @@ export default function PlombierGrimbergenPage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-slate-900 text-white rounded-t-[3rem] sm:rounded-t-[4rem]">
+      <section className="py-24 bg-[#000814]/60 backdrop-blur-md border-t border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             
             {/* Steps */}
             <div>
-              <h2 className="text-3xl font-black mb-8 uppercase tracking-tight text-blue-400">Processus d&apos;intervention express</h2>
+              <h2 className="text-3xl md:text-5xl font-black mb-10 uppercase tracking-tight text-blue-400">Processus d&apos;intervention express</h2>
               <div className="space-y-8">
                 {[
                   { title: "Appel d&apos;urgence", desc: "Diagnostic initial par téléphone pour évaluer la situation et planifier l&apos;arrivée du dépanneur." },
@@ -167,7 +168,7 @@ export default function PlombierGrimbergenPage() {
                       {i + 1}
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg mb-1">{step.title}</h4>
+                      <h4 className="font-bold text-lg text-white mb-1">{step.title}</h4>
                       <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
@@ -176,9 +177,9 @@ export default function PlombierGrimbergenPage() {
             </div>
 
             {/* Local points */}
-            <div className="bg-slate-800/50 border border-slate-700/50 rounded-3xl p-8 sm:p-10">
-              <h3 className="text-2xl font-black mb-6 uppercase">Un service de proximité</h3>
-              <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-10 flex flex-col justify-center">
+              <h3 className="text-2xl font-black mb-6 uppercase text-white tracking-tight">Un service de proximité</h3>
+              <p className="text-slate-300 text-sm mb-8 leading-relaxed font-medium">
                 Bénéficiez du professionnalisme d&apos;une entreprise belge réputée, directement active dans votre quartier.
               </p>
               <ul className="space-y-5">
@@ -201,11 +202,11 @@ export default function PlombierGrimbergenPage() {
       </section>
 
       {/* Local contextual information */}
-      <section className="py-16 bg-slate-50 border-b border-slate-200">
+      <section className="py-20 bg-slate-950/20 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h4 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Partout dans l&apos;agglomération de Grimbergen</h4>
-            <p className="text-slate-600 text-sm leading-relaxed">
+            <h4 className="text-2xl font-black text-white mb-4 tracking-tight uppercase">Partout dans l&apos;agglomération de Grimbergen</h4>
+            <p className="text-slate-300 text-sm leading-relaxed font-medium">
               Nos véhicules de patrouille circulent continuellement dans les différents secteurs de la commune : du pôle commercial et résidentiel de <strong>Strombeek-Bever</strong>, aux villages calmes de <strong>Beigem</strong> et <strong>Humbeek</strong>, sans oublier le cœur historique de <strong>Grimbergen</strong>. Notre réactivité est la clé de votre tranquillité.
             </p>
           </div>
@@ -213,14 +214,14 @@ export default function PlombierGrimbergenPage() {
       </section>
 
       {/* Internal links */}
-      <section className="py-8 bg-white border-b border-slate-100">
+      <section className="py-8 bg-white/5 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ul className="flex flex-wrap lg:justify-center gap-4 text-xs font-bold text-slate-500">
-            <li><Link href="/loodgieter-grimbergen" className="underline hover:text-blue-600">Loodgieter Grimbergen (NL)</Link></li>
-            <li><Link href="/zones-de-services/plomberie/grimbergen" className="underline hover:text-blue-600">Plombier Grimbergen Zone</Link></li>
-            <li><Link href="/plomberie" className="underline hover:text-blue-600">Plomberie Belgique</Link></li>
-            <li><Link href="/debouchage-canalisation" className="underline hover:text-blue-600">Débouchage urgent</Link></li>
-            <li><Link href="/contact" className="underline hover:text-blue-600">Demander un Devis</Link></li>
+          <ul className="flex flex-wrap lg:justify-center gap-6 text-xs font-bold text-slate-400">
+            <li><Link href="/loodgieter-grimbergen" className="hover:text-blue-400 transition-colors">Loodgieter Grimbergen (NL)</Link></li>
+            <li><Link href="/zones-de-services/plomberie/grimbergen" className="hover:text-blue-400 transition-colors">Plombier Grimbergen Zone</Link></li>
+            <li><Link href="/plomberie" className="hover:text-blue-400 transition-colors">Plomberie Belgique</Link></li>
+            <li><Link href="/debouchage-canalisation" className="hover:text-blue-400 transition-colors">Débouchage urgent</Link></li>
+            <li><Link href="/contact" className="hover:text-blue-400 transition-colors">Demander un Devis</Link></li>
           </ul>
         </div>
       </section>
@@ -229,10 +230,10 @@ export default function PlombierGrimbergenPage() {
       <FAQ customFaqs={faqs} />
 
       {/* Contact Form Section */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-24 bg-slate-950/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
-          <h2 className="text-4xl font-black text-slate-900 mb-4 uppercase">Besoin d&apos;une aide immédiate ?</h2>
-          <p className="text-slate-600">Remplissez notre formulaire ou joignez-nous directement par téléphone pour un dépannage en moins de 30 minutes.</p>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Besoin d&apos;une aide immédiate ?</h2>
+          <p className="text-slate-300 font-medium">Remplissez notre formulaire ou joignez-nous directement par téléphone pour un dépannage en moins de 30 minutes.</p>
         </div>
         <ContactForm />
       </section>

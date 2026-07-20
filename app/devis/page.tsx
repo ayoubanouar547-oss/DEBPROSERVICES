@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/sections/ContactForm";
+import { CostEstimator } from "@/components/sections/CostEstimator";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,14 +24,13 @@ export default function DevisPage() {
     <div className="pt-24 pb-12">
       <div className="text-center py-8">
         <h1 className="text-4xl font-heading font-bold text-dark">
-          Devis 100% Gratuit
+          Estimation & Devis 100% Gratuit
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto mt-4">
-          Un de nos experts examinera votre demande et vous répondra très
-          rapidement avec une estimation précise, claire et sans mauvaise
-          surprise.
+          Utilisez notre estimateur interactif ci-dessous pour évaluer instantanément un budget estimatif pour votre intervention, puis soumettez votre demande de devis complet en 1 clic.
         </p>
       </div>
+      <CostEstimator />
       <ContactForm />
     </div>
   );

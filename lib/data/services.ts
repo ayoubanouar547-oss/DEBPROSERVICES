@@ -1,4 +1,4 @@
-import { Wrench, Flame, Droplets, Zap, Wind, Truck, Home } from "lucide-react";
+import { Wrench, Flame, Droplets, Zap, Wind, Truck, Home, Sun, Camera, Hammer, Sparkles, Trees } from "lucide-react";
 
 export const services = [
   {
@@ -744,6 +744,603 @@ export const services = [
         question: "Quel est le prix d'une vidange de fosse septique ?",
         answer:
           "Le tarif pour une vidange standard varie entre 150€ et 300€ selon le volume à pomper et la distance de stationnement du camion.",
+      },
+    ],
+  },
+  {
+    id: "panneaux-solaires",
+    slug: "installation-panneaux-solaires",
+    title: "Panneaux Solaires",
+    icon: Sun,
+    imageUrl:
+      "https://deb-pro-service.odoo.com/web/image/559-23d47a71/Premium_Photovoltaic_Installation_202607182000%20%281%29.jpeg",
+    description:
+      "DEB PRO SERVICES installe vos panneaux solaires photovoltaïques et vos batteries physiques de stockage partout en Belgique. Profitez d'une énergie verte, locale, renouvelable et réduisez durablement votre facture d'électricité jusqu'à 80%. Nos installateurs agréés RESCert gèrent votre projet de A à Z : de l'étude de faisabilité technique gratuite à la mise en service certifiée AREI.",
+    trustPoints: [
+      { title: "Étude Gratuite & Sizing", desc: "Analyse sur site de votre toiture (pente, ombrage, orientation) pour optimiser votre production annuelle de kWh." },
+      { title: "Certifiés RESCert & AREI", desc: "Installateurs certifiés officiels pour vous garantir l'accès aux primes régionales et une conformité électrique absolue." },
+      { title: "Garanties Longue Durée", desc: "Matériel Premium Tier-1 garanti 25 ans en production linéaire et onduleurs garantis 10 à 20 ans." },
+      { title: "Service Clés en Main", desc: "Prise en charge complète : raccordement réseau, pose des structures de montage et démarches administratives." },
+    ],
+    features: [
+      "Installation panneaux photovoltaïques",
+      "Batteries de stockage physique",
+      "Onduleurs hybrides intelligents",
+      "Mise en conformité AREI complète",
+      "Étude de rendement personnalisée",
+    ],
+    subServices: [
+      {
+        slug: "installation-panneaux-photovoltaiques-belgique",
+        title: "Installation Photovoltaïque Premium",
+        desc: "Pose de panneaux solaires monocristallins à haut rendement sur toiture plate ou inclinée.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/559-23d47a71/Premium_Photovoltaic_Installation_202607182000%20%281%29.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/559-23d47a71/Premium_Photovoltaic_Installation_202607182000%20%281%29.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/560-4da8e8ee/Premium_Photovoltaic_Installation_202607182000.jpeg",
+        ],
+      },
+      {
+        slug: "batterie-physique-stockage-solaire",
+        title: "Batteries de Stockage Physique",
+        desc: "Systèmes de stockage lithium (LFP) pour maximiser votre taux d'autoconsommation de jour comme de nuit.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/600-cbea6387/Physical_Storage_Batteries_202607182045.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/600-cbea6387/Physical_Storage_Batteries_202607182045.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/588-18a5ca09/Inverters_and_Micro-inverters_202607181958.jpeg",
+        ],
+      },
+      {
+        slug: "onduleurs-et-micro-onduleurs-solaires",
+        title: "Onduleurs & Micro-Onduleurs",
+        desc: "Installation d'onduleurs hybrides de pointe et micro-onduleurs Enphase pour un rendement panneau par panneau.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/601-376db569/Hybrid_Inverters_Microinverters_%E2%80%A6_202607201925.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/601-376db569/Hybrid_Inverters_Microinverters_%E2%80%A6_202607201925.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/583-228d24b6/Technician_installing_solar_pane%E2%80%A6_202607181843.jpeg",
+        ],
+      },
+    ],
+    color: {
+      bg: "bg-amber-500/20",
+      text: "text-amber-400",
+      border: "border-amber-500/30",
+      glow: "bg-amber-500",
+    },
+    testimonial: {
+      text: "Installation réalisée par des professionnels en 2 jours. Ma facture a été divisée par 4 et l'application mobile de suivi est géniale !",
+      author: "Jean-Paul M., Namur",
+    },
+    faqs: [
+      {
+        question: "Les panneaux solaires sont-ils rentables en Belgique malgré le climat ?",
+        answer:
+          "Absolument. Les panneaux photovoltaïques modernes fonctionnent avec la lumière diffuse et n'ont pas besoin d'un ensoleillement direct permanent. En Belgique, le temps de retour sur investissement moyen est de 5 à 7 ans.",
+      },
+      {
+        question: "Pourquoi est-il conseillé d'installer une batterie physique de stockage ?",
+        answer:
+          "La batterie physique vous permet de stocker l'excédent d'énergie produit en journée pour l'utiliser en soirée ou la nuit. Cela fait passer votre taux d'autoconsommation moyen de 30% à plus de 75%.",
+      },
+      {
+        question: "Faut-il un permis d'urbanisme pour installer des panneaux solaires en Belgique ?",
+        answer:
+          "Dans la grande majorité des cas en Wallonie, à Bruxelles et en Flandre, l'installation de panneaux solaires sur votre toiture ne nécessite aucun permis d'urbanisme, tant qu'ils ne modifient pas l'aspect architectural classé.",
+      },
+    ],
+  },
+  {
+    id: "toiture",
+    slug: "travaux-de-toiture",
+    title: "Toiture",
+    icon: Home,
+    imageUrl:
+      "https://deb-pro-service.odoo.com/web/image/589-99bea1ad/Roofing_Work%2C_Repair_%26_Renovation_202607181958.jpeg",
+    description:
+      "DEB PRO SERVICES prend en charge tous vos travaux de toiture partout en Belgique : réparation urgente de fuites de toit, rénovation complète, isolation thermique de toitures plates ou inclinées, et nettoyage & démoussage professionnel. Nos couvreurs agréés interviennent rapidement avec des matériaux de premier choix garantis pour protéger votre habitat.",
+    trustPoints: [
+      { title: "Couvreurs Agréés Qualifiés", desc: "Une équipe d'artisans couvreurs qualifiés pour tous types de couvertures (ardoises, tuiles, zinc, EPDM)." },
+      { title: "Dépannage Fuite Toit 24h/7", desc: "Bâclage d'urgence suite à une tempête ou une infiltration d'eau de pluie pour stopper immédiatement les dégâts des eaux." },
+      { title: "Garantie Décennale", desc: "Toutes nos réalisations et réfections complètes de toitures bénéficient d'une garantie décennale légale belge." },
+      { title: "Devis Gratuit & Détaillé", desc: "Analyse d'état, métrés détaillés et devis transparent envoyé sous 24 heures sans engagement." },
+    ],
+    features: [
+      "Réparation de fuite & infiltrations",
+      "Rénovation complète (tuiles, ardoises)",
+      "Étanchéité toiture plate & EPDM",
+      "Nettoyage & démoussage de toit",
+      "Isolation de toiture et combles",
+    ],
+    subServices: [
+      {
+        slug: "reparation-fuite-toiture-belgique",
+        title: "Dépannage & Réparation de Fuite",
+        desc: "Localisation rapide de fuites d'eau de pluie, remplacement de tuiles cassées et réparation de solins ou de zingueries défectueuses.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/591-692fbfaf/Troubleshooting_Repair_Roof_Leaks_202607181959.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/591-692fbfaf/Troubleshooting_Repair_Roof_Leaks_202607181959.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/589-99bea1ad/Roofing_Work%2C_Repair_%26_Renovation_202607181958.jpeg",
+        ],
+      },
+      {
+        slug: "renovation-refection-toiture",
+        title: "Rénovation & Réfection Complète",
+        desc: "Remplacement complet de votre ancienne couverture en tuiles de terre cuite, ardoises naturelles ou synthétiques, et réfection de charpente.",
+        imageUrl:
+          "https://picsum.photos/seed/roof-renovation/800/600",
+      },
+      {
+        slug: "etancheite-toiture-terrasse-epdm",
+        title: "Étanchéité Toit Plat & EPDM",
+        desc: "Pose de membrane EPDM ou de roofing bitumeux thermosoudé pour une étanchéité parfaite et durable de vos toitures plates et terrasses.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/602-bc1ee247/Flat_Roof_EPDM_Technician_202607201937.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/602-bc1ee247/Flat_Roof_EPDM_Technician_202607201937.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/593-bd46ae12/Roof_Renovation_and_Refurbishment_202607181959%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "demoussage-nettoyage-toiture-belgique",
+        title: "Nettoyage & Démoussage",
+        desc: "Élimination des mousses, lichens et saletés, nettoyage haute pression contrôlé et application d'un traitement hydrofuge protecteur.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/577-c0042751/Cleaning_moss_removal_protective%E2%80%A6_202607181959.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/577-c0042751/Cleaning_moss_removal_protective%E2%80%A6_202607181959.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/576-ccfc06ff/Cleaning_moss_removal_protective%E2%80%A6_202607181959%20%281%29.jpeg",
+        ],
+      }
+    ],
+    color: {
+      bg: "bg-sky-500/20",
+      text: "text-sky-400",
+      border: "border-sky-500/30",
+      glow: "bg-sky-500",
+    },
+    testimonial: {
+      text: "Intervention en urgence pour une fuite de toiture après une grosse tempête. Travail propre, rapide et facture conforme au devis.",
+      author: "Marc D., Waterloo",
+    },
+    faqs: [
+      {
+        question: "Quelle est la durée de vie d'une toiture en Belgique ?",
+        answer:
+          "Une toiture bien entretenue a une durée de vie moyenne de 30 à 50 ans pour les tuiles en béton ou terre cuite, et de plus de 70 ans pour les ardoises naturelles. Les plateformes en EPDM durent généralement entre 40 et 50 ans.",
+      },
+      {
+        question: "Que faire en cas d'infiltration ou de fuite d'eau par le toit ?",
+        answer:
+          "Il faut agir immédiatement pour éviter la pourriture de la charpente et les dégâts des plafonds. Contactez-nous pour un bâclage d'urgence temporaire. Nous poserons une bâche de protection étanche avant de procéder aux réparations définitives.",
+      },
+      {
+        question: "Bénéficie-t-on de primes pour l'isolation de toiture en Wallonie ou à Bruxelles ?",
+        answer:
+          "Oui, la Région wallonne et la Région de Bruxelles-Capitale proposent des primes à l'isolation thermique pour encourager la rénovation énergétique. Notre équipe agréée vous fournit tous les documents nécessaires pour votre dossier.",
+      },
+    ],
+  },
+  {
+    id: "camera-surveillance",
+    slug: "installation-cameras-surveillance",
+    title: "Caméras de Surveillance",
+    icon: Camera,
+    imageUrl:
+      "https://deb-pro-service.odoo.com/web/image/581-9a991fd4/Security_camera_technician_Brussels_202607181843.jpeg",
+    description:
+      "DEB PRO SERVICES installe vos caméras de surveillance, systèmes d'alarme et solutions de sécurité partout en Belgique. Sécurisez votre maison, commerce ou entreprise avec notre matériel haute définition (IP, Wi-Fi, vision nocturne, détection intelligente). Nos installateurs experts conçoivent des systèmes sur mesure connectés à votre smartphone pour une surveillance en temps réel 24h/24.",
+    trustPoints: [
+      { title: "Étude de Sécurité Offerte", desc: "Analyse complète des points vulnérables de votre bâtiment pour un placement optimal des caméras." },
+      { title: "Matériel HD & Vision Nocturne", desc: "Équipement haut de gamme (HIKVISION, Dahua) avec vision nocturne infrarouge et détection humaine intelligente." },
+      { title: "Application Smartphone Live", desc: "Accès en direct, alertes de mouvement instantanées et contrôle à distance de vos caméras sur iOS et Android." },
+      { title: "Installation & Configuration", desc: "Câblage ultra discret, paramétrage professionnel de l'enregistreur NVR et formation complète à l'utilisation." },
+    ],
+    features: [
+      "Caméras IP haute définition (4K/8MP)",
+      "Enregistreurs NVR sécurisés & stockage durable",
+      "Vision nocturne infrarouge et couleur",
+      "Application mobile d'alerte live en temps réel",
+      "Maintenance, câblage & dépannage de systèmes",
+    ],
+    subServices: [
+      {
+        slug: "installation-camera-ip-interieur-exterieur-belgique",
+        title: "Caméras IP Intérieures & Extérieures",
+        desc: "Pose de caméras dômes ou tubes étanches (certifiées IP67) avec zoom optique motorisé, grand angle et vision nocturne intelligente.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/603-fbfed16e/Indoor_Outdoor_IP_Cameras_Instal%E2%80%A6_202607201942.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/603-fbfed16e/Indoor_Outdoor_IP_Cameras_Instal%E2%80%A6_202607201942.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/595-c9be98f6/Technicians_installation_surveil%E2%80%A6_202607181842.jpeg",
+        ],
+      },
+      {
+        slug: "enregistreur-nvr-stockage-videos-surveillance",
+        title: "Enregistreurs NVR & Stockage Sécurisé",
+        desc: "Mise en place d'enregistreurs numériques intelligents permettant d'enregistrer plusieurs semaines de vidéos en haute définition, protégés contre le vol.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/575-0a0fb232/NVR_recorders_secure_storage_202607181959.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/575-0a0fb232/NVR_recorders_secure_storage_202607181959.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/574-e93e8de2/NVR_recorders_secure_storage_202607181959%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "systemes-alarmes-anti-intrusion-connectes",
+        title: "Systèmes d'Alarme Anti-Intrusion",
+        desc: "Installation d'alarmes intelligentes sans fil connectées avec détecteurs d'ouverture de fenêtres, détecteurs volumétriques et sirènes dissuasives.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/570-8f1447a4/Intrusion_alarm_systems_installa%E2%80%A6_202607182000.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/570-8f1447a4/Intrusion_alarm_systems_installa%E2%80%A6_202607182000.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/571-474f325b/Intrusion_alarm_systems_installa%E2%80%A6_202607181959.jpeg",
+        ],
+      }
+    ],
+    color: {
+      bg: "bg-emerald-500/20",
+      text: "text-emerald-400",
+      border: "border-emerald-500/30",
+      glow: "bg-emerald-500",
+    },
+    testimonial: {
+      text: "L'installation s'est faite sans aucun câble visible. L'application mobile me permet de surveiller mon magasin à distance avec une clarté d'image incroyable !",
+      author: "Youssef K., Bruxelles",
+    },
+    faqs: [
+      {
+        question: "Quelle est la législation sur l'installation de caméras en Belgique ?",
+        answer:
+          "En Belgique, la loi caméra impose de déclarer vos caméras à la police (via la plateforme de déclaration en ligne) et d'apposer un pictogramme officiel à l'entrée du bâtiment pour signaler la présence de surveillance. Nos experts vous guident dans ces démarches réglementaires.",
+      },
+      {
+        question: "Peut-on visionner les caméras de surveillance sur smartphone ?",
+        answer:
+          "Oui, absolument. Toutes nos installations intègrent une connexion réseau hautement sécurisée qui vous permet de visionner le direct, de relire les enregistrements passés et de recevoir des notifications push en cas de détection suspecte, partout dans le monde.",
+      },
+      {
+        question: "Combien de temps sont conservées les images enregistrées ?",
+        answer:
+          "Conformément à la réglementation belge de protection de la vie privée, les images de caméras de surveillance ne peuvent être conservées que pendant un mois maximum (30 jours), sauf si elles servent de preuve dans le cadre d'une enquête policière.",
+      },
+    ],
+  },
+  {
+    id: "construction",
+    slug: "travaux-de-construction-gros-oeuvre",
+    title: "Construction & Gros Œuvre",
+    icon: Hammer,
+    imageUrl:
+      "https://deb-pro-service.odoo.com/web/image/572-12f2e710/Construction_%26_Ma%C3%A7onnerie_Belgique_202607181959%20%281%29.jpeg",
+    description:
+      "DEB PRO SERVICES réalise tous vos travaux de gros œuvre, maçonnerie générale, extensions de maison et aménagements en Belgique. Qu'il s'agisse de couler une dalle de béton armé, d'ouvrir un mur porteur avec pose d'IPN, ou de réaliser une extension clé sur porte, nos maçons qualifiés et certifiés vous garantissent une solidité structurelle à toute épreuve, le tout couvert par une garantie décennale obligatoire.",
+    trustPoints: [
+      { title: "Garantie Décennale Certifiée", desc: "Tous nos chantiers de gros œuvre et de maçonnerie sont couverts par une assurance décennale de 10 ans." },
+      { title: "Calcul de Stabilité d'Ingénieur", desc: "Pour les ouvertures de murs porteurs, nous travaillons avec un bureau d'étude pour garantir la sécurité absolue." },
+      { title: "Matériaux Qualité BENOR", desc: "Nous utilisons exclusivement du béton et des briques certifiés BENOR conformes aux normes de construction belges." },
+      { title: "Devis Clair & Ferme sous 48h", desc: "Pas de suppléments imprévus. Un chiffrage corps par corps précis et transparent pour votre projet." },
+    ],
+    features: [
+      "Gros œuvre ouvert / fermé & maçonnerie de briques",
+      "Ouverture de murs porteurs et pose de poutrelles IPN/HEB",
+      "Terrassement, fondations solides & égouttage complet",
+      "Coulage de dalles en béton armé et chapes",
+      "Rénovation, sablage et rejointoyage de façades",
+    ],
+    subServices: [
+      {
+        slug: "maconnerie-generale-gros-oeuvre-belgique",
+        title: "Maçonnerie Générale & Gros Œuvre",
+        desc: "Élévation de murs porteurs, pose de blocs de béton, briques de parement et travaux de gros œuvre pour vos constructions et extensions.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/568-ba82ab5e/Masonry_and_structural_work_202607182000%20%281%29.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/568-ba82ab5e/Masonry_and_structural_work_202607182000%20%281%29.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/569-e1d8cc97/Masonry_and_structural_work_202607182000.jpeg",
+        ],
+      },
+      {
+        slug: "ouverture-mur-porteur-pose-poutre-ipn-heb",
+        title: "Ouverture de Mur Porteur & Pose d'IPN",
+        desc: "Démolition sécurisée de murs porteurs ou semi-porteurs avec étançonnement professionnel et installation de poutres métalliques IPN / HEB.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/567-c2e917de/Opening_Load-Bearing_Wall_I-beams_202607182000.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/567-c2e917de/Opening_Load-Bearing_Wall_I-beams_202607182000.jpeg",
+        ],
+      },
+      {
+        slug: "coulage-dalle-beton-et-chapes-sur-mesure",
+        title: "Dalles de Béton & Chapes",
+        desc: "Préparation de coffrage, pose de ferraillage et coulage de dalles de sol en béton armé, ainsi que réalisation de chapes de finition.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/566-1c69fec1/Concrete_slabs_and_screeds_202607182000.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/566-1c69fec1/Concrete_slabs_and_screeds_202607182000.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/565-b25338c3/Concrete_slabs_and_screeds_202607182000%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "terrassement-fondations-et-raccordement-egouts",
+        title: "Terrassement & Fondations",
+        desc: "Excavation de terrains, niveaulement, fondations en béton coulé et raccordement au réseau d'égouttage public pour vos extensions.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/563-1e556d46/Terracing_and_foundations_excava%E2%80%A6_202607182000%20%281%29.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/563-1e556d46/Terracing_and_foundations_excava%E2%80%A6_202607182000%20%281%29.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/564-33bef6cd/Terracing_and_foundations_excava%E2%80%A6_202607182000.jpeg",
+        ],
+      },
+      {
+        slug: "ravalement-de-facade-sablage-rejointoyage",
+        title: "Rénovation de Façades & Rejointoyage",
+        desc: "Restauration complète de façades en briques belges : sablage, nettoyage, rejointoyage et application d'un traitement hydrofuge.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/562-92b3b5b5/Facade_renovation_and_repointing_202607182000.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/562-92b3b5b5/Facade_renovation_and_repointing_202607182000.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/561-0bf20dd5/Facade_renovation_and_repointing_202607182000%20%281%29.jpeg",
+        ],
+      },
+    ],
+    color: {
+      bg: "bg-amber-500/20",
+      text: "text-amber-400",
+      border: "border-amber-500/30",
+      glow: "bg-amber-500",
+    },
+    testimonial: {
+      text: "Nous avons fait ouvrir le mur porteur entre notre cuisine et le salon avec DEB PRO SERVICES. Le travail a été fait en 2 jours, calcul d'ingénieur respecté et étayage impeccable. Un grand professionnalisme !",
+      author: "Laurent D., Waterloo",
+    },
+    faqs: [
+      {
+        question: "Qu'est-ce que la garantie décennale de construction en Belgique ?",
+        answer:
+          "La garantie décennale est une obligation légale pour tout entrepreneur de construction en Belgique (loi du 20 février 2018). Elle couvre tous les vices qui menacent la stabilité ou la solidité du bâtiment (comme un affaissement de fondation, une fissure majeure ou un défaut d'étanchéité du gros œuvre) pour une durée de 10 ans après réception des travaux.",
+      },
+      {
+        question: "Faut-il un permis d'urbanisme pour ouvrir un mur porteur ?",
+        answer:
+          "Oui, en Belgique (que ce soit en Wallonie, en Flandre ou à Bruxelles), toute modification touchant à la stabilité du bâtiment (comme l'abattage ou l'ouverture d'un mur porteur) requiert obligatoirement l'obtention d'un permis d'urbanisme préalable et l'intervention d'un architecte ou d'un ingénieur en stabilité.",
+      },
+      {
+        question: "Comment assurez-vous la sécurité d'un mur porteur durant les travaux ?",
+        answer:
+          "Avant toute découpe, nous installons un système d'étançonnement ultra-robuste avec des étançons de chantier certifiés de forte charge pour soutenir temporairement les dalles de plafond. Nous ne retirons les étançons qu'une fois que la poutre métallique (IPN ou HEB) a été posée, scellée au mortier sans retrait et que la stabilité définitive est assurée.",
+      },
+      {
+        question: "Proposez-vous des services d'égouttage pour les nouvelles extensions ?",
+        answer:
+          "Oui, lors de travaux de terrassement et de fondation pour une extension ou annexe, nous réalisons l'intégralité du réseau d'égouttage sous dalle : pose des tuyaux en PVC rigide de forte épaisseur, mise en place des chambres de visite, raccordement au réseau public et raccordement des gouttières de descente.",
+      },
+    ],
+  },
+  {
+    id: "vitres",
+    slug: "nettoyage-de-vitres",
+    title: "Nettoyage de Vitres",
+    icon: Sparkles,
+    imageUrl:
+      "https://deb-pro-service.odoo.com/web/image/546-d82eb670/Window_Cleaning_Company_Belgium_202607182007.jpeg",
+    description:
+      "DEB PRO SERVICES propose des services de nettoyage de vitres professionnels pour particuliers et professionnels partout en Belgique. Qu'il s'agisse de vitres d'habitations, de vitrines de magasins, de vérandas ou de châssis complexes, nos laveurs de vitres qualifiés vous garantissent une propreté éclatante et sans traces.",
+    trustPoints: [
+      { title: "Finition Zéro Trace", desc: "Nos techniques avancées et raclettes professionnelles garantissent une transparence et une brillance parfaites sans aucune trace." },
+      { title: "Équipement Travaux en Hauteur", desc: "Perches télescopiques à eau pure et nacelles élévatrices pour atteindre les vitrages les plus hauts en toute sécurité." },
+      { title: "Nettoyage Complet des Châssis", desc: "Nous nettoyons systématiquement les encadrements de fenêtres, les profilés en PVC, alu ou bois, ainsi que les appuis." },
+      { title: "Contrats Flexibles & Réguliers", desc: "À la demande ou sous forme d'abonnement bimensuel, mensuel ou trimestriel adapté aux commerces et résidences." },
+    ],
+    features: [
+      "Lavage professionnel de vitres résidentielles & baies vitrées",
+      "Nettoyage régulier de vitrines de magasins et showrooms",
+      "Lavage de coupoles de lumière, dômes et puits de lumière",
+      "Entretien complet de vérandas, verrières et jardins d'hiver",
+      "Nettoyage de vitres en hauteur par nacelle ou perche à eau pure",
+    ],
+    subServices: [
+      {
+        slug: "lavage-de-vitres-residentiel-belgique",
+        title: "Lavage de Vitres Résidentiel",
+        desc: "Entretien de vos fenêtres, velux, baies coulissantes et garde-corps vitrés pour redonner un maximum de luminosité à votre maison.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/536-9e3cc5eb/Residential_Window_Cleaning_202607182010.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/536-9e3cc5eb/Residential_Window_Cleaning_202607182010.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/535-692de923/Residential_Window_Cleaning_202607182010%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "nettoyage-vitrines-commerces-et-magasins",
+        title: "Nettoyage de Vitrines de Commerces",
+        desc: "Lavage régulier des vitrines de commerces, boutiques et showrooms professionnels pour soigner l'image de marque de votre enseigne.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/537-3da8d68e/Commercial_Window_Cleaning_202607182010%20%281%29.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/537-3da8d68e/Commercial_Window_Cleaning_202607182010%20%281%29.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/538-815b712d/Commercial_Window_Cleaning_202607182010.jpeg",
+        ],
+      },
+      {
+        slug: "lavage-de-verandas-et-verrieres-complexes",
+        title: "Nettoyage de Vérandas & Verrières",
+        desc: "Lavage des dômes, toits vitrés et structures de vérandas ou de serres. Élimination des mousses, poussières et traces d'eau.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/540-6dfb0efc/Cleaning_Verandas_and_Skylights_202607182009.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/540-6dfb0efc/Cleaning_Verandas_and_Skylights_202607182009.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/539-312fda42/Cleaning_Verandas_and_Skylights_202607182009%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "lavage-de-vitres-en-hauteur-nacelle-et-perche",
+        title: "Lavage de Vitres en Hauteur",
+        desc: "Lavage sécurisé de fenêtres de bureaux ou d'appartements en hauteur, en utilisant des nacelles articulées ou des perches télescopiques à eau pure.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/542-0c193d95/Window_Cleaning_at_Height_202607182009.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/542-0c193d95/Window_Cleaning_at_Height_202607182009.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/541-78eb72ba/Window_Cleaning_at_Height_202607182009%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "nettoyage-de-chassis-de-fenetres-et-volets",
+        title: "Nettoyage des Châssis & Volets",
+        desc: "Lavage complet des profilés (PVC, aluminium, bois), des moustiquaires, des volets roulants et des stores extérieurs pour un rendu impeccable.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/544-7c017d86/Cleaning_of_Frames_%26_Shutters_202607182008.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/544-7c017d86/Cleaning_of_Frames_%26_Shutters_202607182008.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/543-7dd60e26/Cleaning_of_Frames_%26_Shutters_202607182008%20%281%29.jpeg",
+        ],
+      },
+    ],
+    color: {
+      bg: "bg-cyan-500/20",
+      text: "text-cyan-400",
+      border: "border-cyan-500/30",
+      glow: "bg-cyan-500",
+    },
+    testimonial: {
+      text: "Le laveur de vitres est venu pour notre véranda qui n'avait pas été nettoyée depuis deux ans. Le résultat est tout simplement magique, tout est étincelant ! Les châssis ont aussi été nettoyés avec soin.",
+      author: "Nathalie M., Namur",
+    },
+    faqs: [
+      {
+        question: "À quelle fréquence faut-il faire laver ses vitres ?",
+        answer:
+          "Pour les particuliers, nous conseillons généralement un lavage toutes les 6 à 12 semaines pour garder une visibilité optimale. Pour les commerces, boutiques et vitrines professionnelles de centre-ville, une fréquence hebdomadaire ou bimensuelle est vivement recommandée pour soigner la présentation.",
+      },
+      {
+        question: "Est-ce que le nettoyage des châssis et rebords de fenêtres est inclus ?",
+        answer:
+          "Oui, chez DEB PRO SERVICES, nous considérons que le nettoyage des châssis, profilés d'encadrement et rebords de fenêtres est indissociable d'un bon lavage de vitres. C'est pourquoi nous l'incluons systématiquement dans nos forfaits standards.",
+      },
+      {
+        question: "Qu'est-ce que la technique de nettoyage à l'eau pure ?",
+        answer:
+          "C'est une méthode écologique et ultra-efficace pour laver les vitres en hauteur sans détergent. Nous utilisons de l'eau déminéralisée projetée à l'aide d'une perche en carbone munie d'une brosse souple. L'eau pure dissout les saletés et sèche naturellement sans laisser aucune trace ni résidu calcaire.",
+      },
+      {
+        question: "Intervenez-vous en cas de pluie ?",
+        answer:
+          "La pluie fine n'empêche pas de nettoyer les vitres de manière impeccable, car c'est la poussière accumulée sur le verre qui crée les traces d'eau en séchant. Cependant, en cas de fortes averses, de tempête ou de gel, nous reportons l'intervention pour des raisons évidentes de sécurité de nos cordistes.",
+      },
+    ],
+  },
+  {
+    id: "jardinage",
+    slug: "travaux-de-jardinage-elagage",
+    title: "Jardinage & Élagage",
+    icon: Trees,
+    imageUrl:
+      "https://deb-pro-service.odoo.com/web/image/557-e35aedbc/Gardener_Tree_Pruning_Belgium_202607182003%20%281%29.jpeg",
+    description:
+      "DEB PRO SERVICES propose des services complets d'entretien de jardin, d'élagage, d'abattage d'arbres complexes et d'aménagement paysager en Belgique. Que vous soyez un particulier souhaitant entretenir ses espaces verts ou un professionnel cherchant à valoriser les abords de son entreprise, nos jardiniers paysagistes certifiés vous garantissent des prestations soignées et respectueuses de la nature.",
+    trustPoints: [
+      { title: "Jardiniers Paysagistes Agréés", desc: "Une équipe d'artisans qualifiés, formés aux techniques horticoles et de grimpe pour un élagage en toute sécurité." },
+      { title: "Élagage & Abattage Sécurisé", desc: "Nous maîtrisons les techniques d'abattage par démontage dans les espaces restreints avec assurance RC professionnelle." },
+      { title: "Évacuation des Déchets Verts", desc: "Broyage des branches sur place, évacuation complète des déchets verts et nettoyage rigoureux du chantier." },
+      { title: "Contrats d'Entretien Annuels", desc: "Des formules flexibles à l'année pour la tonte de pelouse, la taille de haies et le ramassage des feuilles mortes." },
+    ],
+    features: [
+      "Entretien régulier ou ponctuel de pelouses et parterres",
+      "Élagage, ébranchage & étêtage de grands arbres",
+      "Abattage d'arbres dangereux par démontage sécurisé",
+      "Taille de haies, d'arbustes et d'arbres fruitiers",
+      "Aménagement de terrasses, allées et plantations",
+    ],
+    subServices: [
+      {
+        slug: "entretien-de-jardin-et-espaces-verts",
+        title: "Entretien de Jardin & Espaces Verts",
+        desc: "Tonte de gazon, désherbage de massifs, scarification de pelouse, ramassage des feuilles et remise en état complète de jardins à l'abandon.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/548-2e5fd2c5/Garden_Maintenance_%26_Green_Spaces_202607182005.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/548-2e5fd2c5/Garden_Maintenance_%26_Green_Spaces_202607182005.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/547-22071d1d/Garden_Maintenance_%26_Green_Spaces_202607182005%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "elagage-et-etete-arbres-haute-hauteur",
+        title: "Élagage & Taille d'Arbres",
+        desc: "Taille de sécurité, d'éclaircie ou de restructuration de vos arbres. Préservation de la santé végétale et de l'harmonie de l'arbre.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/549-4cca5710/Tree_Pruning_%26_Trimming_202607182005%20%281%29.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/549-4cca5710/Tree_Pruning_%26_Trimming_202607182005%20%281%29.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/550-4b4211df/Tree_Pruning_%26_Trimming_202607182005.jpeg",
+        ],
+      },
+      {
+        slug: "abattage-arbres-dangereux-demontage-securise",
+        title: "Abattage d'Arbres Dangereux",
+        desc: "Abattage complet ou démontage avec système de rétention pour tronçonner et descendre les branches en toute sécurité au-dessus des habitations.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/552-947085ae/Dangerous_Tree_Removal_202607182005.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/552-947085ae/Dangerous_Tree_Removal_202607182005.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/551-b79bc05c/Dangerous_Tree_Removal_202607182005%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "taille-de-haies-et-arbustes-sur-mesure",
+        title: "Taille de Haies & d'Arbustes",
+        desc: "Taille droite, mise en forme et rabattage de vos haies de thuyas, lauriers ou ifs pour un jardin impeccable et bien délimité.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/554-d58d214d/Hedge_and_shrub_trimming_202607182004.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/554-d58d214d/Hedge_and_shrub_trimming_202607182004.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/553-4397f452/Hedge_and_shrub_trimming_202607182004%20%281%29.jpeg",
+        ],
+      },
+      {
+        slug: "amenagement-paysager-terrasses-et-plantations",
+        title: "Aménagement Paysager & Création",
+        desc: "Création de pelouse (semis ou rouleaux), plantation de massifs, pose de clôtures, d'allées de jardin et de terrasses en bois ou pavés.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/556-bff484a7/Landscaping_and_Creation_202607182004.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/556-bff484a7/Landscaping_and_Creation_202607182004.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/555-67bb18a9/Landscaping_and_Creation_202607182004%20%281%29.jpeg",
+        ],
+      },
+    ],
+    color: {
+      bg: "bg-emerald-500/20",
+      text: "text-emerald-400",
+      border: "border-emerald-500/30",
+      glow: "bg-emerald-500",
+    },
+    testimonial: {
+      text: "Nous avons confié l'élagage de deux chênes centenaires très proches de notre toiture à DEB PRO SERVICES. Équipe ultra-équipée, travail de grimpe impressionnant et sécurité totale. Le jardin a été rendu extrêmement propre !",
+      author: "Jean-Pierre V., Brabant Wallon",
+    },
+    faqs: [
+      {
+        question: "Quelle est la meilleure période pour élaguer un arbre en Belgique ?",
+        answer:
+          "L'élagage se pratique principalement durant le repos végétatif (de fin automne à la fin de l'hiver, hors périodes de gel), ce qui limite la perte de sève. Cependant, la 'taille en vert' est tout à fait possible et recommandée en été pour certains feuillus, permettant une cicatrisation plus rapide.",
+      },
+      {
+        question: "Avez-vous une assurance en cas de dégâts lors d'un abattage ?",
+        answer:
+          "Oui, absolument. DEB PRO SERVICES dispose d'une assurance Responsabilité Civile (RC) professionnelle couvrant l'ensemble de nos activités d'élagage et d'abattage d'arbres. En cas d'incident ou de dommages matériels sur votre propriété ou celle d'un voisin, vous êtes entièrement protégé.",
+      },
+      {
+        question: "Faut-il un permis pour abattre un arbre en Belgique ?",
+        answer:
+          "Dans la plupart des régions et communes belges (notamment en Wallonie et à Bruxelles), un permis d'urbanisme est obligatoire pour abattre un arbre considéré comme 'remarquable' ou ayant une circonférence de tronc supérieure à une certaine taille (généralement 40 cm à 1,50 m de hauteur). Nous vous conseillons et vous accompagnons dans ces démarches.",
+      },
+      {
+        question: "Que faites-vous du bois et des branches coupées ?",
+        answer:
+          "Nous proposons plusieurs options de manière flexible : nous pouvons broyer les petites branches sur place (le broyat peut servir de paillage pour vos parterres), débiter le tronc principal en bûches prêtes pour votre chauffage, ou tout évacuer intégralement vers un centre de compostage agréé.",
       },
     ],
   },

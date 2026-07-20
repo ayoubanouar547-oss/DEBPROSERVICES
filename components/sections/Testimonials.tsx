@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Star, ChevronLeft, ChevronRight, Quote, Medal } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const reviewsNew = [
+const reviewsNewFR = [
   {
     name: "Jean D.",
     city: "Bruxelles",
@@ -48,7 +49,50 @@ const reviewsNew = [
   },
 ];
 
-const reviewsReturning = [
+const reviewsNewNL = [
+  {
+    name: "Jan D.",
+    city: "Brussel",
+    body: "Super snelle interventie op een zondagavond! De technicus heeft onze leiding in minder dan 30 minuten ontstopt. Transparante tarieven, geen verrassingen.",
+    rating: 5,
+    date: "2 dagen geleden",
+    image: "https://i.pravatar.cc/150?img=11",
+  },
+  {
+    name: "Marie L.",
+    city: "Luik",
+    body: "Zeer professioneel bedrijf. Mijn boiler begaf het, ze vonden het gasprobleem heel snel en herstelden het met grote vakkundigheid.",
+    rating: 5,
+    date: "1 week geleden",
+    image: "https://i.pravatar.cc/150?img=5",
+  },
+  {
+    name: "Antoon V.",
+    city: "Namen",
+    body: "Uitstekende service. Volledige vervanging van mijn defecte zekeringkast. Offerte gerespecteerd en zeer beleefd team. Warm aanbevolen.",
+    rating: 5,
+    date: "3 weken geleden",
+    image: "https://i.pravatar.cc/150?img=12",
+  },
+  {
+    name: "Sarah K.",
+    city: "Bergen",
+    body: "Dringend waterlek opgelost in slechts 45 minuten! De loodgieter was uiterst efficiënt en heeft ons parket gered.",
+    rating: 5,
+    date: "1 maand geleden",
+    image: "https://i.pravatar.cc/150?img=9",
+  },
+  {
+    name: "Thomas B.",
+    city: "Charleroi",
+    body: "Installatie van een nieuw centraal verwarmingssysteem. Zeer nauwkeurig, schoon werk en uitstekend onderhoudsadvies. 10/10.",
+    rating: 5,
+    date: "2 maanden geleden",
+    image: "https://i.pravatar.cc/150?img=15",
+  },
+];
+
+const reviewsReturningFR = [
   {
     name: "Entreprise XYZ",
     city: "Bruxelles",
@@ -91,7 +135,53 @@ const reviewsReturning = [
   },
 ];
 
+const reviewsReturningNL = [
+  {
+    name: "Bedrijf XYZ",
+    city: "Brussel",
+    body: "DEB PRO SERVICES beheert het onderhoud van al onze commerciële panden. Hun reactiesnelheid is ongeëvenaard op de Belgische markt. Betrouwbare partner.",
+    rating: 5,
+    date: "VIP Partner",
+    image: "https://i.pravatar.cc/150?img=33",
+  },
+  {
+    name: "Sophie M.",
+    city: "Doornik",
+    body: "Dit is de derde keer dat ik ze bel (loodgieterij, gas, en ketel). Altijd dezelfde vaststelling: absolute perfectie. Bravo aan het hele team!",
+    rating: 5,
+    date: "Vaste klant",
+    image: "https://i.pravatar.cc/150?img=47",
+  },
+  {
+    name: "Laurent G.",
+    city: "Waver",
+    body: "Na een ernstig rioolprobleem heeft het team camera-inspectie en de pompwagen ingezet. Spectaculaire en radicale interventie.",
+    rating: 5,
+    date: "4 dagen geleden",
+    image: "https://i.pravatar.cc/150?img=53",
+  },
+  {
+    name: "Immo Confort",
+    city: "Antwerpen",
+    body: "Wij besteden onze elektriciteits- en sanitaire noodgevallen voor onze 50+ huurders uit aan DEB PRO SERVICES. Al 2 jaar nul klachten.",
+    rating: 5,
+    date: "B2B Partner",
+    image: "https://i.pravatar.cc/150?img=14",
+  },
+  {
+    name: "Chantal R.",
+    city: "Louvain-la-Neuve",
+    body: "Een 5-sterrenservice! Snelle lediging van mijn septic tank die overliep op een feestdag. Ze hielpen me binnen een uur uit de brand. Transparante tarieven.",
+    rating: 5,
+    date: "1 maand geleden",
+    image: "https://i.pravatar.cc/150?img=44",
+  },
+];
+
 export function Testimonials() {
+  const pathname = usePathname();
+  const isNl = pathname ? pathname.startsWith("/nl") : false;
+
   const [mounted, setMounted] = useState(false);
   const [isReturningUser, setIsReturningUser] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -106,20 +196,21 @@ export function Testimonials() {
     }
   }, []);
 
+  const reviewsNew = isNl ? reviewsNewNL : reviewsNewFR;
+  const reviewsReturning = isNl ? reviewsReturningNL : reviewsReturningFR;
+
+  const activeReviews = isReturningUser ? reviewsReturning : reviewsNew;
+
   useEffect(() => {
     if (!mounted) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => {
-        const length = isReturningUser
-          ? reviewsReturning.length
-          : reviewsNew.length;
+        const length = activeReviews.length;
         return (prev + 1) % length;
       });
     }, 6000);
     return () => clearInterval(timer);
-  }, [currentIndex, isReturningUser, mounted]);
-
-  const activeReviews = isReturningUser ? reviewsReturning : reviewsNew;
+  }, [currentIndex, isReturningUser, mounted, activeReviews.length]);
 
   const themePrimary = {
     bgConfig: "bg-[#010918]/80",
@@ -127,10 +218,11 @@ export function Testimonials() {
     textHighlight: "text-blue-400",
     glow: "shadow-[0_20px_60px_-15px_rgba(37,99,235,0.15)]",
     star: "fill-yellow-400 text-yellow-400",
-    badge: "Avis vérifiés",
-    title: "Ce que les belges disent de nous",
-    subtitle:
-      "La satisfaction client est au cœur de notre stratégie. Découvrez leurs expériences avec nos équipes d'urgence.",
+    badge: isNl ? "Geverifieerde Reviews" : "Avis vérifiés",
+    title: isNl ? "Wat Belgen over ons vertellen" : "Ce que les belges disent de nous",
+    subtitle: isNl 
+      ? "Klanttevredenheid staat centraal in onze werking. Ontdek de ervaringen van onze klanten met onze spoeddiensten." 
+      : "La satisfaction client est au cœur de notre stratégie. Découvrez leurs expériences avec nos équipes d'urgence.",
     btnHover: "hover:bg-blue-600/20 hover:text-blue-300 hover:border-blue-500/30",
   };
 
@@ -140,10 +232,11 @@ export function Testimonials() {
     textHighlight: "text-amber-400",
     glow: "shadow-[0_20px_60px_-15px_rgba(245,158,11,0.15)]",
     star: "fill-amber-500 text-amber-500",
-    badge: "Accès Premium",
-    title: "Nos clients fidèles confirment notre excellence",
-    subtitle:
-      "Heureux de vous revoir sur DEB PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de nos prestations.",
+    badge: isNl ? "Premium Toegang" : "Accès Premium",
+    title: isNl ? "Onze trouwe klanten bevestigen de kwaliteit" : "Nos clients fidèles confirment notre excellence",
+    subtitle: isNl
+      ? "Fijn u weer te zien bij DEB PRO SERVICES! Ontdek wat onze vaste B2B-partners en particuliere klanten van ons vinden."
+      : "Heureux de vous revoir sur DEB PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de nos prestations.",
     btnHover: "hover:bg-amber-500/20 hover:text-amber-300 hover:border-amber-500/40",
   };
 
@@ -158,6 +251,7 @@ export function Testimonials() {
       (prev) => (prev - 1 + activeReviews.length) % activeReviews.length,
     );
   };
+
 
   const getVisibleReview = (offset: number) => {
     const i =
@@ -251,12 +345,14 @@ export function Testimonials() {
             <button
               onClick={handlePrev}
               className={`pointer-events-auto p-4 rounded-2xl bg-[#010918]/80 border ${theme.border} text-white backdrop-blur-xl transition-all duration-300 hover:scale-110 shadow-2xl ${theme.btnHover}`}
+              aria-label={isNl ? "Vorige getuigenis" : "Témoignage précédent"}
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={handleNext}
               className={`pointer-events-auto p-4 rounded-2xl bg-[#010918]/80 border ${theme.border} text-white backdrop-blur-xl transition-all duration-300 hover:scale-110 shadow-2xl ${theme.btnHover}`}
+              aria-label={isNl ? "Volgende getuigenis" : "Témoignage suivant"}
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -329,12 +425,14 @@ export function Testimonials() {
             <button
               onClick={handlePrev}
               className={`p-4 rounded-2xl bg-white/5 border border-white/10 text-white ${theme.btnHover}`}
+              aria-label={isNl ? "Vorige getuigenis" : "Témoignage précédent"}
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={handleNext}
               className={`p-4 rounded-2xl bg-white/5 border border-white/10 text-white ${theme.btnHover}`}
+              aria-label={isNl ? "Volgende getuigenis" : "Témoignage suivant"}
             >
               <ChevronRight className="w-6 h-6" />
             </button>

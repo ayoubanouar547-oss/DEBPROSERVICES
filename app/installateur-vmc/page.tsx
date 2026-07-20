@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin, ArrowRight, Wind } from "lucide-react";
+import { PhoneCall, CheckCircle, Wrench, Building, MapPin, Wind } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
@@ -74,72 +74,73 @@ export default function InstallateurVmcPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden text-white">
-        <div className="absolute inset-0 -z-10 bg-slate-900">
+      <section className="relative pt-36 pb-24 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
-            src="https://picsum.photos/seed/belgium-vmc/1920/1080"
-            alt="Installateur VMC Belgique"
+            src="https://debouchageexpress24hh.odoo.com/web/image/4166-17ba685c/Technician_installing_VMC_system_202604301840.jpeg?height=600"
+            alt="Installateur VMC Belgique - Deb Pro Services"
             fill
             priority
-            className="object-cover opacity-40 mix-blend-overlay"
+            className="object-cover object-center opacity-40 mix-blend-overlay"
+            referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-[#000814]/85 to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-600/20 backdrop-blur-md rounded-full text-xs font-bold border border-blue-500/30 mb-6 uppercase tracking-widest text-blue-400">
-              <MapPin className="w-3 h-3" /> Ventilation de Qualité en Belgique
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-sky-500/10 backdrop-blur-md rounded-full text-xs font-extrabold border border-sky-500/30 mb-6 uppercase tracking-widest text-sky-400">
+              <MapPin className="w-3.5 h-3.5" /> Ventilation de Qualité en Belgique
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 tracking-tight drop-shadow-xl font-oswald text-white">
               Installateur VMC en Belgique : Pose, Entretien & Diagnostic
             </h1>
-            <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light">
+            <p className="text-xl text-slate-300 mb-8 leading-relaxed font-medium">
               Deb Pro Services est votre entreprise de référence pour l&apos;étude, l&apos;installation et l&apos;entretien complet de systèmes de ventilation mécanique contrôlée (VMC) simple et double flux, partout en Belgique.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="tel:0496325733"
-                className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-blue-600/20"
+                className="group bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-black px-8 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] active:scale-95"
               >
-                <PhoneCall className="w-5 h-5" /> Offre de prix gratuite : 0496 32 57 33
+                <PhoneCall className="w-5 h-5 animate-pulse" /> Offre de prix gratuite : 0496 32 57 33
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-20 bg-white">
+      {/* Services Section */}
+      <section className="py-24 relative z-10 bg-slate-950/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">
               Prestations Ventilation & VMC en Belgique
             </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
+            <p className="text-slate-300 max-w-2xl mx-auto font-medium">
               Nous concevons des installations de ventilation adaptées aux normes PEB belges en vigueur.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="vmc-d">
-              <Wind className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">VMC Double Flux (Système D)</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="vmc-d">
+              <Wind className="w-10 h-10 text-sky-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-sky-400 font-oswald text-white">VMC Double Flux (Système D)</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
                 Le top de la technologie PEB : renouvellement complet de l&apos;air intérieur avec récupération jusqu&apos;à 90% des calories de l&apos;air extrait. Économisez sur vos factures de chauffage.
               </p>
             </div>
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="vmc-c">
-              <Wind className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">VMC Simple Flux (Système C)</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="vmc-c">
+              <Wind className="w-10 h-10 text-sky-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-sky-400 font-oswald text-white">VMC Simple Flux (Système C)</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
                 Installation économique et performante, idéale en rénovation résidentielle, assurant une extraction de l&apos;air vicié contrôlée mécaniquement dans les pièces humides.
               </p>
             </div>
-            <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-transform hover:-translate-y-1 w-full" id="vmc-ent">
-              <Wrench className="w-10 h-10 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">Entretien & Nettoyage de Gaines</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
+            <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden flex flex-col group" id="vmc-ent">
+              <Wrench className="w-10 h-10 text-sky-400 mb-6 group-hover:scale-110 transition-transform" />
+              <h3 className="text-xl font-bold text-white mb-3 leading-tight uppercase tracking-tight group-hover:text-sky-400 font-oswald text-white">Entretien & Nettoyage de Gaines</h3>
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
                 Remplacement de filtres encrassés, nettoyage des bouches d&apos;extraction, désinfection bactérienne des gaines et mesure de débit pour préserver l&apos;hygiène de l&apos;air.
               </p>
             </div>
@@ -147,27 +148,27 @@ export default function InstallateurVmcPage() {
         </div>
       </section>
 
-      {/* Steps Section */}
-      <section className="py-20 bg-slate-900 text-white rounded-t-[3rem] sm:rounded-t-[4rem]">
+      {/* Process Section */}
+      <section className="py-24 bg-[#000814]/60 backdrop-blur-md border-t border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             
             {/* Steps list */}
             <div>
-              <h2 className="text-3xl font-black mb-8 uppercase tracking-tight text-blue-400">L&apos;installation de votre VMC</h2>
+              <h2 className="text-3xl md:text-5xl font-black mb-10 uppercase tracking-tight text-sky-400">L&apos;installation de votre VMC</h2>
               <div className="space-y-8">
                 {[
                   { title: "Étude et plan de dimensionnement", desc: "Calcul des débits d&apos;air requis pièce par pièce conformément à la réglementation PEB belge." },
                   { title: "Implantation et réseau de gainages", desc: "Passage minutieux de gaines d&apos;air isolées en faux-plafonds ou chapes pour minimiser l&apos;impact visuel." },
-                  { title: "Pose du groupe ventilateur", desc: "Installation de l&apos;unité centrale VMC (Vasco, Zehnder, Aldes, Renson) avec attaches acoustiques anti-vibratiles." },
+                  { title: "Pose du groupe ventilateur", desc: "Installation de l&apos;unité centrale VMC (Vasco, Zehnder, Renson) avec attaches acoustiques anti-vibratiles." },
                   { title: "Mise en service et réglages directs", desc: "Ajustement des anémomètres pour calibrer précisément l&apos;insufflation et l&apos;extraction théorique requise." }
                 ].map((step, i) => (
                   <div key={i} className="flex gap-5">
-                    <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center font-black flex-shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-sky-600/20 border border-sky-500/30 text-sky-400 flex items-center justify-center font-black flex-shrink-0">
                       {i + 1}
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg mb-1">{step.title}</h4>
+                      <h4 className="font-bold text-lg text-white mb-1">{step.title}</h4>
                       <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
@@ -175,10 +176,10 @@ export default function InstallateurVmcPage() {
               </div>
             </div>
 
-            {/* Quality bullets */}
-            <div className="bg-slate-800/50 border border-slate-700/50 rounded-3xl p-8 sm:p-10">
-              <h3 className="text-2xl font-black mb-6 uppercase">Une expertise PEB reconnue</h3>
-              <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+            {/* Quality details */}
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-10 flex flex-col justify-center">
+              <h3 className="text-2xl font-black mb-6 uppercase text-white tracking-tight">Une expertise PEB reconnue</h3>
+              <p className="text-slate-300 text-sm mb-8 leading-relaxed font-medium">
                 Notre société de ventilation applique rigoureusement les normes PEB belges ainsi que les recommandations ergonomiques de débit d&apos;air.
               </p>
               <ul className="space-y-5">
@@ -189,7 +190,7 @@ export default function InstallateurVmcPage() {
                   "Offre de devis détaillée et gratuite avec calcul de déperdition calorifique."
                 ].map((point, i) => (
                   <li key={i} className="flex items-start gap-4">
-                    <CheckCircle className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="w-5 h-5 text-sky-400 mt-0.5 flex-shrink-0" />
                     <span className="text-sm font-medium text-slate-300 leading-relaxed">{point}</span>
                   </li>
                 ))}
@@ -200,12 +201,12 @@ export default function InstallateurVmcPage() {
         </div>
       </section>
 
-      {/* Local/regional details */}
-      <section className="py-16 bg-slate-50 border-b border-slate-200">
+      {/* Regional aspects */}
+      <section className="py-20 bg-slate-950/20 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h4 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">Activement présents partout en Belgique</h4>
-            <p className="text-slate-600 text-sm leading-relaxed">
+            <h4 className="text-2xl font-black text-white mb-4 tracking-tight uppercase">Activement présents partout en Belgique</h4>
+            <p className="text-slate-300 text-sm leading-relaxed font-medium">
               Que vous habitiez à <strong>Bruxelles</strong> (Ixelles, Uccle, Schaerbeek), en Wallonie (Liège, Namur, Charleroi, Brabant Wallon, Mons) ou en périphérie flamande (Vilvoorde, Grimbergen, Wemmel), nos équipes d&apos;installateurs VMC qualifiés interviennent rapidement pour l&apos;assainissement thermique et sanitaire de vos intérieurs.
             </p>
           </div>
@@ -213,13 +214,13 @@ export default function InstallateurVmcPage() {
       </section>
 
       {/* Links internal */}
-      <section className="py-8 bg-white border-b border-slate-100">
+      <section className="py-8 bg-white/5 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ul className="flex flex-wrap lg:justify-center gap-4 text-xs font-bold text-slate-500">
-            <li><Link href="/zones-de-services/climatisation/installation-climatisation-pompe-a-chaleur" className="underline hover:text-blue-600">Installation Climatisation</Link></li>
-            <li><Link href="/chauffage" className="underline hover:text-blue-600">Chauffagiste Belgique</Link></li>
-            <li><Link href="/devis" className="underline hover:text-blue-600">Demander un Devis VMC</Link></li>
-            <li><Link href="/contact" className="underline hover:text-blue-600">Contact</Link></li>
+          <ul className="flex flex-wrap lg:justify-center gap-6 text-xs font-bold text-slate-400">
+            <li><Link href="/zones-de-services/climatisation/installation-climatisation-pompe-a-chaleur" className="hover:text-sky-400 transition-colors">Installation Climatisation</Link></li>
+            <li><Link href="/chauffage" className="hover:text-sky-400 transition-colors">Chauffagiste Belgique</Link></li>
+            <li><Link href="/devis" className="hover:text-sky-400 transition-colors">Demander un Devis VMC</Link></li>
+            <li><Link href="/contact" className="hover:text-sky-400 transition-colors">Contact</Link></li>
           </ul>
         </div>
       </section>
@@ -227,11 +228,11 @@ export default function InstallateurVmcPage() {
       {/* FAQ */}
       <FAQ customFaqs={faqs} />
 
-      {/* Contact Section Form */}
-      <section className="py-20 bg-slate-50">
+      {/* Contact Form Section */}
+      <section className="py-24 bg-slate-950/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
-          <h2 className="text-4xl font-black text-slate-900 mb-4 uppercase">Un projet de ventilation ou VMC ?</h2>
-          <p className="text-slate-600">Remplissez notre formulaire en quelques clics ou prenez rendez-vous pour une étude technique personnalisée.</p>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight font-oswald text-white">Un projet de ventilation ou VMC ?</h2>
+          <p className="text-slate-300 font-medium">Remplissez notre formulaire en quelques clics ou prenez rendez-vous pour une étude technique personnalisée.</p>
         </div>
         <ContactForm />
       </section>

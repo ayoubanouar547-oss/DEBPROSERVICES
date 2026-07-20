@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { ChevronDown, MessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const faqs = [
+const faqsFR = [
   {
     question: "Quels sont les services proposés par DEB PRO SERVICES ?",
     answer:
@@ -32,6 +33,34 @@ const faqs = [
   },
 ];
 
+const faqsNL = [
+  {
+    question: "Welke diensten biedt DEB PRO SERVICES aan?",
+    answer:
+      "Wij zijn een multidisciplinair bedrijf actief in heel België. Onze experts zijn gespecialiseerd in: ontstopping van leidingen, algemene loodgieterij, verwarming (gas en stookolie), elektriciteit, airconditioning, en het ledigen van septic tanks. We voeren ook volledige renovaties uit.",
+  },
+  {
+    question: "Wat is de interventietijd bij een noodgeval?",
+    answer:
+      "Voor noodgevallen (waterlek, verstopte WC, verwarmingsstoring of stroompanne) komen onze technici overal in België ter plaatse met een gemiddelde interventietijd van 30 tot 60 minuten, 24 uur per dag, 7 dagen per week.",
+  },
+  {
+    question: "Bieden jullie gratis offertes aan?",
+    answer:
+      "Ja, transparantie is onze prioriteit. We bieden een gratis en vrijblijvende offerte aan voor elke interventie. U kent de exacte prijs voordat de werkzaamheden beginnen.",
+  },
+  {
+    question: "Werken jullie ook 's nachts, in het weekend en op feestdagen?",
+    answer:
+      "Absoluut. DEB PRO SERVICES heeft wachtdiensten die dag en nacht beschikbaar zijn, inclusief in het weekend en op feestdagen, om uw comfort en veiligheid te garanderen.",
+  },
+  {
+    question: "Zijn jullie technici gecertificeerd?",
+    answer:
+      "Ja, ons team bestaat uit gecertificeerde professionals in hun respectievelijke vakgebieden (loodgieters, verwarmingsinstallateurs, AREI-elektriciens, CERGA-gastechnici, F-Gas koeltechnici).",
+  },
+];
+
 interface FAQItem {
   question: string;
   answer: string;
@@ -44,9 +73,12 @@ export function FAQ({
   city?: string;
   customFaqs?: FAQItem[];
 }) {
+  const pathname = usePathname();
+  const isNl = pathname ? pathname.startsWith("/nl") : false;
+
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const baseFaqs = customFaqs || faqs;
+  const baseFaqs = customFaqs || (isNl ? faqsNL : faqsFR);
 
   const personalizedFaqs = baseFaqs.map((faq) => {
     if (!city) return faq;
@@ -74,17 +106,24 @@ export function FAQ({
           </div>
           <h2 className="text-blue-400 font-black tracking-widest uppercase mb-3 text-sm flex items-center justify-center gap-2">
             <span className="w-8 h-[2px] bg-blue-500"></span>
-            Foire Aux Questions {city && `à ${city}`}
+            {isNl 
+              ? `Veelgestelde Vragen ${city ? `in ${city}` : ""}` 
+              : `Foire Aux Questions ${city ? `à ${city}` : ""}`}
             <span className="w-8 h-[2px] bg-blue-500"></span>
           </h2>
           <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
-            {city
-              ? `Expertise locale à ${city}`
-              : "Vous avez une question ?"}
+            {isNl ? (
+              city ? `Lokale expertise in ${city}` : "Heeft u een vraag?"
+            ) : (
+              city ? `Expertise locale à ${city}` : "Vous avez une question ?"
+            )}
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Nous avons les réponses.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+              {isNl ? "Wij hebben de antwoorden." : "Nous avons les réponses."}
+            </span>
           </h3>
         </motion.div>
+
 
         <div className="space-y-4">
           {personalizedFaqs.map((faq, index) => {

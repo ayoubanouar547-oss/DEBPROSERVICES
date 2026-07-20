@@ -9,6 +9,78 @@ import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 
+// Helper function to dynamically parse service and city combinations for all of Belgium
+function parseServiceAndCity(slug: string) {
+  // First, check if there is an exact match for service
+  const service = services.find((s) => s.slug === slug);
+  if (service) {
+    return { service, cityInfo: null, matchedTerm: service.title };
+  }
+
+  // Check if slug ends with -[citySlug]
+  for (const city of belgianCities) {
+    if (slug.endsWith(`-${city.slug}`)) {
+      const potentialServiceSlug = slug.slice(0, -(city.slug.length + 1));
+      let matchedTerm = "";
+      const foundService = services.find((s) => {
+        if (s.slug === potentialServiceSlug) {
+          matchedTerm = s.title;
+          return true;
+        }
+        if (s.slug === "plomberie" && potentialServiceSlug === "plombier") {
+          matchedTerm = "Plombier";
+          return true;
+        }
+        if (s.slug === "chauffage" && potentialServiceSlug === "chauffagiste") {
+          matchedTerm = "Chauffagiste";
+          return true;
+        }
+        if (s.slug === "electricite" && potentialServiceSlug === "electricien") {
+          matchedTerm = "Électricien";
+          return true;
+        }
+        if (s.slug === "travaux-de-toiture" && potentialServiceSlug === "couvreur") {
+          matchedTerm = "Couvreur";
+          return true;
+        }
+        if (s.slug === "travaux-de-construction-gros-oeuvre" && potentialServiceSlug === "macon") {
+          matchedTerm = "Maçon";
+          return true;
+        }
+        if (s.slug === "debouchage-canalisation" && potentialServiceSlug === "debouchage") {
+          matchedTerm = "Débouchage";
+          return true;
+        }
+        if (s.slug === "nettoyage-de-vitres" && (potentialServiceSlug === "laveur-de-vitres" || potentialServiceSlug === "laveur")) {
+          matchedTerm = "Laveur de vitres";
+          return true;
+        }
+        if (s.slug === "travaux-de-jardinage-elagage" && (potentialServiceSlug === "jardinier" || potentialServiceSlug === "elagueur")) {
+          matchedTerm = "Jardinier";
+          return true;
+        }
+        return false;
+      });
+      if (foundService) {
+        return { service: foundService, cityInfo: city, matchedTerm };
+      }
+    }
+  }
+
+  return { service: null, cityInfo: null, matchedTerm: "" };
+}
+
+function localizeText(text: string, cityName: string) {
+  if (!cityName) return text;
+  return text
+    .replace(/en Belgique/gi, `à ${cityName}`)
+    .replace(/partout en Belgique/gi, `à ${cityName} et ses environs`)
+    .replace(/dans toute la Belgique/gi, `à ${cityName} et ses alentours`)
+    .replace(/Belgique/gi, cityName)
+    .replace(/belge/gi, `de ${cityName}`)
+    .replace(/belges/gi, `de ${cityName}`);
+}
+
 export function generateStaticParams() {
   return services.map((service) => ({
     serviceSlug: service.slug,
@@ -21,8 +93,45 @@ export async function generateMetadata({
   params: Promise<{ serviceSlug: string }>;
 }): Promise<Metadata> {
   const resolvedParams = await params;
-  const service = services.find((s) => s.slug === resolvedParams.serviceSlug);
+  const { service, cityInfo, matchedTerm } = parseServiceAndCity(resolvedParams.serviceSlug);
   if (!service) return {};
+
+  if (cityInfo) {
+    const isSolarService = service.slug === "installation-panneaux-solaires";
+    const isRoofService = service.slug === "travaux-de-toiture";
+    const isCameraService = service.slug === "installation-cameras-surveillance";
+
+    const title = isSolarService
+      ? `☀️ Installateur Panneaux Solaires ${cityInfo.name} — Devis & Étude Gratuite 🔋`
+      : isRoofService
+      ? `🏠 Couvreur ${cityInfo.name} — Rénovation de Toiture & Réparation de Fuite 🌧️`
+      : isCameraService
+      ? `🛡️ Installation Caméras de Surveillance ${cityInfo.name} — Sécurité Professionnelle 📹`
+      : `🚨 ${matchedTerm} ${cityInfo.name} — Devis Gratuit & Intervention 30 Min ⚡`;
+
+    const description = `Besoin d'un expert en ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? DEB PRO SERVICES propose des interventions rapides, devis gratuit et prestations de haute qualité.`;
+
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: `/${resolvedParams.serviceSlug}`,
+      },
+      openGraph: {
+        title,
+        description,
+        url: `https://debservices.canalrose.be/${resolvedParams.serviceSlug}`,
+        images: [
+          {
+            url: service.imageUrl,
+            width: 1200,
+            height: 630,
+            alt: `Artisan Expert ${matchedTerm} à ${cityInfo.name}`,
+          },
+        ],
+      },
+    };
+  }
 
   let description = `${service.title} Belgique : techniciens agréés pour toute intervention urgente. Dépannage 24h/24 & 7j/7. Devis gratuit immédiat ☎ 0496 32 57 33.`;
 
@@ -41,17 +150,70 @@ export async function generateMetadata({
   } else if (service.slug === "electricite") {
     description = 
       "Électricien Belgique urgence 24/7 : mise en conformité, dépannage tableau électrique et installation. Expert agréé, devis gratuit. Appelez le ☎ 0496 32 57 33.";
+  } else if (service.slug === "installation-panneaux-solaires") {
+    description = 
+      "Installation de panneaux solaires photovoltaïques et batteries physiques en Belgique. Installateurs certifiés RESCert, étude de faisabilité gratuite et devis au meilleur prix. Contactez-nous au ☎ 0496 32 57 33.";
+  } else if (service.slug === "travaux-de-toiture") {
+    description = 
+      "Travaux de toiture en Belgique : réparation urgente de fuites, rénovation de toit (ardoises, tuiles, EPDM), isolation thermique et démoussage. Couvreurs certifiés, devis gratuit. Appelez le ☎ 0496 32 57 33.";
+  } else if (service.slug === "installation-cameras-surveillance") {
+    description = 
+      "Installation de caméras de surveillance et alarmes en Belgique. Systèmes de sécurité IP HD connectés sur smartphone pour maison et commerce. Devis gratuit & étude de sécurité offerte ☎ 0496 32 57 33.";
+  } else if (service.slug === "travaux-de-construction-gros-oeuvre") {
+    description = 
+      "Entreprise de construction et maçonnerie en Belgique. Gros œuvre, dalles en béton, ouvertures de mur porteur avec poutrelles IPN/HEB, fondations et façades. Garantie décennale, devis gratuit ☎ 0496 32 57 33.";
+  } else if (service.slug === "nettoyage-de-vitres") {
+    description =
+      "Lavage de vitres professionnel en Belgique. Nettoyage de vitrines, vérandas, fenêtres d'accès difficile, châssis et volets pour particuliers et commerces. Devis gratuit immédiat ☎ 0496 32 57 33.";
+  } else if (service.slug === "travaux-de-jardinage-elagage") {
+    description =
+      "Jardinier paysagiste professionnel en Belgique : entretien de jardin, élagage et abattage d'arbres complexes, taille de haies. Devis gratuit immédiat ☎ 0496 32 57 33.";
   }
 
+  const isSolarService = service.slug === "installation-panneaux-solaires";
+  const isRoofService = service.slug === "travaux-de-toiture";
+  const isCameraService = service.slug === "installation-cameras-surveillance";
+  const isConstructionService = service.slug === "travaux-de-construction-gros-oeuvre";
+  const isCleanService = service.slug === "nettoyage-de-vitres";
+  const isGardenService = service.slug === "travaux-de-jardinage-elagage";
+
+  const metaTitle = isSolarService
+    ? `☀️ Installateur Panneaux Solaires Belgique — Devis & Étude Gratuite 🔋`
+    : isRoofService
+    ? `🏠 Couvreur Belgique — Rénovation de Toiture & Réparation de Fuite 🌧️`
+    : isCameraService
+    ? `🛡️ Installation Caméras de Surveillance Belgique — Sécurité Professionnelle 📹`
+    : isConstructionService
+    ? `🏗️ Entreprise de Maçonnerie & Gros Œuvre Belgique — Devis Décennal 🧱`
+    : isCleanService
+    ? `✨ Lavage & Nettoyage de Vitres Belgique — Finition Sans Trace 🪟`
+    : isGardenService
+    ? `🌳 Jardinier & Élagage Belgique — Entretien d'Espaces Verts 🍃`
+    : `🚨 Expert ${service.title} Belgique — Devis Gratuit & Intervention 30 Min ⚡`;
+
+  const ogTitle = isSolarService
+    ? `☀️ Installateur Panneaux Solaires Belgique — Devis & Étude Gratuite 🔋`
+    : isRoofService
+    ? `🏠 Couvreur Belgique — Rénovation de Toiture & Réparation de Fuite 🌧️`
+    : isCameraService
+    ? `🛡️ Installation Caméras de Surveillance Belgique — Sécurité Professionnelle 📹`
+    : isConstructionService
+    ? `🏗️ Entreprise de Maçonnerie & Gros Œuvre Belgique — Devis Décennal 🧱`
+    : isCleanService
+    ? `✨ Lavage & Nettoyage de Vitres Belgique — Finition Sans Trace 🪟`
+    : isGardenService
+    ? `🌳 Jardinier & Élagage Belgique — Entretien d'Espaces Verts 🍃`
+    : `🚨 Expert ${service.title} Belgique — Devis Gratuit ⚡`;
+
   return {
-    title: `🚨 Expert ${service.title} Belgique — Devis Gratuit & Intervention 30 Min ⚡`,
+    title: metaTitle,
     description,
-    keywords: `${service.title} Belgique, ${service.title} urgent, ${service.title} 24h/24, expert ${service.title}, devis gratuit ${service.title}`,
+    keywords: `${service.title} Belgique, ${service.title} 24h/24, expert ${service.title}, devis gratuit ${service.title}, installation solaire belgique, toiture belgique, couvreur belgique, cameras de surveillance belgique, securite maison belgique`,
     alternates: {
       canonical: `/${service.slug}`,
     },
     openGraph: {
-      title: `🚨 Expert ${service.title} Belgique — Devis Gratuit ⚡`,
+      title: ogTitle,
       description,
       url: `https://debservices.canalrose.be/${service.slug}`,
       images: [
@@ -72,18 +234,75 @@ export default async function ServicePage({
   params: Promise<{ serviceSlug: string }>;
 }) {
   const resolvedParams = await params;
-  const serviceInfo = services.find(
-    (s) => s.slug === resolvedParams.serviceSlug,
-  );
+  const { service: serviceInfo, cityInfo, matchedTerm } = parseServiceAndCity(resolvedParams.serviceSlug);
 
   if (!serviceInfo) {
     notFound();
   }
 
   const isGasService = serviceInfo.slug === "gaz";
-  const h1Title = isGasService 
-    ? `Expert ${serviceInfo.title} Belgique — Techniciens Certifiés CERGA 24h/24`
-    : `Expert ${serviceInfo.title} Belgique — Techniciens Agréés 24h/24`;
+  const isSolarService = serviceInfo.slug === "installation-panneaux-solaires";
+  const isRoofService = serviceInfo.slug === "travaux-de-toiture";
+  const isCameraService = serviceInfo.slug === "installation-cameras-surveillance";
+  const isConstructionService = serviceInfo.slug === "travaux-de-construction-gros-oeuvre";
+  const isCleanService = serviceInfo.slug === "nettoyage-de-vitres";
+  const isGardenService = serviceInfo.slug === "travaux-de-jardinage-elagage";
+
+  let h1Title = `Expert ${serviceInfo.title} Belgique — Techniciens Agréés 24h/24`;
+  if (cityInfo) {
+    if (isSolarService) {
+      h1Title = `Panneaux Solaires à ${cityInfo.name} : Énergie Verte & Durable`;
+    } else if (isRoofService) {
+      h1Title = `Travaux de Toiture à ${cityInfo.name} : Étanchéité & Rénovation`;
+    } else if (isCameraService) {
+      h1Title = `Caméras de Surveillance à ${cityInfo.name} : Protection 24h/24`;
+    } else if (isConstructionService) {
+      h1Title = `Entreprise de Construction à ${cityInfo.name} : Gros Œuvre & Maçonnerie`;
+    } else if (isCleanService) {
+      h1Title = `Lavage de Vitres à ${cityInfo.name} : Nettoyage Sans Trace`;
+    } else if (isGardenService) {
+      h1Title = `Jardinier à ${cityInfo.name} : Élagage & Entretien de Jardin`;
+    } else {
+      h1Title = `${matchedTerm} à ${cityInfo.name} — Devis Gratuit & Intervention`;
+    }
+  } else if (isGasService) {
+    h1Title = `Expert ${serviceInfo.title} Belgique — Techniciens Certifiés CERGA 24h/24`;
+  } else if (isSolarService) {
+    h1Title = `Installateur Panneaux Solaires Belgique — Devis & Étude Gratuite`;
+  } else if (isRoofService) {
+    h1Title = `Artisan Couvreur Belgique — Travaux, Réparation & Rénovation de Toiture`;
+  } else if (isCameraService) {
+    h1Title = `Installation de Caméras de Surveillance Belgique — Sécurité & Devis Gratuit`;
+  } else if (isConstructionService) {
+    h1Title = `Entreprise de Construction & Maçonnerie Belgique — Devis Gratuit`;
+  } else if (isCleanService) {
+    h1Title = `Entreprise de Nettoyage de Vitres Belgique — Devis Gratuit`;
+  } else if (isGardenService) {
+    h1Title = `Jardinier & Élagage Belgique — Entretien de Jardin & Abattage d'Arbres`;
+  }
+
+  let descriptionText = serviceInfo.description;
+  if (cityInfo) {
+    if (isSolarService) {
+      descriptionText = `Réduisez jusqu'à 80% votre facture d'électricité à ${cityInfo.name}. Nos équipes certifiées conçoivent votre système photovoltaïque avec batterie physique de stockage de pointe. Devis gratuit et étude de rendement offerte.`;
+    } else if (isRoofService) {
+      descriptionText = `Une fuite d'eau de pluie ou une rénovation complète de toiture à ${cityInfo.name} ? Nos couvreurs expérimentés interviennent rapidement pour assurer l'étanchéité, l'isolation thermique et la longévité de votre toit.`;
+    } else if (isCameraService) {
+      descriptionText = `Dissuadez les intrusions et gardez un œil sur votre propriété à ${cityInfo.name}. Nos techniciens certifiés installent des solutions de vidéosurveillance intelligentes connectées à votre smartphone. Devis et audit de sécurité offerts.`;
+    } else if (isConstructionService) {
+      descriptionText = `Besoin d'un maçon ou d'une entreprise de construction de confiance à ${cityInfo.name} ? DEB PRO SERVICES s'occupe de vos travaux de gros œuvre, maçonnerie, dalles béton et pose d'IPN avec garantie décennale.`;
+    } else if (isCleanService) {
+      descriptionText = `Trouvez un laveur de vitres professionnel à ${cityInfo.name} pour vos fenêtres, verrières ou vitrines. DEB PRO SERVICES vous garantit un lavage de haute qualité, sans traces et respectueux de vos châssis.`;
+    } else if (isGardenService) {
+      descriptionText = `Besoin d'un jardinier paysagiste ou d'un élagueur qualifié à ${cityInfo.name} ? DEB PRO SERVICES s'occupe de la tonte de pelouse, taille de haies, abattage d'arbres et aménagement paysager de votre extérieur.`;
+    } else {
+      descriptionText = `Vous recherchez un professionnel pour votre ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? DEB PRO SERVICES intervient rapidement à ${cityInfo.name} et ses environs. Que ce soit pour une installation, une rénovation ou un dépannage d'urgence, nos techniciens agréés et certifiés garantissent un travail soigné, durable et au meilleur prix.`;
+    }
+  }
+
+  const heroImage = cityInfo
+    ? `https://picsum.photos/seed/${serviceInfo.id}-${cityInfo.slug}/1200/800`
+    : serviceInfo.imageUrl;
 
   return (
     <>
@@ -98,7 +317,7 @@ export default async function ServicePage({
                 "@id": `https://debservices.canalrose.be/${serviceInfo.slug}#service`,
                 name: serviceInfo.title,
                 serviceType: serviceInfo.title,
-                description: serviceInfo.description,
+                description: descriptionText,
                 provider: {
                   "@id": "https://debservices.canalrose.be/#organization",
                 },
@@ -155,10 +374,10 @@ export default async function ServicePage({
                 "@type": "FAQPage",
                 "mainEntity": serviceInfo.faqs.map(faq => ({
                   "@type": "Question",
-                  "name": faq.question,
+                  "name": cityInfo ? localizeText(faq.question, cityInfo.name) : faq.question,
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": faq.answer
+                    "text": cityInfo ? localizeText(faq.answer, cityInfo.name) : faq.answer
                   }
                 }))
               }] : [])
@@ -170,8 +389,8 @@ export default async function ServicePage({
       <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
         <div className="absolute inset-0 -z-10">
           <Image
-            src={serviceInfo.imageUrl}
-            alt={`DEB PRO SERVICES - Dépannage ${serviceInfo.title} en Belgique`}
+            src={heroImage}
+            alt={cityInfo ? `DEB PRO SERVICES - ${matchedTerm} à ${cityInfo.name}` : `DEB PRO SERVICES - Dépannage ${serviceInfo.title} en Belgique`}
             fill
             priority
             className="object-cover object-center"
@@ -185,20 +404,20 @@ export default async function ServicePage({
               className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}
             >
               <serviceInfo.icon className="w-4 h-4" />
-              Service Pro & Agrée en Belgique
+              {cityInfo ? `Service Pro & Agréé à ${cityInfo.name}` : "Service Pro & Agrée en Belgique"}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
               {h1Title}
             </h1>
             <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
-              {serviceInfo.description}
+              {descriptionText}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="tel:0496325733"
                 className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
               >
-                <PhoneCall className="w-5 h-5" /> Urgence {serviceInfo.title}
+                <PhoneCall className="w-5 h-5" /> Urgence {matchedTerm}
               </a>
             </div>
           </div>
@@ -210,10 +429,10 @@ export default async function ServicePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-5xl font-black mb-6 md:mb-10 text-white uppercase tracking-tight">
-              Nos domaines d'intervention en {serviceInfo.title}
+              Nos services de {serviceInfo.title} {cityInfo ? `à ${cityInfo.name}` : "en Belgique"}
             </h2>
             <p className="text-white text-lg md:text-xl max-w-2xl mx-auto font-medium">
-              Découvrez en détail l'ensemble de nos champs d'expertise. Chaque
+              Découvrez en détail l'ensemble de nos champs d'expertise {cityInfo ? `à ${cityInfo.name}` : "en Belgique"}. Chaque
               problème a sa solution dédiée avec DEB PRO SERVICES.
             </p>
           </div>
@@ -319,8 +538,7 @@ export default async function ServicePage({
 
             <div className="text-white">
               <h2 className="text-4xl font-black mb-8 leading-tight">
-                Pourquoi faire confiance à DEB PRO SERVICES pour votre{" "}
-                {serviceInfo.title} ?
+                Pourquoi faire confiance à DEB PRO SERVICES pour votre {matchedTerm} {cityInfo ? `à ${cityInfo.name}` : "en Belgique"} ?
               </h2>
               <div className="space-y-6">
                 {((serviceInfo as any).trustPoints ?? [
@@ -328,22 +546,26 @@ export default async function ServicePage({
                   { title: "Tarifs Fixes & Transparents", desc: "Aucun frais caché. Un devis clair vous est présenté avant chaque début de travaux." },
                   { title: "Techniciens Agréés & Certifiés", desc: "Tous nos professionnels sont certifiés, assurés et formés aux dernières normes belges en vigueur." },
                   { title: "Garantie de Satisfaction", desc: "Tous nos travaux sont garantis. Nous ne repartons que lorsque le problème est 100% résolu." },
-                ]).map((item: {title: string; desc: string}, i: number) => (
-                  <div
-                    key={i}
-                    className="flex gap-4 p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-colors"
-                  >
-                    <div className="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-blue-500/30">
-                      <CheckCircle className="w-6 h-6 text-blue-400" />
+                ]).map((item: {title: string; desc: string}, i: number) => {
+                  const localizedTitle = cityInfo ? localizeText(item.title, cityInfo.name) : item.title;
+                  const localizedDesc = cityInfo ? localizeText(item.desc, cityInfo.name) : item.desc;
+                  return (
+                    <div
+                      key={i}
+                      className="flex gap-4 p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-colors"
+                    >
+                      <div className="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-blue-500/30">
+                        <CheckCircle className="w-6 h-6 text-blue-400" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-xl mb-2">{localizedTitle}</h3>
+                        <p className="text-slate-400 leading-relaxed">
+                          {localizedDesc}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-xl mb-2">{item.title}</h3>
-                      <p className="text-slate-400 leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               <div className="mt-10">
                 <a
@@ -359,12 +581,44 @@ export default async function ServicePage({
         </div>
       </section>
 
+      {/* Local Context Section */}
+      {cityInfo && (
+        <section className="py-20 bg-slate-950/25 border-t border-b border-white/5 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h3 className="text-2xl md:text-3xl font-black text-white mb-4 tracking-tight uppercase">
+                Installation &amp; Service de Proximité à {cityInfo.name}
+              </h3>
+              <p className="text-slate-300 text-sm md:text-base leading-relaxed font-medium">
+                {isSolarService ? (
+                  <>
+                    Nos équipes d&apos;installateurs agréés interviennent sur toute la commune de <strong>{cityInfo.name}</strong> et ses environs. Grâce à notre connaissance approfondie de la réglementation de la province de <strong>{cityInfo.province}</strong> et des spécificités techniques locales, nous vous garantissons une étude de rendement optimale et une installation sécurisée de vos panneaux photovoltaïques et batteries de stockage physiques.
+                  </>
+                ) : isRoofService ? (
+                  <>
+                    Nos artisans couvreurs de proximité sont actifs à <strong>{cityInfo.name}</strong> pour tous travaux urgents ou programmés. Qu&apos;il s&apos;agisse de réparer une fuite de toiture suite à des intempéries dans la région de <strong>{cityInfo.province}</strong>, d&apos;effectuer un démoussage complet ou de rénover entièrement votre toit (tuiles, ardoises, EPDM), nous vous offrons un service rapide avec garantie décennale.
+                  </>
+                ) : isCameraService ? (
+                  <>
+                    Sécurisez votre maison, villa ou commerce à <strong>{cityInfo.name}</strong> avec l&apos;aide de nos experts locaux. Nous concevons et posons des systèmes de caméras de surveillance IP connectées de dernière génération à <strong>{cityInfo.name}</strong>. Nos audits de sécurité gratuits respectent scrupuleusement la législation caméras belge pour vous garantir une tranquillité d&apos;esprit totale.
+                  </>
+                ) : (
+                  <>
+                    Besoin d&apos;un dépannage rapide ou d&apos;une nouvelle installation en {serviceInfo.title.toLowerCase()} à <strong>{cityInfo.name}</strong> ? Nos techniciens certifiés résident à proximité et interviennent sous 30 à 60 minutes. Nous couvrons toute la région de <strong>{cityInfo.province}</strong> 24h/24 et 7j/7 pour vous apporter l&apos;expertise professionnelle que vous méritez.
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Local SEO Matrix */}
       <section className="py-24 border-t border-white/10 relative z-10 bg-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-black text-white mb-4">
-              Intervention {serviceInfo.title} dans toute la Belgique
+              {cityInfo ? `Nos interventions de ${serviceInfo.title} à ${cityInfo.name} et alentours` : `Intervention ${serviceInfo.title} dans toute la Belgique`}
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
               Sélectionnez votre ville ci-dessous pour découvrir nos services de
@@ -396,11 +650,11 @@ export default async function ServicePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <h2 className="text-3xl font-black text-white mb-4">
-              Demander une intervention {serviceInfo.title}
+              Demander une intervention de {serviceInfo.title.toLowerCase()} {cityInfo ? `à ${cityInfo.name}` : ""}
             </h2>
             <p className="text-slate-400">
               Remplissez le formulaire de contact pour obtenir un devis gratuit
-              ou planifier une intervention non urgente. Une réponse vous sera
+              ou planifier une intervention non urgente {cityInfo ? `à ${cityInfo.name}` : ""}. Une réponse vous sera
               apportée sous 24h.
             </p>
           </div>
@@ -408,8 +662,15 @@ export default async function ServicePage({
         </div>
       </section>
 
-      <FAQ customFaqs={(serviceInfo as any).faqs} />
-      <ServiceSeoText serviceTitle={serviceInfo.title} />
+      <FAQ
+        customFaqs={
+          serviceInfo.faqs?.map((faq) => ({
+            question: cityInfo ? localizeText(faq.question, cityInfo.name) : faq.question,
+            answer: cityInfo ? localizeText(faq.answer, cityInfo.name) : faq.answer,
+          }))
+        }
+      />
+      <ServiceSeoText serviceTitle={serviceInfo.title} cityName={cityInfo?.name} />
     </>
   );
 }

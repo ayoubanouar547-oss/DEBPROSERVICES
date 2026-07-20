@@ -16,7 +16,6 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: [
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           {
             key: "Strict-Transport-Security",
@@ -61,6 +60,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "deb-pro-service.odoo.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "upload.wikimedia.org",
         port: "",
         pathname: "/**",
@@ -75,8 +80,7 @@ const nextConfig: NextConfig = {
   },
   transpilePackages: ["motion"],
   webpack: (config, { dev }) => {
-    // HMR is disabled in AI Studio via DISABLE_HMR env var.
-    // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+    // Configuration de watch pour l'environnement de developpement
     if (dev && process.env.DISABLE_HMR === "true") {
       config.watchOptions = {
         ignored: /.*/,

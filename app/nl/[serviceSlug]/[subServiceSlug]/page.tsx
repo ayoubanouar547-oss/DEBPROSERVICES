@@ -1,8 +1,7 @@
-import { buildLongClusterText } from "@/lib/utils/seo-content-generator";
+import { dutchServices, getAlternatePath, localizeNlText, frToNlCitySlugMap, frToNlCityNameMap } from "@/lib/data/translations";
 import { Metadata } from "next";
-import { services } from "@/lib/data/services";
 import { notFound } from "next/navigation";
-import { PhoneCall, ChevronRight, CheckCircle } from "lucide-react";
+import { PhoneCall, ChevronRight, CheckCircle, Wrench, Flame, Droplets, Zap, Wind, Truck, Home, Sun, Camera, Hammer, Sparkles, Trees, ShieldAlert } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
@@ -10,9 +9,28 @@ import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 
+const serviceIcons: Record<string, any> = {
+  renovation: Home,
+  plomberie: Wrench,
+  debouchage: Droplets,
+  chauffage: Flame,
+  gaz: Flame,
+  citerne: Truck,
+  cng: Wind,
+  electricite: Zap,
+  climatisation: Wind,
+  fosse: Truck,
+  "panneaux-solaires": Sun,
+  toiture: Home,
+  "camera-surveillance": Camera,
+  construction: Hammer,
+  vitres: Sparkles,
+  jardinage: Trees,
+};
+
 export function generateStaticParams() {
   const params: { serviceSlug: string; subServiceSlug: string }[] = [];
-  services.forEach((service) => {
+  dutchServices.forEach((service) => {
     service.subServices.forEach((sub) => {
       params.push({
         serviceSlug: service.slug,
@@ -29,27 +47,33 @@ export async function generateMetadata({
   params: Promise<{ serviceSlug: string; subServiceSlug: string }>;
 }) {
   const resolvedParams = await params;
-  const service = services.find((s) => s.slug === resolvedParams.serviceSlug);
+  const service = dutchServices.find((s) => s.slug === resolvedParams.serviceSlug);
   const subService = service?.subServices.find(
-    (sub) => sub.slug === resolvedParams.subServiceSlug,
+    (sub) => sub.slug === resolvedParams.subServiceSlug
   );
 
   if (!service || !subService) return {};
 
+  const frSlugPath = getAlternatePath(`/nl/${resolvedParams.serviceSlug}/${resolvedParams.subServiceSlug}`, 'fr');
+
   return {
-    title: `🚨 ${subService.title} Belgique — Devis Gratuit & Intervention 30 Min ⚡`,
-    description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} Techniciens agrées avec intervention en urgence 24h/24 et 7j/7 partout en Belgique.`,
-    keywords: `${subService.title} Belgique, ${subService.title} urgent, expert ${subService.title.toLowerCase()}, dépannage 24h/24, ${service.title} Belgique`,
+    title: `🚨 ${subService.title} België — Gratis Offerte & Interventie 30 Min ⚡`,
+    description: `Nood aan een expert voor ${subService.title.toLowerCase()}? ${subService.desc} Erkende technici met 24/7 spoedinterventie in heel België.`,
+    keywords: `${subService.title} België, ${subService.title} spoed, expert ${subService.title.toLowerCase()}, reparatie 24h/24, ${service.title} België`,
     alternates: {
-      canonical: `/${service.slug}/${subService.slug}`,
+      canonical: `https://debservices.canalrose.be/nl/${service.slug}/${subService.slug}`,
+      languages: {
+        'fr': `https://debservices.canalrose.be${frSlugPath}`,
+        'nl': `https://debservices.canalrose.be/nl/${service.slug}/${subService.slug}`
+      }
     },
-    openGraph: {
-      title: `🚨 ${subService.title} Belgique — Action Rapide ⚡`,
-      description: `Expertise en ${subService.title.toLowerCase()} partout en Belgique. Intervention rapide 24/7.`,
-      url: `https://debservices.canalrose.be/${service.slug}/${subService.slug}`,
+      openGraph: {
+      title: `🚨 ${subService.title} België — Snelle Interventie ⚡`,
+      description: `Expertise in ${subService.title.toLowerCase()} in heel België. Snelle service 24/7.`,
+      url: `https://debservices.canalrose.be/nl/${service.slug}/${subService.slug}`,
       images: [
         {
-           url: (subService as any).imageUrl || service.imageUrl,
+          url: (subService as any).imageUrl || (service as any).imageUrl || `https://picsum.photos/seed/${service.id}-${subService.slug}/1200/800`,
           width: 800,
           height: 600,
           alt: subService.title,
@@ -59,13 +83,39 @@ export async function generateMetadata({
   };
 }
 
+function buildLongNlClusterText(serviceName: string, cityName: string, serviceDesc?: string): string[] {
+  return [
+    `<h2 class="text-3xl font-black text-white mb-6 mt-12">Professionele aanpak voor ${serviceName} in ${cityName}</h2>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">Wanneer u te maken heeft met een dringende noodsituatie voor <strong>${serviceName}</strong> in ${cityName}, is een snelle en vakkundige service van cruciaal belang. Bij DEB PRO SERVICES bieden wij gecertificeerde technici die binnen 30 tot 60 minuten ter plaatse zijn om de situatie te stabiliseren en te verhelpen.</p>`,
+    `<div class="bg-blue-600/10 border-l-4 border-blue-400 p-6 my-8 rounded-r-2xl">
+       <h3 class="text-xl font-bold text-blue-300 mb-3">Onze kwaliteitsgarantie</h3>
+       <p class="text-white/90 text-lg leading-relaxed">${serviceDesc || "Wij maken uitsluitend gebruik van gecertificeerde onderdelen en de nieuwste diagnose-apparatuur."}</p>
+     </div>`,
+    `<h3 class="text-2xl font-bold text-blue-300 mb-4 mt-8">Waarom kiezen voor onze experts?</h3>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">Ons team is volledig uitgerust met moderne gereedschappen, waaronder thermografische lekdetectie, HD-camera-inspectie en krachtige hogedruk-reinigers. Wij bieden 100% transparante tarieven door vooraf een gratis offerte op te stellen, zodat u nooit voor verrassingen komt te staan.</p>`,
+    `<div class="mt-12 bg-white/5 p-6 md:p-8 rounded-2xl border border-white/10">
+       <h3 class="text-2xl font-bold text-white mb-6">Veelgestelde vragen over ${serviceName}</h3>
+       <div class="space-y-6">
+         <div>
+           <p class="font-bold text-blue-400 mb-2">Q: Hoe snel kan een technicus aanwezig zijn in ${cityName}?</p>
+           <p class="text-white/80">A: Voor dringende interventies streven we ernaar om binnen 30 tot 60 minuten ter plaatse te zijn.</p>
+         </div>
+         <div>
+           <p class="font-bold text-blue-400 mb-2">Q: Ontvang ik vooraf een prijsopgave?</p>
+           <p class="text-white/80">A: Ja, al onze interventies starten met een transparante en kosteloze offerte.</p>
+         </div>
+       </div>
+     </div>`
+  ];
+}
+
 export default async function SubServicePage({
   params,
 }: {
   params: Promise<{ serviceSlug: string; subServiceSlug: string }>;
 }) {
   const resolvedParams = await params;
-  const serviceInfo = services.find(
+  const serviceInfo = dutchServices.find(
     (s) => s.slug === resolvedParams.serviceSlug,
   );
   const subServiceInfo = serviceInfo?.subServices.find(
@@ -76,22 +126,24 @@ export default async function SubServicePage({
     notFound();
   }
 
-  // Generate a long programmatic text for SEO Clusters
   const paragraphs = [
-    `Lorsqu'il s'agit de <strong>${subServiceInfo.title.toLowerCase()}</strong>, faire appel à des professionnels qualifiés est indispensable. Chez DEB PRO SERVICES, nous avons développé une expertise unique en Belgique concernant la catégorie ${serviceInfo.title.toLowerCase()}. Nos équipes interviennent de jour comme de nuit, dimanches et jours fériés inclus pour assurer un dépannage rapide et efficace.`,
+    `Wanneer het gaat over <strong>${subServiceInfo.title.toLowerCase()}</strong>, is het inschakelen van een gekwalificeerde professional essentieel. Bij DEB PRO SERVICES hebben we een unieke expertise opgebouwd in België voor de categorie ${serviceInfo.title.toLowerCase()}. Onze teams komen dag en nacht, inclusief zon- en feestdagen, tussenbeide om een snelle en efficiënte oplossing te garanderen.`,
 
-    `Le service de <em>${subServiceInfo.title.toLowerCase()}</em> demande un savoir-faire spécifique et un matériel adapté. Nos techniciens certifiés se déplacent chez vous avec des véhicules utilitaires complètement équipés, permettant de résoudre 95% des pannes dès la première visite. ${subServiceInfo.desc}`,
+    `De dienst <em>${subServiceInfo.title.toLowerCase()}</em> vereist specifieke knowhow en aangepast materiaal. Onze gecertificeerde technici komen naar u toe met volledig uitgeruste bedrijfswagens, waarmee 95% van de storingen al bij het eerste bezoek kan worden opgelost. ${subServiceInfo.desc}`,
 
-    `N'attendez pas que la situation se dégrade. Les problèmes liés à la ${serviceInfo.title.toLowerCase()} peuvent engendrer des dégâts collatéraux importants (inondations, courts-circuits, risques pour la santé). En choisissant DEB PRO SERVICES pour votre besoin en ${subServiceInfo.title.toLowerCase()}, vous bénéficiez d'une garantie d'un an sur nos interventions, d'une transparence tatale sur nos prix avec devis gratuit avant travaux, et d'un professionnalisme reconnu par plus de 5000 clients satisfaits.`,
+    `Wacht niet tot de situatie verslechtert. Problemen met ${serviceInfo.title.toLowerCase()} kunnen aanzienlijke nevenschade veroorzaken (overstromingen, kortsluiting, gezondheidsrisico's). Door te kiezen voor DEB PRO SERVICES voor uw behoefte aan ${subServiceInfo.title.toLowerCase()}, geniet u van één jaar garantie op onze interventies, volledige prijstransparantie met een gratis offerte vooraf, en een professionaliteit die wordt erkend door meer dan 5.000 tevreden klanten.`,
 
-    `Nous couvrons l'ensemble du territoire belge (Bruxelles, Wallonie, et la périphérie flamande). Dès réception de votre appel, un dispatcheur analyse votre urgence en <strong>${subServiceInfo.title.toLowerCase()}</strong> et envoie le technicien le plus proche de votre code postal. L'intervention est tracée, sécurisée, et respecte rigoureusement les normes belges en vigueur.`,
+    `Wij dekken het hele Belgische grondgebied (Brussel, Wallonië en de Vlaamse rand). Zodra we uw oproep ontvangen, analyseert een dispatcher uw noodsituatie in <strong>${subServiceInfo.title.toLowerCase()}</strong> en stuurt de dichtstbijzijnde technicus op basis van uw postcode. De interventie is traceerbaar, veilig en respecteert strikt de geldende Belgische normen.`
   ];
 
-  const massiveSEOContent = buildLongClusterText(
+  const massiveSEOContent = buildLongNlClusterText(
     subServiceInfo.title.toLowerCase(),
-    "Belgique",
+    "Belgische Gemeenten",
     subServiceInfo.desc
   );
+
+  const heroImage = (subServiceInfo as any).imageUrl || (serviceInfo as any).imageUrl || `https://picsum.photos/seed/${serviceInfo.id}-${subServiceInfo.slug}/1200/800`;
+  const IconComponent = serviceIcons[serviceInfo.id] || ShieldAlert;
 
   return (
     <>
@@ -103,7 +155,7 @@ export default async function SubServicePage({
             "@graph": [
               {
                 "@type": "Service",
-                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}#service`,
+                "@id": `https://debservices.canalrose.be/nl/${serviceInfo.slug}/${subServiceInfo.slug}#service`,
                 name: `${subServiceInfo.title}`,
                 serviceType: subServiceInfo.title,
                 description: subServiceInfo.desc,
@@ -132,10 +184,10 @@ export default async function SubServicePage({
                 },
                 address: {
                   "@type": "PostalAddress",
-                  addressLocality: "Brussels",
-                  addressRegion: "Brussels",
+                  addressLocality: "Brussel",
+                  addressRegion: "Brussel",
                   postalCode: "1000",
-                  streetAddress: "Centre",
+                  streetAddress: "Brussel Centrum",
                   addressCountry: "BE",
                 },
                 geo: {
@@ -160,25 +212,25 @@ export default async function SubServicePage({
               },
               {
                 "@type": "BreadcrumbList",
-                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}#breadcrumb`,
+                "@id": `https://debservices.canalrose.be/nl/${serviceInfo.slug}/${subServiceInfo.slug}#breadcrumb`,
                 itemListElement: [
                   {
                     "@type": "ListItem",
                     position: 1,
-                    name: "Accueil",
-                    item: "https://debservices.canalrose.be",
+                    name: "Home",
+                    item: "https://debservices.canalrose.be/nl",
                   },
                   {
                     "@type": "ListItem",
                     position: 2,
                     name: serviceInfo.title,
-                    item: `https://debservices.canalrose.be/${serviceInfo.slug}`,
+                    item: `https://debservices.canalrose.be/nl/${serviceInfo.slug}`,
                   },
                   {
                     "@type": "ListItem",
                     position: 3,
                     name: subServiceInfo.title,
-                    item: `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}`,
+                    item: `https://debservices.canalrose.be/nl/${serviceInfo.slug}/${subServiceInfo.slug}`,
                   },
                 ],
               },
@@ -190,7 +242,7 @@ export default async function SubServicePage({
       <section className="relative pt-32 pb-24 overflow-hidden text-white border-b border-white/10">
         <div className="absolute inset-0 -z-10">
           <Image
-            src={(subServiceInfo as any).imageUrl || serviceInfo.imageUrl}
+            src={heroImage}
             alt={`DEB PRO SERVICES - ${subServiceInfo.title}`}
             fill
             priority
@@ -203,12 +255,12 @@ export default async function SubServicePage({
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
           {/* Breadcrumb */}
           <div className="flex items-center justify-center lg:justify-start gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
-            <Link href="/" className="hover:text-blue-400 font-medium">
-              Accueil
+            <Link href="/nl" className="hover:text-blue-400 font-medium">
+              Home
             </Link>
             <ChevronRight className="w-4 h-4" />
             <Link
-              href={`/${serviceInfo.slug}`}
+              href={`/nl/${serviceInfo.slug}`}
               className="hover:text-blue-400 font-medium"
             >
               {serviceInfo.title}
@@ -219,16 +271,14 @@ export default async function SubServicePage({
 
           <div className="max-w-4xl mx-auto lg:mx-0">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-[0.2em] text-white mb-8 shadow-xl shadow-blue-600/20">
-              <serviceInfo.icon className="w-4 h-4" />
-              Intervention Spécialisée 24/7
+              <IconComponent className="w-4 h-4" />
+              Gespecialiseerde Interventie 24/7
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-8xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
               {subServiceInfo.title}
             </h1>
             <p className="text-xl md:text-2xl text-blue-100/70 mb-10 max-w-3xl leading-relaxed mx-auto lg:mx-0">
-              {subServiceInfo.desc} Nos techniciens agréés interviennent en
-              urgence 24h/24 et 7j/7 partout en Belgique avec le matériel
-              adéquat. Solutions durables et travaux garantis.
+              {subServiceInfo.desc} Onze erkende technici komen bij u langs voor spoedinterventie 24u/24 en 7j/7 in heel België. Duurzame oplossingen en gegarandeerd vakwerk.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 md:gap-6">
               <a
@@ -238,7 +288,7 @@ export default async function SubServicePage({
                 <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
-                    Appel SOS 24/7
+                    SOS Oproep 24/7
                   </span>
                   <span className="block text-lg md:text-xl">
                     0496 32 57 33
@@ -249,7 +299,7 @@ export default async function SubServicePage({
                 href="#contact"
                 className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-6 py-4 md:px-10 md:py-6 rounded-2xl border border-white/20 transition text-base md:text-lg flex items-center justify-center text-center"
               >
-                Devis Rapide
+                Snel Offerte
               </Link>
             </div>
           </div>
@@ -261,10 +311,10 @@ export default async function SubServicePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { icon: PhoneCall, text: "Intervention < 60 min" },
-              { icon: ChevronRight, text: "Devis Gratuit" },
-              { icon: ChevronRight, text: "Technicien Agrée" },
-              { icon: ChevronRight, text: "Travail Garanti 1 an" },
+              { icon: PhoneCall, text: "Interventie < 60 min" },
+              { icon: ChevronRight, text: "Gratis Offerte" },
+              { icon: ChevronRight, text: "Erkend Technicus" },
+              { icon: ChevronRight, text: "1 Jaar Garantie" },
             ].map((badge, i) => (
               <div
                 key={i}
@@ -288,7 +338,7 @@ export default async function SubServicePage({
           <div className="grid lg:grid-cols-12 gap-16">
             <div className="lg:col-span-8 space-y-10">
               <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.1] uppercase tracking-tight">
-                Expertise professionnelle en {subServiceInfo.title}
+                Professionele expertise in {subServiceInfo.title}
               </h2>
 
               {/* Secondary Images Gallery */}
@@ -296,46 +346,37 @@ export default async function SubServicePage({
                 <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
                   <Image
                     src={
-                      (subServiceInfo as any).galleryImages?.[0] ||
-                      subServiceInfo.imageUrl ||
                       serviceInfo.subServices[0]?.imageUrl ||
-                      serviceInfo.imageUrl
+                      heroImage
                     }
-                    alt={`Intervention technique ${subServiceInfo.title}`}
+                    alt={`Interventie techniek ${subServiceInfo.title}`}
                     fill
                     className="object-cover"
-                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
                   <Image
                     src={
-                      (subServiceInfo as any).galleryImages?.[1] ||
-                      (subServiceInfo as any).galleryImages?.[0] ||
-                      subServiceInfo.imageUrl ||
                       serviceInfo.subServices[1]?.imageUrl ||
-                      serviceInfo.imageUrl
+                      heroImage
                     }
-                    alt={`Dépannage professionnel ${subServiceInfo.title}`}
+                    alt={`Professionele herstelling ${subServiceInfo.title}`}
                     fill
                     className="object-cover"
-                    referrerPolicy="no-referrer"
                   />
                 </div>
               </div>
 
               <div className="prose prose-xl prose-invert text-white max-w-none">
                 <p className="text-2xl font-medium text-blue-200 mb-8 leading-relaxed">
-                  DEB PRO SERVICES est votre partenaire de confiance en Belgique
-                  pour tout besoin lié à la{" "}
-                  <strong>{subServiceInfo.title.toLowerCase()}</strong>. Nous
-                  combinons rapidité d'intervention et excellence technique.
+                  DEB PRO SERVICES is uw betrouwbare partner in België voor alle noden in verband met{" "}
+                  <strong>{subServiceInfo.title.toLowerCase()}</strong>. Wij combineren snelle interventie en technische uitmuntendheid.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-8 not-prose mb-12">
                   <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
                     <h3 className="text-xl font-bold mb-4 text-blue-400">
-                      Ce que nous garantissons :
+                      Onze garanties :
                     </h3>
                     <ul className="space-y-4">
                       {serviceInfo.features.map((f, i) => (
@@ -348,22 +389,22 @@ export default async function SubServicePage({
                   </div>
                   <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
                     <h3 className="text-xl font-bold mb-4 text-blue-400">
-                      Pourquoi nous appeler ?
+                      Waarom ons bellen ?
                     </h3>
                     <ul className="space-y-4">
                       <li className="flex gap-3 text-slate-300">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        <span>Intervention urgente en moins d'une heure.</span>
+                        <span>Dringende interventie in minder dan een uur.</span>
                       </li>
                       <li className="flex gap-3 text-slate-300">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                         <span>
-                          Techniciens certifiés et hautement qualifiés.
+                          Erkende en hooggekwalificeerde technici.
                         </span>
                       </li>
                       <li className="flex gap-3 text-slate-300">
                         <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                        <span>Matériel de diagnostic de pointe.</span>
+                        <span>Ultramoderne diagnoseapparatuur.</span>
                       </li>
                     </ul>
                   </div>
@@ -373,12 +414,12 @@ export default async function SubServicePage({
                 <div dangerouslySetInnerHTML={{ __html: paragraphs[1] }} />
 
                 <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">
-                  Sécurité et Transparence
+                  Veiligheid en Transparence
                 </h3>
                 <div dangerouslySetInnerHTML={{ __html: paragraphs[2] }} />
 
                 <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">
-                  Actif partout en Belgique
+                  Actief in heel België
                 </h3>
                 <div dangerouslySetInnerHTML={{ __html: paragraphs[3] }} />
 
@@ -398,13 +439,13 @@ export default async function SubServicePage({
                 {/* Sidebar Cluster Links */}
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl">
                   <h3 className="font-bold text-xl mb-4 text-white">
-                    Autres services en {serviceInfo.title}
+                    Andere diensten in {serviceInfo.title}
                   </h3>
                   <ul className="space-y-3">
                     {serviceInfo.subServices.map((sub) => (
                       <li key={sub.slug}>
                         <Link
-                          href={`/${serviceInfo.slug}/${sub.slug}`}
+                          href={`/nl/${serviceInfo.slug}/${sub.slug}`}
                           className={`flex items-center gap-2 text-sm transition-colors ${sub.slug === subServiceInfo.slug ? "text-blue-400 font-bold" : "text-slate-400 hover:text-white"}`}
                         >
                           <ChevronRight className="w-4 h-4" />
@@ -415,18 +456,17 @@ export default async function SubServicePage({
                   </ul>
                 </div>
 
-                {/* Image 3 - Emergency Box */}
+                {/* Emergency Box */}
                 <div className="bg-gradient-to-br from-red-600 to-red-900 p-6 rounded-2xl border border-red-500/30 text-white shadow-2xl">
-                  <h4 className="font-black text-2xl mb-2">Urgence 24/7</h4>
+                  <h4 className="font-black text-2xl mb-2">Urgentie 24/7</h4>
                   <p className="text-red-100 text-sm mb-6">
-                    Nous sommes mobilisés pour toute urgence liée à :{" "}
-                    {subServiceInfo.title}.
+                    Wij zijn onmiddellijk beschikbaar voor elk noodgeval i.v.m. {subServiceInfo.title.toLowerCase()}.
                   </p>
                   <a
                     href="tel:0496325733"
                     className="bg-white text-red-700 w-full px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-50 transition"
                   >
-                    <PhoneCall className="w-5 h-5" /> Appeler le technicien
+                    <PhoneCall className="w-5 h-5" /> Bel de technicus
                   </a>
                 </div>
               </div>
@@ -439,22 +479,26 @@ export default async function SubServicePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-black text-white mb-4">
-              Intervention {subServiceInfo.title} par ville
+              Interventie {subServiceInfo.title} per stad
             </h2>
             <p className="text-slate-400">
-              Trouvez votre expert local pour un dépannage rapide.
+              Vind uw lokale expert voor een snelle herstelling.
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-2">
-            {belgianCities.slice(0, 20).map((city) => (
-              <Link
-                key={city.slug}
-                href={`/zones-de-services/${serviceInfo.slug}/${subServiceInfo.slug}/${city.slug}`}
-                className="px-3 py-1 bg-slate-800 border border-white/10 rounded-full text-xs text-slate-300 hover:text-white transition"
-              >
-                {city.name}
-              </Link>
-            ))}
+            {belgianCities.slice(0, 20).map((city) => {
+              const nlCitySlug = frToNlCitySlugMap[city.slug] || city.slug;
+              const nlCityName = frToNlCityNameMap[city.name] || city.name;
+              return (
+                <Link
+                  key={city.slug}
+                  href={`/nl/${serviceInfo.slug}-${nlCitySlug}`}
+                  className="px-3 py-1 bg-slate-800 border border-white/10 rounded-full text-xs text-slate-300 hover:text-white transition"
+                >
+                  {nlCityName}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -463,14 +507,14 @@ export default async function SubServicePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-black text-white">
-              Demande d'intervention pour {subServiceInfo.title}
+              Aanvraag voor interventie {subServiceInfo.title}
             </h2>
           </div>
           <ContactForm />
         </div>
       </section>
 
-      <FAQ customFaqs={(serviceInfo as any).faqs} />
+      <FAQ customFaqs={serviceInfo.faqs} />
       <ServiceSeoText serviceTitle={subServiceInfo.title} />
     </>
   );

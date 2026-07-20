@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { PhoneCall, ShieldCheck, Clock, Zap, Target } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SERVICES = [
+const SERVICES_FR = [
   { text: "Plomberie", gradient: "from-blue-400 to-cyan-300" },
   { text: "Débouchage", gradient: "from-blue-500 to-indigo-400" },
   { text: "Chauffage", gradient: "from-orange-500 to-red-500" },
@@ -15,15 +16,28 @@ const SERVICES = [
   { text: "Climatisation", gradient: "from-sky-300 to-blue-400" },
 ];
 
+const SERVICES_NL = [
+  { text: "Loodgieter", gradient: "from-blue-400 to-cyan-300" },
+  { text: "Ontstopping", gradient: "from-blue-500 to-indigo-400" },
+  { text: "Verwarming", gradient: "from-orange-500 to-red-500" },
+  { text: "Gas", gradient: "from-amber-400 to-orange-500" },
+  { text: "Elektriciteit", gradient: "from-yellow-300 to-yellow-500" },
+  { text: "Climatisatie", gradient: "from-sky-300 to-blue-400" },
+];
+
 export function Hero() {
+  const pathname = usePathname();
+  const isNl = pathname ? pathname.startsWith("/nl") : false;
+
+  const currentServicesList = isNl ? SERVICES_NL : SERVICES_FR;
   const [serviceIndex, setServiceIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setServiceIndex((current) => (current + 1) % SERVICES.length);
+      setServiceIndex((current) => (current + 1) % currentServicesList.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [currentServicesList.length]);
 
   return (
     <section className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 px-4 sm:px-6 lg:px-12 py-10 pt-32 min-h-[90vh] items-center max-w-[1600px] mx-auto">
@@ -35,13 +49,13 @@ export function Hero() {
           className="flex flex-wrap gap-2 sm:gap-3 mb-8"
         >
           <div className="bg-blue-900/40 text-blue-300 text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full border border-blue-500/30 uppercase tracking-widest backdrop-blur-md flex items-center shadow-lg">
-            <Clock className="w-3.5 h-3.5 mr-2" /> 24H/24
+            <Clock className="w-3.5 h-3.5 mr-2" /> {isNl ? "24U/24" : "24H/24"}
           </div>
           <div className="bg-emerald-900/40 text-emerald-400 text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-500/30 uppercase tracking-widest backdrop-blur-md flex items-center shadow-lg">
-            <ShieldCheck className="w-3.5 h-3.5 mr-2" /> Agréés et Assurés
+            <ShieldCheck className="w-3.5 h-3.5 mr-2" /> {isNl ? "Gecertificeerd & Verzekerd" : "Agréés et Assurés"}
           </div>
           <div className="bg-rose-900/40 text-rose-400 text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full border border-rose-500/30 uppercase tracking-widest backdrop-blur-md flex items-center shadow-lg">
-            <Zap className="w-3.5 h-3.5 mr-2" /> Rapide
+            <Zap className="w-3.5 h-3.5 mr-2" /> {isNl ? "Snel" : "Rapide"}
           </div>
         </motion.div>
 
@@ -63,18 +77,18 @@ export function Hero() {
                   className="flex flex-col sm:flex-row sm:items-baseline gap-y-2 sm:gap-x-4"
                 >
                   <span
-                    className={`bg-clip-text text-transparent bg-gradient-to-r ${SERVICES[serviceIndex].gradient}`}
+                    className={`bg-clip-text text-transparent bg-gradient-to-r ${currentServicesList[serviceIndex].gradient}`}
                   >
-                    {SERVICES[serviceIndex].text.toUpperCase()}
+                    {currentServicesList[serviceIndex].text.toUpperCase()}
                   </span>
                   <span className="text-white opacity-90 tracking-tight">
-                    EN BELGIQUE
+                    {isNl ? "IN BELGIË" : "EN BELGIQUE"}
                   </span>
                 </motion.div>
               </AnimatePresence>
             </div>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-slate-400 block mt-2 text-2xl md:text-4xl lg:text-5xl tracking-tight">
-              INTERVENTION EXPRESS 24H/24
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-slate-400 block mt-2 text-2xl md:text-4xl lg:text-5xl tracking-tight uppercase">
+              {isNl ? "EXPRESS INTERVENTIE 24U/24" : "INTERVENTION EXPRESS 24H/24"}
             </span>
           </motion.h1>
 
@@ -84,7 +98,11 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed font-medium"
           >
-            Le leader en dépannage urgent de plomberie, chauffage, et électricité. Nos techniciens locaux interviennent dans toute la Belgique en moins de 45 minutes.
+            {isNl ? (
+              "De marktleider in spoeddiensten voor loodgieterij, ontstopping, verwarming en elektriciteit. Onze gecertificeerde lokale technici grijpen in heel België in binnen 45 minutes."
+            ) : (
+              "Le leader en dépannage urgent de plomberie, chauffage, et électricité. Nos techniciens locaux interviennent dans toute la Belgique en moins de 45 minutes."
+            )}
           </motion.p>
         </div>
 
@@ -107,11 +125,11 @@ export function Hero() {
           </div>
           <div className="flex-1 sm:flex-initial">
             <Link
-              href="/devis"
+              href={isNl ? "/nl/devis" : "/devis"}
               className="w-full glass-card hover:bg-white/10 px-8 py-5 rounded-2xl font-black text-xl text-white transition-all flex justify-center items-center h-full border border-white/20 hover:scale-105 shadow-xl hover:shadow-2xl"
             >
               <Target className="w-5 h-5 mr-3 text-cyan-400" />
-              Devis Gratuit
+              {isNl ? "Gratis Offerte" : "Devis Gratuit"}
             </Link>
           </div>
         </motion.div>
@@ -127,16 +145,16 @@ export function Hero() {
               5000<span className="text-blue-500">+</span>
             </div>
             <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2">
-              Clients Satisfaits
+              {isNl ? "Tevreden Klanten" : "Clients Satisfaits"}
             </div>
           </div>
           <div className="hidden sm:block w-px h-10 bg-white/10" />
           <div className="flex flex-col">
             <div className="text-3xl md:text-5xl font-black text-white tracking-tighter drop-shadow-lg">
-              15<span className="text-blue-500"> Ans</span>
+              15<span className="text-blue-500"> {isNl ? "Jaar" : "Ans"}</span>
             </div>
             <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2">
-              D'Expérience
+              {isNl ? "Ervaring" : "D'Expérience"}
             </div>
           </div>
           <div className="hidden sm:block w-px h-10 bg-white/10" />
@@ -145,7 +163,7 @@ export function Hero() {
               4.9<span className="text-blue-500 text-2xl">/5</span>
             </div>
             <div className="text-[10px] text-blue-200 uppercase tracking-widest font-black mt-2 flex items-center">
-              Google Avis
+              {isNl ? "Google Reviews" : "Google Avis"}
               <div className="flex ml-2">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <svg key={i} className="w-3 h-3 text-yellow-400 drop-shadow" fill="currentColor" viewBox="0 0 20 20">
@@ -173,7 +191,7 @@ export function Hero() {
           <div className="relative z-10 w-full h-[120%] flex items-end justify-center transform transition-transform duration-700 group-hover:scale-105 group-hover:-translate-y-4">
             <Image
               src="https://debouchageexpress24hh.odoo.com/web/image/4154-71fb4457/technician%20%282%29.webp"
-              alt="Technicien qualifié DEB PRO SERVICES prêt pour une intervention urgente"
+              alt={isNl ? "Gekwalificeerde DEB PRO SERVICES technicus klaar voor een dringende interventie" : "Technicien qualifié DEB PRO SERVICES prêt pour une intervention urgente"}
               fill
               referrerPolicy="no-referrer"
               sizes="(max-width: 768px) 100vw, 50vw"

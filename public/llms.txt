@@ -1,14 +1,78 @@
 # DEB PRO SERVICES
-Entreprise de plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique intervenant partout en Belgique en urgence 24h/24.
 
-## Contact
-Téléphone: 0496 32 57 33
-Disponibilité: 24/7 sur toute la Belgique
+> DEB PRO SERVICES est une entreprise de plomberie, débouchage de canalisation, chauffage, gaz, électricité et vidange de fosse septique intervenant partout en Belgique en urgence 24h/24 et 7j/7.
 
-## Services
-- Plomberie
-- Débouchage
-- Chauffage
-- Gaz
-- Électricité
-- Vidange Fosse Septique
+## Pages Principales / Hoofdpagina's
+
+- [Accueil (FR)](https://debservices.canalrose.be/) - Page d'accueil officielle en français pour tous vos travaux et dépannages en Belgique.
+- [Home (NL)](https://debservices.canalrose.be/nl) - Officiële Nederlandstalige startpagina voor loodgieterij, ontstopping en verwarming in België.
+- [Dépannage d'Urgence 24h/24 (FR)](https://debservices.canalrose.be/urgence) - Services de dépannage rapide de jour comme de nuit pour toute urgence plomberie, chauffage ou électricité.
+- [Spoeddienst 24/7 (NL)](https://debservices.canalrose.be/nl/urgence) - Snelle spoedservice, dag en nacht bereikbaar voor alle dringende herstellingen.
+- [Formulaire de Contact (FR)](https://debservices.canalrose.be/contact) - Contactez notre équipe professionnelle pour toute demande d'intervention ou d'information.
+- [Contactformulier (NL)](https://debservices.canalrose.be/nl/contact) - Neem contact op met ons team voor alle vragen, offertes of interventies.
+- [Demande de Devis Gratuit (FR)](https://debservices.canalrose.be/devis) - Estimez en ligne le coût de vos travaux de plomberie, chauffage ou débouchage.
+- [Gratis Offerte Aanvragen (NL)](https://debservices.canalrose.be/nl/devis) - Vraag eenvoudig online een gratis en vrijblijvende prijsopgave aan.
+- [Zones de Services (FR)](https://debservices.canalrose.be/zones-de-services) - Liste de nos zones d'intervention et communes desservies en Belgique.
+- [Servicegebieden (NL)](https://debservices.canalrose.be/nl/zones-de-services) - Overzicht van onze werkgebieden en gemeenten in België.
+
+## Services de Plomberie et Sanitaire / Loodgietersdiensten
+
+- [Plomberie Générale](https://debservices.canalrose.be/plomberie) - Installation, réparation, remplacement de sanitaires et dépannage de plomberie en urgence.
+- [Recherche de Fuite d'Eau](https://debservices.canalrose.be/plomberie/recherche-et-reparation-de-fuite-d-eau) - Détection de fuites d'eau par caméras thermiques et méthodes acoustiques non destructives.
+- [Installation Sanitaire](https://debservices.canalrose.be/plomberie/installation-sanitaire-et-robinetterie) - Pose de robinetterie, raccordements, WC, douches et douches italiennes.
+- [Remplacement de Boiler / Chauffe-eau](https://debservices.canalrose.be/plomberie/remplacement-chauffe-eau-et-boiler) - Entretien, réparation de boilers électriques et de chauffe-eau au gaz.
+
+## Débouchage de Canalisations / Ontstoppingsdienst
+
+- [Débouchage de Canalisations](https://debservices.canalrose.be/debouchage-canalisation) - Débouchage express et curage haute pression de toutes canalisations obstruées.
+- [Ontstopping (NL)](https://debservices.canalrose.be/nl/ontstopping) - Professionele ontstopping van toiletten, afvoeren en rioleringen.
+- [Débouchage WC & Toilettes](https://debservices.canalrose.be/debouchage-canalisation/debouchage-wc-toilettes) - Débouchage en urgence de toilettes, broyeurs et urinoirs.
+- [Débouchage d'Égout](https://debservices.canalrose.be/debouchage-canalisation/debouchage-egout-et-canalisations) - Hydrocurage, détartrage et nettoyage complet des réseaux d'égouttage.
+- [Débouchage Évier & Lavabo](https://debservices.canalrose.be/debouchage-canalisation/debouchage-evier-et-lavabo) - Élimination rapide des bouchons de graisse et de savon dans vos éviers de cuisine.
+- [Inspection de Canalisations par Caméra](https://debservices.canalrose.be/debouchage-canalisation/inspection-camera-canalisation) - Passage de caméra endoscopique pour identifier précisément les bouchons ou fissures.
+
+## Chauffage et Chaudières / Verwarming en Verwarmingsketels
+
+- [Chauffage Général](https://debservices.canalrose.be/chauffage) - Installation de systèmes de chauffage, entretien annuel et dépannage chaudières.
+- [Verwarming (NL)](https://debservices.canalrose.be/nl/verwarming) - Installatie, reparatie en verplicht onderhoud van cv-ketels.
+- [Dépannage Chaudière](https://debservices.canalrose.be/chauffage/depannage-chaudiere) - Réparation immédiate toutes marques (Vaillant, Bulex, Junkers, Buderus, Viessmann).
+- [Entretien Chaudière](https://debservices.canalrose.be/chauffage/entretien-chaudiere-gaz-mazout) - Entretien légal obligatoire avec remise d'attestation de conformité.
+- [Installation Nouveau Chauffage](https://debservices.canalrose.be/chauffage/installation-nouveau-chauffage) - Pose de chaudière à condensation à haute efficacité énergétique.
+
+## Électricité et Conformité / Elektriciteitswerken
+
+- [Électricité Générale](https://debservices.canalrose.be/electricite) - Dépannage en électricité, mise en conformité RGIE / AREI et nouvelles installations.
+- [Elektriciteit (NL)](https://debservices.canalrose.be/nl/elektriciteit) - Storingen oplossen, keuringen voorbereiden en zekeringkasten vernieuwen.
+- [Dépannage Panne Électrique](https://debservices.canalrose.be/electricite/depannage-panne-electrique) - Recherche de pannes électriques et coupures de courant 24h/24.
+- [Mise en Conformité Électrique AREI / RGIE](https://debservices.canalrose.be/electricite/mise-en-conformite-electrique-arei) - Remise aux normes de vos installations électriques résidentielles et tertiaires.
+- [Remplacement de Tableau Électrique](https://debservices.canalrose.be/electricite/remplacement-tableau-electrique) - Modernisation complète de coffrets de fusibles obsolètes.
+
+## Gaz et Certifications / Gasinstallaties
+
+- [Gaz et Conduites](https://debservices.canalrose.be/gaz) - Raccordement gaz, étanchéité de tuyauteries et habilitation CERGA.
+- [Gas (NL)](https://debservices.canalrose.be/nl/gas) - CERGA-keuringen, gasleidingen installeren en gaslekdetectie.
+- [Détection de Fuite de Gaz](https://debservices.canalrose.be/gaz/detection-fuite-de-gaz) - Intervention d'extrême urgence et sécurisation immédiate en cas d'odeur de gaz.
+- [Mise en Conformité Gaz](https://debservices.canalrose.be/gaz/mise-en-conformite-gaz) - Contrôle et remise de certificat officiel pour l'ouverture ou la réouverture de compteurs de gaz.
+
+## Vidange et Fosse Septique / Putlediging
+
+- [Vidange de Fosse Septique](https://debservices.canalrose.be/vidange-fosse-septique) - Pompage rapide et vidange complète de fosses septiques, dégraisseurs et citernes à eau.
+- [Putlediging (NL)](https://debservices.canalrose.be/nl/putlediging) - Professioneel ledigen en reinigen van beerputten en septische putten.
+- [Pompage & Vidange de Fosse](https://debservices.canalrose.be/vidange-fosse-septique/pompage-et-vidange-fosse-septique) - Intervention expresse par camion hydrocureur pour éviter les débordements et mauvaises odeurs.
+- [Nettoyage de Bac à Graisse](https://debservices.canalrose.be/vidange-fosse-septique/nettoyage-bac-a-graisse) - Curage et entretien des bacs dégraisseurs pour les particuliers et le secteur HORECA.
+
+## Climatisation et Ventilation / Airco en Ventilatie
+
+- [Climatisation & Pompe à Chaleur](https://debservices.canalrose.be/climatisation) - Pose de climatisations mono-split et multi-split, et entretien régulier.
+- [Airco (NL)](https://debservices.canalrose.be/nl/airco) - Installatie en onderhoud van airconditioning en warmtepompen.
+- [Installation de VMC](https://debservices.canalrose.be/climatisation/installation-entretien-vmc) - Pose et réglage de systèmes de ventilation mécanique contrôlée (VMC) simple et double flux.
+
+## Citerne à Mazout / Stookolietank
+
+- [Citerne à Mazout](https://debservices.canalrose.be/citerne-mazout-cuve) - Dégazage, nettoyage de cuves, neutralisation (sable ou béton) et enlèvement de réservoirs.
+- [Stookolietank (NL)](https://debservices.canalrose.be/nl/stookolietank) - Sanering, reiniging, ontgassing en neutralisatie van mazouttanks.
+
+## Informations Administratives / Administratieve Informatie
+
+- [Mentions Légales](https://debservices.canalrose.be/mentions-legales) - Informations légales obligatoires sur la société DEB PRO SERVICES.
+- [Politique de Confidentialité](https://debservices.canalrose.be/privacy-policy) - Notre charte de respect de la vie privée et conformité au RGPD belge.

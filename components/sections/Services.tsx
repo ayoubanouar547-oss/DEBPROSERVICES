@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronRight, CheckCircle2 } from "lucide-react";
 import { services } from "@/lib/data/services";
+import { dutchServices } from "@/lib/data/translations";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -27,6 +29,11 @@ const itemVariants = {
 };
 
 export function Services() {
+  const pathname = usePathname();
+  const isNl = pathname ? pathname.startsWith("/nl") : false;
+
+  const currentServicesList = isNl ? dutchServices : services;
+
   return (
     <section
       className="py-24 relative z-10 border-t border-white/5 overflow-hidden bg-[#00040A]"
@@ -47,7 +54,7 @@ export function Services() {
             >
               <span className="w-12 h-[2px] bg-blue-500"></span>
               <h2 className="text-blue-400 font-black tracking-widest uppercase text-sm">
-                Nos Domaines d'Expertise
+                {isNl ? "Onze Expertisegebieden" : "Nos Domaines d'Expertise"}
               </h2>
             </motion.div>
             <motion.h3
@@ -56,10 +63,21 @@ export function Services() {
               viewport={{ once: true }}
               className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight"
             >
-              Services Rapides <br className="hidden md:block"/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                et Professionnels
-              </span>
+              {isNl ? (
+                <>
+                  Snelle en Professionele <br className="hidden md:block"/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                    Kwaliteitsdiensten
+                  </span>
+                </>
+              ) : (
+                <>
+                  Services Rapides <br className="hidden md:block"/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                    et Professionnels
+                  </span>
+                </>
+              )}
             </motion.h3>
           </div>
           <motion.div
@@ -68,7 +86,11 @@ export function Services() {
             viewport={{ once: true }}
           >
             <p className="text-slate-400 font-medium text-lg max-w-md border-l-2 border-white/10 pl-6 py-2">
-              Nous couvrons l'ensemble de vos besoins résidentiels et commerciaux. Des urgences aux installations complètes.
+              {isNl ? (
+                "Wij dekken al uw residentiële en commerciële behoeften. Van dringende spoedinterventies tot complete nieuwe installaties."
+              ) : (
+                "Nous couvrons l'ensemble de vos besoins résidentiels et commerciaux. Des urgences aux installations complètes."
+              )}
             </p>
           </motion.div>
         </div>
@@ -80,8 +102,11 @@ export function Services() {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
-          {services.map((service, index) => {
-            const Icon = service.icon;
+          {currentServicesList.map((service, index) => {
+            // Re-map the icon since dutchServices objects match by id
+            const originalService = services.find(s => s.id === service.id);
+            const Icon = originalService ? originalService.icon : ArrowRight;
+
             return (
               <motion.div
                 variants={itemVariants}
@@ -99,8 +124,8 @@ export function Services() {
                 {/* Card Image Area */}
                 <div className="relative h-60 w-full overflow-hidden flex-shrink-0 z-10 mask-image-b group-hover:h-52 leading-none transition-all duration-500">
                   <Image
-                    src={service.imageUrl || `https://picsum.photos/seed/${service.slug}/600/400`}
-                    alt={`Service de ${service.title} en Belgique`}
+                    src={originalService?.imageUrl || `https://picsum.photos/seed/${service.slug}/600/400`}
+                    alt={isNl ? `Erkende ${service.title} in België` : `Service de ${service.title} en Belgique`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105 filter group-hover:brightness-110"
@@ -135,12 +160,12 @@ export function Services() {
                     ))}
                   </ul>
 
-                  {(service as any).testimonial && (
+                  {service.testimonial && (
                     <div className="mb-6 opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto overflow-hidden transition-all duration-500">
                        <div className="p-4 rounded-xl bg-white/5 border border-white/5 relative italic flex flex-col gap-3">
-                        <p className="text-slate-300 text-xs">"{(service as any).testimonial.text}"</p>
+                        <p className="text-slate-300 text-xs">"{service.testimonial.text}"</p>
                         <div className="flex justify-between items-end">
-                           <span className="text-[9px] font-bold text-yellow-400 uppercase">{ (service as any).testimonial.author }</span>
+                           <span className="text-[9px] font-bold text-yellow-400 uppercase">{ service.testimonial.author }</span>
                            <div className="flex text-yellow-500 gap-[1px]">
                              {[1,2,3,4,5].map(s => <svg key={s} className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}
                            </div>
@@ -150,10 +175,10 @@ export function Services() {
                   )}
 
                   <Link
-                    href={`/${service.slug}`}
+                    href={isNl ? `/nl/${service.slug}` : `/${service.slug}`}
                     className="mt-auto w-full inline-flex items-center justify-between text-sm font-black text-white group/link bg-white/5 px-6 py-4 rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all uppercase tracking-widest relative overflow-hidden"
                   >
-                    <span className="relative z-10">Détails du Service</span>
+                    <span className="relative z-10">{isNl ? "Bekijk Details" : "Détails du Service"}</span>
                     <div className="relative z-10 bg-white/10 p-1.5 rounded-lg group-hover/link:bg-blue-500 transition-colors">
                        <ArrowRight className="w-4 h-4 group-hover/link:-rotate-45 transition-transform" />
                     </div>
@@ -167,3 +192,4 @@ export function Services() {
     </section>
   );
 }
+

@@ -4,9 +4,27 @@ import { MapPin, Navigation } from "lucide-react";
 import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { frToNlCitySlugMap, frToNlCityNameMap } from "@/lib/data/translations";
 
 export function ServiceZones() {
+  const pathname = usePathname();
+  const isNl = pathname ? pathname.startsWith("/nl") : false;
+
   const provinces = Array.from(new Set(belgianCities.map((c) => c.province)));
+
+  const getProvinceName = (province: string) => {
+    if (!isNl) return `Province de ${province}`;
+    const pMap: Record<string, string> = {
+      "Bruxelles-Capitale": "Brussel-Hoofdstad",
+      "Brabant Flamand": "Vlaams-Brabant",
+      "Brabant Wallon": "Waals-Brabant",
+      "Hainaut": "Henegouwen",
+      "Liège": "Luik",
+      "Namur": "Namen"
+    };
+    return `Provincie ${pMap[province] || province}`;
+  };
 
   return (
     <section
@@ -26,16 +44,26 @@ export function ServiceZones() {
             <div className="flex items-center gap-3 mb-4">
                <span className="w-12 h-[2px] bg-[#EF3340]"></span>
                <h2 className="text-[#EF3340] font-black tracking-widest uppercase text-sm">
-                 Intervention Nationale
+                 {isNl ? "Nationale Interventie" : "Intervention Nationale"}
                </h2>
             </div>
             <h3 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-              Nos Zones d'Interventions en <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDDA24] to-[#EF3340]">Belgique</span>
+              {isNl ? (
+                <>
+                  Onze Interventiezones in <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDDA24] to-[#EF3340]">België</span>
+                </>
+              ) : (
+                <>
+                  Nos Zones d'Interventions en <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FDDA24] to-[#EF3340]">Belgique</span>
+                </>
+              )}
             </h3>
             <p className="text-slate-400 text-lg mb-10 border-l-2 border-white/10 pl-6">
-              Nous disposons de techniciens répartis dans les grandes villes du
-              pays. Cela nous permet d'assurer une présence rapide, généralement
-              en moins d'une heure en fonction de votre région.
+              {isNl ? (
+                "Wij beschikken over technici verspreid over de grote steden van het land. Dit stelt ons in staat om snel ter plaatse te zijn, meestal binnen een uur, afhankelijk van uw regio."
+              ) : (
+                "Nous disposons de techniciens répartis dans les grandes villes du pays. Cela nous permet d'assurer une présence rapide, généralement en moins d'une heure en fonction de votre région."
+              )}
             </p>
 
             <div className="space-y-8">
@@ -56,23 +84,27 @@ export function ServiceZones() {
                       <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mr-3">
                          <MapPin className="w-4 h-4 text-yellow-400" />
                       </div>
-                      Province de {province}
+                      {getProvinceName(province)}
                     </h4>
                     <div className="flex flex-wrap gap-2.5 pl-11">
-                      {cities.slice(0, 6).map((city) => (
-                        <Link
-                          key={city.slug}
-                          href={`/zones-de-services/plomberie/${city.slug}`}
-                          className="text-xs font-medium uppercase tracking-wider bg-[#00040A]/50 backdrop-blur-md hover:bg-blue-600/20 text-slate-400 hover:text-white px-4 py-2 rounded-lg border border-white/5 hover:border-blue-500/30 transition-all shadow-sm"
-                        >
-                          {city.name}
-                        </Link>
-                      ))}
+                      {cities.slice(0, 6).map((city) => {
+                        const nlSlug = frToNlCitySlugMap[city.slug] || city.slug;
+                        const nlName = frToNlCityNameMap[city.name] || city.name;
+                        return (
+                          <Link
+                            key={city.slug}
+                            href={isNl ? `/nl/loodgieter-${nlSlug}` : `/zones-de-services/plomberie/${city.slug}`}
+                            className="text-xs font-medium uppercase tracking-wider bg-[#00040A]/50 backdrop-blur-md hover:bg-blue-600/20 text-slate-400 hover:text-white px-4 py-2 rounded-lg border border-white/5 hover:border-blue-500/30 transition-all shadow-sm"
+                          >
+                            {isNl ? nlName : city.name}
+                          </Link>
+                        );
+                      })}
                       <Link
-                         href="/zones-de-services"
+                         href={isNl ? "/nl/zones-de-services" : "/zones-de-services"}
                          className="text-xs font-black uppercase tracking-wider bg-white/5 backdrop-blur-md text-white px-4 py-2 rounded-lg border border-white/10 hover:bg-white/10 transition-all flex items-center"
                       >
-                         + Villes
+                         {isNl ? "+ Steden" : "+ Villes"}
                       </Link>
                     </div>
                   </motion.div>
@@ -88,10 +120,10 @@ export function ServiceZones() {
               transition={{ delay: 0.4 }}
             >
               <Link
-                href="/zones-de-services"
+                href={isNl ? "/nl/zones-de-services" : "/zones-de-services"}
                 className="inline-flex items-center font-black text-white text-sm uppercase tracking-widest group bg-white/5 hover:bg-white/10 px-6 py-3 rounded-xl border border-white/10 transition-colors"
               >
-                Voir la carte complète 
+                {isNl ? "Bekijk de volledige kaart" : "Voir la carte complète"} 
                 <Navigation className="w-4 h-4 ml-3 group-hover:rotate-45 transition-transform text-blue-400" />
               </Link>
             </motion.div>
@@ -136,12 +168,12 @@ export function ServiceZones() {
                 100%
               </h4>
               <p className="text-slate-300 font-medium text-sm tracking-widest uppercase mb-6">
-                Couverture Nationale
+                {isNl ? "Nationale Dekking" : "Couverture Nationale"}
               </p>
               <div className="inline-flex items-center gap-2 bg-black/40 border border-white/5 px-6 py-3 rounded-xl text-xs font-black text-white uppercase tracking-widest">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
                 <span className="w-2 h-2 rounded-full bg-green-500 absolute"></span>
-                +45 Techniciens Actifs
+                {isNl ? "+45 Actieve Technici" : "+45 Techniciens Actifs"}
               </div>
             </div>
           </motion.div>

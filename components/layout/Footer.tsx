@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Phone,
   Mail,
@@ -10,12 +13,17 @@ import {
 } from "lucide-react";
 import { belgianCities } from "@/lib/data/cities";
 import { services } from "@/lib/data/services";
+import { dutchServices } from "@/lib/data/translations";
 
 const PHONE = "0496 32 57 33";
 const EMAIL = "debproservices@canalrose.be";
 
 export function Footer() {
+  const pathname = usePathname();
+  const isNl = pathname ? pathname.startsWith("/nl") : false;
   const currentYear = new Date().getFullYear();
+
+  const servicesList = isNl ? dutchServices : services;
 
   return (
     <footer className="relative z-10 px-8 py-3 bg-black/40 border-t border-white/10 text-sm text-slate-300 mt-auto">
@@ -24,15 +32,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Col 1: Brand & Desc */}
           <div className="space-y-6 h-card">
-            <Link href="/" className="inline-block u-url p-name p-org">
+            <Link href={isNl ? "/nl" : "/"} className="inline-block u-url p-name p-org">
               <span className="text-2xl font-black tracking-tighter text-white">
                 DEB PRO<span className="text-blue-500">SERVICES</span>
               </span>
             </Link>
             <p className="text-sm text-slate-100 font-medium opacity-80 p-note">
-              Votre partenaire de confiance pour tous vos travaux et urgences de
-              plomberie, chauffage, gaz, électricité et débouchage à travers
-              toute la Belgique.
+              {isNl ? (
+                "Uw betrouwbare partner voor al uw installatiewerken en spoedinterventies van loodgieterij, verwarming, gas, elektriciteit, ontstopping en renovatie in heel België."
+              ) : (
+                "Votre partenaire de confiance pour tous vos travaux et urgences de plomberie, chauffage, gaz, électricité et débouchage à travers toute la Belgique."
+              )}
             </p>
             <div className="flex gap-4">
               <a
@@ -51,20 +61,20 @@ export function Footer() {
               </a>
             </div>
             <div className="flex items-center gap-2 text-xs font-bold text-blue-400 bg-blue-600/20 border border-blue-500/30 max-w-fit px-3 py-1.5 rounded uppercase tracking-widest p-category">
-              <ShieldCheck className="w-4 h-4" /> Entreprise Agréée
+              <ShieldCheck className="w-4 h-4" /> {isNl ? "Erkend Bedrijf" : "Entreprise Agréée"}
             </div>
           </div>
 
           {/* Col 2: Services */}
           <div>
             <h3 className="text-lg font-bold text-white mb-6 font-heading">
-              Nos Services
+              {isNl ? "Onze Diensten" : "Nos Services"}
             </h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
-              {services.map((service) => (
+              {servicesList.map((service) => (
                 <li key={service.id}>
                   <Link
-                    href={`/${service.slug}`}
+                    href={isNl ? `/nl/${service.slug}` : `/${service.slug}`}
                     className="text-sm hover:text-secondary transition flex items-center gap-2 group"
                   >
                     <span className="w-1 h-1 bg-secondary rounded-full group-hover:scale-150 transition-transform"></span>
@@ -78,13 +88,13 @@ export function Footer() {
           {/* Col 3: Zones (SEO value) */}
           <div>
             <h3 className="text-lg font-bold text-white mb-6 font-heading">
-              Zones Principales
+              {isNl ? "Belangrijkste Zones" : "Zones Principales"}
             </h3>
             <ul className="grid grid-cols-2 gap-2 text-xs">
               {belgianCities.slice(0, 10).map((city) => (
                 <li key={city.slug}>
                   <Link
-                    href={`/zones-de-services/plomberie/${city.slug}`}
+                    href={isNl ? `/nl/loodgieter-${city.slug}` : `/zones-de-services/plomberie/${city.slug}`}
                     className="hover:text-secondary transition opacity-80 hover:opacity-100 flex items-center gap-1"
                   >
                     <ChevronRight className="w-2 h-2 text-secondary" />
@@ -95,10 +105,10 @@ export function Footer() {
             </ul>
             <div className="mt-6">
               <Link
-                href="/zones-de-services"
+                href={isNl ? "/nl/zones-de-services" : "/zones-de-services"}
                 className="text-secondary text-sm font-bold hover:underline flex items-center gap-2"
               >
-                Voir toutes les villes <ChevronRight className="w-4 h-4" />
+                {isNl ? "Bekijk alle steden" : "Voir toutes les villes"} <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -106,7 +116,7 @@ export function Footer() {
           {/* Col 4: Contact */}
           <div className="h-card">
             <h3 className="text-lg font-bold text-white mb-6 font-heading">
-              Contactez-nous
+              {isNl ? "Neem Contact Op" : "Contactez-nous"}
             </h3>
             <ul className="space-y-4">
               <li className="flex gap-3">
@@ -130,9 +140,9 @@ export function Footer() {
               <li className="flex gap-3 p-adr h-adr">
                 <MapPin className="w-5 h-5 text-secondary flex-shrink-0 mt-1" />
                 <span className="p-locality">
-                  Intervention 24/7
+                  {isNl ? "Interventie 24/7" : "Intervention 24/7"}
                   <br />
-                  Toute la Belgique
+                  {isNl ? "Heel België" : "Toute la Belgique"}
                 </span>
                 <span className="p-country-name hidden">Belgium</span>
               </li>
@@ -147,16 +157,16 @@ export function Footer() {
           <p>&copy; {currentYear} DEB PRO SERVICES.</p>
           <div className="flex flex-wrap justify-center items-center gap-6">
             <Link
-              href="/mentions-legales"
+              href={isNl ? "/nl/mentions-legales" : "/mentions-legales"}
               className="hover:text-white transition"
             >
-              Mentions Légales
+              {isNl ? "Juridische Info" : "Mentions Légales"}
             </Link>
             <Link
-              href="/privacy-policy"
+              href={isNl ? "/nl/privacy-policy" : "/privacy-policy"}
               className="hover:text-white transition"
             >
-              Confidentialité
+              {isNl ? "Privacybeleid" : "Confidentialité"}
             </Link>
             <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full group cursor-pointer hover:bg-blue-600/10 transition-colors">
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
@@ -178,7 +188,7 @@ export function Footer() {
                 />
               </svg>
               <span className="text-white group-hover:text-blue-400">
-                4.9/5 AVIS GOOGLE
+                {isNl ? "4.9/5 GOOGLE REVIEWS" : "4.9/5 AVIS GOOGLE"}
               </span>
             </div>
           </div>
@@ -187,3 +197,4 @@ export function Footer() {
     </footer>
   );
 }
+

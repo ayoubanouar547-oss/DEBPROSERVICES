@@ -101,6 +101,59 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  if (typeof window !== "undefined") {
+                    var currentFetch = window.fetch || (typeof fetch !== "undefined" ? fetch : null);
+                    if (currentFetch) {
+                      var patched = false;
+                      var targets = [
+                        window,
+                        Window.prototype,
+                        Object.getPrototypeOf(window),
+                        Object.prototype
+                      ];
+                      for (var i = 0; i < targets.length; i++) {
+                        try {
+                          var target = targets[i];
+                          if (target) {
+                            Object.defineProperty(target, 'fetch', {
+                              get: function() { return currentFetch; },
+                              set: function(val) { currentFetch = val; },
+                              configurable: true,
+                              enumerable: true
+                            });
+                            patched = true;
+                            break;
+                          }
+                        } catch (err) {
+                          // Try next target
+                        }
+                      }
+                      if (!patched) {
+                        console.warn("Failed to patch window.fetch with getter/setter on any target");
+                      }
+                    }
+                  }
+                } catch (e) {
+                  console.warn("Failed to patch window.fetch to be writable:", e);
+                }
+                
+                try {
+                  var savedTheme = localStorage.getItem('theme');
+                  if (savedTheme === 'light') {
+                    document.documentElement.classList.add('light-theme');
+                  } else {
+                    document.documentElement.classList.remove('light-theme');
+                  }
+                } catch (e) {}
+              })();
+            `
+          }}
+        />
         <link rel="preconnect" href="https://debouchageexpress24hh.odoo.com" />
         <link rel="preconnect" href="https://www.debouchageexpress24-24h.be" />
       </head>
@@ -151,11 +204,18 @@ export default function RootLayout({
           strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
-              (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "wjxyfzz68l");
+              if (typeof window !== "undefined" && 
+                  window.self === window.top && 
+                  !window.location.hostname.includes("localhost") && 
+                  !window.location.hostname.includes("127.0.0.1") && 
+                  !window.location.hostname.includes("run.app") && 
+                  !window.location.hostname.includes("ais-")) {
+                (function(c,l,a,r,i,t,y){
+                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                })(window, document, "clarity", "script", "wjxyfzz68l");
+              }
             `,
           }}
         />
