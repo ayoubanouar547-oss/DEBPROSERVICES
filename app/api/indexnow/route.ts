@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import sitemap from "@/app/sitemap";
+import { getSitemapEntries } from "@/lib/sitemap-utils";
 
 export async function GET(req: NextRequest) {
   try {
@@ -15,9 +15,9 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // 1. Fetch sitemap URLs dynamically from our Next.js sitemap configuration
-    const sitemapEntries = sitemap();
-    const urlList = sitemapEntries.map((entry) => entry.url);
+    // 1. Fetch sitemap URLs dynamically from our shared sitemap configuration
+    const sitemapEntries = getSitemapEntries();
+    const urlList = sitemapEntries.flatMap((entry) => [entry.url, entry.nlUrl]);
 
     if (urlList.length === 0) {
       return NextResponse.json(
@@ -99,8 +99,8 @@ export async function POST(req: NextRequest) {
     let urlList: string[] = body.urlList || [];
 
     if (urlList.length === 0) {
-      const sitemapEntries = sitemap();
-      urlList = sitemapEntries.map((entry) => entry.url);
+      const sitemapEntries = getSitemapEntries();
+      urlList = sitemapEntries.flatMap((entry) => [entry.url, entry.nlUrl]);
     }
 
     const payload = {
