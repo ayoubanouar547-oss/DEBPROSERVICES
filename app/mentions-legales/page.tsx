@@ -15,21 +15,22 @@ export const metadata: Metadata = {
 
 export default function MentionsLegalesPage() {
   return (
-    <div className="pt-32 pb-24 bg-white">
-      <div className="max-w-4xl mx-auto px-4 prose prose-lg">
-        <h1 className="font-heading font-bold text-4xl mb-8">
+    <div className="pt-32 pb-24 relative z-10 text-slate-300">
+      <div className="max-w-4xl mx-auto px-4 prose prose-lg prose-invert">
+        <h1 className="font-heading font-black text-4xl mb-8 text-white">
           Mentions Légales
         </h1>
+        <p className="text-slate-400">
+          Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}
+        </p>
 
-        <h2>Informations sur l'entreprise</h2>
+        <h2 className="text-white">1. Informations sur l'entreprise</h2>
         <p>
           <strong>Nom de la société :</strong> DEB PRO SERVICES
           <br />
-          <strong>Forme juridique :</strong> SRL (Société à Responsabilité
-          Limitée)
+          <strong>Forme juridique :</strong> SRL (Société à Responsabilité Limitée)
           <br />
-          <strong>Siège social :</strong> Rue de l'Exemple 123, 1000 Bruxelles,
-          Belgique
+          <strong>Siège social :</strong> Rue de l'Exemple 123, 1000 Bruxelles, Belgique
           <br />
           <strong>Numéro d'entreprise (BCE) :</strong> BE 0123.456.789
           <br />
@@ -38,7 +39,7 @@ export default function MentionsLegalesPage() {
           <strong>Email :</strong> debproservices@canalrose.be
         </p>
 
-        <h2>Hébergement du site</h2>
+        <h2 className="text-white">2. Hébergement du site</h2>
         <p>
           Le site est hébergé par Vercel Inc.
           <br />
@@ -47,7 +48,7 @@ export default function MentionsLegalesPage() {
           Walnut, CA 91789
         </p>
 
-        <h2>Responsabilité</h2>
+        <h2 className="text-white">3. Responsabilité</h2>
         <p>
           DEB PRO SERVICES s'efforce d'assurer au mieux la mise à jour des
           informations diffusées sur ce site, dont elle se réserve le droit de
@@ -59,3 +60,4 @@ export default function MentionsLegalesPage() {
     </div>
   );
 }
+
