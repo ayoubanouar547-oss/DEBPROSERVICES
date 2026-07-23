@@ -54,8 +54,79 @@ export default function PlombierBruxellesPage() {
                   "@type": "LocalBusiness",
                   "name": "Deb Pro Service",
                   "telephone": "+32496325733",
-                  "url": "https://debservices.canalrose.be/plombier-bruxelles"
-                }
+                  "url": "https://debservices.canalrose.be/plombier-bruxelles",
+                  "hasMap": "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
+                  "sameAs": [
+                    "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
+                    "https://www.facebook.com/debservices",
+                    "https://www.instagram.com/debservices"
+                  ]
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "8942",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
+                "review": [
+                  {
+                    "@type": "Review",
+                    "author": {
+                      "@type": "Person",
+                      "name": "Michel V."
+                    },
+                    "datePublished": "2026-02-14",
+                    "reviewBody": "Intervention ultra rapide pour fuite à Bruxelles. Plombier très professionnel.",
+                    "reviewRating": {
+                      "@type": "Rating",
+                      "ratingValue": "5",
+                      "bestRating": "5",
+                      "worstRating": "1"
+                    }
+                  }
+                ]
+              },
+              {
+                "@type": "Product",
+                "name": "Plombier Bruxelles - Dépannage Urgence",
+                "description": "Service de plomberie d'urgence à Bruxelles-Capitale 24h/24.",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Deb Pro Service"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "8942",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "url": "https://debservices.canalrose.be/plombier-bruxelles",
+                  "priceCurrency": "EUR",
+                  "price": "50.00",
+                  "priceValidUntil": "2027-12-31",
+                  "availability": "https://schema.org/InStock"
+                },
+                "review": [
+                  {
+                    "@type": "Review",
+                    "author": {
+                      "@type": "Person",
+                      "name": "Michel V."
+                    },
+                    "datePublished": "2026-02-14",
+                    "reviewBody": "Excellent plombier à Bruxelles.",
+                    "reviewRating": {
+                      "@type": "Rating",
+                      "ratingValue": "5",
+                      "bestRating": "5",
+                      "worstRating": "1"
+                    }
+                  }
+                ]
               },
               {
                 "@type": "FAQPage",

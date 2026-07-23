@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { Ratelimit } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
 import { Resend } from "resend";
 
 const schema = z.object({
@@ -11,36 +9,16 @@ const schema = z.object({
   service: z.string(),
   ville: z.string().min(2).max(100),
   message: z.string().min(10).max(1000).trim(),
+  photos: z.array(z.string()).optional(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
   honeypot: z.string().max(0).optional(),
 });
-
-let ratelimit: Ratelimit | null = null;
-if (
-  process.env.UPSTASH_REDIS_REST_URL &&
-  process.env.UPSTASH_REDIS_REST_TOKEN
-) {
-  ratelimit = new Ratelimit({
-    redis: Redis.fromEnv(),
-    limiter: Ratelimit.slidingWindow(10, "1 m"),
-  });
-}
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder");
 
 export async function POST(req: Request) {
   try {
-    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
-
-    if (ratelimit) {
-      const { success } = await ratelimit.limit(ip);
-      if (!success) {
-        return NextResponse.json(
-          { error: "Trop de requêtes" },
-          { status: 429 },
-        );
-      }
-    }
-
     const body = await req.json();
     const data = schema.parse(body);
 
@@ -50,10 +28,39 @@ export async function POST(req: Request) {
     }
 
     if (process.env.RESEND_API_KEY) {
+      const photoHtml = data.photos && data.photos.length > 0
+        ? `
+          <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #334155;">
+            <p style="color: #38bdf8; font-weight: bold; margin-bottom: 8px;">📷 Photos jointes (${data.photos.length}) :</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              ${data.photos
+                .map(
+                  (p, idx) =>
+                    `<img src="${p}" alt="Photo ${idx + 1}" style="max-width: 180px; max-height: 180px; border-radius: 8px; border: 1px solid #475569; object-fit: cover;" />`
+                )
+                .join("")}
+            </div>
+          </div>
+        `
+        : "";
+
+      const attachments = data.photos && data.photos.length > 0
+        ? data.photos.map((base64Str, idx) => {
+            const matches = base64Str.match(/^data:(image\/[a-zA-Z]+);base64,(.+)$/);
+            const contentType = matches ? matches[1] : "image/jpeg";
+            const ext = contentType.split("/")[1] || "jpg";
+            const content = matches ? matches[2] : base64Str;
+            return {
+              filename: `photo_fuite_${idx + 1}.${ext}`,
+              content: content,
+            };
+          })
+        : undefined;
+
       await resend.emails.send({
         from: "Contact Site <onboarding@resend.dev>", // Should be a verified domain in prod
         to: "debproservices@canalrose.be", // Replace with real company email
-        subject: `Nouvelle demande - ${data.service.toUpperCase()} - ${data.ville}`,
+        subject: `Nouvelle demande - ${data.service.toUpperCase()} - ${data.ville}${data.photos && data.photos.length > 0 ? ` [📷 ${data.photos.length} Photo(s)]` : ""}`,
         html: `
           <h3>Nouvelle demande d'intervention</h3>
           <p><strong>Nom:</strong> ${data.nom}</p>
@@ -61,8 +68,11 @@ export async function POST(req: Request) {
           <p><strong>Email:</strong> ${data.email || "Non fourni"}</p>
           <p><strong>Service:</strong> ${data.service}</p>
           <p><strong>Ville:</strong> ${data.ville}</p>
+          ${data.latitude && data.longitude ? `<p><strong>GPS:</strong> ${data.latitude}, ${data.longitude}</p>` : ""}
           <p><strong>Message:</strong><br/>${data.message.replace(/\n/g, "<br/>")}</p>
+          ${photoHtml}
         `,
+        attachments: attachments,
       });
     } else {
       // Fallback or demo mode logging
@@ -72,16 +82,54 @@ export async function POST(req: Request) {
     // Google Sheets Integration
     if (process.env.GOOGLE_SCRIPT_URL) {
       try {
+        const dateStr = new Date().toLocaleString("fr-BE", {
+          timeZone: "Europe/Brussels",
+        });
         await fetch(process.env.GOOGLE_SCRIPT_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ...data,
-            date: new Date().toLocaleString("fr-BE", {
-              timeZone: "Europe/Brussels",
-            }),
+            // Exact column headers matching Google Sheet layout:
+            // Date / Heure | Nom | Téléphone | Email | Service | Ville / Adresse | Message
+            "Date / Heure": dateStr,
+            "Nom": data.nom,
+            "Téléphone": data.telephone,
+            "Email": data.email || "Non fourni",
+            "Service": data.service,
+            "Ville / Adresse": data.ville,
+            "Message": data.message,
+
+            // Accent-free variations
+            "Date": dateStr,
+            "Telephone": data.telephone,
+            "Ville": data.ville,
+            "Adresse": data.ville,
+
+            // Primary French lowercase keys
+            "nom": data.nom,
+            "telephone": data.telephone,
+            "email": data.email || "Non fourni",
+            "service": data.service,
+            "ville": data.ville,
+            "message": data.message,
+            "date": dateStr,
+
+            // English & standard Google Sheet column aliases
+            "name": data.nom,
+            "phone": data.telephone,
+            "city": data.ville,
+            "address": data.ville,
+            "details": data.message,
+            "timestamp": dateStr,
+
+            // Additional common column keys
+            "fullName": data.nom,
+            "phoneNumber": data.telephone,
+            "location": data.ville,
+            "serviceType": data.service,
+            "source": "Formulaire de Contact Site",
           }),
         });
       } catch (sheetError) {

@@ -59,7 +59,7 @@ export function getSitemapEntries(): SitemapEntry[] {
   add("/mentions-legales", "/mentions-legales", "0.5", "weekly");
   add("/privacy-policy", "/privacy-policy", "0.5", "weekly");
 
-  // 2. High Value Local Folders
+  // 2. High Value Local Folders and Short Keyword URLs
   const staticFolders = [
     { fr: "/plombier-bruxelles", nl: "/nl/loodgieter-bruxelles" },
     { fr: "/plombier-grimbergen", nl: "/nl/loodgieter-grimbergen" },
@@ -70,10 +70,56 @@ export function getSitemapEntries(): SitemapEntry[] {
     { fr: "/plombier-woluwe", nl: "/nl/loodgieter-woluwe" },
     { fr: "/recherche-de-fuite-bruxelles", nl: "/nl/lekdetectie-brussel" },
     { fr: "/vidange-fosse-septique-liege", nl: "/nl/putlediging-luik" },
+    { fr: "/camera-surveillance", nl: "/nl/camerabewaking" },
+    { fr: "/debouchage", nl: "/nl/ontstopping" },
+    { fr: "/debouchage-wc", nl: "/nl/ontstopping-wc" },
+    { fr: "/debouchage-evier", nl: "/nl/ontstopping-evier" },
+    { fr: "/debouchage-egout", nl: "/nl/ontstopping-egout" },
+    { fr: "/plombier", nl: "/nl/loodgieter" },
+    { fr: "/fuite-deau", nl: "/nl/waterlek" },
+    { fr: "/recherche-de-fuite", nl: "/nl/lekdetectie" },
+    { fr: "/chauffagiste", nl: "/nl/verwarming" },
+    { fr: "/entretien-chaudiere", nl: "/nl/ketelonderhoud" },
+    { fr: "/depannage-chaudiere", nl: "/nl/ketel-herstelling" },
+    { fr: "/electricien", nl: "/nl/elektriciteit" },
+    { fr: "/couvreur", nl: "/nl/dakwerker" },
+    { fr: "/vidange-fosse-septique", nl: "/nl/putlediging" },
   ];
 
   for (const folder of staticFolders) {
-    add(folder.fr, folder.nl, "0.8", "weekly");
+    add(folder.fr, folder.nl, "0.9", "weekly");
+  }
+
+  // 3. Short Keyword + City URLs (e.g. /debouchage-charleroi, /plombier-namur, /chauffagiste-liege)
+  const shortKeywordPrefixes = [
+    { fr: "debouchage", nl: "ontstopping" },
+    { fr: "plombier", nl: "loodgieter" },
+    { fr: "chauffagiste", nl: "verwarming" },
+    { fr: "electricien", nl: "elektriciteit" },
+    { fr: "vidange-fosse-septique", nl: "putlediging" },
+    { fr: "recherche-de-fuite", nl: "lekdetectie" },
+    { fr: "camera-surveillance", nl: "camerabewaking" },
+    { fr: "couvreur", nl: "dakwerker" },
+  ];
+
+  const targetCitiesList = [
+    { fr: "bruxelles", nl: "brussel" },
+    { fr: "liege", nl: "luik" },
+    { fr: "charleroi", nl: "charleroi" },
+    { fr: "namur", nl: "namen" },
+    { fr: "mons", nl: "bergen" },
+    { fr: "wavre", nl: "waver" },
+    { fr: "waterloo", nl: "waterloo" },
+    { fr: "grimbergen", nl: "grimbergen" },
+    { fr: "woluwe", nl: "woluwe" },
+    { fr: "uccle", nl: "ukkel" },
+    { fr: "ixelles", nl: "elsene" },
+  ];
+
+  for (const kw of shortKeywordPrefixes) {
+    for (const city of targetCitiesList) {
+      add(`/${kw.fr}-${city.fr}`, `/nl/${kw.nl}-${city.nl}`, "0.8", "weekly");
+    }
   }
 
   // 3. Dynamic Services

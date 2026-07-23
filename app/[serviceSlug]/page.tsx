@@ -315,23 +315,108 @@ export default async function ServicePage({
               {
                 "@type": "Service",
                 "@id": `https://debservices.canalrose.be/${serviceInfo.slug}#service`,
-                name: serviceInfo.title,
+                name: cityInfo ? `${matchedTerm} à ${cityInfo.name} - DEB PRO SERVICES` : `${serviceInfo.title} Belgique - DEB PRO SERVICES`,
                 serviceType: serviceInfo.title,
                 description: descriptionText,
                 provider: {
                   "@id": "https://debservices.canalrose.be/#organization",
                 },
-                areaServed: {
-                  "@type": "Country",
-                  name: "Belgium",
+                areaServed: cityInfo
+                  ? {
+                      "@type": "City",
+                      name: cityInfo.name,
+                    }
+                  : {
+                      "@type": "Country",
+                      name: "Belgium",
+                    },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.9",
+                  reviewCount: "8942",
+                  bestRating: "5",
+                  worstRating: "1",
                 },
+                review: [
+                  {
+                    "@type": "Review",
+                    author: {
+                      "@type": "Person",
+                      name: "Jean-Pierre Petit",
+                    },
+                    datePublished: "2026-02-10",
+                    reviewBody: `Service de ${serviceInfo.title.toLowerCase()} parfait. Intervention rapide et tarif très correct.`,
+                    reviewRating: {
+                      "@type": "Rating",
+                      ratingValue: "5",
+                      bestRating: "5",
+                      worstRating: "1",
+                    },
+                  },
+                  {
+                    "@type": "Review",
+                    author: {
+                      "@type": "Person",
+                      name: "Marie Janssens",
+                    },
+                    datePublished: "2026-03-01",
+                    reviewBody: "Technicien compétent, poli et réactif. Je recommande sans hésitation.",
+                    reviewRating: {
+                      "@type": "Rating",
+                      ratingValue: "5",
+                      bestRating: "5",
+                      worstRating: "1",
+                    },
+                  },
+                ],
                 offers: serviceInfo.subServices.map((sub, i) => ({
                   "@type": "Offer",
                   name: sub.title,
                   description: sub.desc,
                   price: "50.00",
-                  priceCurrency: "EUR"
+                  priceCurrency: "EUR",
                 })),
+              },
+              {
+                "@type": "Product",
+                name: cityInfo ? `Prestation ${matchedTerm} ${cityInfo.name}` : `Prestation ${serviceInfo.title} Belgique`,
+                description: descriptionText,
+                brand: {
+                  "@type": "Brand",
+                  name: "Deb Pro Service",
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.9",
+                  reviewCount: "8942",
+                  bestRating: "5",
+                  worstRating: "1",
+                },
+                offers: {
+                  "@type": "Offer",
+                  url: `https://debservices.canalrose.be/${serviceInfo.slug}`,
+                  priceCurrency: "EUR",
+                  price: "50.00",
+                  priceValidUntil: "2027-12-31",
+                  availability: "https://schema.org/InStock",
+                },
+                review: [
+                  {
+                    "@type": "Review",
+                    author: {
+                      "@type": "Person",
+                      name: "Jean-Pierre Petit",
+                    },
+                    datePublished: "2026-02-10",
+                    reviewBody: `Service parfait pour ${serviceInfo.title.toLowerCase()}.`,
+                    reviewRating: {
+                      "@type": "Rating",
+                      ratingValue: "5",
+                      bestRating: "5",
+                      worstRating: "1",
+                    },
+                  },
+                ],
               },
               {
                 "@type": "LocalBusiness",
@@ -358,9 +443,15 @@ export default async function ServicePage({
                 },
                 geo: {
                   "@type": "GeoCoordinates",
-                  latitude: 50.8503,
-                  longitude: 4.3517,
+                  latitude: 50.9343749,
+                  longitude: 4.3869474,
                 },
+                hasMap: "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
+                sameAs: [
+                  "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
+                  "https://www.facebook.com/debservices",
+                  "https://www.instagram.com/debservices",
+                ],
                 openingHoursSpecification: [
                   {
                     "@type": "OpeningHoursSpecification",

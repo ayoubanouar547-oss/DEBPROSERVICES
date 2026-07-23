@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PreFooterLinks } from "@/components/layout/PreFooterLinks";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
+import ChatBot from "@/components/layout/ChatBot";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,12 +25,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://debservices.canalrose.be"),
   title: {
     template: "%s",
-    default: "Urgence Plomberie, Chauffage & Débouchage en Belgique 🚀 Intervention 30 Min",
+    default: "DEB PRO SERVICES Belgique 🚀 Plomberie, Chauffage, Électricité, Gaz, Caméras, Solaires & Climatisation 24/7",
   },
   description:
-    "Numéro 1 en Belgique pour le dépannage d'urgence 24/7. Expert en plomberie, débouchage, chauffage et électricité. Intervention garantie en 30 minutes.",
+    "DEB PRO SERVICES en Belgique : plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture, rénovation, jardinage & vitres. Intervention rapide 24/7.",
   keywords:
-    "meilleur plombier Belgique, entreprise débouchage numéro 1, urgence plomberie, chauffage urgence, expert recommandé, Bruxelles, Wallonie, Flandre",
+    "plomberie Belgique, électricité Belgique, gaz Belgique, climatisation Belgique, ventilation VMC, caméras de surveillance, panneaux solaires photovoltaïques, débouchage canalisation, chauffage urgence, vidange fosse septique, rénovation maison, toiture, Belgique 24/7",
   authors: [{ name: "Deb Pro Service" }],
   creator: "Deb Pro Service",
   publisher: "Deb Pro Service",
@@ -43,9 +44,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Urgence Plomberie, Chauffage & Débouchage en Belgique 🚀 Intervention 30 Min",
+      "DEB PRO SERVICES Belgique 🚀 Tous vos Services & Dépannages 24h/24",
     description:
-      "Une urgence ? Nos plombiers et déboucheurs interviennent en 30 minutes partout en Belgique. Qualité garantie, tarifs transparents.",
+      "Services complets en Belgique 24/7 : Plomberie, Chauffage, Gaz, Électricité, Climatisation, Ventilation, Caméras de surveillance, Panneaux solaires, Vidange fosse septique, Rénovation & Dépannage rapide.",
     url: "https://debservices.canalrose.be",
     siteName: "Deb Pro Service",
     images: [
@@ -198,6 +199,7 @@ export default function RootLayout({
         <PreFooterLinks />
         <Footer />
         <CookieBanner />
+        <ChatBot />
         <MobileBottomNav />
         <Script
           id="microsoft-clarity"

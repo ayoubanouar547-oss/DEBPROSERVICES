@@ -22,11 +22,11 @@ export const metadata: Metadata = {
 export default function DevisPage() {
   return (
     <div className="pt-24 pb-12">
-      <div className="text-center py-8">
-        <h1 className="text-4xl font-heading font-bold text-dark">
+      <div className="text-center py-8 px-4">
+        <h1 className="text-3xl sm:text-5xl font-heading font-black text-white tracking-tight">
           Estimation & Devis 100% Gratuit
         </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto mt-4">
+        <p className="text-slate-300 font-medium text-base sm:text-lg max-w-2xl mx-auto mt-4 leading-relaxed">
           Utilisez notre estimateur interactif ci-dessous pour évaluer instantanément un budget estimatif pour votre intervention, puis soumettez votre demande de devis complet en 1 clic.
         </p>
       </div>

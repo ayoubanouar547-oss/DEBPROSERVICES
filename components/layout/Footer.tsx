@@ -139,11 +139,18 @@ export function Footer() {
               </li>
               <li className="flex gap-3 p-adr h-adr">
                 <MapPin className="w-5 h-5 text-secondary flex-shrink-0 mt-1" />
-                <span className="p-locality">
-                  {isNl ? "Interventie 24/7" : "Intervention 24/7"}
-                  <br />
-                  {isNl ? "Heel België" : "Toute la Belgique"}
-                </span>
+                <a
+                  href="https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-secondary transition"
+                >
+                  <span className="p-locality">
+                    {isNl ? "Interventie 24/7" : "Intervention 24/7"}
+                    <br />
+                    {isNl ? "Heel België (Google Maps)" : "Toute la Belgique (Voir sur Maps)"}
+                  </span>
+                </a>
                 <span className="p-country-name hidden">Belgium</span>
               </li>
             </ul>
@@ -168,7 +175,12 @@ export function Footer() {
             >
               {isNl ? "Privacybeleid" : "Confidentialité"}
             </Link>
-            <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full group cursor-pointer hover:bg-blue-600/10 transition-colors">
+            <a
+              href="https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full group cursor-pointer hover:bg-blue-600/20 transition-colors"
+            >
               <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
                 <path
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -190,7 +202,7 @@ export function Footer() {
               <span className="text-white group-hover:text-blue-400">
                 {isNl ? "4.9/5 GOOGLE REVIEWS" : "4.9/5 AVIS GOOGLE"}
               </span>
-            </div>
+            </a>
           </div>
         </div>
       </div>

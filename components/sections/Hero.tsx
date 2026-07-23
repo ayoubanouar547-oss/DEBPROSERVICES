@@ -14,6 +14,11 @@ const SERVICES_FR = [
   { text: "Gaz", gradient: "from-amber-400 to-orange-500" },
   { text: "Électricité", gradient: "from-yellow-300 to-yellow-500" },
   { text: "Climatisation", gradient: "from-sky-300 to-blue-400" },
+  { text: "Ventilation VMC", gradient: "from-emerald-300 to-teal-400" },
+  { text: "Caméras", gradient: "from-purple-400 to-indigo-400" },
+  { text: "Panneaux Solaires", gradient: "from-amber-300 to-yellow-400" },
+  { text: "Vidange Fosse", gradient: "from-cyan-400 to-blue-600" },
+  { text: "Toiture", gradient: "from-slate-300 to-slate-100" },
 ];
 
 const SERVICES_NL = [
@@ -23,6 +28,11 @@ const SERVICES_NL = [
   { text: "Gas", gradient: "from-amber-400 to-orange-500" },
   { text: "Elektriciteit", gradient: "from-yellow-300 to-yellow-500" },
   { text: "Climatisatie", gradient: "from-sky-300 to-blue-400" },
+  { text: "Ventilatie VMC", gradient: "from-emerald-300 to-teal-400" },
+  { text: "Bewakingscamera's", gradient: "from-purple-400 to-indigo-400" },
+  { text: "Zonnepanelen", gradient: "from-amber-300 to-yellow-400" },
+  { text: "Ruiming Putten", gradient: "from-cyan-400 to-blue-600" },
+  { text: "Dakbedekking", gradient: "from-slate-300 to-slate-100" },
 ];
 
 export function Hero() {
@@ -99,9 +109,9 @@ export function Hero() {
             className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed font-medium"
           >
             {isNl ? (
-              "De marktleider in spoeddiensten voor loodgieterij, ontstopping, verwarming en elektriciteit. Onze gecertificeerde lokale technici grijpen in heel België in binnen 45 minutes."
+              "De marktleider in België voor loodgieterij, ontstopping, verwarming, gas, elektriciteit, climatisatie, VMC ventilatie, bewakingscamera's, zonnepanelen, ruiming van putten, dakbedekking en renovatie. Onze gecertificeerde technici grijpen in heel België in binnen 45 minuten."
             ) : (
-              "Le leader en dépannage urgent de plomberie, chauffage, et électricité. Nos techniciens locaux interviennent dans toute la Belgique en moins de 45 minutes."
+              "Le leader en Belgique pour la plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture & rénovation. Nos techniciens locaux interviennent dans toute la Belgique en moins de 45 minutes."
             )}
           </motion.p>
         </div>
