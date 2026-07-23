@@ -100,25 +100,27 @@ export function getSitemapEntries(): SitemapEntry[] {
     { fr: "recherche-de-fuite", nl: "lekdetectie" },
     { fr: "camera-surveillance", nl: "camerabewaking" },
     { fr: "couvreur", nl: "dakwerker" },
-  ];
-
-  const targetCitiesList = [
-    { fr: "bruxelles", nl: "brussel" },
-    { fr: "liege", nl: "luik" },
-    { fr: "charleroi", nl: "charleroi" },
-    { fr: "namur", nl: "namen" },
-    { fr: "mons", nl: "bergen" },
-    { fr: "wavre", nl: "waver" },
-    { fr: "waterloo", nl: "waterloo" },
-    { fr: "grimbergen", nl: "grimbergen" },
-    { fr: "woluwe", nl: "woluwe" },
-    { fr: "uccle", nl: "ukkel" },
-    { fr: "ixelles", nl: "elsene" },
+    { fr: "vitrier", nl: "glazenmaker" },
+    { fr: "menuisier", nl: "schrijnwerker" },
+    { fr: "macon", nl: "metselaar" },
+    { fr: "peintre", nl: "schilder" },
+    { fr: "serrurier", nl: "slotenmaker" },
+    { fr: "jardinier", nl: "tuinman" },
+    { fr: "renovation", nl: "renovatie" },
+    { fr: "toiture", nl: "dakwerken" },
+    { fr: "climatisation", nl: "airco" },
+    { fr: "panneaux-solaires", nl: "zonnepanelen" },
+    { fr: "entretien-chaudiere", nl: "ketelonderhoud" },
+    { fr: "depannage-plomberie", nl: "loodgieter-depannage" },
+    { fr: "installation-electrique", nl: "elektrische-installatie" },
+    { fr: "fuite-deau", nl: "waterlek" },
+    { fr: "debouchage-egout", nl: "ontstopping-egout" }
   ];
 
   for (const kw of shortKeywordPrefixes) {
-    for (const city of targetCitiesList) {
-      add(`/${kw.fr}-${city.fr}`, `/nl/${kw.nl}-${city.nl}`, "0.8", "weekly");
+    for (const city of belgianCities) {
+      const nlCitySlug = frToNlCitySlugMap[city.slug] || city.slug;
+      add(`/${kw.fr}-${city.slug}`, `/nl/${kw.nl}-${nlCitySlug}`, "0.8", "weekly");
     }
   }
 
@@ -131,13 +133,13 @@ export function getSitemapEntries(): SitemapEntry[] {
       add(`/${service.slug}/${sub.slug}`, `/nl/${nlServiceSlug}/${sub.slug}`, "0.8", "weekly");
     }
 
-    const mainCities = belgianCities.filter(c => 
-      ["bruxelles", "grimbergen", "liege", "anvers", "gand", "charleroi", "mons", "namur", "wavre", "waterloo"].includes(c.slug)
-    );
-
-    for (const city of mainCities) {
+    for (const city of belgianCities) {
       const nlCitySlug = frToNlCitySlugMap[city.slug] || city.slug;
       add(`/zones-de-services/${service.slug}/${city.slug}`, `/nl/zones-de-services/${nlServiceSlug}/${nlCitySlug}`, "0.7", "monthly");
+      
+      for (const sub of service.subServices) {
+        add(`/zones-de-services/${service.slug}/${sub.slug}/${city.slug}`, `/nl/zones-de-services/${nlServiceSlug}/${sub.slug}/${nlCitySlug}`, "0.6", "monthly");
+      }
     }
   }
 

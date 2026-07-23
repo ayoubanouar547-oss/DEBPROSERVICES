@@ -36,7 +36,7 @@ interface Message {
 
 const QUICK_QUESTIONS: { label: string; text: string }[] = [];
 
-const SOFIA_AVATAR_URL = "/Woman_assistant_looking_ahead_202607222344.jpeg";
+const SOFIA_AVATAR_URL = "https://deb-pro-service.odoo.com/web/image/615-d11d282d/Woman_assistant_looking_ahead_202607222344.jpeg";
 const SOFIA_AVATAR_REMOTE_FALLBACK = "https://deb-pro-service.odoo.com/web/image/615-d11d282d/Woman_assistant_looking_ahead_202607222344.jpeg";
 
 export default function ChatBot() {
@@ -483,6 +483,7 @@ export default function ChatBot() {
                       <input
                         type="text"
                         placeholder="Votre Nom *"
+                        aria-label="Votre Nom"
                         required
                         value={bookingForm.nom}
                         onChange={(e) => setBookingForm({ ...bookingForm, nom: e.target.value })}
@@ -491,6 +492,7 @@ export default function ChatBot() {
                       <input
                         type="tel"
                         placeholder="Téléphone *"
+                        aria-label="Téléphone"
                         required
                         value={bookingForm.telephone}
                         onChange={(e) => setBookingForm({ ...bookingForm, telephone: e.target.value })}
@@ -499,6 +501,7 @@ export default function ChatBot() {
                     </div>
                     <div className="grid grid-cols-2 gap-2">
                       <select
+                        aria-label="Service d'intervention"
                         value={bookingForm.service}
                         onChange={(e) => setBookingForm({ ...bookingForm, service: e.target.value })}
                         className="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-2.5 py-2 text-white focus:outline-none focus:border-cyan-500"
@@ -521,6 +524,7 @@ export default function ChatBot() {
                       <input
                         type="text"
                         placeholder="Ville / Code Postal *"
+                        aria-label="Ville ou Code Postal"
                         required
                         value={bookingForm.ville}
                         onChange={(e) => setBookingForm({ ...bookingForm, ville: e.target.value })}
@@ -682,6 +686,7 @@ export default function ChatBot() {
               >
                 <input
                   type="text"
+                  aria-label={isNl ? "Schrijf uw bericht" : "Écrivez votre message"}
                   placeholder={isNl ? "Schrijf uw bericht of gegevens..." : "Écrivez votre message ou vos coordonnées..."}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
@@ -785,8 +790,9 @@ function InlineChatForm({
 
       <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
         <div>
-          <label className="block text-[10px] text-slate-400 mb-1">Nom complet *</label>
+          <label htmlFor={`cb-nom-${type}`} className="block text-[10px] text-slate-400 mb-1">Nom complet *</label>
           <input
+            id={`cb-nom-${type}`}
             type="text"
             required
             placeholder="Ex: Jean Dupont"
@@ -796,8 +802,9 @@ function InlineChatForm({
           />
         </div>
         <div>
-          <label className="block text-[10px] text-slate-400 mb-1">Téléphone *</label>
+          <label htmlFor={`cb-tel-${type}`} className="block text-[10px] text-slate-400 mb-1">Téléphone *</label>
           <input
+            id={`cb-tel-${type}`}
             type="tel"
             required
             placeholder="Ex: 0496 12 34 56"
@@ -810,8 +817,9 @@ function InlineChatForm({
 
       <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
         <div>
-          <label className="block text-[10px] text-slate-400 mb-1">Service demandé *</label>
+          <label htmlFor={`cb-srv-${type}`} className="block text-[10px] text-slate-400 mb-1">Service demandé *</label>
           <select
+            id={`cb-srv-${type}`}
             value={service}
             onChange={(e) => setService(e.target.value)}
             className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-cyan-500 text-[11px]"
@@ -836,8 +844,9 @@ function InlineChatForm({
           </select>
         </div>
         <div>
-          <label className="block text-[10px] text-slate-400 mb-1">Ville / Commune *</label>
+          <label htmlFor={`cb-ville-${type}`} className="block text-[10px] text-slate-400 mb-1">Ville / Commune *</label>
           <input
+            id={`cb-ville-${type}`}
             type="text"
             required
             placeholder="Ex: Bruxelles, Liège..."
@@ -849,8 +858,9 @@ function InlineChatForm({
       </div>
 
       <div>
-        <label className="block text-[10px] text-slate-400 mb-1">Précisions / Urgence (Optionnel)</label>
+        <label htmlFor={`cb-msg-${type}`} className="block text-[10px] text-slate-400 mb-1">Précisions / Urgence (Optionnel)</label>
         <textarea
+          id={`cb-msg-${type}`}
           placeholder="Ex: Fuite sous évier, chaudière affiche erreur..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}

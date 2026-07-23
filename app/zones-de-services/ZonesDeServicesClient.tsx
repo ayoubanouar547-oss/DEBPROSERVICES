@@ -134,6 +134,7 @@ export default function ZonesDeServicesClient({ isNl = false }: { isNl?: boolean
                 <Search className="w-6 h-6 ml-4 text-slate-500" />
                 <input
                   type="text"
+                  aria-label={isNl ? "Zoek een stad, provincie of service" : "Rechercher une ville, province ou service"}
                   placeholder={isNl ? "Zoek een stad, provincie of service..." : "Rechercher une ville, province ou service..."}
                   className="flex-1 bg-transparent border-none focus:ring-0 text-lg text-white placeholder-slate-500 py-3"
                   value={searchTerm}

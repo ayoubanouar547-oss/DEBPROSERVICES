@@ -393,8 +393,11 @@ export function InterventionBooking() {
               </label>
 
               <div className="flex items-center gap-2">
-                <span className="text-[11px] text-slate-400">{isNl ? "Of kies exact:" : "Ou sélection directe :"}</span>
+                <label htmlFor="booking-date-input" className="text-[11px] text-slate-400">
+                  {isNl ? "Of kies exact:" : "Ou sélection directe :"}
+                </label>
                 <input
+                  id="booking-date-input"
                   type="date"
                   value={selectedDate}
                   min={new Date().toISOString().split("T")[0]}
@@ -508,12 +511,13 @@ export function InterventionBooking() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
+                <label htmlFor="booking-nom-input" className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
                   {isNl ? "Naam Complet *" : "Nom Complet *"}
                 </label>
                 <div className="relative">
                   <User className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
+                    id="booking-nom-input"
                     type="text"
                     required
                     value={nom}
@@ -525,12 +529,13 @@ export function InterventionBooking() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
+                <label htmlFor="booking-phone-input" className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
                   {isNl ? "Telefoonnummer *" : "Téléphone (GSM) *"}
                 </label>
                 <div className="relative">
                   <Phone className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
+                    id="booking-phone-input"
                     type="tel"
                     required
                     value={telephone}
@@ -544,12 +549,13 @@ export function InterventionBooking() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
+                <label htmlFor="booking-ville-input" className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
                   {isNl ? "Stad / Gemeente *" : "Ville / Commune *"}
                 </label>
                 <div className="relative">
                   <MapPin className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
+                    id="booking-ville-input"
                     type="text"
                     required
                     value={ville}
@@ -561,10 +567,11 @@ export function InterventionBooking() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
+                <label htmlFor="booking-email-input" className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
                   {isNl ? "E-mail (Optioneel)" : "E-mail (Optionnel)"}
                 </label>
                 <input
+                  id="booking-email-input"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -602,10 +609,11 @@ export function InterventionBooking() {
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
+              <label htmlFor="booking-message-textarea" className="block text-[11px] font-bold text-slate-300 mb-1.5 uppercase">
                 {isNl ? "Omschrijving / Details van het probleem" : "Description du problème / Détails d'accès"}
               </label>
               <textarea
+                id="booking-message-textarea"
                 rows={2}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}

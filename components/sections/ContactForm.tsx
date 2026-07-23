@@ -552,10 +552,11 @@ export function ContactForm() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                      <label htmlFor="contact-nom-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
                         {isNl ? "Volledige Naam *" : "Nom Complet *"}
                       </label>
                       <input
+                        id="contact-nom-input"
                         type="text"
                         {...register("nom")}
                         className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.nom ? "border-red-500/50" : "border-white/10"} text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
@@ -568,10 +569,11 @@ export function ContactForm() {
                       )}
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                      <label htmlFor="contact-telephone-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
                         {isNl ? "Telefoon *" : "Téléphone *"}
                       </label>
                       <input
+                        id="contact-telephone-input"
                         type="tel"
                         {...register("telephone")}
                         className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.telephone ? "border-red-500/50" : "border-white/10"} text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
@@ -613,10 +615,11 @@ export function ContactForm() {
                       )}
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                      <label htmlFor="contact-ville-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
                         {isNl ? "Stad / Postcode *" : "Ville / Code Postal *"}
                       </label>
                       <input
+                        id="contact-ville-input"
                         type="text"
                         {...register("ville")}
                         className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.ville ? "border-red-500/50" : "border-white/10"} text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
@@ -631,13 +634,14 @@ export function ContactForm() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                    <label htmlFor="contact-email-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
                       {isNl ? "E-mail " : "Email "}
                       <span className="font-normal text-slate-500 lowercase">
                         {isNl ? "(Optioneel)" : "(Optionnel)"}
                       </span>
                     </label>
                     <input
+                      id="contact-email-input"
                       type="email"
                       {...register("email")}
                       className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors"
@@ -680,7 +684,7 @@ export function ContactForm() {
                   {/* Photo Upload Section */}
                   <div className="space-y-2.5 pt-1">
                     <div className="flex items-center justify-between">
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                      <label htmlFor="photo-upload-input" className="block text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5 cursor-pointer">
                         <Camera className="w-3.5 h-3.5 text-blue-400" />
                         {isNl ? "Foto's van het lek / probleem " : "Photos de la fuite / du problème "}
                         <span className="font-normal text-slate-500 lowercase">
@@ -807,7 +811,7 @@ export function ContactForm() {
 
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                      <label htmlFor="contact-message-textarea" className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
                         {isNl ? "Details van de aanvraag *" : "Détails de la demande *"}
                       </label>
 
@@ -869,6 +873,7 @@ export function ContactForm() {
                     )}
 
                     <textarea
+                      id="contact-message-textarea"
                       {...register("message")}
                       rows={3}
                       className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.message ? "border-red-500/50" : "border-white/10"} text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors resize-none`}
