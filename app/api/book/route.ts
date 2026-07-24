@@ -107,9 +107,11 @@ export async function POST(req: Request) {
 
     if (process.env.RESEND_API_KEY) {
       try {
+        const recipient = process.env.NOTIFICATION_EMAIL || "debproservices@canalrose.be";
+        const sender = process.env.RESEND_FROM_EMAIL || "Réservation DEB PRO <onboarding@resend.dev>";
         await resend.emails.send({
-          from: "Réservation DEB PRO <onboarding@resend.dev>",
-          to: "debproservices@canalrose.be",
+          from: sender,
+          to: recipient,
           subject: `📅 Nouvelle Réservation Intervenant - ${serviceVal.toUpperCase()} le ${bookingDateVal} (${timeSlotVal})`,
           html: `
             <div font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; background: #0f172a; color: #ffffff;">

@@ -15,11 +15,6 @@ function getGeminiClient(): GoogleGenAI | null {
   if (!aiClient) {
     aiClient = new GoogleGenAI({
       apiKey: key,
-      httpOptions: {
-        headers: {
-          "User-Agent": "aistudio-build",
-        },
-      },
     });
   }
   return aiClient;
@@ -111,9 +106,11 @@ async function saveLeadToSheetAndEmail(lead: {
   // 2. Send email notification via Resend if RESEND_API_KEY is configured
   if (process.env.RESEND_API_KEY) {
     try {
+      const recipient = process.env.NOTIFICATION_EMAIL || "debproservices@canalrose.be";
+      const sender = process.env.RESEND_FROM_EMAIL || "Chatbot Sofia <onboarding@resend.dev>";
       await resend.emails.send({
-        from: "Chatbot Sofia <onboarding@resend.dev>",
-        to: "debproservices@canalrose.be",
+        from: sender,
+        to: recipient,
         subject: `🤖 Nouveau RDV Chatbot - ${serviceVal.toUpperCase()} - ${cityVal}`,
         html: `
           <h3>🤖 Nouveau rendez-vous enregistré par l'Assistant Virtuel (Sofia)</h3>
@@ -370,14 +367,14 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
             let responseStream;
             try {
               responseStream = await ai.models.generateContentStream({
-                model: "gemini-3.6-flash",
+                model: "gemini-2.5-flash",
                 contents: contents,
                 config: { systemInstruction },
               });
             } catch (e) {
-              console.warn("gemini-3.6-flash stream error, fallback to gemini-flash-latest", e);
+              console.warn("gemini-2.5-flash stream error, fallback to gemini-1.5-flash", e);
               responseStream = await ai.models.generateContentStream({
-                model: "gemini-flash-latest",
+                model: "gemini-1.5-flash",
                 contents: contents,
                 config: { systemInstruction },
               });

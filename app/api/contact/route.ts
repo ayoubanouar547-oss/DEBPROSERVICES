@@ -28,52 +28,59 @@ export async function POST(req: Request) {
     }
 
     if (process.env.RESEND_API_KEY) {
-      const photoHtml = data.photos && data.photos.length > 0
-        ? `
-          <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #334155;">
-            <p style="color: #38bdf8; font-weight: bold; margin-bottom: 8px;">📷 Photos jointes (${data.photos.length}) :</p>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-              ${data.photos
-                .map(
-                  (p, idx) =>
-                    `<img src="${p}" alt="Photo ${idx + 1}" style="max-width: 180px; max-height: 180px; border-radius: 8px; border: 1px solid #475569; object-fit: cover;" />`
-                )
-                .join("")}
+      try {
+        const photoHtml = data.photos && data.photos.length > 0
+          ? `
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #334155;">
+              <p style="color: #38bdf8; font-weight: bold; margin-bottom: 8px;">📷 Photos jointes (${data.photos.length}) :</p>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                ${data.photos
+                  .map(
+                    (p, idx) =>
+                      `<img src="${p}" alt="Photo ${idx + 1}" style="max-width: 180px; max-height: 180px; border-radius: 8px; border: 1px solid #475569; object-fit: cover;" />`
+                  )
+                  .join("")}
+              </div>
             </div>
-          </div>
-        `
-        : "";
+          `
+          : "";
 
-      const attachments = data.photos && data.photos.length > 0
-        ? data.photos.map((base64Str, idx) => {
-            const matches = base64Str.match(/^data:(image\/[a-zA-Z]+);base64,(.+)$/);
-            const contentType = matches ? matches[1] : "image/jpeg";
-            const ext = contentType.split("/")[1] || "jpg";
-            const content = matches ? matches[2] : base64Str;
-            return {
-              filename: `photo_fuite_${idx + 1}.${ext}`,
-              content: content,
-            };
-          })
-        : undefined;
+        const attachments = data.photos && data.photos.length > 0
+          ? data.photos.map((base64Str, idx) => {
+              const matches = base64Str.match(/^data:(image\/[a-zA-Z]+);base64,(.+)$/);
+              const contentType = matches ? matches[1] : "image/jpeg";
+              const ext = contentType.split("/")[1] || "jpg";
+              const content = matches ? matches[2] : base64Str;
+              return {
+                filename: `photo_fuite_${idx + 1}.${ext}`,
+                content: content,
+              };
+            })
+          : undefined;
 
-      await resend.emails.send({
-        from: "Contact Site <onboarding@resend.dev>", // Should be a verified domain in prod
-        to: "debproservices@canalrose.be", // Replace with real company email
-        subject: `Nouvelle demande - ${data.service.toUpperCase()} - ${data.ville}${data.photos && data.photos.length > 0 ? ` [📷 ${data.photos.length} Photo(s)]` : ""}`,
-        html: `
-          <h3>Nouvelle demande d'intervention</h3>
-          <p><strong>Nom:</strong> ${data.nom}</p>
-          <p><strong>Téléphone:</strong> ${data.telephone}</p>
-          <p><strong>Email:</strong> ${data.email || "Non fourni"}</p>
-          <p><strong>Service:</strong> ${data.service}</p>
-          <p><strong>Ville:</strong> ${data.ville}</p>
-          ${data.latitude && data.longitude ? `<p><strong>GPS:</strong> ${data.latitude}, ${data.longitude}</p>` : ""}
-          <p><strong>Message:</strong><br/>${data.message.replace(/\n/g, "<br/>")}</p>
-          ${photoHtml}
-        `,
-        attachments: attachments,
-      });
+        const recipient = process.env.NOTIFICATION_EMAIL || "debproservices@canalrose.be";
+        const sender = process.env.RESEND_FROM_EMAIL || "Contact Site <onboarding@resend.dev>";
+
+        await resend.emails.send({
+          from: sender,
+          to: recipient,
+          subject: `Nouvelle demande - ${data.service.toUpperCase()} - ${data.ville}${data.photos && data.photos.length > 0 ? ` [📷 ${data.photos.length} Photo(s)]` : ""}`,
+          html: `
+            <h3>Nouvelle demande d'intervention</h3>
+            <p><strong>Nom:</strong> ${data.nom}</p>
+            <p><strong>Téléphone:</strong> ${data.telephone}</p>
+            <p><strong>Email:</strong> ${data.email || "Non fourni"}</p>
+            <p><strong>Service:</strong> ${data.service}</p>
+            <p><strong>Ville:</strong> ${data.ville}</p>
+            ${data.latitude && data.longitude ? `<p><strong>GPS:</strong> ${data.latitude}, ${data.longitude}</p>` : ""}
+            <p><strong>Message:</strong><br/>${data.message.replace(/\n/g, "<br/>")}</p>
+            ${photoHtml}
+          `,
+          attachments: attachments,
+        });
+      } catch (emailError) {
+        console.error("Resend email error in contact API:", emailError);
+      }
     } else {
       // Fallback or demo mode logging
       console.log("No Resend API Key. Payload received:", data);
