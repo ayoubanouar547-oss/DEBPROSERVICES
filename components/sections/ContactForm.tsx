@@ -88,7 +88,7 @@ export function ContactForm() {
   const pathname = usePathname();
   const isNl = pathname ? pathname.startsWith("/nl") : false;
 
-  const [activeTab, setActiveTab] = useState<"booking" | "devis">("booking");
+  const [activeTab, setActiveTab] = useState<"booking" | "devis">("devis");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -430,18 +430,6 @@ export function ContactForm() {
           {/* Tab Switcher */}
           <div className="inline-flex p-1.5 bg-slate-900/90 rounded-2xl border border-white/10 mt-8 shadow-xl">
             <button
-              onClick={() => setActiveTab("booking")}
-              className={`px-6 py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-2 ${
-                activeTab === "booking"
-                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/30"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              <Calendar className="w-4 h-4 text-blue-300" />
-              {isNl ? "📅 Réserver une intervention (Datum & Tijdslot)" : "📅 Réserver une intervention (Date & Créneau)"}
-            </button>
-
-            <button
               onClick={() => setActiveTab("devis")}
               className={`px-6 py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-2 ${
                 activeTab === "devis"
@@ -451,6 +439,18 @@ export function ContactForm() {
             >
               <FileText className="w-4 h-4 text-indigo-300" />
               {isNl ? "📋 Snelle Offerte / Bericht" : "📋 Demande de Devis / Message"}
+            </button>
+
+            <button
+              onClick={() => setActiveTab("booking")}
+              className={`px-6 py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-2 ${
+                activeTab === "booking"
+                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/30"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              <Calendar className="w-4 h-4 text-blue-300" />
+              {isNl ? "📅 Réserver une intervention (Datum & Tijdslot)" : "📅 Réserver une intervention (Date & Créneau)"}
             </button>
           </div>
         </div>
@@ -463,7 +463,7 @@ export function ContactForm() {
         ) : (
           /* Tab 2: Standard Quick Quote Form */
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-3 duration-300">
-            <div>
+            <div className="order-2 lg:order-1">
               <h3 className="text-2xl md:text-4xl font-black text-white mb-4">
                 {isNl ? "Gratis en Vrijblijvende Offerte" : "Devis Gratuit & Sans Engagement"}
               </h3>
@@ -506,7 +506,7 @@ export function ContactForm() {
               </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/10">
+            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/10 order-1 lg:order-2">
               {status === "success" ? (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-12">
                   <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 mb-4 border border-green-500/30">
@@ -681,168 +681,12 @@ export function ContactForm() {
                     )}
                   </div>
 
-                  {/* Photo Upload Section */}
-                  <div className="space-y-2.5 pt-1">
-                    <div className="flex items-center justify-between">
-                      <label htmlFor="photo-upload-input" className="block text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5 cursor-pointer">
-                        <Camera className="w-3.5 h-3.5 text-blue-400" />
-                        {isNl ? "Foto's van het lek / probleem " : "Photos de la fuite / du problème "}
-                        <span className="font-normal text-slate-500 lowercase">
-                          {isNl ? "(Optioneel)" : "(Optionnel)"}
-                        </span>
-                      </label>
-                      <span className="text-[10px] font-bold text-slate-400">
-                        {photos.length} / {MAX_PHOTOS} {isNl ? "foto's" : "photos"}
-                      </span>
-                    </div>
-
-                    <p className="text-[11px] text-slate-400 leading-normal">
-                      {isNl
-                        ? "📷 Voeg foto's toe van het lek, de leiding of de installatie voor een snellere diagnose door onze dispatcher."
-                        : "📷 Joignez des photos de la fuite, tuyauterie ou installation pour un diagnostic rapide par le dispatcher."}
-                    </p>
-
-                    {/* Hidden File Input */}
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/jpeg,image/png,image/webp,image/heic,image/gif"
-                      multiple
-                      onChange={(e) => {
-                        if (e.target.files) processFiles(e.target.files);
-                      }}
-                      className="hidden"
-                      id="photo-upload-input"
-                    />
-
-                    {/* Drag-and-drop Dropzone */}
-                    {photos.length < MAX_PHOTOS && (
-                      <div
-                        onDragOver={(e) => {
-                          e.preventDefault();
-                          setIsDragging(true);
-                        }}
-                        onDragLeave={(e) => {
-                          e.preventDefault();
-                          setIsDragging(false);
-                        }}
-                        onDrop={(e) => {
-                          e.preventDefault();
-                          setIsDragging(false);
-                          if (e.dataTransfer.files) processFiles(e.dataTransfer.files);
-                        }}
-                        onClick={() => fileInputRef.current?.click()}
-                        className={`relative cursor-pointer rounded-2xl border-2 border-dashed p-4 text-center transition-all flex flex-col items-center justify-center gap-1.5 group ${
-                          isDragging
-                            ? "border-blue-400 bg-blue-500/20 shadow-lg shadow-blue-500/20 scale-[0.99]"
-                            : "border-white/15 bg-black/20 hover:border-blue-400/60 hover:bg-white/5"
-                        }`}
-                      >
-                        <div className="w-9 h-9 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
-                          <UploadCloud className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <p className="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">
-                            {isNl
-                              ? "Klik hier om foto's te kiezen of sleep ze hierheen"
-                              : "Cliquez pour ajouter des photos ou glissez-les ici"}
-                          </p>
-                          <p className="text-[10px] text-slate-400 mt-0.5">
-                            {isNl
-                              ? "JPG, PNG, WebP (max 5 MB per bestand)"
-                              : "JPG, PNG, WebP (max 5 Mo par photo)"}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Photo Error Display */}
-                    {photoError && (
-                      <div className="p-2.5 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-xs flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                        <span>{photoError}</span>
-                      </div>
-                    )}
-
-                    {/* Thumbnails Preview Grid */}
-                    {photos.length > 0 && (
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-                        {photos.map((photo, idx) => (
-                          <div
-                            key={photo.id}
-                            className="relative group rounded-xl overflow-hidden bg-slate-900 border border-white/10 aspect-square shadow-md"
-                          >
-                            <img
-                              src={photo.previewUrl}
-                              alt={photo.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-90 group-hover:opacity-100 transition-opacity p-2 flex flex-col justify-between">
-                              <div className="flex justify-between items-start">
-                                <span className="text-[9px] font-bold text-blue-300 bg-blue-950/80 px-1.5 py-0.5 rounded border border-blue-400/30 backdrop-blur-sm">
-                                  #{idx + 1}
-                                </span>
-                                <button
-                                  type="button"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    removePhoto(photo.id);
-                                  }}
-                                  className="w-6 h-6 rounded-full bg-red-600/90 text-white flex items-center justify-center hover:bg-red-500 transition-colors shadow-md"
-                                  title={isNl ? "Verwijder foto" : "Supprimer la photo"}
-                                >
-                                  <X className="w-3.5 h-3.5" />
-                                </button>
-                              </div>
-                              <div>
-                                <p className="text-[10px] font-medium text-white truncate drop-shadow-sm">
-                                  {photo.name}
-                                </p>
-                                <p className="text-[9px] text-slate-300">
-                                  {(photo.size / (1024 * 1024)).toFixed(2)} MB
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
+                  {/* Textarea details section without the microphone button inside the label */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <label htmlFor="contact-message-textarea" className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
                         {isNl ? "Details van de aanvraag *" : "Détails de la demande *"}
                       </label>
-
-                      {speechSupported && (
-                        <button
-                          type="button"
-                          onClick={toggleListening}
-                          className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold transition-all ${
-                            isListening
-                              ? "bg-red-500/20 text-red-400 border border-red-500/40 animate-pulse shadow-md shadow-red-500/20"
-                              : "bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20"
-                          }`}
-                          title={
-                            isNl
-                              ? "Spreek uw bericht in (Dictafoon)"
-                              : "Dicter votre message par la voix"
-                          }
-                        >
-                          {isListening ? (
-                            <>
-                              <MicOff className="w-3.5 h-3.5 text-red-400 animate-bounce" />
-                              <span>{isNl ? "Aan het luisteren..." : "Écoute en cours..."}</span>
-                            </>
-                          ) : (
-                            <>
-                              <Mic className="w-3.5 h-3.5 text-blue-400" />
-                              <span>{isNl ? "🎙️ Dicteren" : "🎙️ Dictée vocale"}</span>
-                            </>
-                          )}
-                        </button>
-                      )}
                     </div>
 
                     {isListening && (
@@ -879,8 +723,8 @@ export function ContactForm() {
                       className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.message ? "border-red-500/50" : "border-white/10"} text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors resize-none`}
                       placeholder={
                         isNl
-                          ? "Beschrijf uw probleem of spreek in via de dictafoon-knop..."
-                          : "Décrivez votre problème ou dictez-le avec le bouton vocal..."
+                          ? "Beschrijf uw probleem of spreek in via de dictafoon-knop hieronder..."
+                          : "Décrivez votre problème ou dictez-le avec le bouton vocal ci-dessous..."
                       }
                     />
                     {errors.message && (
@@ -889,6 +733,38 @@ export function ContactForm() {
                       </p>
                     )}
                   </div>
+
+                  {/* Enlarged Microphone Button placed right above the submit button */}
+                  {speechSupported && (
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={toggleListening}
+                        className={`w-full flex items-center justify-center gap-2.5 px-4 py-3.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all border ${
+                          isListening
+                            ? "bg-red-500/20 text-red-400 border-red-500/40 animate-pulse shadow-lg shadow-red-500/25"
+                            : "bg-blue-500/10 text-blue-400 border-blue-500/20 hover:bg-blue-500/20 hover:text-white"
+                        }`}
+                        title={
+                          isNl
+                            ? "Spreek uw bericht in (Dictafoon)"
+                            : "Dicter votre message par la voix"
+                        }
+                      >
+                        {isListening ? (
+                          <>
+                            <MicOff className="w-4.5 h-4.5 text-red-400 animate-bounce" />
+                            <span>{isNl ? "🎙️ Aan het luisteren... Klik om te stoppen" : "🎙️ Écoute en cours... Cliquer pour arrêter"}</span>
+                          </>
+                        ) : (
+                          <>
+                            <Mic className="w-4.5 h-4.5 text-blue-400" />
+                            <span>{isNl ? "🎙️ Klik hier om uw bericht in te spreken" : "🎙️ Cliquer ici pour dicter votre message"}</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
 
                   {status === "error" && (
                     <div className="p-3 bg-red-500/10 text-red-400 text-xs font-bold rounded-xl border border-red-500/20">
