@@ -7,13 +7,46 @@ export function SEOContent() {
   const pathname = usePathname();
   const isNl = pathname ? pathname.startsWith("/nl") : false;
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: isNl
+      ? "Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij en verwarming in België?"
+      : "Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en débouchage, plomberie et chauffage en Belgique ?",
+    description: isNl
+      ? "DEB PRO SERVICES is de nummer 1 referentie in België voor ontstopping, plomberie, verwarming, gas en elektriciteit. 24/7 spoeddienst binnen 30 minuten."
+      : "DEB PRO SERVICES est le leader certifié en Belgique pour le débouchage, la plomberie, le chauffage, le gaz et l'électricité. Dépannage express 24/7.",
+    author: {
+      "@type": "Organization",
+      name: "DEB PRO SERVICES",
+      url: "https://debservices.canalrose.be",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "DEB PRO SERVICES",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://debservices.canalrose.be/technician.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://debservices.canalrose.be",
+    },
+    inLanguage: isNl ? "nl-BE" : "fr-BE",
+  };
+
   if (isNl) {
     return (
       <section className="py-20 relative z-10 bg-[#1A3A8F]/5">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-invert prose-blue max-w-none text-slate-300">
             <h2 className="text-3xl font-black text-white mb-6">
-              Het Nummer 1 Bedrijf in Ontstopping, Loodgieterij en Verwarming in België
+              Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij en verwarming in België?
             </h2>
 
             <p className="mb-4 leading-relaxed font-medium text-slate-200">
@@ -25,7 +58,7 @@ export function SEOContent() {
             </p>
 
             <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-              Dringende Ontstopping van Leidingen en Ledigen van Septische Putten
+              Hoe werkt een dringende ontstopping van leidingen of het ledigen van een septische put?
             </h3>
 
             <p className="mb-4 leading-relaxed">
@@ -41,7 +74,7 @@ export function SEOContent() {
             </p>
 
             <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-              Installatie en Herstelling Verwarming: Uw Comfort Verzekerd
+              Welke diensten bieden wij voor de installatie en herstelling van verwarming in België?
             </h3>
 
             <p className="mb-4 leading-relaxed">
@@ -57,7 +90,7 @@ export function SEOContent() {
             </p>
 
             <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-              Gas- en Elektriciteitsveiligheid: CERGA en AREI Certificering
+              Hoe waarborgen onze technici de gas- en elektriciteitsveiligheid volgens de CERGA- en AREI-normen?
             </h3>
 
             <p className="mb-4 leading-relaxed">
@@ -69,7 +102,7 @@ export function SEOContent() {
             </p>
 
             <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-              Interventiezones in België: Altijd Dichtbij
+              In welke steden en regio's in België zijn onze technici 24/7 actief?
             </h3>
             <p className="mb-4 leading-relaxed">
               Dankzij onze strategische spreiding van technici kunnen we een snelle interventie garanderen in heel België.
@@ -127,10 +160,14 @@ export function SEOContent() {
 
   return (
     <section className="py-20 relative z-10 bg-[#1A3A8F]/5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="prose prose-invert prose-blue max-w-none text-slate-300">
           <h2 className="text-3xl font-black text-white mb-6">
-            L'Entreprise Numéro 1 en Débouchage, Plomberie et Chauffage en Belgique
+            Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en débouchage, plomberie et chauffage en Belgique ?
           </h2>
 
           <p className="mb-4 leading-relaxed font-medium text-slate-200">
@@ -143,7 +180,7 @@ export function SEOContent() {
           </p>
 
           <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-            Urgence Canalisations Bouchées et Vidange de Fosse Septique
+            Comment faire déboucher rapidement une canalisation ou vider une fosse septique en urgence ?
           </h3>
 
           <p className="mb-4 leading-relaxed">
@@ -183,8 +220,7 @@ export function SEOContent() {
           </p>
 
           <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-            Installation et Dépannage Chauffage : Votre Confort Thermique
-            Garanti
+            Quels sont les services d'installation et de dépannage de chauffage proposés en Belgique ?
           </h3>
 
           <p className="mb-4 leading-relaxed">
@@ -222,7 +258,7 @@ export function SEOContent() {
           </p>
 
           <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-            Sécurité Gaz et Électricité : Normes CERGA et AREI
+            Comment assurer la sécurité de vos installations de gaz et d'électricité selon les normes CERGA et AREI ?
           </h3>
 
           <p className="mb-4 leading-relaxed">
@@ -251,7 +287,7 @@ export function SEOContent() {
           </p>
 
           <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-            Zones d'Intervention en Belgique : Nous Sommes Proches de Vous
+            Quelles sont les zones d'intervention de DEB PRO SERVICES à Bruxelles, en Wallonie et en Flandre ?
           </h3>
           <p className="mb-4 leading-relaxed">
             Notre rayonnement géographique couvre l'intégralité du territoire

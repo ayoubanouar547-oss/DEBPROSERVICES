@@ -102,6 +102,27 @@ export default async function SubServicePage({
             "@context": "https://schema.org",
             "@graph": [
               {
+                "@type": "Article",
+                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}#article`,
+                headline: `Pourquoi choisir DEB PRO SERVICES pour votre ${subServiceInfo.title} en Belgique ?`,
+                description: subServiceInfo.desc,
+                author: {
+                  "@type": "Organization",
+                  name: "Deb Pro Service",
+                  url: "https://debservices.canalrose.be",
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: "Deb Pro Service",
+                  url: "https://debservices.canalrose.be",
+                },
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}`,
+                },
+                inLanguage: "fr-BE",
+              },
+              {
                 "@type": "Service",
                 "@id": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}#service`,
                 name: `${subServiceInfo.title}`,
@@ -288,7 +309,7 @@ export default async function SubServicePage({
           <div className="grid lg:grid-cols-12 gap-16">
             <div className="lg:col-span-8 space-y-10">
               <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.1] uppercase tracking-tight">
-                Expertise professionnelle en {subServiceInfo.title}
+                Pourquoi faire appel à nos experts pour votre {subServiceInfo.title} en Belgique ?
               </h2>
 
               {/* Secondary Images Gallery */}
@@ -373,12 +394,12 @@ export default async function SubServicePage({
                 <div dangerouslySetInnerHTML={{ __html: paragraphs[1] }} />
 
                 <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">
-                  Sécurité et Transparence
+                  Quelles sont nos garanties de sécurité et de transparence tarifaire ?
                 </h3>
                 <div dangerouslySetInnerHTML={{ __html: paragraphs[2] }} />
 
                 <h3 className="text-3xl font-black text-white mt-12 mb-6 uppercase tracking-tight">
-                  Actif partout en Belgique
+                  Dans quelles communes en Belgique nos techniciens interviennent-ils 24/7 ?
                 </h3>
                 <div dangerouslySetInnerHTML={{ __html: paragraphs[3] }} />
 

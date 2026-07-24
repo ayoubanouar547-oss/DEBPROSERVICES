@@ -38,6 +38,27 @@ export default function Home() {
                 "url": "https://debservices.canalrose.be"
               },
               {
+                "@type": "Article",
+                "@id": "https://debservices.canalrose.be/#article",
+                "headline": "Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en débouchage, plomberie et chauffage en Belgique ?",
+                "description": "DEB PRO SERVICES en Belgique : Entreprise certifiée multiservice pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, Caméras & Panneaux Solaires.",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Deb Pro Service",
+                  "url": "https://debservices.canalrose.be"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Deb Pro Service",
+                  "url": "https://debservices.canalrose.be"
+                },
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": "https://debservices.canalrose.be"
+                },
+                "inLanguage": "fr-BE"
+              },
+              {
                 "@type": "LocalBusiness",
                 "name": "Deb Pro Service",
                 "image": "https://debservices.canalrose.be/technician.png",

@@ -61,7 +61,7 @@ export function ServiceSeoText({ serviceTitle, cityName }: ServiceSeoProps) {
           </p>
 
           <h3 className="text-2xl font-bold text-white mt-12 mb-6">
-            Technische expertise en ultramodern materiaal {cityName ? `in ${cityName}` : ""}
+            {localizeNl(`Waarom is onze technische expertise en apparatuur de beste keuze voor ${serviceTitle} in België ?`)}
           </h3>
           <p className="mb-6 leading-relaxed">
             Een goede interventie voor <strong>{serviceTitle.toLowerCase()}</strong> vereist twee elementen: een deskundige expert en performante gereedschappen. Wij investeren voortdurend in lekdetectie via thermische camera&apos;s, hogedrukmachines voor de meest complexe ontstoppingen, en HD endoscopische camera&apos;s voor leidingen. Onze technici volgen regelmatig opleidingen om op de hoogte te blijven van de nieuwste innovaties op het gebied van verwarming, zonnepanelen of camerabewaking.
@@ -124,7 +124,7 @@ export function ServiceSeoText({ serviceTitle, cityName }: ServiceSeoProps) {
         </p>
 
         <h3 className="text-2xl font-bold text-white mt-12 mb-6">
-          Expertise technique et matériel de pointe {cityName ? `à ${cityName}` : ""}
+          {localizeFr(`Quelle est notre expertise technique et quel matériel de pointe utilisons-nous pour ${serviceTitle} en Belgique ?`)}
         </h3>
         <p className="mb-6 leading-relaxed">
           Une bonne intervention de{" "}

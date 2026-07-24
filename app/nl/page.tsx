@@ -23,6 +23,27 @@ export default function Home() {
                 "url": "https://debservices.canalrose.be/nl"
               },
               {
+                "@type": "Article",
+                "@id": "https://debservices.canalrose.be/nl#article",
+                "headline": "Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij en verwarming in België?",
+                "description": "DEB PRO SERVICES in België: Gecertificeerd bedrijf voor Ontstopping 24/7, Loodgieterij, Verwarming, Gas CERGA, Elektriciteit AREI, Airco & Zonnepanelen.",
+                "author": {
+                  "@type": "Organization",
+                  "name": "Deb Pro Service",
+                  "url": "https://debservices.canalrose.be"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Deb Pro Service",
+                  "url": "https://debservices.canalrose.be"
+                },
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": "https://debservices.canalrose.be/nl"
+                },
+                "inLanguage": "nl-BE"
+              },
+              {
                 "@type": "LocalBusiness",
                 name: "Deb Pro Service",
                 image: "https://debservices.canalrose.be/technician.png",
