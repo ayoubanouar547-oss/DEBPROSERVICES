@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://debservices.canalrose.be"),
   title: {
     template: "%s",
-    default: "DEB PRO SERVICES Belgique 🚀 Plomberie, Chauffage, Électricité, Gaz, Caméras, Solaires & Climatisation 24/7",
+    default: "Debservices - DEB PRO SERVICES Belgique 🚀 Plomberie, Chauffage, Électricité, Gaz, Caméras, Solaires & Climatisation 24/7",
   },
   description:
     "DEB PRO SERVICES en Belgique : plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture, rénovation, jardinage & vitres. Intervention rapide 24/7.",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     description:
       "Services complets en Belgique 24/7 : Plomberie, Chauffage, Gaz, Électricité, Climatisation, Ventilation, Caméras de surveillance, Panneaux solaires, Vidange fosse septique, Rénovation & Dépannage rapide.",
     url: "https://debservices.canalrose.be",
-    siteName: "Deb Pro Service",
+    siteName: "Debservices - DEB PRO SERVICES",
     images: [
       {
         url: "https://picsum.photos/seed/debpro/1200/630",
@@ -188,12 +188,52 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "Deb Pro Service",
-              "url": "https://debservices.canalrose.be",
-            })
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "@id": "https://debservices.canalrose.be/#organization",
+                "name": "DEB PRO SERVICES",
+                "alternateName": "Debservices",
+                "url": "https://debservices.canalrose.be",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://debservices.canalrose.be/logo.png",
+                  "width": "512",
+                  "height": "512"
+                },
+                "contactPoint": {
+                  "@type": "ContactPoint",
+                  "telephone": "+32496325733",
+                  "contactType": "customer service",
+                  "areaServed": "BE",
+                  "availableLanguage": ["French", "Dutch", "English"]
+                },
+                "sameAs": [
+                  "https://www.facebook.com/debservices",
+                  "https://www.instagram.com/debservices",
+                  "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x"
+                ]
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": "https://debservices.canalrose.be/#website",
+                "name": "DEB PRO SERVICES",
+                "url": "https://debservices.canalrose.be",
+                "publisher": {
+                  "@id": "https://debservices.canalrose.be/#organization"
+                },
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": "https://debservices.canalrose.be/search?q={search_term_string}"
+                  },
+                  "query-input": "required name=search_term_string"
+                }
+              }
+            ])
           }}
         />
 

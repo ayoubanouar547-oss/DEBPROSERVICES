@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -72,6 +73,7 @@ export default function ChatBot() {
         },
       ]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNl]);
 
   const [rollingSummary, setRollingSummary] = useState<string>("");
@@ -306,12 +308,13 @@ export default function ChatBot() {
             className="pointer-events-auto mb-2.5 bg-[#000d26]/95 backdrop-blur-md border border-cyan-500/50 text-white p-3 sm:p-3.5 rounded-2xl shadow-2xl max-w-[280px] sm:max-w-xs text-xs relative flex items-start gap-2.5 sm:gap-3"
           >
             <div className="relative flex-shrink-0">
-              <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-md">
-                <img
+              <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-md relative overflow-hidden">
+                <Image
                   src={SOFIA_AVATAR_URL}
-                  onError={(e) => { e.currentTarget.src = SOFIA_AVATAR_REMOTE_FALLBACK; }}
                   alt="Assistant Sofia"
-                  className="w-full h-full rounded-full object-cover"
+                  fill
+                  className="rounded-full object-cover"
+                  referrerPolicy="no-referrer"
                 />
               </div>
               <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-[#000d26] rounded-full"></span>
@@ -348,14 +351,15 @@ export default function ChatBot() {
             <X className="w-6 h-6 text-white" />
           </div>
         ) : (
-          <div className="relative w-full h-full">
-            <img
+          <div className="relative w-full h-full rounded-full overflow-hidden">
+            <Image
               src={SOFIA_AVATAR_URL}
-              onError={(e) => { e.currentTarget.src = SOFIA_AVATAR_REMOTE_FALLBACK; }}
               alt="Sofia - Girl avatar"
-              className="w-full h-full rounded-full object-cover"
+              fill
+              className="rounded-full object-cover"
+              referrerPolicy="no-referrer"
             />
-            <span className="absolute bottom-0 right-0 flex h-3.5 w-3.5">
+            <span className="absolute bottom-0 right-0 flex h-3.5 w-3.5 z-10">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-[#000d26]"></span>
             </span>
@@ -370,20 +374,21 @@ export default function ChatBot() {
         onClick={() => setIsOpen(!isOpen)}
         className="pointer-events-auto hidden md:flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 text-white rounded-full shadow-lg shadow-cyan-950/70 border border-cyan-400/50 hover:border-cyan-300 transition-all duration-300 group"
       >
-        <div className="relative flex-shrink-0 w-7 h-7">
+        <div className="relative flex-shrink-0 w-7 h-7 rounded-full overflow-hidden">
           {isOpen ? (
             <div className="w-7 h-7 rounded-full bg-slate-900/80 border border-white/20 flex items-center justify-center">
               <X className="w-4 h-4 text-white" />
             </div>
           ) : (
             <>
-              <img
+              <Image
                 src={SOFIA_AVATAR_URL}
-                onError={(e) => { e.currentTarget.src = SOFIA_AVATAR_REMOTE_FALLBACK; }}
                 alt="Assistant Sofia"
-                className="w-7 h-7 rounded-full object-cover border border-white/90 shadow-sm"
+                fill
+                className="rounded-full object-cover border border-white/90 shadow-sm"
+                referrerPolicy="no-referrer"
               />
-              <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
+              <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5 z-10">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-blue-900"></span>
               </span>
@@ -416,15 +421,16 @@ export default function ChatBot() {
             <div className="bg-gradient-to-r from-slate-900 via-[#011438] to-slate-900 p-4 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative flex-shrink-0">
-                  <div className="w-11 h-11 rounded-full p-0.5 bg-gradient-to-tr from-cyan-400 to-blue-600 shadow-lg shadow-cyan-500/20">
-                    <img
+                  <div className="w-11 h-11 rounded-full p-0.5 bg-gradient-to-tr from-cyan-400 to-blue-600 shadow-lg shadow-cyan-500/20 relative overflow-hidden">
+                    <Image
                       src={SOFIA_AVATAR_URL}
-                      onError={(e) => { e.currentTarget.src = SOFIA_AVATAR_REMOTE_FALLBACK; }}
                       alt="Assistant Sofia"
-                      className="w-full h-full rounded-full object-cover"
+                      fill
+                      className="rounded-full object-cover"
+                      referrerPolicy="no-referrer"
                     />
                   </div>
-                  <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#000918] rounded-full ring-2 ring-emerald-500/30 animate-pulse"></span>
+                  <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#000918] rounded-full ring-2 ring-emerald-500/30 animate-pulse z-10"></span>
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
@@ -568,12 +574,13 @@ export default function ChatBot() {
                   }`}
                 >
                   {msg.role === "assistant" && (
-                    <div className="w-8 h-8 rounded-full border border-cyan-400/60 overflow-hidden flex-shrink-0 mt-1 shadow-sm">
-                      <img
+                    <div className="w-8 h-8 rounded-full border border-cyan-400/60 overflow-hidden flex-shrink-0 mt-1 shadow-sm relative">
+                      <Image
                         src={SOFIA_AVATAR_URL}
-                        onError={(e) => { e.currentTarget.src = SOFIA_AVATAR_REMOTE_FALLBACK; }}
                         alt="Assistant Sofia"
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        referrerPolicy="no-referrer"
                       />
                     </div>
                   )}
@@ -635,12 +642,13 @@ export default function ChatBot() {
 
               {isLoading && (
                 <div className="flex gap-2.5 items-center my-2">
-                  <div className="w-8 h-8 rounded-full border border-cyan-400/60 overflow-hidden flex-shrink-0">
-                    <img
+                  <div className="w-8 h-8 rounded-full border border-cyan-400/60 overflow-hidden flex-shrink-0 relative">
+                    <Image
                       src={SOFIA_AVATAR_URL}
-                      onError={(e) => { e.currentTarget.src = SOFIA_AVATAR_REMOTE_FALLBACK; }}
                       alt="Sofia"
-                      className="w-full h-full object-cover animate-pulse"
+                      fill
+                      className="object-cover animate-pulse"
+                      referrerPolicy="no-referrer"
                     />
                   </div>
                   <div className="bg-slate-900 border border-slate-800 px-3.5 py-2.5 rounded-2xl rounded-tl-none flex items-center gap-2 shadow-md">

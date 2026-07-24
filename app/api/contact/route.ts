@@ -51,18 +51,26 @@ export async function POST(req: Request) {
               const matches = base64Str.match(/^data:(image\/[a-zA-Z]+);base64,(.+)$/);
               const contentType = matches ? matches[1] : "image/jpeg";
               const ext = contentType.split("/")[1] || "jpg";
-              const content = matches ? matches[2] : base64Str;
+              const base64Content = matches ? matches[2] : base64Str;
+              
               return {
                 filename: `photo_fuite_${idx + 1}.${ext}`,
-                content: content,
+                content: Buffer.from(base64Content, 'base64'),
+                contentType: contentType,
               };
             })
           : undefined;
 
         const recipient = process.env.NOTIFICATION_EMAIL || "debproservices@canalrose.be";
-        const sender = process.env.RESEND_FROM_EMAIL || "Contact Site <onboarding@resend.dev>";
+        const sender = process.env.RESEND_FROM_EMAIL || "DEB PRO <onboarding@resend.dev>";
 
-        await resend.emails.send({
+        console.log(`Attempting to send contact form email to: ${recipient} from: ${sender}`);
+
+        if (!process.env.RESEND_API_KEY) {
+          console.error("CRITICAL: RESEND_API_KEY is missing. Emails will not be sent.");
+        }
+
+        const { data: resendData, error: resendError } = await resend.emails.send({
           from: sender,
           to: recipient,
           subject: `Nouvelle demande - ${data.service.toUpperCase()} - ${data.ville}${data.photos && data.photos.length > 0 ? ` [📷 ${data.photos.length} Photo(s)]` : ""}`,
@@ -79,6 +87,12 @@ export async function POST(req: Request) {
           `,
           attachments: attachments,
         });
+
+        if (resendError) {
+          console.error("Resend API Error (Contact Form):", resendError);
+        } else {
+          console.log("Contact form email sent successfully:", resendData?.id);
+        }
       } catch (emailError) {
         console.error("Resend email error in contact API:", emailError);
       }

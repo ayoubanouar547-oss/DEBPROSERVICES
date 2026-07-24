@@ -109,8 +109,10 @@ async function saveLeadToSheetAndEmail(lead: {
   if (process.env.RESEND_API_KEY) {
     try {
       const recipient = process.env.NOTIFICATION_EMAIL || "debproservices@canalrose.be";
-      const sender = process.env.RESEND_FROM_EMAIL || "Chatbot Sofia <onboarding@resend.dev>";
-      await resend.emails.send({
+      const sender = process.env.RESEND_FROM_EMAIL || "DEB PRO <onboarding@resend.dev>";
+      console.log(`Attempting to send chatbot lead email to: ${recipient} from: ${sender}`);
+      
+      const { data, error } = await resend.emails.send({
         from: sender,
         to: recipient,
         subject: `🤖 Nouveau RDV Chatbot - ${serviceVal.toUpperCase()} - ${cityVal}`,
@@ -125,6 +127,12 @@ async function saveLeadToSheetAndEmail(lead: {
           <p><strong>Date / Heure:</strong> ${dateStr}</p>
         `,
       });
+
+      if (error) {
+        console.error("Resend API Error (Chatbot):", error);
+      } else {
+        console.log("Chatbot email sent successfully:", data?.id);
+      }
     } catch (emailErr) {
       console.error("Error sending chatbot email notification:", emailErr);
     }

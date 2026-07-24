@@ -383,7 +383,7 @@ export default async function ServicePage({
                 description: descriptionText,
                 brand: {
                   "@type": "Brand",
-                  name: "Deb Pro Service",
+                  name: "Debservices - DEB PRO SERVICES",
                 },
                 aggregateRating: {
                   "@type": "AggregateRating",
@@ -421,7 +421,8 @@ export default async function ServicePage({
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "Deb Pro Service",
+                name: "Debservices - DEB PRO SERVICES",
+                alternateName: ["Debservices", "DEB PRO SERVICES", "Deb Pro Service"],
                 image: "https://debservices.canalrose.be/logo.png",
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",

@@ -45,7 +45,8 @@ export default function Home() {
               },
               {
                 "@type": "LocalBusiness",
-                name: "Deb Pro Service",
+                "name": "DEB PRO SERVICES",
+                "alternateName": ["Debservices", "Deb Pro Service"],
                 image: "https://debservices.canalrose.be/technician.png",
                 "@id": "https://debservices.canalrose.be",
                 url: "https://debservices.canalrose.be/nl",

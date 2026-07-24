@@ -44,12 +44,14 @@ export default function Home() {
                 "description": "DEB PRO SERVICES en Belgique : Entreprise certifiée multiservice pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, Caméras & Panneaux Solaires.",
                 "author": {
                   "@type": "Organization",
-                  "name": "Deb Pro Service",
+                  "name": "DEB PRO SERVICES",
+                  "alternateName": "Debservices",
                   "url": "https://debservices.canalrose.be"
                 },
                 "publisher": {
                   "@type": "Organization",
-                  "name": "Deb Pro Service",
+                  "name": "DEB PRO SERVICES",
+                  "alternateName": "Debservices",
                   "url": "https://debservices.canalrose.be"
                 },
                 "mainEntityOfPage": {
@@ -60,12 +62,14 @@ export default function Home() {
               },
               {
                 "@type": "LocalBusiness",
-                "name": "Deb Pro Service",
+                "name": "DEB PRO SERVICES",
+                "alternateName": ["Debservices", "Deb Pro Service"],
                 "image": "https://debservices.canalrose.be/technician.png",
                 "@id": "https://debservices.canalrose.be/#organization",
                 "url": "https://debservices.canalrose.be",
                 "telephone": "+32496325733",
-                "priceRange": "$$",
+                "email": "info@debservices.canalrose.be",
+                "priceRange": "€€",
                 "aggregateRating": {
                   "@type": "AggregateRating",
                   "ratingValue": "4.9",
@@ -77,6 +81,7 @@ export default function Home() {
                   "@type": "PostalAddress",
                   "streetAddress": "Centre-ville",
                   "addressLocality": "Bruxelles",
+                  "addressRegion": "Bruxelles-Capitale",
                   "postalCode": "1000",
                   "addressCountry": "BE",
                 },

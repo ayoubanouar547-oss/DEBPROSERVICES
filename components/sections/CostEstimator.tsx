@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { 
   Wrench, Flame, Droplets, Zap, Wind, Truck, Home, Sun, Camera, Sparkles, Trees,
@@ -665,7 +665,7 @@ export function CostEstimator() {
   const selectedSubService = selectedCategory.subServices.find((s) => s.id === selectedSubServiceId) || selectedCategory.subServices[0];
   const selectedUrgency = urgenciesList.find((u) => u.id === selectedUrgencyId) || urgenciesList[0];
 
-  const customQuestions = SERVICE_CUSTOM_QUESTIONS[selectedCategory.id] || [];
+  const customQuestions = useMemo(() => SERVICE_CUSTOM_QUESTIONS[selectedCategory.id] || [], [selectedCategory.id]);
 
   // Reset custom options when changing category
   const handleCategoryChange = (cat: ServiceCategory) => {

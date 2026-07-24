@@ -103,8 +103,11 @@ export async function POST(req: Request) {
     if (process.env.RESEND_API_KEY) {
       try {
         const recipient = process.env.NOTIFICATION_EMAIL || "debproservices@canalrose.be";
-        const sender = process.env.RESEND_FROM_EMAIL || "Réservation DEB PRO <onboarding@resend.dev>";
-        await resend.emails.send({
+        const sender = process.env.RESEND_FROM_EMAIL || "DEB PRO <onboarding@resend.dev>";
+        
+        console.log(`Attempting to send booking email to: ${recipient} from: ${sender}`);
+
+        const { data: resendData, error: resendError } = await resend.emails.send({
           from: sender,
           to: recipient,
           subject: `📅 Nouvelle Réservation Intervenant - ${serviceVal.toUpperCase()} le ${bookingDateVal} (${timeSlotVal})`,
@@ -128,6 +131,12 @@ export async function POST(req: Request) {
             </div>
           `,
         });
+
+        if (resendError) {
+          console.error("Resend API Error (Booking):", resendError);
+        } else {
+          console.log("Booking email sent successfully:", resendData?.id);
+        }
       } catch (emailErr) {
         console.error("Error sending email via Resend:", emailErr);
       }
