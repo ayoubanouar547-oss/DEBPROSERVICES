@@ -80,10 +80,10 @@ export function Hero() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={serviceIndex}
-                  initial={{ y: 30, opacity: 0, filter: "blur(10px)" }}
-                  animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                  exit={{ y: -30, opacity: 0, filter: "blur(10px)" }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                   className="flex flex-col sm:flex-row sm:items-baseline gap-y-2 sm:gap-x-4"
                 >
                   <span
@@ -188,15 +188,15 @@ export function Hero() {
 
       {/* Hero Image Side */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, filter: "blur(20px)" }}
-        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-        transition={{ duration: 1.2, delay: 0.2 }}
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
         className="col-span-1 lg:col-span-5 flex items-center justify-center mt-12 lg:mt-0 relative"
       >
         <div className="relative aspect-[4/5] w-full max-w-[320px] lg:max-w-xl mx-auto flex items-end justify-center group">
-          <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-[100px] transition-all duration-700 group-hover:bg-cyan-500/30" />
-          <div className="absolute top-1/4 right-0 w-32 h-32 bg-cyan-400/30 rounded-full blur-[60px]" />
-          <div className="absolute bottom-1/4 left-0 w-40 h-40 bg-indigo-500/20 rounded-full blur-[70px]" />
+          <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-[80px] transition-all duration-700 group-hover:bg-cyan-500/30" />
+          <div className="absolute top-1/4 right-0 w-32 h-32 bg-cyan-400/30 rounded-full blur-[50px]" />
+          <div className="absolute bottom-1/4 left-0 w-40 h-40 bg-indigo-500/20 rounded-full blur-[50px]" />
 
           <div className="relative z-10 w-full h-[120%] flex items-end justify-center transform transition-transform duration-700 group-hover:scale-105 group-hover:-translate-y-4">
             <Image
@@ -204,8 +204,9 @@ export function Hero() {
               alt={isNl ? "Gekwalificeerde DEB PRO SERVICES technicus klaar voor een dringende interventie" : "Technicien qualifié DEB PRO SERVICES prêt pour une intervention urgente"}
               fill
               referrerPolicy="no-referrer"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 640px) 280px, (max-width: 1024px) 450px, 550px"
               priority={true}
+              quality={80}
               className="object-contain object-bottom drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] filter contrast-110 saturate-110"
             />
           </div>

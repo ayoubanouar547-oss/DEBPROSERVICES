@@ -34,6 +34,9 @@ interface Message {
     service: string;
     ville: string;
     date: string;
+    email?: string;
+    "Mot de passe"?: string;
+    [key: string]: any;
   };
   formType?: "appointment" | "quote";
   timestamp: string;
@@ -600,8 +603,8 @@ export default function ChatBot() {
                         </div>
                         <div className="grid grid-cols-2 gap-1 text-[11px] text-slate-300">
                           <div><strong>Nom:</strong> {msg.appointment.nom}</div>
-                          {msg.appointment["Mot de passe"] && msg.appointment["Mot de passe"] !== "Non fourni" && (
-                            <div><strong>Code:</strong> {msg.appointment["Mot de passe"]}</div>
+                          {(msg.appointment as Record<string, any>)["Mot de passe"] && (msg.appointment as Record<string, any>)["Mot de passe"] !== "Non fourni" && (
+                            <div><strong>Code:</strong> {(msg.appointment as Record<string, any>)["Mot de passe"]}</div>
                           )}
                           <div><strong>Tél:</strong> {msg.appointment.telephone}</div>
                           <div><strong>Email:</strong> {msg.appointment.email || "Non fourni"}</div>

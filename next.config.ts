@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion", "motion"],
+  },
   async rewrites() {
     return [];
   },
@@ -29,16 +32,28 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "index, follow" },
         ],
       },
+      {
+        source: "/:path*.(png|jpg|jpeg|gif|webp|avif|svg|ico|woff|woff2)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
-  // Allow access to remote image placeholder.
   images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "picsum.photos",
         port: "",
-        pathname: "/**", // This allows any path under the hostname
+        pathname: "/**",
       },
       {
         protocol: "https",
@@ -48,7 +63,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "www.debouchageexpress24-24h.be", // logo hostname
+        hostname: "www.debouchageexpress24-24h.be",
         port: "",
         pathname: "/**",
       },
@@ -80,7 +95,6 @@ const nextConfig: NextConfig = {
   },
   transpilePackages: ["motion"],
   webpack: (config, { dev }) => {
-    // Configuration de watch pour l'environnement de developpement
     if (dev && process.env.DISABLE_HMR === "true") {
       config.watchOptions = {
         ignored: /.*/,

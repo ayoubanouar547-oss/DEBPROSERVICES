@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Oswald } from "next/font/google";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { PreFooterLinks } from "@/components/layout/PreFooterLinks";
-import { CookieBanner } from "@/components/layout/CookieBanner";
 import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
-import ChatBot from "@/components/layout/ChatBot";
+import { ClientWidgets } from "@/components/layout/ClientWidgets";
+
+const PreFooterLinks = dynamic(() => import("@/components/layout/PreFooterLinks").then(m => m.PreFooterLinks));
 
 const inter = Inter({
   subsets: ["latin"],
@@ -110,43 +111,6 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  if (typeof window !== "undefined") {
-                    var currentFetch = window.fetch || (typeof fetch !== "undefined" ? fetch : null);
-                    if (currentFetch) {
-                      var patched = false;
-                      var targets = [
-                        window,
-                        Window.prototype,
-                        Object.getPrototypeOf(window),
-                        Object.prototype
-                      ];
-                      for (var i = 0; i < targets.length; i++) {
-                        try {
-                          var target = targets[i];
-                          if (target) {
-                            Object.defineProperty(target, 'fetch', {
-                              get: function() { return currentFetch; },
-                              set: function(val) { currentFetch = val; },
-                              configurable: true,
-                              enumerable: true
-                            });
-                            patched = true;
-                            break;
-                          }
-                        } catch (err) {
-                          // Try next target
-                        }
-                      }
-                      if (!patched) {
-                        console.warn("Failed to patch window.fetch with getter/setter on any target");
-                      }
-                    }
-                  }
-                } catch (e) {
-                  console.warn("Failed to patch window.fetch to be writable:", e);
-                }
-                
-                try {
                   var savedTheme = localStorage.getItem('theme');
                   if (savedTheme === 'light') {
                     document.documentElement.classList.add('light-theme');
@@ -158,8 +122,10 @@ export default function RootLayout({
             `
           }}
         />
-        <link rel="preconnect" href="https://debouchageexpress24hh.odoo.com" />
-        <link rel="preconnect" href="https://www.debouchageexpress24-24h.be" />
+        <link rel="dns-prefetch" href="https://debouchageexpress24hh.odoo.com" />
+        <link rel="dns-prefetch" href="https://deb-pro-service.odoo.com" />
+        <link rel="preconnect" href="https://debouchageexpress24hh.odoo.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.debouchageexpress24-24h.be" crossOrigin="anonymous" />
       </head>
       <body
         className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
@@ -241,8 +207,7 @@ export default function RootLayout({
         <main className="flex-1 relative z-10">{children}</main>
         <PreFooterLinks />
         <Footer />
-        <CookieBanner />
-        <ChatBot />
+        <ClientWidgets />
         <MobileBottomNav />
         <Script
           id="microsoft-clarity"

@@ -397,6 +397,7 @@ export function Testimonials() {
                                src={review.image}
                                alt={`Photo de profil de ${review.name}`}
                                fill
+                               sizes="56px"
                                className="object-cover"
                                referrerPolicy="no-referrer"
                              />
