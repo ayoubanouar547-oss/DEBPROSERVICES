@@ -272,7 +272,7 @@ export function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="max-w-2xl"
@@ -297,7 +297,7 @@ export function Testimonials() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 1, scale: 1 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className={`backdrop-blur-xl px-8 py-5 rounded-[2rem] border ${theme.border} flex items-center gap-5 bg-white/5 shadow-2xl relative overflow-hidden`}
@@ -368,9 +368,9 @@ export function Testimonials() {
                   return (
                     <motion.div
                       key={`${currentIndex}-${idx}`}
-                      initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                      initial={{ opacity: 1, scale: 1, y: 0 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.9, y: -30 }}
+                      exit={{ opacity: 1, scale: 1, y: -30 }}
                       transition={{ type: "spring", stiffness: 100, damping: 20 }}
                       className={`${isVisibleMobile ? "flex" : "hidden md:flex"} ${!isVisibleTablet && "md:hidden lg:flex"} flex-col ${theme.bgConfig} backdrop-blur-3xl p-10 rounded-[2.5rem] border ${theme.border} ${theme.glow} relative hover:border-white/20 transition-all duration-500 hover:-translate-y-2`}
                     >

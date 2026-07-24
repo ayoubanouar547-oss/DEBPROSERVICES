@@ -113,7 +113,7 @@ export function FAQ({
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
@@ -147,7 +147,7 @@ export function FAQ({
             const isOpen = openIndex === index;
             return (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
@@ -172,9 +172,9 @@ export function FAQ({
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
+                      initial={{ height: 0, opacity: 1 }}
                       animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
+                      exit={{ height: 0, opacity: 1 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <div className="px-8 pb-8 text-slate-400 text-base leading-relaxed">

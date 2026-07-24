@@ -53,7 +53,7 @@ export function Hero() {
     <section className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 px-4 sm:px-6 lg:px-12 py-10 pt-32 min-h-[90vh] items-center max-w-[1600px] mx-auto">
       <div className="col-span-1 lg:col-span-7 flex flex-col justify-center relative">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="flex flex-wrap gap-2 sm:gap-3 mb-8"
@@ -71,7 +71,7 @@ export function Hero() {
 
         <div className="space-y-6">
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-black leading-[0.95] mb-8"
@@ -80,9 +80,9 @@ export function Hero() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={serviceIndex}
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={{ y: 0, opacity: 1 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
+                  exit={{ y: -20, opacity: 1 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className="flex flex-col sm:flex-row sm:items-baseline gap-y-2 sm:gap-x-4"
                 >
@@ -103,7 +103,7 @@ export function Hero() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed font-medium"
@@ -118,7 +118,7 @@ export function Hero() {
 
         {/* CTA Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 pt-6"
@@ -145,7 +145,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-16 flex flex-wrap items-center gap-8 md:gap-12"
@@ -188,7 +188,7 @@ export function Hero() {
 
       {/* Hero Image Side */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
+        initial={{ opacity: 1, scale: 1 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.1 }}
         className="col-span-1 lg:col-span-5 flex items-center justify-center mt-12 lg:mt-0 relative"
