@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
+import { postToGoogleSheets } from "@/lib/googleSheets";
 
 const schema = z.object({
   nom: z.string().min(2).max(100).trim(),
@@ -92,52 +93,46 @@ export async function POST(req: Request) {
         const dateStr = new Date().toLocaleString("fr-BE", {
           timeZone: "Europe/Brussels",
         });
-        await fetch(process.env.GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            // Exact column headers matching Google Sheet layout:
-            // Date / Heure | Nom | Téléphone | Email | Service | Ville / Adresse | Message
-            "Date / Heure": dateStr,
-            "Nom": data.nom,
-            "Téléphone": data.telephone,
-            "Email": data.email || "Non fourni",
-            "Service": data.service,
-            "Ville / Adresse": data.ville,
-            "Message": data.message,
+        await postToGoogleSheets(process.env.GOOGLE_SCRIPT_URL, {
+          // Exact column headers matching Google Sheet layout:
+          // Date / Heure | Nom | Téléphone | Email | Service | Ville / Adresse | Message
+          "Date / Heure": dateStr,
+          "Nom": data.nom,
+          "Téléphone": data.telephone,
+          "Email": data.email || "Non fourni",
+          "Service": data.service,
+          "Ville / Adresse": data.ville,
+          "Message": data.message,
 
-            // Accent-free variations
-            "Date": dateStr,
-            "Telephone": data.telephone,
-            "Ville": data.ville,
-            "Adresse": data.ville,
+          // Accent-free variations
+          "Date": dateStr,
+          "Telephone": data.telephone,
+          "Ville": data.ville,
+          "Adresse": data.ville,
 
-            // Primary French lowercase keys
-            "nom": data.nom,
-            "telephone": data.telephone,
-            "email": data.email || "Non fourni",
-            "service": data.service,
-            "ville": data.ville,
-            "message": data.message,
-            "date": dateStr,
+          // Primary French lowercase keys
+          "nom": data.nom,
+          "telephone": data.telephone,
+          "email": data.email || "Non fourni",
+          "service": data.service,
+          "ville": data.ville,
+          "message": data.message,
+          "date": dateStr,
 
-            // English & standard Google Sheet column aliases
-            "name": data.nom,
-            "phone": data.telephone,
-            "city": data.ville,
-            "address": data.ville,
-            "details": data.message,
-            "timestamp": dateStr,
+          // English & standard Google Sheet column aliases
+          "name": data.nom,
+          "phone": data.telephone,
+          "city": data.ville,
+          "address": data.ville,
+          "details": data.message,
+          "timestamp": dateStr,
 
-            // Additional common column keys
-            "fullName": data.nom,
-            "phoneNumber": data.telephone,
-            "location": data.ville,
-            "serviceType": data.service,
-            "source": "Formulaire de Contact Site",
-          }),
+          // Additional common column keys
+          "fullName": data.nom,
+          "phoneNumber": data.telephone,
+          "location": data.ville,
+          "serviceType": data.service,
+          "source": "Formulaire de Contact Site",
         });
       } catch (sheetError) {
         console.error("Error sending to Google Sheets:", sheetError);

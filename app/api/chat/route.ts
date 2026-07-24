@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { GoogleGenAI, Type } from "@google/genai";
+import { postToGoogleSheets } from "@/lib/googleSheets";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder");
 
@@ -15,6 +16,11 @@ function getGeminiClient(): GoogleGenAI | null {
   if (!aiClient) {
     aiClient = new GoogleGenAI({
       apiKey: key,
+      httpOptions: {
+        headers: {
+          "User-Agent": "aistudio-build",
+        },
+      },
     });
   }
   return aiClient;
@@ -93,11 +99,7 @@ async function saveLeadToSheetAndEmail(lead: {
   // 1. Send to Google Sheets if GOOGLE_SCRIPT_URL is configured
   if (process.env.GOOGLE_SCRIPT_URL) {
     try {
-      await fetch(process.env.GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formattedLead),
-      });
+      await postToGoogleSheets(process.env.GOOGLE_SCRIPT_URL, formattedLead);
     } catch (err) {
       console.error("Error sending chatbot lead to Google Sheets:", err);
     }
@@ -367,14 +369,14 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
             let responseStream;
             try {
               responseStream = await ai.models.generateContentStream({
-                model: "gemini-2.5-flash",
+                model: "gemini-3.6-flash",
                 contents: contents,
                 config: { systemInstruction },
               });
             } catch (e) {
-              console.warn("gemini-2.5-flash stream error, fallback to gemini-1.5-flash", e);
+              console.warn("gemini-3.6-flash stream error, fallback to gemini-flash-latest", e);
               responseStream = await ai.models.generateContentStream({
-                model: "gemini-1.5-flash",
+                model: "gemini-flash-latest",
                 contents: contents,
                 config: { systemInstruction },
               });
@@ -425,12 +427,16 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
             responseText = "Dat is genoteerd voor uw camerasysteem. Wenst u een offerte of een interventie ter plaatse?";
           } else if (lower.includes("ruiming") || lower.includes("vidange") || lower.includes("putten")) {
             responseText = "Dat is genoteerd voor de ruiming of het onderhoud. In welke gemeente in België bevindt u zich?";
+          } else if (lower.includes("lek") || lower.includes("loodgieter") || lower.includes("sanitair")) {
+            responseText = "Onze loodgieters komen met spoed ter plaatse voor alle lekken en sanitair werk. In welke stad bevindt u zich?";
+          } else if (lower.includes("verwarming") || lower.includes("boiler") || lower.includes("ketel")) {
+            responseText = "Onze erkende verwarmingstechnici staan 24/7 klaar voor onderhoud en herstelling van uw ketel.";
           } else if (info.telephone) {
             responseText = `Dat is genoteerd! Een technieker belt u zo snel mogelijk terug op ${info.telephone}.`;
           } else if (info.hasVille) {
             responseText = `Akkoord, onze techniekers komen snel ter plaatse in ${info.ville}. Wenst u de aanvraag te bevestigen?`;
           } else {
-            responseText = "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen?";
+            responseText = "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?";
           }
         } else {
           if (
@@ -446,8 +452,50 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
             lower.includes("bac à graisse")
           ) {
             responseText = `C'est bien pris en compte pour la vidange. Quelle est votre commune en Belgique ?`;
+          } else if (
+            lower.includes("fuite") ||
+            lower.includes("plomberie") ||
+            lower.includes("plombier") ||
+            lower.includes("eau") ||
+            lower.includes("robinet") ||
+            lower.includes("chasse")
+          ) {
+            responseText = `Nos plombiers interviennent en urgence 24h/24 pour stopper toute fuite d'eau. Dans quelle commune vous trouvez-vous ?`;
+          } else if (
+            lower.includes("débouch") ||
+            lower.includes("debouch") ||
+            lower.includes("wc") ||
+            lower.includes("toilette") ||
+            lower.includes("égout") ||
+            lower.includes("canalisation")
+          ) {
+            responseText = `Nos équipes de débouchage haute pression interviennent en 30 minutes. Souhaitez-vous fixer une intervention ?`;
+          } else if (
+            lower.includes("chauffage") ||
+            lower.includes("chaudière") ||
+            lower.includes("boiler") ||
+            lower.includes("thermostat")
+          ) {
+            responseText = `Nos chauffagistes certifiés interviennent immédiatement pour tout dépannage de chaudière et chauffage. Quel est votre code postal ?`;
+          } else if (
+            lower.includes("prix") ||
+            lower.includes("tarif") ||
+            lower.includes("combien") ||
+            lower.includes("devis") ||
+            lower.includes("coût")
+          ) {
+            responseText = `Tous nos devis sont 100% gratuits et sans engagement. Pouvez-vous nous préciser votre besoin ou votre commune ?`;
+            formType = "quote";
+          } else if (
+            lower.includes("rendez-vous") ||
+            lower.includes("rdv") ||
+            lower.includes("réserver") ||
+            lower.includes("reserver")
+          ) {
+            responseText = `Vous pouvez réserver un créneau d'intervention directement avec notre technicien ci-dessous.`;
+            formType = "appointment";
           } else if (info.telephone) {
-            responseText = `C'est bien noté ! Un technicien vous rappellera sur le ${info.telephone}.`;
+            responseText = `C'est bien noté ! Un technicien vous rappellera rapidement sur le ${info.telephone}.`;
           } else if (info.hasVille) {
             responseText = `D'accord, nos techniciens interviennent rapidement à ${info.ville}. Souhaitez-vous confirmer votre demande ?`;
           } else if (
@@ -457,18 +505,18 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
             lower.includes("hi") ||
             lower.includes("coucou")
           ) {
-            responseText = `Salut ! Je suis Sofia l'assistant de deb pro services, Comment puis-je vous aider aujourd'hui ?`;
+            responseText = `Salut ! Je suis Sofia, l'assistante virtuelle de DEB PRO SERVICES. Comment puis-je vous aider aujourd'hui ?`;
           } else if (lower.includes("bonsoir")) {
-            responseText = `Bonsoir ! Comment puis-je vous aider ?`;
+            responseText = `Bonsoir ! Je suis Sofia de DEB PRO SERVICES. Comment puis-je vous aider ?`;
           } else if (
             lower.includes("salam") ||
             lower.includes("labas") ||
             lower.includes("sbah lkhir") ||
             lower.includes("msal khir")
           ) {
-            responseText = `Salam ! Kifash n3awnak lyoum ?`;
+            responseText = `Salam ! Kifash n3awnak lyoum f les travaux wla dépannage dialk ?`;
           } else {
-            responseText = `Bonjour, comment puis-je vous aider ?`;
+            responseText = `Bonjour ! Je suis Sofia de DEB PRO SERVICES. Je suis à votre disposition pour toute demande de dépannage, plomberie, chauffage, électricité ou vidange en Belgique.`;
           }
         }
 

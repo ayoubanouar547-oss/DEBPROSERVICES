@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { postToGoogleSheets } from "@/lib/googleSheets";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder");
 
@@ -93,13 +94,7 @@ export async function POST(req: Request) {
 
     if (process.env.GOOGLE_SCRIPT_URL) {
       try {
-        await fetch(process.env.GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
+        await postToGoogleSheets(process.env.GOOGLE_SCRIPT_URL, payload);
       } catch (sheetErr) {
         console.error("Error sending booking to Google Sheet:", sheetErr);
       }
