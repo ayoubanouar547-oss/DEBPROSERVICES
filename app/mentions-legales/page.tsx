@@ -30,9 +30,9 @@ export default function MentionsLegalesPage() {
           <br />
           <strong>Forme juridique :</strong> SRL (Société à Responsabilité Limitée)
           <br />
-          <strong>Siège social :</strong> Rue de l'Exemple 123, 1000 Bruxelles, Belgique
+          <strong>Siège social :</strong> Madeliefjesstraat 1/B006, 1850 Grimbergen, Belgique
           <br />
-          <strong>Numéro d'entreprise (BCE) :</strong> BE 0123.456.789
+          <strong>Numéro d'entreprise (BCE) / TVA :</strong> BE 1034.012.476
           <br />
           <strong>Téléphone :</strong> 0496 32 57 33
           <br />

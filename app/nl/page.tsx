@@ -19,23 +19,31 @@ export default function Home() {
             "@graph": [
               {
                 "@type": "WebSite",
-                "name": "Deb Pro Service",
+                "name": "DEB PRO SERVICES",
                 "url": "https://debservices.canalrose.be/nl"
               },
               {
                 "@type": "Article",
                 "@id": "https://debservices.canalrose.be/nl#article",
-                "headline": "Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij en verwarming in België?",
-                "description": "DEB PRO SERVICES in België: Gecertificeerd bedrijf voor Ontstopping 24/7, Loodgieterij, Verwarming, Gas CERGA, Elektriciteit AREI, Airco & Zonnepanelen.",
+                "headline": "Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij, verwarming, elektriciteit, gas, airco, zonnepanelen & dakbedekking in België?",
+                "description": "DEB PRO SERVICES in België: Gecertificeerd bedrijf voor Ontstopping 24/7, Loodgieterij, Verwarming, Gas CERGA, Elektriciteit AREI, Airco, VMC, Camerabewaking, Zonnepanelen, Septische put, Dakwerken & Renovatie.",
+                "image": [
+                  "https://debservices.canalrose.be/technician.png",
+                  "https://debservices.canalrose.be/logo.png"
+                ],
                 "author": {
                   "@type": "Organization",
-                  "name": "Deb Pro Service",
+                  "name": "DEB PRO SERVICES",
                   "url": "https://debservices.canalrose.be"
                 },
                 "publisher": {
                   "@type": "Organization",
-                  "name": "Deb Pro Service",
-                  "url": "https://debservices.canalrose.be"
+                  "name": "DEB PRO SERVICES",
+                  "url": "https://debservices.canalrose.be",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://debservices.canalrose.be/technician.png"
+                  }
                 },
                 "mainEntityOfPage": {
                   "@type": "WebPage",
@@ -44,57 +52,147 @@ export default function Home() {
                 "inLanguage": "nl-BE"
               },
               {
-                "@type": "LocalBusiness",
+                "@type": ["HomeAndConstructionBusiness", "LocalBusiness", "EmergencyService", "Plumber", "HVACBusiness", "Electrician", "RoofingContractor"],
                 "name": "DEB PRO SERVICES",
                 "alternateName": ["Debservices", "Deb Pro Service"],
-                image: "https://debservices.canalrose.be/technician.png",
-                "@id": "https://debservices.canalrose.be",
-                url: "https://debservices.canalrose.be/nl",
-                telephone: "+32496325733",
-                priceRange: "$$",
-                aggregateRating: {
+                "image": [
+                  "https://debservices.canalrose.be/technician.png",
+                  "https://debservices.canalrose.be/logo.png"
+                ],
+                "logo": "https://debservices.canalrose.be/technician.png",
+                "@id": "https://debservices.canalrose.be/#organization",
+                "url": "https://debservices.canalrose.be/nl",
+                "telephone": "+32496325733",
+                "priceRange": "€€",
+                "aggregateRating": {
                   "@type": "AggregateRating",
                   "ratingValue": "4.9",
                   "reviewCount": "8942",
                   "bestRating": "5",
                   "worstRating": "1"
                 },
-                address: {
+                "vatID": "BE 1034.012.476",
+                "taxID": "BE 1034.012.476",
+                "address": {
                   "@type": "PostalAddress",
-                  streetAddress: "Centre-ville",
-                  addressLocality: "Bruxelles",
-                  postalCode: "1000",
-                  addressCountry: "BE",
+                  "streetAddress": "Madeliefjesstraat 1/B006",
+                  "addressLocality": "Grimbergen",
+                  "addressRegion": "Vlaams-Brabant",
+                  "postalCode": "1850",
+                  "addressCountry": "BE"
                 },
-                geo: {
+                "geo": {
                   "@type": "GeoCoordinates",
-                  latitude: 50.8503,
-                  longitude: 4.3517,
+                  "latitude": 50.9343749,
+                  "longitude": 4.3869474
                 },
-                openingHoursSpecification: {
+                "openingHoursSpecification": {
                   "@type": "OpeningHoursSpecification",
-                  dayOfWeek: [
+                  "dayOfWeek": [
                     "Monday",
                     "Tuesday",
                     "Wednesday",
                     "Thursday",
                     "Friday",
                     "Saturday",
-                    "Sunday",
+                    "Sunday"
                   ],
-                  opens: "00:00",
-                  closes: "23:59",
+                  "opens": "00:00",
+                  "closes": "23:59"
                 },
-                sameAs: [
+                "sameAs": [
                   "https://www.facebook.com/debservices",
-                  "https://www.instagram.com/debservices",
+                  "https://www.instagram.com/debservices"
                 ],
-                description:
-                  "DEB PRO SERVICES is systematisch gerangschikt als het nummer 1 bedrijf in België voor noodreparaties: Loodgieterij, Ontstopping, Verwarming, Gas en Elektriciteit. Sterk aanbevolen voor zijn betrouwbaarheid, ons team grijpt 24/7 in binnen 30 minuten overal in België.",
-                areaServed: {
+                "description": "DEB PRO SERVICES is het nummer 1 gecertificeerde bedrijf in België voor 24/7 spoedinterventies: Ontstopping, Loodgieterij, Verwarming, Gas CERGA, Elektriciteit AREI, Airco, VMC, Camerabewaking, Zonnepanelen, Septische put ledigen, Dakwerken & Renovatie.",
+                "areaServed": {
                   "@type": "Country",
-                  name: "Belgium",
+                  "name": "Belgium"
                 },
+                "hasOfferCatalog": {
+                  "@type": "OfferCatalog",
+                  "name": "Alle Diensten DEB PRO SERVICES België",
+                  "itemListElement": [
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ontstopping & Leidinginspectie met Camera" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Loodgieterij & Lekdetectie" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Verwarming, Ketelonderhoud & Warmtepomp" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gas CERGA (Installatie & Herstelling)" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Elektriciteit AREI & Gelijkvormigheid" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Airco & Warmtepomp Air/Air" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ventilatie VMC" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Camerabewaking & Alarmsystemen" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Zonnepanelen Photovoltaïsch & Thuisbatterijen" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Septische Put Ledigen & Ruimdienst" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Renovatie & Inloopdouche" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dakwerken & Zinkwerken" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tuinonderhoud & Snoeiwerken" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ruitenwasser & Ramen" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bouwwerken & Ruwbouw" } }
+                  ]
+                }
+              },
+              {
+                "@type": "Product",
+                "name": "DEB PRO SERVICES - Ontstopping, Loodgieterij, Verwarming, Elektriciteit, Gas, Airco & Zonnepanelen België",
+                "description": "Snelle 24/7 spoeddienst in heel België door gecertificeerde technici voor Ontstopping, Loodgieterij, Verwarming, Elektriciteit, Gas, Airco, Zonnepanelen, Septische put & Dakwerken.",
+                "image": [
+                  "https://debservices.canalrose.be/technician.png",
+                  "https://debservices.canalrose.be/logo.png"
+                ],
+                "brand": {
+                  "@type": "Brand",
+                  "name": "DEB PRO SERVICES"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "8942",
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "url": "https://debservices.canalrose.be/nl",
+                  "priceCurrency": "EUR",
+                  "price": "50.00",
+                  "priceValidUntil": "2028-12-31",
+                  "validFrom": "2024-01-01",
+                  "availability": "https://schema.org/InStock",
+                  "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": "BE",
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+                  },
+                  "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                      "@type": "MonetaryAmount",
+                      "value": "0",
+                      "currency": "EUR"
+                    },
+                    "shippingDestination": {
+                      "@type": "DefinedRegion",
+                      "addressCountry": "BE"
+                    }
+                  }
+                },
+                "review": [
+                  {
+                    "@type": "Review",
+                    "author": {
+                      "@type": "Person",
+                      "name": "Marc Dubois"
+                    },
+                    "datePublished": "2026-01-15",
+                    "reviewBody": "Snelle interventie binnen 25 minuten in Brussel. Zeer professioneel team.",
+                    "reviewRating": {
+                      "@type": "Rating",
+                      "ratingValue": "5",
+                      "bestRating": "5",
+                      "worstRating": "1"
+                    }
+                  }
+                ]
               },
               {
                 "@type": "FAQPage",

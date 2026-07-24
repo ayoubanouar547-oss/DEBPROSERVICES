@@ -313,36 +313,38 @@ export default async function ServicePage({
             "@context": "https://schema.org",
             "@graph": [
               {
-                "@type": "Service",
-                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}#service`,
-                name: cityInfo ? `${matchedTerm} à ${cityInfo.name} - DEB PRO SERVICES` : `${serviceInfo.title} Belgique - DEB PRO SERVICES`,
-                serviceType: serviceInfo.title,
-                description: descriptionText,
-                provider: {
-                  "@id": "https://debservices.canalrose.be/#organization",
+                "@type": ["HomeAndConstructionBusiness", "LocalBusiness", "EmergencyService"],
+                "@id": "https://debservices.canalrose.be/#organization",
+                name: "DEB PRO SERVICES",
+                image: [
+                  heroImage || "https://debservices.canalrose.be/technician.png",
+                  "https://debservices.canalrose.be/logo.png"
+                ],
+                logo: "https://debservices.canalrose.be/technician.png",
+                url: "https://debservices.canalrose.be",
+                telephone: "+32496325733",
+                priceRange: "€€",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "Madeliefjesstraat 1/B006",
+                  addressLocality: cityInfo ? cityInfo.name : "Grimbergen",
+                  addressRegion: "Vlaams-Brabant",
+                  postalCode: "1850",
+                  addressCountry: "BE"
                 },
-                areaServed: cityInfo
-                  ? {
-                      "@type": "City",
-                      name: cityInfo.name,
-                    }
-                  : {
-                      "@type": "Country",
-                      name: "Belgium",
-                    },
                 aggregateRating: {
                   "@type": "AggregateRating",
                   ratingValue: "4.9",
                   reviewCount: "8942",
                   bestRating: "5",
-                  worstRating: "1",
+                  worstRating: "1"
                 },
                 review: [
                   {
                     "@type": "Review",
                     author: {
                       "@type": "Person",
-                      name: "Jean-Pierre Petit",
+                      name: "Jean-Pierre Petit"
                     },
                     datePublished: "2026-02-10",
                     reviewBody: `Service de ${serviceInfo.title.toLowerCase()} parfait. Intervention rapide et tarif très correct.`,
@@ -350,14 +352,14 @@ export default async function ServicePage({
                       "@type": "Rating",
                       ratingValue: "5",
                       bestRating: "5",
-                      worstRating: "1",
-                    },
+                      worstRating: "1"
+                    }
                   },
                   {
                     "@type": "Review",
                     author: {
                       "@type": "Person",
-                      name: "Marie Janssens",
+                      name: "Marie Janssens"
                     },
                     datePublished: "2026-03-01",
                     reviewBody: "Technicien compétent, poli et réactif. Je recommande sans hésitation.",
@@ -365,47 +367,88 @@ export default async function ServicePage({
                       "@type": "Rating",
                       ratingValue: "5",
                       bestRating: "5",
-                      worstRating: "1",
+                      worstRating: "1"
+                    }
+                  }
+                ]
+              },
+              {
+                "@type": "Service",
+                "@id": `https://debservices.canalrose.be/${serviceInfo.slug}#service`,
+                name: cityInfo ? `${matchedTerm} à ${cityInfo.name} - DEB PRO SERVICES` : `${serviceInfo.title} Belgique - DEB PRO SERVICES`,
+                serviceType: serviceInfo.title,
+                description: descriptionText,
+                provider: {
+                  "@id": "https://debservices.canalrose.be/#organization"
+                },
+                areaServed: cityInfo
+                  ? {
+                      "@type": "City",
+                      name: cityInfo.name
+                    }
+                  : {
+                      "@type": "Country",
+                      name: "Belgium"
                     },
-                  },
-                ],
-                offers: serviceInfo.subServices.map((sub, i) => ({
+                offers: serviceInfo.subServices.map((sub) => ({
                   "@type": "Offer",
                   name: sub.title,
                   description: sub.desc,
                   price: "50.00",
-                  priceCurrency: "EUR",
-                })),
+                  priceCurrency: "EUR"
+                }))
               },
               {
                 "@type": "Product",
-                name: cityInfo ? `Prestation ${matchedTerm} ${cityInfo.name}` : `Prestation ${serviceInfo.title} Belgique`,
+                name: cityInfo ? `Prestation ${matchedTerm} ${cityInfo.name} - DEB PRO SERVICES` : `Prestation ${serviceInfo.title} Belgique - DEB PRO SERVICES`,
                 description: descriptionText,
+                image: [
+                  heroImage || "https://debservices.canalrose.be/technician.png",
+                  "https://debservices.canalrose.be/logo.png"
+                ],
                 brand: {
                   "@type": "Brand",
-                  name: "Debservices - DEB PRO SERVICES",
+                  name: "DEB PRO SERVICES"
                 },
                 aggregateRating: {
                   "@type": "AggregateRating",
                   ratingValue: "4.9",
                   reviewCount: "8942",
                   bestRating: "5",
-                  worstRating: "1",
+                  worstRating: "1"
                 },
                 offers: {
                   "@type": "Offer",
                   url: `https://debservices.canalrose.be/${serviceInfo.slug}`,
                   priceCurrency: "EUR",
                   price: "50.00",
-                  priceValidUntil: "2027-12-31",
+                  priceValidUntil: "2028-12-31",
+                  validFrom: "2024-01-01",
                   availability: "https://schema.org/InStock",
+                  hasMerchantReturnPolicy: {
+                    "@type": "MerchantReturnPolicy",
+                    applicableCountry: "BE",
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+                  },
+                  shippingDetails: {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                      "@type": "MonetaryAmount",
+                      value: "0",
+                      currency: "EUR"
+                    },
+                    "shippingDestination": {
+                      "@type": "DefinedRegion",
+                      addressCountry: "BE"
+                    }
+                  }
                 },
                 review: [
                   {
                     "@type": "Review",
                     author: {
                       "@type": "Person",
-                      name: "Jean-Pierre Petit",
+                      name: "Jean-Pierre Petit"
                     },
                     datePublished: "2026-02-10",
                     reviewBody: `Service parfait pour ${serviceInfo.title.toLowerCase()}.`,
@@ -413,54 +456,10 @@ export default async function ServicePage({
                       "@type": "Rating",
                       ratingValue: "5",
                       bestRating: "5",
-                      worstRating: "1",
-                    },
-                  },
-                ],
-              },
-              {
-                "@type": "LocalBusiness",
-                "@id": "https://debservices.canalrose.be/#organization",
-                name: "Debservices - DEB PRO SERVICES",
-                alternateName: ["Debservices", "DEB PRO SERVICES", "Deb Pro Service"],
-                image: "https://debservices.canalrose.be/logo.png",
-                url: "https://debservices.canalrose.be",
-                telephone: "+32496325733",
-                priceRange: "$$",
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.8",
-                  "reviewCount": "7209",
-                  "bestRating": "5",
-                  "worstRating": "1"
-                },
-                address: {
-                  "@type": "PostalAddress",
-                  addressLocality: "Brussels",
-                  addressRegion: "Brussels",
-                  postalCode: "1000",
-                  streetAddress: "Centre Ville",
-                  addressCountry: "BE",
-                },
-                geo: {
-                  "@type": "GeoCoordinates",
-                  latitude: 50.9343749,
-                  longitude: 4.3869474,
-                },
-                hasMap: "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
-                sameAs: [
-                  "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
-                  "https://www.facebook.com/debservices",
-                  "https://www.instagram.com/debservices",
-                ],
-                openingHoursSpecification: [
-                  {
-                    "@type": "OpeningHoursSpecification",
-                    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-                    opens: "00:00",
-                    closes: "23:59",
+                      worstRating: "1"
+                    }
                   }
-                ],
+                ]
               },
               ...(serviceInfo.faqs ? [{
                 "@type": "FAQPage",

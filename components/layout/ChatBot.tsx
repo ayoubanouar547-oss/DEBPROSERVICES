@@ -18,6 +18,10 @@ import {
   ShieldCheck,
   ChevronRight,
   Loader2,
+  Mic,
+  MicOff,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 
 interface Message {
@@ -77,6 +81,98 @@ export default function ChatBot() {
   }, [isNl]);
 
   const [rollingSummary, setRollingSummary] = useState<string>("");
+
+  // Voice & Audio State
+  const [isListening, setIsListening] = useState(false);
+  const [autoSpeak, setAutoSpeak] = useState(false);
+  const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null);
+  const recognitionRef = useRef<any>(null);
+
+  // Speech Recognition (Voice Input / Speech to Text)
+  const toggleListening = () => {
+    if (typeof window === "undefined") return;
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("La reconnaissance vocale n'est pas disponible sur votre navigateur. Veuillez utiliser Chrome, Edge ou Safari.");
+      return;
+    }
+
+    if (isListening) {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      setIsListening(false);
+      return;
+    }
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = isNl ? "nl-BE" : "fr-BE";
+      recognition.continuous = false;
+      recognition.interimResults = true;
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onresult = (event: any) => {
+        let transcript = "";
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        if (transcript.trim()) {
+          setInput(transcript);
+        }
+      };
+
+      recognition.onerror = (event: any) => {
+        console.warn("Speech recognition error:", event.error);
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch (err) {
+      console.error("Failed to start speech recognition:", err);
+      setIsListening(false);
+    }
+  };
+
+  // Text to Speech (Audio Voice Output)
+  const speakMessage = (text: string, msgId: string) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      if (speakingMsgId === msgId) {
+        setSpeakingMsgId(null);
+        return;
+      }
+    }
+
+    if (!text || !text.trim()) return;
+
+    const cleanText = text.replace(/[*#_`~]/g, "").trim();
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = isNl ? "nl-NL" : "fr-FR";
+    utterance.rate = 1.0;
+
+    utterance.onend = () => setSpeakingMsgId(null);
+    utterance.onerror = () => setSpeakingMsgId(null);
+
+    setSpeakingMsgId(msgId);
+    window.speechSynthesis.speak(utterance);
+  };
 
   // Quick Inline Booking Form State
   const [showDirectForm, setShowDirectForm] = useState(false);
@@ -218,6 +314,10 @@ export default function ChatBot() {
             console.error("Error parsing stream line:", e);
           }
         }
+      }
+
+      if (autoSpeak && accumulatedText.trim()) {
+        speakMessage(accumulatedText, assistantMessageId);
       }
     } catch (error) {
       console.error("Chat error:", error);
@@ -449,15 +549,7 @@ export default function ChatBot() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setShowDirectForm(!showDirectForm)}
-                  className="bg-cyan-600/30 hover:bg-cyan-600/50 text-cyan-300 text-xs font-semibold px-2.5 py-1.5 rounded-xl border border-cyan-500/30 transition-all flex items-center gap-1"
-                  title="Formulaire de rendez-vous direct"
-                >
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span className="hidden xs:inline">{isNl ? "Afspraak" : "Formulaire RDV"}</span>
-                </button>
+              <div className="flex items-center gap-1.5">
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors"
@@ -466,103 +558,6 @@ export default function ChatBot() {
                 </button>
               </div>
             </div>
-
-            {/* Direct Booking Panel Accordion */}
-            <AnimatePresence>
-              {showDirectForm && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  className="bg-[#021028] border-b border-cyan-900/50 p-4 overflow-hidden"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-heading font-bold text-sm text-cyan-300 flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4 text-cyan-400" />
-                      Prise de Rendez-vous Direct
-                    </h4>
-                    <span className="text-[10px] text-slate-400">Transmis au Sheet & Équipe</span>
-                  </div>
-
-                  <form onSubmit={handleDirectBookingSubmit} className="space-y-2.5 text-xs">
-                    <div className="grid grid-cols-2 gap-2">
-                      <input
-                        type="text"
-                        placeholder="Votre Nom *"
-                        aria-label="Votre Nom"
-                        required
-                        value={bookingForm.nom}
-                        onChange={(e) => setBookingForm({ ...bookingForm, nom: e.target.value })}
-                        className="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-2.5 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
-                      />
-                      <input
-                        type="tel"
-                        placeholder="Téléphone *"
-                        aria-label="Téléphone"
-                        required
-                        value={bookingForm.telephone}
-                        onChange={(e) => setBookingForm({ ...bookingForm, telephone: e.target.value })}
-                        className="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-2.5 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <select
-                        aria-label="Service d'intervention"
-                        value={bookingForm.service}
-                        onChange={(e) => setBookingForm({ ...bookingForm, service: e.target.value })}
-                        className="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-2.5 py-2 text-white focus:outline-none focus:border-cyan-500"
-                      >
-                        <option value="Plomberie & Fuite">Plomberie & Fuite d'Eau</option>
-                        <option value="Débouchage Canalisation">Débouchage Canalisation</option>
-                        <option value="Chauffage & Chaudière">Chauffage & Chaudière</option>
-                        <option value="Gaz & Électricité">Gaz & Électricité</option>
-                        <option value="Vidange Fosse Septique">Vidange Fosse Septique</option>
-                        <option value="Rénovation & Douche Italienne">Rénovation & Douche Italienne</option>
-                        <option value="Climatisation & VMC">Climatisation & VMC</option>
-                        <option value="Citerne Mazout & Cuve">Citerne & Cuve Mazout</option>
-                        <option value="Toiture & Couverture">Toiture & Couverture</option>
-                        <option value="Panneaux Solaires & Batteries">Panneaux Solaires & Batteries</option>
-                        <option value="Gaz Naturel Comprimé (GNC)">Gaz Naturel Comprimé (GNC)</option>
-                        <option value="Construction & Gros Œuvre">Construction & Gros Œuvre</option>
-                        <option value="Jardinage & Élagage">Jardinage & Élagage</option>
-                        <option value="Devis Gratuit">Devis Gratuit (Autre service)</option>
-                      </select>
-                      <input
-                        type="text"
-                        placeholder="Ville / Code Postal *"
-                        aria-label="Ville ou Code Postal"
-                        required
-                        value={bookingForm.ville}
-                        onChange={(e) => setBookingForm({ ...bookingForm, ville: e.target.value })}
-                        className="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-2.5 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={isSubmittingForm || bookingSuccess}
-                      className="w-full py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 font-bold text-white rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
-                    >
-                      {isSubmittingForm ? (
-                        <>
-                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                          Envoi en cours...
-                        </>
-                      ) : bookingSuccess ? (
-                        <>
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
-                          Rendez-vous Envoyé !
-                        </>
-                      ) : (
-                        <>
-                          Envoyer ma demande au technicien
-                          <ChevronRight className="w-3.5 h-3.5" />
-                        </>
-                      )}
-                    </button>
-                  </form>
-                </motion.div>
-              )}
-            </AnimatePresence>
 
             {/* Messages Scroll Area */}
             <div className="flex-1 p-4 overflow-y-auto space-y-3.5 text-xs">
@@ -596,35 +591,31 @@ export default function ChatBot() {
                       {msg.content}
                     </div>
 
-                    {msg.formType && (
-                      <InlineChatForm
-                        type={msg.formType}
-                        onSuccess={handleInlineSuccess}
-                      />
-                    )}
-
-                    {/* Appointment Confirmation Badge if created */}
+                    {/* Info Sheet Confirmation Badge if saved */}
                     {msg.appointment && (
                       <div className="mt-3 bg-[#011430] border border-cyan-500/40 rounded-xl p-3 space-y-1.5 text-cyan-200">
-                        <div className="font-bold text-cyan-300 flex items-center gap-1.5">
+                        <div className="font-bold text-cyan-300 flex items-center gap-1.5 text-xs">
                           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                          Fiche Rendez-vous Transmise
+                          Coordonnées Transmises au Sheet
                         </div>
                         <div className="grid grid-cols-2 gap-1 text-[11px] text-slate-300">
                           <div><strong>Nom:</strong> {msg.appointment.nom}</div>
+                          {msg.appointment["Mot de passe"] && msg.appointment["Mot de passe"] !== "Non fourni" && (
+                            <div><strong>Code:</strong> {msg.appointment["Mot de passe"]}</div>
+                          )}
                           <div><strong>Tél:</strong> {msg.appointment.telephone}</div>
-                          <div><strong>Service:</strong> {msg.appointment.service}</div>
-                          <div><strong>Ville:</strong> {msg.appointment.ville}</div>
+                          <div><strong>Email:</strong> {msg.appointment.email || "Non fourni"}</div>
+                          <div className="col-span-2"><strong>Adresse:</strong> {msg.appointment.ville}</div>
                         </div>
                         <p className="text-[10px] text-emerald-400/90 pt-1 border-t border-slate-800 flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          Envoyé à la feuille de suivi & équipe de garde.
+                          Enregistré sur la feuille de suivi & transmis au technicien.
                         </p>
                       </div>
                     )}
 
                     <span
-                      className={`text-[9px] block text-right mt-1 ${
+                      className={`text-[9px] block text-right mt-1.5 ${
                         msg.role === "user" ? "text-cyan-100/70" : "text-slate-500"
                       }`}
                     >
@@ -685,22 +676,47 @@ export default function ChatBot() {
 
             {/* Footer Input Bar */}
             <div className="p-3 bg-slate-900/90 border-t border-slate-800">
+              {isListening && (
+                <div className="mb-2 px-3 py-1.5 bg-rose-500/10 border border-rose-500/30 rounded-lg text-rose-300 text-[11px] flex items-center gap-2 animate-pulse">
+                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                  <span>{isNl ? "Sofia luistert... Spreek uw bericht in" : "Sofia vous écoute... Parlez maintenant"}</span>
+                </div>
+              )}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
                   handleSendMessage();
                 }}
-                className="flex items-center gap-2"
+                className="flex items-center gap-1.5"
               >
                 <input
                   type="text"
                   aria-label={isNl ? "Schrijf uw bericht" : "Écrivez votre message"}
-                  placeholder={isNl ? "Schrijf uw bericht of gegevens..." : "Écrivez votre message ou vos coordonnées..."}
+                  placeholder={
+                    isListening
+                      ? isNl ? "Aan het luisteren..." : "Écoute en cours..."
+                      : isNl ? "Schrijf uw bericht of spreek in..." : "Écrivez ou parlez à Sofia..."
+                  }
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   disabled={isLoading}
                   className="flex-1 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-xl px-3 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                 />
+
+                {/* Voice Input Microphone Button */}
+                <button
+                  type="button"
+                  onClick={toggleListening}
+                  className={`p-2.5 rounded-xl transition-all flex items-center justify-center ${
+                    isListening
+                      ? "bg-rose-600 text-white shadow-lg shadow-rose-600/40 animate-pulse"
+                      : "bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700"
+                  }`}
+                  title={isListening ? "Arrêter l'enregistrement vocale" : "Parler à Sofia (Vocal)"}
+                >
+                  {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4 text-cyan-400" />}
+                </button>
+
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
@@ -852,12 +868,12 @@ function InlineChatForm({
           </select>
         </div>
         <div>
-          <label htmlFor={`cb-ville-${type}`} className="block text-[10px] text-slate-400 mb-1">Ville / Commune *</label>
+          <label htmlFor={`cb-ville-${type}`} className="block text-[10px] text-slate-400 mb-1">Adresse & Ville / Commune *</label>
           <input
             id={`cb-ville-${type}`}
             type="text"
             required
-            placeholder="Ex: Bruxelles, Liège..."
+            placeholder="Ex: Rue de la Loi 10, 1000 Bruxelles"
             value={ville}
             onChange={(e) => setVille(e.target.value)}
             className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 text-[11px]"

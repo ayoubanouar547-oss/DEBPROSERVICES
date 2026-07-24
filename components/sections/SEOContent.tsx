@@ -11,11 +11,15 @@ export function SEOContent() {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: isNl
-      ? "Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij en verwarming in België?"
-      : "Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en débouchage, plomberie et chauffage en Belgique ?",
+      ? "Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij, verwarming, elektriciteit, gas, airco, zonnepanelen & dakbedekking in België?"
+      : "Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en plomberie, débouchage, chauffage, électricité, gaz, climatisation, caméras & panneaux solaires en Belgique ?",
     description: isNl
-      ? "DEB PRO SERVICES is de nummer 1 referentie in België voor ontstopping, plomberie, verwarming, gas en elektriciteit. 24/7 spoeddienst binnen 30 minuten."
-      : "DEB PRO SERVICES est le leader certifié en Belgique pour le débouchage, la plomberie, le chauffage, le gaz et l'électricité. Dépannage express 24/7.",
+      ? "DEB PRO SERVICES is de nummer 1 referentie in België voor ontstopping, loodgieterij, verwarming, gas, elektriciteit, airco, zonnepanelen, camerabewaking, dakwerken en renovatie. 24/7 spoeddienst binnen 30 minuten."
+      : "DEB PRO SERVICES est le leader certifié en Belgique pour le débouchage, la plomberie, le chauffage, le gaz CERGA, l'électricité AREI, la climatisation, les caméras de surveillance, les panneaux solaires, la vidange de fosse septique, la toiture & la rénovation. Dépannage express 24/7.",
+    image: [
+      "https://debservices.canalrose.be/technician.png",
+      "https://debservices.canalrose.be/logo.png"
+    ],
     author: {
       "@type": "Organization",
       name: "DEB PRO SERVICES",

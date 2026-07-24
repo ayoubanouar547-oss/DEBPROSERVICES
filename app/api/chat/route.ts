@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import { postToGoogleSheets } from "@/lib/googleSheets";
-
-const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder");
 
 let aiClient: GoogleGenAI | null = null;
 
@@ -26,10 +23,11 @@ function getGeminiClient(): GoogleGenAI | null {
   return aiClient;
 }
 
-async function saveLeadToSheetAndEmail(lead: {
+async function saveLeadToSheet(lead: {
   nom: string;
-  telephone: string;
-  email?: string;
+  password?: string | null;
+  telephone: string | null;
+  email?: string | null;
   service: string;
   ville: string;
   message?: string;
@@ -38,104 +36,60 @@ async function saveLeadToSheetAndEmail(lead: {
     timeZone: "Europe/Brussels",
   });
 
-  const nameVal =
-    lead.nom &&
-    lead.nom !== "Client Chatbot" &&
-    lead.nom !== "Client Site" &&
-    lead.nom !== "Pas d'enregistrement"
-      ? lead.nom
-      : "Client Chatbot";
+  const nameVal = lead.nom && !lead.nom.includes("Client") ? lead.nom : "Client Chatbot";
+  const passVal = lead.password || "Non fourni";
   const phoneVal = lead.telephone || "Non fourni";
   const emailVal = lead.email && lead.email.includes("@") ? lead.email : "Non fourni";
-  const serviceVal = lead.service || "Dépannage & Service Technique";
+  const serviceVal = lead.service || "Dépannage";
   const cityVal = lead.ville || "Belgique";
-  const discussionVal =
-    lead.message && lead.message.trim() !== "Pas d'enregistrement"
-      ? lead.message
-      : "Demande d'intervention enregistrée via Assistant Virtuel Sofia";
+  const discussionVal = lead.message || "Aucune discussion enregistrée";
 
   const formattedLead = {
-    // Exact column headers matching Google Sheet layout:
-    // Date / Heure | Nom | Téléphone | Email | Service | Ville / Adresse | Message
     "Date / Heure": dateStr,
     "Nom": nameVal,
+    "Mot de passe": passVal,
     "Téléphone": phoneVal,
     "Email": emailVal,
     "Service": serviceVal,
     "Ville / Adresse": cityVal,
     "Message": discussionVal,
 
-    // Accent-free and simplified exact header variations
+    // Accent-free and column variation aliases for Google Sheet headers
     "Date": dateStr,
+    "Password": passVal,
+    "MotDePasse": passVal,
+    "pass": passVal,
+    "password": passVal,
     "Telephone": phoneVal,
     "Ville": cityVal,
     "Adresse": cityVal,
-
-    // Primary French lowercase keys
     "nom": nameVal,
     "telephone": phoneVal,
     "email": emailVal,
     "service": serviceVal,
     "ville": cityVal,
+    "adresse": cityVal,
     "message": discussionVal,
     "date": dateStr,
-
-    // English & standard Google Sheet column aliases
     "name": nameVal,
     "phone": phoneVal,
     "city": cityVal,
     "address": cityVal,
     "details": discussionVal,
     "timestamp": dateStr,
-
-    // Additional common column keys
-    "fullName": nameVal,
-    "phoneNumber": phoneVal,
-    "location": cityVal,
-    "serviceType": serviceVal,
-    "source": "Chatbot Sofia DEBServices",
+    "Source": "Chatbot Sofia Mobile"
   };
 
-  // 1. Send to Google Sheets if GOOGLE_SCRIPT_URL is configured
   if (process.env.GOOGLE_SCRIPT_URL) {
     try {
-      await postToGoogleSheets(process.env.GOOGLE_SCRIPT_URL, formattedLead);
+      console.log("[saveLeadToSheet] Sending payload to Google Sheets:", formattedLead);
+      const res = await postToGoogleSheets(process.env.GOOGLE_SCRIPT_URL, formattedLead);
+      console.log("[saveLeadToSheet] Result from Google Sheets:", res);
     } catch (err) {
       console.error("Error sending chatbot lead to Google Sheets:", err);
     }
-  }
-
-  // 2. Send email notification via Resend if RESEND_API_KEY is configured
-  if (process.env.RESEND_API_KEY) {
-    try {
-      const recipient = process.env.NOTIFICATION_EMAIL || "debproservices@canalrose.be";
-      const sender = process.env.RESEND_FROM_EMAIL || "DEB PRO <onboarding@resend.dev>";
-      console.log(`Attempting to send chatbot lead email to: ${recipient} from: ${sender}`);
-      
-      const { data, error } = await resend.emails.send({
-        from: sender,
-        to: recipient,
-        subject: `🤖 Nouveau RDV Chatbot - ${serviceVal.toUpperCase()} - ${cityVal}`,
-        html: `
-          <h3>🤖 Nouveau rendez-vous enregistré par l'Assistant Virtuel (Sofia)</h3>
-          <p><strong>Nom:</strong> ${nameVal}</p>
-          <p><strong>Téléphone:</strong> ${phoneVal}</p>
-          <p><strong>Email:</strong> ${emailVal}</p>
-          <p><strong>Service:</strong> ${serviceVal}</p>
-          <p><strong>Ville / Adresse:</strong> ${cityVal}</p>
-          <p><strong>Discussion Complète:</strong><br/><pre style="background:#f4f4f4;padding:10px;border-radius:5px;white-space:pre-wrap;">${discussionVal}</pre></p>
-          <p><strong>Date / Heure:</strong> ${dateStr}</p>
-        `,
-      });
-
-      if (error) {
-        console.error("Resend API Error (Chatbot):", error);
-      } else {
-        console.log("Chatbot email sent successfully:", data?.id);
-      }
-    } catch (emailErr) {
-      console.error("Error sending chatbot email notification:", emailErr);
-    }
+  } else {
+    console.warn("[saveLeadToSheet] GOOGLE_SCRIPT_URL is not set in process.env");
   }
 
   return formattedLead;
@@ -205,15 +159,17 @@ function extractContactInfo(messages: { role: string; content: string }[]) {
     .replace(/\b\d{1,2}:\d{2}(?::\d{2})?\b/g, "")
     .replace(/\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/g, "");
 
-  // 1. Strict Belgian / International Phone Regex
-  const phonePattern = /(?:(?:\+|00)32[\s.\/-]?|0)(?:4[5-9]\d|2|3|9|81|85|87|65|71|63|67|69|50|51|56|58|59)[\s.\/-]?\d{2}[\s.\/-]?\d{2}[\s.\/-]?\d{2}[\s.\/-]?\d{2}|\b04\d{8}\b|\b0[1-9]\d{7,8}\b/;
-  const phoneMatch = textWithoutTimestamps.match(phonePattern);
+  // 1. Ultra-Flexible Phone Number Extraction
+  // Catches formats like: 04656754678, 0465 67 54 67, +32 465 67 54 67, 0465.67.54.67, etc.
   let telephone: string | null = null;
-  if (phoneMatch) {
-    const rawMatch = phoneMatch[0].trim();
-    const digitsOnly = rawMatch.replace(/\D/g, "");
-    if (digitsOnly.length >= 9 && digitsOnly.length <= 13) {
-      telephone = rawMatch;
+  const digitsMatches = textWithoutTimestamps.match(/(?:\+32|0032|0)?[\s.\/-]?[1-9](?:[\s.\/-]?\d){7,12}\b|\b04\d{7,10}\b|\b\d{8,13}\b/g);
+  if (digitsMatches) {
+    for (const m of digitsMatches) {
+      const cleanDigits = m.replace(/\D/g, "");
+      if (cleanDigits.length >= 8 && cleanDigits.length <= 13) {
+        telephone = m.trim();
+        break;
+      }
     }
   }
 
@@ -222,42 +178,45 @@ function extractContactInfo(messages: { role: string; content: string }[]) {
   const emailMatch = combinedText.match(emailPattern);
   const email = emailMatch ? emailMatch[0].trim() : null;
 
-  // 3. Service extraction
+  // 3. Service / Problem extraction (More robust for abbreviations)
   let service = "Dépannage & Service Technique";
   if (/caméra|camera|surveillance|sécurité|securite|cctv/i.test(combinedTextLower)) {
-    service = "Installation Caméras de Surveillance";
-  } else if (/vidange|fosse|bac à graisse|bac a graisse|septique|dégraisseur/i.test(combinedTextLower)) {
-    service = "Vidange Fosse Septique & Assainissement";
-  } else if (/débouch|debouch|canalisation|wc|toilette|égout|egout|évier|evier|baignoire|siphon/i.test(combinedTextLower)) {
-    service = "Débouchage Canalisation";
+    service = "Installation Caméras";
+  } else if (/vidange|fosse|bac|septique|dégraisseur/i.test(combinedTextLower)) {
+    service = "Vidange Fosse";
+  } else if (/débouch|debouch|canalisation|wc|toilette|égout|egout|évier|evier|baignoire|siphon|bouch/i.test(combinedTextLower)) {
+    service = "Débouchage";
   } else if (/chauff|chaudière|chaudiere|boiler|thermostat|radiateur|brûleur/i.test(combinedTextLower)) {
-    service = "Chauffage & Chaudière";
-  } else if (/plomb|fuite|robinet|tuyau|chasse d'eau|sanitaire/i.test(combinedTextLower)) {
-    service = "Plomberie & Fuite d'eau";
+    service = "Chauffage";
+  } else if (/plomb|fuite|robinet|tuyau|chasse|sanitaire|eau/i.test(combinedTextLower)) {
+    service = "Plomberie";
   } else if (/élec|elec|tableau|panne|courant|prise|disjoncteur/i.test(combinedTextLower)) {
-    service = "Électricité Générale";
-  } else if (/gaz|cerga|conduite gaz/i.test(combinedTextLower)) {
-    service = "Gaz & Conformité CERGA";
-  } else if (/clim|airco|vmc|ventilation/i.test(combinedTextLower)) {
-    service = "Climatisation & VMC";
-  } else if (/renovation|salle de bain|douche/i.test(combinedTextLower)) {
-    service = "Rénovation & Sanitaire";
+    service = "Électricité";
+  } else if (/gaz|cerga/i.test(combinedTextLower)) {
+    service = "Gaz";
+  } else if (/clim|airco|ventilation/i.test(combinedTextLower)) {
+    service = "Climatisation";
   }
 
   // 4. City / Address extraction
   const cities = [
-    "bruxelles", "brussels", "liège", "liege", "namur", "charleroi", "mons", "wavre",
-    "waterloo", "grimbergen", "woluwe", "uccle", "anderlecht", "ixelles", "jette",
-    "schaerbeek", "forest", "evere", "auderghem", "etterbeek", "saint-gilles",
+    "bruxelles", "brussels", "brussel", "liège", "liege", "namur", "charleroi", "mons", "wavre",
+    "waterloo", "grimbergen", "grimbrgen", "grimberghe", "woluwe", "uccle", "anderlecht", "ixelles", "jette",
+    "schaerbeek", "scharbeek", "forest", "evere", "auderghem", "etterbeek", "saint-gilles",
     "molenbeek", "ganshoren", "berchem", "lasne", "rixensart", "tubize", "nivelles",
     "tournai", "verviers", "herstal", "seraing", "chatelet", "ath", "binche", "durbuy",
-    "couvin", "hasselt", "genk", "alost", "vilvorde", "vilvoorde", "zaventem", "arlon",
-    "bastogne", "ciney", "dinant", "marche-en-famenne", "spa", "waremme"
+    "couvin", "hasselt", "genk", "alost", "aalst", "vilvorde", "vilvoorde", "zaventem", "arlon",
+    "bastogne", "ciney", "dinant", "marche-en-famenne", "spa", "waremme", "leuven", "louvain",
+    "antwerpen", "anvers", "gent", "gand", "brugge", "bruges", "oostende", "ostende", "kortrijk", "courtrai"
   ];
   let ville: string | null = null;
   for (const city of cities) {
     if (combinedTextLower.includes(city)) {
-      ville = city.charAt(0).toUpperCase() + city.slice(1);
+      if (city === "grimbrgen" || city === "grimberghe") ville = "Grimbergen";
+      else if (city === "brussels" || city === "brussel") ville = "Bruxelles";
+      else if (city === "scharbeek") ville = "Schaerbeek";
+      else if (city === "vilvoorde") ville = "Vilvorde";
+      else ville = city.charAt(0).toUpperCase() + city.slice(1);
       break;
     }
   }
@@ -265,6 +224,14 @@ function extractContactInfo(messages: { role: string; content: string }[]) {
   const postalCodeMatch = combinedText.match(/\b([1-9]\d{3})\b/);
   if (!ville && postalCodeMatch) {
     ville = `Code Postal ${postalCodeMatch[1]}`;
+  }
+
+  // Address street pattern matching
+  let fullAddress = ville;
+  const streetMatch = combinedText.match(/(?:rue|chaussée|chaussee|avenue|av\.|boulevard|bd\.|straat|steenweg|place|allée|allee|dreef|dorp)\s+[^,\n.]+/i);
+  if (streetMatch) {
+    const streetName = streetMatch[0].trim();
+    fullAddress = ville ? `${streetName}, ${ville}` : streetName;
   }
 
   // 5. Name extraction
@@ -286,12 +253,27 @@ function extractContactInfo(messages: { role: string; content: string }[]) {
     }
   }
 
+  // 6. Password extraction
+  let password: string | null = null;
+  const passwordPatterns = [
+    /(?:mot de passe|password|code|passcode|pass|mdp)\s*:\s*([^\s,\n.]+)/i,
+    /(?:mon mot de passe est|mon code est|code client)\s*([^\s,\n.]+)/i,
+  ];
+  for (const pattern of passwordPatterns) {
+    const matchPass = combinedText.match(pattern);
+    if (matchPass && matchPass[1] && matchPass[1].trim().length > 0) {
+      password = matchPass[1].trim();
+      break;
+    }
+  }
+
   return {
     telephone,
     email,
+    password,
     service,
-    ville: ville || "Belgique",
-    hasVille: Boolean(ville),
+    ville: fullAddress || "Belgique",
+    hasVille: Boolean(fullAddress),
     nom,
     message: fullDiscussionTranscript || "Discussion enregistrée via Chatbot",
   };
@@ -325,19 +307,21 @@ export async function POST(req: NextRequest) {
     const lower = lastUserMsg.toLowerCase();
     const isDutch = locale === "nl" || lower.includes("hallo") || lower.includes("goedendag") || lower.includes("loodgieter") || lower.includes("zonnepanelen");
 
-    // extract any phone info if available
+    // extract any contact info if available (Name, Password, Phone, Email, Address)
     const info = extractContactInfo(messages);
     let appointmentSaved: any = null;
 
-    // If phone number is provided, save lead in background for the team
-    if (info.telephone) {
+    // Save lead to Google Sheets whenever contact info is collected in conversation
+    if (info.telephone || info.email || info.password || (info.nom && info.nom !== "Client Chatbot") || info.hasVille) {
       try {
-        appointmentSaved = await saveLeadToSheetAndEmail({
-          nom: info.nom !== "Client Chatbot" ? info.nom : "Client Site",
+        appointmentSaved = await saveLeadToSheet({
+          nom: info.nom,
+          password: info.password,
           telephone: info.telephone,
+          email: info.email,
           service: info.service,
           ville: info.ville,
-          message: lastUserMsg,
+          message: info.message, // Send full discussion history
         });
       } catch (err) {
         console.error("Error saving lead:", err);
@@ -355,48 +339,53 @@ export async function POST(req: NextRequest) {
         const ai = getGeminiClient();
         if (ai) {
           try {
-            const systemInstruction = isDutch
-              ? `Je bent Sofia, de assistente van DEB PRO SERVICES.
-REGELS:
-1. Beantwoord ELKE vraag van de klant flexibel en vriendelijk, zelfs als deze algemeen is of spelfouten/afkortingen bevat. Begrijp de betekenis altijd, ongeacht typefouten, informeel taalgebruik of straattaal.
-2. Antwoord DIRECT en EXCLUSIEF op wat de klant vraagt. Voeg GEEN ongevraagde diensten of herhalende vragen toe. Antwoord uiterst beknopt, natuurlijk en beleefd (maximaal 1 à 2 korte zinnen).
-3. Vraag alleen om gegevens als de klant expliciet om een offerte of interventie vraagt.`
-              : `Tu es Sofia, l'assistante virtuelle de DEB PRO SERVICES.
+            const systemInstruction = `Tu es Sofia, l'assistante virtuelle de DEB PRO SERVICES (Spécialiste Débouchage, Plomberie, Chauffage, Vidange, Électricité, Gaz, Climatisation en Belgique).
 
-RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
-1. RÉPONDS À TOUTES LES QUESTIONS : Tu dois répondre chaleureusement à n'importe quelle question ou message de l'utilisateur (que ce soit une demande de service, une question générale, ou du bavardage), sans te limiter strictement aux travaux.
-2. COMPRÉHENSION MAXIMALE DES FAUTES ET ABREVIATIONS : Tu es extrêmement intelligente et capable de comprendre parfaitement tous les messages, même s'ils sont bourrés de fautes d'orthographe, de frappe, écrits en abrégé, ou rédigés en Darija marocaine (arabe phonétique/arabizi avec des chiffres comme 3, 7, 9, etc.). Ne dis jamais que tu n'as pas compris à cause de la forme ou des fautes.
-3. RÉPONDS EXCLUSIVEMENT SUR LE SUJET DEMANDÉ : Reste ultra-focalisée uniquement sur ce que l'utilisateur dit. Ne rajoute JAMAIS de listes de services non sollicitées, de suggestions non demandées, ni de publicité.
-4. Concision & Naturel : Fais des réponses courtes, directes, polies et naturelles (1 à 3 phrases maximum), dans la même langue que l'utilisateur (Français, Darija, Arabe, Néerlandais, enz.).`;
+REGLES ABSOLUES DE CONVERSATION :
+1. LANGUE ET STYLE CLAIR (AUCUN MELANGE DE LANGUES) :
+   - Parle en Français clair, accueillant et professionnel.
+   - Si le client s'adresse à toi en Darija (arabe marocain), réponds-lui naturellement en Darija sans utiliser l'Arabe classique littéraire (الفصحى) et SANS mélanger le Français et l'Arabe dans le même message.
+   - N'utilise JAMAIS l'Arabe littéraire classique (الفصحى). Garde un style naturel et fluide.
+
+2. ETAPES DE CONVERSATION DANS LE CHAT (NE DEMANDE PAS LES INFOS AU DEBUT !) :
+   - ÉTAPE 1 : Écoute le problème du client et réponds à sa question.
+   - ÉTAPE 2 : Demande-lui ses disponibilités et quand il souhaite l'intervention ("Quand souhaitez-vous qu'on intervienne ?", "Est-ce que vous êtes disponible aujourd'hui ou demain ?", "Êtes-vous prêt pour qu'on fixe la visite ?").
+   - ÉTAPE 3 : Une fois le problème discuté et qu'il vous dit quand il est disponible/prêt, CONFIRME l'intervention et demande-lui de te donner directement dans le chat ses 4 informations :
+     1. Nom complet
+     2. Numéro de téléphone
+     3. Adresse d'intervention
+     4. Adresse email
+
+3. PARCOURS 100% CHAT DIRECT (SANS AUCUN FORMULAIRE) :
+   - Collecte toutes les informations par simple message dans la discussion.
+   - Une fois les infos reçues, confirme au client que sa demande est validée et enregistrée sur la feuille de suivi de l'équipe technique pour l'envoi immédiat du technicien.
+
+4. COMPORTEMENT ET FORMAT :
+   - Réponses courtes, claires et adaptées au mobile (1 à 3 phrases max).`;
 
             let contents = formatGeminiContents(messages);
             if (contents.length === 0 && lastUserMsg) {
               contents = [{ role: "user", parts: [{ text: lastUserMsg }] }];
             }
 
-            let responseStream;
-            try {
-              responseStream = await ai.models.generateContentStream({
-                model: "gemini-3.6-flash",
-                contents: contents,
-                config: { systemInstruction: systemInstruction }
-              });
-            } catch (e) {
-              console.warn("gemini-3.6-flash stream error, fallback to gemini-flash-latest", e);
+            let responseStream = null;
+            const modelsToTry = ["gemini-3.1-flash-lite", "gemini-3.6-flash", "gemini-flash-latest"];
+
+            for (const modelName of modelsToTry) {
               try {
                 responseStream = await ai.models.generateContentStream({
-                  model: "gemini-flash-latest",
+                  model: modelName,
                   contents: contents,
                   config: { systemInstruction: systemInstruction }
                 });
-              } catch (e2) {
-                console.warn("gemini-flash-latest stream error, fallback to gemini-3.1-flash-lite", e2);
-                responseStream = await ai.models.generateContentStream({
-                  model: "gemini-3.1-flash-lite",
-                  contents: contents,
-                  config: { systemInstruction: systemInstruction }
-                });
+                if (responseStream) break;
+              } catch (e) {
+                console.warn(`Model ${modelName} stream error, trying next fallback model...`);
               }
+            }
+
+            if (!responseStream) {
+              throw new Error("All Gemini models exceeded quota or failed; activating local fallback.");
             }
 
             for await (const chunk of responseStream) {
@@ -405,23 +394,8 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
               }
             }
 
-            // Determine if a form should be shown based on intent
-            let resolvedFormType: "appointment" | "quote" | undefined = undefined;
-            if (
-              lower.includes("rendez-vous") ||
-              lower.includes("rendez vous") ||
-              lower.includes("rdv") ||
-              lower.includes("réserver") ||
-              lower.includes("planifier")
-            ) {
-              resolvedFormType = "appointment";
-            } else if (
-              lower.includes("devis") ||
-              lower.includes("estimation") ||
-              lower.includes("chiffrage")
-            ) {
-              resolvedFormType = "quote";
-            }
+            // Do NOT send any large interactive form to mobile chat! Collect via conversation directly.
+            const resolvedFormType = undefined;
 
             sendJSON({
               type: "meta",
@@ -512,20 +486,20 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
             lower.includes("devis") ||
             lower.includes("coût")
           ) {
-            responseText = `Tous nos devis sont 100% gratuits et sans engagement. Pouvez-vous nous préciser votre besoin ou votre commune ?`;
-            formType = "quote";
+            responseText = `Tous nos devis sont 100% gratuits et sans engagement. Décrivez-moi votre besoin et dites-moi quand vous souhaitez qu'on intervienne !`;
+            formType = undefined;
           } else if (
             lower.includes("rendez-vous") ||
             lower.includes("rdv") ||
             lower.includes("réserver") ||
             lower.includes("reserver")
           ) {
-            responseText = `Vous pouvez réserver un créneau d'intervention directement avec notre technicien ci-dessous.`;
-            formType = "appointment";
+            responseText = `Quand souhaitez-vous fixer le rendez-vous ? Dites-moi quel jour et quelle heure vous conviennent le mieux.`;
+            formType = undefined;
           } else if (isAffirmative) {
             responseText = isDutch 
-              ? "Dat is genoteerd. Om een afspraak te maken of voor een offerte, kunt u uw telefoonnummer en stad achterlaten?"
-              : "C'est parfait. Pour qu'un technicien puisse vous recontacter ou intervenir, pouvez-vous me communiquer votre numéro de téléphone et votre ville ?";
+              ? "Dat is prima. Wanneer wenst u dat onze technicus langskomt?"
+              : "C'est parfait. Quand souhaitez-vous qu'on intervienne ? Dites-moi si vous êtes disponible aujourd'hui ou un autre jour.";
           } else if (info.telephone && !info.hasVille) {
             responseText = `C'est bien noté pour le ${info.telephone}. Dans quelle ville ou commune avez-vous besoin de nous ?`;
           } else if (info.telephone && info.hasVille) {

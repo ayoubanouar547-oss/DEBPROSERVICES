@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 import { postToGoogleSheets } from "@/lib/googleSheets";
-
-const resend = new Resend(process.env.RESEND_API_KEY || "re_placeholder");
 
 // Simple in-memory fallback for booked slots if needed
 let BOOKINGS_STORE: Array<{
@@ -95,50 +92,9 @@ export async function POST(req: Request) {
     if (process.env.GOOGLE_SCRIPT_URL) {
       try {
         await postToGoogleSheets(process.env.GOOGLE_SCRIPT_URL, payload);
+        console.log("Booking lead successfully sent to Google Sheets");
       } catch (sheetErr) {
         console.error("Error sending booking to Google Sheet:", sheetErr);
-      }
-    }
-
-    if (process.env.RESEND_API_KEY) {
-      try {
-        const recipient = process.env.NOTIFICATION_EMAIL || "debproservices@canalrose.be";
-        const sender = process.env.RESEND_FROM_EMAIL || "DEB PRO <onboarding@resend.dev>";
-        
-        console.log(`Attempting to send booking email to: ${recipient} from: ${sender}`);
-
-        const { data: resendData, error: resendError } = await resend.emails.send({
-          from: sender,
-          to: recipient,
-          subject: `📅 Nouvelle Réservation Intervenant - ${serviceVal.toUpperCase()} le ${bookingDateVal} (${timeSlotVal})`,
-          html: `
-            <div font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; background: #0f172a; color: #ffffff;">
-              <h2 style="color: #38bdf8; margin-top: 0;">📅 Nouvelle Réservation d'Intervention Confirmée</h2>
-              <p style="color: #94a3b8;">Un client a réservé un créneau d'intervention sur le site DEB PRO SERVICES.</p>
-              
-              <div style="background: #1e293b; padding: 16px; border-radius: 8px; margin: 20px 0;">
-                <p style="margin: 6px 0; color: #38bdf8;"><strong>🗓️ Date demandée :</strong> ${bookingDateVal}</p>
-                <p style="margin: 6px 0; color: #38bdf8;"><strong>⏰ Créneau horaire :</strong> ${timeSlotVal}</p>
-                <p style="margin: 6px 0;"><strong>🛠️ Service :</strong> ${serviceVal}</p>
-                <p style="margin: 6px 0;"><strong>👤 Nom Client :</strong> ${nomVal}</p>
-                <p style="margin: 6px 0;"><strong>📞 Téléphone :</strong> <a href="tel:${telVal}" style="color: #4ade80;">${telVal}</a></p>
-                <p style="margin: 6px 0;"><strong>✉️ Email :</strong> ${emailVal}</p>
-                <p style="margin: 6px 0;"><strong>📍 Ville / Adresse :</strong> ${villeVal}</p>
-                <p style="margin: 6px 0;"><strong>📝 Remarques / Problème :</strong><br/>${messageVal}</p>
-              </div>
-              
-              <p style="font-size: 12px; color: #64748b;">E-mail généré automatiquement par l'application DEB PRO SERVICES.</p>
-            </div>
-          `,
-        });
-
-        if (resendError) {
-          console.error("Resend API Error (Booking):", resendError);
-        } else {
-          console.log("Booking email sent successfully:", resendData?.id);
-        }
-      } catch (emailErr) {
-        console.error("Error sending email via Resend:", emailErr);
       }
     }
 

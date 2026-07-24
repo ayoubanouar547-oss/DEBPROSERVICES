@@ -34,14 +34,18 @@ export default function Home() {
             "@graph": [
               {
                 "@type": "WebSite",
-                "name": "Deb Pro Service",
+                "name": "DEB PRO SERVICES",
                 "url": "https://debservices.canalrose.be"
               },
               {
                 "@type": "Article",
                 "@id": "https://debservices.canalrose.be/#article",
-                "headline": "Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en débouchage, plomberie et chauffage en Belgique ?",
-                "description": "DEB PRO SERVICES en Belgique : Entreprise certifiée multiservice pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, Caméras & Panneaux Solaires.",
+                "headline": "Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en plomberie, débouchage, chauffage, électricité, gaz, climatisation, caméras & panneaux solaires en Belgique ?",
+                "description": "DEB PRO SERVICES en Belgique : Entreprise certifiée multiservice pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, VMC, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture, Rénovation & Jardinage.",
+                "image": [
+                  "https://debservices.canalrose.be/technician.png",
+                  "https://debservices.canalrose.be/logo.png"
+                ],
                 "author": {
                   "@type": "Organization",
                   "name": "DEB PRO SERVICES",
@@ -52,7 +56,11 @@ export default function Home() {
                   "@type": "Organization",
                   "name": "DEB PRO SERVICES",
                   "alternateName": "Debservices",
-                  "url": "https://debservices.canalrose.be"
+                  "url": "https://debservices.canalrose.be",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://debservices.canalrose.be/technician.png"
+                  }
                 },
                 "mainEntityOfPage": {
                   "@type": "WebPage",
@@ -61,74 +69,19 @@ export default function Home() {
                 "inLanguage": "fr-BE"
               },
               {
-                "@type": "LocalBusiness",
+                "@type": ["HomeAndConstructionBusiness", "LocalBusiness", "EmergencyService", "Plumber", "HVACBusiness", "Electrician", "RoofingContractor"],
                 "name": "DEB PRO SERVICES",
                 "alternateName": ["Debservices", "Deb Pro Service"],
-                "image": "https://debservices.canalrose.be/technician.png",
+                "image": [
+                  "https://debservices.canalrose.be/technician.png",
+                  "https://debservices.canalrose.be/logo.png"
+                ],
+                "logo": "https://debservices.canalrose.be/technician.png",
                 "@id": "https://debservices.canalrose.be/#organization",
                 "url": "https://debservices.canalrose.be",
                 "telephone": "+32496325733",
                 "email": "info@debservices.canalrose.be",
                 "priceRange": "€€",
-                "aggregateRating": {
-                  "@type": "AggregateRating",
-                  "ratingValue": "4.9",
-                  "reviewCount": "8942",
-                  "bestRating": "5",
-                  "worstRating": "1"
-                },
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Centre-ville",
-                  "addressLocality": "Bruxelles",
-                  "addressRegion": "Bruxelles-Capitale",
-                  "postalCode": "1000",
-                  "addressCountry": "BE",
-                },
-                "geo": {
-                  "@type": "GeoCoordinates",
-                  "latitude": 50.9343749,
-                  "longitude": 4.3869474,
-                },
-                "hasMap": "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
-                "openingHoursSpecification": {
-                  "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                    "Sunday",
-                  ],
-                  "opens": "00:00",
-                  "closes": "23:59",
-                },
-                "sameAs": [
-                  "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
-                  "https://www.facebook.com/debservices",
-                  "https://www.instagram.com/debservices",
-                ],
-                "description":
-                  "DEB PRO SERVICES en Belgique : Entreprise multiservice certifiée pour la Plomberie, Débouchage, Chauffage, Gaz, Électricité, Climatisation, Ventilation VMC, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture, Rénovation, Gros Œuvre, Jardinage & Nettoyage de Vitres.",
-                "areaServed": {
-                  "@type": "Country",
-                  "name": "Belgium",
-                },
-              },
-              {
-                "@type": "Service",
-                "@id": "https://debservices.canalrose.be/#service",
-                "name": "DEB PRO SERVICES - Dépannage Urgence 24h/24 & 7j/7 en Belgique",
-                "serviceType": "Dépannage & Installation Technique",
-                "provider": {
-                  "@id": "https://debservices.canalrose.be/#organization"
-                },
-                "areaServed": {
-                  "@type": "Country",
-                  "name": "Belgium"
-                },
                 "aggregateRating": {
                   "@type": "AggregateRating",
                   "ratingValue": "4.9",
@@ -144,12 +97,12 @@ export default function Home() {
                       "name": "Marc Dubois"
                     },
                     "datePublished": "2026-01-15",
-                    "reviewBody": "Intervention ultra rapide en 25 minutes pour une fuite d'eau à Bruxelles. Équipe très professionnelle et tarifs transparents !",
+                    "reviewBody": "Intervention ultra rapide en 25 minutes pour plomberie, chauffage et urgence à Bruxelles. Équipe très professionnelle et tarifs transparents !",
                     "reviewRating": {
                       "@type": "Rating",
-                      "ratingValue": "5",
-                      "bestRating": "5",
-                      "worstRating": "1"
+                      ratingValue: "5",
+                      bestRating: "5",
+                      worstRating: "1"
                     }
                   },
                   {
@@ -159,23 +112,90 @@ export default function Home() {
                       "name": "Sophie Laurent"
                     },
                     "datePublished": "2026-02-02",
-                    "reviewBody": "Débouchage de canalisation réalisé avec caméra thermique. Résultat impeccable et problème résolu immédiatement.",
+                    "reviewBody": "Débouchage canalisation, électricité, airco et entretien chaudière réalisés avec perfection. Résultat impeccable et service 24/7 au top en Belgique.",
                     "reviewRating": {
                       "@type": "Rating",
-                      "ratingValue": "5",
-                      "bestRating": "5",
-                      "worstRating": "1"
+                      ratingValue: "5",
+                      bestRating: "5",
+                      worstRating: "1"
                     }
                   }
-                ]
+                ],
+                "vatID": "BE 1034.012.476",
+                "taxID": "BE 1034.012.476",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Madeliefjesstraat 1/B006",
+                  "addressLocality": "Grimbergen",
+                  "addressRegion": "Vlaams-Brabant",
+                  "postalCode": "1850",
+                  "addressCountry": "BE"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": 50.9343749,
+                  "longitude": 4.3869474
+                },
+                "hasMap": "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
+                "openingHoursSpecification": {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "opens": "00:00",
+                  "closes": "23:59"
+                },
+                "sameAs": [
+                  "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
+                  "https://www.facebook.com/debservices",
+                  "https://www.instagram.com/debservices"
+                ],
+                "description": "DEB PRO SERVICES en Belgique : Entreprise multiservice certifiée pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, Ventilation VMC, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture, Rénovation, Gros Œuvre, Jardinage & Nettoyage de Vitres.",
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "Belgium"
+                },
+                "hasOfferCatalog": {
+                  "@type": "OfferCatalog",
+                  "name": "Tous les Services DEB PRO SERVICES Belgique",
+                  "itemListElement": [
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plomberie & Dépannage Fuite d'Eau" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Débouchage Canalisation 24/7 & Inspection Caméra" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Chauffage, Entretien Chaudière & Pompe à Chaleur" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gaz CERGA (Installation & Dépannage)" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Électricité AREI & Mise en Conformité" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Climatisation & Pompe à Chaleur Air/Air" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ventilation VMC (Installation & Entretien)" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Caméras de Surveillance & Alarmes de Sécurité" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Panneaux Solaires Photovoltaïques & Batteries" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vidange Fosse Septique & Curage de Cuve" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rénovation Immobilière & Douche Italienne" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Toiture, Couverture & Zinc" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Jardinage, Élagage & Entretien Espaces Verts" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Nettoyage de Vitres & Châssis" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Construction & Gros Œuvre" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Citerne Mazout & Dépollution" } },
+                    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gaz Naturel Comprimé (GNC)" } }
+                  ]
+                }
               },
               {
                 "@type": "Product",
-                "name": "Services DEB PRO SERVICES - Plomberie, Débouchage & Chauffage Belgique",
-                "description": "Dépannage express 24h/24 et 7j/7 en Belgique par techniciens certifiés.",
+                "name": "Services DEB PRO SERVICES - Plomberie, Débouchage, Chauffage, Électricité, Gaz, Climatisation, Caméras & Solaire Belgique",
+                "description": "Dépannage express 24h/24 et 7j/7 en Belgique par techniciens certifiés : Plomberie, Débouchage, Chauffage, Électricité AREI, Gaz CERGA, Climatisation, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture & Rénovation.",
+                "image": [
+                  "https://debservices.canalrose.be/technician.png",
+                  "https://debservices.canalrose.be/logo.png"
+                ],
                 "brand": {
                   "@type": "Brand",
-                  "name": "Deb Pro Service"
+                  "name": "DEB PRO SERVICES"
                 },
                 "aggregateRating": {
                   "@type": "AggregateRating",
@@ -189,8 +209,26 @@ export default function Home() {
                   "url": "https://debservices.canalrose.be",
                   "priceCurrency": "EUR",
                   "price": "50.00",
-                  "priceValidUntil": "2027-12-31",
-                  "availability": "https://schema.org/InStock"
+                  "priceValidUntil": "2028-12-31",
+                  "validFrom": "2024-01-01",
+                  "availability": "https://schema.org/InStock",
+                  "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": "BE",
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+                  },
+                  "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                      "@type": "MonetaryAmount",
+                      "value": "0",
+                      "currency": "EUR"
+                    },
+                    "shippingDestination": {
+                      "@type": "DefinedRegion",
+                      "addressCountry": "BE"
+                    }
+                  }
                 },
                 "review": [
                   {
@@ -200,7 +238,7 @@ export default function Home() {
                       "name": "Marc Dubois"
                     },
                     "datePublished": "2026-01-15",
-                    "reviewBody": "Intervention d'urgence parfaite en moins de 30 minutes. Tarifs respectés.",
+                    "reviewBody": "Intervention d'urgence parfaite en moins de 30 minutes. Tarifs respectés et service complet.",
                     "reviewRating": {
                       "@type": "Rating",
                       "ratingValue": "5",
