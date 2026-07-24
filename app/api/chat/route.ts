@@ -313,7 +313,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const lastUserMsg = messages.filter((m: any) => m.role === "user").pop()?.content || "";
+    const lastUserMsg = (messages.filter((m: any) => m.role === "user").pop()?.content || "").trim();
     const lower = lastUserMsg.toLowerCase();
     const isDutch = locale === "nl" || lower.includes("hallo") || lower.includes("goedendag") || lower.includes("loodgieter") || lower.includes("zonnepanelen");
 
@@ -371,15 +371,24 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
               responseStream = await ai.models.generateContentStream({
                 model: "gemini-3.6-flash",
                 contents: contents,
-                config: { systemInstruction },
+                config: { systemInstruction: systemInstruction }
               });
             } catch (e) {
               console.warn("gemini-3.6-flash stream error, fallback to gemini-flash-latest", e);
-              responseStream = await ai.models.generateContentStream({
-                model: "gemini-flash-latest",
-                contents: contents,
-                config: { systemInstruction },
-              });
+              try {
+                responseStream = await ai.models.generateContentStream({
+                  model: "gemini-flash-latest",
+                  contents: contents,
+                  config: { systemInstruction: systemInstruction }
+                });
+              } catch (e2) {
+                console.warn("gemini-flash-latest stream error, fallback to gemini-3.1-flash-lite", e2);
+                responseStream = await ai.models.generateContentStream({
+                  model: "gemini-3.1-flash-lite",
+                  contents: contents,
+                  config: { systemInstruction: systemInstruction }
+                });
+              }
             }
 
             for await (const chunk of responseStream) {
@@ -422,6 +431,11 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
         let responseText = "";
         let formType: "appointment" | "quote" | undefined = undefined;
 
+        const isAffirmative = ["oui", "ok", "d'accord", "daccord", "yes", "ya", "da", "waga", "ja", "goed", "bevestigen", "bevestig"].includes(lower) || 
+                             lower.startsWith("oui ") || lower.startsWith("ja ") || lower === "ouai" || lower === "ouais";
+        const hasHistory = messages.filter(m => m.role === "user").length > 0;
+        const isFollowUp = messages.filter(m => m.role === "user").length > 1;
+
         if (isDutch) {
           if (lower.includes("camera") || lower.includes("bewaking")) {
             responseText = "Dat is genoteerd voor uw camerasysteem. Wenst u een offerte of een interventie ter plaatse?";
@@ -431,12 +445,18 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
             responseText = "Onze loodgieters komen met spoed ter plaatse voor alle lekken en sanitair werk. In welke stad bevindt u zich?";
           } else if (lower.includes("verwarming") || lower.includes("boiler") || lower.includes("ketel")) {
             responseText = "Onze erkende verwarmingstechnici staan 24/7 klaar voor onderhoud en herstelling van uw ketel.";
-          } else if (info.telephone) {
-            responseText = `Dat is genoteerd! Een technieker belt u zo snel mogelijk terug op ${info.telephone}.`;
-          } else if (info.hasVille) {
-            responseText = `Akkoord, onze techniekers komen snel ter plaatse in ${info.ville}. Wenst u de aanvraag te bevestigen?`;
+          } else if (lower === "ja" || lower === "ok" || lower === "goed") {
+            responseText = "Prima! Kunt u uw telefoonnummer en gemeente doorgeven zodat we contact met u kunnen opnemen?";
+          } else if (info.telephone && !info.hasVille) {
+            responseText = `Bedankt voor uw nummer (${info.telephone}). In welke stad of gemeente is de interventie nodig?`;
+          } else if (info.telephone && info.hasVille) {
+            responseText = `Bedankt! Een technieker belt u zo snel mogelijk terug op ${info.telephone} voor de interventie in ${info.ville}.`;
+          } else if (info.hasVille && !info.telephone) {
+            responseText = `Bedankt! We hebben techniekers in ${info.ville}. Kunt u uw telefoonnummer achterlaten zodat we u kunnen terugbellen?`;
           } else {
-            responseText = "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?";
+            responseText = isFollowUp 
+              ? "Ik begrijp het niet helemaal. Kunt u meer details geven over uw probleem of uw telefoonnummer achterlaten?"
+              : "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?";
           }
         } else {
           if (
@@ -494,20 +514,32 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
           ) {
             responseText = `Vous pouvez réserver un créneau d'intervention directement avec notre technicien ci-dessous.`;
             formType = "appointment";
-          } else if (info.telephone) {
-            responseText = `C'est bien noté ! Un technicien vous rappellera rapidement sur le ${info.telephone}.`;
-          } else if (info.hasVille) {
-            responseText = `D'accord, nos techniciens interviennent rapidement à ${info.ville}. Souhaitez-vous confirmer votre demande ?`;
+          } else if (isAffirmative) {
+            responseText = isDutch 
+              ? "Dat is genoteerd. Om een afspraak te maken of voor een offerte, kunt u uw telefoonnummer en stad achterlaten?"
+              : "C'est parfait. Pour qu'un technicien puisse vous recontacter ou intervenir, pouvez-vous me communiquer votre numéro de téléphone et votre ville ?";
+          } else if (info.telephone && !info.hasVille) {
+            responseText = `C'est bien noté pour le ${info.telephone}. Dans quelle ville ou commune avez-vous besoin de nous ?`;
+          } else if (info.telephone && info.hasVille) {
+            responseText = `C'est parfait ! Un technicien vous rappellera rapidement sur le ${info.telephone} pour l'intervention à ${info.ville}.`;
+          } else if (info.hasVille && !info.telephone) {
+            responseText = `Nous avons des techniciens à ${info.ville}. Pouvez-vous me laisser votre numéro de téléphone pour vous recontacter ?`;
           } else if (
             lower.includes("bonjour") ||
             lower.includes("salut") ||
             lower.includes("hello") ||
             lower.includes("hi") ||
-            lower.includes("coucou")
+            lower.includes("coucou") ||
+            lower.includes("hallo") ||
+            lower.includes("goedendag")
           ) {
-            responseText = `Salut ! Je suis Sofia, l'assistante virtuelle de DEB PRO SERVICES. Comment puis-je vous aider aujourd'hui ?`;
-          } else if (lower.includes("bonsoir")) {
-            responseText = `Bonsoir ! Je suis Sofia de DEB PRO SERVICES. Comment puis-je vous aider ?`;
+            responseText = isDutch
+              ? "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Hoe kan ik u vandaag helpen?"
+              : `Salut ! Je suis Sofia, l'assistante virtuelle de DEB PRO SERVICES. Comment puis-je vous aider aujourd'hui ?`;
+          } else if (lower.includes("bonsoir") || lower.includes("goedenavond")) {
+            responseText = isDutch
+              ? "Goedenavond! Ik ben Sofia van DEB PRO SERVICES. Waarmee kan ik u helpen?"
+              : `Bonsoir ! Je suis Sofia de DEB PRO SERVICES. Comment puis-je vous aider ?`;
           } else if (
             lower.includes("salam") ||
             lower.includes("labas") ||
@@ -516,7 +548,15 @@ RÈGLES STRICTES DE COMPORTEMENT & RÉPONSE :
           ) {
             responseText = `Salam ! Kifash n3awnak lyoum f les travaux wla dépannage dialk ?`;
           } else {
-            responseText = `Bonjour ! Je suis Sofia de DEB PRO SERVICES. Je suis à votre disposition pour toute demande de dépannage, plomberie, chauffage, électricité ou vidange en Belgique.`;
+            if (isDutch) {
+              responseText = isFollowUp 
+                ? "Ik begrijp het niet helemaal. Kunt u meer details geven over uw probleem of uw telefoonnummer achterlaten?"
+                : "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?";
+            } else {
+              responseText = isFollowUp 
+                ? "Je ne suis pas sûre d'avoir bien compris. Pouvez-vous me donner plus de détails sur votre problème ou me laisser votre numéro de téléphone ?"
+                : `Bonjour ! Je suis Sofia de DEB PRO SERVICES. Je suis à votre disposition pour toute demande de dépannage, plomberie, chauffage, électricité ou vidange en Belgique.`;
+            }
           }
         }
 

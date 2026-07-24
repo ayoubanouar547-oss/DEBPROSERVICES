@@ -5,47 +5,65 @@
  */
 export async function postToGoogleSheets(scriptUrl: string, payload: Record<string, any>) {
   if (!scriptUrl || typeof scriptUrl !== "string" || !scriptUrl.startsWith("http")) {
-    return;
+    console.error("[GoogleSheets] Invalid script URL:", scriptUrl);
+    return { success: false, error: "Invalid URL" };
   }
 
   try {
-    const jsonString = JSON.stringify(payload);
+    const body = JSON.stringify(payload);
+    console.log(`[GoogleSheets] Sending payload to ${scriptUrl}`);
 
-    // 1. Send POST with text/plain (avoids CORS preflight & header stripping)
-    // and redirect: "manual" so node-fetch doesn't convert 302 POST to GET.
-    const res = await fetch(scriptUrl, {
+    // Try 1: Standard POST with redirect follow
+    // We use text/plain to avoid CORS preflight which can be tricky with GAS
+    const response = await fetch(scriptUrl, {
       method: "POST",
       headers: {
         "Content-Type": "text/plain;charset=utf-8",
       },
-      body: jsonString,
-      redirect: "manual",
-    });
-
-    console.log(`[GoogleSheets] POST sent to script. HTTP Status: ${res.status}`);
-
-    // If redirect returned (302 or 307) or 200, Google Apps Script executed doPost(e)
-    if (res.status === 200 || res.status === 302 || res.status === 307 || res.status === 0) {
-      return { success: true, status: res.status };
-    }
-
-    // 2. Secondary fallback with query parameters in case doPost relies on GET or URL params
-    const queryParams = new URLSearchParams();
-    for (const [key, val] of Object.entries(payload)) {
-      if (typeof val === "string" || typeof val === "number") {
-        queryParams.append(key, String(val));
-      }
-    }
-    const fallbackUrl = `${scriptUrl}?${queryParams.toString()}`;
-
-    await fetch(fallbackUrl, {
-      method: "GET",
+      body: body,
       redirect: "follow",
     });
 
-    return { success: true, fallback: true };
+    if (response.ok || response.status === 200) {
+      console.log(`[GoogleSheets] Success (POST follow). Status: ${response.status}`);
+      return { success: true, method: "POST_FOLLOW" };
+    }
+
+    // Try 2: Manual redirect handling if follow didn't work as expected
+    const res2 = await fetch(scriptUrl, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: body,
+      redirect: "manual",
+    });
+
+    if (res2.status === 302 || res2.status === 307) {
+      const location = res2.headers.get("location");
+      if (location) {
+        console.log(`[GoogleSheets] Manual redirect to: ${location}`);
+        // For GAS, the redirect is usually to a GET page that confirms receipt
+        await fetch(location, { method: "GET" });
+        return { success: true, method: "POST_MANUAL_REDIRECT" };
+      }
+    }
+
+    // Try 3: GET fallback (some GAS scripts use doGet instead of doPost for simplicity)
+    const params = new URLSearchParams();
+    Object.entries(payload).forEach(([k, v]) => params.append(k, String(v)));
+    const getUrl = `${scriptUrl}${scriptUrl.includes("?") ? "&" : "?"}${params.toString()}`;
+    
+    console.log(`[GoogleSheets] Trying GET fallback...`);
+    const res3 = await fetch(getUrl, { method: "GET" });
+    
+    if (res3.ok) {
+      console.log(`[GoogleSheets] Success on GET fallback.`);
+      return { success: true, method: "GET_FALLBACK" };
+    }
+
+    console.error(`[GoogleSheets] All attempts failed. Last status: ${res3.status}`);
+    return { success: false, status: res3.status };
   } catch (err) {
-    console.error("[GoogleSheets] Error posting to Google Apps Script:", err);
+    console.error("[GoogleSheets] Critical error:", err);
     return { success: false, error: String(err) };
   }
 }
