@@ -125,12 +125,12 @@ export function Hero() {
         >
           <div className="flex-1 sm:flex-initial">
             <Link
-              href="tel:0496325733"
+              href="tel:0492479201"
               className="group relative w-full px-8 py-5 rounded-2xl font-black text-xl text-white flex items-center justify-center gap-3 transition-all overflow-hidden bg-gradient-to-br from-red-600 to-rose-700 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_60px_-10px_rgba(220,38,38,0.7)] hover:-translate-y-1"
             >
               <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%)] bg-[length:250%_250%,100%_100%] animate-[bg-shift_2s_linear_infinite]" />
               <PhoneCall className="w-6 h-6 animate-pulse relative z-10" />
-              <span className="relative z-10 tracking-wide">0496 32 57 33</span>
+              <span className="relative z-10 tracking-wide">0492 47 92 01</span>
             </Link>
           </div>
           <div className="flex-1 sm:flex-initial">

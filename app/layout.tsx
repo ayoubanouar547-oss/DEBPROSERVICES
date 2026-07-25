@@ -111,6 +111,22 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
+                  if (typeof window !== 'undefined') {
+                    ['fetch', 'Headers', 'Request', 'Response'].forEach(function(prop) {
+                      try {
+                        var val = window[prop];
+                        window['__custom_' + prop] = val;
+                        Object.defineProperty(window, prop, {
+                          get: function() { return window['__custom_' + prop]; },
+                          set: function(v) { window['__custom_' + prop] = v; },
+                          configurable: true,
+                          enumerable: true
+                        });
+                      } catch (e) {}
+                    });
+                  }
+                } catch (e) {}
+                try {
                   var savedTheme = localStorage.getItem('theme');
                   if (savedTheme === 'light') {
                     document.documentElement.classList.add('light-theme');
@@ -170,7 +186,7 @@ export default function RootLayout({
                 },
                 "contactPoint": {
                   "@type": "ContactPoint",
-                  "telephone": "+32496325733",
+                  "telephone": "+32492479201",
                   "contactType": "customer service",
                   "areaServed": "BE",
                   "availableLanguage": ["French", "Dutch", "English"]

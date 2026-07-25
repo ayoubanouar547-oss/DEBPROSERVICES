@@ -331,7 +331,7 @@ export default function ChatBot() {
           id: `err-${Date.now()}`,
           role: "assistant",
           content:
-            "Désolé, le service de chat est momentanément indisponible. Vous pouvez cliquer sur 'Formulaire RDV' ci-dessus ou nous appeler 24/7 au 0496 32 57 33.",
+            "Désolé, le service de chat est momentanément indisponible. Vous pouvez cliquer sur 'Formulaire RDV' ci-dessus ou nous appeler 24/7 au 0492 47 92 01.",
           timestamp: new Date().toLocaleTimeString("fr-FR", {
             hour: "2-digit",
             minute: "2-digit",
@@ -731,11 +731,11 @@ export default function ChatBot() {
 
               <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
                 <a
-                  href="tel:0496325733"
+                  href="tel:0492479201"
                   className="text-cyan-400 hover:underline flex items-center gap-1 font-semibold"
                 >
                   <Phone className="w-3 h-3 text-cyan-400" />
-                  {isNl ? "Directe Oproep: 0496 32 57 33" : "Appel Direct : 0496 32 57 33"}
+                  {isNl ? "Directe Oproep: 0492 47 92 01" : "Appel Direct : 0492 47 92 01"}
                 </a>
                 <span>{isNl ? "Beschikbaar 24/7" : "Disponible 24H/24 & 7J/7"}</span>
               </div>
@@ -834,7 +834,7 @@ function InlineChatForm({
             id={`cb-tel-${type}`}
             type="tel"
             required
-            placeholder="Ex: 0496 12 34 56"
+            placeholder="Ex: 0492 12 34 56"
             value={telephone}
             onChange={(e) => setTelephone(e.target.value)}
             className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 text-[11px]"

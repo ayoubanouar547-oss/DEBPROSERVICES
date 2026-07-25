@@ -498,8 +498,8 @@ export function ContactForm() {
                     </h4>
                     <p className="text-slate-400 text-xs mt-1">
                       {isNl
-                        ? "Voor dringende situaties kunt u ons rechtstreeks bellen op 0496 32 57 33."
-                        : "En cas d'urgence absolue, vous pouvez nous joindre directement au 0496 32 57 33."}
+                        ? "Voor dringende situaties kunt u ons rechtstreeks bellen op 0492 47 92 01."
+                        : "En cas d'urgence absolue, vous pouvez nous joindre directement au 0492 47 92 01."}
                     </p>
                   </div>
                 </div>
@@ -577,7 +577,7 @@ export function ContactForm() {
                         type="tel"
                         {...register("telephone")}
                         className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.telephone ? "border-red-500/50" : "border-white/10"} text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
-                        placeholder="0496 32 57 33"
+                        placeholder="0492 47 92 01"
                       />
                       {errors.telephone && (
                         <p className="mt-1 text-xs text-red-400 font-bold">

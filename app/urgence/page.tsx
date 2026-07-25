@@ -35,7 +35,7 @@ export default function UrgencePage() {
             image: "https://debservices.canalrose.be/technician.png",
             "@id": "https://debservices.canalrose.be/urgence",
             url: "https://debservices.canalrose.be/urgence",
-            telephone: "+32496325733",
+            telephone: "+32492479201",
             priceRange: "$$",
             aggregateRating: {
               "@type": "AggregateRating",
@@ -70,10 +70,10 @@ export default function UrgencePage() {
           </p>
           <div className="flex justify-center">
             <a
-              href="tel:0496325733"
+              href="tel:0492479201"
               className="flex items-center gap-3 bg-white text-accent hover:bg-gray-100 px-10 py-5 rounded-full font-bold text-2xl md:text-3xl transition shadow-2xl"
             >
-              <PhoneCall className="w-8 h-8" /> 0496 32 57 33
+              <PhoneCall className="w-8 h-8" /> 0492 47 92 01
             </a>
           </div>
         </div>

@@ -78,7 +78,7 @@ export default function Home() {
                 "logo": "https://debservices.canalrose.be/technician.png",
                 "@id": "https://debservices.canalrose.be/#organization",
                 "url": "https://debservices.canalrose.be",
-                "telephone": "+32496325733",
+                "telephone": "+32492479201",
                 "email": "info@debservices.canalrose.be",
                 "priceRange": "€€",
                 "aggregateRating": {

@@ -133,41 +133,41 @@ export async function generateMetadata({
     };
   }
 
-  let description = `${service.title} Belgique : techniciens agréés pour toute intervention urgente. Dépannage 24h/24 & 7j/7. Devis gratuit immédiat ☎ 0496 32 57 33.`;
+  let description = `${service.title} Belgique : techniciens agréés pour toute intervention urgente. Dépannage 24h/24 & 7j/7. Devis gratuit immédiat ☎ 0492 47 92 01.`;
 
   if (service.slug === "plomberie") {
     description =
-      "Plombier Belgique urgence 24/7 : techniciens agréés pour fuites, installations et dépannages rapides. Devis gratuit. Intervention immédiate au ☎ 0496 32 57 33 !";
+      "Plombier Belgique urgence 24/7 : techniciens agréés pour fuites, installations et dépannages rapides. Devis gratuit. Intervention immédiate au ☎ 0492 47 92 01 !";
   } else if (service.slug === "debouchage-canalisation") {
     description =
-      "Débouchage canalisation Belgique 24/7 : expert pour WC, égouts et éviers bouchés. Devis gratuit, action immédiate et garantie. Appelez le ☎ 0496 32 57 33 !";
+      "Débouchage canalisation Belgique 24/7 : expert pour WC, égouts et éviers bouchés. Devis gratuit, action immédiate et garantie. Appelez le ☎ 0492 47 92 01 !";
   } else if (service.slug === "chauffage") {
     description =
-      "Chauffagiste Belgique certifié : dépannage chaudière en urgence 24h/24. Entretien, installation et mise en service rapide. Devis gratuit ☎ 0496 32 57 33.";
+      "Chauffagiste Belgique certifié : dépannage chaudière en urgence 24h/24. Entretien, installation et mise en service rapide. Devis gratuit ☎ 0492 47 92 01.";
   } else if (service.slug === "gaz") {
     description = 
-      "Techniciens certifiés CERGA pour toute intervention gaz en Belgique. Détection de fuites, mise en conformité, raccordement. Urgence 24h/24 ☎ 0496 32 57 33";
+      "Techniciens certifiés CERGA pour toute intervention gaz en Belgique. Détection de fuites, mise en conformité, raccordement. Urgence 24h/24 ☎ 0492 47 92 01";
   } else if (service.slug === "electricite") {
     description = 
-      "Électricien Belgique urgence 24/7 : mise en conformité, dépannage tableau électrique et installation. Expert agréé, devis gratuit. Appelez le ☎ 0496 32 57 33.";
+      "Électricien Belgique urgence 24/7 : mise en conformité, dépannage tableau électrique et installation. Expert agréé, devis gratuit. Appelez le ☎ 0492 47 92 01.";
   } else if (service.slug === "installation-panneaux-solaires") {
     description = 
-      "Installation de panneaux solaires photovoltaïques et batteries physiques en Belgique. Installateurs certifiés RESCert, étude de faisabilité gratuite et devis au meilleur prix. Contactez-nous au ☎ 0496 32 57 33.";
+      "Installation de panneaux solaires photovoltaïques et batteries physiques en Belgique. Installateurs certifiés RESCert, étude de faisabilité gratuite et devis au meilleur prix. Contactez-nous au ☎ 0492 47 92 01.";
   } else if (service.slug === "travaux-de-toiture") {
     description = 
-      "Travaux de toiture en Belgique : réparation urgente de fuites, rénovation de toit (ardoises, tuiles, EPDM), isolation thermique et démoussage. Couvreurs certifiés, devis gratuit. Appelez le ☎ 0496 32 57 33.";
+      "Travaux de toiture en Belgique : réparation urgente de fuites, rénovation de toit (ardoises, tuiles, EPDM), isolation thermique et démoussage. Couvreurs certifiés, devis gratuit. Appelez le ☎ 0492 47 92 01.";
   } else if (service.slug === "installation-cameras-surveillance") {
     description = 
-      "Installation de caméras de surveillance et alarmes en Belgique. Systèmes de sécurité IP HD connectés sur smartphone pour maison et commerce. Devis gratuit & étude de sécurité offerte ☎ 0496 32 57 33.";
+      "Installation de caméras de surveillance et alarmes en Belgique. Systèmes de sécurité IP HD connectés sur smartphone pour maison et commerce. Devis gratuit & étude de sécurité offerte ☎ 0492 47 92 01.";
   } else if (service.slug === "travaux-de-construction-gros-oeuvre") {
     description = 
-      "Entreprise de construction et maçonnerie en Belgique. Gros œuvre, dalles en béton, ouvertures de mur porteur avec poutrelles IPN/HEB, fondations et façades. Garantie décennale, devis gratuit ☎ 0496 32 57 33.";
+      "Entreprise de construction et maçonnerie en Belgique. Gros œuvre, dalles en béton, ouvertures de mur porteur avec poutrelles IPN/HEB, fondations et façades. Garantie décennale, devis gratuit ☎ 0492 47 92 01.";
   } else if (service.slug === "nettoyage-de-vitres") {
     description =
-      "Lavage de vitres professionnel en Belgique. Nettoyage de vitrines, vérandas, fenêtres d'accès difficile, châssis et volets pour particuliers et commerces. Devis gratuit immédiat ☎ 0496 32 57 33.";
+      "Lavage de vitres professionnel en Belgique. Nettoyage de vitrines, vérandas, fenêtres d'accès difficile, châssis et volets pour particuliers et commerces. Devis gratuit immédiat ☎ 0492 47 92 01.";
   } else if (service.slug === "travaux-de-jardinage-elagage") {
     description =
-      "Jardinier paysagiste professionnel en Belgique : entretien de jardin, élagage et abattage d'arbres complexes, taille de haies. Devis gratuit immédiat ☎ 0496 32 57 33.";
+      "Jardinier paysagiste professionnel en Belgique : entretien de jardin, élagage et abattage d'arbres complexes, taille de haies. Devis gratuit immédiat ☎ 0492 47 92 01.";
   }
 
   const isSolarService = service.slug === "installation-panneaux-solaires";
@@ -322,7 +322,7 @@ export default async function ServicePage({
                 ],
                 logo: "https://debservices.canalrose.be/technician.png",
                 url: "https://debservices.canalrose.be",
-                telephone: "+32496325733",
+                telephone: "+32492479201",
                 priceRange: "€€",
                 address: {
                   "@type": "PostalAddress",
@@ -505,7 +505,7 @@ export default async function ServicePage({
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="tel:0496325733"
+                href="tel:0492479201"
                 className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
               >
                 <PhoneCall className="w-5 h-5" /> Urgence {matchedTerm}
@@ -660,11 +660,10 @@ export default async function ServicePage({
               </div>
               <div className="mt-10">
                 <a
-                  href="tel:0496325733"
+                  href="tel:0492479201"
                   className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-10 py-5 rounded-2xl hover:bg-slate-100 transition shadow-2xl"
                 >
-                  <PhoneCall className="w-6 h-6" /> APPELEZ VOTRE EXPERT : 0496
-                  32 57 33
+                  <PhoneCall className="w-6 h-6" /> APPELEZ VOTRE EXPERT : 0492 47 92 01
                 </a>
               </div>
             </div>

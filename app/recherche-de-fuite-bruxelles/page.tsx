@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Recherche de Fuite Bruxelles | Détection Sans Casse | Deb Pro",
-  description: "Fuite d'eau invisible à Bruxelles ? Deb Pro Services intervient pour la détection non destructive. Murs humides, compteur qui tourne. 0496 32 57 33.",
+  description: "Fuite d'eau invisible à Bruxelles ? Deb Pro Services intervient pour la détection non destructive. Murs humides, compteur qui tourne. 0492 47 92 01.",
   alternates: {
     canonical: "/recherche-de-fuite-bruxelles",
   },
@@ -53,7 +53,7 @@ export default function RechercheFuiteBruxellesPage() {
                 "provider": {
                   "@type": "LocalBusiness",
                   "name": "Deb Pro Service",
-                  "telephone": "+32496325733",
+                  "telephone": "+32492479201",
                   "url": "https://debservices.canalrose.be/recherche-de-fuite-bruxelles"
                 }
               },
@@ -99,10 +99,10 @@ export default function RechercheFuiteBruxellesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="tel:0496325733"
+                href="tel:0492479201"
                 className="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-cyan-600/20"
               >
-                <PhoneCall className="w-5 h-5" /> 0496 32 57 33
+                <PhoneCall className="w-5 h-5" /> 0492 47 92 01
               </a>
             </div>
           </div>
