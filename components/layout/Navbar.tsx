@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { WaterSplash } from "../ui/WaterSplash";
 import { getAlternatePath } from "@/lib/data/translations";
 
-const PHONE_NUMBER = "0492 47 92 01";
+const PHONE_NUMBER = "0498 35 25 88";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);

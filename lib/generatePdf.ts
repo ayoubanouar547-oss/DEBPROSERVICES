@@ -54,7 +54,7 @@ export function generatePdfDocument(data: PdfDocumentData) {
   doc.setFontSize(9);
   doc.setTextColor(203, 213, 225); // Slate 300
   doc.text("Service de Dépannage, Plomberie & Chauffage 24/7 en Belgique", 14, 25);
-  doc.text("☎ Tel: +32 492 47 92 01 | 🌐 https://debservices.canalrose.be", 14, 31);
+  doc.text("☎ Tel: +32 496 32 57 33 | 🌐 https://debservices.canalrose.be", 14, 31);
   doc.text("✉ Contact & Interventions rapides partout en Belgique", 14, 37);
 
   // Document Type Badge

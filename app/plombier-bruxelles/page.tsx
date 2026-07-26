@@ -53,7 +53,7 @@ export default function PlombierBruxellesPage() {
                 "provider": {
                   "@type": "LocalBusiness",
                   "name": "Deb Pro Service",
-                  "telephone": "+32492479201",
+                  "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/plombier-bruxelles",
                   "hasMap": "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
                   "sameAs": [
@@ -170,10 +170,10 @@ export default function PlombierBruxellesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="tel:0492479201"
+                href="tel:0498352588"
                 className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-blue-600/20"
               >
-                <PhoneCall className="w-5 h-5" /> Urgence Bruxelles : 0492 47 92 01
+                <PhoneCall className="w-5 h-5" /> Urgence Bruxelles : 0498 35 25 88
               </a>
             </div>
           </div>

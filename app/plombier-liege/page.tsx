@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Plombier Liège : Dépannage Urgence 24/7 & Devis Gratuit | Deb Pro Service",
-  description: "Besoin d'un plombier à Liège ? Deb Pro Service intervient en 30 minutes pour vos fuites, débouchages et installations. Artisans locaux, prix transparents. Appelez le 0492 47 92 01.",
+  description: "Besoin d'un plombier à Liège ? Deb Pro Service intervient en 30 minutes pour vos fuites, débouchages et installations. Artisans locaux, prix transparents. Appelez le 0498 35 25 88.",
   alternates: {
     canonical: "/plombier-liege",
   },
@@ -53,7 +53,7 @@ export default function PlombierLiegePage() {
                 "provider": {
                   "@type": "LocalBusiness",
                   "name": "Deb Pro Service",
-                  "telephone": "+32492479201",
+                  "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/plombier-liege"
                 }
               },
@@ -99,10 +99,10 @@ export default function PlombierLiegePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="tel:0492479201"
+                href="tel:0498352588"
                 className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
               >
-                <PhoneCall className="w-5 h-5" /> Urgence Liège : 0492 47 92 01
+                <PhoneCall className="w-5 h-5" /> Urgence Liège : 0498 35 25 88
               </a>
             </div>
           </div>
@@ -174,8 +174,8 @@ export default function PlombierLiegePage() {
                 <p className="text-xs text-slate-300 italic mb-4">
                   \"Nous intervenons également avec la même réactivité à Seraing, Herstal, Ans, Flémalle, Oupeye et Saint-Nicolas.\"
                 </p>
-                <a href="tel:0492479201" className="w-full bg-white text-slate-900 font-black py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-100 transition">
-                  <PhoneCall className="w-4 h-4" /> 0492 47 92 01
+                <a href="tel:0498352588" className="w-full bg-white text-slate-900 font-black py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-100 transition">
+                  <PhoneCall className="w-4 h-4" /> 0498 35 25 88
                 </a>
               </div>
             </div>

@@ -34,7 +34,7 @@ export default function MentionsLegalesPage() {
           <br />
           <strong>Numéro d'entreprise (BCE) / TVA :</strong> BE 1034.012.476
           <br />
-          <strong>Téléphone :</strong> 0492 47 92 01
+          <strong>Téléphone :</strong> 0498 35 25 88
           <br />
           <strong>Email :</strong> debproservices@canalrose.be
         </p>

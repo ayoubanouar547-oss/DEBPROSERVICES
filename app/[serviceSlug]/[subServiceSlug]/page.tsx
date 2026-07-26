@@ -142,7 +142,7 @@ export default async function SubServicePage({
                 name: "Deb Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 url: "https://debservices.canalrose.be",
-                telephone: "+32492479201",
+                telephone: "+32496325733",
                 priceRange: "$$",
                 aggregateRating: {
                   "@type": "AggregateRating",
@@ -253,7 +253,7 @@ export default async function SubServicePage({
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 md:gap-6">
               <a
-                href="tel:0492479201"
+                href="tel:0498352588"
                 className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
               >
                 <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
@@ -262,7 +262,7 @@ export default async function SubServicePage({
                     Appel SOS 24/7
                   </span>
                   <span className="block text-lg md:text-xl">
-                    0492 47 92 01
+                    0498 35 25 88
                   </span>
                 </div>
               </a>
@@ -444,7 +444,7 @@ export default async function SubServicePage({
                     {subServiceInfo.title}.
                   </p>
                   <a
-                    href="tel:0492479201"
+                    href="tel:0498352588"
                     className="bg-white text-red-700 w-full px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-50 transition"
                   >
                     <PhoneCall className="w-5 h-5" /> Appeler le technicien

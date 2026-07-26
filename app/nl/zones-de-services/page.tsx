@@ -39,7 +39,7 @@ export default function ZonesDeServicesPage() {
                   "bestRating": "5"
                 },
                 url: "https://debservices.canalrose.be/nl",
-                telephone: "+32492479201",
+                telephone: "+32496325733",
                 address: {
                   "@type": "PostalAddress",
                   addressLocality: "Brussels",

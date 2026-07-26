@@ -40,7 +40,7 @@ export default function AboutPage() {
                   "bestRating": "5"
                 },
                 url: "https://debservices.canalrose.be",
-                telephone: "+32492479201",
+                telephone: "+32496325733",
                 vatID: "BE 1034.012.476",
                 address: {
                   "@type": "PostalAddress",

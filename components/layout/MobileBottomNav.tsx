@@ -18,7 +18,7 @@ export function MobileBottomNav() {
   const navItems = [
     { name: "Accueil", icon: Home, href: "/" },
     { name: "Services", icon: ShieldCheck, href: "/#services" },
-    { name: "Appeler", icon: Phone, href: "tel:0492479201", isLarge: true },
+    { name: "Appeler", icon: Phone, href: "tel:0498 35 25 88", isLarge: true },
     { name: "Zones", icon: MapPin, href: "/zones-de-services" },
     { name: "Urgence", icon: AlertTriangle, href: "/urgence" },
   ];

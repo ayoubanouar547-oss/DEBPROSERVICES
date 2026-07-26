@@ -87,10 +87,10 @@ export function ServiceSeoText({ serviceTitle, cityName }: ServiceSeoProps) {
               Wacht niet tot een klein lek een overstroming wordt. Onze dispatchers staan 7 dagen per week voor u klaar, inclusief zon- en feestdagen. Neem nu contact op met DEB PRO SERVICES voor uw gemoedsrust.
             </p>
             <a
-              href="tel:0492479201"
+              href="tel:0498352588"
               className="inline-block bg-white text-blue-600 font-bold px-8 py-3 rounded-xl hover:bg-slate-100 transition shadow-lg uppercase tracking-wider"
             >
-              Bel ons : 0492 47 92 01
+              Bel ons : 0498 35 25 88
             </a>
           </div>
         </div>
@@ -151,10 +151,10 @@ export function ServiceSeoText({ serviceTitle, cityName }: ServiceSeoProps) {
             N&apos;attendez pas qu&apos;une petite fuite devienne une inondation. Nos dispatcheurs sont prêts à vous répondre 7j/7, dimanches et jours fériés inclus. Contactez DEB PRO SERVICES dès maintenant pour une sérénité retrouvée.
           </p>
           <a
-            href="tel:0492479201"
+            href="tel:0498352588"
             className="inline-block bg-white text-blue-600 font-bold px-8 py-3 rounded-xl hover:bg-slate-100 transition shadow-lg uppercase tracking-wider"
           >
-            Appelez-nous : 0492 47 92 01
+            Appelez-nous : 0498 35 25 88
           </a>
         </div>
       </div>
