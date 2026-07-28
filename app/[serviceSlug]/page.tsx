@@ -413,7 +413,7 @@ export default async function ServicePage({
               },
               ...(serviceInfo.faqs ? [{
                 "@type": "FAQPage",
-                "mainEntity": serviceInfo.faqs.map(faq => ({
+                "mainEntity": serviceInfo.faqs.map((faq: { question: string; answer: string }) => ({
                   "@type": "Question",
                   "name": cityInfo ? localizeText(faq.question, cityInfo.name) : faq.question,
                   "acceptedAnswer": {
@@ -704,7 +704,7 @@ export default async function ServicePage({
 
       <FAQ
         customFaqs={
-          serviceInfo.faqs?.map((faq) => ({
+          serviceInfo.faqs?.map((faq: { question: string; answer: string }) => ({
             question: cityInfo ? localizeText(faq.question, cityInfo.name) : faq.question,
             answer: cityInfo ? localizeText(faq.answer, cityInfo.name) : faq.answer,
           }))

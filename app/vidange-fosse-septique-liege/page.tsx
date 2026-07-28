@@ -61,7 +61,7 @@ export default function VidangeFosseSeptiqueLiegePage() {
               },
               {
                 "@type": "FAQPage",
-                "mainEntity": faqs.map(faq => ({
+                "mainEntity": faqs.map((faq: { question: string; answer: string }) => ({
                   "@type": "Question",
                   "name": faq.question,
                   "acceptedAnswer": {
