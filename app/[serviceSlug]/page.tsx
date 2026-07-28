@@ -340,7 +340,7 @@ export default async function ServicePage({
                       "@type": "Country",
                       name: "Belgium"
                     },
-                offers: serviceInfo.subServices.map((sub) => ({
+                offers: serviceInfo.subServices.map((sub: { title: string; desc: string }) => ({
                   "@type": "Offer",
                   name: sub.title,
                   description: sub.desc,
