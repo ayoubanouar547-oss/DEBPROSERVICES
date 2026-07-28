@@ -1,5 +1,7 @@
 import { Wrench, Flame, Droplets, Zap, Wind, Truck, Home, Sun, Camera, Hammer, Sparkles, Trees } from "lucide-react";
 
+export type Service = typeof services[number];
+
 export const services = [
   {
     id: "renovation",

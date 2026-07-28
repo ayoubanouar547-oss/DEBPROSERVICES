@@ -442,7 +442,7 @@ export default async function SubServicePage({
                     Andere diensten in {serviceInfo.title}
                   </h3>
                   <ul className="space-y-3">
-                    {serviceInfo.subServices.map((sub) => (
+                    {serviceInfo.subServices.map((sub: any) => (
                       <li key={sub.slug}>
                         <Link
                           href={`/nl/${serviceInfo.slug}/${sub.slug}`}

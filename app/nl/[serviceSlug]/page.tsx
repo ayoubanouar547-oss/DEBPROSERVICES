@@ -462,7 +462,7 @@ export default async function ServicePage({
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {serviceInfo.subServices.map((sub) => (
+            {serviceInfo.subServices.map((sub: any) => (
               <Link
                 key={sub.slug}
                 href={`/nl/${serviceInfo.slug}/${sub.slug}`}

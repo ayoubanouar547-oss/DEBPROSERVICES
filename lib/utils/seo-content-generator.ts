@@ -205,3 +205,84 @@ export function buildLongClusterText(
 
   return textBlocks;
 }
+
+const nlIntros = [
+  "Wanneer er een noodgeval optreedt in uw woning of bedrijfspand in {cityName}, telt elke minuut. {serviceName} vereist een grondige aanpak en snelle reactie. De inwoners van {cityName} kunnen rekenen op ons lokale team.",
+  "Bij een behoefte aan {serviceName} in {cityName} is het essentieel om een beroep te doen op gecertificeerde technici. Wij combineren snelle interventie met hoogwaardige afwerking.",
+  "Professioneel beheer van uw {serviceName} staat centraal in ons werk. Dag en nacht zijn onze vakmensen onderweg in {cityName} voor duurzame oplossingen met transparante prijzen vooraf."
+];
+
+const nlMethodology = [
+  "Onze interventiemethoden zijn gebaseerd op geavanceerde apparatuur. Voor elke handeling voeren we een nauwkeurige diagnose uit van uw {serviceName} in {cityName}.",
+  "Elke herstelling wordt voorafgegaan door een duidelijke offerte. We gebruiken gecertificeerde onderdelen en leven de lokale Belgische normen strikt na.",
+  "Het proces is eenvoudig: telefonische evaluatie, snelle beveiliging, gedetailleerde diagnose en definitieve herstelling in {cityName}."
+];
+
+const nlStandards = [
+  "Het naleven van veiligheids- en milieunormen is essentieel. Onze service voor {serviceName} in {cityName} is 100% conform de geldende Belgische regelgeving.",
+  "Al onze installaties voldoen aan de huidige isolatie- en dichtheidsnormen. Ons kwaliteitslabel biedt zekerheid aan inwoners en syndici in {cityName}."
+];
+
+const nlConclusions = [
+  "Wacht niet tot de schade verergert. Neem voor een snelle interventie voor {serviceName} in {cityName} contact op met onze 24/7 centrale.",
+  "Onze reputatie in {cityName} is gebouwd op vertrouwen en efficiëntie. Of het nu gaat om een dringende herstelling of een complex project, onze experts staan voor u klaar."
+];
+
+export function buildLongNlClusterText(
+  serviceName: string,
+  cityName: string,
+  serviceDesc?: string,
+): string[] {
+  const seedPrefix = serviceName + "-" + cityName + "-nl";
+  
+  const h1 = stringToHash(seedPrefix + "_1");
+  const h2 = stringToHash(seedPrefix + "_2");
+  const h3 = stringToHash(seedPrefix + "_3");
+  const h4 = stringToHash(seedPrefix + "_4");
+
+  const formattedServiceName = serviceName.toLowerCase();
+
+  const introText = getRandomElement(nlIntros, h1)
+    .replace(/{serviceName}/g, formattedServiceName)
+    .replace(/{cityName}/g, cityName);
+    
+  const methdologyText = getRandomElement(nlMethodology, h2)
+    .replace(/{serviceName}/g, formattedServiceName)
+    .replace(/{cityName}/g, cityName);
+    
+  const standardsText = getRandomElement(nlStandards, h3)
+    .replace(/{serviceName}/g, formattedServiceName)
+    .replace(/{cityName}/g, cityName);
+    
+  const conclusionText = getRandomElement(nlConclusions, h4)
+    .replace(/{serviceName}/g, formattedServiceName)
+    .replace(/{cityName}/g, cityName);
+
+  const textBlocks: string[] = [];
+
+  textBlocks.push(
+    `<h2 class="text-3xl font-black text-white mb-6 mt-12">Hoe verloopt onze interventie voor ${serviceName} in ${cityName}?</h2>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">${introText}</p>`,
+  );
+
+  if (serviceDesc) {
+    textBlocks.push(
+      `<div class="bg-blue-600/10 border-l-4 border-blue-400 p-6 my-8 rounded-r-2xl">
+         <h3 class="text-xl font-bold text-blue-300 mb-3">Specifieke details voor ${cityName}</h3>
+         <p class="text-white/90 text-lg leading-relaxed">${serviceDesc}</p>
+       </div>`
+    );
+  }
+
+  textBlocks.push(
+    `<h3 class="text-2xl font-bold text-blue-300 mb-4 mt-8">Onze professionele werkwijze voor ${serviceName} in ${cityName}</h3>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">${methdologyText}</p>`,
+    `<h3 class="text-2xl font-bold text-emerald-300 mb-4 mt-8">Garanties en veiligheidsnormen in ${cityName}</h3>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">${standardsText}</p>`,
+    `<div class="bg-gradient-to-r from-blue-900/30 to-purple-900/10 p-6 rounded-xl mt-8 mb-8 border border-white/5">`,
+    `<p class="text-white text-lg font-medium leading-relaxed m-0">${conclusionText}</p>`,
+    `</div>`
+  );
+
+  return textBlocks;
+}

@@ -16,7 +16,7 @@ import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import { buildLongNlClusterText } from "@/lib/utils/seo-content-generator";
-import { frToNlCitySlugMap, frToNlCityNameMap } from "@/lib/data/translations";
+import { frToNlCitySlugMap, frToNlCityNameMap, dutchServices } from "@/lib/data/translations";
 
 interface UnifiedParams {
   serviceSlug: string;
@@ -376,7 +376,7 @@ export default async function NlUnifiedZonePage({
                     { title: "Erkende Technici", desc: "Gecertificeerde vakmensen volgens Belgische normen." },
                     { title: "Transparante Prijzen", desc: "Gratis offerte vooraf, geen verborgen kosten." },
                     { title: "24/7 Beschikbaar", desc: "Dag en nacht bereikbaar, ook in het weekend." },
-                  ]).map((item, idx) => (
+                  ]).map((item: { title: string; desc: string }, idx: number) => (
                     <div
                       key={idx}
                       className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-blue-500/30 transition-colors"

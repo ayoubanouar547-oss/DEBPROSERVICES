@@ -422,7 +422,7 @@ export default async function SubServicePage({
                     Autres services en {serviceInfo.title}
                   </h3>
                   <ul className="space-y-3">
-                    {serviceInfo.subServices.map((sub) => (
+                    {serviceInfo.subServices.map((sub: any) => (
                       <li key={sub.slug}>
                         <Link
                           href={`/${serviceInfo.slug}/${sub.slug}`}

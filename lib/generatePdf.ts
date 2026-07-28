@@ -26,7 +26,9 @@ export interface PdfDocumentData {
   message?: string;
   customOptions?: Array<{ label: string; value: string }>;
   urgencyTitle?: string;
+  includedGuarantees?: string[];
   bookingDate?: string;
+  timeSlot?: string;
   date?: string;
 }
 

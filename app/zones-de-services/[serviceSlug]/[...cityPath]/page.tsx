@@ -1,5 +1,6 @@
 import { buildLongClusterText } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { services } from "@/lib/data/services";
 import { belgianCities } from "@/lib/data/cities";
 import { cityData, defaultCityData, getFallbackCityData } from "@/lib/cityData";
@@ -510,7 +511,7 @@ export default async function UnifiedZonePage({
                     Nos Services Spécifiques à {cityInfo.name}
                   </h3>
                   <div className="grid sm:grid-cols-2 gap-4">
-                    {serviceInfo.subServices.map((sub) => (
+                    {serviceInfo.subServices.map((sub: any) => (
                       <Link
                         key={sub.slug}
                         href={`/zones-de-services/${serviceInfo.slug}/${sub.slug}/${cityInfo.slug}`}
@@ -548,7 +549,7 @@ export default async function UnifiedZonePage({
                       title: "Disponibilité 24/7",
                       desc: "Une équipe d'astreinte jour et nuit, même les jours fériés.",
                     },
-                  ]).map((item, idx) => (
+                  ]).map((item: { title: string; desc: string }, idx: number) => (
                     <div
                       key={idx}
                       className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-blue-500/30 transition-colors"
