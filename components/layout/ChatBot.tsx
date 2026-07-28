@@ -22,7 +22,9 @@ import {
   MicOff,
   Volume2,
   VolumeX,
+  Download,
 } from "lucide-react";
+import { generatePdfDocument } from "@/lib/generatePdf";
 
 interface Message {
   id: string;
@@ -804,6 +806,22 @@ function InlineChatForm({
             ? "Votre demande de devis gratuit a été transmise à notre secrétariat. Nous vous enverrons l'estimation par SMS/Email sous 15 minutes."
             : "Votre rendez-vous d'intervention urgent a été enregistré. Un technicien de garde vous rappelle sous 5 à 10 minutes."}
         </p>
+        <button
+          type="button"
+          onClick={() => {
+            generatePdfDocument({
+              documentType: "DEVIS",
+              referenceNumber: `DEV-${Date.now().toString().slice(-6)}`,
+              clientInfo: { nom, telephone, ville },
+              serviceTitle: service,
+              message,
+            });
+          }}
+          className="mt-2.5 w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 transition shadow-md"
+        >
+          <Download className="w-3.5 h-3.5 text-blue-200" />
+          📄 Télécharger Devis PDF (Deb Pro Services)
+        </button>
       </div>
     );
   }

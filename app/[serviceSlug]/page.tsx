@@ -8,66 +8,16 @@ import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
+import { matchServiceAndCity } from "@/lib/service-matcher";
 
 // Helper function to dynamically parse service and city combinations for all of Belgium
 function parseServiceAndCity(slug: string) {
-  // First, check if there is an exact match for service
-  const service = services.find((s) => s.slug === slug);
-  if (service) {
-    return { service, cityInfo: null, matchedTerm: service.title };
-  }
-
-  // Check if slug ends with -[citySlug]
-  for (const city of belgianCities) {
-    if (slug.endsWith(`-${city.slug}`)) {
-      const potentialServiceSlug = slug.slice(0, -(city.slug.length + 1));
-      let matchedTerm = "";
-      const foundService = services.find((s) => {
-        if (s.slug === potentialServiceSlug) {
-          matchedTerm = s.title;
-          return true;
-        }
-        if (s.slug === "plomberie" && potentialServiceSlug === "plombier") {
-          matchedTerm = "Plombier";
-          return true;
-        }
-        if (s.slug === "chauffage" && potentialServiceSlug === "chauffagiste") {
-          matchedTerm = "Chauffagiste";
-          return true;
-        }
-        if (s.slug === "electricite" && potentialServiceSlug === "electricien") {
-          matchedTerm = "Électricien";
-          return true;
-        }
-        if (s.slug === "travaux-de-toiture" && potentialServiceSlug === "couvreur") {
-          matchedTerm = "Couvreur";
-          return true;
-        }
-        if (s.slug === "travaux-de-construction-gros-oeuvre" && potentialServiceSlug === "macon") {
-          matchedTerm = "Maçon";
-          return true;
-        }
-        if (s.slug === "debouchage-canalisation" && potentialServiceSlug === "debouchage") {
-          matchedTerm = "Débouchage";
-          return true;
-        }
-        if (s.slug === "nettoyage-de-vitres" && (potentialServiceSlug === "laveur-de-vitres" || potentialServiceSlug === "laveur")) {
-          matchedTerm = "Laveur de vitres";
-          return true;
-        }
-        if (s.slug === "travaux-de-jardinage-elagage" && (potentialServiceSlug === "jardinier" || potentialServiceSlug === "elagueur")) {
-          matchedTerm = "Jardinier";
-          return true;
-        }
-        return false;
-      });
-      if (foundService) {
-        return { service: foundService, cityInfo: city, matchedTerm };
-      }
-    }
-  }
-
-  return { service: null, cityInfo: null, matchedTerm: "" };
+  const result = matchServiceAndCity(slug, "fr");
+  return {
+    service: result.service,
+    cityInfo: result.cityInfo,
+    matchedTerm: result.matchedTerm,
+  };
 }
 
 function localizeText(text: string, cityName: string) {

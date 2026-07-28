@@ -63,7 +63,8 @@ const createSchema = (isNl: boolean) => z.object({
     "vitres",
     "jardinage",
   ]),
-  ville: z.string().min(2, isNl ? "Voer uw stad in" : "Veuillez entrer votre ville"),
+  ville: z.string().min(2, isNl ? "Voer uw adres of stad in" : "Veuillez entrer votre adresse ou ville"),
+  tva: z.string().optional(),
   message: z
     .string()
     .min(10, isNl ? "Bericht is te kort, geef meer details." : "Le message est trop court, merci de préciser.")
@@ -92,6 +93,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
+  const [estimatedPriceFromEvent, setEstimatedPriceFromEvent] = useState<number | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [showMap, setShowMap] = useState(false);
   const [submittedData, setSubmittedData] = useState<FormData | null>(null);
@@ -139,10 +141,13 @@ export function ContactForm() {
 
   useEffect(() => {
     const handleCostEstimationApplied = (e: Event) => {
-      const customEvent = e as CustomEvent<{ service: any; message: string }>;
+      const customEvent = e as CustomEvent<{ service: any; message: string; estimatedPrice?: number }>;
       if (customEvent.detail) {
         setValue("service", customEvent.detail.service);
         setValue("message", customEvent.detail.message);
+        if (customEvent.detail.estimatedPrice) {
+          setEstimatedPriceFromEvent(customEvent.detail.estimatedPrice);
+        }
         setActiveTab("devis");
       }
     };
@@ -400,12 +405,13 @@ export function ContactForm() {
         nom: submittedData.nom,
         telephone: submittedData.telephone,
         email: submittedData.email || "",
-        ville: submittedData.ville,
+        adresse: submittedData.ville,
+        tva: submittedData.tva || "",
       },
-      serviceCategory: "Demande de Devis DEB PRO SERVICES",
+      serviceCategory: "DEVIS OFFICIEL",
       serviceTitle: submittedData.service.toUpperCase(),
-      urgencyTitle: "Demande Standard / Express",
       message: submittedData.message,
+      estimatedPrice: estimatedPriceFromEvent || undefined
     });
   };
 
@@ -530,7 +536,7 @@ export function ContactForm() {
                       className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-3 px-6 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 my-2"
                     >
                       <Download className="w-4 h-4 text-emerald-200" />
-                      {isNl ? "📄 Kopie van Aanvraag Downloaden (PDF)" : "📄 Télécharger Copie de la Demande (PDF)"}
+                      {isNl ? "📄 Offerte Downloaden (PDF)" : "📄 Télécharger le Devis (PDF)"}
                     </button>
                   )}
 
@@ -616,20 +622,36 @@ export function ContactForm() {
                     </div>
                     <div>
                       <label htmlFor="contact-ville-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
-                        {isNl ? "Stad / Postcode *" : "Ville / Code Postal *"}
+                        {isNl ? "Adres / Stad *" : "Adresse / Localité *"}
                       </label>
                       <input
                         id="contact-ville-input"
                         type="text"
                         {...register("ville")}
                         className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.ville ? "border-red-500/50" : "border-white/10"} text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
-                        placeholder={isNl ? "1000 Brussel" : "1000 Bruxelles"}
+                        placeholder={isNl ? "1000 Brussel, Nieuwstraat 1" : "1000 Bruxelles, Rue Neuve 1"}
                       />
                       {errors.ville && (
                         <p className="mt-1 text-xs text-red-400 font-bold">
                           {errors.ville.message}
                         </p>
                       )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="contact-tva-input" className="block text-xs font-bold text-slate-300 mb-2 uppercase tracking-wider">
+                        {isNl ? "Btw-nummer " : "Numéro de TVA "}
+                        <span className="font-normal text-slate-500 lowercase">
+                          {isNl ? "(Optioneel)" : "(Optionnel)"}
+                        </span>
+                      </label>
+                      <input
+                        id="contact-tva-input"
+                        type="text"
+                        {...register("tva")}
+                        className={`w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
+                        placeholder="BE 0123 456 789"
+                      />
                     </div>
                   </div>
 
@@ -783,7 +805,7 @@ export function ContactForm() {
                       </>
                     ) : (
                       <>
-                        {isNl ? "Aanvraag Verzenden" : "Envoyer la demande"}{" "}
+                        {isNl ? "Verzenden" : "Envoyer le message"}{" "}
                         <Send className="w-4 h-4" />
                       </>
                     )}

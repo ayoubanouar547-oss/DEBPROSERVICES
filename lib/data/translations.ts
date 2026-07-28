@@ -1,4 +1,5 @@
 import { services } from "./services";
+import { matchServiceAndCity } from "../service-matcher";
 
 export type LocalizedService = {
   id: string;
@@ -1077,67 +1078,18 @@ export const dutchServices: LocalizedService[] = [
 ];
 
 export function parseNlServiceAndCity(slug: string) {
-  // First, check if there is an exact match for service
-  const service = dutchServices.find((s) => s.slug === slug);
-  if (service) {
-    return { service, cityInfo: null, matchedTerm: service.title };
-  }
-
-  // Check if slug ends with -[citySlug] (using Dutch city slugs)
-  const citySlugs = Object.values(frToNlCitySlugMap);
-  for (const [frCitySlug, nlCitySlug] of Object.entries(frToNlCitySlugMap)) {
-    if (slug.endsWith(`-${nlCitySlug}`)) {
-      const potentialServiceSlug = slug.slice(0, -(nlCitySlug.length + 1));
-      let matchedTerm = "";
-      
-      const foundService = dutchServices.find((s) => {
-        if (s.slug === potentialServiceSlug) {
-          matchedTerm = s.title;
-          return true;
+  const result = matchServiceAndCity(slug, "nl");
+  return {
+    service: result.dutchService,
+    cityInfo: result.cityInfo
+      ? {
+          name: frToNlCityNameMap[result.cityInfo.name] || result.cityInfo.name,
+          slug: frToNlCitySlugMap[result.cityInfo.slug] || result.cityInfo.slug,
+          province: result.cityInfo.province === "Belgique" ? "België" : result.cityInfo.province,
         }
-        if (s.slug === "loodgieter" && potentialServiceSlug === "loodgietersbedrijf") {
-          matchedTerm = "Loodgieter";
-          return true;
-        }
-        if (s.slug === "verwarming" && potentialServiceSlug === "verwarmingstechnicus") {
-          matchedTerm = "Verwarmingstechnicus";
-          return true;
-        }
-        if (s.slug === "ontstopping" && potentialServiceSlug === "ontstoppingsdienst") {
-          matchedTerm = "Ontstoppingsdienst";
-          return true;
-        }
-        if (s.slug === "putlediging" && potentialServiceSlug === "ruimdienst") {
-          matchedTerm = "Ruimdienst";
-          return true;
-        }
-        if (s.slug === "ruitenwasser" && potentialServiceSlug === "glazenwasser") {
-          matchedTerm = "Glazenwasser";
-          return true;
-        }
-        return false;
-      });
-
-      if (foundService) {
-        // Find corresponding French city info to keep consistency
-        const frCityName = Object.keys(frToNlCityNameMap).find(
-          (key) => frToNlCityNameMap[key] === frToNlCityNameMap[frCityNameFromSlug(frCitySlug)]
-        ) || frCitySlug;
-        
-        return {
-          service: foundService,
-          cityInfo: {
-            name: frToNlCityNameMap[capitalizeWord(frCitySlug.replace(/-/g, " "))] || capitalizeWord(nlCitySlug.replace(/-/g, " ")),
-            slug: nlCitySlug,
-            province: "België"
-          },
-          matchedTerm
-        };
-      }
-    }
-  }
-
-  return { service: null, cityInfo: null, matchedTerm: "" };
+      : null,
+    matchedTerm: result.matchedTerm,
+  };
 }
 
 function frCityNameFromSlug(slug: string): string {

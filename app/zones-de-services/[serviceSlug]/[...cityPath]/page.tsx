@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { services } from "@/lib/data/services";
 import { belgianCities } from "@/lib/data/cities";
 import { cityData, defaultCityData, getFallbackCityData } from "@/lib/cityData";
-import { notFound } from "next/navigation";
+import { resolveZoneServiceAndPath } from "@/lib/service-matcher";
 import {
   PhoneCall,
   MapPin,
@@ -67,19 +67,11 @@ export async function generateMetadata({
   const resolvedParams = await params;
   const { serviceSlug, cityPath } = resolvedParams;
 
-  const service = services.find((s) => s.slug === serviceSlug);
-  if (!service) return {};
-
-  let subService = null;
-  let cityInfo = null;
-
-  if (cityPath.length === 1) {
-    cityInfo = belgianCities.find((c) => c.slug === cityPath[0]);
-    subService = service.subServices.find((ss) => ss.slug === cityPath[0]);
-  } else if (cityPath.length === 2) {
-    subService = service.subServices.find((ss) => ss.slug === cityPath[0]);
-    cityInfo = belgianCities.find((c) => c.slug === cityPath[1]);
-  }
+  const { service, subService, cityInfo } = resolveZoneServiceAndPath(
+    serviceSlug,
+    cityPath,
+    "fr"
+  );
 
   const path = `/zones-de-services/${serviceSlug}/${cityPath.join("/")}`;
   const keywords = `${service.title}, ${subService ? subService.title : ""}, ${cityInfo ? cityInfo.name : "Belgique"}, intervention urgente, dépannage 24/7`;
@@ -134,7 +126,11 @@ export async function generateMetadata({
     };
   }
 
-  return {};
+  return {
+    title: `🚨 ${service.title} Belgique — Intervention Rapide 24/7`,
+    description: `Expert en ${service.title.toLowerCase()} en Belgique. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`,
+    alternates: { canonical: path },
+  };
 }
 
 export default async function UnifiedZonePage({
@@ -145,27 +141,8 @@ export default async function UnifiedZonePage({
   const resolvedParams = await params;
   const { serviceSlug, cityPath } = resolvedParams;
 
-  const serviceInfo = services.find((s) => s.slug === serviceSlug);
-  if (!serviceInfo) notFound();
-
-  let subServiceInfo = null;
-  let cityInfo = null;
-
-  if (cityPath.length === 1) {
-    cityInfo = belgianCities.find((c) => c.slug === cityPath[0]);
-    subServiceInfo = serviceInfo.subServices.find(
-      (ss) => ss.slug === cityPath[0],
-    );
-    if (!cityInfo && !subServiceInfo) notFound();
-  } else if (cityPath.length === 2) {
-    subServiceInfo = serviceInfo.subServices.find(
-      (ss) => ss.slug === cityPath[0],
-    );
-    cityInfo = belgianCities.find((c) => c.slug === cityPath[1]);
-    if (!subServiceInfo || !cityInfo) notFound();
-  } else {
-    notFound();
-  }
+  const { service: serviceInfo, subService: subServiceInfo, cityInfo } =
+    resolveZoneServiceAndPath(serviceSlug, cityPath, "fr");
 
   // Case: Service + Subservice (List cities)
   if (subServiceInfo && !cityInfo) {

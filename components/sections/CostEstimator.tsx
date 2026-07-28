@@ -731,7 +731,8 @@ export function CostEstimator() {
       const event = new CustomEvent("cost-estimation-applied", {
         detail: {
           service: selectedCategory.slug,
-          message: messageText
+          message: messageText,
+          estimatedPrice: estimatedRange.max
         }
       });
       
@@ -1051,28 +1052,19 @@ export function CostEstimator() {
               >
                 {isCopied ? (
                   <>
-                    <CheckCircle2 className="w-5 h-5 animate-bounce" /> {isNl ? "Formulier Vooraf Ingevuld!" : "Formulaire Pré-rempli !"}
+                    <CheckCircle2 className="w-5 h-5 animate-bounce" /> {isNl ? "Ga verder met het formulier!" : "Continuez vers le formulaire !"}
                   </>
                 ) : (
                   <>
-                    {isNl ? "Toepassen & Offerte Invullen" : "Appliquer & Remplir le Devis"} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <Download className="w-4 h-4 text-emerald-200" /> {isNl ? "Maak uw Offerte" : "Créer votre Devis"} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform ml-2" />
                   </>
                 )}
               </button>
 
-              <button
-                type="button"
-                onClick={handleDownloadPdf}
-                className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black py-3.5 px-6 rounded-xl transition-all shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 text-xs uppercase tracking-wider"
-              >
-                <Download className="w-4 h-4 text-emerald-200" />
-                {isNl ? "📄 Officiële Offerte Downloaden (PDF)" : "📄 Télécharger Mon Devis Officiel (PDF)"}
-              </button>
-
               <p className="text-[11px] text-slate-500 text-center mt-2">
                 {isNl 
-                  ? "Download direct de volledige offerte met bedrijfslogo, opties en prijzen." 
-                  : "Téléchargez immédiatement le devis complet avec logo, options configurées et tarifs."}
+                  ? "Vul uw gegevens in om direct de volledige offerte met bedrijfslogo, opties en prijzen te genereren." 
+                  : "Remplissez vos coordonnées pour générer immédiatement le devis complet avec logo, options configurées et tarifs."}
               </p>
             </div>
 

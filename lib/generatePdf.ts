@@ -1,261 +1,251 @@
 import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
 
 export interface PdfDocumentData {
-  documentType: "DEVIS" | "RESERVATION";
-  referenceNumber: string;
+  documentType?: string;
+  referenceNumber?: string;
   isNl?: boolean;
   clientInfo?: {
     nom?: string;
     telephone?: string;
     email?: string;
-    ville?: string;
     adresse?: string;
+    ville?: string;
+    tva?: string;
   };
-  serviceCategory: string;
-  serviceTitle: string;
+  clientName?: string;
+  clientPhone?: string;
+  clientEmail?: string;
+  clientAddress?: string;
+  serviceCategory?: string;
+  serviceTitle?: string;
   subServiceTitle?: string;
+  cityName?: string;
+  estimatedPrice?: string | number;
+  priceRange?: string;
+  details?: string;
+  message?: string;
   customOptions?: Array<{ label: string; value: string }>;
   urgencyTitle?: string;
   bookingDate?: string;
-  timeSlot?: string;
-  priceRange?: string;
-  message?: string;
-  includedGuarantees?: string[];
+  date?: string;
 }
 
-export function generatePdfDocument(data: PdfDocumentData) {
+export async function generatePdfDocument(data: PdfDocumentData): Promise<void> {
   const isNl = Boolean(data.isNl);
+  const refNum = data.referenceNumber || `DEV-${Math.floor(100000 + Math.random() * 900000)}`;
+  const dateStr = data.date || new Date().toLocaleDateString(isNl ? "nl-BE" : "fr-BE");
+
   const doc = new jsPDF({
     orientation: "portrait",
     unit: "mm",
     format: "a4",
   });
 
-  const primaryColor = [15, 23, 42]; // Slate 900
-  const accentBlue = [37, 99, 235];  // Blue 600
-  const emeraldColor = [5, 150, 105]; // Emerald 600
+  const clientNom = data.clientInfo?.nom || data.clientName || "Client";
+  const clientTel = data.clientInfo?.telephone || data.clientPhone || "-";
+  const clientEmail = data.clientInfo?.email || data.clientEmail || "-";
+  const clientVille = data.clientInfo?.ville || data.cityName || data.clientInfo?.adresse || data.clientAddress || "-";
 
-  // 1. Header Banner
+  const mainService = data.serviceTitle || data.serviceCategory || (isNl ? "Interventie & Depannage" : "Intervention & Depannage");
+  const priceDisplay = data.priceRange || (data.estimatedPrice ? (typeof data.estimatedPrice === "number" ? `${data.estimatedPrice} EUR` : String(data.estimatedPrice)) : (isNl ? "Op offerte / Ter plaatse" : "Sur devis / Sur place"));
+
+  // Colors
+  const primaryColor = [30, 58, 138]; // Deep blue
+  const accentColor = [220, 38, 38]; // Red accent
+  const darkTextColor = [31, 41, 55];
+  const grayBg = [243, 244, 246];
+
+  // Header band
   doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
-  doc.rect(0, 0, 210, 42, "F");
+  doc.rect(0, 0, 210, 26, "F");
 
-  // Accent Line
-  doc.setFillColor(accentBlue[0], accentBlue[1], accentBlue[2]);
-  doc.rect(0, 42, 210, 3, "F");
-
-  // Company Name & Logo Text
+  // Company Name
   doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(22);
-  doc.text("DEB PRO SERVICES", 14, 18);
+  doc.setFontSize(20);
+  doc.text("DEB PRO SERVICE", 15, 13);
 
+  doc.setFontSize(8.5);
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(9);
-  doc.setTextColor(203, 213, 225); // Slate 300
-  doc.text("Service de Dépannage, Plomberie & Chauffage 24/7 en Belgique", 14, 25);
-  doc.text("☎ Tel: +32 496 32 57 33 | 🌐 https://debservices.canalrose.be", 14, 31);
-  doc.text("✉ Contact & Interventions rapides partout en Belgique", 14, 37);
+  doc.text(isNl ? "Spoedinterventie 24/7 in heel Belgie" : "Depannage & Interventions Rapides 24/7 en Belgique", 15, 20);
 
-  // Document Type Badge
-  const badgeTitle = data.documentType === "DEVIS" 
-    ? (isNl ? "OFFICIËLE OFFERTE" : "DEVIS ESTIMATIF COMPLET")
-    : (isNl ? "RESERVERINGSBEVESTIGING" : "FICHE DE RÉSERVATION");
-
-  doc.setFillColor(255, 255, 255);
-  doc.roundedRect(135, 10, 62, 24, 3, 3, "F");
-
-  doc.setTextColor(accentBlue[0], accentBlue[1], accentBlue[2]);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(10);
-  doc.text(badgeTitle, 138, 18);
-
-  doc.setFontSize(9);
-  doc.setTextColor(100, 116, 139);
-  doc.text(`Réf: ${data.referenceNumber}`, 138, 24);
-  doc.text(`Date: ${new Date().toLocaleDateString(isNl ? "nl-BE" : "fr-BE")}`, 138, 29);
-
-  let currentY = 52;
-
-  // 2. Client & Service Header Box
-  doc.setFillColor(248, 250, 252);
-  doc.setDrawColor(226, 232, 240);
-  doc.roundedRect(14, currentY, 182, 38, 3, 3, "FD");
-
+  // Phone
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
-  doc.setTextColor(15, 23, 42);
-  doc.text(isNl ? "KLANTGEGEVENS & LOCATIE" : "INFORMATIONS CLIENT & LOCALISATION", 20, currentY + 8);
+  doc.text("0498 35 25 88", 195, 15, { align: "right" });
 
-  doc.setFont("helvetica", "normal");
+  // Document Header Title
+  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+  doc.setFontSize(18);
+  doc.setFont("helvetica", "bold");
+  const docTitle = data.documentType ? (data.documentType === "RESERVATION" ? (isNl ? "RESERVATIEBEVESTIGING" : "CONFIRMATION DE RESERVATION") : (isNl ? "OFFERTE ESTIMATIEF" : "DEVIS ESTIMATIF")) : (isNl ? "OFFERTE ESTIMATIEF" : "DEVIS ESTIMATIF");
+  doc.text(docTitle, 15, 38);
+
   doc.setFontSize(9.5);
-  doc.setTextColor(51, 65, 85);
+  doc.setTextColor(100, 116, 139);
+  doc.setFont("helvetica", "normal");
+  doc.text(`Ref : ${refNum}`, 15, 44);
+  doc.text(`Date : ${dateStr}`, 195, 44, { align: "right" });
 
-  const clientNom = data.clientInfo?.nom || (isNl ? "Niet opgegeven (Web aanvraag)" : "Client Direct (Site Web)");
-  const clientTel = data.clientInfo?.telephone || (isNl ? "Onbekend" : "Non spécifié");
-  const clientEmail = data.clientInfo?.email || "-";
-  const clientVille = data.clientInfo?.ville || "Belgique";
+  // Line
+  doc.setDrawColor(226, 232, 240);
+  doc.setLineWidth(0.5);
+  doc.line(15, 48, 195, 48);
 
-  doc.text(`Nom: ${clientNom}`, 20, currentY + 16);
-  doc.text(`Téléphone: ${clientTel}`, 20, currentY + 23);
-  doc.text(`Ville / Localité: ${clientVille}`, 105, currentY + 16);
-  doc.text(`Email: ${clientEmail}`, 105, currentY + 23);
+  // Provider Box (Left)
+  doc.setFillColor(grayBg[0], grayBg[1], grayBg[2]);
+  doc.roundedRect(15, 53, 88, 42, 2, 2, "F");
 
-  if (data.bookingDate) {
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(emeraldColor[0], emeraldColor[1], emeraldColor[2]);
-    doc.text(`📅 Date choisie: ${data.bookingDate} (${data.timeSlot || "Créneau standard"})`, 20, currentY + 31);
-  } else {
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(accentBlue[0], accentBlue[1], accentBlue[2]);
-    doc.text(`⚡ Urgence & Délai: ${data.urgencyTitle || "Intervention Rapide"}`, 20, currentY + 31);
+  doc.setFontSize(9.5);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+  doc.text(isNl ? "DIENSTVERLENER" : "PRESTATAIRE DE SERVICE", 20, 60);
+
+  doc.setFontSize(8.5);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
+  doc.text("DEB PRO SERVICE BELGIQUE", 20, 67);
+  doc.text(isNl ? "24/7 Nooddienst" : "Service d'urgence 24h/24 et 7j/7", 20, 72);
+  doc.text("Tel : +32 498 35 25 88", 20, 77);
+  doc.text("Email : contact@canalrose.be", 20, 82);
+  doc.text(isNl ? "Belgie" : "Belgique", 20, 87);
+
+  // Client Box (Right)
+  doc.setFillColor(grayBg[0], grayBg[1], grayBg[2]);
+  doc.roundedRect(107, 53, 88, 42, 2, 2, "F");
+
+  doc.setFontSize(9.5);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+  doc.text(isNl ? "KLANT / BESTEMMING" : "CLIENT / DESTINATAIRE", 112, 60);
+
+  doc.setFontSize(8.5);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
+  doc.text(`${isNl ? "Naam" : "Nom"} : ${clientNom}`, 112, 67);
+  doc.text(`Tel : ${clientTel}`, 112, 72);
+  doc.text(`Email : ${clientEmail}`, 112, 77);
+  doc.text(`${isNl ? "Stad / Adres" : "Ville / Adresse"} : ${clientVille}`, 112, 82);
+
+  // Table Section
+  let startY = 102;
+  doc.setFillColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+  doc.rect(15, startY, 180, 7, "F");
+
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.5);
+  doc.text(isNl ? "BESCHRIJVING VAN DE INTERVENTIE" : "DESCRIPTION DE L'INTERVENTION", 20, startY + 5);
+  doc.text(isNl ? "GESCHAT BEDRAG" : "MONTANT ESTIMEE", 190, startY + 5, { align: "right" });
+
+  // Main row box
+  startY += 7;
+  let boxHeight = 28;
+  if (data.customOptions && data.customOptions.length > 0) {
+    boxHeight += data.customOptions.length * 5;
   }
 
-  currentY += 46;
+  doc.setFillColor(255, 255, 255);
+  doc.setDrawColor(226, 232, 240);
+  doc.rect(15, startY, 180, boxHeight, "D");
 
-  // 3. Service Details Section
+  doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.setTextColor(15, 23, 42);
-  doc.text(isNl ? "DETAILS VAN DE AANVRAAG & CONFIGURATIE" : "DÉTAILS DU SERVICE & CONFIGURATION", 14, currentY);
+  doc.setFontSize(10);
+  doc.text(mainService, 20, startY + 7);
 
-  currentY += 4;
-
-  const tableRows: Array<[string, string]> = [
-    [isNl ? "Dienst Categorie" : "Catégorie de Service", data.serviceCategory],
-    [isNl ? "Type Interventie" : "Prestation Sélectionnée", data.serviceTitle],
-  ];
-
+  let detailsY = startY + 13;
   if (data.subServiceTitle) {
-    tableRows.push([isNl ? "Beschrijving" : "Description Spécifique", data.subServiceTitle]);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8.5);
+    doc.setTextColor(100, 116, 139);
+    doc.text(data.subServiceTitle, 20, detailsY);
+    detailsY += 5;
+  }
+
+  if (data.message || data.details) {
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.setTextColor(100, 116, 139);
+    const msgText = data.message || data.details || "";
+    const splitMsg = doc.splitTextToSize(msgText, 120);
+    doc.text(splitMsg, 20, detailsY);
+    detailsY += splitMsg.length * 4;
   }
 
   if (data.customOptions && data.customOptions.length > 0) {
-    data.customOptions.forEach((opt) => {
-      tableRows.push([opt.label, opt.value]);
-    });
-  }
-
-  if (data.urgencyTitle) {
-    tableRows.push([isNl ? "Urgentieniveau / Slot" : "Niveau d'Urgence / Créneau", data.urgencyTitle]);
-  }
-
-  autoTable(doc, {
-    startY: currentY,
-    head: [[isNl ? "Kenmerk" : "Élément du Devis", isNl ? "Geselecteerde Optie / Detail" : "Configuration Sélectionnée"]],
-    body: tableRows,
-    theme: "striped",
-    headStyles: {
-      fillColor: primaryColor as [number, number, number],
-      textColor: [255, 255, 255],
-      fontStyle: "bold",
-      fontSize: 9.5,
-    },
-    bodyStyles: {
-      fontSize: 9,
-      textColor: [51, 65, 85],
-    },
-    columnStyles: {
-      0: { cellWidth: 70, fontStyle: "bold" },
-      1: { cellWidth: 112 },
-    },
-    margin: { left: 14, right: 14 },
-  });
-
-  const finalTable = (doc as any).lastAutoTable;
-  currentY = finalTable ? finalTable.finalY + 8 : currentY + 40;
-
-  // 4. Price Estimation Box (if present)
-  if (data.priceRange) {
-    doc.setFillColor(239, 246, 255); // Blue 50
-    doc.setDrawColor(191, 219, 254);
-    doc.roundedRect(14, currentY, 182, 22, 3, 3, "FD");
-
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.setTextColor(30, 64, 175);
-    doc.text(isNl ? "ESTIMATIEF BUDGET / PRIX BRUT ESTIMÉ" : "FOURCHETTE DE PRIX ESTIMATIVE AU COMPTANT :", 20, currentY + 8);
-
-    doc.setFontSize(14);
-    doc.setTextColor(37, 99, 235);
-    doc.text(`${data.priceRange} TTC (Déplacement & Main d'œuvre inclus)`, 20, currentY + 16);
-
-    currentY += 28;
-  }
-
-  // 5. Guarantees & Terms Box
-  if (data.includedGuarantees && data.includedGuarantees.length > 0) {
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10.5);
-    doc.setTextColor(15, 23, 42);
-    doc.text(isNl ? "INBEGREPEN GARANTIES & COMMITMENT" : "GARANTIES & ENGAGEMENT DEB PRO SERVICES", 14, currentY);
-
-    currentY += 4;
-
-    const guaranteeRows = data.includedGuarantees.map((g) => ["✔", g]);
-
-    autoTable(doc, {
-      startY: currentY,
-      body: guaranteeRows,
-      theme: "plain",
-      bodyStyles: {
-        fontSize: 8.5,
-        textColor: [71, 85, 105],
-      },
-      columnStyles: {
-        0: { cellWidth: 8, fontStyle: "bold", textColor: emeraldColor as [number, number, number] },
-        1: { cellWidth: 174 },
-      },
-      margin: { left: 14, right: 14 },
-    });
-
-    const gTable = (doc as any).lastAutoTable;
-    currentY = gTable ? gTable.finalY + 6 : currentY + 25;
-  }
-
-  // 6. Message / Customer Instructions
-  if (data.message) {
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(9.5);
-    doc.setTextColor(15, 23, 42);
-    doc.text(isNl ? "OPMERKINGEN / BERICHT VAN DE KLANT" : "REMARQUES / INSTRUCTIONS DU CLIENT :", 14, currentY);
-
-    currentY += 4;
-    doc.setFont("helvetica", "italic");
-    doc.setFontSize(8.5);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
     doc.setTextColor(71, 85, 105);
-
-    const splitMessage = doc.splitTextToSize(data.message, 180);
-    doc.text(splitMessage, 14, currentY);
-
-    currentY += splitMessage.length * 4.5 + 4;
+    data.customOptions.forEach((opt) => {
+      doc.text(`- ${opt.label}: ${opt.value}`, 20, detailsY);
+      detailsY += 4.5;
+    });
   }
 
-  // Footer Disclaimer
-  doc.setFillColor(241, 245, 249);
-  doc.rect(0, 275, 210, 22, "F");
+  // Price column
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
+  doc.text(priceDisplay, 190, startY + 10, { align: "right" });
+
+  // Summary box
+  let summaryY = startY + boxHeight + 6;
+  doc.setFillColor(grayBg[0], grayBg[1], grayBg[2]);
+  doc.roundedRect(110, summaryY, 85, 22, 2, 2, "F");
+
+  doc.setFontSize(9);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
+  doc.text(isNl ? "Totale Schatting :" : "Estimation Totale :", 115, summaryY + 9);
+
+  doc.setFontSize(13);
+  doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
+  doc.text(priceDisplay, 190, summaryY + 9, { align: "right" });
+
+  doc.setFontSize(7.5);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(100, 116, 139);
+  doc.text(isNl ? "Inclusief BTW & verplaatsing" : "TVA & deplacement inclus sous reserve de diagnostic", 115, summaryY + 16);
+
+  // Notice Section
+  let noticeY = summaryY + 30;
+  doc.setFontSize(8.5);
+  doc.setFont("helvetica", "bold");
+  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
+  doc.text(isNl ? "BELANGRIJKE INFORMATIE :" : "INFORMATIONS IMPORTANTES :", 15, noticeY);
 
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(7.5);
+  doc.setFontSize(8);
   doc.setTextColor(100, 116, 139);
-  doc.text(
-    isNl
-      ? "DEB PRO SERVICES — Erkende professionele dienstverlening in België — 24/7 Dépannage & Renovatie"
-      : "DEB PRO SERVICES — Entreprise certifiée agréée en Belgique — Dépannage & Rénovation 24h/24 & 7j/7",
-    105,
-    281,
-    { align: "center" }
-  );
-  doc.text(
-    isNl
-      ? "Document ter informatie gegenereerd. De definitieve offerte ter plaatse voor de start van de werken blijft bindend."
-      : "Document d'estimation préalable. Le devis contradictoire remis sur place avant le début des travaux fait foi.",
-    105,
-    286,
-    { align: "center" }
-  );
+  const notices = isNl
+    ? [
+        "- Dit document is een gratis en vrijblijvende prijsindicatie.",
+        "- De definitieve kostprijs wordt ter plaatse bevestigd met de technicus voor aanvang van de werken.",
+        "- Snelle interventie binnen 30 tot 60 minuten over heel Belgie.",
+        "- Garantie op wisselstukken en werkuren."
+      ]
+    : [
+        "- Ce document constitue une estimation prealable et gratuite sans engagement.",
+        "- L'intervention definitive et le cout exact sont valides sur place avec le technicien avant tout debut de travaux.",
+        "- Deplacement rapide sous 30 a 60 minutes en Belgique.",
+        "- Garantie sur toutes nos pieces et main-d'oeuvre."
+      ];
 
-  // Trigger browser download
-  const fileName = `${data.documentType.toLowerCase()}_debpro_${data.referenceNumber}.pdf`;
+  notices.forEach((note, idx) => {
+    doc.text(note, 15, noticeY + 5 + idx * 4.5);
+  });
+
+  // Footer
+  const pageHeight = doc.internal.pageSize.getHeight();
+  doc.setDrawColor(226, 232, 240);
+  doc.line(15, pageHeight - 16, 195, pageHeight - 16);
+
+  doc.setFontSize(7.5);
+  doc.setTextColor(156, 163, 175);
+  doc.text("DEB PRO SERVICE - Depannage urgent 24/7 en Belgique - Tel: 0498 35 25 88 - Email: contact@canalrose.be", 105, pageHeight - 9, { align: "center" });
+
+  // Immediate Save / Download
+  const fileName = `devis_debpro_${refNum}.pdf`;
   doc.save(fileName);
 }
