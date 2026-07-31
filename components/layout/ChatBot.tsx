@@ -56,9 +56,6 @@ export default function ChatBot() {
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
   const isNl = pathname ? pathname.startsWith("/nl") : false;
-  const isHomePage = !pathname || pathname === "/" || pathname === "/nl";
-  const botPhone = isHomePage ? "0465 99 60 76" : "0498 35 25 88";
-  const botPhoneTel = isHomePage ? "0465996076" : "0498352588";
 
   // Show notification pop-up above Sofia when client enters the site
   useEffect(() => {
@@ -350,7 +347,7 @@ export default function ChatBot() {
           id: `err-${Date.now()}`,
           role: "assistant",
           content:
-            `Désolé, le service de chat est momentanément indisponible. Vous pouvez cliquer sur 'Formulaire RDV' ci-dessus ou nous appeler 24/7 au ${botPhone}.`,
+            "Désolé, le service de chat est momentanément indisponible. Vous pouvez cliquer sur 'Formulaire RDV' ci-dessus ou nous appeler 24/7 au 0465 99 60 76.",
           timestamp: new Date().toLocaleTimeString("fr-FR", {
             hour: "2-digit",
             minute: "2-digit",
@@ -812,11 +809,11 @@ export default function ChatBot() {
 
               <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
                 <a
-                  href={`tel:${botPhoneTel}`}
+                  href="tel:0465996076"
                   className="text-cyan-400 hover:underline flex items-center gap-1 font-semibold"
                 >
                   <Phone className="w-3 h-3 text-cyan-400" />
-                  {isNl ? `Directe Oproep: ${botPhone}` : `Appel Direct : ${botPhone}`}
+                  {isNl ? "Directe Oproep: 0465 99 60 76" : "Appel Direct : 0465 99 60 76"}
                 </a>
                 <span>{isNl ? "Beschikbaar 24/7" : "Disponible 24H/24 & 7J/7"}</span>
               </div>
@@ -835,6 +832,10 @@ function InlineChatForm({
   type: "appointment" | "quote"; 
   onSuccess: (payload: any) => void; 
 }) {
+  const pathname = usePathname();
+  const isHomePage = !pathname || pathname === "/" || pathname === "/nl";
+  const botPhone = isHomePage ? "0465 99 60 76" : "0498 35 25 88";
+
   const [nom, setNom] = useState("");
   const [telephone, setTelephone] = useState("");
   const [service, setService] = useState(type === "quote" ? "Devis Gratuit" : "Plomberie & Fuite");
