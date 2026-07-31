@@ -12,7 +12,7 @@ const COVERAGE_AREAS = [
     lat: 50.8503,
     lng: 4.3517,
     description: "Plomberie, débouchage de canalisation express & recherche de fuite d'eau urgente. Techniciens de garde 24h/24.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Zone Principale"
   },
   {
@@ -20,7 +20,7 @@ const COVERAGE_AREAS = [
     lat: 50.8354,
     lng: 4.4339,
     description: "Dépannage sanitaire, débouchage WC & colmatage de fuite. Intervention en moins de 30 minutes.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Dépannage 30m"
   },
   {
@@ -28,7 +28,7 @@ const COVERAGE_AREAS = [
     lat: 50.8468,
     lng: 4.4262,
     description: "Équipes d'intervention rapide près de Tomberg et de l'UCL. Disponibilité totale jour et nuit.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Dépannage 30m"
   },
   {
@@ -36,7 +36,7 @@ const COVERAGE_AREAS = [
     lat: 50.9333,
     lng: 4.3667,
     description: "Plombier local, vidange, assainissement & réparation de chauffe-eau ou de chaudière.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Service Local"
   },
   {
@@ -44,7 +44,7 @@ const COVERAGE_AREAS = [
     lat: 50.6326,
     lng: 5.5797,
     description: "Spécialistes vidange fosse septique, hydrocurage haute pression & curage de canalisation.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Urgence Vidange"
   },
   {
@@ -52,7 +52,7 @@ const COVERAGE_AREAS = [
     lat: 50.5966,
     lng: 5.5085,
     description: "Service pompage fosse septique, bac à graisse & curage d'égout pour particuliers et professionnels.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Service Vidange"
   },
   {
@@ -60,7 +60,7 @@ const COVERAGE_AREAS = [
     lat: 50.5932,
     lng: 5.8638,
     description: "Dépannage de plomberie d'urgence, recherche de fuites & curage de canalisation.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Intervention 24h/7"
   },
   {
@@ -68,7 +68,7 @@ const COVERAGE_AREAS = [
     lat: 50.4108,
     lng: 4.4446,
     description: "Débouchage WC, inspection caméra, plomberie générale et urgences de chauffage.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Urgence Sanitaire"
   },
   {
@@ -76,7 +76,7 @@ const COVERAGE_AREAS = [
     lat: 50.9272,
     lng: 4.4217,
     description: "Réparation urgente de tuyauterie fuyarde, installations sanitaires & mitigeurs.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Plombier Pro"
   },
   {
@@ -84,7 +84,7 @@ const COVERAGE_AREAS = [
     lat: 50.7171,
     lng: 4.3980,
     description: "Recherche de fuite non destructive, réparation de boiler et plomberie.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Recherche Fuite"
   },
   {
@@ -92,7 +92,7 @@ const COVERAGE_AREAS = [
     lat: 50.4669,
     lng: 4.8675,
     description: "Déploiement de camions pompe et d'artisans plombiers certifiés sur toute la province.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Dépannage Rapide"
   },
   {
@@ -100,7 +100,7 @@ const COVERAGE_AREAS = [
     lat: 51.2194,
     lng: 4.4025,
     description: "Interventions rapides en débouchage, urgence égouttage et plomberie.",
-    phone: "0498 35 25 88",
+    phone: "0465 99 60 76",
     tag: "Débouchage Pro"
   }
 ];
@@ -175,7 +175,7 @@ export default function CoverageMapInner() {
                   href={`tel:${area.phone}`}
                   className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-black py-2 px-3 rounded-xl text-xs uppercase tracking-wider transition-all duration-300 shadow-md shadow-red-900/30 active:scale-95 text-center"
                 >
-                  <Phone className="w-3 h-3" /> Appeler : 0498 35 25 88
+                  <Phone className="w-3 h-3" /> Appeler : 0465 99 60 76
                 </a>
               </div>
             </Popup>

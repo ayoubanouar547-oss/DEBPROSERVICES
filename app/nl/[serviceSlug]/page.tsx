@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PhoneCall, ChevronRight, CheckCircle, Wrench, Flame, Droplets, Zap, Wind, Truck, Home, Sun, Camera, Hammer, Sparkles, Trees, ShieldAlert } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { HeroQuoteForm } from "@/components/sections/HeroQuoteForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
@@ -86,41 +87,41 @@ export async function generateMetadata({
     };
   }
 
-  let description = `${service.title} in België: erkende technici voor alle dringende interventies. 24h/24 & 7j/7 bereikbaar. Direct gratis offerte via ☎ 0498 35 25 88.`;
+  let description = `${service.title} in België: erkende technici voor alle dringende interventies. 24h/24 & 7j/7 bereikbaar. Direct gratis offerte via ☎ 0465 99 60 76.`;
 
   if (service.slug === "loodgieter") {
     description =
-      "Loodgieter in België spoed 24/7: erkende technici voor lekken, installaties en snelle herstellingen. Gratis offerte. Bel direct ☎ 0498 35 25 88!";
+      "Loodgieter in België spoed 24/7: erkende technici voor lekken, installaties en snelle herstellingen. Gratis offerte. Bel direct ☎ 0465 99 60 76!";
   } else if (service.slug === "ontstopping") {
     description =
-      "Ontstopping van leidingen in België 24/7: expert voor verstopte WC, riolen en gootstenen. Gratis offerte, snelle actie en garantie. Bel ☎ 0498 35 25 88!";
+      "Ontstopping van leidingen in België 24/7: expert voor verstopte WC, riolen en gootstenen. Gratis offerte, snelle actie en garantie. Bel ☎ 0465 99 60 76!";
   } else if (service.slug === "verwarming") {
     description =
-      "Gecertificeerde verwarmingsinstallateur in België: spoedherstelling verwarmingsketel 24/7. Onderhoud en installatie. Gratis offerte ☎ 0498 35 25 88.";
+      "Gecertificeerde verwarmingsinstallateur in België: spoedherstelling verwarmingsketel 24/7. Onderhoud en installatie. Gratis offerte ☎ 0465 99 60 76.";
   } else if (service.slug === "gas") {
     description =
-      "Gecertificeerde CERGA technici voor alle gasinterventies in België. Lekdetectie, conformiteit, aansluiting. Spoed 24/7 ☎ 0498 35 25 88.";
+      "Gecertificeerde CERGA technici voor alle gasinterventies in België. Lekdetectie, conformiteit, aansluiting. Spoed 24/7 ☎ 0465 99 60 76.";
   } else if (service.slug === "elektriciteit") {
     description =
-      "Elektricien in België spoed 24/7: AREI-keuring, zekeringkast vervangen en installatie. Erkende expert, gratis offerte. Bel ☎ 0498 35 25 88.";
+      "Elektricien in België spoed 24/7: AREI-keuring, zekeringkast vervangen en installatie. Erkende expert, gratis offerte. Bel ☎ 0465 99 60 76.";
   } else if (service.slug === "zonnepanelen") {
     description =
-      "Installatie van fotovoltaïsche zonnepanelen en thuisbatterijen in België. Gecertificeerde installateurs, gratis rendementsstudie. Bel ☎ 0498 35 25 88.";
+      "Installatie van fotovoltaïsche zonnepanelen en thuisbatterijen in België. Gecertificeerde installateurs, gratis rendementsstudie. Bel ☎ 0465 99 60 76.";
   } else if (service.slug === "dakwerken") {
     description =
-      "Dakwerken in België: dringende herstelling van daklekken, renovatie en isolatie. Erkende dakdekkers, gratis offerte. Bel ☎ 0498 35 25 88.";
+      "Dakwerken in België: dringende herstelling van daklekken, renovatie en isolatie. Erkende dakdekkers, gratis offerte. Bel ☎ 0465 99 60 76.";
   } else if (service.slug === "camerabewaking") {
     description =
-      "Installatie van camerabewaking en alarmen in België. HD IP-beveiligingssystemen verbonden met uw smartphone. Gratis offerte ☎ 0498 35 25 88.";
+      "Installatie van camerabewaking en alarmen in België. HD IP-beveiligingssystemen verbonden met uw smartphone. Gratis offerte ☎ 0465 99 60 76.";
   } else if (service.slug === "bouwwerken") {
     description =
-      "Aannemer voor ruwbouw- en metselwerken in België. Dragende muren openbreken, IPN-balken, betonplaten. Tienjarige garantie, gratis offerte ☎ 0498 35 25 88.";
+      "Aannemer voor ruwbouw- en metselwerken in België. Dragende muren openbreken, IPN-balken, betonplaten. Tienjarige garantie, gratis offerte ☎ 0465 99 60 76.";
   } else if (service.slug === "ruitenwasser") {
     description =
-      "Professionele ruitenwasser in België. Wassen van ramen, veranda's, winkeletalages voor particulieren en bedrijven. Streeploos resultaat ☎ 0498 35 25 88.";
+      "Professionele ruitenwasser in België. Wassen van ramen, veranda's, winkeletalages voor particulieren en bedrijven. Streeploos resultaat ☎ 0465 99 60 76.";
   } else if (service.slug === "tuinieren") {
     description =
-      "Professionele tuinman in België: tuinonderhoud, snoeien, gevaarlijke bomen vellen en hagen knippen. Gratis offerte ☎ 0498 35 25 88.";
+      "Professionele tuinman in België: tuinonderhoud, snoeien, gevaarlijke bomen vellen en hagen knippen. Gratis offerte ☎ 0465 99 60 76.";
   }
 
   const isSolarService = service.slug === "zonnepanelen";
@@ -424,26 +425,32 @@ export default async function ServicePage({
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div
-              className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}
-            >
-              <IconComponent className="w-4 h-4" />
-              {cityInfo ? `Professionele Dienst in ${cityInfo.name}` : "Professionele Dienst in België"}
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
-              {h1Title}
-            </h1>
-            <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
-              {descriptionText}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="tel:0498352588"
-                className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7">
+              <div
+                className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}
               >
-                <PhoneCall className="w-5 h-5" /> Urgentie {matchedTerm}
-              </a>
+                <IconComponent className="w-4 h-4" />
+                {cityInfo ? `Professionele Dienst in ${cityInfo.name}` : "Professionele Dienst in België"}
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
+                {h1Title}
+              </h1>
+              <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
+                {descriptionText}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="tel:0465996076"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
+                >
+                  <PhoneCall className="w-5 h-5" /> Urgentie {matchedTerm}
+                </a>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 w-full max-w-lg mx-auto mt-8 lg:mt-0">
+              <HeroQuoteForm />
             </div>
           </div>
         </div>
@@ -593,10 +600,10 @@ export default async function ServicePage({
               </div>
               <div className="mt-10">
                 <a
-                  href="tel:0498352588"
+                  href="tel:0465996076"
                   className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-10 py-5 rounded-2xl hover:bg-slate-100 transition shadow-2xl"
                 >
-                  <PhoneCall className="w-6 h-6" /> BEL UW EXPERT: 0498 35 25 88
+                  <PhoneCall className="w-6 h-6" /> BEL UW EXPERT: 0465 99 60 76
                 </a>
               </div>
             </div>

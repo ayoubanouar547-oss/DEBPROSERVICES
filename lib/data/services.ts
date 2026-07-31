@@ -1,4 +1,4 @@
-import { Wrench, Flame, Droplets, Zap, Wind, Truck, Home, Sun, Camera, Hammer, Sparkles, Trees } from "lucide-react";
+import { Wrench, Flame, Droplets, Zap, Wind, Truck, Home, Sun, Camera, Hammer, Sparkles, Trees, Palette } from "lucide-react";
 
 export type Service = typeof services[number];
 
@@ -1343,6 +1343,172 @@ export const services = [
         question: "Que faites-vous du bois et des branches coupées ?",
         answer:
           "Nous proposons plusieurs options de manière flexible : nous pouvons broyer les petites branches sur place (le broyat peut servir de paillage pour vos parterres), débiter le tronc principal en bûches prêtes pour votre chauffage, ou tout évacuer intégralement vers un centre de compostage agréé.",
+      },
+    ],
+  },
+  {
+    id: "peinture",
+    slug: "peinture",
+    title: "Peinture & Finitions",
+    icon: Palette,
+    imageUrl:
+      "https://debouchageexpress24hh.odoo.com/web/image/4083-e1a8d1d4/regenerated_image_1777331518753.png?height=600",
+    description:
+      "Entreprise de peinture et finitions professionnelle en Belgique. Peintres et artisans agréés pour vos travaux de peinture intérieure et extérieure, aménagement et pose de cuisines équipées, toiture et étanchéité (roofing), revêtements de sol (parquet & stratifié), et Gyproc & plâtrerie. Devis gratuit sans engagement, finitions soignées et garantie décennale.",
+    trustPoints: [
+      { title: "Devis Gratuit sous 24h", desc: "Visite technique sur site et devis détaillé sans engagement partout en Belgique." },
+      { title: "Peintres Qualifiés & Soignés", desc: "Protection rigoureuse des sols et meubles, préparation méticuleuse et finitions impeccables." },
+      { title: "Peintures Écologiques Premium", desc: "Utilisation de peintures dépolluantes, sans COV, lavables et haute durabilité (Sikkens, Boss Paints)." },
+      { title: "Garantie Décennale & Nettoyage", desc: "Chantier rendu parfaitement propre, travaux couverts par notre garantie et assurance professionnelle." },
+    ],
+    features: [
+      "Peinture intérieure murs, plafonds & moulures",
+      "Peinture extérieure & ravalement de façade",
+      "Aménagement & pose de cuisines équipées sur mesure",
+      "Toiture & étanchéité (roofing toits plats & terrasses)",
+      "Revêtements de sol (parquet massif, stratifié & époxy)",
+      "Gyproc & plâtrerie (cloisons, faux plafonds & plâtre)",
+      "Préparation des supports, enduisage & plafonnage",
+      "Peinture boiseries, châssis & portes",
+    ],
+    subServices: [
+      {
+        slug: "peinture-interieure-murs-et-plafonds",
+        title: "Peinture Intérieure (Murs & Plafonds)",
+        desc: "Mise en peinture haute précision de vos murs, plafonds, moulures et boiseries intérieures avec peintures écologiques à haute résistance.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/636-8db3f049/WhatsApp%20Image%202026-07-29%20at%20DCDCD.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/636-8db3f049/WhatsApp%20Image%202026-07-29%20at%20DCDCD.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/637-481b1760/WhatsApp%20Image%202026-07-29%20at%2001.01.18SEQ.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/646-8db3f049/P.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/647-313f6724/EDEEFEFEDE.jpeg",
+        ],
+      },
+      {
+        slug: "peinture-exterieure-et-facade",
+        title: "Peinture Extérieure & Façades",
+        desc: "Traitement, imperméabilisation et peinture protectrice pour vos façades, pignons, murs extérieurs et corniches.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/638-38c75153/WhatsApp%20Image%202026-07-29%20at%2001.01.18DCSDCSCS.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/638-38c75153/WhatsApp%20Image%202026-07-29%20at%2001.01.18DCSDCSCS.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/639-cc624dcb/WhatsApp%20Image%202026-07-29%20at%2001.01.18DCC%25.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/648-b8a9477d/EDEDEDECECECE.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/658-79ba2356/DCD.jpeg",
+        ],
+      },
+      {
+        slug: "preparation-enduisage-et-plafonnage",
+        title: "Préparation, Enduisage & Plafonnage",
+        desc: "Lissage complet de vos murs, rebouchage des fissures, ponçage sans poussière et pose de voile de verre ou papier peint.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/642-48caab7e/WhatsApp%20Image%202026-07-29%20at%2001.01.09%20%281%29SCDCS.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/642-48caab7e/WhatsApp%20Image%202026-07-29%20at%2001.01.09%20%281%29SCDCS.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/643-9eb37167/WhatsApp%20Image%202026-07-29%20at%2000.46.37CDCSDCSCS.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/654-6084151d/DCSCSDCSCSC.jpeg",
+        ],
+      },
+      {
+        slug: "peinture-boiseries-chassis-portes",
+        title: "Peinture Boiseries, Châssis & Portes",
+        desc: "Rénovation, ponçage et mise en peinture ou lasure de vos portes, châssis en bois/alu, escaliers et garde-corps.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/640-bdac2999/WhatsApp%20Image%202026-07-29%20at%2001.01.18CS.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/640-bdac2999/WhatsApp%20Image%202026-07-29%20at%2001.01.18CS.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/641-6b9f38d2/WhatsApp%20Image%202026-07-29%20at%2001.01.18%20DCSDCSCS.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/657-71e935c8/DCDCSSSXS.jpeg",
+        ],
+      },
+      {
+        slug: "peinture-epoxy-et-revetements-sols",
+        title: "Peinture Époxy & Revêtements de Sol",
+        desc: "Application de résines époxy ultra-résistantes pour sols de garages, ateliers, caves, cuisines industrielles et locaux commerciaux.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/645-7d4069bf/SQXSCSDCSCSC.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/645-7d4069bf/SQXSCSDCSCSC.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/644-80f1c033/WhatsApp%20Image%202026-07-29%20at%2000.46.37.jpeg",
+        ],
+      },
+      {
+        slug: "amenagement-et-pose-de-cuisines",
+        title: "Aménagement & Pose de Cuisines",
+        desc: "Installation complète de cuisines équipées et assemblage de mobilier sur mesure.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/649-b9d63242/DCSDCSDCSD.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/649-b9d63242/DCSDCSDCSD.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/651-09ff25bf/DCSDCSDCSCS.jpeg?height=256",
+        ],
+      },
+      {
+        slug: "toiture-et-etancheite-roofing",
+        title: "Toiture & Étanchéité (Roofing)",
+        desc: "Travaux d'étanchéité pour toits plats et terrasses (pose et réfection de roofing).",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/648-b8a9477d/EDEDEDECECECE.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/648-b8a9477d/EDEDEDECECECE.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/638-38c75153/WhatsApp%20Image%202026-07-29%20at%2001.01.18DCSDCSCS.jpeg",
+        ],
+      },
+      {
+        slug: "revetements-de-sol-parquet-et-stratifie",
+        title: "Revêtements de Sol (Parquet & Stratifié)",
+        desc: "Fourniture et pose de parquet massif, semi-massif et sol stratifié (laminat).",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/659-82d32629/CSDCSDCSS.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/659-82d32629/CSDCSDCSS.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/644-80f1c033/WhatsApp%20Image%202026-07-29%20at%2000.46.37.jpeg",
+        ],
+      },
+      {
+        slug: "gyproc-et-platrerie",
+        title: "Gyproc & Plâtrerie",
+        desc: "Pose de cloisons, faux plafonds en Gyproc et travaux de plâtre traditionnels.",
+        imageUrl:
+          "https://deb-pro-service.odoo.com/web/image/654-6084151d/DCSCSDCSCSC.jpeg",
+        galleryImages: [
+          "https://deb-pro-service.odoo.com/web/image/654-6084151d/DCSCSDCSCSC.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/656-90ccc0be/DCSCSCSCS.jpeg",
+          "https://deb-pro-service.odoo.com/web/image/655-9bb2d004/DCSCSCSDCDCSD.jpeg",
+        ],
+      },
+    ],
+    color: {
+      bg: "bg-purple-500/20",
+      text: "text-purple-400",
+      border: "border-purple-500/30",
+      glow: "bg-purple-500",
+    },
+    testimonial: {
+      text: "Une rénovation peinture complète de notre maison à Bruxelles. Protection des meubles parfaite, finitions des plafonds très lisses. Je recommande les yeux fermés !",
+      author: "Catherine M., Bruxelles",
+    },
+    faqs: [
+      {
+        question: "Quel est le prix au m² pour des travaux de peinture en Belgique ?",
+        answer:
+          "En Belgique, le tarif moyen pour de la peinture intérieure se situe entre 20€ et 40€ / m² (fourniture et pose incluses), selon l'état de préparation des murs (enduisage, lissage) et le nombre de couches requises.",
+      },
+      {
+        question: "Utilisez-vous des peintures écologiques et sans odeur ?",
+        answer:
+          "Oui, nous privilégions des peintures professionnelles à faible émission de COV (composés organiques volatils), sans odeur forte, hypoallergéniques et respectueuses de l'environnement et de la santé.",
+      },
+      {
+        question: "Comment préparez-vous le chantier avant de peindre ?",
+        answer:
+          "Notre équipe protège intégralement vos sols, fenêtres et meubles avec des bâches étanches et du ruban de masquage de précision. Après les travaux, nous nettoyons le chantier pour vous rendre une pièce impeccable.",
+      },
+      {
+        question: "Proposez-vous un devis gratuit pour la peinture de maison ?",
+        answer:
+          "Absolument. Nous effectuons un déplacement gratuit sur site partout en Belgique pour mesurer la surface et évaluer l'état des murs, puis vous remettons un devis détaillé clair sous 24 à 48 heures.",
       },
     ],
   },

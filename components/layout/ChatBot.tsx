@@ -57,6 +57,20 @@ export default function ChatBot() {
   const pathname = usePathname();
   const isNl = pathname ? pathname.startsWith("/nl") : false;
 
+  // Show notification pop-up above Sofia when client enters the site
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTooltip(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      setShowTooltip(false);
+    }
+  }, [isOpen]);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome-1",
@@ -333,7 +347,7 @@ export default function ChatBot() {
           id: `err-${Date.now()}`,
           role: "assistant",
           content:
-            "Désolé, le service de chat est momentanément indisponible. Vous pouvez cliquer sur 'Formulaire RDV' ci-dessus ou nous appeler 24/7 au 0498 35 25 88.",
+            "Désolé, le service de chat est momentanément indisponible. Vous pouvez cliquer sur 'Formulaire RDV' ci-dessus ou nous appeler 24/7 au 0465 99 60 76.",
           timestamp: new Date().toLocaleTimeString("fr-FR", {
             hour: "2-digit",
             minute: "2-digit",
@@ -403,43 +417,100 @@ export default function ChatBot() {
 
   return (
     <div className="fixed bottom-20 md:bottom-6 right-3 sm:right-6 z-[9999] flex flex-col items-end pointer-events-none">
-      {/* Floating Tooltip Callout */}
+      {/* Floating Tooltip Callout / Notification above Sofia */}
       <AnimatePresence>
         {!isOpen && showTooltip && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="pointer-events-auto mb-2.5 bg-[#000d26]/95 backdrop-blur-md border border-cyan-500/50 text-white p-3 sm:p-3.5 rounded-2xl shadow-2xl max-w-[280px] sm:max-w-xs text-xs relative flex items-start gap-2.5 sm:gap-3"
-          >
-            <div className="relative flex-shrink-0">
-              <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-md relative overflow-hidden">
-                <Image
-                  src={SOFIA_AVATAR_URL}
-                  alt="Assistant Sofia"
-                  fill
-                  className="rounded-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-[#000d26] rounded-full"></span>
-            </div>
-            <div className="flex-1 pr-3">
-              <p className="font-semibold text-cyan-300 mb-0.5 flex items-center gap-1">
-                Assistant Sofia
-                <Sparkles className="w-3 h-3 text-amber-400 fill-amber-400" />
-              </p>
-              <p className="text-slate-300 text-[11px] leading-relaxed">
-                {isNl ? "Hulp nodig? Chat 24/7 live met een expert." : "Besoin d'aide ? Discuter avec un expert en direct 24/7."}
-              </p>
-            </div>
-            <button
-              onClick={() => setShowTooltip(false)}
-              className="absolute top-2 right-2 text-slate-400 hover:text-white transition-colors"
+          <>
+            {/* Desktop Full Tooltip */}
+            <motion.div
+              initial={{ opacity: 0, y: 15, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.9 }}
+              transition={{ duration: 0.3, type: "spring" }}
+              onClick={() => {
+                setIsOpen(true);
+                setShowTooltip(false);
+              }}
+              className="pointer-events-auto cursor-pointer mb-2.5 bg-[#000d26]/95 backdrop-blur-md border border-cyan-400/70 text-white p-4 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] w-80 relative hidden sm:flex items-start gap-3 hover:border-cyan-300 transition-all group"
             >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          </motion.div>
+              <div className="relative flex-shrink-0">
+                <div className="w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-md relative overflow-hidden">
+                  <Image
+                    src={SOFIA_AVATAR_URL}
+                    alt="Assistant Sofia"
+                    fill
+                    sizes="48px"
+                    className="rounded-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-[#000d26] rounded-full animate-pulse"></span>
+              </div>
+              <div className="flex-1 pr-3">
+                <p className="font-semibold text-cyan-300 mb-0.5 flex items-center gap-1.5 text-sm">
+                  Assistant Sofia
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                </p>
+                <p className="text-white text-sm font-medium leading-relaxed">
+                  {isNl
+                    ? "Hallo! Waarmee kan ik u vandaag helpen?"
+                    : "Salut, comment puis-je vous aider aujourd'hui ?"}
+                </p>
+              </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowTooltip(false);
+                }}
+                className="absolute top-2 right-2 text-slate-400 hover:text-white transition-colors p-1"
+                aria-label="Fermer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </motion.div>
+
+            {/* Mobile Small Notification */}
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 5, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => {
+                setIsOpen(true);
+                setShowTooltip(false);
+              }}
+              className="pointer-events-auto cursor-pointer flex sm:hidden mb-2 bg-[#000d26]/95 backdrop-blur-md border border-cyan-400/70 text-white px-3 py-2 rounded-full shadow-lg relative items-center gap-2 hover:border-cyan-300 transition-all"
+            >
+              <div className="relative flex-shrink-0 w-6 h-6 rounded-full p-[1px] bg-gradient-to-tr from-cyan-500 to-blue-600">
+                <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-900">
+                  <Image
+                    src={SOFIA_AVATAR_URL}
+                    alt="Assistant Sofia"
+                    fill
+                    sizes="24px"
+                    className="rounded-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center gap-1.5 pr-2 pl-0.5">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                <p className="text-[13px] font-medium text-cyan-50 whitespace-nowrap">
+                  {isNl ? "1 Nieuw bericht" : "1 Nouveau message"}
+                </p>
+              </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowTooltip(false);
+                }}
+                className="ml-1 text-slate-400 hover:text-white p-1 rounded-full bg-white/5"
+                aria-label="Fermer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 
@@ -461,6 +532,7 @@ export default function ChatBot() {
               src={SOFIA_AVATAR_URL}
               alt="Sofia - Girl avatar"
               fill
+              sizes="56px"
               className="rounded-full object-cover"
               referrerPolicy="no-referrer"
             />
@@ -490,6 +562,7 @@ export default function ChatBot() {
                 src={SOFIA_AVATAR_URL}
                 alt="Assistant Sofia"
                 fill
+                sizes="28px"
                 className="rounded-full object-cover border border-white/90 shadow-sm"
                 referrerPolicy="no-referrer"
               />
@@ -531,6 +604,7 @@ export default function ChatBot() {
                       src={SOFIA_AVATAR_URL}
                       alt="Assistant Sofia"
                       fill
+                      sizes="44px"
                       className="rounded-full object-cover"
                       referrerPolicy="no-referrer"
                     />
@@ -579,6 +653,7 @@ export default function ChatBot() {
                         src={SOFIA_AVATAR_URL}
                         alt="Assistant Sofia"
                         fill
+                        sizes="32px"
                         className="object-cover"
                         referrerPolicy="no-referrer"
                       />
@@ -643,6 +718,7 @@ export default function ChatBot() {
                       src={SOFIA_AVATAR_URL}
                       alt="Sofia"
                       fill
+                      sizes="32px"
                       className="object-cover animate-pulse"
                       referrerPolicy="no-referrer"
                     />
@@ -733,11 +809,11 @@ export default function ChatBot() {
 
               <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500">
                 <a
-                  href="tel:0498352588"
+                  href="tel:0465996076"
                   className="text-cyan-400 hover:underline flex items-center gap-1 font-semibold"
                 >
                   <Phone className="w-3 h-3 text-cyan-400" />
-                  {isNl ? "Directe Oproep: 0498 35 25 88" : "Appel Direct : 0498 35 25 88"}
+                  {isNl ? "Directe Oproep: 0465 99 60 76" : "Appel Direct : 0465 99 60 76"}
                 </a>
                 <span>{isNl ? "Beschikbaar 24/7" : "Disponible 24H/24 & 7J/7"}</span>
               </div>
@@ -852,7 +928,7 @@ function InlineChatForm({
             id={`cb-tel-${type}`}
             type="tel"
             required
-            placeholder="Ex: 0498 35 25 88"
+            placeholder="Ex: 0465 99 60 76"
             value={telephone}
             onChange={(e) => setTelephone(e.target.value)}
             className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 text-[11px]"

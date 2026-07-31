@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { 
   Phone, Menu, X, AlertTriangle, ChevronDown, Moon,
-  Home, Wrench, Droplets, Flame, Zap, Wind, Truck, Sun, Camera, Hammer, Sparkles, Trees 
+  Home, Wrench, Droplets, Flame, Zap, Wind, Truck, Sun, Camera, Hammer, Sparkles, Trees, Palette 
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { WaterSplash } from "../ui/WaterSplash";
 import { getAlternatePath } from "@/lib/data/translations";
 
-const PHONE_NUMBER = "0498 35 25 88";
+const PHONE_NUMBER = "0465 99 60 76";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -87,7 +87,8 @@ export function Navbar() {
     { name: "Camerabewaking", href: "/nl/camerabewaking", desc: "Professionele HD IP-beveiligingscamera's", icon: Camera, color: "text-violet-400" },
     { name: "Bouwwerken", href: "/nl/bouwwerken", desc: "Metselwerk, dragende muren & ruwbouw", icon: Hammer, color: "text-orange-400" },
     { name: "Ruitenwasser", href: "/nl/ruitenwasser", desc: "Streeploze ruitenwas voor huizen & winkels", icon: Sparkles, color: "text-cyan-300" },
-    { name: "Tuinieren", href: "/nl/tuinieren", desc: "Tuinonderhoud, bomen vellen & hagen snoeien", icon: Trees, color: "text-emerald-400" }
+    { name: "Tuinieren", href: "/nl/tuinieren", desc: "Tuinonderhoud, bomen vellen & hagen snoeien", icon: Trees, color: "text-emerald-400" },
+    { name: "Schilderwerken", href: "/nl/schilderwerken", desc: "Binnen- & buitenschilderwerken, gevels & pleisterwerk", icon: Palette, color: "text-purple-400" }
   ] : [
     { name: "Rénovation", href: "/renovation-maison", desc: "Rénovation de maison & salle de bain", icon: Home, color: "text-indigo-400" },
     { name: "Plomberie", href: "/plomberie", desc: "Dépannage de fuites & sanitaires d'urgence", icon: Wrench, color: "text-blue-400" },
@@ -104,7 +105,8 @@ export function Navbar() {
     { name: "Vidéosurveillance", href: "/installation-cameras-surveillance", desc: "Caméras de surveillance IP connectées", icon: Camera, color: "text-violet-400" },
     { name: "Construction & Gros Œuvre", href: "/travaux-de-construction-gros-oeuvre", desc: "Maçonnerie générale, extensions, dalles & IPN", icon: Hammer, color: "text-orange-400" },
     { name: "Nettoyage de Vitres", href: "/nettoyage-de-vitres", desc: "Lavage professionnel de vitres & vitrines", icon: Sparkles, color: "text-cyan-300" },
-    { name: "Jardinage & Élagage", href: "/travaux-de-jardinage-elagage", desc: "Entretien, taille de haies & abattage d'arbres", icon: Trees, color: "text-emerald-400" }
+    { name: "Jardinage & Élagage", href: "/travaux-de-jardinage-elagage", desc: "Entretien, taille de haies & abattage d'arbres", icon: Trees, color: "text-emerald-400" },
+    { name: "Peinture & Finitions", href: "/peinture", desc: "Peinture intérieure, extérieure, façade & enduisage", icon: Palette, color: "text-purple-400" }
   ];
 
   return (
@@ -127,11 +129,11 @@ export function Navbar() {
               <div className="relative z-10 flex items-center justify-center">
                 <WaterSplash />
                 <Image
-                  src="https://www.debouchageexpress24-24h.be/web/image/website/1/logo/Debouchage%20Express%2024H?unique=0a4877c"
-                  alt="DEB PRO SERVICES - Logo officiel Plomberie et Débouchage en Belgique"
-                  width={150}
-                  height={60}
-                  className="h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 relative z-10"
+                  src="https://deb-pro-service.odoo.com/web/image/679-4360ef3d/PRO%20SERVICE.png"
+                  alt="PRO SERVICE - Logo officiel Plomberie et Débouchage en Belgique"
+                  width={240}
+                  height={80}
+                  className="h-16 md:h-20 lg:h-22 w-auto object-contain transition-transform duration-300 group-hover:scale-105 relative z-10"
                   referrerPolicy="no-referrer"
                   priority
                 />

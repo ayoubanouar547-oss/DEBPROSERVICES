@@ -3,12 +3,14 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PhoneCall, ChevronRight, CheckCircle } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { HeroQuoteForm } from "@/components/sections/HeroQuoteForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { matchServiceAndCity } from "@/lib/service-matcher";
+import { PaintingGallery } from "@/components/sections/PaintingGallery";
 
 // Helper function to dynamically parse service and city combinations for all of Belgium
 function parseServiceAndCity(slug: string) {
@@ -83,41 +85,44 @@ export async function generateMetadata({
     };
   }
 
-  let description = `${service.title} Belgique : techniciens agréés pour toute intervention urgente. Dépannage 24h/24 & 7j/7. Devis gratuit immédiat ☎ 0498 35 25 88.`;
+  let description = `${service.title} Belgique : techniciens agréés pour toute intervention urgente. Dépannage 24h/24 & 7j/7. Devis gratuit immédiat ☎ 0465 99 60 76.`;
 
   if (service.slug === "plomberie") {
     description =
-      "Plombier Belgique urgence 24/7 : techniciens agréés pour fuites, installations et dépannages rapides. Devis gratuit. Intervention immédiate au ☎ 0498 35 25 88 !";
+      "Plombier Belgique urgence 24/7 : techniciens agréés pour fuites, installations et dépannages rapides. Devis gratuit. Intervention immédiate au ☎ 0465 99 60 76 !";
   } else if (service.slug === "debouchage-canalisation") {
     description =
-      "Débouchage canalisation Belgique 24/7 : expert pour WC, égouts et éviers bouchés. Devis gratuit, action immédiate et garantie. Appelez le ☎ 0498 35 25 88 !";
+      "Débouchage canalisation Belgique 24/7 : expert pour WC, égouts et éviers bouchés. Devis gratuit, action immédiate et garantie. Appelez le ☎ 0465 99 60 76 !";
   } else if (service.slug === "chauffage") {
     description =
-      "Chauffagiste Belgique certifié : dépannage chaudière en urgence 24h/24. Entretien, installation et mise en service rapide. Devis gratuit ☎ 0498 35 25 88.";
+      "Chauffagiste Belgique certifié : dépannage chaudière en urgence 24h/24. Entretien, installation et mise en service rapide. Devis gratuit ☎ 0465 99 60 76.";
   } else if (service.slug === "gaz") {
     description = 
-      "Techniciens certifiés CERGA pour toute intervention gaz en Belgique. Détection de fuites, mise en conformité, raccordement. Urgence 24h/24 ☎ 0498 35 25 88";
+      "Techniciens certifiés CERGA pour toute intervention gaz en Belgique. Détection de fuites, mise en conformité, raccordement. Urgence 24h/24 ☎ 0465 99 60 76";
   } else if (service.slug === "electricite") {
     description = 
-      "Électricien Belgique urgence 24/7 : mise en conformité, dépannage tableau électrique et installation. Expert agréé, devis gratuit. Appelez le ☎ 0498 35 25 88.";
+      "Électricien Belgique urgence 24/7 : mise en conformité, dépannage tableau électrique et installation. Expert agréé, devis gratuit. Appelez le ☎ 0465 99 60 76.";
   } else if (service.slug === "installation-panneaux-solaires") {
     description = 
-      "Installation de panneaux solaires photovoltaïques et batteries physiques en Belgique. Installateurs certifiés RESCert, étude de faisabilité gratuite et devis au meilleur prix. Contactez-nous au ☎ 0498 35 25 88.";
+      "Installation de panneaux solaires photovoltaïques et batteries physiques en Belgique. Installateurs certifiés RESCert, étude de faisabilité gratuite et devis au meilleur prix. Contactez-nous au ☎ 0465 99 60 76.";
   } else if (service.slug === "travaux-de-toiture") {
     description = 
-      "Travaux de toiture en Belgique : réparation urgente de fuites, rénovation de toit (ardoises, tuiles, EPDM), isolation thermique et démoussage. Couvreurs certifiés, devis gratuit. Appelez le ☎ 0498 35 25 88.";
+      "Travaux de toiture en Belgique : réparation urgente de fuites, rénovation de toit (ardoises, tuiles, EPDM), isolation thermique et démoussage. Couvreurs certifiés, devis gratuit. Appelez le ☎ 0465 99 60 76.";
   } else if (service.slug === "installation-cameras-surveillance") {
     description = 
-      "Installation de caméras de surveillance et alarmes en Belgique. Systèmes de sécurité IP HD connectés sur smartphone pour maison et commerce. Devis gratuit & étude de sécurité offerte ☎ 0498 35 25 88.";
+      "Installation de caméras de surveillance et alarmes en Belgique. Systèmes de sécurité IP HD connectés sur smartphone pour maison et commerce. Devis gratuit & étude de sécurité offerte ☎ 0465 99 60 76.";
   } else if (service.slug === "travaux-de-construction-gros-oeuvre") {
     description = 
-      "Entreprise de construction et maçonnerie en Belgique. Gros œuvre, dalles en béton, ouvertures de mur porteur avec poutrelles IPN/HEB, fondations et façades. Garantie décennale, devis gratuit ☎ 0498 35 25 88.";
+      "Entreprise de construction et maçonnerie en Belgique. Gros œuvre, dalles en béton, ouvertures de mur porteur avec poutrelles IPN/HEB, fondations et façades. Garantie décennale, devis gratuit ☎ 0465 99 60 76.";
   } else if (service.slug === "nettoyage-de-vitres") {
     description =
-      "Lavage de vitres professionnel en Belgique. Nettoyage de vitrines, vérandas, fenêtres d'accès difficile, châssis et volets pour particuliers et commerces. Devis gratuit immédiat ☎ 0498 35 25 88.";
+      "Lavage de vitres professionnel en Belgique. Nettoyage de vitrines, vérandas, fenêtres d'accès difficile, châssis et volets pour particuliers et commerces. Devis gratuit immédiat ☎ 0465 99 60 76.";
   } else if (service.slug === "travaux-de-jardinage-elagage") {
     description =
-      "Jardinier paysagiste professionnel en Belgique : entretien de jardin, élagage et abattage d'arbres complexes, taille de haies. Devis gratuit immédiat ☎ 0498 35 25 88.";
+      "Jardinier paysagiste professionnel en Belgique : entretien de jardin, élagage et abattage d'arbres complexes, taille de haies. Devis gratuit immédiat ☎ 0465 99 60 76.";
+  } else if (service.slug === "peinture") {
+    description =
+      "Entreprise de peinture en Belgique : peintres en bâtiment certifiés pour peinture intérieure, ravalement de façade, enduisage et ponçage. Finitions soignées, devis gratuit ☎ 0465 99 60 76.";
   }
 
   const isSolarService = service.slug === "installation-panneaux-solaires";
@@ -440,26 +445,32 @@ export default async function ServicePage({
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div
-              className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}
-            >
-              <serviceInfo.icon className="w-4 h-4" />
-              {cityInfo ? `Service Pro & Agréé à ${cityInfo.name}` : "Service Pro & Agrée en Belgique"}
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
-              {h1Title}
-            </h1>
-            <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
-              {descriptionText}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="tel:0498352588"
-                className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7">
+              <div
+                className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}
               >
-                <PhoneCall className="w-5 h-5" /> Urgence {matchedTerm}
-              </a>
+                <serviceInfo.icon className="w-4 h-4" />
+                {cityInfo ? `Service Pro & Agréé à ${cityInfo.name}` : "Service Pro & Agrée en Belgique"}
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
+                {h1Title}
+              </h1>
+              <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
+                {descriptionText}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="tel:0465996076"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
+                >
+                  <PhoneCall className="w-5 h-5" /> Urgence {matchedTerm}
+                </a>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 w-full max-w-lg mx-auto mt-8 lg:mt-0">
+              <HeroQuoteForm />
             </div>
           </div>
         </div>
@@ -521,53 +532,7 @@ export default async function ServicePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
-                    <Image
-                      src={
-                        serviceInfo.subServices[0]?.imageUrl ||
-                        serviceInfo.imageUrl
-                      }
-                      alt="Expertise DEB PRO SERVICES"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
-                    <Image
-                      src={
-                        serviceInfo.subServices[1]?.imageUrl ||
-                        serviceInfo.imageUrl
-                      }
-                      alt="Intervention technique"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="pt-8 space-y-4">
-                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
-                    <Image
-                      src={
-                        serviceInfo.subServices[2]?.imageUrl ||
-                        serviceInfo.imageUrl
-                      }
-                      alt="Équipement professionnel"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
-                    <Image
-                      src={serviceInfo.imageUrl}
-                      alt="Service client"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
+              <PaintingGallery />
               {/* Trust Badge */}
               <div className="absolute -bottom-6 -right-6 bg-blue-600 p-8 rounded-2xl shadow-2xl z-20 border-4 border-[#000814]">
                 <div className="text-4xl font-black text-white mb-1">15+</div>
@@ -610,10 +575,10 @@ export default async function ServicePage({
               </div>
               <div className="mt-10">
                 <a
-                  href="tel:0498352588"
+                  href="tel:0465996076"
                   className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-10 py-5 rounded-2xl hover:bg-slate-100 transition shadow-2xl"
                 >
-                  <PhoneCall className="w-6 h-6" /> APPELEZ VOTRE EXPERT : 0498 35 25 88
+                  <PhoneCall className="w-6 h-6" /> APPELEZ VOTRE EXPERT : 0465 99 60 76
                 </a>
               </div>
             </div>

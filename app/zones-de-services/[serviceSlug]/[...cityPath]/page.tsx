@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { HeroQuoteForm } from "@/components/sections/HeroQuoteForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
@@ -80,7 +81,7 @@ export async function generateMetadata({
   if (subService && cityInfo) {
     const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
     const title = `🚨 Devis Gratuit pour ${subService.title} à ${cityInfo.name} ⚡ Intervention 30 Min`;
-    const description = `Expert en ${subService.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`;
+    const description = `Expert en ${subService.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0465 99 60 76`;
     return {
       title,
       description,
@@ -113,7 +114,7 @@ export async function generateMetadata({
   if (cityInfo) {
     const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
     const title = `🚨 Devis Gratuit pour ${service.title} à ${cityInfo.name} ⚡ Intervention 30 Min`;
-    const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`;
+    const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0465 99 60 76`;
     return {
       title,
       description,
@@ -129,7 +130,7 @@ export async function generateMetadata({
 
   return {
     title: `🚨 ${service.title} Belgique — Intervention Rapide 24/7`,
-    description: `Expert en ${service.title.toLowerCase()} en Belgique. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`,
+    description: `Expert en ${service.title.toLowerCase()} en Belgique. Techniciens agréés. Devis gratuit ☎ 0465 99 60 76`,
     alternates: { canonical: path },
   };
 }
@@ -440,7 +441,7 @@ export default async function UnifiedZonePage({
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
                 <a
-                  href="tel:0498352588"
+                  href="tel:0465996076"
                   className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
                 >
                   <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
@@ -449,7 +450,7 @@ export default async function UnifiedZonePage({
                       Dépannage Urgent
                     </span>
                     <span className="block text-lg md:text-xl">
-                      0498 35 25 88
+                      0465 99 60 76
                     </span>
                   </div>
                 </a>
@@ -462,30 +463,8 @@ export default async function UnifiedZonePage({
               </div>
             </div>
 
-            <div className="relative mt-8 lg:mt-0">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
-                <Image
-                  src={serviceInfo.imageUrl}
-                  fill
-                  priority={true}
-                  alt={`${titleToUse} à ${cityInfo.name}`}
-                  className="object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/10 p-5 rounded-2xl flex items-center justify-between">
-                  <div>
-                    <div className="text-white font-bold text-lg">
-                      Spécialiste {cityInfo.name}
-                    </div>
-                    <div className="text-blue-300 text-sm">
-                      Disponible en {cityInfo.province}
-                    </div>
-                  </div>
-                  <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center border border-blue-500/40">
-                    <CheckCircle className="w-6 h-6 text-blue-400" />
-                  </div>
-                </div>
-              </div>
+            <div className="relative mt-8 lg:mt-0 w-full max-w-lg mx-auto">
+              <HeroQuoteForm />
             </div>
           </div>
         </div>
@@ -713,10 +692,10 @@ export default async function UnifiedZonePage({
                     {cityInfo.name}.
                   </p>
                   <a
-                    href="tel:0498352588"
+                    href="tel:0465996076"
                     className="w-full bg-white text-blue-600 font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-100 transition shadow-lg"
                   >
-                    <PhoneCall className="w-5 h-5" /> 0498 35 25 88
+                    <PhoneCall className="w-5 h-5" /> 0465 99 60 76
                   </a>
                 </div>
               </div>

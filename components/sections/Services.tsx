@@ -159,20 +159,6 @@ export function Services() {
                     ))}
                   </ul>
 
-                  {service.testimonial && (
-                    <div className="mb-6 opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto overflow-hidden transition-all duration-500">
-                       <div className="p-4 rounded-xl bg-white/5 border border-white/5 relative italic flex flex-col gap-3">
-                        <p className="text-slate-300 text-xs">"{service.testimonial.text}"</p>
-                        <div className="flex justify-between items-end">
-                           <span className="text-[9px] font-bold text-yellow-400 uppercase">{ service.testimonial.author }</span>
-                           <div className="flex text-yellow-500 gap-[1px]">
-                             {[1,2,3,4,5].map(s => <svg key={s} className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}
-                           </div>
-                        </div>
-                       </div>
-                    </div>
-                  )}
-
                   <Link
                     href={isNl ? `/nl/${service.slug}` : `/${service.slug}`}
                     className="mt-auto w-full inline-flex items-center justify-between text-sm font-black text-white group/link bg-white/5 px-6 py-4 rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all uppercase tracking-widest relative overflow-hidden"

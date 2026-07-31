@@ -4,11 +4,13 @@ import { services } from "@/lib/data/services";
 import { notFound } from "next/navigation";
 import { PhoneCall, ChevronRight, CheckCircle } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { HeroQuoteForm } from "@/components/sections/HeroQuoteForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
+import { PaintingGallery } from "@/components/sections/PaintingGallery";
 
 export function generateStaticParams() {
   const params: { serviceSlug: string; subServiceSlug: string }[] = [];
@@ -238,40 +240,40 @@ export default async function SubServicePage({
             <span className="text-white font-bold">{subServiceInfo.title}</span>
           </div>
 
-          <div className="max-w-4xl mx-auto lg:mx-0">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-[0.2em] text-white mb-8 shadow-xl shadow-blue-600/20">
-              <serviceInfo.icon className="w-4 h-4" />
-              Intervention Spécialisée 24/7
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-[0.2em] text-white mb-8 shadow-xl shadow-blue-600/20">
+                <serviceInfo.icon className="w-4 h-4" />
+                Intervention Spécialisée 24/7
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
+                {subServiceInfo.title}
+              </h1>
+              <p className="text-xl text-blue-100/70 mb-10 leading-relaxed">
+                {subServiceInfo.desc} Nos techniciens agréés interviennent en
+                urgence 24h/24 et 7j/7 partout en Belgique avec le matériel
+                adéquat. Solutions durables et travaux garantis.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
+                <a
+                  href="tel:0465996076"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
+                >
+                  <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <div className="text-left">
+                    <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
+                      Appel SOS 24/7
+                    </span>
+                    <span className="block text-lg md:text-xl">
+                      0465 99 60 76
+                    </span>
+                  </div>
+                </a>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
-              {subServiceInfo.title}
-            </h1>
-            <p className="text-xl md:text-2xl text-blue-100/70 mb-10 max-w-3xl leading-relaxed mx-auto lg:mx-0">
-              {subServiceInfo.desc} Nos techniciens agréés interviennent en
-              urgence 24h/24 et 7j/7 partout en Belgique avec le matériel
-              adéquat. Solutions durables et travaux garantis.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 md:gap-6">
-              <a
-                href="tel:0498352588"
-                className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
-              >
-                <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
-                <div className="text-left">
-                  <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
-                    Appel SOS 24/7
-                  </span>
-                  <span className="block text-lg md:text-xl">
-                    0498 35 25 88
-                  </span>
-                </div>
-              </a>
-              <Link
-                href="#contact"
-                className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-6 py-4 md:px-10 md:py-6 rounded-2xl border border-white/20 transition text-base md:text-lg flex items-center justify-center text-center"
-              >
-                Devis Rapide
-              </Link>
+
+            <div className="lg:col-span-5 w-full max-w-lg mx-auto mt-8 lg:mt-0">
+              <HeroQuoteForm />
             </div>
           </div>
         </div>
@@ -312,38 +314,14 @@ export default async function SubServicePage({
                 Pourquoi faire appel à nos experts pour votre {subServiceInfo.title} en Belgique ?
               </h2>
 
-              {/* Secondary Images Gallery */}
-              <div className="grid grid-cols-2 gap-4 mb-12">
-                <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
-                  <Image
-                    src={
-                      (subServiceInfo as any).galleryImages?.[0] ||
-                      subServiceInfo.imageUrl ||
-                      serviceInfo.subServices[0]?.imageUrl ||
-                      serviceInfo.imageUrl
-                    }
-                    alt={`Intervention technique ${subServiceInfo.title}`}
-                    fill
-                    className="object-cover"
-                    referrerPolicy="no-referrer"
-                  />
+              {serviceInfo.slug === "peinture" ? (
+                <PaintingGallery />
+              ) : (
+                <div className="bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl mb-10">
+                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">Demander une intervention</h3>
+                  <ContactForm />
                 </div>
-                <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
-                  <Image
-                    src={
-                      (subServiceInfo as any).galleryImages?.[1] ||
-                      (subServiceInfo as any).galleryImages?.[0] ||
-                      subServiceInfo.imageUrl ||
-                      serviceInfo.subServices[1]?.imageUrl ||
-                      serviceInfo.imageUrl
-                    }
-                    alt={`Dépannage professionnel ${subServiceInfo.title}`}
-                    fill
-                    className="object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-              </div>
+              )}
 
               <div className="prose prose-xl prose-invert text-white max-w-none">
                 <p className="text-2xl font-medium text-blue-200 mb-8 leading-relaxed">
@@ -444,7 +422,7 @@ export default async function SubServicePage({
                     {subServiceInfo.title}.
                   </p>
                   <a
-                    href="tel:0498352588"
+                    href="tel:0465996076"
                     className="bg-white text-red-700 w-full px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-50 transition"
                   >
                     <PhoneCall className="w-5 h-5" /> Appeler le technicien

@@ -30,7 +30,8 @@ export const frToNlSlugMap: Record<string, string> = {
   "installation-cameras-surveillance": "camerabewaking",
   "travaux-de-construction-gros-oeuvre": "bouwwerken",
   "nettoyage-de-vitres": "ruitenwasser",
-  "travaux-de-jardinage-elagage": "tuinieren"
+  "travaux-de-jardinage-elagage": "tuinieren",
+  "peinture": "schilderwerken"
 };
 
 export const nlToFrSlugMap: Record<string, string> = Object.fromEntries(
@@ -1074,6 +1075,95 @@ export const dutchServices: LocalizedService[] = [
       border: "border-emerald-500/30",
       glow: "bg-emerald-500"
     }
+  },
+  {
+    id: "peinture",
+    slug: "schilderwerken",
+    title: "Schilderwerken & Afwerking",
+    description: "Professioneel schildersbedrijf en afwerkingsbedrijf in België. Erkende vaklui voor al uw binnenschilderwerken, buitenschilderwerken, keukeninrichting, dakbedekking (roofing), vloerbekleding (parket & laminaat) en Gyproc & pleisterwerk. Gratis vrijblijvende offerte, perfecte afwerking en 10 jaar garantie.",
+    trustPoints: [
+      { title: "Gratis Offerte binnen 24u", desc: "Plaatsbezoek en gedetailleerde offerte zonder verplichtingen in heel België." },
+      { title: "Vakkundige Schilders", desc: "Zorgvuldige bescherming van meubels en vloeren, grondige voorbereiding en strakke afwerking." },
+      { title: "Ecologische Kwaliteitsverf", desc: "Gebruik van geurarme, VOC-vrije en afwasbare verven van topmerken (Sikkens, Boss Paints)." },
+      { title: "Tienjarige Garantie & Opruiming", desc: "Werf wordt kraakproper achtergelaten, gedekt door garantie en professionele verzekering." },
+    ],
+    features: [
+      "Binnenschilderwerk muren, plafonds & houtwerk",
+      "Buitenschilderwerk & gevelrenovatie",
+      "Keukeninrichting & plaatsing van keukens op maat",
+      "Dakwerken & waterdichting (roofing platte daken)",
+      "Vloerbekleding (parket, laminaat & epoxy)",
+      "Gyproc & pleisterwerk (scheidingswanden & valse plafonds)",
+      "Voorbereiding, plamuren & bepleistering",
+      "Schilderen deuren, raamkozijnen & trappen",
+    ],
+    subServices: [
+      {
+        slug: "binnenschilderwerk-muren-plafonds",
+        title: "Binnenschilderwerk (Muren & Plafonds)",
+        desc: "Schilderen van uw muren, plafonds, sierlijsten en houtwerk met ecologische kwaliteitsverf.",
+      },
+      {
+        slug: "buitenschilderwerk-gevels",
+        title: "Buitenschilderwerk & Gevels",
+        desc: "Behandeling, waterdicht maken en schilderen van uw gevels, buitenmuren en dakgoten.",
+      },
+      {
+        slug: "voorbereiding-plamuren-pleisterwerk",
+        title: "Voorbereiding, Plamuren & Pleisterwerk",
+        desc: "Egaliseren van muren, opvullen van barsten, stofvrij schuren en vliesbehang plaatsen.",
+      },
+      {
+        slug: "schilderen-houtwerk-ramen-deuren",
+        title: "Schilderen Houtwerk, Ramen & Deuren",
+        desc: "Renovatie, schuren en schilderen of beitsen van uw binnendeuren, raamkozijnen en trappen.",
+      },
+      {
+        slug: "epoxycoating-vloerafwerking",
+        title: "Epoxyvloeren & Vloercoatings",
+        desc: "Aanbrengen van oersterke epoxyharsvloeren voor garages, ateliers, kelders en winkels.",
+      },
+      {
+        slug: "keukeninrichting-en-keukenplaatsing",
+        title: "Keukeninrichting & Keukenplaatsing",
+        desc: "Volledige installatie van uitgeruste keukens en montage van meubilair op maat.",
+      },
+      {
+        slug: "dakwerken-en-waterdichting-roofing",
+        title: "Dakwerken & Waterdichting (Roofing)",
+        desc: "Waterdichtingswerken voor platte daken en terrassen (plaatsen en herstellen van roofing).",
+      },
+      {
+        slug: "vloerbekleding-parket-en-laminaat",
+        title: "Vloerbekleding (Parket & Laminaat)",
+        desc: "Leveren en plaatsen van massief parket, halfmassief parket en laminaatvloeren.",
+      },
+      {
+        slug: "gyproc-en-pleisterwerk",
+        title: "Gyproc & Pleisterwerk",
+        desc: "Plaatsen van scheidingswanden, valse plafonds in Gyproc en traditionele pleisterwerken.",
+      },
+    ],
+    color: {
+      bg: "bg-purple-500/20",
+      text: "text-purple-400",
+      border: "border-purple-500/30",
+      glow: "bg-purple-500",
+    },
+    testimonial: {
+      text: "Volledige schilderrenovatie van ons huis in Brussel. Meubels perfect beschermd, hele strakke plafonds. Aanrader!",
+      author: "Catherine M., Brussel",
+    },
+    faqs: [
+      {
+        question: "Wat is de gemiddelde prijs per m² voor schilderwerken in België?",
+        answer: "In België ligt de gemiddelde prijs voor binnenschilderwerk tussen €20 en €40 per m² (inclusief materiaal en arbeidsloon), afhankelijk van de staat van de muren en het aantal lagen.",
+      },
+      {
+        question: "Gebruikt u milieuvriendelijke en geurarme verven?",
+        answer: "Ja, wij werken bij voorkeur met professionele verven met een laag VOC-gehalte, geurarm, hypoallergeen en milieuvriendelijk.",
+      },
+    ],
   }
 ];
 

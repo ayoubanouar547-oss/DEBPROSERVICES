@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { PhoneCall, ShieldCheck, Clock, Zap, Target } from "lucide-react";
+import { PhoneCall, ShieldCheck, Clock, Zap, Target, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { HeroQuoteForm } from "@/components/sections/HeroQuoteForm";
 
 const SERVICES_FR = [
   { text: "Plomberie", gradient: "from-blue-400 to-cyan-300" },
@@ -71,35 +72,40 @@ export function Hero() {
 
         <div className="space-y-6">
           <motion.h1
-            initial={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-black leading-[0.95] mb-8"
+            className="font-black leading-tight mb-6 relative group"
           >
-            <div className="text-[14vw] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[80px] min-h-[140px] sm:min-h-[160px] flex flex-col justify-center overflow-visible py-2">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={serviceIndex}
-                  initial={{ y: 0, opacity: 1 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 1 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="flex flex-col sm:flex-row sm:items-baseline gap-y-2 sm:gap-x-4"
+            {/* Background Glow */}
+            <div className="absolute -left-10 -top-10 w-72 h-36 bg-blue-600/30 rounded-full blur-3xl pointer-events-none animate-pulse" />
+
+            <div className="flex flex-col gap-2 relative z-10">
+              {/* Main "PRO SERVICE" Animated Display */}
+              <div className="relative inline-block py-2">
+                <motion.span
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[92px] font-black tracking-tighter uppercase text-transparent bg-clip-text bg-[linear-gradient(90deg,#60a5fa,#38bdf8,#818cf8,#38bdf8,#60a5fa)] bg-[length:300%_300%] drop-shadow-[0_10px_25px_rgba(37,99,235,0.4)]"
                 >
-                  <span
-                    className={`bg-clip-text text-transparent bg-gradient-to-r ${currentServicesList[serviceIndex].gradient}`}
-                  >
-                    {currentServicesList[serviceIndex].text.toUpperCase()}
-                  </span>
-                  <span className="text-white opacity-90 tracking-tight">
-                    {isNl ? "IN BELGIË" : "EN BELGIQUE"}
-                  </span>
-                </motion.div>
-              </AnimatePresence>
+                  PRO SERVICE
+                </motion.span>
+              </div>
+
+              {/* Decorative Accent Bar & Subtitle */}
+              <div className="flex items-center gap-3 pt-1">
+                <div className="h-1.5 w-16 sm:w-24 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 rounded-full shadow-[0_0_15px_rgba(56,189,248,0.8)]" />
+                <span className="text-white font-bold text-lg sm:text-2xl tracking-wider uppercase text-slate-200">
+                  MULTI-SERVICES 24H/7
+                </span>
+              </div>
             </div>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-slate-400 block mt-2 text-2xl md:text-4xl lg:text-5xl tracking-tight uppercase">
-              {isNl ? "EXPRESS INTERVENTIE 24U/24" : "INTERVENTION EXPRESS 24H/24"}
-            </span>
           </motion.h1>
 
           <motion.p
@@ -125,12 +131,12 @@ export function Hero() {
         >
           <div className="flex-1 sm:flex-initial">
             <Link
-              href="tel:0498352588"
+              href="tel:0465996076"
               className="group relative w-full px-8 py-5 rounded-2xl font-black text-xl text-white flex items-center justify-center gap-3 transition-all overflow-hidden bg-gradient-to-br from-red-600 to-rose-700 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_60px_-10px_rgba(220,38,38,0.7)] hover:-translate-y-1"
             >
               <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%)] bg-[length:250%_250%,100%_100%] animate-[bg-shift_2s_linear_infinite]" />
               <PhoneCall className="w-6 h-6 animate-pulse relative z-10" />
-              <span className="relative z-10 tracking-wide">0498 35 25 88</span>
+              <span className="relative z-10 tracking-wide">0465 99 60 76</span>
             </Link>
           </div>
           <div className="flex-1 sm:flex-initial">
@@ -186,31 +192,14 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Hero Image Side */}
+      {/* Hero Quote Form Side */}
       <motion.div
         initial={{ opacity: 1, scale: 1 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="col-span-1 lg:col-span-5 flex items-center justify-center mt-12 lg:mt-0 relative"
+        className="col-span-1 lg:col-span-5 flex flex-col justify-center mt-8 lg:mt-0 relative w-full"
       >
-        <div className="relative aspect-[4/5] w-full max-w-[320px] lg:max-w-xl mx-auto flex items-end justify-center group">
-          <div className="absolute inset-0 bg-blue-600/20 rounded-full blur-[80px] transition-all duration-700 group-hover:bg-cyan-500/30" />
-          <div className="absolute top-1/4 right-0 w-32 h-32 bg-cyan-400/30 rounded-full blur-[50px]" />
-          <div className="absolute bottom-1/4 left-0 w-40 h-40 bg-indigo-500/20 rounded-full blur-[50px]" />
-
-          <div className="relative z-10 w-full h-[120%] flex items-end justify-center transform transition-transform duration-700 group-hover:scale-105 group-hover:-translate-y-4">
-            <Image
-              src="https://debouchageexpress24hh.odoo.com/web/image/4154-71fb4457/technician%20%282%29.webp"
-              alt={isNl ? "Gekwalificeerde DEB PRO SERVICES technicus klaar voor een dringende interventie" : "Technicien qualifié DEB PRO SERVICES prêt pour une intervention urgente"}
-              fill
-              referrerPolicy="no-referrer"
-              sizes="(max-width: 640px) 280px, (max-width: 1024px) 450px, 550px"
-              priority={true}
-              quality={80}
-              className="object-contain object-bottom drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] filter contrast-110 saturate-110"
-            />
-          </div>
-        </div>
+        <HeroQuoteForm />
       </motion.div>
     </section>
   );

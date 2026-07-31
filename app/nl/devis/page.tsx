@@ -1,5 +1,4 @@
 import { ContactForm } from "@/components/sections/ContactForm";
-import { CostEstimator } from "@/components/sections/CostEstimator";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -24,13 +23,12 @@ export default function DevisPage() {
     <div className="pt-24 pb-12">
       <div className="text-center py-8">
         <h1 className="text-4xl font-heading font-bold text-white">
-          Schatting & 100% Gratis Offerte
+          100% Gratis Offerte Aanvragen
         </h1>
         <p className="text-slate-300 max-w-2xl mx-auto mt-4 px-4">
-          Gebruik onze interactieve calculator hieronder om direct uw geschatte budget voor de interventie te evalueren. Verstuur daarna uw offerteaanvraag met 1 klik.
+          Vul het onderstaande formulier in om uw offerteaanvraag met 1 klik te versturen. Ons team neemt snel contact met u op.
         </p>
       </div>
-      <CostEstimator />
       <ContactForm />
     </div>
   );

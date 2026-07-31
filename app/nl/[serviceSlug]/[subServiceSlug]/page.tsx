@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PhoneCall, ChevronRight, CheckCircle, Wrench, Flame, Droplets, Zap, Wind, Truck, Home, Sun, Camera, Hammer, Sparkles, Trees, ShieldAlert } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { HeroQuoteForm } from "@/components/sections/HeroQuoteForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
@@ -269,38 +270,38 @@ export default async function SubServicePage({
             <span className="text-white font-bold">{subServiceInfo.title}</span>
           </div>
 
-          <div className="max-w-4xl mx-auto lg:mx-0">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-[0.2em] text-white mb-8 shadow-xl shadow-blue-600/20">
-              <IconComponent className="w-4 h-4" />
-              Gespecialiseerde Interventie 24/7
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-[0.2em] text-white mb-8 shadow-xl shadow-blue-600/20">
+                <IconComponent className="w-4 h-4" />
+                Gespecialiseerde Interventie 24/7
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
+                {subServiceInfo.title}
+              </h1>
+              <p className="text-xl text-blue-100/70 mb-10 leading-relaxed">
+                {subServiceInfo.desc} Onze erkende technici komen bij u langs voor spoedinterventie 24u/24 en 7j/7 in heel België. Duurzame oplossingen en gegarandeerd vakwerk.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
+                <a
+                  href="tel:0465996076"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
+                >
+                  <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <div className="text-left">
+                    <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
+                      SOS Oproep 24/7
+                    </span>
+                    <span className="block text-lg md:text-xl">
+                      0465 99 60 76
+                    </span>
+                  </div>
+                </a>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
-              {subServiceInfo.title}
-            </h1>
-            <p className="text-xl md:text-2xl text-blue-100/70 mb-10 max-w-3xl leading-relaxed mx-auto lg:mx-0">
-              {subServiceInfo.desc} Onze erkende technici komen bij u langs voor spoedinterventie 24u/24 en 7j/7 in heel België. Duurzame oplossingen en gegarandeerd vakwerk.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 md:gap-6">
-              <a
-                href="tel:0498352588"
-                className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
-              >
-                <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
-                <div className="text-left">
-                  <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
-                    SOS Oproep 24/7
-                  </span>
-                  <span className="block text-lg md:text-xl">
-                    0498 35 25 88
-                  </span>
-                </div>
-              </a>
-              <Link
-                href="#contact"
-                className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-6 py-4 md:px-10 md:py-6 rounded-2xl border border-white/20 transition text-base md:text-lg flex items-center justify-center text-center"
-              >
-                Snel Offerte
-              </Link>
+
+            <div className="lg:col-span-5 w-full max-w-lg mx-auto mt-8 lg:mt-0">
+              <HeroQuoteForm />
             </div>
           </div>
         </div>
@@ -463,7 +464,7 @@ export default async function SubServicePage({
                     Wij zijn onmiddellijk beschikbaar voor elk noodgeval i.v.m. {subServiceInfo.title.toLowerCase()}.
                   </p>
                   <a
-                    href="tel:0498352588"
+                    href="tel:0465996076"
                     className="bg-white text-red-700 w-full px-4 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-50 transition"
                   >
                     <PhoneCall className="w-5 h-5" /> Bel de technicus

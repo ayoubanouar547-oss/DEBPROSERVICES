@@ -47,7 +47,7 @@ export async function generateMetadata({
 
   if (dutchSubService && cityInfo) {
     const title = `🚨 Devis Gratuit for ${titleToUse} in ${cityInfo.name} ⚡ Interventie 30 Min`;
-    const description = `Expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie in heel België 24/7. Erkende technici. Gratis offerte ☎ 0498 35 25 88`;
+    const description = `Expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie in heel België 24/7. Erkende technici. Gratis offerte ☎ 0465 99 60 76`;
     return {
       title,
       description,
@@ -79,7 +79,7 @@ export async function generateMetadata({
 
   if (cityInfo) {
     const title = `🚨 ${titleToUse} in ${cityInfo.name} ⚡ Interventie 30 Min | Devis Gratuit`;
-    const description = `Erkend expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie 24/7. Gratis offerte ☎ 0498 35 25 88`;
+    const description = `Erkend expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie 24/7. Gratis offerte ☎ 0465 99 60 76`;
     return {
       title,
       description,
@@ -315,7 +315,7 @@ export default async function NlUnifiedZonePage({
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
                 <a
-                  href="tel:0498352588"
+                  href="tel:0465996076"
                   className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
                 >
                   <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
@@ -324,7 +324,7 @@ export default async function NlUnifiedZonePage({
                       SOS Oproep 24/7
                     </span>
                     <span className="block text-lg md:text-xl">
-                      0498 35 25 88
+                      0465 99 60 76
                     </span>
                   </div>
                 </a>
@@ -435,10 +435,10 @@ export default async function NlUnifiedZonePage({
                     Neem direct contact op voor snelle hulp in {activeCity.name}.
                   </p>
                   <a
-                    href="tel:0498352588"
+                    href="tel:0465996076"
                     className="w-full bg-white text-blue-600 font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-100 transition shadow-lg"
                   >
-                    <PhoneCall className="w-5 h-5" /> 0498 35 25 88
+                    <PhoneCall className="w-5 h-5" /> 0465 99 60 76
                   </a>
                 </div>
               </div>

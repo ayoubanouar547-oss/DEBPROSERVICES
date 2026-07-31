@@ -15,7 +15,7 @@ import { belgianCities } from "@/lib/data/cities";
 import { services } from "@/lib/data/services";
 import { dutchServices } from "@/lib/data/translations";
 
-const PHONE = "0498 35 25 88";
+const PHONE = "0465 99 60 76";
 const EMAIL = "debproservices@canalrose.be";
 
 export function Footer() {

@@ -176,7 +176,10 @@ function extractContactInfo(messages: { role: string; content: string }[]) {
   // 2. Email extraction
   const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
   const emailMatch = combinedText.match(emailPattern);
-  const email = emailMatch ? emailMatch[0].trim() : null;
+  let email = emailMatch ? emailMatch[0].trim() : null;
+  if (!email && /pas d'email|pas email|sans email|no email|geen email|n'ai pas d'email|j'ai pas d'email/i.test(combinedTextLower)) {
+    email = "Non fourni (Pas d'email)";
+  }
 
   // 3. Service / Problem extraction (More robust for abbreviations)
   let service = "Dépannage & Service Technique";
@@ -246,10 +249,43 @@ function extractContactInfo(messages: { role: string; content: string }[]) {
     if (matchName && matchName[1] && matchName[1].trim().length > 1) {
       const extracted = matchName[1].trim();
       const lowerExtracted = extracted.toLowerCase();
-      if (!["un", "une", "le", "la", "des", "du", "sur", "pour", "avec", "chez", "besoin", "salam", "bonjour"].includes(lowerExtracted)) {
+      const stopWords = ["un", "une", "le", "la", "des", "du", "sur", "pour", "avec", "chez", "besoin", "salam", "bonjour", "salut", "fuite", "devis", "urgent", "rendez-vous", "rdv", "demain", "aujourd'hui"];
+      if (!stopWords.includes(lowerExtracted)) {
         nom = extracted;
         break;
       }
+    }
+  }
+
+  // Fallback standalone name extraction if name pattern didn't match
+  if (nom === "Client Chatbot") {
+    const stopWords = new Set([
+      "un", "une", "le", "la", "des", "du", "sur", "pour", "avec", "chez", "besoin", "salam", "bonjour", "salut",
+      "fuite", "devis", "urgent", "rendez-vous", "rdv", "demain", "aujourd'hui", "oui", "non", "ok", "d'accord",
+      "bruxelles", "liege", "namur", "charleroi", "mons", "wavre", "waterloo", "plombier", "debouchage", "chauffage",
+      "adresse", "telephone", "email", "mail", "merci", "voici", "mon", "ma", "mes"
+    ]);
+
+    for (const msg of userMessages) {
+      const lines = msg.split("\n");
+      for (const rawLine of lines) {
+        const line = rawLine.trim();
+        if (emailPattern.test(line) || /\d/.test(line) || /(?:rue|chaussée|avenue|boulevard|straat)/i.test(line)) {
+          continue;
+        }
+        if (/^[A-Za-zÀ-ÿ\-]+(?:\s+[A-Za-zÀ-ÿ\-]+){0,2}$/.test(line)) {
+          const lowerLine = line.toLowerCase();
+          const words = lowerLine.split(/\s+/);
+          if (!words.some((w) => stopWords.has(w)) && line.length >= 2) {
+            nom = line
+              .split(/\s+/)
+              .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+              .join(" ");
+            break;
+          }
+        }
+      }
+      if (nom !== "Client Chatbot") break;
     }
   }
 
@@ -307,13 +343,26 @@ export async function POST(req: NextRequest) {
     const lower = lastUserMsg.toLowerCase();
     const isDutch = locale === "nl" || lower.includes("hallo") || lower.includes("goedendag") || lower.includes("loodgieter") || lower.includes("zonnepanelen");
 
-    // extract any contact info if available (Name, Password, Phone, Email, Address)
+    // Extract contact info from messages (Name, Phone, Email, Address)
     const info = extractContactInfo(messages);
     let appointmentSaved: any = null;
 
-    // Save lead to Google Sheets whenever contact info is collected in conversation
-    if (info.telephone || info.email || info.password || (info.nom && info.nom !== "Client Chatbot") || info.hasVille) {
+    // Check if ALL 4 required pieces of information are provided by the client:
+    // 1. Telephone number
+    // 2. City / Address
+    // 3. Client Name (not default fallback "Client Chatbot")
+    // 4. Client Email (or explicitly stated "pas d'email")
+    const hasPhone = Boolean(info.telephone);
+    const hasAddress = Boolean(info.hasVille && info.ville && info.ville !== "Belgique");
+    const hasName = Boolean(info.nom && info.nom.trim() !== "" && info.nom !== "Client Chatbot");
+    const hasEmail = Boolean(info.email);
+
+    const hasAllInformation = hasPhone && hasAddress && hasName && hasEmail;
+
+    // SOFIA MUST NOT send information to Google Sheets until she receives ALL information from the client!
+    if (hasAllInformation) {
       try {
+        console.log("[Chat API] All required client information gathered. Saving lead to Google Sheets...", info);
         appointmentSaved = await saveLeadToSheet({
           nom: info.nom,
           password: info.password,
@@ -324,8 +373,15 @@ export async function POST(req: NextRequest) {
           message: info.message, // Send full discussion history
         });
       } catch (err) {
-        console.error("Error saving lead:", err);
+        console.error("Error saving lead to Google Sheets:", err);
       }
+    } else {
+      console.log("[Chat API] Incomplete client info - waiting for remaining fields before sending to Google Sheets. Current state:", {
+        hasName,
+        hasPhone,
+        hasAddress,
+        hasEmail,
+      });
     }
 
     const encoder = new TextEncoder();
@@ -347,18 +403,19 @@ REGLES ABSOLUES DE CONVERSATION :
    - Si le client s'adresse à toi en Darija (arabe marocain), réponds-lui naturellement en Darija sans utiliser l'Arabe classique littéraire (الفصحى) et SANS mélanger le Français et l'Arabe dans le même message.
    - N'utilise JAMAIS l'Arabe littéraire classique (الفصحى). Garde un style naturel et fluide.
 
-2. ETAPES DE CONVERSATION DANS LE CHAT (NE DEMANDE PAS LES INFOS AU DEBUT !) :
+2. ETAPES DE CONVERSATION DANS LE CHAT :
    - ÉTAPE 1 : Écoute le problème du client et réponds à sa question.
-   - ÉTAPE 2 : Demande-lui ses disponibilités et quand il souhaite l'intervention ("Quand souhaitez-vous qu'on intervienne ?", "Est-ce que vous êtes disponible aujourd'hui ou demain ?", "Êtes-vous prêt pour qu'on fixe la visite ?").
-   - ÉTAPE 3 : Une fois le problème discuté et qu'il vous dit quand il est disponible/prêt, CONFIRME l'intervention et demande-lui de te donner directement dans le chat ses 4 informations :
+   - ÉTAPE 2 : Demande-lui ses disponibilités et quand il souhaite l'intervention ("Quand souhaitez-vous qu'on intervienne ?", "Est-ce que vous êtes disponible aujourd'hui ou demain ?").
+   - ÉTAPE 3 : Une fois le problème discuté et le créneau d'intervention choisi, CONFIRME l'intervention et demande-lui de te fournir ses 4 INFORMATIONS OBLIGATOIRES :
      1. Nom complet
      2. Numéro de téléphone
-     3. Adresse d'intervention
-     4. Adresse email
+     3. Adresse d'intervention exacte (Rue, numéro, commune)
+     4. Adresse email (ou préciser "pas d'email")
 
-3. PARCOURS 100% CHAT DIRECT (SANS AUCUN FORMULAIRE) :
-   - Collecte toutes les informations par simple message dans la discussion.
-   - Une fois les infos reçues, confirme au client que sa demande est validée et enregistrée sur la feuille de suivi de l'équipe technique pour l'envoi immédiat du technicien.
+3. RÈGLE STRICTE GOOGLE SHEET (TRES IMPORTANT) :
+   - Ne valide et n'envoie JAMAIS la demande sur la feuille de suivi (Google Sheet) tant que tu n'as pas collecté L'ENSEMBLE DES 4 INFORMATIONS (Nom, Téléphone, Adresse, Email).
+   - Si le client te donne seulement 1, 2 ou 3 informations (par exemple uniquement son téléphone ou son nom), REMERCIE-LE et DEMANDE-LUI POLIMENT les informations manquantes pour pouvoir valider sa demande.
+   - Ne dis que la demande est enregistrée/transmise sur la feuille de suivi QUE LORSQUE LES 4 INFORMATIONS SONT COMPLÈTES.
 
 4. COMPORTEMENT ET FORMAT :
    - Réponses courtes, claires et adaptées au mobile (1 à 3 phrases max).`;
@@ -500,12 +557,18 @@ REGLES ABSOLUES DE CONVERSATION :
             responseText = isDutch 
               ? "Dat is prima. Wanneer wenst u dat onze technicus langskomt?"
               : "C'est parfait. Quand souhaitez-vous qu'on intervienne ? Dites-moi si vous êtes disponible aujourd'hui ou un autre jour.";
-          } else if (info.telephone && !info.hasVille) {
-            responseText = `C'est bien noté pour le ${info.telephone}. Dans quelle ville ou commune avez-vous besoin de nous ?`;
-          } else if (info.telephone && info.hasVille) {
-            responseText = `C'est parfait ! Un technicien vous rappellera rapidement sur le ${info.telephone} pour l'intervention à ${info.ville}.`;
-          } else if (info.hasVille && !info.telephone) {
-            responseText = `Nous avons des techniciens à ${info.ville}. Pouvez-vous me laisser votre numéro de téléphone pour vous recontacter ?`;
+          } else if (hasAllInformation) {
+            responseText = `C'est parfait ${info.nom} ! Vos 4 informations ont bien été reçues et transmises sur la feuille de suivi. Notre technicien vous contactera très rapidement au ${info.telephone} pour l'intervention à ${info.ville}.`;
+          } else if (hasPhone && hasAddress && hasName && !hasEmail) {
+            responseText = `Merci ${info.nom}. Il me manque juste votre adresse email (ou précisez "pas d'email") pour valider définitivement la fiche d'intervention.`;
+          } else if (hasPhone && hasAddress && !hasName) {
+            responseText = `C'est bien noté pour le ${info.telephone} à ${info.ville}. Pouvez-vous me donner votre nom complet ainsi que votre adresse email ?`;
+          } else if (hasPhone && !hasAddress) {
+            responseText = `C'est bien noté pour le ${info.telephone}. Quelle est votre adresse exacte d'intervention (rue, numéro, commune) et votre adresse email ?`;
+          } else if (hasAddress && !hasPhone) {
+            responseText = `Nous avons des techniciens à ${info.ville}. Pouvez-vous me donner votre numéro de téléphone, votre nom complet et votre adresse email ?`;
+          } else if (hasName && !hasPhone) {
+            responseText = `Merci ${info.nom}. Pouvez-vous me laisser votre numéro de téléphone, votre adresse et votre email pour fixer le rendez-vous ?`;
           } else if (
             lower.includes("bonjour") ||
             lower.includes("salut") ||

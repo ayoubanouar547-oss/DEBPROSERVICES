@@ -139,6 +139,13 @@ const aliasToServiceId: Record<string, string> = {
   "tuinieren": "jardinage",
   "tuinonderhoud": "jardinage",
   "tuinman": "jardinage",
+
+  // Peinture / Schilderwerken
+  "peinture": "peinture",
+  "peintre": "peinture",
+  "peinture-batiment": "peinture",
+  "schilder": "peinture",
+  "schilderwerken": "peinture",
 };
 
 export function getServiceById(id: string): { service: Service; dutchService: LocalizedService } {

@@ -234,7 +234,7 @@ html.light-theme .rounded-2xl:not(section):not(body):not(.absolute):not(button):
 html.light-theme .rounded-3xl:not(section):not(body):not(.absolute):not(button):not(a):not(input):not(select):not(textarea):not([role="button"]):not([class*="bg-red"]):not([class*="bg-blue"]):not([class*="bg-green"]):not([class*="from-red"]):not([class*="from-blue"]):not([class*="bg-amber"]):not([class*="bg-emerald"]):not([class*="bg-rose"]):not([class*="border-blue"]):not([class*="bg-blue-500/10"]):not([class*="bg-blue-500/5"]),
 html.light-theme [class*="bg-[#010918]"]:not(section):not(body):not(.absolute):not(button):not(a):not([class*="bg-red"]):not([class*="bg-blue"]),
 html.light-theme [class*="bg-[#00040A]"]:not(section):not(body):not(.absolute):not(button):not(a):not([class*="bg-red"]):not([class*="bg-blue"]),
-html.light-theme [class*="bg-slate-900"]:not(section):not(body):not(.absolute):not(button):not(a):not(#estimateur-tarif):not([class*="bg-red"]):not([class*="bg-blue"]),
+html.light-theme [class*="bg-slate-900"]:not(section):not(body):not(.absolute):not(button):not(a):not([class*="bg-red"]):not([class*="bg-blue"]),
 html.light-theme [class*="bg-slate-950"]:not(section):not(body):not(.absolute):not(button):not(a):not([class*="bg-red"]):not([class*="bg-blue"]),
 html.light-theme [class*="bg-black/40"]:not(section):not(body):not(.absolute):not(button):not(a):not([class*="bg-red"]):not([class*="bg-blue"]) {
   background-color: #ffffff !important;
@@ -551,134 +551,6 @@ html.light-theme [class*="border-blue-500"] {
 html.light-theme .lg\:hidden button,
 html.light-theme .lg\:hidden a {
   color: #0f172a !important;
-}
-
-/* ==========================================
-   INTERACTIVE TARIEFCALCULATOR LIGHT MODE
-   ========================================== */
-html.light-theme #estimateur-tarif {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08) !important;
-}
-
-html.light-theme #estimateur-tarif h2,
-html.light-theme #estimateur-tarif h4 {
-  color: #0f172a !important;
-}
-
-html.light-theme #estimateur-tarif p {
-  color: #475569 !important;
-}
-
-/* Categories (Step 1), Sub-Services (Step 2) & Urgency Level (Step 3) - Default (not selected) */
-html.light-theme #estimateur-tarif button:not(.bg-blue-600) {
-  background-color: #f8fafc !important;
-  border-color: #e2e8f0 !important;
-  color: #475569 !important;
-}
-
-/* Category icons (unselected) */
-html.light-theme #estimateur-tarif button:not([class*="border-blue-500"]) svg {
-  color: #64748b !important;
-}
-
-/* Categories, Sub-Services & Urgency - Selected (has border-blue-500) */
-html.light-theme #estimateur-tarif button[class*="border-blue-500"],
-html.light-theme #estimateur-tarif button[class*="bg-blue-500/10"],
-html.light-theme #estimateur-tarif button[class*="bg-blue-500/5"] {
-  background-color: #eff6ff !important; /* ultra light blue */
-  border-color: #2563eb !important;
-  color: #1d4ed8 !important;
-}
-
-/* Selected item texts and icons inside */
-html.light-theme #estimateur-tarif button[class*="border-blue-500"] h4,
-html.light-theme #estimateur-tarif button[class*="bg-blue-500/10"] h4,
-html.light-theme #estimateur-tarif button[class*="bg-blue-500/5"] h4 {
-  color: #1e40af !important; /* royal blue title */
-}
-
-html.light-theme #estimateur-tarif button[class*="border-blue-500"] p,
-html.light-theme #estimateur-tarif button[class*="bg-blue-500/10"] p,
-html.light-theme #estimateur-tarif button[class*="bg-blue-500/5"] p {
-  color: #2563eb !important; /* medium blue description */
-}
-
-html.light-theme #estimateur-tarif button[class*="border-blue-500"] svg,
-html.light-theme #estimateur-tarif button[class*="bg-blue-500/10"] svg,
-html.light-theme #estimateur-tarif button[class*="bg-blue-500/5"] svg {
-  color: #2563eb !important; /* blue icons */
-}
-
-/* Step Number Labels (1, 2, 3) */
-html.light-theme #estimateur-tarif label span[class*="bg-blue-500/20"] {
-  background-color: #dbeafe !important;
-  color: #1e40af !important;
-}
-
-/* Categories, Sub-Services & Urgency - Hover (not selected) */
-html.light-theme #estimateur-tarif button:not([class*="border-blue-500"]):hover {
-  background-color: #f1f5f9 !important;
-  border-color: #94a3b8 !important;
-  color: #0f172a !important;
-}
-
-html.light-theme #estimateur-tarif button:not([class*="border-blue-500"]):hover svg {
-  color: #0f172a !important;
-}
-
-html.light-theme #estimateur-tarif button:not([class*="border-blue-500"]):hover h4 {
-  color: #0f172a !important;
-}
-
-/* Right Column (Results sidebar) */
-html.light-theme #estimateur-tarif .lg\:col-span-5 {
-  background-color: #f1f5f9 !important;
-  background-image: none !important;
-  border-left: 1px solid #cbd5e1 !important;
-}
-
-html.light-theme #estimateur-tarif .lg\:col-span-5 h4,
-html.light-theme #estimateur-tarif .lg\:col-span-5 span,
-html.light-theme #estimateur-tarif .lg\:col-span-5 div {
-  color: #0f172a !important;
-}
-
-/* Price texts inside Right Column */
-html.light-theme #estimateur-tarif .lg\:col-span-5 .text-white {
-  color: #0f172a !important;
-}
-
-html.light-theme #estimateur-tarif .lg\:col-span-5 p {
-  color: #475569 !important;
-}
-
-/* Background panel behind Price Range Display */
-html.light-theme #estimateur-tarif [class*="bg-white/5"] {
-  background-color: #ffffff !important;
-  border-color: #cbd5e1 !important;
-}
-
-/* CheckCircle2 and icons in the results list */
-html.light-theme #estimateur-tarif .text-green-400 {
-  color: #16a34a !important;
-}
-
-/* Blue primary apply CTA button in Results */
-html.light-theme #estimateur-tarif button.bg-blue-600 {
-  background-color: #2563eb !important;
-  color: #ffffff !important;
-  border-color: #2563eb !important;
-}
-
-html.light-theme #estimateur-tarif button.bg-blue-600:hover {
-  background-color: #1d4ed8 !important;
-}
-
-html.light-theme #estimateur-tarif button.bg-blue-600 * {
-  color: #ffffff !important;
 }
 
 /* ==========================================

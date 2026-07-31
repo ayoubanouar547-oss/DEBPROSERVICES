@@ -72,6 +72,7 @@ export const metadata: Metadata = {
     google: "EzJCaAlzhQ39X0jWHXeJrMgF3-RDrFjKMTgx5bs0UGE",
     other: {
       "msvalidate.01": "9DB75FAF1500A17D9FE4DE423F249119",
+      "2bf92fe70e4abb4": "6595b8b2d915664eda2b1efb495cd6e6",
     },
   },
   robots: {
@@ -138,6 +139,7 @@ export default function RootLayout({
             `
           }}
         />
+        <meta name="2bf92fe70e4abb4" content="6595b8b2d915664eda2b1efb495cd6e6" />
         <link rel="dns-prefetch" href="https://debouchageexpress24hh.odoo.com" />
         <link rel="dns-prefetch" href="https://deb-pro-service.odoo.com" />
         <link rel="preconnect" href="https://debouchageexpress24hh.odoo.com" crossOrigin="anonymous" />

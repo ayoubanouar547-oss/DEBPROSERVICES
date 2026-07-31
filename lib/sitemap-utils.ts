@@ -25,6 +25,7 @@ const frToNlSlugMap: Record<string, string> = {
   "panneaux-photovoltaiques": "zonnepanelen",
   "camera-de-surveillance": "camerabewaking",
   "travaux-de-batiment": "bouwwerken",
+  "peinture": "schilderwerken",
 };
 
 const frToNlCitySlugMap: Record<string, string> = {
