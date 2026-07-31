@@ -87,7 +87,7 @@ export async function generateMetadata({
 function buildLongNlClusterText(serviceName: string, cityName: string, serviceDesc?: string): string[] {
   return [
     `<h2 class="text-3xl font-black text-white mb-6 mt-12">Professionele aanpak voor ${serviceName} in ${cityName}</h2>`,
-    `<p class="mb-6 text-white/90 text-lg leading-relaxed">Wanneer u te maken heeft met een dringende noodsituatie voor <strong>${serviceName}</strong> in ${cityName}, is een snelle en vakkundige service van cruciaal belang. Bij DEB PRO SERVICES bieden wij gecertificeerde technici die binnen 30 tot 60 minuten ter plaatse zijn om de situatie te stabiliseren en te verhelpen.</p>`,
+    `<p class="mb-6 text-white/90 text-lg leading-relaxed">Wanneer u te maken heeft met een dringende noodsituatie voor <strong>${serviceName}</strong> in ${cityName}, is een snelle en vakkundige service van cruciaal belang. Bij PRO SERVICES bieden wij gecertificeerde technici die binnen 30 tot 60 minuten ter plaatse zijn om de situatie te stabiliseren en te verhelpen.</p>`,
     `<div class="bg-blue-600/10 border-l-4 border-blue-400 p-6 my-8 rounded-r-2xl">
        <h3 class="text-xl font-bold text-blue-300 mb-3">Onze kwaliteitsgarantie</h3>
        <p class="text-white/90 text-lg leading-relaxed">${serviceDesc || "Wij maken uitsluitend gebruik van gecertificeerde onderdelen en de nieuwste diagnose-apparatuur."}</p>
@@ -128,11 +128,11 @@ export default async function SubServicePage({
   }
 
   const paragraphs = [
-    `Wanneer het gaat over <strong>${subServiceInfo.title.toLowerCase()}</strong>, is het inschakelen van een gekwalificeerde professional essentieel. Bij DEB PRO SERVICES hebben we een unieke expertise opgebouwd in België voor de categorie ${serviceInfo.title.toLowerCase()}. Onze teams komen dag en nacht, inclusief zon- en feestdagen, tussenbeide om een snelle en efficiënte oplossing te garanderen.`,
+    `Wanneer het gaat over <strong>${subServiceInfo.title.toLowerCase()}</strong>, is het inschakelen van een gekwalificeerde professional essentieel. Bij PRO SERVICES hebben we een unieke expertise opgebouwd in België voor de categorie ${serviceInfo.title.toLowerCase()}. Onze teams komen dag en nacht, inclusief zon- en feestdagen, tussenbeide om een snelle en efficiënte oplossing te garanderen.`,
 
     `De dienst <em>${subServiceInfo.title.toLowerCase()}</em> vereist specifieke knowhow en aangepast materiaal. Onze gecertificeerde technici komen naar u toe met volledig uitgeruste bedrijfswagens, waarmee 95% van de storingen al bij het eerste bezoek kan worden opgelost. ${subServiceInfo.desc}`,
 
-    `Wacht niet tot de situatie verslechtert. Problemen met ${serviceInfo.title.toLowerCase()} kunnen aanzienlijke nevenschade veroorzaken (overstromingen, kortsluiting, gezondheidsrisico's). Door te kiezen voor DEB PRO SERVICES voor uw behoefte aan ${subServiceInfo.title.toLowerCase()}, geniet u van één jaar garantie op onze interventies, volledige prijstransparantie met een gratis offerte vooraf, en een professionaliteit die wordt erkend door meer dan 5.000 tevreden klanten.`,
+    `Wacht niet tot de situatie verslechtert. Problemen met ${serviceInfo.title.toLowerCase()} kunnen aanzienlijke nevenschade veroorzaken (overstromingen, kortsluiting, gezondheidsrisico's). Door te kiezen voor PRO SERVICES voor uw behoefte aan ${subServiceInfo.title.toLowerCase()}, geniet u van één jaar garantie op onze interventies, volledige prijstransparantie met een gratis offerte vooraf, en een professionaliteit die wordt erkend door meer dan 5.000 tevreden klanten.`,
 
     `Wij dekken het hele Belgische grondgebied (Brussel, Wallonië en de Vlaamse rand). Zodra we uw oproep ontvangen, analyseert een dispatcher uw noodsituatie in <strong>${subServiceInfo.title.toLowerCase()}</strong> en stuurt de dichtstbijzijnde technicus op basis van uw postcode. De interventie is traceerbaar, veilig en respecteert strikt de geldende Belgische normen.`
   ];
@@ -171,7 +171,7 @@ export default async function SubServicePage({
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "Deb Pro Service",
+                name: "Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
@@ -244,7 +244,7 @@ export default async function SubServicePage({
         <div className="absolute inset-0 -z-10">
           <Image
             src={heroImage}
-            alt={`DEB PRO SERVICES - ${subServiceInfo.title}`}
+            alt={`PRO SERVICES - ${subServiceInfo.title}`}
             fill
             priority
             className="object-cover object-center"
@@ -370,7 +370,7 @@ export default async function SubServicePage({
 
               <div className="prose prose-xl prose-invert text-white max-w-none">
                 <p className="text-2xl font-medium text-blue-200 mb-8 leading-relaxed">
-                  DEB PRO SERVICES is uw betrouwbare partner in België voor alle noden in verband met{" "}
+                  PRO SERVICES is uw betrouwbare partner in België voor alle noden in verband met{" "}
                   <strong>{subServiceInfo.title.toLowerCase()}</strong>. Wij combineren snelle interventie en technische uitmuntendheid.
                 </p>
 

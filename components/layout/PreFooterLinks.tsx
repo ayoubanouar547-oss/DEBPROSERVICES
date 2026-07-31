@@ -87,7 +87,7 @@ export function PreFooterLinks() {
 
         <div className="mt-20 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">
-            DEB PRO SERVICES © 2026 - TOUTES LES RÉGIONS DE BELGIQUE COUVERTES
+            PRO SERVICES © 2026 - TOUTES LES RÉGIONS DE BELGIQUE COUVERTES
           </div>
           <Link href="/zones-de-services" className="text-blue-500 text-xs font-black uppercase tracking-tighter hover:underline">
             Voir l'annuaire complet des services &rarr;

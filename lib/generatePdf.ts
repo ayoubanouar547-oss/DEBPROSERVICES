@@ -65,7 +65,7 @@ export async function generatePdfDocument(data: PdfDocumentData): Promise<void> 
   doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
-  doc.text("DEB PRO SERVICE", 15, 13);
+  doc.text("PRO SERVICE", 15, 13);
 
   doc.setFontSize(8.5);
   doc.setFont("helvetica", "normal");
@@ -106,7 +106,7 @@ export async function generatePdfDocument(data: PdfDocumentData): Promise<void> 
   doc.setFontSize(8.5);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(darkTextColor[0], darkTextColor[1], darkTextColor[2]);
-  doc.text("DEB PRO SERVICE BELGIQUE", 20, 67);
+  doc.text("PRO SERVICE BELGIQUE", 20, 67);
   doc.text(isNl ? "24/7 Nooddienst" : "Service d'urgence 24h/24 et 7j/7", 20, 72);
   doc.text("Tel : +32 498 35 25 88", 20, 77);
   doc.text("Email : contact@canalrose.be", 20, 82);
@@ -245,7 +245,7 @@ export async function generatePdfDocument(data: PdfDocumentData): Promise<void> 
 
   doc.setFontSize(7.5);
   doc.setTextColor(156, 163, 175);
-  doc.text("DEB PRO SERVICE - Depannage urgent 24/7 en Belgique - Tel: 0465 99 60 76 - Email: contact@canalrose.be", 105, pageHeight - 9, { align: "center" });
+  doc.text("PRO SERVICE - Depannage urgent 24/7 en Belgique - Tel: 0465 99 60 76 - Email: contact@canalrose.be", 105, pageHeight - 9, { align: "center" });
 
   // Immediate Save / Download
   const fileName = `devis_debpro_${refNum}.pdf`;

@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Plombier Grimbergen : Dépannage Urgence & Fuite | Deb Pro",
-  description: "Urgence plomberie à Grimbergen ou Strombeek-Bever ? Deb Pro Services intervient en 30 min pour fuite d'eau, débouchage de canalisation et sanitaires. Devis gratuit.",
+  title: "Plombier Grimbergen : Dépannage Urgence & Fuite | Pro Services",
+  description: "Urgence plomberie à Grimbergen ou Strombeek-Bever ? Pro Services intervient en 30 min pour fuite d'eau, débouchage de canalisation et sanitaires. Devis gratuit.",
   alternates: {
     canonical: "/plombier-grimbergen",
   },
@@ -52,7 +52,7 @@ export default function PlombierGrimbergenPage() {
                 },
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/plombier-grimbergen"
                 }
@@ -78,7 +78,7 @@ export default function PlombierGrimbergenPage() {
         <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
             src="https://debouchageexpress24hh.odoo.com/web/image/4146-3c23cecf/regenerated_image_1777316390260%20%284%29.png?height=600"
-            alt="Plombier Grimbergen - Deb Pro Services"
+            alt="Plombier Grimbergen - Pro Services"
             fill
             priority
             className="object-cover object-center opacity-40 mix-blend-overlay"

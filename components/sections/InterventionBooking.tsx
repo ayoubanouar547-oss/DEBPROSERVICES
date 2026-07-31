@@ -210,8 +210,8 @@ export function InterventionBooking() {
   const generateGoogleCalendarUrl = () => {
     if (!selectedDate) return "#";
     const dateFormatted = selectedDate.replace(/-/g, "");
-    const title = encodeURIComponent(`Intervention DEB PRO SERVICES - ${selectedService.toUpperCase()}`);
-    const details = encodeURIComponent(`Rendez-vous intervention technique DEB PRO SERVICES.\nClient: ${nom}\nTéléphone: ${telephone}\nVille: ${ville}\nCréneau: ${selectedSlot}\nDétails: ${message}`);
+    const title = encodeURIComponent(`Intervention PRO SERVICES - ${selectedService.toUpperCase()}`);
+    const details = encodeURIComponent(`Rendez-vous intervention technique PRO SERVICES.\nClient: ${nom}\nTéléphone: ${telephone}\nVille: ${ville}\nCréneau: ${selectedSlot}\nDétails: ${message}`);
     const location = encodeURIComponent(`${ville}, Belgique`);
     
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dateFormatted}T080000Z/${dateFormatted}T100000Z&details=${details}&location=${location}`;
@@ -222,14 +222,14 @@ export function InterventionBooking() {
     const icsContent = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
-      "PRODID:-//DEB PRO SERVICES//Rendez-vous Intervention//FR",
+      "PRODID:-//PRO SERVICES//Rendez-vous Intervention//FR",
       "BEGIN:VEVENT",
       `UID:booking-${Date.now()}@debservices.canalrose.be`,
       `DTSTAMP:${dateFormatted}T080000Z`,
       `DTSTART:${dateFormatted}T080000Z`,
       `DTEND:${dateFormatted}T100000Z`,
-      `SUMMARY:Intervention DEB PRO SERVICES - ${selectedService.toUpperCase()}`,
-      `DESCRIPTION:Rendez-vous technique DEB PRO SERVICES.\\nClient: ${nom}\\nTéléphone: ${telephone}\\nCréneau: ${selectedSlot}`,
+      `SUMMARY:Intervention PRO SERVICES - ${selectedService.toUpperCase()}`,
+      `DESCRIPTION:Rendez-vous technique PRO SERVICES.\\nClient: ${nom}\\nTéléphone: ${telephone}\\nCréneau: ${selectedSlot}`,
       `LOCATION:${ville}\\, Belgique`,
       "STATUS:CONFIRMED",
       "END:VEVENT",
@@ -259,7 +259,7 @@ export function InterventionBooking() {
         email,
         ville,
       },
-      serviceCategory: "DEB PRO SERVICES BELGIQUE",
+      serviceCategory: "PRO SERVICES BELGIQUE",
       serviceTitle: serviceTitleStr,
       urgencyTitle: selectedSlot,
       bookingDate: selectedDate,

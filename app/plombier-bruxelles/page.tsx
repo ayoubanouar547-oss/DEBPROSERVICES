@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Plombier Bruxelles : Dépannage Urgence & Fuite | Deb Pro",
-  description: "Urgence plomberie à Bruxelles-Capitale ? Deb Pro Services intervient pour fuites, colonnes communes et sanitaires. Devis clair, techniciens locaux.",
+  title: "Plombier Bruxelles : Dépannage Urgence & Fuite | Pro Services",
+  description: "Urgence plomberie à Bruxelles-Capitale ? Pro Services intervient pour fuites, colonnes communes et sanitaires. Devis clair, techniciens locaux.",
   alternates: {
     canonical: "/plombier-bruxelles",
   },
@@ -52,7 +52,7 @@ export default function PlombierBruxellesPage() {
                 },
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/plombier-bruxelles",
                   "hasMap": "https://www.google.com/maps/place/Deb+Pro+Services/@50.9343749,4.3843725,17z/data=!3m1!4b1!4m6!3m5!1s0x47c3e9f7ff0c3d79:0x54ce02342d4a8439!8m2!3d50.9343749!4d4.3869474!16s%2Fg%2F11z3pw860x",
@@ -93,7 +93,7 @@ export default function PlombierBruxellesPage() {
                 "description": "Service de plomberie d'urgence à Bruxelles-Capitale 24h/24.",
                 "brand": {
                   "@type": "Brand",
-                  "name": "Deb Pro Service"
+                  "name": "Pro Service"
                 },
                 "aggregateRating": {
                   "@type": "AggregateRating",
@@ -166,7 +166,7 @@ export default function PlombierBruxellesPage() {
               Plombier à Bruxelles : Dépannage Rapide et Intervention d'Urgence
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light">
-              À Bruxelles, les problèmes de plomberie exigent une intervention précise et immédiate. Qu'il s'agisse de fuites dans des appartements mitoyens, de colonnes communes défectueuses ou d'une pression d'eau irrégulière, Deb Pro Services mobilise ses techniciens pour apporter des solutions durables aux infrastructures urbaines.
+              À Bruxelles, les problèmes de plomberie exigent une intervention précise et immédiate. Qu'il s'agisse de fuites dans des appartements mitoyens, de colonnes communes défectueuses ou d'une pression d'eau irrégulière, Pro Services mobilise ses techniciens pour apporter des solutions durables aux infrastructures urbaines.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a

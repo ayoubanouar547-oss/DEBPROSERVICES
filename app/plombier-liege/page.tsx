@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Plombier Liège : Dépannage Urgence 24/7 & Devis Gratuit | Deb Pro Service",
-  description: "Besoin d'un plombier à Liège ? Deb Pro Service intervient en 30 minutes pour vos fuites, débouchages et installations. Artisans locaux, prix transparents. Appelez le 0465 99 60 76.",
+  title: "Plombier Liège : Dépannage Urgence 24/7 & Devis Gratuit | Pro Service",
+  description: "Besoin d'un plombier à Liège ? Pro Service intervient en 30 minutes pour vos fuites, débouchages et installations. Artisans locaux, prix transparents. Appelez le 0465 99 60 76.",
   alternates: {
     canonical: "/plombier-liege",
   },
@@ -52,7 +52,7 @@ export default function PlombierLiegePage() {
                 },
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/plombier-liege"
                 }
@@ -78,7 +78,7 @@ export default function PlombierLiegePage() {
         <div className="absolute inset-0 -z-10">
           <Image
             src="https://picsum.photos/seed/liege-plumbing/1920/1080"
-            alt="Plombier Liège - Deb Pro Service"
+            alt="Plombier Liège - Pro Service"
             fill
             priority
             className="object-cover"
@@ -95,7 +95,7 @@ export default function PlombierLiegePage() {
               Plombier à Liège : Expert en Dépannage 24h/24
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-              À Liège, les problèmes de plomberie ne préviennent jamais. Qu'il s'agisse d'une vieille tuyauterie dans le quartier du Laveu ou d'un souci de pression dans le centre-ville, Deb Pro Service mobilise ses artisans liégeois pour des interventions rapides.
+              À Liège, les problèmes de plomberie ne préviennent jamais. Qu'il s'agisse d'une vieille tuyauterie dans le quartier du Laveu ou d'un souci de pression dans le centre-ville, Pro Service mobilise ses artisans liégeois pour des interventions rapides.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a

@@ -61,7 +61,7 @@ export async function generateMetadata({
       ? `🛡️ Installation Caméras de Surveillance ${cityInfo.name} — Sécurité Professionnelle 📹`
       : `🚨 ${matchedTerm} ${cityInfo.name} — Devis Gratuit & Intervention 30 Min ⚡`;
 
-    const description = `Besoin d'un expert en ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? DEB PRO SERVICES propose des interventions rapides, devis gratuit et prestations de haute qualité.`;
+    const description = `Besoin d'un expert en ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? PRO SERVICES propose des interventions rapides, devis gratuit et prestations de haute qualité.`;
 
     return {
       title,
@@ -245,13 +245,13 @@ export default async function ServicePage({
     } else if (isCameraService) {
       descriptionText = `Dissuadez les intrusions et gardez un œil sur votre propriété à ${cityInfo.name}. Nos techniciens certifiés installent des solutions de vidéosurveillance intelligentes connectées à votre smartphone. Devis et audit de sécurité offerts.`;
     } else if (isConstructionService) {
-      descriptionText = `Besoin d'un maçon ou d'une entreprise de construction de confiance à ${cityInfo.name} ? DEB PRO SERVICES s'occupe de vos travaux de gros œuvre, maçonnerie, dalles béton et pose d'IPN avec garantie décennale.`;
+      descriptionText = `Besoin d'un maçon ou d'une entreprise de construction de confiance à ${cityInfo.name} ? PRO SERVICES s'occupe de vos travaux de gros œuvre, maçonnerie, dalles béton et pose d'IPN avec garantie décennale.`;
     } else if (isCleanService) {
-      descriptionText = `Trouvez un laveur de vitres professionnel à ${cityInfo.name} pour vos fenêtres, verrières ou vitrines. DEB PRO SERVICES vous garantit un lavage de haute qualité, sans traces et respectueux de vos châssis.`;
+      descriptionText = `Trouvez un laveur de vitres professionnel à ${cityInfo.name} pour vos fenêtres, verrières ou vitrines. PRO SERVICES vous garantit un lavage de haute qualité, sans traces et respectueux de vos châssis.`;
     } else if (isGardenService) {
-      descriptionText = `Besoin d'un jardinier paysagiste ou d'un élagueur qualifié à ${cityInfo.name} ? DEB PRO SERVICES s'occupe de la tonte de pelouse, taille de haies, abattage d'arbres et aménagement paysager de votre extérieur.`;
+      descriptionText = `Besoin d'un jardinier paysagiste ou d'un élagueur qualifié à ${cityInfo.name} ? PRO SERVICES s'occupe de la tonte de pelouse, taille de haies, abattage d'arbres et aménagement paysager de votre extérieur.`;
     } else {
-      descriptionText = `Vous recherchez un professionnel pour votre ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? DEB PRO SERVICES intervient rapidement à ${cityInfo.name} et ses environs. Que ce soit pour une installation, une rénovation ou un dépannage d'urgence, nos techniciens agréés et certifiés garantissent un travail soigné, durable et au meilleur prix.`;
+      descriptionText = `Vous recherchez un professionnel pour votre ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? PRO SERVICES intervient rapidement à ${cityInfo.name} et ses environs. Que ce soit pour une installation, une rénovation ou un dépannage d'urgence, nos techniciens agréés et certifiés garantissent un travail soigné, durable et au meilleur prix.`;
     }
   }
 
@@ -270,7 +270,7 @@ export default async function ServicePage({
               {
                 "@type": ["HomeAndConstructionBusiness", "LocalBusiness", "EmergencyService"],
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "DEB PRO SERVICES",
+                name: "PRO SERVICES",
                 image: [
                   heroImage || "https://debservices.canalrose.be/technician.png",
                   "https://debservices.canalrose.be/logo.png"
@@ -330,7 +330,7 @@ export default async function ServicePage({
               {
                 "@type": "Service",
                 "@id": `https://debservices.canalrose.be/${serviceInfo.slug}#service`,
-                name: cityInfo ? `${matchedTerm} à ${cityInfo.name} - DEB PRO SERVICES` : `${serviceInfo.title} Belgique - DEB PRO SERVICES`,
+                name: cityInfo ? `${matchedTerm} à ${cityInfo.name} - PRO SERVICES` : `${serviceInfo.title} Belgique - PRO SERVICES`,
                 serviceType: serviceInfo.title,
                 description: descriptionText,
                 provider: {
@@ -355,7 +355,7 @@ export default async function ServicePage({
               },
               {
                 "@type": "Product",
-                name: cityInfo ? `Prestation ${matchedTerm} ${cityInfo.name} - DEB PRO SERVICES` : `Prestation ${serviceInfo.title} Belgique - DEB PRO SERVICES`,
+                name: cityInfo ? `Prestation ${matchedTerm} ${cityInfo.name} - PRO SERVICES` : `Prestation ${serviceInfo.title} Belgique - PRO SERVICES`,
                 description: descriptionText,
                 image: [
                   heroImage || "https://debservices.canalrose.be/technician.png",
@@ -363,7 +363,7 @@ export default async function ServicePage({
                 ],
                 brand: {
                   "@type": "Brand",
-                  name: "DEB PRO SERVICES"
+                  name: "PRO SERVICES"
                 },
                 aggregateRating: {
                   "@type": "AggregateRating",
@@ -436,7 +436,7 @@ export default async function ServicePage({
         <div className="absolute inset-0 -z-10">
           <Image
             src={heroImage}
-            alt={cityInfo ? `DEB PRO SERVICES - ${matchedTerm} à ${cityInfo.name}` : `DEB PRO SERVICES - Dépannage ${serviceInfo.title} en Belgique`}
+            alt={cityInfo ? `PRO SERVICES - ${matchedTerm} à ${cityInfo.name}` : `PRO SERVICES - Dépannage ${serviceInfo.title} en Belgique`}
             fill
             priority
             className="object-cover object-center"
@@ -485,7 +485,7 @@ export default async function ServicePage({
             </h2>
             <p className="text-white text-lg md:text-xl max-w-2xl mx-auto font-medium">
               Découvrez en détail l'ensemble de nos champs d'expertise {cityInfo ? `à ${cityInfo.name}` : "en Belgique"}. Chaque
-              problème a sa solution dédiée avec DEB PRO SERVICES.
+              problème a sa solution dédiée avec PRO SERVICES.
             </p>
           </div>
 
@@ -544,7 +544,7 @@ export default async function ServicePage({
 
             <div className="text-white">
               <h2 className="text-4xl font-black mb-8 leading-tight">
-                Pourquoi faire confiance à DEB PRO SERVICES pour votre {matchedTerm} {cityInfo ? `à ${cityInfo.name}` : "en Belgique"} ?
+                Pourquoi faire confiance à PRO SERVICES pour votre {matchedTerm} {cityInfo ? `à ${cityInfo.name}` : "en Belgique"} ?
               </h2>
               <div className="space-y-6">
                 {((serviceInfo as any).trustPoints ?? [

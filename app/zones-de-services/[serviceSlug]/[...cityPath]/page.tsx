@@ -284,7 +284,7 @@ export default async function UnifiedZonePage({
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "Deb Pro Service",
+                name: "Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
@@ -334,7 +334,7 @@ export default async function UnifiedZonePage({
                     "name": `Proposez-vous un devis gratuit à ${cityInfo.name} ?`,
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": `Oui, DEB PRO SERVICES propose des devis gratuits et sans engagement pour tous vos travaux de ${titleToUse.toLowerCase()} à ${cityInfo.name}.`
+                      "text": `Oui, PRO SERVICES propose des devis gratuits et sans engagement pour tous vos travaux de ${titleToUse.toLowerCase()} à ${cityInfo.name}.`
                     }
                   }
                 ]
@@ -378,7 +378,7 @@ export default async function UnifiedZonePage({
         <div className="absolute inset-0 -z-10">
           <Image
             src={subServiceInfo?.imageUrl || serviceInfo.imageUrl}
-            alt={`DEB PRO SERVICES - ${titleToUse} ${cityInfo.name}`}
+            alt={`PRO SERVICES - ${titleToUse} ${cityInfo.name}`}
             fill
             priority
             className="object-cover object-center"

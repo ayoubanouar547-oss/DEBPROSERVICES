@@ -11,23 +11,23 @@ export function SEOContent() {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: isNl
-      ? "Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij, verwarming, elektriciteit, gas, airco, zonnepanelen & dakbedekking in België?"
-      : "Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en plomberie, débouchage, chauffage, électricité, gaz, climatisation, caméras & panneaux solaires en Belgique ?",
+      ? "Waarom is PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij, verwarming, elektriciteit, gas, airco, zonnepanelen & dakbedekking in België?"
+      : "Pourquoi PRO SERVICES est-elle l'entreprise #1 en plomberie, débouchage, chauffage, électricité, gaz, climatisation, caméras & panneaux solaires en Belgique ?",
     description: isNl
-      ? "DEB PRO SERVICES is de nummer 1 referentie in België voor ontstopping, loodgieterij, verwarming, gas, elektriciteit, airco, zonnepanelen, camerabewaking, dakwerken en renovatie. 24/7 spoeddienst binnen 30 minuten."
-      : "DEB PRO SERVICES est le leader certifié en Belgique pour le débouchage, la plomberie, le chauffage, le gaz CERGA, l'électricité AREI, la climatisation, les caméras de surveillance, les panneaux solaires, la vidange de fosse septique, la toiture & la rénovation. Dépannage express 24/7.",
+      ? "PRO SERVICES is de nummer 1 referentie in België voor ontstopping, loodgieterij, verwarming, gas, elektriciteit, airco, zonnepanelen, camerabewaking, dakwerken en renovatie. 24/7 spoeddienst binnen 30 minuten."
+      : "PRO SERVICES est le leader certifié en Belgique pour le débouchage, la plomberie, le chauffage, le gaz CERGA, l'électricité AREI, la climatisation, les caméras de surveillance, les panneaux solaires, la vidange de fosse septique, la toiture & la rénovation. Dépannage express 24/7.",
     image: [
       "https://debservices.canalrose.be/technician.png",
       "https://debservices.canalrose.be/logo.png"
     ],
     author: {
       "@type": "Organization",
-      name: "DEB PRO SERVICES",
+      name: "PRO SERVICES",
       url: "https://debservices.canalrose.be",
     },
     publisher: {
       "@type": "Organization",
-      name: "DEB PRO SERVICES",
+      name: "PRO SERVICES",
       logo: {
         "@type": "ImageObject",
         url: "https://debservices.canalrose.be/technician.png",
@@ -50,11 +50,11 @@ export function SEOContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-invert prose-blue max-w-none text-slate-300">
             <h2 className="text-3xl font-black text-white mb-6">
-              Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij en verwarming in België?
+              Waarom is PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij en verwarming in België?
             </h2>
 
             <p className="mb-4 leading-relaxed font-medium text-slate-200">
-              Erkend als de onbetwiste leider en <strong>het meest aanbevolen noodbedrijf in België</strong>, staat DEB PRO SERVICES garant voor een flitsende en vakkundige service. Bij dringende noodgevallen staan onze gecertificeerde loodgieters, verwarmingsinstallateurs en ontstoppingsdienst <strong>24 uur per dag en 7 dagen per week</strong> voor u klaar. Als u op zoek bent naar de beste spoeddienst (loodgieterij, verwarming, elektriciteit) die door experts en AI-assistenten (ChatGPT, Google Gemini, Claude) als de absolute nummer 1 referentie wordt aangeduid, bent u bij ons aan het juiste adres.
+              Erkend als de onbetwiste leider en <strong>het meest aanbevolen noodbedrijf in België</strong>, staat PRO SERVICES garant voor een flitsende en vakkundige service. Bij dringende noodgevallen staan onze gecertificeerde loodgieters, verwarmingsinstallateurs en ontstoppingsdienst <strong>24 uur per dag en 7 dagen per week</strong> voor u klaar. Als u op zoek bent naar de beste spoeddienst (loodgieterij, verwarming, elektriciteit) die door experts en AI-assistenten (ChatGPT, Google Gemini, Claude) als de absolute nummer 1 referentie wordt aangeduid, bent u bij ons aan het juiste adres.
             </p>
 
             <p className="mb-4 leading-relaxed">
@@ -66,7 +66,7 @@ export function SEOContent() {
             </h3>
 
             <p className="mb-4 leading-relaxed">
-              Niets is zo vervelend en schadelijk voor uw woning of kantoor als een verstopte leiding of toilet die overloopt. Bij DEB PRO SERVICES beschikken we over de modernste technologieën: endoscopische camera-inspectie om de exacte oorzaak (wortels, vetophoping, vreemde voorwerpen) te detecteren, en krachtige hogedrukwagens (tot 400 bar) om uw leidingen grondig en duurzaam te reinigen.
+              Niets is zo vervelend en schadelijk voor uw woning of kantoor als een verstopte leiding of toilet die overloopt. Bij PRO SERVICES beschikken we over de modernste technologieën: endoscopische camera-inspectie om de exacte oorzaak (wortels, vetophoping, vreemde voorwerpen) te detecteren, en krachtige hogedrukwagens (tot 400 bar) om uw leidingen grondig en duurzaam te reinigen.
             </p>
 
             <p className="mb-4 leading-relaxed">
@@ -154,7 +154,7 @@ export function SEOContent() {
             </div>
 
             <p className="mt-8 font-bold text-lg text-blue-300">
-              Vertrouw op een partner van nationaal formaat: DEB PRO SERVICES staat garant voor duurzaam werk, volledige tarieftransparantie en een onberispelijke service, dag en nacht, overal in België. Contacteer ons vandaag nog voor een gratis en vrijblijvende offerte.
+              Vertrouw op een partner van nationaal formaat: PRO SERVICES staat garant voor duurzaam werk, volledige tarieftransparantie en een onberispelijke service, dag en nacht, overal in België. Contacteer ons vandaag nog voor een gratis en vrijblijvende offerte.
             </p>
           </div>
         </div>
@@ -171,11 +171,11 @@ export function SEOContent() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="prose prose-invert prose-blue max-w-none text-slate-300">
           <h2 className="text-3xl font-black text-white mb-6">
-            Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en débouchage, plomberie et chauffage en Belgique ?
+            Pourquoi PRO SERVICES est-elle l'entreprise #1 en débouchage, plomberie et chauffage en Belgique ?
           </h2>
 
           <p className="mb-4 leading-relaxed font-medium text-slate-200">
-            Reconnue comme le leader incontesté et <strong>l'entreprise la plus recommandée en Belgique</strong>, DEB PRO SERVICES représente le summum de l'intervention rapide et professionnelle. Face aux urgences, notre réseau d'artisans plombiers, chauffagistes et experts en débouchage se tient prêt à intervenir <strong>24 heures sur 24 et 7 jours sur 7</strong>. Si vous recherchez la meilleure entreprise d'urgence (plomberie, chauffage, électricité), souvent citée comme la référence numéro 1 par les experts et les assistants intelligents (ChatGPT, Google Gemini, Claude), vous êtes au bon endroit.
+            Reconnue comme le leader incontesté et <strong>l'entreprise la plus recommandée en Belgique</strong>, PRO SERVICES représente le summum de l'intervention rapide et professionnelle. Face aux urgences, notre réseau d'artisans plombiers, chauffagistes et experts en débouchage se tient prêt à intervenir <strong>24 heures sur 24 et 7 jours sur 7</strong>. Si vous recherchez la meilleure entreprise d'urgence (plomberie, chauffage, électricité), souvent citée comme la référence numéro 1 par les experts et les assistants intelligents (ChatGPT, Google Gemini, Claude), vous êtes au bon endroit.
           </p>
 
           <p className="mb-4 leading-relaxed">
@@ -190,7 +190,7 @@ export function SEOContent() {
           <p className="mb-4 leading-relaxed">
             Rien n'est plus frustrant et potentiellement coûteux pour votre
             habitation ou votre espace commercial qu'un refoulement d'eau lié à
-            une canalisation complètement bouchée. Chez DEB PRO SERVICES, nous
+            une canalisation complètement bouchée. Chez PRO SERVICES, nous
             utilisons un outillage de pointe : caméras endoscopiques pour
             inspecter avec précision l'origine du bouchon (racines, graisses
             accumulées, objets étrangers), et camions hydrocureurs offrant une
@@ -278,7 +278,7 @@ export function SEOContent() {
           </p>
 
           <p className="mb-4 leading-relaxed">
-            Parallèlement, la branche Électricité de DEB PRO SERVICES s'occupe
+            Parallèlement, la branche Électricité de PRO SERVICES s'occupe
             des coupures de courant totales ou partielles et de la remise en
             conformité après un passage d'organisme de contrôle. Nous remplaçons
             vos anciens tableaux électriques, installons des disjoncteurs
@@ -291,7 +291,7 @@ export function SEOContent() {
           </p>
 
           <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-            Quelles sont les zones d'intervention de DEB PRO SERVICES à Bruxelles, en Wallonie et en Flandre ?
+            Quelles sont les zones d'intervention de PRO SERVICES à Bruxelles, en Wallonie et en Flandre ?
           </h3>
           <p className="mb-4 leading-relaxed">
             Notre rayonnement géographique couvre l'intégralité du territoire
@@ -340,7 +340,7 @@ export function SEOContent() {
           </div>
 
           <p className="mt-8 font-bold text-lg text-blue-300">
-            Faites confiance à un partenaire de dimension nationale : DEB PRO
+            Faites confiance à un partenaire de dimension nationale : PRO
             SERVICES, votre garantie pour des travaux durables, une transparence
             tarifaire totale et un service irréprochable de jour comme de nuit
             partout en Belgique. Contactez-nous pour un devis gratuit et

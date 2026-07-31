@@ -59,7 +59,7 @@ export async function generateMetadata({
       ? `🛡️ Camerabewaking Installatie ${cityInfo.name} — Professionele Beveiliging 📹`
       : `🚨 ${matchedTerm} ${cityInfo.name} — Gratis Offerte & Interventie 30 Min ⚡`;
 
-    const description = `Nood aan een expert in ${matchedTerm.toLowerCase()} in ${cityInfo.name}? DEB PRO SERVICES biedt snelle interventies, gratis offertes en hoogwaardige diensten.`;
+    const description = `Nood aan een expert in ${matchedTerm.toLowerCase()} in ${cityInfo.name}? PRO SERVICES biedt snelle interventies, gratis offertes en hoogwaardige diensten.`;
 
     return {
       title,
@@ -248,13 +248,13 @@ export default async function ServicePage({
     } else if (isCameraService) {
       descriptionText = `Schrik inbrekers af en houd uw eigendom in ${cityInfo.name} in de gaten. Onze gecertificeerde technici installeren slimme camerabewakingssystemen verbonden met uw smartphone. Gratis offerte en beveiligingsaudit.`;
     } else if (isConstructionService) {
-      descriptionText = `Nood aan een betrouwbare metselaar of aannemer in ${cityInfo.name}? DEB PRO SERVICES verzorgt uw ruwbouwwerken, metselwerk, betonplaten en stalen IPN-balken met tienjarige garantie.`;
+      descriptionText = `Nood aan een betrouwbare metselaar of aannemer in ${cityInfo.name}? PRO SERVICES verzorgt uw ruwbouwwerken, metselwerk, betonplaten en stalen IPN-balken met tienjarige garantie.`;
     } else if (isCleanService) {
-      descriptionText = `Vind een professionele ruitenwasser in ${cityInfo.name} voor uw ramen, veranda of etalage. DEB PRO SERVICES garandeert streeploos wassen met respect voor uw raamprofielen.`;
+      descriptionText = `Vind een professionele ruitenwasser in ${cityInfo.name} voor uw ramen, veranda of etalage. PRO SERVICES garandeert streeploos wassen met respect voor uw raamprofielen.`;
     } else if (isGardenService) {
-      descriptionText = `Nood aan een gekwalificeerde tuinman of boomverzorger in ${cityInfo.name}? DEB PRO SERVICES verzorgt het maaien van gras, knippen van hagen, vellen van bomen en tuinonderhoud of uw buitenruimte.`;
+      descriptionText = `Nood aan een gekwalificeerde tuinman of boomverzorger in ${cityInfo.name}? PRO SERVICES verzorgt het maaien van gras, knippen van hagen, vellen van bomen en tuinonderhoud of uw buitenruimte.`;
     } else {
-      descriptionText = `Op zoek naar een professional voor uw ${matchedTerm.toLowerCase()} in ${cityInfo.name}? DEB PRO SERVICES grijpt snel in in ${cityInfo.name} en omgeving. Of het nu gaat om een installatie, renovatie of spoedreparatie, onze gecertificeerde technici garanderen vakkundig, duurzaam werk tegen de beste prijs.`;
+      descriptionText = `Op zoek naar een professional voor uw ${matchedTerm.toLowerCase()} in ${cityInfo.name}? PRO SERVICES grijpt snel in in ${cityInfo.name} en omgeving. Of het nu gaat om een installatie, renovatie of spoedreparatie, onze gecertificeerde technici garanderen vakkundig, duurzaam werk tegen de beste prijs.`;
     }
   }
 
@@ -276,7 +276,7 @@ export default async function ServicePage({
               {
                 "@type": "Service",
                 "@id": `https://debservices.canalrose.be/nl/${serviceInfo.slug}#service`,
-                name: cityInfo ? `${matchedTerm} in ${cityInfo.name} - DEB PRO SERVICES` : `${serviceInfo.title} België - DEB PRO SERVICES`,
+                name: cityInfo ? `${matchedTerm} in ${cityInfo.name} - PRO SERVICES` : `${serviceInfo.title} België - PRO SERVICES`,
                 serviceType: serviceInfo.title,
                 description: descriptionText,
                 provider: {
@@ -293,7 +293,7 @@ export default async function ServicePage({
               },
               {
                 "@type": "Product",
-                name: cityInfo ? `Dienst ${matchedTerm} ${cityInfo.name} - DEB PRO SERVICES` : `Dienst ${serviceInfo.title} België - DEB PRO SERVICES`,
+                name: cityInfo ? `Dienst ${matchedTerm} ${cityInfo.name} - PRO SERVICES` : `Dienst ${serviceInfo.title} België - PRO SERVICES`,
                 description: descriptionText,
                 image: [
                   heroImage || "https://debservices.canalrose.be/technician.png",
@@ -301,7 +301,7 @@ export default async function ServicePage({
                 ],
                 brand: {
                   "@type": "Brand",
-                  name: "DEB PRO SERVICES"
+                  name: "PRO SERVICES"
                 },
                 aggregateRating: {
                   "@type": "AggregateRating",
@@ -357,8 +357,8 @@ export default async function ServicePage({
               {
                 "@type": ["HomeAndConstructionBusiness", "LocalBusiness", "EmergencyService"],
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "DEB PRO SERVICES",
-                alternateName: ["Debservices", "Deb Pro Service"],
+                name: "PRO SERVICES",
+                alternateName: ["Debservices", "Pro Service"],
                 image: [
                   "https://debservices.canalrose.be/technician.png",
                   "https://debservices.canalrose.be/logo.png"
@@ -416,7 +416,7 @@ export default async function ServicePage({
         <div className="absolute inset-0 -z-10">
           <Image
             src={heroImage}
-            alt={cityInfo ? `DEB PRO SERVICES - ${matchedTerm} in ${cityInfo.name}` : `DEB PRO SERVICES - Interventie ${serviceInfo.title} in België`}
+            alt={cityInfo ? `PRO SERVICES - ${matchedTerm} in ${cityInfo.name}` : `PRO SERVICES - Interventie ${serviceInfo.title} in België`}
             fill
             priority
             className="object-cover object-center"
@@ -464,7 +464,7 @@ export default async function ServicePage({
               Onze diensten van {serviceInfo.title} {cityInfo ? `in ${cityInfo.name}` : "in België"}
             </h2>
             <p className="text-white text-lg md:text-xl max-w-2xl mx-auto font-medium">
-              Ontdek in detail al onze expertises {cityInfo ? `in ${cityInfo.name}` : "in België"}. Elk probleem heeft een passende oplossing bij DEB PRO SERVICES.
+              Ontdek in detail al onze expertises {cityInfo ? `in ${cityInfo.name}` : "in België"}. Elk probleem heeft een passende oplossing bij PRO SERVICES.
             </p>
           </div>
 
@@ -519,7 +519,7 @@ export default async function ServicePage({
                         serviceInfo.subServices[0]?.imageUrl ||
                         heroImage
                       }
-                      alt="Expertise DEB PRO SERVICES"
+                      alt="Expertise PRO SERVICES"
                       fill
                       className="object-cover"
                     />
@@ -569,7 +569,7 @@ export default async function ServicePage({
 
             <div className="text-white">
               <h2 className="text-4xl font-black mb-8 leading-tight">
-                Waarom kiezen voor DEB PRO SERVICES voor uw {matchedTerm} {cityInfo ? `in ${cityInfo.name}` : "in België"} ?
+                Waarom kiezen voor PRO SERVICES voor uw {matchedTerm} {cityInfo ? `in ${cityInfo.name}` : "in België"} ?
               </h2>
               <div className="space-y-6">
                 {(serviceInfo.trustPoints ?? [

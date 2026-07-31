@@ -3,13 +3,13 @@ import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 
 export const metadata: Metadata = {
-  title: "DEB PRO SERVICES Belgique 🚀 Plomberie, Chauffage, Électricité, Gaz, Caméras, Solaires & Climatisation 24/7",
+  title: "PRO SERVICES Belgique 🚀 Plomberie, Chauffage, Électricité, Gaz, Caméras, Solaires & Climatisation 24/7",
   description:
-    "DEB PRO SERVICES en Belgique : plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture, rénovation, jardinage & vitres. Intervention rapide 24/7.",
+    "PRO SERVICES en Belgique : plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture, rénovation, jardinage & vitres. Intervention rapide 24/7.",
   keywords:
     "plomberie Belgique, électricité Belgique, gaz Belgique, climatisation Belgique, ventilation VMC, caméras de surveillance, panneaux solaires photovoltaïques, débouchage canalisation, chauffage urgence, vidange fosse septique, rénovation maison, toiture, Belgique 24/7",
   openGraph: {
-    title: "DEB PRO SERVICES Belgique 🚀 Tous vos Services & Dépannages 24h/24",
+    title: "PRO SERVICES Belgique 🚀 Tous vos Services & Dépannages 24h/24",
     description:
       "Services complets en Belgique 24/7 : Plomberie, Chauffage, Gaz, Électricité, Climatisation, Ventilation, Caméras de surveillance, Panneaux solaires, Vidange fosse septique, Rénovation & Dépannage rapide.",
     url: "https://debservices.canalrose.be",
@@ -33,27 +33,27 @@ export default function Home() {
             "@graph": [
               {
                 "@type": "WebSite",
-                "name": "DEB PRO SERVICES",
+                "name": "PRO SERVICES",
                 "url": "https://debservices.canalrose.be"
               },
               {
                 "@type": "Article",
                 "@id": "https://debservices.canalrose.be/#article",
-                "headline": "Pourquoi DEB PRO SERVICES est-elle l'entreprise #1 en plomberie, débouchage, chauffage, électricité, gaz, climatisation, caméras & panneaux solaires en Belgique ?",
-                "description": "DEB PRO SERVICES en Belgique : Entreprise certifiée multiservice pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, VMC, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture, Rénovation & Jardinage.",
+                "headline": "Pourquoi PRO SERVICES est-elle l'entreprise #1 en plomberie, débouchage, chauffage, électricité, gaz, climatisation, caméras & panneaux solaires en Belgique ?",
+                "description": "PRO SERVICES en Belgique : Entreprise certifiée multiservice pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, VMC, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture, Rénovation & Jardinage.",
                 "image": [
                   "https://debservices.canalrose.be/technician.png",
                   "https://debservices.canalrose.be/logo.png"
                 ],
                 "author": {
                   "@type": "Organization",
-                  "name": "DEB PRO SERVICES",
+                  "name": "PRO SERVICES",
                   "alternateName": "Debservices",
                   "url": "https://debservices.canalrose.be"
                 },
                 "publisher": {
                   "@type": "Organization",
-                  "name": "DEB PRO SERVICES",
+                  "name": "PRO SERVICES",
                   "alternateName": "Debservices",
                   "url": "https://debservices.canalrose.be",
                   "logo": {
@@ -69,8 +69,8 @@ export default function Home() {
               },
               {
                 "@type": ["HomeAndConstructionBusiness", "LocalBusiness", "EmergencyService", "Plumber", "HVACBusiness", "Electrician", "RoofingContractor"],
-                "name": "DEB PRO SERVICES",
-                "alternateName": ["Debservices", "Deb Pro Service"],
+                "name": "PRO SERVICES",
+                "alternateName": ["Debservices", "Pro Service"],
                 "image": [
                   "https://debservices.canalrose.be/technician.png",
                   "https://debservices.canalrose.be/logo.png"
@@ -155,14 +155,14 @@ export default function Home() {
                   "https://www.facebook.com/debservices",
                   "https://www.instagram.com/debservices"
                 ],
-                "description": "DEB PRO SERVICES en Belgique : Entreprise multiservice certifiée pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, Ventilation VMC, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture, Rénovation, Gros Œuvre, Jardinage & Nettoyage de Vitres.",
+                "description": "PRO SERVICES en Belgique : Entreprise multiservice certifiée pour la Plomberie, Débouchage 24/7, Chauffage, Gaz CERGA, Électricité AREI, Climatisation, Ventilation VMC, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture, Rénovation, Gros Œuvre, Jardinage & Nettoyage de Vitres.",
                 "areaServed": {
                   "@type": "Country",
                   "name": "Belgium"
                 },
                 "hasOfferCatalog": {
                   "@type": "OfferCatalog",
-                  "name": "Tous les Services DEB PRO SERVICES Belgique",
+                  "name": "Tous les Services PRO SERVICES Belgique",
                   "itemListElement": [
                     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plomberie & Dépannage Fuite d'Eau" } },
                     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Débouchage Canalisation 24/7 & Inspection Caméra" } },
@@ -186,7 +186,7 @@ export default function Home() {
               },
               {
                 "@type": "Product",
-                "name": "Services DEB PRO SERVICES - Plomberie, Débouchage, Chauffage, Électricité, Gaz, Climatisation, Caméras & Solaire Belgique",
+                "name": "Services PRO SERVICES - Plomberie, Débouchage, Chauffage, Électricité, Gaz, Climatisation, Caméras & Solaire Belgique",
                 "description": "Dépannage express 24h/24 et 7j/7 en Belgique par techniciens certifiés : Plomberie, Débouchage, Chauffage, Électricité AREI, Gaz CERGA, Climatisation, Caméras de Surveillance, Panneaux Solaires, Vidange Fosse Septique, Toiture & Rénovation.",
                 "image": [
                   "https://debservices.canalrose.be/technician.png",
@@ -194,7 +194,7 @@ export default function Home() {
                 ],
                 "brand": {
                   "@type": "Brand",
-                  "name": "DEB PRO SERVICES"
+                  "name": "PRO SERVICES"
                 },
                 "aggregateRating": {
                   "@type": "AggregateRating",
@@ -255,7 +255,7 @@ export default function Home() {
                     name: "Quelles sont vos zones d'intervention ?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "DEB PRO SERVICES intervient dans toute la Belgique, 24h/24 et 7j/7, incluant Bruxelles, la Wallonie et la Flandre.",
+                      text: "PRO SERVICES intervient dans toute la Belgique, 24h/24 et 7j/7, incluant Bruxelles, la Wallonie et la Flandre.",
                     },
                   },
                   {

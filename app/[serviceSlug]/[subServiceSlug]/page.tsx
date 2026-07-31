@@ -80,11 +80,11 @@ export default async function SubServicePage({
 
   // Generate a long programmatic text for SEO Clusters
   const paragraphs = [
-    `Lorsqu'il s'agit de <strong>${subServiceInfo.title.toLowerCase()}</strong>, faire appel à des professionnels qualifiés est indispensable. Chez DEB PRO SERVICES, nous avons développé une expertise unique en Belgique concernant la catégorie ${serviceInfo.title.toLowerCase()}. Nos équipes interviennent de jour comme de nuit, dimanches et jours fériés inclus pour assurer un dépannage rapide et efficace.`,
+    `Lorsqu'il s'agit de <strong>${subServiceInfo.title.toLowerCase()}</strong>, faire appel à des professionnels qualifiés est indispensable. Chez PRO SERVICES, nous avons développé une expertise unique en Belgique concernant la catégorie ${serviceInfo.title.toLowerCase()}. Nos équipes interviennent de jour comme de nuit, dimanches et jours fériés inclus pour assurer un dépannage rapide et efficace.`,
 
     `Le service de <em>${subServiceInfo.title.toLowerCase()}</em> demande un savoir-faire spécifique et un matériel adapté. Nos techniciens certifiés se déplacent chez vous avec des véhicules utilitaires complètement équipés, permettant de résoudre 95% des pannes dès la première visite. ${subServiceInfo.desc}`,
 
-    `N'attendez pas que la situation se dégrade. Les problèmes liés à la ${serviceInfo.title.toLowerCase()} peuvent engendrer des dégâts collatéraux importants (inondations, courts-circuits, risques pour la santé). En choisissant DEB PRO SERVICES pour votre besoin en ${subServiceInfo.title.toLowerCase()}, vous bénéficiez d'une garantie d'un an sur nos interventions, d'une transparence tatale sur nos prix avec devis gratuit avant travaux, et d'un professionnalisme reconnu par plus de 5000 clients satisfaits.`,
+    `N'attendez pas que la situation se dégrade. Les problèmes liés à la ${serviceInfo.title.toLowerCase()} peuvent engendrer des dégâts collatéraux importants (inondations, courts-circuits, risques pour la santé). En choisissant PRO SERVICES pour votre besoin en ${subServiceInfo.title.toLowerCase()}, vous bénéficiez d'une garantie d'un an sur nos interventions, d'une transparence tatale sur nos prix avec devis gratuit avant travaux, et d'un professionnalisme reconnu par plus de 5000 clients satisfaits.`,
 
     `Nous couvrons l'ensemble du territoire belge (Bruxelles, Wallonie, et la périphérie flamande). Dès réception de votre appel, un dispatcheur analyse votre urgence en <strong>${subServiceInfo.title.toLowerCase()}</strong> et envoie le technicien le plus proche de votre code postal. L'intervention est tracée, sécurisée, et respecte rigoureusement les normes belges en vigueur.`,
   ];
@@ -106,16 +106,16 @@ export default async function SubServicePage({
               {
                 "@type": "Article",
                 "@id": `https://debservices.canalrose.be/${serviceInfo.slug}/${subServiceInfo.slug}#article`,
-                headline: `Pourquoi choisir DEB PRO SERVICES pour votre ${subServiceInfo.title} en Belgique ?`,
+                headline: `Pourquoi choisir PRO SERVICES pour votre ${subServiceInfo.title} en Belgique ?`,
                 description: subServiceInfo.desc,
                 author: {
                   "@type": "Organization",
-                  name: "Deb Pro Service",
+                  name: "Pro Service",
                   url: "https://debservices.canalrose.be",
                 },
                 publisher: {
                   "@type": "Organization",
-                  name: "Deb Pro Service",
+                  name: "Pro Service",
                   url: "https://debservices.canalrose.be",
                 },
                 mainEntityOfPage: {
@@ -141,7 +141,7 @@ export default async function SubServicePage({
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "Deb Pro Service",
+                name: "Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
@@ -214,7 +214,7 @@ export default async function SubServicePage({
         <div className="absolute inset-0 -z-10">
           <Image
             src={(subServiceInfo as any).imageUrl || serviceInfo.imageUrl}
-            alt={`DEB PRO SERVICES - ${subServiceInfo.title}`}
+            alt={`PRO SERVICES - ${subServiceInfo.title}`}
             fill
             priority
             className="object-cover object-center"
@@ -325,7 +325,7 @@ export default async function SubServicePage({
 
               <div className="prose prose-xl prose-invert text-white max-w-none">
                 <p className="text-2xl font-medium text-blue-200 mb-8 leading-relaxed">
-                  DEB PRO SERVICES est votre partenaire de confiance en Belgique
+                  PRO SERVICES est votre partenaire de confiance en Belgique
                   pour tout besoin lié à la{" "}
                   <strong>{subServiceInfo.title.toLowerCase()}</strong>. Nous
                   combinons rapidité d'intervention et excellence technique.

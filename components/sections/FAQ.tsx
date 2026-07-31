@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqsFR = [
   {
-    question: "Quels sont les services proposés par DEB PRO SERVICES ?",
+    question: "Quels sont les services proposés par PRO SERVICES ?",
     answer:
       "Nous sommes une entreprise multiservice intervenant dans toute la Belgique. Nos experts couvrent : le débouchage de canalisations, la plomberie générale, le chauffage (gaz et mazout), l'électricité, la climatisation, et la vidange de fosse septique. Nous réalisons également des rénovations complètes.",
   },
@@ -24,7 +24,7 @@ const faqsFR = [
   {
     question: "Intervenez-vous la nuit, le week-end et les jours fériés ?",
     answer:
-      "Absolument. DEB PRO SERVICES dispose d'équipes de garde disponibles de jour comme de nuit, y compris les week-ends et tous les jours fériés pour assurer votre confort et votre sécurité.",
+      "Absolument. PRO SERVICES dispose d'équipes de garde disponibles de jour comme de nuit, y compris les week-ends et tous les jours fériés pour assurer votre confort et votre sécurité.",
   },
   {
     question: "Vos techniciens sont-ils agréés ?",
@@ -35,7 +35,7 @@ const faqsFR = [
 
 const faqsNL = [
   {
-    question: "Welke diensten biedt DEB PRO SERVICES aan?",
+    question: "Welke diensten biedt PRO SERVICES aan?",
     answer:
       "Wij zijn een multidisciplinair bedrijf actief in heel België. Onze experts zijn gespecialiseerd in: ontstopping van leidingen, algemene loodgieterij, verwarming (gas en stookolie), elektriciteit, airconditioning, en het ledigen van septic tanks. We voeren ook volledige renovaties uit.",
   },
@@ -52,7 +52,7 @@ const faqsNL = [
   {
     question: "Werken jullie ook 's nachts, in het weekend en op feestdagen?",
     answer:
-      "Absoluut. DEB PRO SERVICES heeft wachtdiensten die dag en nacht beschikbaar zijn, inclusief in het weekend en op feestdagen, om uw comfort en veiligheid te garanderen.",
+      "Absoluut. PRO SERVICES heeft wachtdiensten die dag en nacht beschikbaar zijn, inclusief in het weekend en op feestdagen, om uw comfort en veiligheid te garanderen.",
   },
   {
     question: "Zijn jullie technici gecertificeerd?",

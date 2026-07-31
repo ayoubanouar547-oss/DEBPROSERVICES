@@ -30,7 +30,7 @@ export default function ZonesDeServicesPage() {
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "Deb Pro Service",
+                name: "Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 aggregateRating: {
                   "@type": "AggregateRating",

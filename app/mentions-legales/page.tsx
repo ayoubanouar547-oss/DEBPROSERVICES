@@ -26,7 +26,7 @@ export default function MentionsLegalesPage() {
 
         <h2 className="text-white">1. Informations sur l'entreprise</h2>
         <p>
-          <strong>Nom de la société :</strong> DEB PRO SERVICES
+          <strong>Nom de la société :</strong> PRO SERVICES
           <br />
           <strong>Forme juridique :</strong> SRL (Société à Responsabilité Limitée)
           <br />
@@ -50,7 +50,7 @@ export default function MentionsLegalesPage() {
 
         <h2 className="text-white">3. Responsabilité</h2>
         <p>
-          DEB PRO SERVICES s'efforce d'assurer au mieux la mise à jour des
+          PRO SERVICES s'efforce d'assurer au mieux la mise à jour des
           informations diffusées sur ce site, dont elle se réserve le droit de
           corriger le contenu à tout moment et sans préavis. Les devis et
           estimations fournis en ligne sont donnés à titre indicatif et ne

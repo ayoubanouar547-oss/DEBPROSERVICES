@@ -395,7 +395,7 @@ export async function POST(req: NextRequest) {
         const ai = getGeminiClient();
         if (ai) {
           try {
-            const systemInstruction = `Tu es Sofia, l'assistante virtuelle de DEB PRO SERVICES (Spécialiste Débouchage, Plomberie, Chauffage, Vidange, Électricité, Gaz, Climatisation en Belgique).
+            const systemInstruction = `Tu es Sofia, l'assistante virtuelle de PRO SERVICES (Spécialiste Débouchage, Plomberie, Chauffage, Vidange, Électricité, Gaz, Climatisation en Belgique).
 
 REGLES ABSOLUES DE CONVERSATION :
 1. LANGUE ET STYLE CLAIR (AUCUN MELANGE DE LANGUES) :
@@ -495,7 +495,7 @@ REGLES ABSOLUES DE CONVERSATION :
           } else {
             responseText = isFollowUp 
               ? "Ik begrijp het niet helemaal. Kunt u meer details geven over uw probleem of uw telefoonnummer achterlaten?"
-              : "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?";
+              : "Hallo! Ik ben Sofia, de assistente van PRO SERVICES. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?";
           }
         } else {
           if (
@@ -579,12 +579,12 @@ REGLES ABSOLUES DE CONVERSATION :
             lower.includes("goedendag")
           ) {
             responseText = isDutch
-              ? "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Hoe kan ik u vandaag helpen?"
-              : `Salut ! Je suis Sofia, l'assistante virtuelle de DEB PRO SERVICES. Comment puis-je vous aider aujourd'hui ?`;
+              ? "Hallo! Ik ben Sofia, de assistente van PRO SERVICES. Hoe kan ik u vandaag helpen?"
+              : `Salut ! Je suis Sofia, l'assistante virtuelle de PRO SERVICES. Comment puis-je vous aider aujourd'hui ?`;
           } else if (lower.includes("bonsoir") || lower.includes("goedenavond")) {
             responseText = isDutch
-              ? "Goedenavond! Ik ben Sofia van DEB PRO SERVICES. Waarmee kan ik u helpen?"
-              : `Bonsoir ! Je suis Sofia de DEB PRO SERVICES. Comment puis-je vous aider ?`;
+              ? "Goedenavond! Ik ben Sofia van PRO SERVICES. Waarmee kan ik u helpen?"
+              : `Bonsoir ! Je suis Sofia de PRO SERVICES. Comment puis-je vous aider ?`;
           } else if (
             lower.includes("salam") ||
             lower.includes("labas") ||
@@ -596,11 +596,11 @@ REGLES ABSOLUES DE CONVERSATION :
             if (isDutch) {
               responseText = isFollowUp 
                 ? "Ik begrijp het niet helemaal. Kunt u meer details geven over uw probleem of uw telefoonnummer achterlaten?"
-                : "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?";
+                : "Hallo! Ik ben Sofia, de assistente van PRO SERVICES. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?";
             } else {
               responseText = isFollowUp 
                 ? "Je ne suis pas sûre d'avoir bien compris. Pouvez-vous me donner plus de détails sur votre problème ou me laisser votre numéro de téléphone ?"
-                : `Bonjour ! Je suis Sofia de DEB PRO SERVICES. Je suis à votre disposition pour toute demande de dépannage, plomberie, chauffage, électricité ou vidange en Belgique.`;
+                : `Bonjour ! Je suis Sofia de PRO SERVICES. Je suis à votre disposition pour toute demande de dépannage, plomberie, chauffage, électricité ou vidange en Belgique.`;
             }
           }
         }

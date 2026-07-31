@@ -77,8 +77,8 @@ export default function ChatBot() {
       role: "assistant",
       content:
         pathname && pathname.startsWith("/nl")
-          ? "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen?"
-          : "Salut ! Je suis Sofia l'assistant de deb pro services, Comment puis-je vous aider aujourd'hui",
+          ? "Hallo! Ik ben Sofia, de assistente van PRO SERVICES. Waarmee kan ik u vandaag helpen?"
+          : "Salut ! Je suis Sofia l'assistant de pro services, Comment puis-je vous aider aujourd'hui",
       timestamp: new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" }),
     },
   ]);
@@ -90,8 +90,8 @@ export default function ChatBot() {
           id: "welcome-1",
           role: "assistant",
           content: isNl
-            ? "Hallo! Ik ben Sofia, de assistente van DEB PRO SERVICES. Waarmee kan ik u vandaag helpen?"
-            : "Salut ! Je suis Sofia l'assistant de deb pro services, Comment puis-je vous aider aujourd'hui",
+            ? "Hallo! Ik ben Sofia, de assistente van PRO SERVICES. Waarmee kan ik u vandaag helpen?"
+            : "Salut ! Je suis Sofia l'assistant de pro services, Comment puis-je vous aider aujourd'hui",
           timestamp: new Date().toLocaleTimeString(isNl ? "nl-NL" : "fr-FR", { hour: "2-digit", minute: "2-digit" }),
         },
       ]);
@@ -896,7 +896,7 @@ function InlineChatForm({
           className="mt-2.5 w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 transition shadow-md"
         >
           <Download className="w-3.5 h-3.5 text-blue-200" />
-          📄 Télécharger Devis PDF (Deb Pro Services)
+          📄 Télécharger Devis PDF (Pro Services)
         </button>
       </div>
     );

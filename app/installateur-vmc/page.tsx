@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Installateur VMC Belgique : Pose, Entretien & Ventilation | Deb Pro",
+  title: "Installateur VMC Belgique : Pose, Entretien & Ventilation | Pro Services",
   description: "Besoin d'un installateur VMC en Belgique ? Nous installons et entretenons vos systèmes de ventilation double flux (système D) et simple flux (système C). Devis Gratuit.",
   alternates: {
     canonical: "/installateur-vmc",
@@ -52,7 +52,7 @@ export default function InstallateurVmcPage() {
                 },
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/installateur-vmc"
                 }
@@ -78,7 +78,7 @@ export default function InstallateurVmcPage() {
         <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
             src="https://debouchageexpress24hh.odoo.com/web/image/4166-17ba685c/Technician_installing_VMC_system_202604301840.jpeg?height=600"
-            alt="Installateur VMC Belgique - Deb Pro Services"
+            alt="Installateur VMC Belgique - Pro Services"
             fill
             priority
             className="object-cover object-center opacity-40 mix-blend-overlay"
@@ -96,7 +96,7 @@ export default function InstallateurVmcPage() {
               Installateur VMC en Belgique : Pose, Entretien & Diagnostic
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-medium">
-              Deb Pro Services est votre entreprise de référence pour l&apos;étude, l&apos;installation et l&apos;entretien complet de systèmes de ventilation mécanique contrôlée (VMC) simple et double flux, partout en Belgique.
+              Pro Services est votre entreprise de référence pour l&apos;étude, l&apos;installation et l&apos;entretien complet de systèmes de ventilation mécanique contrôlée (VMC) simple et double flux, partout en Belgique.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a

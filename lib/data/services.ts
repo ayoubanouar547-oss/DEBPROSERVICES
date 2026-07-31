@@ -11,7 +11,7 @@ export const services = [
     imageUrl:
       "https://debouchageexpress24hh.odoo.com/web/image/4148-835ccca6/regenerated_image_1777316391207.jpg?height=600",
     description:
-      "DEB PRO SERVICES réalise tous vos projets de rénovation de maison et appartement en Belgique. De la rénovation complète à la modernisation de votre salle de bain avec douche italienne, nos techniciens agréés vous garantissent un travail soigné, durable et au meilleur prix.",
+      "PRO SERVICES réalise tous vos projets de rénovation de maison et appartement en Belgique. De la rénovation complète à la modernisation de votre salle de bain avec douche italienne, nos techniciens agréés vous garantissent un travail soigné, durable et au meilleur prix.",
     trustPoints: [
       { title: "Devis Détaillé Gratuit sous 48h", desc: "Visite technique sur site et chiffrage corps par corps sans engagement." },
       { title: "Tous Corps de Métier", desc: "Plomberie, électricité, carrelage, peinture — un seul interlocuteur pour tout le chantier." },
@@ -88,7 +88,7 @@ export const services = [
         question:
           "Est-ce que vous gérez la plomberie et l'électricité lors de la rénovation ?",
         answer:
-          "Oui, DEB PRO SERVICES est une entreprise multiservice. Nous gérons tout de A à Z : plomberie, électricité, carrelage et plafonnage.",
+          "Oui, PRO SERVICES est une entreprise multiservice. Nous gérons tout de A à Z : plomberie, électricité, carrelage et plafonnage.",
       },
     ],
   },
@@ -100,7 +100,7 @@ export const services = [
     imageUrl:
       "https://debouchageexpress24hh.odoo.com/web/image/4146-3c23cecf/regenerated_image_1777316390260%20%284%29.png?height=600",
     description:
-      "Expert en plomberie en Belgique disponible 24h/24. Une fuite d'eau sous votre évier ? Un robinet qui goutte ou une chasse d'eau à réparer ? DEB PRO SERVICES propose des services de plomberie complets : de la recherche de fuite non destructive au remplacement de votre boiler ou chauffe-eau. Nos plombiers agréés vous assurent une intervention rapide et durable au meilleur prix.",
+      "Expert en plomberie en Belgique disponible 24h/24. Une fuite d'eau sous votre évier ? Un robinet qui goutte ou une chasse d'eau à réparer ? PRO SERVICES propose des services de plomberie complets : de la recherche de fuite non destructive au remplacement de votre boiler ou chauffe-eau. Nos plombiers agréés vous assurent une intervention rapide et durable au meilleur prix.",
     trustPoints: [
       { title: "Détection Non Destructive", desc: "Caméras thermiques et détecteurs acoustiques pour localiser les fuites sans casser les murs." },
       { title: "Intervention en 30 min", desc: "Nos plombiers agréés interviennent en moins de 30 minutes partout en Belgique." },
@@ -167,7 +167,7 @@ export const services = [
     imageUrl:
       "https://debouchageexpress24hh.odoo.com/web/image/4126-df5892ca/regenerated_image_1777411808057.png?height=600",
     description:
-      "Débouchage canalisation en Belgique 24h/24. Vous faites face à un WC bouché, un évier qui ne s'écoule plus ou des égouts saturés ? DEB PRO SERVICES intervient rapidement, 7j/7, avec furet électrique et hydrocureur haute pression. Prix transparent : fini les surprises sur le coût d'un débouchage ! Que vous soyez locataire ou propriétaire, nous vous conseillons sur qui doit payer l'intervention.",
+      "Débouchage canalisation en Belgique 24h/24. Vous faites face à un WC bouché, un évier qui ne s'écoule plus ou des égouts saturés ? PRO SERVICES intervient rapidement, 7j/7, avec furet électrique et hydrocureur haute pression. Prix transparent : fini les surprises sur le coût d'un débouchage ! Que vous soyez locataire ou propriétaire, nous vous conseillons sur qui doit payer l'intervention.",
     trustPoints: [
       { title: "Hydrocureur 400 bars", desc: "Notre matériel haute pression dégage les canalisations les plus bouchées sans les endommager." },
       { title: "Caméra Endoscopique HD", desc: "Diagnostic précis par inspection vidéo en temps réel pour cibler l'intervention." },
@@ -532,7 +532,7 @@ export const services = [
     imageUrl:
       "https://debouchageexpress24hh.odoo.com/web/image/4150-691b84a7/regenerated_image_1777316385571.png?height=600",
     description:
-      "Panne de courant totale, court-circuit ou besoin de mise en conformité AREI ? Nos électriciens qualifiés interviennent partout en Belgique pour sécuriser votre installation. Du remplacement du tableau électrique à la pose de nouvelles prises, DEB PRO SERVICES garantit des travaux électriques certifiés et sûrs.",
+      "Panne de courant totale, court-circuit ou besoin de mise en conformité AREI ? Nos électriciens qualifiés interviennent partout en Belgique pour sécuriser votre installation. Du remplacement du tableau électrique à la pose de nouvelles prises, PRO SERVICES garantit des travaux électriques certifiés et sûrs.",
     trustPoints: [
       { title: "Agréés AREI", desc: "Rapport de conformité officiel remis après chaque mise en conformité électrique." },
       { title: "Tableau Électrique en 1 Jour", desc: "Remplacement complet avec remise du schéma unifilaire à jour le même jour." },
@@ -757,7 +757,7 @@ export const services = [
     imageUrl:
       "https://deb-pro-service.odoo.com/web/image/559-23d47a71/Premium_Photovoltaic_Installation_202607182000%20%281%29.jpeg",
     description:
-      "DEB PRO SERVICES installe vos panneaux solaires photovoltaïques et vos batteries physiques de stockage partout en Belgique. Profitez d'une énergie verte, locale, renouvelable et réduisez durablement votre facture d'électricité jusqu'à 80%. Nos installateurs agréés RESCert gèrent votre projet de A à Z : de l'étude de faisabilité technique gratuite à la mise en service certifiée AREI.",
+      "PRO SERVICES installe vos panneaux solaires photovoltaïques et vos batteries physiques de stockage partout en Belgique. Profitez d'une énergie verte, locale, renouvelable et réduisez durablement votre facture d'électricité jusqu'à 80%. Nos installateurs agréés RESCert gèrent votre projet de A à Z : de l'étude de faisabilité technique gratuite à la mise en service certifiée AREI.",
     trustPoints: [
       { title: "Étude Gratuite & Sizing", desc: "Analyse sur site de votre toiture (pente, ombrage, orientation) pour optimiser votre production annuelle de kWh." },
       { title: "Certifiés RESCert & AREI", desc: "Installateurs certifiés officiels pour vous garantir l'accès aux primes régionales et une conformité électrique absolue." },
@@ -842,7 +842,7 @@ export const services = [
     imageUrl:
       "https://deb-pro-service.odoo.com/web/image/589-99bea1ad/Roofing_Work%2C_Repair_%26_Renovation_202607181958.jpeg",
     description:
-      "DEB PRO SERVICES prend en charge tous vos travaux de toiture partout en Belgique : réparation urgente de fuites de toit, rénovation complète, isolation thermique de toitures plates ou inclinées, et nettoyage & démoussage professionnel. Nos couvreurs agréés interviennent rapidement avec des matériaux de premier choix garantis pour protéger votre habitat.",
+      "PRO SERVICES prend en charge tous vos travaux de toiture partout en Belgique : réparation urgente de fuites de toit, rénovation complète, isolation thermique de toitures plates ou inclinées, et nettoyage & démoussage professionnel. Nos couvreurs agréés interviennent rapidement avec des matériaux de premier choix garantis pour protéger votre habitat.",
     trustPoints: [
       { title: "Couvreurs Agréés Qualifiés", desc: "Une équipe d'artisans couvreurs qualifiés pour tous types de couvertures (ardoises, tuiles, zinc, EPDM)." },
       { title: "Dépannage Fuite Toit 24h/7", desc: "Bâclage d'urgence suite à une tempête ou une infiltration d'eau de pluie pour stopper immédiatement les dégâts des eaux." },
@@ -934,7 +934,7 @@ export const services = [
     imageUrl:
       "https://deb-pro-service.odoo.com/web/image/581-9a991fd4/Security_camera_technician_Brussels_202607181843.jpeg",
     description:
-      "DEB PRO SERVICES installe vos caméras de surveillance, systèmes d'alarme et solutions de sécurité partout en Belgique. Sécurisez votre maison, commerce ou entreprise avec notre matériel haute définition (IP, Wi-Fi, vision nocturne, détection intelligente). Nos installateurs experts conçoivent des systèmes sur mesure connectés à votre smartphone pour une surveillance en temps réel 24h/24.",
+      "PRO SERVICES installe vos caméras de surveillance, systèmes d'alarme et solutions de sécurité partout en Belgique. Sécurisez votre maison, commerce ou entreprise avec notre matériel haute définition (IP, Wi-Fi, vision nocturne, détection intelligente). Nos installateurs experts conçoivent des systèmes sur mesure connectés à votre smartphone pour une surveillance en temps réel 24h/24.",
     trustPoints: [
       { title: "Étude de Sécurité Offerte", desc: "Analyse complète des points vulnérables de votre bâtiment pour un placement optimal des caméras." },
       { title: "Matériel HD & Vision Nocturne", desc: "Équipement haut de gamme (HIKVISION, Dahua) avec vision nocturne infrarouge et détection humaine intelligente." },
@@ -1019,7 +1019,7 @@ export const services = [
     imageUrl:
       "https://deb-pro-service.odoo.com/web/image/572-12f2e710/Construction_%26_Ma%C3%A7onnerie_Belgique_202607181959%20%281%29.jpeg",
     description:
-      "DEB PRO SERVICES réalise tous vos travaux de gros œuvre, maçonnerie générale, extensions de maison et aménagements en Belgique. Qu'il s'agisse de couler une dalle de béton armé, d'ouvrir un mur porteur avec pose d'IPN, ou de réaliser une extension clé sur porte, nos maçons qualifiés et certifiés vous garantissent une solidité structurelle à toute épreuve, le tout couvert par une garantie décennale obligatoire.",
+      "PRO SERVICES réalise tous vos travaux de gros œuvre, maçonnerie générale, extensions de maison et aménagements en Belgique. Qu'il s'agisse de couler une dalle de béton armé, d'ouvrir un mur porteur avec pose d'IPN, ou de réaliser une extension clé sur porte, nos maçons qualifiés et certifiés vous garantissent une solidité structurelle à toute épreuve, le tout couvert par une garantie décennale obligatoire.",
     trustPoints: [
       { title: "Garantie Décennale Certifiée", desc: "Tous nos chantiers de gros œuvre et de maçonnerie sont couverts par une assurance décennale de 10 ans." },
       { title: "Calcul de Stabilité d'Ingénieur", desc: "Pour les ouvertures de murs porteurs, nous travaillons avec un bureau d'étude pour garantir la sécurité absolue." },
@@ -1096,7 +1096,7 @@ export const services = [
       glow: "bg-amber-500",
     },
     testimonial: {
-      text: "Nous avons fait ouvrir le mur porteur entre notre cuisine et le salon avec DEB PRO SERVICES. Le travail a été fait en 2 jours, calcul d'ingénieur respecté et étayage impeccable. Un grand professionnalisme !",
+      text: "Nous avons fait ouvrir le mur porteur entre notre cuisine et le salon avec PRO SERVICES. Le travail a été fait en 2 jours, calcul d'ingénieur respecté et étayage impeccable. Un grand professionnalisme !",
       author: "Laurent D., Waterloo",
     },
     faqs: [
@@ -1130,7 +1130,7 @@ export const services = [
     imageUrl:
       "https://deb-pro-service.odoo.com/web/image/546-d82eb670/Window_Cleaning_Company_Belgium_202607182007.jpeg",
     description:
-      "DEB PRO SERVICES propose des services de nettoyage de vitres professionnels pour particuliers et professionnels partout en Belgique. Qu'il s'agisse de vitres d'habitations, de vitrines de magasins, de vérandas ou de châssis complexes, nos laveurs de vitres qualifiés vous garantissent une propreté éclatante et sans traces.",
+      "PRO SERVICES propose des services de nettoyage de vitres professionnels pour particuliers et professionnels partout en Belgique. Qu'il s'agisse de vitres d'habitations, de vitrines de magasins, de vérandas ou de châssis complexes, nos laveurs de vitres qualifiés vous garantissent une propreté éclatante et sans traces.",
     trustPoints: [
       { title: "Finition Zéro Trace", desc: "Nos techniques avancées et raclettes professionnelles garantissent une transparence et une brillance parfaites sans aucune trace." },
       { title: "Équipement Travaux en Hauteur", desc: "Perches télescopiques à eau pure et nacelles élévatrices pour atteindre les vitrages les plus hauts en toute sécurité." },
@@ -1220,7 +1220,7 @@ export const services = [
       {
         question: "Est-ce que le nettoyage des châssis et rebords de fenêtres est inclus ?",
         answer:
-          "Oui, chez DEB PRO SERVICES, nous considérons que le nettoyage des châssis, profilés d'encadrement et rebords de fenêtres est indissociable d'un bon lavage de vitres. C'est pourquoi nous l'incluons systématiquement dans nos forfaits standards.",
+          "Oui, chez PRO SERVICES, nous considérons que le nettoyage des châssis, profilés d'encadrement et rebords de fenêtres est indissociable d'un bon lavage de vitres. C'est pourquoi nous l'incluons systématiquement dans nos forfaits standards.",
       },
       {
         question: "Qu'est-ce que la technique de nettoyage à l'eau pure ?",
@@ -1242,7 +1242,7 @@ export const services = [
     imageUrl:
       "https://deb-pro-service.odoo.com/web/image/557-e35aedbc/Gardener_Tree_Pruning_Belgium_202607182003%20%281%29.jpeg",
     description:
-      "DEB PRO SERVICES propose des services complets d'entretien de jardin, d'élagage, d'abattage d'arbres complexes et d'aménagement paysager en Belgique. Que vous soyez un particulier souhaitant entretenir ses espaces verts ou un professionnel cherchant à valoriser les abords de son entreprise, nos jardiniers paysagistes certifiés vous garantissent des prestations soignées et respectueuses de la nature.",
+      "PRO SERVICES propose des services complets d'entretien de jardin, d'élagage, d'abattage d'arbres complexes et d'aménagement paysager en Belgique. Que vous soyez un particulier souhaitant entretenir ses espaces verts ou un professionnel cherchant à valoriser les abords de son entreprise, nos jardiniers paysagistes certifiés vous garantissent des prestations soignées et respectueuses de la nature.",
     trustPoints: [
       { title: "Jardiniers Paysagistes Agréés", desc: "Une équipe d'artisans qualifiés, formés aux techniques horticoles et de grimpe pour un élagage en toute sécurité." },
       { title: "Élagage & Abattage Sécurisé", desc: "Nous maîtrisons les techniques d'abattage par démontage dans les espaces restreints avec assurance RC professionnelle." },
@@ -1320,7 +1320,7 @@ export const services = [
       glow: "bg-emerald-500",
     },
     testimonial: {
-      text: "Nous avons confié l'élagage de deux chênes centenaires très proches de notre toiture à DEB PRO SERVICES. Équipe ultra-équipée, travail de grimpe impressionnant et sécurité totale. Le jardin a été rendu extrêmement propre !",
+      text: "Nous avons confié l'élagage de deux chênes centenaires très proches de notre toiture à PRO SERVICES. Équipe ultra-équipée, travail de grimpe impressionnant et sécurité totale. Le jardin a été rendu extrêmement propre !",
       author: "Jean-Pierre V., Brabant Wallon",
     },
     faqs: [
@@ -1332,7 +1332,7 @@ export const services = [
       {
         question: "Avez-vous une assurance en cas de dégâts lors d'un abattage ?",
         answer:
-          "Oui, absolument. DEB PRO SERVICES dispose d'une assurance Responsabilité Civile (RC) professionnelle couvrant l'ensemble de nos activités d'élagage et d'abattage d'arbres. En cas d'incident ou de dommages matériels sur votre propriété ou celle d'un voisin, vous êtes entièrement protégé.",
+          "Oui, absolument. PRO SERVICES dispose d'une assurance Responsabilité Civile (RC) professionnelle couvrant l'ensemble de nos activités d'élagage et d'abattage d'arbres. En cas d'incident ou de dommages matériels sur votre propriété ou celle d'un voisin, vous êtes entièrement protégé.",
       },
       {
         question: "Faut-il un permis pour abattre un arbre en Belgique ?",

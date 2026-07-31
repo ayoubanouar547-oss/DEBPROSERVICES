@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Chauffagiste Grimbergen : Dépannage Chaudière & Entretien | Deb Pro",
+  title: "Chauffagiste Grimbergen : Dépannage Chaudière & Entretien | Pro Services",
   description: "Dépannage chaudière d'urgence à Grimbergen, Strombeek-Bever & environs. Chauffagiste agréé pour entretien annuel, réparation de radiateur et fuite de gaz. Devis gratuit.",
   alternates: {
     canonical: "/chauffagiste-grimbergen",
@@ -52,7 +52,7 @@ export default function ChauffagisteGrimbergenPage() {
                 },
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/chauffagiste-grimbergen"
                 }
@@ -78,7 +78,7 @@ export default function ChauffagisteGrimbergenPage() {
         <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
             src="https://debouchageexpress24hh.odoo.com/web/image/4149-39dd8a88/regenerated_image_1777315741847.png?height=600"
-            alt="Chauffagiste Grimbergen - Deb Pro Services"
+            alt="Chauffagiste Grimbergen - Pro Services"
             fill
             priority
             className="object-cover object-center opacity-40 mix-blend-overlay"

@@ -241,7 +241,7 @@ export default async function NlUnifiedZonePage({
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "Deb Pro Service",
+                name: "Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 url: "https://debservices.canalrose.be",
                 telephone: "+32496325733",
@@ -271,7 +271,7 @@ export default async function NlUnifiedZonePage({
         <div className="absolute inset-0 -z-10">
           <Image
             src={heroImg}
-            alt={`DEB PRO SERVICES - ${titleToUse} ${activeCity.name}`}
+            alt={`PRO SERVICES - ${titleToUse} ${activeCity.name}`}
             fill
             priority
             className="object-cover object-center"

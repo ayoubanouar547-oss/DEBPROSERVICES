@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Débouchage Grimbergen : WC, Évier & Égout Bouché | Deb Pro",
+  title: "Débouchage Grimbergen : WC, Évier & Égout Bouché | Pro Services",
   description: "Canalisation bouchée ou refoulement d'égout à Grimbergen, Strombeek-Bever & environs ? Nos techniciens interviennent d'urgence 24h/24 en 30 min. Devis gratuit.",
   alternates: {
     canonical: "/debouchage-grimbergen",
@@ -54,7 +54,7 @@ export default function DebouchageGrimbergenPage() {
                 ],
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/debouchage-grimbergen"
                 }
@@ -80,7 +80,7 @@ export default function DebouchageGrimbergenPage() {
         <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
             src="https://debouchageexpress24hh.odoo.com/web/image/4126-df5892ca/regenerated_image_1777411808057.png?height=600"
-            alt="Débouchage Grimbergen - Deb Pro Services"
+            alt="Débouchage Grimbergen - Pro Services"
             fill
             priority
             className="object-cover object-center opacity-40 mix-blend-overlay"

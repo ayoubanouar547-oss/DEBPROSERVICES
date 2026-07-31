@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Recherche de Fuite Bruxelles | Détection Sans Casse | Deb Pro",
-  description: "Fuite d'eau invisible à Bruxelles ? Deb Pro Services intervient pour la détection non destructive. Murs humides, compteur qui tourne. 0465 99 60 76.",
+  title: "Recherche de Fuite Bruxelles | Détection Sans Casse | Pro Services",
+  description: "Fuite d'eau invisible à Bruxelles ? Pro Services intervient pour la détection non destructive. Murs humides, compteur qui tourne. 0465 99 60 76.",
   alternates: {
     canonical: "/recherche-de-fuite-bruxelles",
   },
@@ -52,7 +52,7 @@ export default function RechercheFuiteBruxellesPage() {
                 },
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/recherche-de-fuite-bruxelles"
                 }
@@ -95,7 +95,7 @@ export default function RechercheFuiteBruxellesPage() {
               Recherche de Fuite d'Eau à Bruxelles : Détection Sans Casse
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light">
-              Face à une infiltration d'eau ou un compteur qui tourne anormalement, une intervention précise est cruciale. Les bâtiments bruxellois nécessitent une approche ciblée pour localiser le sinistre sans détruire vos murs. Deb Pro Services mobilise des techniciens équipés de technologies thermiques et acoustiques sur toute la capitale.
+              Face à une infiltration d'eau ou un compteur qui tourne anormalement, une intervention précise est cruciale. Les bâtiments bruxellois nécessitent une approche ciblée pour localiser le sinistre sans détruire vos murs. Pro Services mobilise des techniciens équipés de technologies thermiques et acoustiques sur toute la capitale.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
@@ -232,7 +232,7 @@ export default function RechercheFuiteBruxellesPage() {
             <li><Link href="/chauffage" className="underline hover:text-cyan-600">Dépannage sur chaudière (Page Chauffage)</Link></li>
             <li><Link href="/debouchage-canalisation" className="underline hover:text-cyan-600">Débouchage à Bruxelles (Service local)</Link></li>
             <li><Link href="/devis" className="underline hover:text-cyan-600">Devis et Tarification Intervention (Formulaire)</Link></li>
-            <li><Link href="/" className="underline hover:text-cyan-600">Deb Pro Services Belgique (Accueil)</Link></li>
+            <li><Link href="/" className="underline hover:text-cyan-600">Pro Services Belgique (Accueil)</Link></li>
           </ul>
         </div>
       </section>

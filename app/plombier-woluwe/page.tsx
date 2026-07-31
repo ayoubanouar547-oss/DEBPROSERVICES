@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Plombier Woluwe-Saint-Pierre & Woluwe-Saint-Lambert | Deb Pro",
-  description: "Urgence plomberie à Woluwe-Saint-Pierre et Woluwe-Saint-Lambert ? Deb Pro Services intervient en 30 min pour fuite d'eau, débouchage urgent et sanitaire. Devis gratuit.",
+  title: "Plombier Woluwe-Saint-Pierre & Woluwe-Saint-Lambert | Pro Services",
+  description: "Urgence plomberie à Woluwe-Saint-Pierre et Woluwe-Saint-Lambert ? Pro Services intervient en 30 min pour fuite d'eau, débouchage urgent et sanitaire. Devis gratuit.",
   alternates: {
     canonical: "/plombier-woluwe",
   },
@@ -58,7 +58,7 @@ export default function PlombierWoluwePage() {
                 ],
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/plombier-woluwe"
                 }
@@ -84,7 +84,7 @@ export default function PlombierWoluwePage() {
         <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
             src="https://debouchageexpress24hh.odoo.com/web/image/4146-3c23cecf/regenerated_image_1777316390260%20%284%29.png?height=600"
-            alt="Plombier Woluwe - Deb Pro Services"
+            alt="Plombier Woluwe - Pro Services"
             fill
             priority
             className="object-cover object-center opacity-40 mix-blend-overlay"

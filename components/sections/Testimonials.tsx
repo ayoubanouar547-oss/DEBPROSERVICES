@@ -96,7 +96,7 @@ const reviewsReturningFR = [
   {
     name: "Entreprise XYZ",
     city: "Bruxelles",
-    body: "DEB PRO SERVICES gère la maintenance de tous nos locaux commerciaux. Leur réactivité est inégalée sur le marché belge. Des partenaires de confiance.",
+    body: "PRO SERVICES gère la maintenance de tous nos locaux commerciaux. Leur réactivité est inégalée sur le marché belge. Des partenaires de confiance.",
     rating: 5,
     date: "Partenaire VIP",
     image: "https://i.pravatar.cc/150?img=33",
@@ -120,7 +120,7 @@ const reviewsReturningFR = [
   {
     name: "Immo Confort",
     city: "Anvers",
-    body: "Nous sous-traitons nos urgences électriques et sanitaires à DEB PRO SERVICES pour nos 50+ locataires. Zéro plainte client depuis 2 ans.",
+    body: "Nous sous-traitons nos urgences électriques et sanitaires à PRO SERVICES pour nos 50+ locataires. Zéro plainte client depuis 2 ans.",
     rating: 5,
     date: "Partenaire B2B",
     image: "https://i.pravatar.cc/150?img=14",
@@ -139,7 +139,7 @@ const reviewsReturningNL = [
   {
     name: "Bedrijf XYZ",
     city: "Brussel",
-    body: "DEB PRO SERVICES beheert het onderhoud van al onze commerciële panden. Hun reactiesnelheid is ongeëvenaard op de Belgische markt. Betrouwbare partner.",
+    body: "PRO SERVICES beheert het onderhoud van al onze commerciële panden. Hun reactiesnelheid is ongeëvenaard op de Belgische markt. Betrouwbare partner.",
     rating: 5,
     date: "VIP Partner",
     image: "https://i.pravatar.cc/150?img=33",
@@ -163,7 +163,7 @@ const reviewsReturningNL = [
   {
     name: "Immo Confort",
     city: "Antwerpen",
-    body: "Wij besteden onze elektriciteits- en sanitaire noodgevallen voor onze 50+ huurders uit aan DEB PRO SERVICES. Al 2 jaar nul klachten.",
+    body: "Wij besteden onze elektriciteits- en sanitaire noodgevallen voor onze 50+ huurders uit aan PRO SERVICES. Al 2 jaar nul klachten.",
     rating: 5,
     date: "B2B Partner",
     image: "https://i.pravatar.cc/150?img=14",
@@ -235,8 +235,8 @@ export function Testimonials() {
     badge: isNl ? "Premium Toegang" : "Accès Premium",
     title: isNl ? "Onze trouwe klanten bevestigen de kwaliteit" : "Nos clients fidèles confirment notre excellence",
     subtitle: isNl
-      ? "Fijn u weer te zien bij DEB PRO SERVICES! Ontdek wat onze vaste B2B-partners en particuliere klanten van ons vinden."
-      : "Heureux de vous revoir sur DEB PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de nos prestations.",
+      ? "Fijn u weer te zien bij PRO SERVICES! Ontdek wat onze vaste B2B-partners en particuliere klanten van ons vinden."
+      : "Heureux de vous revoir sur PRO SERVICES ! Découvrez ce que nos partenaires de longue date pensent de nos prestations.",
     btnHover: "hover:bg-amber-500/20 hover:text-amber-300 hover:border-amber-500/40",
   };
 

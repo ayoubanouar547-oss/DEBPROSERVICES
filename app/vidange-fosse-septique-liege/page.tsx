@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Vidange Fosse Septique Liège : Curage & Hydrocurage | Deb Pro",
+  title: "Vidange Fosse Septique Liège : Curage & Hydrocurage | Pro Services",
   description: "Fosse septique pleine à Liège ou en Province de Liège ? Nos techniciens interviennent d'urgence 24h/24 pour la vidange et le curage de vos fosses et bacs à graisse. Devis gratuit.",
   alternates: {
     canonical: "/vidange-fosse-septique-liege",
@@ -54,7 +54,7 @@ export default function VidangeFosseSeptiqueLiegePage() {
                 ],
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/vidange-fosse-septique-liege"
                 }
@@ -80,7 +80,7 @@ export default function VidangeFosseSeptiqueLiegePage() {
         <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
             src="https://debouchageexpress24hh.odoo.com/web/image/4147-e633d2dc/regenerated_image_1777316387949%20%283%29.png?height=600"
-            alt="Vidange Fosse Septique Liège - Deb Pro Services"
+            alt="Vidange Fosse Septique Liège - Pro Services"
             fill
             priority
             className="object-cover object-center opacity-40 mix-blend-overlay"
@@ -98,7 +98,7 @@ export default function VidangeFosseSeptiqueLiegePage() {
               Vidange Fosse Septique à Liège : Qualité & Écologie
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-medium">
-              Votre fosse septique déborde ou dégage des relents intolérables ? Deb Pro Services déploie ses camions pompe hydrocureurs à Liège, Seraing, Verviers et Herstal pour des vidanges et des nettoyages complets à des tarifs imbattables.
+              Votre fosse septique déborde ou dégage des relents intolérables ? Pro Services déploie ses camions pompe hydrocureurs à Liège, Seraing, Verviers et Herstal pour des vidanges et des nettoyages complets à des tarifs imbattables.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a

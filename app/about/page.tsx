@@ -31,7 +31,7 @@ export default function AboutPage() {
               {
                 "@type": "LocalBusiness",
                 "@id": "https://debservices.canalrose.be/#organization",
-                name: "Deb Pro Service",
+                name: "Pro Service",
                 image: "https://debservices.canalrose.be/logo.png",
                 aggregateRating: {
                   "@type": "AggregateRating",
@@ -80,7 +80,7 @@ export default function AboutPage() {
               L'Artisanat au service de votre sérénité
             </h1>
             <p className="text-slate-300 text-lg mb-6 leading-relaxed">
-              DEB PRO SERVICES est une entreprise belge spécialisée dans la
+              PRO SERVICES est une entreprise belge spécialisée dans la
               plomberie, le débouchage, le chauffage, le gaz, l'électricité et
               la vidange de fosses septiques. Fondée par des professionnels
               expérimentés, notre équipe intervient dans toute la Belgique avec

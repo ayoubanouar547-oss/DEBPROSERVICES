@@ -39,18 +39,18 @@ export function ServiceSeoText({ serviceTitle, cityName }: ServiceSeoProps) {
       <section className="py-20 bg-slate-900 border-t border-white/10 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 text-slate-300">
           <h2 className="text-3xl font-black text-white mb-8 uppercase tracking-tight">
-            {localizeNl(`Waarom kiezen voor DEB PRO SERVICES voor uw ${serviceTitle} in België ?`)}
+            {localizeNl(`Waarom kiezen voor PRO SERVICES voor uw ${serviceTitle} in België ?`)}
           </h2>
 
           <p className="mb-6 leading-relaxed">
             Als we het hebben over <strong>{serviceTitle.toLowerCase()}</strong> {cityName ? `in ${cityName}` : "op het Belgische grondgebied"}, is reactiesnelheid vaak het allerbelangrijkste criterium.
             {cityName ? (
               <>
-                Of u nu in het centrum van <strong>{cityName}</strong> woont of in de omliggende gemeenten, een loodgieterspanne, een verwarmingsprobleem of een kortsluiting kan niet wachten. Daarom heeft DEB PRO SERVICES een netwerk van vakmensen opgebouwd die 24u/24 klaarstaan voor spoedinterventies in <strong>{cityName}</strong>.
+                Of u nu in het centrum van <strong>{cityName}</strong> woont of in de omliggende gemeenten, een loodgieterspanne, een verwarmingsprobleem of een kortsluiting kan niet wachten. Daarom heeft PRO SERVICES een netwerk van vakmensen opgebouwd die 24u/24 klaarstaan voor spoedinterventies in <strong>{cityName}</strong>.
               </>
             ) : (
               <>
-                Of u nu in Brussel, Antwerpen of Gent bent, een loodgieterspanne of een verstoppingsprobleem kan niet wachten. Daarom heeft DEB PRO SERVICES een netwerk van vakmensen opgebouwd die 24u/24 klaarstaan voor spoedinterventies.
+                Of u nu in Brussel, Antwerpen of Gent bent, een loodgieterspanne of een verstoppingsprobleem kan niet wachten. Daarom heeft PRO SERVICES een netwerk van vakmensen opgebouwd die 24u/24 klaarstaan voor spoedinterventies.
               </>
             )} Onze experts zijn gecertificeerd en respecteren strikt de geldende veiligheidsnormen (AREI voor elektriciteit, CERGA voor gas).
           </p>
@@ -84,7 +84,7 @@ export function ServiceSeoText({ serviceTitle, cityName }: ServiceSeoProps) {
               Dringend een technicus nodig {cityName ? `in ${cityName}` : ""} ?
             </p>
             <p className="mb-6">
-              Wacht niet tot een klein lek een overstroming wordt. Onze dispatchers staan 7 dagen per week voor u klaar, inclusief zon- en feestdagen. Neem nu contact op met DEB PRO SERVICES voor uw gemoedsrust.
+              Wacht niet tot een klein lek een overstroming wordt. Onze dispatchers staan 7 dagen per week voor u klaar, inclusief zon- en feestdagen. Neem nu contact op met PRO SERVICES voor uw gemoedsrust.
             </p>
             <a
               href="tel:0465996076"
@@ -102,18 +102,18 @@ export function ServiceSeoText({ serviceTitle, cityName }: ServiceSeoProps) {
     <section className="py-20 bg-slate-900 border-t border-white/10 overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 text-slate-300">
         <h2 className="text-3xl font-black text-white mb-8 uppercase tracking-tight">
-          {localizeFr(`Pourquoi choisir DEB PRO SERVICES pour votre ${serviceTitle} en Belgique ?`)}
+          {localizeFr(`Pourquoi choisir PRO SERVICES pour votre ${serviceTitle} en Belgique ?`)}
         </h2>
 
         <p className="mb-6 leading-relaxed">
           Lorsqu&apos;on parle de <strong>{serviceTitle.toLowerCase()}</strong> {cityName ? `à ${cityName}` : "sur le territoire belge"}, la réactivité est souvent le critère numéro un.
           {cityName ? (
             <>
-              Que vous habitiez dans le centre de <strong>{cityName}</strong> ou dans les communes limitrophes, une panne de plomberie, un problème de chauffage ou un court-circuit ne peut pas attendre. C’est pour cette raison que DEB PRO SERVICES a structuré un réseau d&apos;artisans capables de se déplacer en urgence 24h/24 à <strong>{cityName}</strong>.
+              Que vous habitiez dans le centre de <strong>{cityName}</strong> ou dans les communes limitrophes, une panne de plomberie, un problème de chauffage ou un court-circuit ne peut pas attendre. C’est pour cette raison que PRO SERVICES a structuré un réseau d&apos;artisans capables de se déplacer en urgence 24h/24 à <strong>{cityName}</strong>.
             </>
           ) : (
             <>
-              Que vous soyez à Bruxelles, en Province de Liège ou dans le Hainaut, une panne de plomberie ou un conduit bouché ne peut pas attendre. C’est pour cette raison que DEB PRO SERVICES a structuré un réseau d&apos;artisans capables de se déplacer en urgence 24h/24.
+              Que vous soyez à Bruxelles, en Province de Liège ou dans le Hainaut, une panne de plomberie ou un conduit bouché ne peut pas attendre. C’est pour cette raison que PRO SERVICES a structuré un réseau d&apos;artisans capables de se déplacer en urgence 24h/24.
             </>
           )} Nos experts sont certifiés et respectent rigoureusement les normes de sécurité en vigueur (AREI pour l&apos;électricité, CERGA pour le gaz).
         </p>
@@ -148,7 +148,7 @@ export function ServiceSeoText({ serviceTitle, cityName }: ServiceSeoProps) {
             Besoin d&apos;un dépannage immédiat {cityName ? `à ${cityName}` : ""} ?
           </p>
           <p className="mb-6">
-            N&apos;attendez pas qu&apos;une petite fuite devienne une inondation. Nos dispatcheurs sont prêts à vous répondre 7j/7, dimanches et jours fériés inclus. Contactez DEB PRO SERVICES dès maintenant pour une sérénité retrouvée.
+            N&apos;attendez pas qu&apos;une petite fuite devienne une inondation. Nos dispatcheurs sont prêts à vous répondre 7j/7, dimanches et jours fériés inclus. Contactez PRO SERVICES dès maintenant pour une sérénité retrouvée.
           </p>
           <a
             href="tel:0465996076"

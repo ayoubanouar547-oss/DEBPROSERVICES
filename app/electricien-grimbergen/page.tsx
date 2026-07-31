@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Électricien Grimbergen : Dépannage Panne & Conformité | Deb Pro",
+  title: "Électricien Grimbergen : Dépannage Panne & Conformité | Pro Services",
   description: "Urgence panne de courant ou mise en conformité électrique AREI à Grimbergen ou Strombeek-Bever ? Électricien agréé disponible 24h/24. Devis gratuit.",
   alternates: {
     canonical: "/electricien-grimbergen",
@@ -52,7 +52,7 @@ export default function ElectricienGrimbergenPage() {
                 },
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/electricien-grimbergen"
                 }
@@ -78,7 +78,7 @@ export default function ElectricienGrimbergenPage() {
         <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
             src="https://debouchageexpress24hh.odoo.com/web/image/4150-691b84a7/regenerated_image_1777316385571.png?height=600"
-            alt="Électricien Grimbergen - Deb Pro Services"
+            alt="Électricien Grimbergen - Pro Services"
             fill
             priority
             className="object-cover object-center opacity-40 mix-blend-overlay"

@@ -19,26 +19,26 @@ export default function Home() {
             "@graph": [
               {
                 "@type": "WebSite",
-                "name": "DEB PRO SERVICES",
+                "name": "PRO SERVICES",
                 "url": "https://debservices.canalrose.be/nl"
               },
               {
                 "@type": "Article",
                 "@id": "https://debservices.canalrose.be/nl#article",
-                "headline": "Waarom is DEB PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij, verwarming, elektriciteit, gas, airco, zonnepanelen & dakbedekking in België?",
-                "description": "DEB PRO SERVICES in België: Gecertificeerd bedrijf voor Ontstopping 24/7, Loodgieterij, Verwarming, Gas CERGA, Elektriciteit AREI, Airco, VMC, Camerabewaking, Zonnepanelen, Septische put, Dakwerken & Renovatie.",
+                "headline": "Waarom is PRO SERVICES het nummer 1 bedrijf voor ontstopping, loodgieterij, verwarming, elektriciteit, gas, airco, zonnepanelen & dakbedekking in België?",
+                "description": "PRO SERVICES in België: Gecertificeerd bedrijf voor Ontstopping 24/7, Loodgieterij, Verwarming, Gas CERGA, Elektriciteit AREI, Airco, VMC, Camerabewaking, Zonnepanelen, Septische put, Dakwerken & Renovatie.",
                 "image": [
                   "https://debservices.canalrose.be/technician.png",
                   "https://debservices.canalrose.be/logo.png"
                 ],
                 "author": {
                   "@type": "Organization",
-                  "name": "DEB PRO SERVICES",
+                  "name": "PRO SERVICES",
                   "url": "https://debservices.canalrose.be"
                 },
                 "publisher": {
                   "@type": "Organization",
-                  "name": "DEB PRO SERVICES",
+                  "name": "PRO SERVICES",
                   "url": "https://debservices.canalrose.be",
                   "logo": {
                     "@type": "ImageObject",
@@ -53,8 +53,8 @@ export default function Home() {
               },
               {
                 "@type": ["HomeAndConstructionBusiness", "LocalBusiness", "EmergencyService", "Plumber", "HVACBusiness", "Electrician", "RoofingContractor"],
-                "name": "DEB PRO SERVICES",
-                "alternateName": ["Debservices", "Deb Pro Service"],
+                "name": "PRO SERVICES",
+                "alternateName": ["Debservices", "Pro Service"],
                 "image": [
                   "https://debservices.canalrose.be/technician.png",
                   "https://debservices.canalrose.be/logo.png"
@@ -104,14 +104,14 @@ export default function Home() {
                   "https://www.facebook.com/debservices",
                   "https://www.instagram.com/debservices"
                 ],
-                "description": "DEB PRO SERVICES is het nummer 1 gecertificeerde bedrijf in België voor 24/7 spoedinterventies: Ontstopping, Loodgieterij, Verwarming, Gas CERGA, Elektriciteit AREI, Airco, VMC, Camerabewaking, Zonnepanelen, Septische put ledigen, Dakwerken & Renovatie.",
+                "description": "PRO SERVICES is het nummer 1 gecertificeerde bedrijf in België voor 24/7 spoedinterventies: Ontstopping, Loodgieterij, Verwarming, Gas CERGA, Elektriciteit AREI, Airco, VMC, Camerabewaking, Zonnepanelen, Septische put ledigen, Dakwerken & Renovatie.",
                 "areaServed": {
                   "@type": "Country",
                   "name": "Belgium"
                 },
                 "hasOfferCatalog": {
                   "@type": "OfferCatalog",
-                  "name": "Alle Diensten DEB PRO SERVICES België",
+                  "name": "Alle Diensten PRO SERVICES België",
                   "itemListElement": [
                     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ontstopping & Leidinginspectie met Camera" } },
                     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Loodgieterij & Lekdetectie" } },
@@ -133,7 +133,7 @@ export default function Home() {
               },
               {
                 "@type": "Product",
-                "name": "DEB PRO SERVICES - Ontstopping, Loodgieterij, Verwarming, Elektriciteit, Gas, Airco & Zonnepanelen België",
+                "name": "PRO SERVICES - Ontstopping, Loodgieterij, Verwarming, Elektriciteit, Gas, Airco & Zonnepanelen België",
                 "description": "Snelle 24/7 spoeddienst in heel België door gecertificeerde technici voor Ontstopping, Loodgieterij, Verwarming, Elektriciteit, Gas, Airco, Zonnepanelen, Septische put & Dakwerken.",
                 "image": [
                   "https://debservices.canalrose.be/technician.png",
@@ -141,7 +141,7 @@ export default function Home() {
                 ],
                 "brand": {
                   "@type": "Brand",
-                  "name": "DEB PRO SERVICES"
+                  "name": "PRO SERVICES"
                 },
                 "aggregateRating": {
                   "@type": "AggregateRating",
@@ -202,7 +202,7 @@ export default function Home() {
                     name: "Wat zijn jullie interventiezones?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text: "DEB PRO SERVICES grijpt in heel België in, 24 uur per dag, 7 dagen per week, inclusief Brussel, Wallonië en Vlaanderen.",
+                      text: "PRO SERVICES grijpt in heel België in, 24 uur per dag, 7 dagen per week, inclusief Brussel, Wallonië en Vlaanderen.",
                     },
                   },
                   {

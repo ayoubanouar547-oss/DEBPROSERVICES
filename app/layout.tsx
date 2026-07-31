@@ -26,15 +26,15 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://debservices.canalrose.be"),
   title: {
     template: "%s",
-    default: "Debservices - DEB PRO SERVICES Belgique 🚀 Plomberie, Chauffage, Électricité, Gaz, Caméras, Solaires & Climatisation 24/7",
+    default: "Debservices - PRO SERVICES Belgique 🚀 Plomberie, Chauffage, Électricité, Gaz, Caméras, Solaires & Climatisation 24/7",
   },
   description:
-    "DEB PRO SERVICES en Belgique : plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture, rénovation, jardinage & vitres. Intervention rapide 24/7.",
+    "PRO SERVICES en Belgique : plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture, rénovation, jardinage & vitres. Intervention rapide 24/7.",
   keywords:
     "plomberie Belgique, électricité Belgique, gaz Belgique, climatisation Belgique, ventilation VMC, caméras de surveillance, panneaux solaires photovoltaïques, débouchage canalisation, chauffage urgence, vidange fosse septique, rénovation maison, toiture, Belgique 24/7",
-  authors: [{ name: "Deb Pro Service" }],
-  creator: "Deb Pro Service",
-  publisher: "Deb Pro Service",
+  authors: [{ name: "Pro Service" }],
+  creator: "Pro Service",
+  publisher: "Pro Service",
   formatDetection: {
     email: false,
     address: true,
@@ -45,17 +45,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "DEB PRO SERVICES Belgique 🚀 Tous vos Services & Dépannages 24h/24",
+      "PRO SERVICES Belgique 🚀 Tous vos Services & Dépannages 24h/24",
     description:
       "Services complets en Belgique 24/7 : Plomberie, Chauffage, Gaz, Électricité, Climatisation, Ventilation, Caméras de surveillance, Panneaux solaires, Vidange fosse septique, Rénovation & Dépannage rapide.",
     url: "https://debservices.canalrose.be",
-    siteName: "Debservices - DEB PRO SERVICES",
+    siteName: "Debservices - PRO SERVICES",
     images: [
       {
         url: "https://picsum.photos/seed/debpro/1200/630",
         width: 1200,
         height: 630,
-        alt: "Deb Pro Service - Plomberie et Débouchage en Belgique",
+        alt: "Pro Service - Plomberie et Débouchage en Belgique",
       },
     ],
     locale: "fr_BE",
@@ -177,7 +177,7 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 "@id": "https://debservices.canalrose.be/#organization",
-                "name": "DEB PRO SERVICES",
+                "name": "PRO SERVICES",
                 "alternateName": "Debservices",
                 "url": "https://debservices.canalrose.be",
                 "logo": {
@@ -203,7 +203,7 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 "@id": "https://debservices.canalrose.be/#website",
-                "name": "DEB PRO SERVICES",
+                "name": "PRO SERVICES",
                 "url": "https://debservices.canalrose.be",
                 "publisher": {
                   "@id": "https://debservices.canalrose.be/#organization"

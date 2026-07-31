@@ -31,7 +31,7 @@ export default function UrgencePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            name: "Deb Pro Service - Spoed 24u/24",
+            name: "Pro Service - Spoed 24u/24",
             image: "https://debservices.canalrose.be/technician.png",
             "@id": "https://debservices.canalrose.be/nl/urgence",
             url: "https://debservices.canalrose.be/nl/urgence",

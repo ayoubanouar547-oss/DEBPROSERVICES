@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Loodgieter Grimbergen : Dringende Herstelling & Ontstopping | Deb Pro",
-  description: "Dringende loodgieter nodig in Grimbergen of Strombeek-Bever? Deb Pro Services is binnen 30 minuten ter plaatse for lekken, sanitair en ontstoppingen. Bel ons!",
+  title: "Loodgieter Grimbergen : Dringende Herstelling & Ontstopping | Pro Services",
+  description: "Dringende loodgieter nodig in Grimbergen of Strombeek-Bever? Pro Services is binnen 30 minuten ter plaatse for lekken, sanitair en ontstoppingen. Bel ons!",
   alternates: {
     canonical: "/loodgieter-grimbergen",
   },
@@ -52,7 +52,7 @@ export default function LoodgieterGrimbergenPage() {
                 },
                 "provider": {
                   "@type": "LocalBusiness",
-                  "name": "Deb Pro Service",
+                  "name": "Pro Service",
                   "telephone": "+32496325733",
                   "url": "https://debservices.canalrose.be/loodgieter-grimbergen"
                 }
@@ -78,7 +78,7 @@ export default function LoodgieterGrimbergenPage() {
         <div className="absolute inset-0 -z-10 bg-[#000814]">
           <Image
             src="https://debouchageexpress24hh.odoo.com/web/image/4146-3c23cecf/regenerated_image_1777316390260%20%284%29.png?height=600"
-            alt="Loodgieter Grimbergen - Deb Pro Services"
+            alt="Loodgieter Grimbergen - Pro Services"
             fill
             priority
             className="object-cover object-center opacity-40 mix-blend-overlay"
@@ -96,7 +96,7 @@ export default function LoodgieterGrimbergenPage() {
               Loodgieter in Grimbergen: Snel & Professioneel
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-medium">
-              Dringende loodgieter nodig met snelle service in Grimbergen, Beigem of Humbeek? Of het nu gaat om een hardnekkig waterlek, een verstopping of de herstelling van uw boiler, Deb Pro Services staat 24/7 klaar om u te helpen.
+              Dringende loodgieter nodig met snelle service in Grimbergen, Beigem of Humbeek? Of het nu gaat om een hardnekkig waterlek, een verstopping of de herstelling van uw boiler, Pro Services staat 24/7 klaar om u te helpen.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
@@ -178,7 +178,7 @@ export default function LoodgieterGrimbergenPage() {
 
             {/* Local Bullets */}
             <div className="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-10 flex flex-col justify-center">
-              <h3 className="text-2xl font-black mb-6 uppercase text-white tracking-tight">Waarom kiezen voor Deb Pro Services?</h3>
+              <h3 className="text-2xl font-black mb-6 uppercase text-white tracking-tight">Waarom kiezen voor Pro Services?</h3>
               <p className="text-slate-300 text-sm mb-8 leading-relaxed font-medium">
                 Onze lokale aanwezigheid in Vlaams-Brabant stelt ons in staat om de allerbeste service te bieden.
               </p>

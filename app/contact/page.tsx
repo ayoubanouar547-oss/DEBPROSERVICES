@@ -31,8 +31,8 @@ export default function ContactPage() {
                 "@type": "ContactPage",
                 "@id": "https://debservices.canalrose.be/contact#webpage",
                 "url": "https://debservices.canalrose.be/contact",
-                "name": "Contactez DEB PRO SERVICES",
-                "description": "Formulaire de contact et coordonnées pour DEB PRO SERVICES en Belgique.",
+                "name": "Contactez PRO SERVICES",
+                "description": "Formulaire de contact et coordonnées pour PRO SERVICES en Belgique.",
                 "breadcrumb": {
                   "@id": "https://debservices.canalrose.be/contact#breadcrumb"
                 },

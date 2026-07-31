@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
 
         <p>
           Conformément au Règlement Général sur la Protection des Données (RGPD)
-          et à la loi belge du 30 juillet 2018, DEB PRO SERVICES s'engage à
+          et à la loi belge du 30 juillet 2018, PRO SERVICES s'engage à
           protéger vos données personnelles. La présente politique de
           confidentialité vous informe sur la collecte, le traitement et la
           conservation de vos données dans le cadre de l'utilisation de notre

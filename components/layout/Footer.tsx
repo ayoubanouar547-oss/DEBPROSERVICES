@@ -34,7 +34,7 @@ export function Footer() {
           <div className="space-y-6 h-card">
             <Link href={isNl ? "/nl" : "/"} className="inline-block u-url p-name p-org">
               <span className="text-2xl font-black tracking-tighter text-white">
-                DEB PRO<span className="text-blue-500">SERVICES</span>
+                PRO<span className="text-blue-500">SERVICES</span>
               </span>
             </Link>
             <p className="text-sm text-slate-100 font-medium opacity-80 p-note">
@@ -161,7 +161,7 @@ export function Footer() {
       {/* Bottom Footer */}
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-bold text-white/60 uppercase tracking-widest">
-          <p>&copy; {currentYear} DEB PRO SERVICES.</p>
+          <p>&copy; {currentYear} PRO SERVICES.</p>
           <div className="flex flex-wrap justify-center items-center gap-6">
             <Link
               href={isNl ? "/nl/mentions-legales" : "/mentions-legales"}

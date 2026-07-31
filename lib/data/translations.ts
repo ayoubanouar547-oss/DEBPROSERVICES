@@ -152,7 +152,7 @@ export const dutchServices: LocalizedService[] = [
     id: "renovation",
     slug: "renovatie",
     title: "Renovatie",
-    description: "DEB PRO SERVICES realiseert al uw renovatieprojecten voor huizen en appartementen in België. Van een totale renovatie tot een moderne inloopdouche in uw badkamer, onze erkende technici garanderen perfect afgewerkt, duurzaam werk tegen de scherpste prijs.",
+    description: "PRO SERVICES realiseert al uw renovatieprojecten voor huizen en appartementen in België. Van een totale renovatie tot een moderne inloopdouche in uw badkamer, onze erkende technici garanderen perfect afgewerkt, duurzaam werk tegen de scherpste prijs.",
     trustPoints: [
       { title: "Gratis Gedetailleerde Offerte binnen 48u", desc: "Technisch plaatsbezoek en transparante prijsopgave per onderdeel zonder verplichtingen." },
       { title: "Alle Vakgebieden", desc: "Loodgieterswerk, elektriciteit, tegelwerk, schilderwerk — één aanspreekpunt voor de hele werf." },
@@ -208,7 +208,7 @@ export const dutchServices: LocalizedService[] = [
       },
       {
         question: "Beheert u zowel loodgieterswerk als elektriciteit tijdens de renovatie?",
-        answer: "Ja, DEB PRO SERVICES is een all-in-one bedrijf. Wij beheren alles van A tot Z: loodgieterswerk, elektriciteit, tegelwerk en pleisterwerk."
+        answer: "Ja, PRO SERVICES is een all-in-one bedrijf. Wij beheren alles van A tot Z: loodgieterswerk, elektriciteit, tegelwerk en pleisterwerk."
       }
     ],
     color: {
@@ -222,7 +222,7 @@ export const dutchServices: LocalizedService[] = [
     id: "plomberie",
     slug: "loodgieter",
     title: "Loodgieter",
-    description: "Ervaren loodgieter in België 24/7 beschikbaar. Een waterlek onder uw gootsteen, een druppelende kraan of een toilet dat hersteld moet worden? DEB PRO SERVICES biedt volledige loodgietersdiensten: van niet-destructieve lekdetectie tot het vervangen van uw boiler. Onze erkende loodgieters garanderen een snelle en duurzame interventie tegen de beste prijs.",
+    description: "Ervaren loodgieter in België 24/7 beschikbaar. Een waterlek onder uw gootsteen, een druppelende kraan of een toilet dat hersteld moet worden? PRO SERVICES biedt volledige loodgietersdiensten: van niet-destructieve lekdetectie tot het vervangen van uw boiler. Onze erkende loodgieters garanderen een snelle en duurzame interventie tegen de beste prijs.",
     trustPoints: [
       { title: "Niet-Destructieve Lekdetectie", desc: "Inzet van warmtebeeldcamera's en akoestische detectoren om lekken op te sporen zonder muren open te breken." },
       { title: "Interventie binnen 30 min", desc: "Onze erkende loodgieters zijn binnen 30 minuten ter plaatse in heel België." },
@@ -277,7 +277,7 @@ export const dutchServices: LocalizedService[] = [
     id: "debouchage",
     slug: "ontstopping",
     title: "Ontstopping",
-    description: "Ontstopping van leidingen en rioleringen in België 24/7. Zit u met een verstopt toilet, een gootsteen die niet meer wegloopt of een overlopende riool? DEB PRO SERVICES grijpt snel in, 7 dagen per week, met elektrische veren en hogedrukreinigers. Transparante prijzen: geen verrassingen achteraf over de kosten van een ontstopping!",
+    description: "Ontstopping van leidingen en rioleringen in België 24/7. Zit u met een verstopt toilet, een gootsteen die niet meer wegloopt of een overlopende riool? PRO SERVICES grijpt snel in, 7 dagen per week, met elektrische veren en hogedrukreinigers. Transparante prijzen: geen verrassingen achteraf over de kosten van een ontstopping!",
     trustPoints: [
       { title: "Hogedrukreiniger 400 bar", desc: "Onze hogedrukapparatuur reinigt de meest hardnekkige verstoppingen zonder leidingen te beschadigen." },
       { title: "HD Endoscopische Camera", desc: "Nauwkeurige diagnose via live video-inspectie om de blokkade direct te lokaliseren." },
@@ -558,7 +558,7 @@ export const dutchServices: LocalizedService[] = [
     id: "electricite",
     slug: "elektriciteit",
     title: "Elektriciteit",
-    description: "Stroompanne, kortsluiting of een AREI-keuringsverslag nodig? Onze gekwalificeerde elektriciens grijpen overal in België in om uw installatie te beveiligen. Van het vervangen van de verdeelkast tot het leggen van nieuwe stopcontacten, DEB PRO SERVICES staat garant voor gecertificeerd en veilig elektrisch werk.",
+    description: "Stroompanne, kortsluiting of een AREI-keuringsverslag nodig? Onze gekwalificeerde elektriciens grijpen overal in België in om uw installatie te beveiligen. Van het vervangen van de verdeelkast tot het leggen van nieuwe stopcontacten, PRO SERVICES staat garant voor gecertificeerd en veilig elektrisch werk.",
     trustPoints: [
       { title: "AREI Goedgekeurd", desc: "Officieel conformiteitsrapport geleverd na elke AREI-aanpassing van uw elektriciteit." },
       { title: "Verdeelkast in 1 Dag", desc: "Volledige vervanging inclusief het opleveren van het eendraadsschema op dezelfde dag." },
@@ -735,7 +735,7 @@ export const dutchServices: LocalizedService[] = [
     id: "panneaux-solaires",
     slug: "zonnepanelen",
     title: "Zonnepanelen",
-    description: "DEB PRO SERVICES installeert uw fotovoltaïsche zonnepanelen en thuisbatterijen overal in België. Profiteer van groene, lokale en hernieuwbare energie en verlaag uw elektriciteitsrekening permanent met tot wel 80%. Onze RESCert-gecertificeerde installateurs regelen uw project van A tot Z.",
+    description: "PRO SERVICES installeert uw fotovoltaïsche zonnepanelen en thuisbatterijen overal in België. Profiteer van groene, lokale en hernieuwbare energie en verlaag uw elektriciteitsrekening permanent met tot wel 80%. Onze RESCert-gecertificeerde installateurs regelen uw project van A tot Z.",
     trustPoints: [
       { title: "Gratis Rendementsstudie", desc: "Analyse ter plaatse van uw dak (hellingshoek, schaduw, oriëntatie) om uw jaarlijkse opbrengst te maximaliseren." },
       { title: "RESCert & AREI Gecertificeerd", desc: "Erkende installateurs om uw recht op premies te garanderen en een absolute elektrische conformiteit te leveren." },
@@ -787,7 +787,7 @@ export const dutchServices: LocalizedService[] = [
     id: "toiture",
     slug: "dakwerken",
     title: "Dakwerken",
-    description: "DEB PRO SERVICES verzorgt al uw dakwerken in heel België: dringende herstelling of daklekken, volledige dakrenovatie, thermische isolatie van platte of schuine daken, en professionele reiniging of ontmossing. Onze ervaren dakdekkers garanderen kwalitatief werk.",
+    description: "PRO SERVICES verzorgt al uw dakwerken in heel België: dringende herstelling of daklekken, volledige dakrenovatie, thermische isolatie van platte of schuine daken, en professionele reiniging of ontmossing. Onze ervaren dakdekkers garanderen kwalitatief werk.",
     trustPoints: [
       { title: "Erkende Dakdekkers", desc: "Een team van gekwalificeerde vakmensen voor alle soorten dakbedekking (pannen, leien, zink, EPDM)." },
       { title: "24/7 Dringende Lekherstelling", desc: "Noodafdichting na storm of bij zware infiltratie om waterschade direct te stoppen." },
@@ -844,7 +844,7 @@ export const dutchServices: LocalizedService[] = [
     id: "camera-surveillance",
     slug: "camerabewaking",
     title: "Camerabewaking",
-    description: "DEB PRO SERVICES installeert uw camerabewaking, alarmsystemen en beveiligingsoplossingen in heel België. Beveilig uw woning, winkel of bedrijf met onze HD-apparatuur (IP, Wi-Fi, nachtzicht, slimme detectie). Live meekijken op uw smartphone 24h/24.",
+    description: "PRO SERVICES installeert uw camerabewaking, alarmsystemen en beveiligingsoplossingen in heel België. Beveilig uw woning, winkel of bedrijf met onze HD-apparatuur (IP, Wi-Fi, nachtzicht, slimme detectie). Live meekijken op uw smartphone 24h/24.",
     trustPoints: [
       { title: "Gratis Beveiligingsstudie", desc: "Volledige analyse van de kwetsbare punten van uw gebouw voor een optimale plaatsing." },
       { title: "HD Apparatuur & Nachtzicht", desc: "High-end camera's (HIKVISION, Dahua) met infrarood nachtzicht en slimme persoonsdetectie." },
@@ -896,7 +896,7 @@ export const dutchServices: LocalizedService[] = [
     id: "construction",
     slug: "bouwwerken",
     title: "Ruwbouw & Metselwerken",
-    description: "DEB PRO SERVICES voert al uw ruwbouwwerken, algemeen metselwerk, uitbouwen van woningen en aanpassingen uit in België. Of het nu gaat om het gieten van een gewapende betonplaat, het openmaken van een dragende muur met een stalen IPN-balk, of een complete aanbouw, onze ervaren metselaars garanderen een ijzersterke stabiliteit.",
+    description: "PRO SERVICES voert al uw ruwbouwwerken, algemeen metselwerk, uitbouwen van woningen en aanpassingen uit in België. Of het nu gaat om het gieten van een gewapende betonplaat, het openmaken van een dragende muur met een stalen IPN-balk, of een complete aanbouw, onze ervaren metselaars garanderen een ijzersterke stabiliteit.",
     trustPoints: [
       { title: "10 Jaar Verzekerde Garantie", desc: "Al onze ruwbouw- en metselwerken zijn gedekt door de verplichte tienjarige BA-verzekering." },
       { title: "Stabiliteitsberekening Ingenieur", desc: "Voor dragende structuren werken wij nauw samen met een stabiliteits bureau voor absolute veiligheid." },
@@ -957,7 +957,7 @@ export const dutchServices: LocalizedService[] = [
     id: "vitres",
     slug: "ruitenwasser",
     title: "Ruitenwasser",
-    description: "DEB PRO SERVICES biedt professionele ruitenwasser-diensten voor particulieren en bedrijven in België. Of het nu gaat om woningen, winkelpuien, veranda's of complexe raampartijen, onze ruitenwassers garanderen een stralend resultaat zonder strepen.",
+    description: "PRO SERVICES biedt professionele ruitenwasser-diensten voor particulieren en bedrijven in België. Of het nu gaat om woningen, winkelpuien, veranda's of complexe raampartijen, onze ruitenwassers garanderen een stralend resultaat zonder strepen.",
     trustPoints: [
       { title: "Streepvrije Afwerking", desc: "Onze ruitenwassers gebruiken professionele technieken en trekkers voor een streeploos glanzend glas." },
       { title: "Hoogte- en Telescoopreiniging", desc: "Inzet van osmose-telescoopstelen en hoogwerkers om ook de hoogste ramen veilig te reinigen." },
@@ -1018,7 +1018,7 @@ export const dutchServices: LocalizedService[] = [
     id: "jardinage",
     slug: "tuinieren",
     title: "Tuinman & Boomverzorging",
-    description: "DEB PRO SERVICES biedt volledige diensten voor tuinonderhoud, snoeien, vellen van bomen en tuinontwerp in België. Of u nu uw gazon wilt laten maaien, hagen snoeien of een gevaarlijke boom veilig wilt laten kappen, onze hoveniers staan voor u klaar.",
+    description: "PRO SERVICES biedt volledige diensten voor tuinonderhoud, snoeien, vellen van bomen en tuinontwerp in België. Of u nu uw gazon wilt laten maaien, hagen snoeien of een gevaarlijke boom veilig wilt laten kappen, onze hoveniers staan voor u klaar.",
     trustPoints: [
       { title: "Erkende Tuiniers & Boomverzorgers", desc: "Gekwalificeerde hoveniers opgeleid in snoeitechnieken en veilig klimmen bij boomverzorging." },
       { title: "Veilig Vellen & Snoeien", desc: "Wij beheersen gecontroleerd afbreken in kleine ruimtes met volledige beroepsaansprakelijkheidsverzekering." },
@@ -1060,7 +1060,7 @@ export const dutchServices: LocalizedService[] = [
       }
     ],
     testimonial: {
-      text: "We hebben het snoeien van twee grote eiken vlak bij ons dak toevertrouwd aan DEB PRO SERVICES. Sensationeel klimwerk en absolute veiligheid. De tuin werd keurig opgeruimd!",
+      text: "We hebben het snoeien van twee grote eiken vlak bij ons dak toevertrouwd aan PRO SERVICES. Sensationeel klimwerk en absolute veiligheid. De tuin werd keurig opgeruimd!",
       author: "Jean-Pierre V., Waals-Brabant"
     },
     faqs: [

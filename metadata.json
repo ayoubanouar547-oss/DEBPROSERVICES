@@ -1,5 +1,5 @@
 {
-  "name": "Deb Pro Service",
+  "name": "Pro Service",
   "description": "Leader du dépannage d'urgence et de la rénovation en Belgique : Plomberie, Débouchage, Chauffage, Gaz, Électricité et Rénovation Maison.",
   "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
