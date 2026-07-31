@@ -87,41 +87,41 @@ export async function generateMetadata({
     };
   }
 
-  let description = `${service.title} in België: erkende technici voor alle dringende interventies. 24h/24 & 7j/7 bereikbaar. Direct gratis offerte via ☎ 0465 99 60 76.`;
+  let description = `${service.title} in België: erkende technici voor alle dringende interventies. 24h/24 & 7j/7 bereikbaar. Direct gratis offerte via ☎ 0498 35 25 88.`;
 
   if (service.slug === "loodgieter") {
     description =
-      "Loodgieter in België spoed 24/7: erkende technici voor lekken, installaties en snelle herstellingen. Gratis offerte. Bel direct ☎ 0465 99 60 76!";
+      "Loodgieter in België spoed 24/7: erkende technici voor lekken, installaties en snelle herstellingen. Gratis offerte. Bel direct ☎ 0498 35 25 88!";
   } else if (service.slug === "ontstopping") {
     description =
-      "Ontstopping van leidingen in België 24/7: expert voor verstopte WC, riolen en gootstenen. Gratis offerte, snelle actie en garantie. Bel ☎ 0465 99 60 76!";
+      "Ontstopping van leidingen in België 24/7: expert voor verstopte WC, riolen en gootstenen. Gratis offerte, snelle actie en garantie. Bel ☎ 0498 35 25 88!";
   } else if (service.slug === "verwarming") {
     description =
-      "Gecertificeerde verwarmingsinstallateur in België: spoedherstelling verwarmingsketel 24/7. Onderhoud en installatie. Gratis offerte ☎ 0465 99 60 76.";
+      "Gecertificeerde verwarmingsinstallateur in België: spoedherstelling verwarmingsketel 24/7. Onderhoud en installatie. Gratis offerte ☎ 0498 35 25 88.";
   } else if (service.slug === "gas") {
     description =
-      "Gecertificeerde CERGA technici voor alle gasinterventies in België. Lekdetectie, conformiteit, aansluiting. Spoed 24/7 ☎ 0465 99 60 76.";
+      "Gecertificeerde CERGA technici voor alle gasinterventies in België. Lekdetectie, conformiteit, aansluiting. Spoed 24/7 ☎ 0498 35 25 88.";
   } else if (service.slug === "elektriciteit") {
     description =
-      "Elektricien in België spoed 24/7: AREI-keuring, zekeringkast vervangen en installatie. Erkende expert, gratis offerte. Bel ☎ 0465 99 60 76.";
+      "Elektricien in België spoed 24/7: AREI-keuring, zekeringkast vervangen en installatie. Erkende expert, gratis offerte. Bel ☎ 0498 35 25 88.";
   } else if (service.slug === "zonnepanelen") {
     description =
-      "Installatie van fotovoltaïsche zonnepanelen en thuisbatterijen in België. Gecertificeerde installateurs, gratis rendementsstudie. Bel ☎ 0465 99 60 76.";
+      "Installatie van fotovoltaïsche zonnepanelen en thuisbatterijen in België. Gecertificeerde installateurs, gratis rendementsstudie. Bel ☎ 0498 35 25 88.";
   } else if (service.slug === "dakwerken") {
     description =
-      "Dakwerken in België: dringende herstelling van daklekken, renovatie en isolatie. Erkende dakdekkers, gratis offerte. Bel ☎ 0465 99 60 76.";
+      "Dakwerken in België: dringende herstelling van daklekken, renovatie en isolatie. Erkende dakdekkers, gratis offerte. Bel ☎ 0498 35 25 88.";
   } else if (service.slug === "camerabewaking") {
     description =
-      "Installatie van camerabewaking en alarmen in België. HD IP-beveiligingssystemen verbonden met uw smartphone. Gratis offerte ☎ 0465 99 60 76.";
+      "Installatie van camerabewaking en alarmen in België. HD IP-beveiligingssystemen verbonden met uw smartphone. Gratis offerte ☎ 0498 35 25 88.";
   } else if (service.slug === "bouwwerken") {
     description =
-      "Aannemer voor ruwbouw- en metselwerken in België. Dragende muren openbreken, IPN-balken, betonplaten. Tienjarige garantie, gratis offerte ☎ 0465 99 60 76.";
+      "Aannemer voor ruwbouw- en metselwerken in België. Dragende muren openbreken, IPN-balken, betonplaten. Tienjarige garantie, gratis offerte ☎ 0498 35 25 88.";
   } else if (service.slug === "ruitenwasser") {
     description =
-      "Professionele ruitenwasser in België. Wassen van ramen, veranda's, winkeletalages voor particulieren en bedrijven. Streeploos resultaat ☎ 0465 99 60 76.";
+      "Professionele ruitenwasser in België. Wassen van ramen, veranda's, winkeletalages voor particulieren en bedrijven. Streeploos resultaat ☎ 0498 35 25 88.";
   } else if (service.slug === "tuinieren") {
     description =
-      "Professionele tuinman in België: tuinonderhoud, snoeien, gevaarlijke bomen vellen en hagen knippen. Gratis offerte ☎ 0465 99 60 76.";
+      "Professionele tuinman in België: tuinonderhoud, snoeien, gevaarlijke bomen vellen en hagen knippen. Gratis offerte ☎ 0498 35 25 88.";
   }
 
   const isSolarService = service.slug === "zonnepanelen";
@@ -441,7 +441,7 @@ export default async function ServicePage({
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="tel:0465996076"
+                  href="tel:0498 35 25 88"
                   className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
                 >
                   <PhoneCall className="w-5 h-5" /> Urgentie {matchedTerm}
@@ -600,10 +600,10 @@ export default async function ServicePage({
               </div>
               <div className="mt-10">
                 <a
-                  href="tel:0465996076"
+                  href="tel:0498 35 25 88"
                   className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-10 py-5 rounded-2xl hover:bg-slate-100 transition shadow-2xl"
                 >
-                  <PhoneCall className="w-6 h-6" /> BEL UW EXPERT: 0465 99 60 76
+                  <PhoneCall className="w-6 h-6" /> BEL UW EXPERT: 0498 35 25 88
                 </a>
               </div>
             </div>

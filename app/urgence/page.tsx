@@ -70,10 +70,10 @@ export default function UrgencePage() {
           </p>
           <div className="flex justify-center">
             <a
-              href="tel:0465996076"
+              href="tel:0498 35 25 88"
               className="flex items-center gap-3 bg-white text-accent hover:bg-gray-100 px-10 py-5 rounded-full font-bold text-2xl md:text-3xl transition shadow-2xl"
             >
-              <PhoneCall className="w-8 h-8" /> 0465 99 60 76
+              <PhoneCall className="w-8 h-8" /> 0498 35 25 88
             </a>
           </div>
         </div>

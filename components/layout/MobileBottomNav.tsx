@@ -15,10 +15,13 @@ export function MobileBottomNav() {
     setIsVisible(true);
   }, []);
 
+  const isHomePage = !pathname || pathname === "/" || pathname === "/nl";
+  const phoneHref = isHomePage ? "tel:0465996076" : "tel:0498352588";
+
   const navItems = [
     { name: "Accueil", icon: Home, href: "/" },
     { name: "Services", icon: ShieldCheck, href: "/#services" },
-    { name: "Appeler", icon: Phone, href: "tel:0465996076", isLarge: true },
+    { name: "Appeler", icon: Phone, href: phoneHref, isLarge: true },
     { name: "Zones", icon: MapPin, href: "/zones-de-services" },
     { name: "Urgence", icon: AlertTriangle, href: "/urgence" },
   ];

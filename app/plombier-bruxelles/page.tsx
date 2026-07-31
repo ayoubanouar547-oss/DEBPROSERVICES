@@ -170,10 +170,10 @@ export default function PlombierBruxellesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="tel:0465996076"
+                href="tel:0498 35 25 88"
                 className="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-blue-600/20"
               >
-                <PhoneCall className="w-5 h-5" /> Urgence Bruxelles : 0465 99 60 76
+                <PhoneCall className="w-5 h-5" /> Urgence Bruxelles : 0498 35 25 88
               </a>
             </div>
           </div>

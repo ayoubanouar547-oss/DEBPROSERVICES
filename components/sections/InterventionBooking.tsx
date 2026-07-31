@@ -540,7 +540,7 @@ export function InterventionBooking() {
                     required
                     value={telephone}
                     onChange={(e) => setTelephone(e.target.value)}
-                    placeholder="0465 99 60 76"
+                    placeholder="04XX XX XX XX"
                     className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-black/30 border border-white/10 text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500"
                   />
                 </div>

@@ -81,7 +81,7 @@ export async function generateMetadata({
   if (subService && cityInfo) {
     const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
     const title = `🚨 Devis Gratuit pour ${subService.title} à ${cityInfo.name} ⚡ Intervention 30 Min`;
-    const description = `Expert en ${subService.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0465 99 60 76`;
+    const description = `Expert en ${subService.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`;
     return {
       title,
       description,
@@ -114,7 +114,7 @@ export async function generateMetadata({
   if (cityInfo) {
     const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
     const title = `🚨 Devis Gratuit pour ${service.title} à ${cityInfo.name} ⚡ Intervention 30 Min`;
-    const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0465 99 60 76`;
+    const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`;
     return {
       title,
       description,
@@ -130,7 +130,7 @@ export async function generateMetadata({
 
   return {
     title: `🚨 ${service.title} Belgique — Intervention Rapide 24/7`,
-    description: `Expert en ${service.title.toLowerCase()} en Belgique. Techniciens agréés. Devis gratuit ☎ 0465 99 60 76`,
+    description: `Expert en ${service.title.toLowerCase()} en Belgique. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`,
     alternates: { canonical: path },
   };
 }
@@ -441,7 +441,7 @@ export default async function UnifiedZonePage({
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
                 <a
-                  href="tel:0465996076"
+                  href="tel:0498 35 25 88"
                   className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
                 >
                   <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
@@ -450,7 +450,7 @@ export default async function UnifiedZonePage({
                       Dépannage Urgent
                     </span>
                     <span className="block text-lg md:text-xl">
-                      0465 99 60 76
+                      0498 35 25 88
                     </span>
                   </div>
                 </a>
@@ -692,10 +692,10 @@ export default async function UnifiedZonePage({
                     {cityInfo.name}.
                   </p>
                   <a
-                    href="tel:0465996076"
+                    href="tel:0498 35 25 88"
                     className="w-full bg-white text-blue-600 font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-100 transition shadow-lg"
                   >
-                    <PhoneCall className="w-5 h-5" /> 0465 99 60 76
+                    <PhoneCall className="w-5 h-5" /> 0498 35 25 88
                   </a>
                 </div>
               </div>

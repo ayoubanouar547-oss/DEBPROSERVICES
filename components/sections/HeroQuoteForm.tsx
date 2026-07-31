@@ -18,6 +18,9 @@ import {
 export function HeroQuoteForm() {
   const pathname = usePathname();
   const isNl = pathname ? pathname.startsWith("/nl") : false;
+  const isHomePage = !pathname || pathname === "/" || pathname === "/nl";
+  const formPhone = isHomePage ? "0465 99 60 76" : "0498 35 25 88";
+  const formPhoneTel = isHomePage ? "0465996076" : "0498352588";
 
   const [nom, setNom] = useState("");
   const [telephone, setTelephone] = useState("");
@@ -110,11 +113,11 @@ export function HeroQuoteForm() {
         </p>
 
         <a
-          href="tel:0465996076"
+          href={`tel:${formPhoneTel}`}
           className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-red-600 to-rose-700 text-white font-bold text-sm shadow-md hover:brightness-110 transition-all"
         >
           <PhoneCall className="w-4 h-4 animate-pulse" />
-          <span>{isNl ? "Dringend? Bel 0465 99 60 76" : "Urgence ? Appelez 0465 99 60 76"}</span>
+          <span>{isNl ? `Dringend? Bel ${formPhone}` : `Urgence ? Appelez ${formPhone}`}</span>
         </a>
       </div>
     );
@@ -172,7 +175,7 @@ export function HeroQuoteForm() {
               <input
                 type="tel"
                 required
-                placeholder="0465 XX XX XX"
+                placeholder="04XX XX XX XX"
                 value={telephone}
                 onChange={(e) => setTelephone(e.target.value)}
                 className="w-full pl-8 pr-2.5 py-2 rounded-lg bg-slate-800/90 border border-slate-700/80 text-white placeholder-slate-500 text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"

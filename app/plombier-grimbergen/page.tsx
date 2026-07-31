@@ -100,10 +100,10 @@ export default function PlombierGrimbergenPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="tel:0465996076"
+                href="tel:0498 35 25 88"
                 className="group bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white font-black px-8 py-4 rounded-2xl flex items-center justify-center gap-3 transition-all hover:-translate-y-1 shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] active:scale-95"
               >
-                <PhoneCall className="w-5 h-5 animate-pulse" /> Urgence Grimbergen : 0465 99 60 76
+                <PhoneCall className="w-5 h-5 animate-pulse" /> Urgence Grimbergen : 0498 35 25 88
               </a>
             </div>
           </div>

@@ -15,11 +15,12 @@ import { belgianCities } from "@/lib/data/cities";
 import { services } from "@/lib/data/services";
 import { dutchServices } from "@/lib/data/translations";
 
-const PHONE = "0465 99 60 76";
 const EMAIL = "debproservices@canalrose.be";
 
 export function Footer() {
   const pathname = usePathname();
+  const isHomePage = !pathname || pathname === "/" || pathname === "/nl";
+  const PHONE = isHomePage ? "0465 99 60 76" : "0498 35 25 88";
   const isNl = pathname ? pathname.startsWith("/nl") : false;
   const currentYear = new Date().getFullYear();
 

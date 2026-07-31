@@ -12,8 +12,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { WaterSplash } from "../ui/WaterSplash";
 import { getAlternatePath } from "@/lib/data/translations";
 
-const PHONE_NUMBER = "0465 99 60 76";
-
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -21,6 +19,9 @@ export function Navbar() {
   const [isMounted, setIsMounted] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<"light" | "dark">("dark");
   const pathname = usePathname();
+
+  const isHomePage = !pathname || pathname === "/" || pathname === "/nl";
+  const PHONE_NUMBER = isHomePage ? "0465 99 60 76" : "0498 35 25 88";
 
   useEffect(() => {
     setIsMounted(true);

@@ -88,6 +88,8 @@ interface AttachedPhoto {
 export function ContactForm() {
   const pathname = usePathname();
   const isNl = pathname ? pathname.startsWith("/nl") : false;
+  const isHomePage = !pathname || pathname === "/" || pathname === "/nl";
+  const contactPhone = isHomePage ? "0465 99 60 76" : "0498 35 25 88";
 
   const [activeTab, setActiveTab] = useState<"booking" | "devis">("devis");
   const [status, setStatus] = useState<
@@ -504,8 +506,8 @@ export function ContactForm() {
                     </h4>
                     <p className="text-slate-400 text-xs mt-1">
                       {isNl
-                        ? "Voor dringende situaties kunt u ons rechtstreeks bellen op 0465 99 60 76."
-                        : "En cas d'urgence absolue, vous pouvez nous joindre directement au 0465 99 60 76."}
+                        ? `Voor dringende situaties kunt u ons rechtstreeks bellen op ${contactPhone}.`
+                        : `En cas d'urgence absolue, vous pouvez nous joindre directement au ${contactPhone}.`}
                     </p>
                   </div>
                 </div>
@@ -583,7 +585,7 @@ export function ContactForm() {
                         type="tel"
                         {...register("telephone")}
                         className={`w-full px-4 py-3 rounded-xl bg-black/20 border ${errors.telephone ? "border-red-500/50" : "border-white/10"} text-white text-xs placeholder-slate-500 focus:outline-none focus:border-blue-500/50 transition-colors`}
-                        placeholder="0465 99 60 76"
+                        placeholder="04XX XX XX XX"
                       />
                       {errors.telephone && (
                         <p className="mt-1 text-xs text-red-400 font-bold">
