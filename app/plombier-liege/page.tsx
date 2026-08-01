@@ -8,8 +8,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Le Meilleur Plombier à Liège - Devis Gratuit 24/7 | Pro Services",
-  description: "Besoin d'un plombier à Liège ? Pro Services intervient en 30 minutes pour fuites, débouchages et sanitaires. Devis gratuit ☎ 0498 35 25 88.",
+  title: "Plombier à Liège — Dépannage & Urgence 24/7",
+  description: "Besoin d'un plombier à Liège ? Intervention rapide en 30 min pour fuites d'eau, débouchages et sanitaires 24/7.",
   alternates: {
     canonical: "/plombier-liege",
   },

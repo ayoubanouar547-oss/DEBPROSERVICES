@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import ZonesDeServicesClient from "@/app/zones-de-services/ZonesDeServicesClient";
 
 export const metadata: Metadata = {
-  title: "🚨 Onze Interventiezones in België — Gratis Offerte & Interventie in 30 Min ⚡",
+  title: "Onze Interventiezones in België — 24/7 Service",
   description:
-    "Ontdek alle steden in België waar wij onze 24/7 noodhulpdiensten aanbieden voor loodgieterij, verwarming, gas en ontstopping. Snelle interventie gegarandeerd in heel België.",
+    "Overzicht van alle steden in België voor loodgieterij, verwarming en ontstoppingen. Snelle interventie in 30 min.",
   keywords:
     "interventiezones België, loodgieter Brussel, verwarmingsmonteur Luik, ontstopping Antwerpen, lokale service België",
   alternates: {

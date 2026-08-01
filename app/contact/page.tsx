@@ -2,9 +2,9 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "🚨 Contactez-nous — Intervention 30 Min Belgique ⚡",
+  title: "Contact & Dépannage Rapide 24/7 Belgique",
   description:
-    "Prenez contact pour tous vos travaux et urgences en plomberie, chauffage ou débouchage. Intervention rapide partout en Belgique. Devis gratuit.",
+    "Contactez nos techniciens agréés pour vos travaux et urgences en plomberie, chauffage et débouchage en Belgique.",
   keywords:
     "contact plombier Belgique, devis débouchage, urgence chauffage contact, téléphone",
   alternates: {

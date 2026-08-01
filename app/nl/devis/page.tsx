@@ -2,9 +2,9 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "🚨 Gratis Offerte Aanvragen — Erkende Vakman in België ⚡",
+  title: "Gratis Offerte — Loodgieter & Verwarming België",
   description:
-    "Ontvang een gratis en vrijblijvende offerte voor uw loodgieterswerk, verwarming, elektriciteit en ontstopping. Volledige transparantie en eerlijke prijzen.",
+    "Gratis offerte voor loodgieterij, verwarming, elektriciteit en ontstopping in België. Transparante tarieven.",
   keywords:
     "gratis offerte loodgieter, prijsindicatie ontstopping, prijs verwarmingsmonteur België, snelle offerte elektriciteit",
   alternates: {

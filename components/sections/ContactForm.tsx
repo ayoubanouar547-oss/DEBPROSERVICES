@@ -427,7 +427,7 @@ export function ContactForm() {
             {isNl ? "Contact & Afspraken" : "Contact & Prise de Rendez-vous"}
           </h2>
           <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-3 sm:mb-4 break-words">
-            {isNl ? "Réserver une intervention ou obtenir un devis" : "Réserver une intervention ou demander un devis"}
+            {isNl ? "Interventie boeken of een offerte aanvragen" : "Réserver une intervention ou demander un devis"}
           </h3>
           <p className="text-slate-400 text-sm md:text-lg leading-relaxed">
             {isNl
@@ -458,7 +458,7 @@ export function ContactForm() {
               }`}
             >
               <Calendar className="w-4 h-4 text-blue-300 flex-shrink-0" />
-              <span>{isNl ? "📅 Réserver (Datum & Tijdslot)" : "📅 Réserver (Date & Créneau)"}</span>
+              <span>{isNl ? "📅 Boeken (Datum & Tijdslot)" : "📅 Réserver (Date & Créneau)"}</span>
             </button>
           </div>
         </div>
@@ -689,7 +689,7 @@ export function ContactForm() {
                         className="text-[10px] font-black text-blue-400 uppercase tracking-widest flex items-center gap-1.5 hover:text-white transition-colors"
                       >
                         <MapPin className="w-3 h-3" />
-                        {showMap ? (isNl ? "Verberg la kaart" : "Masquer la carte") : (isNl ? "Kaart gebruiken" : "Utiliser la carte")}
+                        {showMap ? (isNl ? "Kaart verbergen" : "Masquer la carte") : (isNl ? "Kaart gebruiken" : "Utiliser la carte")}
                       </button>
                     </div>
 

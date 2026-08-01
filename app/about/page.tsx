@@ -3,9 +3,9 @@ import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "🚨 À Propos de Nous — Entreprise Agréée ⚡",
+  title: "À Propos — Plomberie & Chauffage en Belgique",
   description:
-    "Découvrez votre expert belge en plomberie, chauffage, et débouchage avec plus de 15 ans d'expérience. Entreprise familiale agréée intervenant 24/7.",
+    "Experts en plomberie, chauffage et débouchage en Belgique depuis 15 ans. Techniciens agréés disponibles 24/7.",
   keywords:
     "entreprise plomberie Belgique, plombier Bruxelles expert, chauffagiste Wallonie certifié, histoire",
   alternates: {

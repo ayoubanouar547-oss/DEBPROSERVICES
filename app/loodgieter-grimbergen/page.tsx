@@ -8,8 +8,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "De Beste Loodgieter in Grimbergen - Gratis Offerte 24/7 | Pro Services",
-  description: "Dringende loodgieter nodig in Grimbergen of Strombeek-Bever? Pro Services is binnen 30 minuten ter plaatse voor lekken, sanitair en ontstoppingen. Bel ☎ 0498 35 25 88!",
+  title: "Loodgieter in Grimbergen — Spoeddienst 24/7",
+  description: "Dringende loodgieter nodig in Grimbergen? Binnen 30 minuten ter plaatse voor lekken, sanitair en ontstoppingen.",
   alternates: {
     canonical: "/loodgieter-grimbergen",
   },

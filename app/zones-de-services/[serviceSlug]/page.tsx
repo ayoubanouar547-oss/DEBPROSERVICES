@@ -23,8 +23,8 @@ export async function generateMetadata({
 
   const path = `/zones-de-services/${service.slug}`;
   return {
-    title: `🚨 Devis Gratuit pour ${service.title} | Intervention en 30 Min ⚡`,
-    description: `Découvrez toutes les villes en Belgique où nous intervenons pour votre ${service.title.toLowerCase()}. Service rapide 24h/24 et 7j/7. Plus de 300 villes couvertes par nos techniciens agréés.`,
+    title: `${service.title} Belgique — Zones d'Intervention 24/7`,
+    description: `Découvrez les villes couvertes en Belgique pour vos travaux de ${service.title.toLowerCase()}. Intervention rapide 24/7.`,
     keywords: `zones intervention ${service.title.toLowerCase()}, plombier ${service.title}, dépannage ${service.title} Belgique`,
     alternates: {
       canonical: path,

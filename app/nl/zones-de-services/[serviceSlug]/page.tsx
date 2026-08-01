@@ -25,8 +25,8 @@ export async function generateMetadata({
   );
 
   return {
-    title: `🚨 ${dutchService.title} België — Alle Steden & Interventies 24/7`,
-    description: `Ontdek al onze actieve zones in België voor ${dutchService.title.toLowerCase()}. Erkende technici en snelle spoedinterventie 24h/24 en 7j/7.`,
+    title: `${dutchService.title} België — Interventiezones 24/7`,
+    description: `Ontdek alle steden in België voor uw ${dutchService.title.toLowerCase()}. Erkende technici en snelle 24/7 service.`,
     alternates: { canonical: `/nl/zones-de-services/${resolvedParams.serviceSlug}` },
   };
 }

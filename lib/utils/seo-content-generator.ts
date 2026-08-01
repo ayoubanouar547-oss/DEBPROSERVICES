@@ -290,6 +290,8 @@ export function buildLongNlClusterText(
   return textBlocks;
 }
 
+import { frToNlCityNameMap } from "@/lib/data/translations";
+
 export function getProfessionMetaTitle(serviceSlug: string, cityName: string, isNl: boolean = false): string {
   let title = "";
   
@@ -315,46 +317,73 @@ export function getProfessionMetaTitle(serviceSlug: string, cityName: string, is
   let profession = title;
   
   if (isNl) {
-    if (title.toLowerCase().includes("ontstopping")) profession = title.replace(/ontstopping/i, "Ontstopper");
-    else if (title.toLowerCase().includes("installatie")) profession = "Installateur van " + title.replace(/installatie/i, "").trim();
-    else if (title.toLowerCase().includes("renovatie")) profession = "Aannemer voor " + title;
-    else if (title.toLowerCase().includes("reiniging")) profession = "Schoonmaker voor " + title;
-    else if (title.toLowerCase().includes("onderhoud")) profession = "Onderhoudsspecialist voor " + title;
-    else if (title.toLowerCase().includes("herstelling")) profession = "Hersteller voor " + title;
-    else profession = "Specialist in " + title;
+    const rawCity = cityName || "België";
+    const city = frToNlCityNameMap[rawCity] || rawCity;
+    const lower = title.toLowerCase();
+
+    if (lower === "loodgieter" || lower.includes("plomberie")) profession = "Loodgieter";
+    else if (lower.includes("ontstopping") || lower.includes("debouchage")) profession = "Ontstoppingsdienst";
+    else if (lower === "verwarming" || lower.includes("chauffage")) profession = "Chauffagiste & Loodgieter";
+    else if (lower.includes("elektriciteit") || lower.includes("electricite")) profession = "Elektricien";
+    else if (lower.includes("gas") || lower.includes("gaz")) profession = "Gastechnicus CERGA";
+    else if (lower.includes("airco") || lower.includes("climatisation")) profession = "Airco Installateur";
+    else if (lower.includes("ventilatie") || lower.includes("vmc")) profession = "Ventilatie Installateur";
+    else if (lower.includes("renovatie") || lower.includes("renovation")) profession = "Aannemer Renovatie";
+    else if (lower.includes("badkamer")) profession = "Badkamer Installateur";
+    else if (lower.includes("keuken")) profession = "Keuken Installateur";
+    else if (lower.includes("camerabewaking") || lower.includes("camera")) profession = "Camerabewaking Specialist";
+    else if (lower.includes("zonnepanelen")) profession = "Zonnepanelen Installateur";
+    else if (lower.includes("septische") || lower.includes("put")) profession = "Ruimdienst Septische Put";
+    else if (lower.includes("dakwerken")) profession = "Dakdekker";
+    else if (lower.includes("bouwwerken")) profession = "Aannemer Bouwwerken";
+    else if (lower.includes("ruitenwasser")) profession = "Ruitenwasser";
+    else if (lower.includes("tuinieren")) profession = "Tuinman & Hovenier";
+    else if (lower.includes("installatie")) profession = "Installateur " + title.replace(/installatie/i, "").trim();
+    else if (lower.includes("herstelling")) profession = "Hersteller " + title.replace(/herstelling/i, "").trim();
+    else if (lower.includes("onderhoud")) profession = "Onderhoud " + title.replace(/onderhoud/i, "").trim();
+    else profession = title;
+
+    const isBelgium = city.toLowerCase().includes("belgië") || city.toLowerCase().includes("belgie");
+    const prep = "in";
+    
+    const titleStr = `${profession} ${prep} ${city} — Spoeddienst 24/7`;
+    if (titleStr.length > 68) {
+      return `${profession} ${prep} ${city} — 24/7`.substring(0, 68);
+    }
+    return titleStr;
   } else {
     const lower = title.toLowerCase();
-    if (lower.startsWith("débouchage") || lower.startsWith("debouchage")) {
+    if (lower === "plomberie" || lower.includes("plombier")) profession = "Plombier";
+    else if (lower === "chauffage" || lower.includes("chauffagiste")) profession = "Chauffagiste";
+    else if (lower.startsWith("débouchage") || lower.startsWith("debouchage")) {
       profession = title.replace(/^débouchage/i, "Déboucheur").replace(/^debouchage/i, "Déboucheur");
-      if (lower.includes("evier") || lower.includes("évier")) profession = "Déboucheur d'Évier et Lavabo";
-      else if (lower.includes("égout") || lower.includes("egout")) profession = "Déboucheur d'Égout et Canalisations";
+      if (lower.includes("evier") || lower.includes("évier")) profession = "Déboucheur Évier & Lavabo";
+      else if (lower.includes("égout") || lower.includes("egout")) profession = "Déboucheur Égout & Canalisations";
       else profession = title.replace(/^débouchage\s+/i, "Déboucheur ").replace(/^debouchage\s+/i, "Déboucheur ");
     }
-    else if (lower.startsWith("installation")) profession = title.replace(/^installation\s+(de\s+|d')?/i, "Installateur de ");
-    else if (lower.startsWith("dégazage") || lower.startsWith("degazage")) profession = title.replace(/^dégazage et nettoyage\s+(de\s+)?/i, "Dégazeur et Nettoyeur de ").replace(/^dégazage\s+(de\s+)?/i, "Dégazeur de ").replace(/^degazage\s+(de\s+)?/i, "Dégazeur de ");
-    else if (lower.startsWith("nettoyage")) profession = title.replace(/^nettoyage\s+(de\s+|d')?/i, "Nettoyeur de ");
-    else if (lower.startsWith("vidange")) profession = title.replace(/^vidange\s+(de\s+|d')?/i, "Vidangeur de ");
-    else if (lower.startsWith("pompage")) profession = title.replace(/^pompage\s+(et\s+)?vidange\s+(de\s+|d')?/i, "Vidangeur de ");
-    else if (lower.startsWith("rénovation") || lower.startsWith("renovation") || lower.startsWith("aménagement") || lower.startsWith("construction")) profession = "Entrepreneur en " + title;
-    else if (lower.startsWith("peinture") || lower.startsWith("peintre")) profession = "Peintre pour " + title;
-    else if (lower.includes("plomberie")) profession = "Plombier pour " + title;
-    else if (lower.includes("chauffage") || lower.includes("chaudière") || lower.includes("chaudiere")) profession = "Chauffagiste pour " + title;
-    else if (lower.startsWith("entretien")) profession = "Spécialiste en " + title;
-    else if (lower.startsWith("dépannage") || lower.startsWith("depannage")) profession = title.replace(/^dépannage/i, "Dépanneur pour").replace(/^depannage/i, "Dépanneur pour");
-    else if (lower.startsWith("recherche")) profession = "Expert en " + title;
-    else if (lower.startsWith("mise en conformité")) profession = "Expert en " + title;
-    else if (lower.startsWith("remplacement")) profession = "Installateur pour le " + title;
-    else if (lower.startsWith("neutralisation")) profession = "Expert en " + title;
-    else profession = "Expert en " + title;
-  }
+    else if (lower.startsWith("installation")) profession = title.replace(/^installation\s+(de\s+|d')?/i, "Installateur ");
+    else if (lower.startsWith("dégazage") || lower.startsWith("degazage")) profession = "Dégazage Cuve à Mazout";
+    else if (lower.startsWith("nettoyage")) profession = title.replace(/^nettoyage\s+(de\s+|d')?/i, "Nettoyeur ");
+    else if (lower.startsWith("vidange")) profession = title.replace(/^vidange\s+(de\s+|d')?/i, "Vidangeur ");
+    else if (lower.startsWith("pompage")) profession = title.replace(/^pompage\s+(et\s+)?vidange\s+(de\s+|d')?/i, "Vidangeur ");
+    else if (lower.startsWith("rénovation") || lower.startsWith("renovation")) profession = "Rénovation & Aménagement";
+    else if (lower.startsWith("peinture") || lower.startsWith("peintre")) profession = "Peintre en Bâtiment";
+    else if (lower.includes("électricité") || lower.includes("electricite")) profession = "Électricien";
+    else if (lower.includes("gaz")) profession = "Chauffagiste Gaz CERGA";
+    else if (lower.includes("climatisation")) profession = "Installateur Climatisation";
+    else if (lower.startsWith("entretien")) profession = "Entretien " + title.replace(/^entretien\s+/i, "");
+    else if (lower.startsWith("dépannage") || lower.startsWith("depannage")) profession = "Dépannage " + title.replace(/^dépannage\s+/i, "");
+    else if (lower.startsWith("recherche")) profession = "Recherche de Fuite";
+    else profession = title;
 
-  const city = cityName || (isNl ? "België" : "Belgique");
-  const isBelgium = city.toLowerCase().includes("belgique") || city.toLowerCase().includes("belgië");
-  const prep = isBelgium ? (isNl ? "in" : "en") : (isNl ? "in" : "à");
-  
-  if (isNl) {
-    return `De Beste ${profession} ${prep} ${city} - Gratis Offerte 24/7 | PRO SERVICES`;
-  }
+    const city = cityName || "Belgique";
+    const isBelgium = city.toLowerCase().includes("belgique") || city.toLowerCase().includes("belgië");
+    const prep = isBelgium ? "en" : "à";
 
-  return `Le Meilleur ${profession} ${prep} ${city} - Devis Gratuit 24/7 | PRO SERVICES`;
+    const titleStr = `${profession} ${prep} ${city} — Service 24/7`;
+    if (titleStr.length > 68) {
+      return `${profession} ${prep} ${city}`.substring(0, 68);
+    }
+    return titleStr;
+  }
 }

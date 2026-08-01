@@ -114,11 +114,12 @@ export const frToNlCityNameMap: Record<string, string> = {
   "Watermael-Boitsfort": "Watermaal-Bosvoorde",
   "Berchem-Sainte-Agathe": "Sint-Agatha-Berchem",
   "Grimbergen": "Grimbergen",
-  "Vilvorde": "Vilvorde",
+  "Vilvorde": "Vilvoorde",
   "Hal (Halle)": "Halle",
   "Hal": "Halle",
   "Zaventem": "Zaventem",
   "Leuven": "Leuven",
+  "Louvain": "Leuven",
   "Asse": "Asse",
   "Dilbeek": "Dilbeek",
   "Wemmel": "Wemmel",
@@ -140,7 +141,18 @@ export const frToNlCityNameMap: Record<string, string> = {
   "Charleroi": "Charleroi",
   "Mons": "Bergen",
   "Tournai": "Doornik",
-  "Liège": "Luik"
+  "Liège": "Luik",
+  "Anvers": "Antwerpen",
+  "Gand": "Gent",
+  "Namur": "Namen",
+  "Arlon": "Aarlen",
+  "Bastogne": "Bastenaken",
+  "Malines": "Mechelen",
+  "Courtrai": "Kortrijk",
+  "Bruges": "Brugge",
+  "Ostende": "Oostende",
+  "Ypres": "Ieper",
+  "Alost": "Aalst"
 };
 
 export const nlToFrCityNameMap: Record<string, string> = Object.fromEntries(

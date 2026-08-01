@@ -69,6 +69,20 @@ export function SEOContent() {
               Niets is zo vervelend en schadelijk voor uw woning of kantoor als een verstopte leiding of toilet die overloopt. Bij PRO SERVICES beschikken we over de modernste technologieën: endoscopische camera-inspectie om de exacte oorzaak (wortels, vetophoping, vreemde voorwerpen) te detecteren, en krachtige hogedrukwagens (tot 400 bar) om uw leidingen grondig en duurzaam te reinigen.
             </p>
 
+            <h4 className="text-xl font-bold text-blue-300 mt-6 mb-3">Technisch stappenplan voor riool- en afvoerherstelling</h4>
+            
+            <h5 className="text-lg font-semibold text-slate-200 mt-4 mb-2">1. Endoscopische camera-diagnose</h5>
+            <h6 className="text-base font-medium text-slate-400 mt-2 mb-1">Nauwkeurige detectie van verstoppingen, scheuren en leidingverzakkingen</h6>
+            <p className="mb-4 leading-relaxed text-sm">
+              Onze technici voeren een grondige video-inspectie uit van de binnenkant van uw riolering om de exacte diepte en oorzaak van het probleem vast te stellen.
+            </p>
+
+            <h5 className="text-lg font-semibold text-slate-200 mt-4 mb-2">2. Ecologische hydrocurage op hoge druk</h5>
+            <h6 className="text-base font-medium text-slate-400 mt-2 mb-1">Grondige reiniging zonder schadelijke chemicaliën</h6>
+            <p className="mb-4 leading-relaxed text-sm">
+              Met behulp van waterstralen onder ultrahoge druk worden vet- en kalkafzettingen volledig verwijderd zonder uw leidingen te beschadigen.
+            </p>
+
             <p className="mb-4 leading-relaxed">
               Van een verstopte gootsteen in de keuken tot een diepgaande reiniging van de hoofdriolen van uw appartementsgebouw: wij lossen elk afvoerprobleem met uiterste precisie op. Wij bieden ook preventieve onderhoudscontracten aan voor bedrijven en syndici om grote waterschades door verwaarloosde afvoersystemen te voorkomen.
             </p>
@@ -196,6 +210,20 @@ export function SEOContent() {
             accumulées, objets étrangers), et camions hydrocureurs offrant une
             très haute pression (allant jusqu'à 400 bars) pour un nettoyage
             complet et durable.
+          </p>
+
+          <h4 className="text-xl font-bold text-blue-300 mt-6 mb-3">Guide technique du débouchage haute pression et inspection caméra</h4>
+          
+          <h5 className="text-lg font-semibold text-slate-200 mt-4 mb-2">1. Diagnostic vidéo endoscopique de précision</h5>
+          <h6 className="text-base font-medium text-slate-400 mt-2 mb-1">Localisation exacte des fissures, contrepentes et accumulations de bouchons</h6>
+          <p className="mb-4 leading-relaxed text-sm">
+            Notre équipe réalise une inspection vidéo haute définition dans vos canalisations afin de repérer l'emplacement exact et la nature de la fissure ou de l'engorgement.
+          </p>
+
+          <h5 className="text-lg font-semibold text-slate-200 mt-4 mb-2">2. Hydrocurage écologique jusqu'à 400 bars</h5>
+          <h6 className="text-base font-medium text-slate-400 mt-2 mb-1">Nettoyage complet sans produits chimiques agressifs</h6>
+          <p className="mb-4 leading-relaxed text-sm">
+            Un jet d'eau sous pression élimine intégralement le calcaire, les racines et le tartre accumulé dans vos tuyaux sans altérer la tuyauterie.
           </p>
 
           <p className="mb-4 leading-relaxed">

@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Le Meilleur Chauffagiste à Grimbergen - Devis Gratuit 24/7 | Pro Services",
-  description: "Dépannage chaudière d'urgence à Grimbergen, Strombeek-Bever & environs. Chauffagiste agréé pour entretien annuel, réparation et fuite de gaz. Devis gratuit ☎ 0498 35 25 88.",
+  title: "Chauffagiste à Grimbergen — Dépannage & Entretien 24/7",
+  description: "Dépannage chaudière à Grimbergen et Strombeek-Bever. Chauffagiste agréé pour entretien, pannes et installations 24/7.",
   alternates: {
     canonical: "/chauffagiste-grimbergen",
   },

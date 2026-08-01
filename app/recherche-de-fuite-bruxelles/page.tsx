@@ -8,8 +8,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Le Meilleur Expert Recherche de Fuite à Bruxelles - Devis Gratuit 24/7 | Pro Services",
-  description: "Fuite d'eau invisible à Bruxelles ? Pro Services intervient pour la détection non destructive sans casse. Devis gratuit ☎ 0498 35 25 88.",
+  title: "Recherche de Fuite à Bruxelles — Détection Non Destructive 24/7",
+  description: "Fuite d'eau invisible à Bruxelles ? Détection non destructive sans casse. Rapport officiel pour assurance.",
   alternates: {
     canonical: "/recherche-de-fuite-bruxelles",
   },

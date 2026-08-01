@@ -107,8 +107,8 @@ export async function generateMetadata({
   }
 
   if (subService) {
-    const title = `🚨 Devis Gratuit pour ${subService.title} Belgique ⚡ Intervention Rapide 24/7`;
-    const description = `Découvrez toutes les villes en Belgique où nous intervenons pour votre ${subService.title.toLowerCase()}. Service rapide 24h/24 et 7j/7.`;
+    const title = `${subService.title} Belgique — Service 24/7`;
+    const description = `Villes couvertes en Belgique pour votre ${subService.title.toLowerCase()}. Service rapide 24h/24 et 7j/7.`;
     return {
       title,
       description,
@@ -125,7 +125,7 @@ export async function generateMetadata({
   if (cityInfo) {
     const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
     const title = getProfessionMetaTitle(service.slug, cityInfo.name);
-    const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`;
+    const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime} 24/7 par techniciens agréés.`;
     return {
       title,
       description,
@@ -140,8 +140,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: `🚨 ${service.title} Belgique — Intervention Rapide 24/7`,
-    description: `Expert en ${service.title.toLowerCase()} en Belgique. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`,
+    title: `${service.title} Belgique — Service 24/7`,
+    description: `Expert en ${service.title.toLowerCase()} en Belgique. Techniciens agréés disponibles 24/7 pour toute intervention.`,
     alternates: { canonical: path },
   };
 }

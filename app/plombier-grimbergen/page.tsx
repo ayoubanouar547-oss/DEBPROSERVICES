@@ -8,8 +8,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Le Meilleur Plombier à Grimbergen - Devis Gratuit 24/7 | Pro Services",
-  description: "Urgence plomberie à Grimbergen ou Strombeek-Bever ? Pro Services intervient en 30 min pour fuites d'eau, débouchages et sanitaires. Devis gratuit ☎ 0498 35 25 88.",
+  title: "Plombier à Grimbergen — Dépannage Rapide 24/7",
+  description: "Urgence plomberie à Grimbergen et Strombeek-Bever ? Intervention rapide en 30 min pour fuites d'eau et débouchages.",
   alternates: {
     canonical: "/plombier-grimbergen",
   },

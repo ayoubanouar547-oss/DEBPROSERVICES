@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Installateur VMC Belgique : Pose, Entretien & Ventilation | Pro Services",
-  description: "Besoin d'un installateur VMC en Belgique ? Nous installons et entretenons vos systèmes de ventilation double flux (système D) et simple flux (système C). Devis Gratuit.",
+  title: "Installateur VMC Belgique — Pose & Entretien Ventilation",
+  description: "Installation et entretien de VMC simple et double flux en Belgique. Techniciens agréés pour une ventilation optimale.",
   alternates: {
     canonical: "/installateur-vmc",
   },

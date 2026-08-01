@@ -2,9 +2,9 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "🚨 Contacteer ons — Interventie 30 Min in België ⚡",
+  title: "Contact & Snelle Interventie 24/7 in België",
   description:
-    "Neem contact met ons op voor al uw werkzaamheden en noodgevallen op het gebied van loodgieterswerk, verwarming of ontstopping. Snelle interventie in heel België. Gratis offerte.",
+    "Contacteer onze erkende vakmensen voor loodgieterij, verwarming en ontstoppingen in België. 24/7 bereikbaar.",
   keywords:
     "contact loodgieter België, offerte ontstopping, spoedverwarming contact, telefoon",
   alternates: {

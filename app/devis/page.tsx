@@ -2,9 +2,9 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "🚨 Demande de Devis Gratuit — Expert Artisan Belgique ⚡",
+  title: "Demande de Devis — Plomberie & Chauffage Belgique",
   description:
-    "Obtenez un devis gratuit et sans engagement pour vos travaux de plomberie, chauffage, électricité et débouchage. Transparence totale et prix justes.",
+    "Devis gratuit et sans engagement pour plomberie, chauffage, électricité et débouchage en Belgique. Tarifs clairs.",
   keywords:
     "devis gratuit plombier, estimation prix débouchage, prix chauffagiste Belgique, devis électricité rapide",
   alternates: {

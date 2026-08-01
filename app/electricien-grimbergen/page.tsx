@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Le Meilleur Électricien à Grimbergen - Devis Gratuit 24/7 | Pro Services",
-  description: "Urgence panne de courant ou mise en conformité électrique AREI à Grimbergen ou Strombeek-Bever ? Électricien agréé disponible 24h/24. Devis gratuit ☎ 0498 35 25 88.",
+  title: "Électricien à Grimbergen — Dépannage & Conformité 24/7",
+  description: "Panne de courant ou mise en conformité AREI à Grimbergen. Électricien agréé disponible 24/7. Intervention rapide.",
   alternates: {
     canonical: "/electricien-grimbergen",
   },

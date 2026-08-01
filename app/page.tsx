@@ -3,9 +3,9 @@ import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 
 export const metadata: Metadata = {
-  title: "PRO SERVICES Belgique 🚀 Plomberie, Chauffage, Électricité, Gaz, Caméras, Solaires & Climatisation 24/7",
+  title: "Plomberie, Chauffage & Électricité Belgique 24/7",
   description:
-    "PRO SERVICES en Belgique : plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture, rénovation, jardinage & vitres. Intervention rapide 24/7.",
+    "Service 24/7 en Belgique : plomberie, débouchage, chauffage, électricité et climatisation. Techniciens qualifiés sur place en 30 min.",
   keywords:
     "plomberie Belgique, électricité Belgique, gaz Belgique, climatisation Belgique, ventilation VMC, caméras de surveillance, panneaux solaires photovoltaïques, débouchage canalisation, chauffage urgence, vidange fosse septique, rénovation maison, toiture, Belgique 24/7",
   alternates: {
