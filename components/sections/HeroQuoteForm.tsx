@@ -198,6 +198,8 @@ export function HeroQuoteForm() {
               <User className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
               <input
                 id="hero-name-input"
+                name="nom"
+                aria-label={isNl ? "Naam" : "Nom complet"}
                 type="text"
                 required
                 placeholder={isNl ? "Jan Dupont" : "Jean Dupont"}
@@ -216,6 +218,8 @@ export function HeroQuoteForm() {
               <Phone className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
               <input
                 id="hero-phone-input"
+                name="telephone"
+                aria-label={isNl ? "Telefoon" : "Téléphone"}
                 type="tel"
                 required
                 placeholder="04XX XX XX XX"
@@ -237,6 +241,8 @@ export function HeroQuoteForm() {
               <Mail className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
               <input
                 id="hero-email-input"
+                name="email"
+                aria-label={isNl ? "E-mail" : "Adresse Email"}
                 type="email"
                 required
                 placeholder={isNl ? "naam@voorbeeld.be" : "exemple@email.com"}
@@ -255,6 +261,8 @@ export function HeroQuoteForm() {
               <MapPin className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
               <input
                 id="hero-ville-input"
+                name="ville"
+                aria-label={isNl ? "Stad / Postcode" : "Localité / Code Postal"}
                 type="text"
                 required
                 placeholder={isNl ? "1000 Brussel..." : "1000 Bruxelles..."}
@@ -275,6 +283,7 @@ export function HeroQuoteForm() {
             <Wrench className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
             <select
               id="hero-service-select"
+              name="service"
               aria-label={isNl ? "Dienst" : "Service requis"}
               value={service}
               onChange={(e) => setService(e.target.value)}
@@ -311,6 +320,8 @@ export function HeroQuoteForm() {
             <FileText className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
             <textarea
               id="hero-message-textarea"
+              name="message"
+              aria-label={isNl ? "Details" : "Message"}
               rows={2}
               placeholder={isNl ? "Korte beschrijving van uw probleem..." : "Description rapide de votre demande..."}
               value={message}

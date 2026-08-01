@@ -16,11 +16,13 @@ export const metadata: Metadata = {
   },
 };
 
-import { ServiceZones } from "@/components/sections/ServiceZones";
-import { Testimonials } from "@/components/sections/Testimonials";
-import { FAQ } from "@/components/sections/FAQ";
-import { ContactForm } from "@/components/sections/ContactForm";
-import { SEOContent } from "@/components/sections/SEOContent";
+import dynamic from "next/dynamic";
+
+const ServiceZones = dynamic(() => import("@/components/sections/ServiceZones").then((m) => m.ServiceZones));
+const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then((m) => m.Testimonials));
+const FAQ = dynamic(() => import("@/components/sections/FAQ").then((m) => m.FAQ));
+const ContactForm = dynamic(() => import("@/components/sections/ContactForm").then((m) => m.ContactForm));
+const SEOContent = dynamic(() => import("@/components/sections/SEOContent").then((m) => m.SEOContent));
 
 export default function Home() {
   return (

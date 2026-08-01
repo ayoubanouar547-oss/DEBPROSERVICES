@@ -556,6 +556,8 @@ export function ContactForm() {
                     {...register("honeypot")}
                     className="hidden"
                     aria-hidden="true"
+                    tabIndex={-1}
+                    aria-label="honeypot"
                   />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

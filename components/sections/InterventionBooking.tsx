@@ -398,6 +398,8 @@ export function InterventionBooking() {
                 </label>
                 <input
                   id="booking-date-input"
+                  name="bookingDate"
+                  aria-label={isNl ? "Kies datum" : "Date d'intervention"}
                   type="date"
                   value={selectedDate}
                   min={new Date().toISOString().split("T")[0]}
