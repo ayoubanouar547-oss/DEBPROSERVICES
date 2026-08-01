@@ -11,6 +11,15 @@ import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
+function getDebouchageInitialType(slug: string) {
+  if (slug.includes("wc")) return "wc" as const;
+  if (slug.includes("evier")) return "evier" as const;
+  if (slug.includes("egout")) return "canalisation" as const;
+  if (slug.includes("camera")) return "camera" as const;
+  return "all" as const;
+}
 
 export function generateStaticParams() {
   const params: { serviceSlug: string; subServiceSlug: string }[] = [];
@@ -246,7 +255,7 @@ export default async function SubServicePage({
                 <serviceInfo.icon className="w-4 h-4" />
                 Intervention Spécialisée 24/7
               </div>
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-snug sm:leading-[1] mb-4 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tight break-words">
+              <h1 className="text-4xl sm:text-[40px] leading-[1.1] md:text-5xl lg:text-7xl font-black sm:leading-[1] mb-4 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tight break-words">
                 {subServiceInfo.title}
               </h1>
               <p className="text-sm sm:text-lg md:text-xl text-blue-100/80 mb-6 sm:mb-10 leading-relaxed max-w-2xl">
@@ -316,6 +325,8 @@ export default async function SubServicePage({
 
               {serviceInfo.slug === "peinture" ? (
                 <PaintingGallery />
+              ) : serviceInfo.slug === "debouchage-canalisation" ? (
+                <DebouchageGallery initialType={getDebouchageInitialType(resolvedParams.subServiceSlug)} isNl={false} />
               ) : (
                 <div className="relative h-80 sm:h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                   <Image

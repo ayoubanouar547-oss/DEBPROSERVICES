@@ -11,6 +11,15 @@ import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
+function getDebouchageInitialType(slug: string) {
+  if (slug.includes("wc")) return "wc" as const;
+  if (slug.includes("evier") || slug.includes("gootsteen")) return "evier" as const;
+  if (slug.includes("egout") || slug.includes("riolering")) return "canalisation" as const;
+  if (slug.includes("camera")) return "camera" as const;
+  return "all" as const;
+}
 
 const serviceIcons: Record<string, any> = {
   renovation: Home,
@@ -278,7 +287,7 @@ export default async function SubServicePage({
                 <IconComponent className="w-4 h-4" />
                 Gespecialiseerde Interventie 24/7
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
+              <h1 className="text-[40px] leading-[1.1] md:text-5xl lg:text-7xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
                 {subServiceInfo.title}
               </h1>
               <p className="text-xl text-blue-100/70 mb-10 leading-relaxed">
@@ -346,6 +355,8 @@ export default async function SubServicePage({
 
               {serviceInfo.slug === "peinture" ? (
                 <PaintingGallery />
+              ) : serviceInfo.slug === "debouchage-canalisation" ? (
+                <DebouchageGallery initialType={getDebouchageInitialType(resolvedParams.subServiceSlug)} isNl={true} />
               ) : (
                 /* Secondary Images Gallery */
                 <div className="grid grid-cols-2 gap-4 mb-12">

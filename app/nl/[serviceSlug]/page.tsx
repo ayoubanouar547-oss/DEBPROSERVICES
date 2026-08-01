@@ -11,6 +11,7 @@ import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 const serviceIcons: Record<string, any> = {
   renovation: Home,
@@ -419,7 +420,7 @@ export default async function ServicePage({
                 <IconComponent className="w-4 h-4" />
                 {cityInfo ? `Professionele Dienst in ${cityInfo.name}` : "Professionele Dienst in België"}
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
+              <h1 className="text-[40px] leading-[1.1] md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
                 {h1Title}
               </h1>
               <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
@@ -496,66 +497,72 @@ export default async function ServicePage({
       <section className="py-24 bg-[#000814] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              {serviceInfo.slug === "peinture" ? (
-                <PaintingGallery />
-              ) : (
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-4">
-                    <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
-                      <Image
-                        src={
-                          serviceInfo.subServices[0]?.imageUrl ||
-                          heroImage
-                        }
-                        alt="Expertise PRO SERVICES"
-                        fill
-                        className="object-cover"
-                      />
+            {serviceInfo.slug === "debouchage-canalisation" ? (
+              <div className="lg:col-span-2">
+                <DebouchageGallery initialType="all" isNl={true} />
+              </div>
+            ) : (
+              <div className="relative">
+                {serviceInfo.slug === "peinture" ? (
+                  <PaintingGallery />
+                ) : (
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-4">
+                      <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
+                        <Image
+                          src={
+                            serviceInfo.subServices[0]?.imageUrl ||
+                            heroImage
+                          }
+                          alt="Expertise PRO SERVICES"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
+                        <Image
+                          src={
+                            serviceInfo.subServices[1]?.imageUrl ||
+                            heroImage
+                          }
+                          alt="Interventie techniek"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
-                    <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
-                      <Image
-                        src={
-                          serviceInfo.subServices[1]?.imageUrl ||
-                          heroImage
-                        }
-                        alt="Interventie techniek"
-                        fill
-                        className="object-cover"
-                      />
+                    <div className="pt-8 space-y-4">
+                      <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
+                        <Image
+                          src={
+                            serviceInfo.subServices[2]?.imageUrl ||
+                            heroImage
+                          }
+                          alt="Professioneel materiaal"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
+                        <Image
+                          src={heroImage}
+                          alt="Klantendienst"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="pt-8 space-y-4">
-                    <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
-                      <Image
-                        src={
-                          serviceInfo.subServices[2]?.imageUrl ||
-                          heroImage
-                        }
-                        alt="Professioneel materiaal"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
-                      <Image
-                        src={heroImage}
-                        alt="Klantendienst"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
+                )}
+                {/* Trust Badge */}
+                <div className="absolute -bottom-6 -right-6 bg-blue-600 p-8 rounded-2xl shadow-2xl z-20 border-4 border-[#000814]">
+                  <div className="text-4xl font-black text-white mb-1">15+</div>
+                  <div className="text-blue-100 text-sm font-bold uppercase tracking-widest">
+                    Jaar ervaring
                   </div>
-                </div>
-              )}
-              {/* Trust Badge */}
-              <div className="absolute -bottom-6 -right-6 bg-blue-600 p-8 rounded-2xl shadow-2xl z-20 border-4 border-[#000814]">
-                <div className="text-4xl font-black text-white mb-1">15+</div>
-                <div className="text-blue-100 text-sm font-bold uppercase tracking-widest">
-                  Jaar ervaring
                 </div>
               </div>
-            </div>
+            )}
 
             <div className="text-white">
               <h2 className="text-4xl font-black mb-8 leading-tight">
