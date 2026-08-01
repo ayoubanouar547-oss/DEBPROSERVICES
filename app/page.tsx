@@ -23,6 +23,7 @@ const Testimonials = dynamic(() => import("@/components/sections/Testimonials").
 const FAQ = dynamic(() => import("@/components/sections/FAQ").then((m) => m.FAQ));
 const ContactForm = dynamic(() => import("@/components/sections/ContactForm").then((m) => m.ContactForm));
 const SEOContent = dynamic(() => import("@/components/sections/SEOContent").then((m) => m.SEOContent));
+const DebouchageGallery = dynamic(() => import("@/components/sections/DebouchageGallery").then((m) => m.DebouchageGallery));
 
 export default function Home() {
   return (
@@ -276,6 +277,15 @@ export default function Home() {
       />
       <Hero />
       <Services />
+      <section className="py-24 bg-[#000814] relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tight font-oswald">Nos Interventions en Images</h2>
+          <p className="text-slate-300 max-w-2xl mx-auto text-lg">Découvrez la qualité et le sérieux de nos interventions de débouchage et de curage partout en Belgique.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DebouchageGallery initialType="all" isNl={false} />
+        </div>
+      </section>
       <ServiceZones />
       <Testimonials />
       <FAQ />

@@ -117,22 +117,6 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  if (typeof window !== \x27undefined\x27) {
-                    [\x27fetch\x27, \x27Headers\x27, \x27Request\x27, \x27Response\x27].forEach(function(prop) {
-                      try {
-                        var val = window[prop];
-                        window[\x27__custom_\x27 + prop] = val;
-                        Object.defineProperty(window, prop, {
-                          get: function() { return window[\x27__custom_\x27 + prop]; },
-                          set: function(v) { window[\x27__custom_\x27 + prop] = v; },
-                          configurable: true,
-                          enumerable: true
-                        });
-                      } catch (e) {}
-                    });
-                  }
-                } catch (e) {}
-                try {
                   var savedTheme = localStorage.getItem(\x27theme\x27);
                   if (savedTheme === \x27light\x27) {
                     document.documentElement.classList.add(\x27light-theme\x27);
@@ -149,7 +133,7 @@ export default function RootLayout({
           <div className="absolute top-[-20%] left-[-10%] w-[900px] h-[900px] bg-blue-700/20 rounded-full blur-[150px] animate-blob"></div>
           <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-cyan-600/10 rounded-full blur-[150px] animate-blob animation-delay-2000"></div>
           <div className="absolute top-[30%] right-[-5%] w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[120px] animate-blob animation-delay-4000"></div>
-          <div className="absolute middle-0 left-[-20%] w-[1000px] h-[1000px] bg-blue-900/10 rounded-full blur-[160px] animate-blob-slow"></div>
+          <div className="absolute top-[40%] left-[-20%] w-[1000px] h-[1000px] bg-blue-900/10 rounded-full blur-[160px] animate-blob-slow"></div>
 
           {/* subtle grid pattern for a more technical/plumbing look */}
           <div

@@ -5,6 +5,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
 export const metadata: Metadata = {
   title: "Le Meilleur Plombier à Woluwe - Devis Gratuit 24/7 | Pro Services",
   description: "Urgence plomberie à Woluwe-Saint-Pierre & Woluwe-Saint-Lambert ? Pro Services intervient en 30 min pour fuite d'eau, débouchage et sanitaire. Devis gratuit ☎ 0498 35 25 88.",
@@ -220,6 +222,17 @@ export default function PlombierWoluwePage() {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* Local contextual information */}
+      <section className="py-20 bg-slate-950/20 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight text-white font-oswald">Nos Interventions à Woluwe</h2>
+          <p className="text-slate-300 max-w-2xl mx-auto font-medium text-lg">Découvrez en images notre expertise en plomberie et débouchage à Woluwe-Saint-Pierre et Woluwe-Saint-Lambert.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DebouchageGallery initialType="all" isNl={false} />
         </div>
       </section>
 

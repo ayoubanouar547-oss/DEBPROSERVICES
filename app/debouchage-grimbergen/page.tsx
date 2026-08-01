@@ -5,6 +5,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
 export const metadata: Metadata = {
   title: "Le Meilleur Déboucheur à Grimbergen - Devis Gratuit 24/7 | Pro Services",
   description: "Canalisation bouchée, WC ou égout refoulé à Grimbergen & environs ? Intervention rapide 24h/24 en 30 min par nos déboucheurs agréés. Devis gratuit ☎ 0498 35 25 88.",
@@ -204,6 +206,16 @@ export default function DebouchageGrimbergenPage() {
       </section>
 
       {/* Regional context */}
+      <section className="py-20 bg-slate-950/20 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Nos Réalisations à Grimbergen</h2>
+          <p className="text-slate-300 max-w-2xl mx-auto font-medium">Découvrez en images la qualité de nos interventions de débouchage.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DebouchageGallery initialType="all" isNl={false} />
+        </div>
+      </section>
+
       <section className="py-20 bg-slate-950/20 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">

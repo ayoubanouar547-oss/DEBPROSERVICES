@@ -5,6 +5,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
 export const metadata: Metadata = {
   title: "Le Meilleur Expert Recherche de Fuite à Bruxelles - Devis Gratuit 24/7 | Pro Services",
   description: "Fuite d'eau invisible à Bruxelles ? Pro Services intervient pour la détection non destructive sans casse. Devis gratuit ☎ 0498 35 25 88.",
@@ -207,6 +209,16 @@ export default function RechercheFuiteBruxellesPage() {
       </section>
 
       {/* Relatifs & Nearby Areas */}
+      <section className="py-16 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+          <h2 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight">Nos Interventions en Détection</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">Découvrez en images nos méthodes de recherche de fuite par caméra et techniques non destructives.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DebouchageGallery initialType="camera" isNl={false} />
+        </div>
+      </section>
+
       <section className="py-16 bg-slate-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12">
           <div>

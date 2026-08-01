@@ -5,6 +5,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
 export const metadata: Metadata = {
   title: "Le Meilleur Expert Vidange Fosse Septique à Liège - Devis Gratuit 24/7 | Pro Services",
   description: "Fosse septique pleine à Liège ? Intervention rapide 24h/24 pour la vidange, le pompage et le curage de vos fosses septiques & bacs à graisse. Devis gratuit ☎ 0498 35 25 88.",
@@ -220,6 +222,16 @@ export default function VidangeFosseSeptiqueLiegePage() {
       </section>
 
       {/* Regional aspects */}
+      <section className="py-20 bg-slate-950/20 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Nos Interventions à Liège</h2>
+          <p className="text-slate-300 max-w-2xl mx-auto font-medium">Découvrez en images notre expertise en vidange et débouchage.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DebouchageGallery initialType="canalisation" isNl={false} />
+        </div>
+      </section>
+
       <section className="py-20 bg-slate-950/20 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">

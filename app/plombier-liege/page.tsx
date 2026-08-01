@@ -5,6 +5,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
 export const metadata: Metadata = {
   title: "Le Meilleur Plombier à Liège - Devis Gratuit 24/7 | Pro Services",
   description: "Besoin d'un plombier à Liège ? Pro Services intervient en 30 minutes pour fuites, débouchages et sanitaires. Devis gratuit ☎ 0498 35 25 88.",
@@ -184,6 +186,16 @@ export default function PlombierLiegePage() {
       </section>
 
       {/* Internal Linking */}
+      <section className="py-20 bg-slate-50 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+          <h2 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight">Nos Réalisations à Liège</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto font-medium">Découvrez en images la qualité de nos interventions de plomberie et débouchage.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DebouchageGallery initialType="all" isNl={false} />
+        </div>
+      </section>
+
       <section className="py-12 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 text-center">Nos autres pôles d'expertise</h4>

@@ -5,6 +5,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
 export const metadata: Metadata = {
   title: "Le Meilleur Plombier à Bruxelles - Devis Gratuit 24/7 | Pro Services",
   description: "Urgence plomberie à Bruxelles-Capitale ? Pro Services intervient en 30 min pour fuites d'eau, sanitaires et débouchages. Devis gratuit ☎ 0498 35 25 88.",
@@ -272,6 +274,16 @@ export default function PlombierBruxellesPage() {
       </section>
 
       {/* Relatifs & Nearby Areas */}
+      <section className="py-16 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+          <h2 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tight">Nos Réalisations en Plomberie & Débouchage</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">Interventions rapides et soignées pour tous vos problèmes de canalisations à Bruxelles.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DebouchageGallery initialType="all" isNl={false} />
+        </div>
+      </section>
+
       <section className="py-16 bg-slate-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">

@@ -4,6 +4,7 @@ import { belgianCities } from "@/lib/data/cities";
 import { cityData, getFallbackCityData } from "@/lib/cityData";
 import {
   PhoneCall,
+  MapPin,
   ChevronRight,
   CheckCircle,
   ShieldCheck,
@@ -14,18 +15,17 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
-import { PaintingGallery } from "@/components/sections/PaintingGallery";
-import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+import { paintingImages } from "@/lib/data/gallery-images";
 import { buildLongNlClusterText, getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { frToNlCitySlugMap, frToNlCityNameMap, dutchServices } from "@/lib/data/translations";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
-function getDebouchageInitialType(slug?: string) {
-  if (!slug) return "all" as const;
-  if (slug.includes("wc")) return "wc" as const;
-  if (slug.includes("evier") || slug.includes("gootsteen")) return "evier" as const;
-  if (slug.includes("egout") || slug.includes("riolering")) return "canalisation" as const;
+function getDebouchageInitialType(slug: string) {
+  if (slug.includes("wc") || slug.includes("toilet")) return "wc" as const;
+  if (slug.includes("evier") || slug.includes("wastafel") || slug.includes("gootsteen")) return "evier" as const;
+  if (slug.includes("egout") || slug.includes("riolering") || slug.includes("leidingen") || slug.includes("afvoer")) return "canalisation" as const;
   if (slug.includes("camera")) return "camera" as const;
-  if (slug.includes("baignoire") || slug.includes("bad")) return "baignoire" as const;
+  if (slug.includes("douche") || slug.includes("baignoire") || slug.includes("bad")) return "douche" as const;
   return "all" as const;
 }
 
@@ -45,44 +45,62 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const resolvedParams = await params;
   const { serviceSlug, cityPath } = resolvedParams;
+
   const { dutchService, dutchSubService, cityInfo } = resolveZoneServiceAndPath(
     serviceSlug,
     cityPath,
     "nl"
   );
-  
+
   const titleToUse = dutchSubService ? dutchSubService.title : dutchService.title;
   const path = `/nl/zones-de-services/${serviceSlug}/${cityPath.join("/")}`;
   const keywords = `${titleToUse}, ${cityInfo ? cityInfo.name : "België"}, spoedinterventie, reparatie 24/7, gratis offerte`;
-  
+
   if (dutchSubService && cityInfo) {
     const subSlug = dutchSubService.slug || serviceSlug;
     const title = getProfessionMetaTitle(subSlug, cityInfo.name, true);
+    const description = `Expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie in heel België 24/7. Erkende technici. Gratis offerte ☎ 0498 35 25 88`;
     return {
       title,
-      description: `Heeft u een expert nodig voor ${dutchSubService.title} in ${cityInfo.name}? Onze erkende technici komen binnen 30 minuten ter plaatse, 24/7. Gratis offerte zonder verplichting.`,
+      description,
       keywords,
-      alternates: {
-        canonical: path,
-      },
+      alternates: { canonical: path },
       openGraph: {
         title,
-        description: `Expert in ${dutchSubService.title} in ${cityInfo.name}. Gegarandeerde interventie 24/7.`,
+        description,
         url: `https://debservices.canalrose.be${path}`,
       },
     };
-  } else if (cityInfo) {
-    const title = getProfessionMetaTitle(serviceSlug, cityInfo.name, true);
+  }
+
+  if (dutchSubService) {
+    const subSlug = dutchSubService.slug || serviceSlug;
+    const title = getProfessionMetaTitle(subSlug, "België", true);
+    const description = `Ontdek alle Belgische steden waar wij tussenbeide komen voor uw ${titleToUse.toLowerCase()}. Snelle service 24u/24. Gratis offerte.`;
     return {
       title,
-      description: `Expert in ${dutchService.title} in ${cityInfo.name}. Snelle herstelling 24/7. Gratis offerte en interventie gegarandeerd binnen de 30 min.`,
+      description,
       keywords,
-      alternates: {
-        canonical: path,
-      },
+      alternates: { canonical: path },
       openGraph: {
         title,
-        description: `Spoedinterventie voor ${dutchService.title} in ${cityInfo.name}.`,
+        description,
+        url: `https://debservices.canalrose.be${path}`,
+      },
+    };
+  }
+
+  if (cityInfo) {
+    const title = getProfessionMetaTitle(serviceSlug, cityInfo.name, true);
+    const description = `Erkend expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie 24/7. Gratis offerte ☎ 0498 35 25 88`;
+    return {
+      title,
+      description,
+      keywords,
+      alternates: { canonical: path },
+      openGraph: {
+        title,
+        description,
         url: `https://debservices.canalrose.be${path}`,
       },
     };
@@ -90,10 +108,12 @@ export async function generateMetadata({
 
   return {
     title: getProfessionMetaTitle(serviceSlug, "België", true),
+    description: `Expert in ${dutchService.title.toLowerCase()} in heel België. Transparante tarieven en 24/7 spoed service. Gratis offerte.`,
+    alternates: { canonical: path },
   };
 }
 
-export default async function ZoneCityPage({
+export default async function NlUnifiedZonePage({
   params,
 }: {
   params: Promise<UnifiedParams>;
@@ -101,172 +121,406 @@ export default async function ZoneCityPage({
   const resolvedParams = await params;
   const { serviceSlug, cityPath } = resolvedParams;
 
-  const { dutchService, dutchSubService, cityInfo } =
+  const { service, dutchService, subService, dutchSubService, cityInfo } =
     resolveZoneServiceAndPath(serviceSlug, cityPath, "nl");
 
-  if (!dutchService || !cityInfo || !cityInfo) {
+  const titleToUse = dutchSubService ? dutchSubService.title : dutchService.title;
+  const descToUse = dutchSubService ? dutchSubService.desc : dutchService.description;
+
+  // Case 1: Subservice without City -> Show City Directory in Dutch
+  if (dutchSubService && !cityInfo) {
+    const provinces = Array.from(
+      new Set(belgianCities.map((c) => c.province))
+    ).sort();
+
     return (
-      <div className="bg-slate-900 min-h-[50vh] flex items-center justify-center text-white">
-        <h1>Stad of dienst niet gevonden.</h1>
+      <div className="bg-slate-900 min-h-screen pt-32 pb-24 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
+            <Link href="/nl" className="hover:text-blue-400 transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <Link
+              href="/nl/zones-de-services"
+              className="hover:text-blue-400 transition-colors"
+            >
+              Dienstenzones
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <Link
+              href={`/nl/${dutchService.slug}`}
+              className="hover:text-blue-400 transition-colors"
+            >
+              {dutchService.title}
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-white font-medium">{dutchSubService.title}</span>
+          </div>
+
+          <div className="mb-16">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6">
+              Steden voor <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                {dutchSubService.title}
+              </span>
+            </h1>
+            <p className="text-xl text-slate-400 max-w-2xl leading-relaxed">
+              Wij komen in heel België op spoedinterventie voor uw{" "}
+              {dutchSubService.title.toLowerCase()}. Selecteer uw stad voor een lokale vakman.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {provinces.map((province) => {
+              const cities = belgianCities
+                .filter((c) => c.province === province)
+                .sort((a, b) => a.name.localeCompare(b.name));
+              return (
+                <div
+                  key={province}
+                  className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-colors group"
+                >
+                  <h2 className="text-2xl font-black mb-6 flex items-center justify-between">
+                    {province}
+                  </h2>
+                  <div className="grid grid-cols-1 gap-1">
+                    {cities.map((city) => {
+                      const nlCitySlug = frToNlCitySlugMap[city.slug] || city.slug;
+                      const nlCityName = frToNlCityNameMap[city.name] || city.name;
+                      return (
+                        <Link
+                          key={city.slug}
+                          href={`/nl/zones-de-services/${dutchService.slug}/${dutchSubService.slug}/${nlCitySlug}`}
+                          className="flex items-center justify-between py-2 text-slate-400 hover:text-white transition-colors group/city"
+                        >
+                          <span className="text-sm font-bold uppercase tracking-tight">
+                            {nlCityName}
+                          </span>
+                          <ChevronRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/city:opacity-100 group-hover/city:translate-x-0 transition-all" />
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     );
   }
 
-  let enrichedCityData = cityData[cityInfo.slug as keyof typeof cityData];
-  if (!enrichedCityData) {
-    enrichedCityData = getFallbackCityData(cityInfo.name);
-  }
+  // Case 2: City Landing Page in Dutch
+  const activeCity = cityInfo || {
+    name: "Brussel",
+    slug: "brussel",
+    province: "Brussel",
+  };
 
-  const titleToUse = dutchSubService ? dutchSubService.title : dutchService.title;
-  const titleSlug = dutchSubService ? dutchSubService.slug : dutchService.slug;
-
-  const seoTextHtml = buildLongNlClusterText(
-    titleToUse,
-    cityInfo.name,
-    titleSlug || serviceSlug
+  const cityDataObj = cityData[activeCity.slug] ?? getFallbackCityData(activeCity.name, activeCity.province);
+  const localIntro = `Woont u in <strong>${activeCity.name}</strong> (${activeCity.province}) en zoekt u een expert voor <strong>${titleToUse.toLowerCase()}</strong>? Onze erkende technici komen binnen 30 tot 60 minuten ter plaatse voor een snelle en duurzame interventie.`;
+  
+  const massiveSEOContent = buildLongNlClusterText(
+    titleToUse.toLowerCase(),
+    activeCity.name,
+    descToUse
   );
 
+  const heroImg = (dutchSubService as any)?.imageUrl || (subService as any)?.imageUrl || (dutchService as any)?.imageUrl || service.imageUrl;
+
   return (
-    <main className="bg-slate-900 min-h-screen text-white overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full mix-blend-screen" />
-          <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-indigo-900/30 blur-[150px] rounded-full mix-blend-screen" />
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-              backgroundSize: "40px 40px",
-            }}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Service",
+                "@id": `https://debservices.canalrose.be/nl/zones-de-services/${serviceSlug}/${cityPath.join("/")}#service`,
+                name: `${titleToUse} in ${activeCity.name}`,
+                serviceType: titleToUse,
+                description: `${titleToUse} in ${activeCity.name}. Dringende interventie 24/7 in heel België. Erkende vakmensen.`,
+                provider: {
+                  "@id": "https://debservices.canalrose.be/#organization",
+                },
+                areaServed: {
+                  "@type": "City",
+                  name: activeCity.name,
+                },
+              },
+              {
+                "@type": "LocalBusiness",
+                "@id": "https://debservices.canalrose.be/#organization",
+                name: "Pro Service",
+                image: "https://debservices.canalrose.be/logo.png",
+                url: "https://debservices.canalrose.be",
+                telephone: "+32496325733",
+                priceRange: "$$",
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "4.9",
+                  reviewCount: "6854",
+                  bestRating: "5",
+                  worstRating: "1",
+                },
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: activeCity.name,
+                  addressRegion: activeCity.province,
+                  postalCode: "1000",
+                  streetAddress: "Lokale Service",
+                  addressCountry: "BE",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
+      <section className="relative pt-32 pb-24 overflow-hidden text-white border-b border-white/10">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src={heroImg}
+            alt={`PRO SERVICES - ${titleToUse} ${activeCity.name}`}
+            fill
+            priority
+            className="object-cover object-center"
           />
+          <div className="absolute inset-0 bg-[#000814]/85 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/50" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-400 mb-8 sm:mb-12 overflow-x-auto whitespace-nowrap pb-2">
-            <Link href="/nl" className="hover:text-white transition-colors">
-              Startpagina
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
+            <Link href="/nl" className="hover:text-blue-400 font-medium">
+              Home
             </Link>
-            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
-            <Link href="/nl/zones-de-services" className="hover:text-white transition-colors">
+            <ChevronRight className="w-4 h-4" />
+            <Link href="/nl/zones-de-services" className="hover:text-blue-400 font-medium">
               Zones
             </Link>
-            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
-            <Link href={`/nl/zones-de-services/${dutchService.slug}`} className="hover:text-white transition-colors">
+            <ChevronRight className="w-4 h-4" />
+            <Link
+              href={`/nl/${dutchService.slug}`}
+              className="hover:text-blue-400 font-medium"
+            >
               {dutchService.title}
             </Link>
-            {dutchSubService && (
-              <>
-                <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                <Link href={`/nl/zones-de-services/${dutchService.slug}/${cityPath[0]}`} className="hover:text-white transition-colors truncate">
-                  {dutchSubService.title}
-                </Link>
-              </>
-            )}
-            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span className="text-white font-bold">{cityInfo.name}</span>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-white font-bold">{activeCity.name}</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-center">
-            <div className="lg:col-span-7">
-              <h1 className="text-4xl sm:text-[40px] leading-[1.1] md:text-5xl lg:text-7xl font-black sm:leading-tight mb-4 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tight break-words">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-widest text-white border border-blue-400/30 mb-8 shadow-2xl shadow-blue-600/30">
+                <MapPin className="w-4 h-4" />
+                Lokale technicus in {activeCity.name}
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tight">
                 {titleToUse} <br />
-                <span className="text-blue-500">{cityInfo.name}</span>
+                <span className="text-blue-500">{activeCity.name}</span>
               </h1>
-
-              <p className="text-base sm:text-lg md:text-2xl text-blue-100/70 mb-8 sm:mb-10 leading-relaxed max-w-2xl">
-                Nood aan een expert voor <strong>{titleToUse.toLowerCase()}</strong> in {cityInfo.name}? Onze technici komen binnen 30 tot 60 minuten ter plaatse, 24/7. Gratis offerte zonder verplichting.
+              <p className="text-lg md:text-2xl text-blue-100/70 mb-8 md:mb-10 leading-relaxed max-w-2xl">
+                Nood aan een expert voor <strong>{titleToUse.toLowerCase()}</strong> in {activeCity.name}? Onze technici komen binnen 30 tot 60 minuten ter plaatse, 24/7. Gratis offerte zonder verplichting.
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-10 sm:mb-16">
+              <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
                 <a
                   href="tel:0498 35 25 88"
-                  className="bg-blue-600 hover:bg-blue-500 text-white px-6 sm:px-8 py-4 sm:py-5 rounded-2xl font-black text-lg sm:text-xl flex items-center justify-center gap-3 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
                 >
-                  <PhoneCall className="w-6 h-6 animate-pulse" />
-                  0498 35 25 88
+                  <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <div className="text-left">
+                    <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
+                      SOS Oproep 24/7
+                    </span>
+                    <span className="block text-lg md:text-xl">
+                      0498 35 25 88
+                    </span>
+                  </div>
                 </a>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                <div className="flex items-center gap-3 text-slate-300 bg-white/5 p-4 rounded-xl border border-white/10">
-                  <ShieldCheck className="w-6 h-6 text-green-400 shrink-0" />
-                  <span className="font-semibold text-sm sm:text-base">Gratis Offerte & Zonder Verplichting</span>
-                </div>
-                <div className="flex items-center gap-3 text-slate-300 bg-white/5 p-4 rounded-xl border border-white/10">
-                  <CheckCircle className="w-6 h-6 text-blue-400 shrink-0" />
-                  <span className="font-semibold text-sm sm:text-base">Kwaliteitsgarantie op Interventie</span>
-                </div>
+                <a
+                  href="#contact"
+                  className="w-full sm:w-auto text-center bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-6 py-4 md:px-10 md:py-6 rounded-2xl border border-white/20 transition text-base md:text-lg"
+                >
+                  Snel Offerte
+                </a>
               </div>
             </div>
 
-            <div className="lg:col-span-5 relative mt-8 lg:mt-0">
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent z-10 rounded-3xl" />
-              <div className="bg-white/5 border border-white/10 p-4 sm:p-8 rounded-3xl backdrop-blur-md relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-[50px]" />
-                <h3 className="text-xl sm:text-2xl font-black mb-6 flex items-center gap-3">
-                  <ShieldAlert className="w-6 h-6 text-red-500" />
-                  Spoedinterventie
-                </h3>
-                <ContactForm />
+            <div className="relative mt-8 lg:mt-0">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
+                <Image
+                  src={heroImg}
+                  fill
+                  priority={true}
+                  alt={`${titleToUse} in ${activeCity.name}`}
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SEO Content Section */}
-      <section className="py-24 bg-slate-900 border-t border-white/5 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-16 items-start">
+      {/* Main Content */}
+      <section className="py-24 relative z-10 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-12 gap-16">
             <div className="lg:col-span-8 space-y-16">
-              <ServiceSeoText serviceTitle={titleToUse} cityName={cityInfo.name} />
-              {serviceSlug === "debouchage-canalisation" && (
-                <DebouchageGallery initialType={getDebouchageInitialType(dutchSubService?.slug)} isNl={true} />
-              )}
-              {serviceSlug === "peinture" && (
-                <PaintingGallery />
-              )}
-            </div>
-            
-            <div className="lg:col-span-4 space-y-8 sticky top-32">
-              <div className="bg-gradient-to-br from-blue-600 to-indigo-900 p-8 rounded-3xl border border-blue-500/30 text-white shadow-2xl">
-                <h4 className="font-black text-2xl mb-4">Urgentie 24/7</h4>
-                <p className="text-blue-100 mb-6">
-                  Onze technici staan klaar om onmiddellijk te interveniëren in {cityInfo.name}.
-                </p>
-                <a
-                  href="tel:0498 35 25 88"
-                  className="bg-white text-blue-900 w-full px-6 py-4 rounded-xl font-black text-lg flex items-center justify-center gap-3 hover:bg-blue-50 transition-colors"
-                >
-                  <PhoneCall className="w-6 h-6" />
-                  0498 35 25 88
-                </a>
+              <div>
+                <h2 className="text-3xl md:text-5xl font-black mb-6 md:mb-10 text-white">
+                  {titleToUse} in {activeCity.name} : Onze Expertise
+                </h2>
+                <div className="prose prose-lg md:prose-xl prose-invert text-white">
+                  <p dangerouslySetInnerHTML={{ __html: localIntro }} />
+                </div>
               </div>
-              
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
-                <h4 className="font-bold text-xl mb-6">Andere zones gedekt</h4>
-                <ul className="space-y-3">
-                  {belgianCities.slice(0, 5).map((c) => (
-                    <li key={c.slug}>
-                      <Link 
-                        href={`/nl/zones-de-services/${serviceSlug}${dutchSubService ? `/${dutchSubService.slug}` : ""}/${c.slug}`}
-                        className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
-                      >
-                        <ChevronRight className="w-4 h-4 text-blue-500" />
-                        {c.name}
-                      </Link>
-                    </li>
+
+              <div>
+                <h3 className="text-2xl md:text-4xl font-black mb-8 md:mb-10 text-white">
+                  Waarom kiezen voor ons in {activeCity.name}?
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  {(dutchService.trustPoints || [
+                    { title: "Snelle Interventie", desc: `Aankomst binnen 30-60 min in ${activeCity.name}.` },
+                    { title: "Erkende Technici", desc: "Gecertificeerde vakmensen volgens Belgische normen." },
+                    { title: "Transparante Prijzen", desc: "Gratis offerte vooraf, geen verborgen kosten." },
+                    { title: "24/7 Beschikbaar", desc: "Dag en nacht bereikbaar, ook in het weekend." },
+                  ]).map((item: { title: string; desc: string }, idx: number) => (
+                    <div
+                      key={idx}
+                      className="bg-white/5 border border-white/10 rounded-3xl p-6 hover:border-blue-500/30 transition-colors"
+                    >
+                      <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <CheckCircle className="w-6 h-6 text-blue-400" />
+                      </div>
+                      <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                      <p className="text-slate-400 text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   ))}
-                </ul>
+                </div>
+              </div>
+
+              {/* Multiple Images Gallery Section */}
+              {serviceSlug === "debouchage-canalisation" ? (
+                <div className="py-12 border-t border-white/10">
+                  <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight font-oswald">
+                    Foto&apos;s van onze interventies in {activeCity.name}
+                  </h3>
+                  <DebouchageGallery 
+                    initialType={dutchSubService ? getDebouchageInitialType(dutchSubService.slug) : "all"} 
+                    isNl={true} 
+                  />
+                </div>
+              ) : (dutchService.id === "peinture" || serviceSlug === "peinture") ? (
+                <div className="py-12 border-t border-white/10">
+                  <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">
+                    Foto&apos;s van onze interventies
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {paintingImages.map((img, idx) => (
+                      <div
+                        key={idx}
+                        className="relative h-64 sm:h-72 rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-xl group"
+                      >
+                        <Image
+                          src={img.url}
+                          alt={`${img.title || img.category} - ${activeCity.name}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                          <div>
+                            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block mb-1">
+                              {img.category === "Intérieur" ? "Interieur" : img.category === "Extérieur" ? "Exterieur" : img.category === "Boiseries" ? "Houtwerk" : img.category === "Cuisines" ? "Keukens" : img.category === "Sols" ? "Vloeren" : img.category}
+                            </span>
+                            <h4 className="text-sm font-bold text-white uppercase tracking-tight">
+                              {img.title}
+                            </h4>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="mt-16 prose prose-xl prose-invert text-white">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: massiveSEOContent.join(""),
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 relative">
+              <div className="sticky top-32 space-y-8">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl">
+                  <h3 className="font-bold text-xl mb-4 text-white uppercase tracking-tighter">
+                    Andere diensten in {activeCity.name}
+                  </h3>
+                  <div className="grid grid-cols-1 gap-2">
+                    {dutchServices
+                      .filter((s) => s.slug !== dutchService.slug)
+                      .slice(0, 5)
+                      .map((s) => (
+                        <Link
+                          key={s.slug}
+                          href={`/nl/zones-de-services/${s.slug}/${activeCity.slug}`}
+                          className="text-xs bg-white/5 border border-white/10 p-3 rounded-xl text-slate-300 hover:text-white hover:border-blue-500/50 transition-all flex items-center justify-between group"
+                        >
+                          <span className="font-bold uppercase">
+                            {s.title} {activeCity.name}
+                          </span>
+                          <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 transition-colors" />
+                        </Link>
+                      ))}
+                  </div>
+                </div>
+
+                <div className="bg-blue-600 p-8 rounded-3xl shadow-2xl shadow-blue-600/20">
+                  <h3 className="text-2xl font-black text-white mb-4 italic">
+                    DRINGENDE HERSTELLING?
+                  </h3>
+                  <p className="text-blue-100 mb-6">
+                    Neem direct contact op voor snelle hulp in {activeCity.name}.
+                  </p>
+                  <a
+                    href="tel:0498 35 25 88"
+                    className="w-full bg-white text-blue-600 font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-100 transition shadow-lg"
+                  >
+                    <PhoneCall className="w-5 h-5" /> 0498 35 25 88
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <FAQ city={cityInfo.name} />
-    </main>
+      <section className="py-24 bg-white/5 border-t border-white/10 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-black text-white mb-4">
+              Aanvraag voor {titleToUse} in {activeCity.name}
+            </h2>
+            <p className="text-slate-400">
+              Vul het onderstaande formulier in voor een snelle en vrijblijvende offerte.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
+      </section>
+
+      <FAQ customFaqs={dutchService.faqs} />
+      <ServiceSeoText serviceTitle={`${titleToUse} in ${activeCity.name}`} />
+    </>
   );
 }

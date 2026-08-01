@@ -5,6 +5,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+
 export const metadata: Metadata = {
   title: "De Beste Loodgieter in Grimbergen - Gratis Offerte 24/7 | Pro Services",
   description: "Dringende loodgieter nodig in Grimbergen of Strombeek-Bever? Pro Services is binnen 30 minuten ter plaatse voor lekken, sanitair en ontstoppingen. Bel ☎ 0498 35 25 88!",
@@ -202,6 +204,16 @@ export default function LoodgieterGrimbergenPage() {
       </section>
 
       {/* Nearby Areas */}
+      <section className="py-20 bg-slate-950/20 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">Onze Realisaties in Grimbergen</h2>
+          <p className="text-slate-300 max-w-2xl mx-auto font-medium">Ontdek in beelden de kwaliteit van onze loodgieters- en ontstoppingwerkzaamheden.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <DebouchageGallery initialType="all" isNl={true} />
+        </div>
+      </section>
+
       <section className="py-20 bg-slate-950/20 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">

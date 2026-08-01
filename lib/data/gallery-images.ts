@@ -10,7 +10,7 @@ export interface DebouchageGalleryImage {
   categoryNl: string;
   title: string;
   titleNl: string;
-  type: "wc" | "evier" | "canalisation" | "baignoire" | "camera";
+  type: "wc" | "evier" | "canalisation" | "douche" | "baignoire" | "camera";
 }
 
 export const paintingImages: PaintingGalleryImage[] = [

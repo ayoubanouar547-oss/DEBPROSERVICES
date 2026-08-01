@@ -14,10 +14,11 @@ import { PaintingGallery } from "@/components/sections/PaintingGallery";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 function getDebouchageInitialType(slug: string) {
-  if (slug.includes("wc")) return "wc" as const;
-  if (slug.includes("evier") || slug.includes("gootsteen")) return "evier" as const;
-  if (slug.includes("egout") || slug.includes("riolering")) return "canalisation" as const;
+  if (slug.includes("wc") || slug.includes("toilet")) return "wc" as const;
+  if (slug.includes("evier") || slug.includes("wastafel") || slug.includes("gootsteen")) return "evier" as const;
+  if (slug.includes("egout") || slug.includes("riolering") || slug.includes("leidingen") || slug.includes("afvoer")) return "canalisation" as const;
   if (slug.includes("camera")) return "camera" as const;
+  if (slug.includes("douche") || slug.includes("baignoire") || slug.includes("bad")) return "douche" as const;
   return "all" as const;
 }
 
