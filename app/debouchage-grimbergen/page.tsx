@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Débouchage Grimbergen : WC, Évier & Égout Bouché | Pro Services",
-  description: "Canalisation bouchée ou refoulement d'égout à Grimbergen, Strombeek-Bever & environs ? Nos techniciens interviennent d'urgence 24h/24 en 30 min. Devis gratuit.",
+  title: "Le Meilleur Déboucheur à Grimbergen - Devis Gratuit 24/7 | Pro Services",
+  description: "Canalisation bouchée, WC ou égout refoulé à Grimbergen & environs ? Intervention rapide 24h/24 en 30 min par nos déboucheurs agréés. Devis gratuit ☎ 0498 35 25 88.",
   alternates: {
     canonical: "/debouchage-grimbergen",
   },

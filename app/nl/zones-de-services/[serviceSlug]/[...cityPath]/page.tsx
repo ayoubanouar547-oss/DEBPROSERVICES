@@ -16,7 +16,6 @@ import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import { paintingImages } from "@/lib/data/gallery-images";
-import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 import { buildLongNlClusterText, getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { frToNlCitySlugMap, frToNlCityNameMap, dutchServices } from "@/lib/data/translations";
 
@@ -48,7 +47,8 @@ export async function generateMetadata({
   const keywords = `${titleToUse}, ${cityInfo ? cityInfo.name : "België"}, spoedinterventie, reparatie 24/7, gratis offerte`;
 
   if (dutchSubService && cityInfo) {
-    const title = getProfessionMetaTitle(serviceSlug, cityInfo.name, true);
+    const subSlug = dutchSubService.slug || serviceSlug;
+    const title = getProfessionMetaTitle(subSlug, cityInfo.name, true);
     const description = `Expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie in heel België 24/7. Erkende technici. Gratis offerte ☎ 0498 35 25 88`;
     return {
       title,
@@ -64,8 +64,9 @@ export async function generateMetadata({
   }
 
   if (dutchSubService) {
-    const title = `🚨 ${titleToUse} België ⚡ Snelle Interventie 24/7`;
-    const description = `Ontdek alle Belgische steden waar wij tussenbeide komen voor uw ${titleToUse.toLowerCase()}. Snelle service 24u/24.`;
+    const subSlug = dutchSubService.slug || serviceSlug;
+    const title = getProfessionMetaTitle(subSlug, "België", true);
+    const description = `Ontdek alle Belgische steden waar wij tussenbeide komen voor uw ${titleToUse.toLowerCase()}. Snelle service 24u/24. Gratis offerte.`;
     return {
       title,
       description,
@@ -96,8 +97,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: `🚨 ${dutchService.title} België — Snelle Interventie 24/7`,
-    description: `Expert in ${dutchService.title.toLowerCase()} in heel België. Transparante tarieven en 24/7 spoed service.`,
+    title: getProfessionMetaTitle(serviceSlug, "België", true),
+    description: `Expert in ${dutchService.title.toLowerCase()} in heel België. Transparante tarieven en 24/7 spoed service. Gratis offerte.`,
     alternates: { canonical: path },
   };
 }
@@ -427,18 +428,6 @@ export default async function NlUnifiedZonePage({
                       </div>
                     ))}
                   </div>
-                </div>
-              ) : (dutchService.id === "debouchage" || serviceSlug === "debouchage-canalisation") ? (
-                <div className="py-12 border-t border-white/10">
-                  <DebouchageGallery
-                    isNl={true}
-                    initialType={
-                      dutchSubService?.slug === "debouchage-wc-toilettes" ? "wc" :
-                      dutchSubService?.slug === "debouchage-egout-et-canalisations" ? "canalisation" :
-                      dutchSubService?.slug === "debouchage-evier-et-lavabo" ? "evier" :
-                      dutchSubService?.slug === "inspection-camera-canalisation" ? "camera" : "all"
-                    }
-                  />
                 </div>
               ) : null}
 

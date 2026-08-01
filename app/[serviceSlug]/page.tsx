@@ -11,7 +11,6 @@ import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { matchServiceAndCity } from "@/lib/service-matcher";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
-import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 
 // Helper function to dynamically parse service and city combinations for all of Belgium
@@ -428,7 +427,7 @@ export default async function ServicePage({
         }}
       />
 
-      <section className="relative pt-32 pb-20 overflow-hidden text-white border-b border-white/10">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 overflow-hidden text-white border-b border-white/10">
         <div className="absolute inset-0 -z-10">
           <Image
             src={heroImage}
@@ -444,28 +443,28 @@ export default async function ServicePage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7">
               <div
-                className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full text-sm font-bold border border-white/10 mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}
+                className={`inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/5 backdrop-blur-md rounded-full text-xs sm:text-sm font-bold border border-white/10 mb-4 sm:mb-6 uppercase tracking-widest ${serviceInfo.color.text}`}
               >
-                <serviceInfo.icon className="w-4 h-4" />
+                <serviceInfo.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 {cityInfo ? `Service Pro & Agréé à ${cityInfo.name}` : "Service Pro & Agrée en Belgique"}
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 text-white drop-shadow-lg">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-snug sm:leading-tight mb-4 sm:mb-6 text-white drop-shadow-lg break-words uppercase">
                 {h1Title}
               </h1>
-              <p className="text-xl text-slate-300 mb-8 max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-lg md:text-xl text-slate-300 mb-6 sm:mb-8 max-w-2xl leading-relaxed">
                 {descriptionText}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30 text-sm sm:text-base"
                 >
-                  <PhoneCall className="w-5 h-5" /> Urgence {matchedTerm}
+                  <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5" /> Urgence {matchedTerm}
                 </a>
               </div>
             </div>
 
-            <div className="lg:col-span-5 w-full max-w-lg mx-auto mt-8 lg:mt-0">
+            <div className="lg:col-span-5 w-full max-w-lg mx-auto mt-6 lg:mt-0">
               <HeroQuoteForm />
             </div>
           </div>
@@ -473,19 +472,19 @@ export default async function ServicePage({
       </section>
 
       {/* Sub-services / Clusters Overview */}
-      <section className="py-24 relative z-10 text-white bg-slate-900/50">
+      <section className="py-12 sm:py-24 relative z-10 text-white bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-5xl font-black mb-6 md:mb-10 text-white uppercase tracking-tight">
+          <div className="text-center mb-8 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black mb-4 sm:mb-8 text-white uppercase tracking-tight break-words">
               Nos services de {serviceInfo.title} {cityInfo ? `à ${cityInfo.name}` : "en Belgique"}
             </h2>
-            <p className="text-white text-lg md:text-xl max-w-2xl mx-auto font-medium">
+            <p className="text-white text-sm sm:text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
               Découvrez en détail l'ensemble de nos champs d'expertise {cityInfo ? `à ${cityInfo.name}` : "en Belgique"}. Chaque
               problème a sa solution dédiée avec PRO SERVICES.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
             {serviceInfo.subServices.map((sub: any) => (
               <Link
                 key={sub.slug}
@@ -530,10 +529,17 @@ export default async function ServicePage({
             <div className="relative">
               {serviceInfo.slug === "peinture" ? (
                 <PaintingGallery />
-              ) : serviceInfo.slug === "debouchage-canalisation" ? (
-                <DebouchageGallery initialType="all" />
               ) : (
-                <PaintingGallery />
+                <div className="relative h-[450px] sm:h-[520px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
+                  <Image
+                    src={serviceInfo.imageUrl}
+                    alt={`${serviceInfo.title} ${cityInfo ? cityInfo.name : "Belgique"}`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-transparent opacity-60" />
+                </div>
               )}
               {/* Trust Badge */}
               <div className="absolute -bottom-6 -right-6 bg-blue-600 p-8 rounded-2xl shadow-2xl z-20 border-4 border-[#000814]">

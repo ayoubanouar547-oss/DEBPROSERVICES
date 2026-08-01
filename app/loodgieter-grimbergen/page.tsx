@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Loodgieter Grimbergen : Dringende Herstelling & Ontstopping | Pro Services",
-  description: "Dringende loodgieter nodig in Grimbergen of Strombeek-Bever? Pro Services is binnen 30 minuten ter plaatse for lekken, sanitair en ontstoppingen. Bel ons!",
+  title: "De Beste Loodgieter in Grimbergen - Gratis Offerte 24/7 | Pro Services",
+  description: "Dringende loodgieter nodig in Grimbergen of Strombeek-Bever? Pro Services is binnen 30 minuten ter plaatse voor lekken, sanitair en ontstoppingen. Bel ☎ 0498 35 25 88!",
   alternates: {
     canonical: "/loodgieter-grimbergen",
   },

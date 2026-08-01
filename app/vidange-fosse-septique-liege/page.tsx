@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Vidange Fosse Septique Liège : Curage & Hydrocurage | Pro Services",
-  description: "Fosse septique pleine à Liège ou en Province de Liège ? Nos techniciens interviennent d'urgence 24h/24 pour la vidange et le curage de vos fosses et bacs à graisse. Devis gratuit.",
+  title: "Le Meilleur Expert Vidange Fosse Septique à Liège - Devis Gratuit 24/7 | Pro Services",
+  description: "Fosse septique pleine à Liège ? Intervention rapide 24h/24 pour la vidange, le pompage et le curage de vos fosses septiques & bacs à graisse. Devis gratuit ☎ 0498 35 25 88.",
   alternates: {
     canonical: "/vidange-fosse-septique-liege",
   },

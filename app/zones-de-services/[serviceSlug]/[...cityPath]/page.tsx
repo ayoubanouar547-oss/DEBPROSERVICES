@@ -19,7 +19,6 @@ import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import { paintingImages } from "@/lib/data/gallery-images";
-import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 interface UnifiedParams {
   serviceSlug: string;
@@ -376,7 +375,7 @@ export default async function UnifiedZonePage({
         }}
       />
 
-      <section className="relative pt-32 pb-24 overflow-hidden text-white border-b border-white/10">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden text-white border-b border-white/10">
         <div className="absolute inset-0 -z-10">
           <Image
             src={subServiceInfo?.imageUrl || serviceInfo.imageUrl}
@@ -390,25 +389,25 @@ export default async function UnifiedZonePage({
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-400 mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap scrollbar-none pb-2">
             <Link href="/" className="hover:text-blue-400 font-medium">
               Accueil
             </Link>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <Link
               href="/zones-de-services"
               className="hover:text-blue-400 font-medium"
             >
               Zones
             </Link>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <Link
               href={`/zones-de-services/${serviceInfo.slug}`}
               className="hover:text-blue-400 font-medium"
             >
               {serviceInfo.title}
             </Link>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             {subServiceInfo && (
               <>
                 <Link
@@ -417,7 +416,7 @@ export default async function UnifiedZonePage({
                 >
                   {cityInfo.name}
                 </Link>
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </>
             )}
             <span className="text-white font-bold">
@@ -425,47 +424,47 @@ export default async function UnifiedZonePage({
             </span>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-widest text-white border border-blue-400/30 mb-8 shadow-2xl shadow-blue-600/30">
-                <MapPin className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-wider text-white border border-blue-400/30 mb-6 sm:mb-8 shadow-2xl shadow-blue-600/30">
+                <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 Technicien local dispatché à {cityInfo.name}
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tight">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-snug sm:leading-tight mb-4 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tight break-words">
                 {titleToUse} <br />
                 <span className="text-blue-500">{cityInfo.name}</span>
               </h1>
-              <p className="text-lg md:text-2xl text-blue-100/70 mb-8 md:mb-10 leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-lg md:text-2xl text-blue-100/80 mb-6 sm:mb-10 leading-relaxed max-w-2xl">
                 Besoin d'un expert pour{" "}
                 <strong>{titleToUse.toLowerCase()}</strong> à {cityInfo.name} ?
                 Nos techniciens interviennent chez vous en moins de {cityDataObj.interventionTime},
                 24h/24 et 7j/7. Devis gratuit et sans engagement.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3.5 sm:px-10 sm:py-6 rounded-2xl flex items-center justify-center gap-3 sm:gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-sm sm:text-lg group"
                 >
-                  <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <PhoneCall className="w-5 h-5 sm:w-7 sm:h-7 animate-pulse group-hover:scale-110 transition-transform" />
                   <div className="text-left">
-                    <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
+                    <span className="block text-[10px] sm:text-xs opacity-80 uppercase tracking-widest font-bold">
                       Dépannage Urgent
                     </span>
-                    <span className="block text-lg md:text-xl">
+                    <span className="block text-base sm:text-xl">
                       0498 35 25 88
                     </span>
                   </div>
                 </a>
                 <a
                   href="#contact"
-                  className="w-full sm:w-auto text-center bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-6 py-4 md:px-10 md:py-6 rounded-2xl border border-white/20 transition text-base md:text-lg"
+                  className="w-full sm:w-auto text-center bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-6 py-3.5 sm:px-10 sm:py-6 rounded-2xl border border-white/20 transition text-sm sm:text-lg"
                 >
                   Demander un Devis
                 </a>
               </div>
             </div>
 
-            <div className="relative mt-8 lg:mt-0 w-full max-w-lg mx-auto">
+            <div className="relative mt-6 lg:mt-0 w-full max-w-lg mx-auto">
               <HeroQuoteForm />
             </div>
           </div>
@@ -548,92 +547,39 @@ export default async function UnifiedZonePage({
               </div>
 
               {/* Multiple Images Gallery Section */}
-              <div className="py-12 border-t border-white/10">
-                {serviceInfo.id === "peinture" || serviceSlug === "peinture" ? (
-                  <>
-                    <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">
-                      Photos de nos interventions
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                      {paintingImages.map((img, idx) => (
-                        <div
-                          key={idx}
-                          className="relative h-64 sm:h-72 rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-xl group"
-                        >
-                          <Image
-                            src={img.url}
-                            alt={`${img.title || img.category} - ${cityInfo.name}`}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            referrerPolicy="no-referrer"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <div>
-                              <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block mb-1">
-                                {img.category}
-                              </span>
-                              <h4 className="text-sm font-bold text-white uppercase tracking-tight">
-                                {img.title}
-                              </h4>
-                            </div>
+              {(serviceInfo.id === "peinture" || serviceSlug === "peinture") ? (
+                <div className="py-12 border-t border-white/10">
+                  <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">
+                    Photos de nos interventions
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {paintingImages.map((img, idx) => (
+                      <div
+                        key={idx}
+                        className="relative h-64 sm:h-72 rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-xl group"
+                      >
+                        <Image
+                          src={img.url}
+                          alt={`${img.title || img.category} - ${cityInfo.name}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                          <div>
+                            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block mb-1">
+                              {img.category}
+                            </span>
+                            <h4 className="text-sm font-bold text-white uppercase tracking-tight">
+                              {img.title}
+                            </h4>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </>
-                ) : serviceInfo.id === "debouchage" || serviceSlug === "debouchage-canalisation" ? (
-                  <DebouchageGallery
-                    initialType={
-                      subServiceInfo?.slug === "debouchage-wc-toilettes" ? "wc" :
-                      subServiceInfo?.slug === "debouchage-egout-et-canalisations" ? "canalisation" :
-                      subServiceInfo?.slug === "debouchage-evier-et-lavabo" ? "evier" :
-                      subServiceInfo?.slug === "inspection-camera-canalisation" ? "camera" : "all"
-                    }
-                  />
-                ) : (
-                  <>
-                    <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">
-                      Photos de nos interventions
-                    </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
-                        <Image
-                          src={
-                            subServiceInfo?.imageUrl ||
-                            serviceInfo.subServices[0]?.imageUrl ||
-                            serviceInfo.imageUrl
-                          }
-                          alt={`Intervention ${titleToUse} ${cityInfo.name}`}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
                       </div>
-                      <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
-                        <Image
-                          src={
-                            serviceInfo.subServices[1]?.imageUrl ||
-                            serviceInfo.imageUrl
-                          }
-                          alt={`Technicien ${serviceInfo.title} ${cityInfo.name}`}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                      <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group hidden md:block">
-                        <Image
-                          src={
-                            serviceInfo.subServices[2]?.imageUrl ||
-                            serviceInfo.imageUrl
-                          }
-                          alt={`Dépannage urgent ${cityInfo.name}`}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
 
               <div className="bg-blue-600/10 border border-blue-500/20 rounded-3xl p-10">
                 <h3 className="text-3xl font-black mb-6 text-white">

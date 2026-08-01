@@ -418,47 +418,47 @@ export function ContactForm() {
   };
 
   return (
-    <section className="py-20 relative z-10" id="contact">
+    <section className="py-12 sm:py-20 relative z-10" id="contact">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Header & Selector Tabs */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           <h2 className="text-blue-400 font-bold tracking-widest uppercase mb-2 text-xs md:text-sm">
             {isNl ? "Contact & Afspraken" : "Contact & Prise de Rendez-vous"}
           </h2>
-          <h3 className="text-3xl md:text-5xl font-black text-white mb-4">
+          <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-3 sm:mb-4 break-words">
             {isNl ? "Réserver une intervention ou obtenir un devis" : "Réserver une intervention ou demander un devis"}
           </h3>
-          <p className="text-slate-400 text-base md:text-lg">
+          <p className="text-slate-400 text-sm md:text-lg leading-relaxed">
             {isNl
               ? "Kies een datum en tijdslot voor een snelle interventie door een erkende technicus, of stuur ons een algemene offerte-aanvraag."
               : "Choisissez une date et un créneau horaire pour une intervention directe avec un technicien certifié, ou envoyez une demande de devis express."}
           </p>
 
           {/* Tab Switcher */}
-          <div className="inline-flex p-1.5 bg-slate-900/90 rounded-2xl border border-white/10 mt-8 shadow-xl">
+          <div className="inline-flex flex-col sm:flex-row p-1.5 bg-slate-900/90 rounded-2xl border border-white/10 mt-6 sm:mt-8 shadow-xl w-full sm:w-auto gap-1">
             <button
               onClick={() => setActiveTab("devis")}
-              className={`px-6 py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-2 ${
+              className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 ${
                 activeTab === "devis"
                   ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/30"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <FileText className="w-4 h-4 text-indigo-300" />
-              {isNl ? "📋 Snelle Offerte / Bericht" : "📋 Demande de Devis / Message"}
+              <FileText className="w-4 h-4 text-indigo-300 flex-shrink-0" />
+              <span>{isNl ? "📋 Snelle Offerte / Bericht" : "📋 Demande de Devis / Message"}</span>
             </button>
 
             <button
               onClick={() => setActiveTab("booking")}
-              className={`px-6 py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-2 ${
+              className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center justify-center gap-2 ${
                 activeTab === "booking"
                   ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/30"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <Calendar className="w-4 h-4 text-blue-300" />
-              {isNl ? "📅 Réserver une intervention (Datum & Tijdslot)" : "📅 Réserver une intervention (Date & Créneau)"}
+              <Calendar className="w-4 h-4 text-blue-300 flex-shrink-0" />
+              <span>{isNl ? "📅 Réserver (Datum & Tijdslot)" : "📅 Réserver (Date & Créneau)"}</span>
             </button>
           </div>
         </div>
@@ -470,12 +470,12 @@ export function ContactForm() {
           </div>
         ) : (
           /* Tab 2: Standard Quick Quote Form */
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-3 duration-300">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto animate-in fade-in slide-in-from-bottom-3 duration-300">
             <div className="order-2 lg:order-1">
-              <h3 className="text-2xl md:text-4xl font-black text-white mb-4">
+              <h3 className="text-xl sm:text-2xl md:text-4xl font-black text-white mb-3 sm:mb-4">
                 {isNl ? "Gratis en Vrijblijvende Offerte" : "Devis Gratuit & Sans Engagement"}
               </h3>
-              <p className="text-slate-400 mb-8 text-base leading-relaxed">
+              <p className="text-slate-400 mb-6 sm:mb-8 text-xs sm:text-base leading-relaxed">
                 {isNl ? (
                   "Vul het onderstaande formulier in met zoveel mogelijk details. Ons team neemt zo snel mogelijk contact met u op voor een diagnose of een nauwkeurige offerte."
                 ) : (
@@ -483,14 +483,14 @@ export function ContactForm() {
                 )}
               </p>
 
-              <div className="space-y-4">
-                <div className="bg-white/5 backdrop-blur-xl p-5 rounded-2xl border border-white/10 flex items-start gap-3">
-                  <ShieldCheck className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-0.5" />
+              <div className="space-y-3 sm:space-y-4">
+                <div className="bg-white/5 backdrop-blur-xl p-4 sm:p-5 rounded-2xl border border-white/10 flex items-start gap-3">
+                  <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-bold text-white text-sm">
+                    <h4 className="font-bold text-white text-xs sm:text-sm">
                       {isNl ? "100% Transparante Tarieven" : "Tarifs 100% Transparents"}
                     </h4>
-                    <p className="text-slate-400 text-xs mt-1">
+                    <p className="text-slate-400 text-[11px] sm:text-xs mt-0.5 sm:mt-1">
                       {isNl
                         ? "Geen verborgen kosten. Voorafgaande schriftelijke offerte voor elke herstelling."
                         : "Aucun frais caché. Devis écrit préalable avant toute intervention."}
@@ -498,13 +498,13 @@ export function ContactForm() {
                   </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur-xl p-5 rounded-2xl border border-white/10 flex items-start gap-3">
-                  <Phone className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5" />
+                <div className="bg-white/5 backdrop-blur-xl p-4 sm:p-5 rounded-2xl border border-white/10 flex items-start gap-3">
+                  <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-bold text-white text-sm">
+                    <h4 className="font-bold text-white text-xs sm:text-sm">
                       {isNl ? "Telefonische Support 24/7" : "Assistance Téléphonique 24h/7"}
                     </h4>
-                    <p className="text-slate-400 text-xs mt-1">
+                    <p className="text-slate-400 text-[11px] sm:text-xs mt-0.5 sm:mt-1">
                       {isNl
                         ? `Voor dringende situaties kunt u ons rechtstreeks bellen op ${contactPhone}.`
                         : `En cas d'urgence absolue, vous pouvez nous joindre directement au ${contactPhone}.`}
@@ -514,7 +514,7 @@ export function ContactForm() {
               </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/10 order-1 lg:order-2">
+            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-5 sm:p-8 shadow-2xl border border-white/10 order-1 lg:order-2">
               {status === "success" ? (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-12">
                   <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 mb-4 border border-green-500/30">

@@ -11,7 +11,6 @@ import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
-import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 const serviceIcons: Record<string, any> = {
   renovation: Home,
@@ -128,6 +127,8 @@ export async function generateMetadata({
   const isCleanService = service.slug === "ruitenwasser";
   const isGardenService = service.slug === "tuinieren";
 
+  const defaultMetaTitle = getProfessionMetaTitle(service.id || service.slug, "België", true);
+
   const metaTitle = isSolarService
     ? `☀️ Installateur Zonnepanelen België — Gratis Offerte & Studie 🔋`
     : isRoofService
@@ -140,21 +141,9 @@ export async function generateMetadata({
     ? `✨ Professionele Ruitenwasser België — Streepvrij Resultaat 🪟`
     : isGardenService
     ? `🌳 Tuinman & Boomverzorging België — Groenonderhoud 🍃`
-    : `🚨 Expert ${service.title} België — Gratis Offerte & Interventie 30 Min ⚡`;
+    : defaultMetaTitle;
 
-  const ogTitle = isSolarService
-    ? `☀️ Installateur Zonnepanelen België — Gratis Offerte & Studie 🔋`
-    : isRoofService
-    ? `🏠 Dakdekker België — Dakrenovatie & Lekherstelling 🌧️`
-    : isCameraService
-    ? `🛡️ Camerabewaking Installatie België — Professionele Beveiliging 📹`
-    : isConstructionService
-    ? `🏗️ Aannemer Ruwbouw & Metselwerken België — Tienjarige Garantie 🧱`
-    : isCleanService
-    ? `✨ Professionele Ruitenwasser België — Streepvrij Resultaat 🪟`
-    : isGardenService
-    ? `🌳 Tuinman & Boomverzorging België — Groenonderhoud 🍃`
-    : `🚨 Expert ${service.title} België — Gratis Offerte ⚡`;
+  const ogTitle = metaTitle;
 
   return {
     title: metaTitle,
@@ -510,8 +499,6 @@ export default async function ServicePage({
             <div className="relative">
               {serviceInfo.slug === "peinture" ? (
                 <PaintingGallery />
-              ) : serviceInfo.slug === "debouchage-canalisation" ? (
-                <DebouchageGallery isNl={true} initialType="all" />
               ) : (
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-4">

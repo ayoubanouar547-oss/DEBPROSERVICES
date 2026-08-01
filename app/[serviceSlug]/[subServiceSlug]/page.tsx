@@ -11,7 +11,6 @@ import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
-import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export function generateStaticParams() {
   const params: { serviceSlug: string; subServiceSlug: string }[] = [];
@@ -211,7 +210,7 @@ export default async function SubServicePage({
         }}
       />
 
-      <section className="relative pt-32 pb-24 overflow-hidden text-white border-b border-white/10">
+      <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden text-white border-b border-white/10">
         <div className="absolute inset-0 -z-10">
           <Image
             src={(subServiceInfo as any).imageUrl || serviceInfo.imageUrl}
@@ -224,48 +223,48 @@ export default async function SubServicePage({
           <div className="absolute inset-0 bg-gradient-to-t from-[#000814] via-transparent to-[#000814]/50" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
           {/* Breadcrumb */}
-          <div className="flex items-center justify-center lg:justify-start gap-2 text-sm text-slate-400 mb-8 overflow-x-auto whitespace-nowrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-400 mb-6 sm:mb-8 overflow-x-auto whitespace-nowrap scrollbar-none pb-2">
             <Link href="/" className="hover:text-blue-400 font-medium">
               Accueil
             </Link>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <Link
               href={`/${serviceInfo.slug}`}
               className="hover:text-blue-400 font-medium"
             >
               {serviceInfo.title}
             </Link>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span className="text-white font-bold">{subServiceInfo.title}</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-[0.2em] text-white mb-8 shadow-xl shadow-blue-600/20">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-[0.15em] text-white mb-6 sm:mb-8 shadow-xl shadow-blue-600/20">
                 <serviceInfo.icon className="w-4 h-4" />
                 Intervention Spécialisée 24/7
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[1] mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tighter">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-snug sm:leading-[1] mb-4 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-blue-200 uppercase tracking-tight break-words">
                 {subServiceInfo.title}
               </h1>
-              <p className="text-xl text-blue-100/70 mb-10 leading-relaxed">
+              <p className="text-sm sm:text-lg md:text-xl text-blue-100/80 mb-6 sm:mb-10 leading-relaxed max-w-2xl">
                 {subServiceInfo.desc} Nos techniciens agréés interviennent en
                 urgence 24h/24 et 7j/7 partout en Belgique avec le matériel
                 adéquat. Solutions durables et travaux garantis.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3.5 sm:px-10 sm:py-6 rounded-2xl flex items-center justify-center gap-3 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-sm sm:text-lg group"
                 >
-                  <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <PhoneCall className="w-5 h-5 sm:w-7 sm:h-7 animate-pulse group-hover:scale-110 transition-transform" />
                   <div className="text-left">
-                    <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
+                    <span className="block text-[10px] sm:text-xs opacity-80 uppercase tracking-widest font-bold">
                       Appel SOS 24/7
                     </span>
-                    <span className="block text-lg md:text-xl">
+                    <span className="block text-base sm:text-xl">
                       0498 35 25 88
                     </span>
                   </div>
@@ -273,7 +272,7 @@ export default async function SubServicePage({
               </div>
             </div>
 
-            <div className="lg:col-span-5 w-full max-w-lg mx-auto mt-8 lg:mt-0">
+            <div className="lg:col-span-5 w-full max-w-lg mx-auto mt-6 lg:mt-0">
               <HeroQuoteForm />
             </div>
           </div>
@@ -281,9 +280,9 @@ export default async function SubServicePage({
       </section>
 
       {/* Trust Badges Bar */}
-      <div className="bg-white/5 border-b border-white/10 py-8 relative z-10">
+      <div className="bg-white/5 border-b border-white/10 py-6 sm:py-8 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             {[
               { icon: PhoneCall, text: "Intervention < 60 min" },
               { icon: ChevronRight, text: "Devis Gratuit" },
@@ -292,12 +291,12 @@ export default async function SubServicePage({
             ].map((badge, i) => (
               <div
                 key={i}
-                className="flex items-center justify-center gap-3 text-slate-300"
+                className="flex items-center justify-center gap-2 sm:gap-3 text-slate-300"
               >
-                <div className="w-10 h-10 bg-blue-600/20 rounded-full flex items-center justify-center border border-blue-500/30">
-                  <badge.icon className="w-5 h-5 text-blue-400" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600/20 rounded-full flex items-center justify-center border border-blue-500/30 flex-shrink-0">
+                  <badge.icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
                 </div>
-                <span className="font-bold text-sm uppercase tracking-wider">
+                <span className="font-bold text-xs sm:text-sm uppercase tracking-wider">
                   {badge.text}
                 </span>
               </div>
@@ -307,77 +306,66 @@ export default async function SubServicePage({
       </div>
 
       {/* Main Content Section with Images Gallery */}
-      <section className="py-20 bg-slate-900 text-white relative z-10">
+      <section className="py-12 sm:py-20 bg-slate-900 text-white relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-16">
-            <div className="lg:col-span-8 space-y-10">
-              <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.1] uppercase tracking-tight">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+            <div className="lg:col-span-8 space-y-8 sm:space-y-10">
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white leading-tight uppercase tracking-tight break-words">
                 Pourquoi faire appel à nos experts pour votre {subServiceInfo.title} en Belgique ?
               </h2>
 
               {serviceInfo.slug === "peinture" ? (
                 <PaintingGallery />
-              ) : serviceInfo.slug === "debouchage-canalisation" ? (
-                <>
-                  <DebouchageGallery
-                    initialType={
-                      subServiceInfo.slug === "debouchage-wc-toilettes" ? "wc" :
-                      subServiceInfo.slug === "debouchage-egout-et-canalisations" ? "canalisation" :
-                      subServiceInfo.slug === "debouchage-evier-et-lavabo" ? "evier" :
-                      subServiceInfo.slug === "inspection-camera-canalisation" ? "camera" : "all"
-                    }
-                  />
-                  <div className="bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl mb-10">
-                    <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">Demander une intervention</h3>
-                    <ContactForm />
-                  </div>
-                </>
               ) : (
-                <div className="bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl mb-10">
-                  <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">Demander une intervention</h3>
-                  <ContactForm />
+                <div className="relative h-80 sm:h-96 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                  <Image
+                    src={subServiceInfo.imageUrl || serviceInfo.imageUrl}
+                    alt={subServiceInfo.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               )}
 
-              <div className="prose prose-xl prose-invert text-white max-w-none">
-                <p className="text-2xl font-medium text-blue-200 mb-8 leading-relaxed">
+              <div className="prose prose-sm sm:prose-lg md:prose-xl prose-invert text-white max-w-none">
+                <p className="text-lg sm:text-2xl font-medium text-blue-200 mb-6 sm:mb-8 leading-relaxed">
                   PRO SERVICES est votre partenaire de confiance en Belgique
                   pour tout besoin lié à la{" "}
                   <strong>{subServiceInfo.title.toLowerCase()}</strong>. Nous
                   combinons rapidité d'intervention et excellence technique.
                 </p>
 
-                <div className="grid md:grid-cols-2 gap-8 not-prose mb-12">
-                  <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
-                    <h3 className="text-xl font-bold mb-4 text-blue-400">
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-8 not-prose mb-8 sm:mb-12">
+                  <div className="bg-white/5 p-5 sm:p-8 rounded-3xl border border-white/10">
+                    <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-blue-400">
                       Ce que nous garantissons :
                     </h3>
-                    <ul className="space-y-4">
+                    <ul className="space-y-3 sm:space-y-4 text-xs sm:text-base">
                       {serviceInfo.features.map((f, i) => (
-                        <li key={i} className="flex gap-3 text-slate-300">
-                          <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                        <li key={i} className="flex gap-2.5 sm:gap-3 text-slate-300">
+                          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
                           <span>{f}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
-                    <h3 className="text-xl font-bold mb-4 text-blue-400">
+                  <div className="bg-white/5 p-5 sm:p-8 rounded-3xl border border-white/10">
+                    <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-blue-400">
                       Pourquoi nous appeler ?
                     </h3>
-                    <ul className="space-y-4">
-                      <li className="flex gap-3 text-slate-300">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    <ul className="space-y-3 sm:space-y-4 text-xs sm:text-base">
+                      <li className="flex gap-2.5 sm:gap-3 text-slate-300">
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
                         <span>Intervention urgente en moins d'une heure.</span>
                       </li>
-                      <li className="flex gap-3 text-slate-300">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <li className="flex gap-2.5 sm:gap-3 text-slate-300">
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
                         <span>
                           Techniciens certifiés et hautement qualifiés.
                         </span>
                       </li>
-                      <li className="flex gap-3 text-slate-300">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <li className="flex gap-2.5 sm:gap-3 text-slate-300">
+                        <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
                         <span>Matériel de diagnostic de pointe.</span>
                       </li>
                     </ul>

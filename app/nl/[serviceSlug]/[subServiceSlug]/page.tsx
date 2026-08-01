@@ -11,7 +11,6 @@ import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
-import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 const serviceIcons: Record<string, any> = {
   renovation: Home,
@@ -347,16 +346,6 @@ export default async function SubServicePage({
 
               {serviceInfo.slug === "peinture" ? (
                 <PaintingGallery />
-              ) : serviceInfo.slug === "debouchage-canalisation" ? (
-                <DebouchageGallery
-                  isNl={true}
-                  initialType={
-                    subServiceInfo.slug === "debouchage-wc-toilettes" ? "wc" :
-                    subServiceInfo.slug === "debouchage-egout-et-canalisations" ? "canalisation" :
-                    subServiceInfo.slug === "debouchage-evier-et-lavabo" ? "evier" :
-                    subServiceInfo.slug === "inspection-camera-canalisation" ? "camera" : "all"
-                  }
-                />
               ) : (
                 /* Secondary Images Gallery */
                 <div className="grid grid-cols-2 gap-4 mb-12">

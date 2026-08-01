@@ -1,3 +1,6 @@
+import { services } from "@/lib/data/services";
+import { dutchServices } from "@/lib/data/translations";
+
 // A robust long-form text generator for local pages with highly varied sections
 const intros = [
   "Lorsque survient une urgence à domicile ou dans vos locaux professionnels, chaque minute compte. {serviceName} nécessite une approche rigoureuse et une réactivité sans faille. Les habitants de {cityName} peuvent compter sur notre équipe locale, prête à se déplacer avec tout le matériel nécessaire pour sécuriser les lieux.",
@@ -288,47 +291,70 @@ export function buildLongNlClusterText(
 }
 
 export function getProfessionMetaTitle(serviceSlug: string, cityName: string, isNl: boolean = false): string {
-  const slug = serviceSlug.toLowerCase();
-  if (isNl) {
-    let profession = "expert";
-    if (slug.includes("loodgieter") || slug.includes("plomberie")) profession = "loodgieter";
-    else if (slug.includes("ontstop") || slug.includes("debouchage")) profession = "ontstopper";
-    else if (slug.includes("verwarm") || slug.includes("chauffage")) profession = "verwarmingsinstallateur";
-    else if (slug.includes("gas") || slug.includes("gaz")) profession = "gasinstallateur";
-    else if (slug.includes("elektri") || slug.includes("electricite")) profession = "elektricien";
-    else if (slug.includes("airco") || slug.includes("climatisation")) profession = "airco installateur";
-    else if (slug.includes("ruimen") || slug.includes("septische") || slug.includes("fosse")) profession = "expert ruimen septische put";
-    else if (slug.includes("renovat") || slug.includes("renovatie")) profession = "renovatie aannemer";
-    else if (slug.includes("schilder") || slug.includes("peinture")) profession = "schilder";
-    else if (slug.includes("zonnepaneel") || slug.includes("solaires")) profession = "zonnepanelen installateur";
-    else if (slug.includes("dakwerk") || slug.includes("toiture")) profession = "dakwerker";
-    else if (slug.includes("camerabeveiliging") || slug.includes("camera")) profession = "camerabeveiliging installateur";
-    else if (slug.includes("bouwwerken") || slug.includes("construction")) profession = "aannemer bouwwerken";
-    else if (slug.includes("glazenwasser") || slug.includes("vitres")) profession = "glazenwasser";
-    else if (slug.includes("tuinman") || slug.includes("jardin")) profession = "tuinier";
-    else if (slug.includes("stookolietank") || slug.includes("citerne")) profession = "stookolietank expert";
-    
-    return `De beste ${profession} in ${cityName} - PRO SERVICES`;
-  } else {
-    let profession = "expert";
-    if (slug.includes("plomb") || slug.includes("plomberie")) profession = "plombier";
-    else if (slug.includes("debouc") || slug.includes("debouchage")) profession = "déboucheur";
-    else if (slug.includes("chauff") || slug.includes("chauffage")) profession = "chauffagiste";
-    else if (slug.includes("gaz") || slug.includes("gas")) profession = "installateur de gaz";
-    else if (slug.includes("electri") || slug.includes("electricite")) profession = "électricien";
-    else if (slug.includes("climat") || slug.includes("airco") || slug.includes("climatisation")) profession = "installateur de climatisation";
-    else if (slug.includes("vidange") || slug.includes("fosse")) profession = "expert vidange de fosse septique";
-    else if (slug.includes("renov") || slug.includes("renovation")) profession = "entrepreneur de rénovation";
-    else if (slug.includes("peintre") || slug.includes("peinture")) profession = "peintre";
-    else if (slug.includes("solaire") || slug.includes("solaires") || slug.includes("zonnepanelen")) profession = "installateur de panneaux solaires";
-    else if (slug.includes("toiture") || slug.includes("couvreur")) profession = "couvreur de toiture";
-    else if (slug.includes("camera") || slug.includes("cameras")) profession = "installateur de caméras de surveillance";
-    else if (slug.includes("construction") || slug.includes("gros")) profession = "entrepreneur de construction";
-    else if (slug.includes("vitre") || slug.includes("vitres")) profession = "laveur de vitres";
-    else if (slug.includes("jardin") || slug.includes("elagage")) profession = "jardinier paysagiste";
-    else if (slug.includes("citerne") || slug.includes("mazout")) profession = "expert citerne de mazout";
-
-    const preposition = (cityName.toLowerCase() === "belgique" || cityName.toLowerCase() === "la belgique") ? "en" : "à";
-    return `Le meilleur ${profession} ${preposition} ${cityName} - PRO SERVICES`;
+  let title = "";
+  
+  const searchServices = isNl ? dutchServices : services;
+  for (const s of searchServices) {
+    if (s.slug === serviceSlug || s.id === serviceSlug) {
+      title = s.title;
+      break;
+    }
+    if (s.subServices) {
+      const sub = s.subServices.find(sub => sub.slug === serviceSlug);
+      if (sub) {
+        title = sub.title;
+        break;
+      }
+    }
   }
+
+  if (!title) {
+    title = serviceSlug.replace(/-/g, " ");
+  }
+
+  let profession = title;
+  
+  if (isNl) {
+    if (title.toLowerCase().includes("ontstopping")) profession = title.replace(/ontstopping/i, "Ontstopper");
+    else if (title.toLowerCase().includes("installatie")) profession = "Installateur van " + title.replace(/installatie/i, "").trim();
+    else if (title.toLowerCase().includes("renovatie")) profession = "Aannemer voor " + title;
+    else if (title.toLowerCase().includes("reiniging")) profession = "Schoonmaker voor " + title;
+    else if (title.toLowerCase().includes("onderhoud")) profession = "Onderhoudsspecialist voor " + title;
+    else if (title.toLowerCase().includes("herstelling")) profession = "Hersteller voor " + title;
+    else profession = "Specialist in " + title;
+  } else {
+    const lower = title.toLowerCase();
+    if (lower.startsWith("débouchage") || lower.startsWith("debouchage")) {
+      profession = title.replace(/^débouchage/i, "Déboucheur").replace(/^debouchage/i, "Déboucheur");
+      if (lower.includes("evier") || lower.includes("évier")) profession = "Déboucheur d'Évier et Lavabo";
+      else if (lower.includes("égout") || lower.includes("egout")) profession = "Déboucheur d'Égout et Canalisations";
+      else profession = title.replace(/^débouchage\s+/i, "Déboucheur ").replace(/^debouchage\s+/i, "Déboucheur ");
+    }
+    else if (lower.startsWith("installation")) profession = title.replace(/^installation\s+(de\s+|d')?/i, "Installateur de ");
+    else if (lower.startsWith("dégazage") || lower.startsWith("degazage")) profession = title.replace(/^dégazage et nettoyage\s+(de\s+)?/i, "Dégazeur et Nettoyeur de ").replace(/^dégazage\s+(de\s+)?/i, "Dégazeur de ").replace(/^degazage\s+(de\s+)?/i, "Dégazeur de ");
+    else if (lower.startsWith("nettoyage")) profession = title.replace(/^nettoyage\s+(de\s+|d')?/i, "Nettoyeur de ");
+    else if (lower.startsWith("vidange")) profession = title.replace(/^vidange\s+(de\s+|d')?/i, "Vidangeur de ");
+    else if (lower.startsWith("pompage")) profession = title.replace(/^pompage\s+(et\s+)?vidange\s+(de\s+|d')?/i, "Vidangeur de ");
+    else if (lower.startsWith("rénovation") || lower.startsWith("renovation") || lower.startsWith("aménagement") || lower.startsWith("construction")) profession = "Entrepreneur en " + title;
+    else if (lower.startsWith("peinture") || lower.startsWith("peintre")) profession = "Peintre pour " + title;
+    else if (lower.includes("plomberie")) profession = "Plombier pour " + title;
+    else if (lower.includes("chauffage") || lower.includes("chaudière") || lower.includes("chaudiere")) profession = "Chauffagiste pour " + title;
+    else if (lower.startsWith("entretien")) profession = "Spécialiste en " + title;
+    else if (lower.startsWith("dépannage") || lower.startsWith("depannage")) profession = title.replace(/^dépannage/i, "Dépanneur pour").replace(/^depannage/i, "Dépanneur pour");
+    else if (lower.startsWith("recherche")) profession = "Expert en " + title;
+    else if (lower.startsWith("mise en conformité")) profession = "Expert en " + title;
+    else if (lower.startsWith("remplacement")) profession = "Installateur pour le " + title;
+    else if (lower.startsWith("neutralisation")) profession = "Expert en " + title;
+    else profession = "Expert en " + title;
+  }
+
+  const city = cityName || (isNl ? "België" : "Belgique");
+  const isBelgium = city.toLowerCase().includes("belgique") || city.toLowerCase().includes("belgië");
+  const prep = isBelgium ? (isNl ? "in" : "en") : (isNl ? "in" : "à");
+  
+  if (isNl) {
+    return `De Beste ${profession} ${prep} ${city} - Gratis Offerte 24/7 | PRO SERVICES`;
+  }
+
+  return `Le Meilleur ${profession} ${prep} ${city} - Devis Gratuit 24/7 | PRO SERVICES`;
 }

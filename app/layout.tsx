@@ -106,20 +106,25 @@ export default function RootLayout({
       className={`${inter.variable} ${oswald.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <script
+      <body
+        className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
+        suppressHydrationWarning
+      >
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-                  if (typeof window !== 'undefined') {
-                    ['fetch', 'Headers', 'Request', 'Response'].forEach(function(prop) {
+                  if (typeof window !== \x27undefined\x27) {
+                    [\x27fetch\x27, \x27Headers\x27, \x27Request\x27, \x27Response\x27].forEach(function(prop) {
                       try {
                         var val = window[prop];
-                        window['__custom_' + prop] = val;
+                        window[\x27__custom_\x27 + prop] = val;
                         Object.defineProperty(window, prop, {
-                          get: function() { return window['__custom_' + prop]; },
-                          set: function(v) { window['__custom_' + prop] = v; },
+                          get: function() { return window[\x27__custom_\x27 + prop]; },
+                          set: function(v) { window[\x27__custom_\x27 + prop] = v; },
                           configurable: true,
                           enumerable: true
                         });
@@ -128,23 +133,17 @@ export default function RootLayout({
                   }
                 } catch (e) {}
                 try {
-                  var savedTheme = localStorage.getItem('theme');
-                  if (savedTheme === 'light') {
-                    document.documentElement.classList.add('light-theme');
+                  var savedTheme = localStorage.getItem(\x27theme\x27);
+                  if (savedTheme === \x27light\x27) {
+                    document.documentElement.classList.add(\x27light-theme\x27);
                   } else {
-                    document.documentElement.classList.remove('light-theme');
+                    document.documentElement.classList.remove(\x27light-theme\x27);
                   }
                 } catch (e) {}
               })();
             `
           }}
         />
-        <meta name="2bf92fe70e4abb4" content="6595b8b2d915664eda2b1efb495cd6e6" />
-      </head>
-      <body
-        className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
-        suppressHydrationWarning
-      >
         {/* Advanced Background Animation blobs - Professional Blue/Cyan Palette */}
         <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#000814]">
           <div className="absolute top-[-20%] left-[-10%] w-[900px] h-[900px] bg-blue-700/20 rounded-full blur-[150px] animate-blob"></div>
