@@ -1,4 +1,4 @@
-import { buildLongClusterText } from "@/lib/utils/seo-content-generator";
+import { buildLongClusterText, getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { services } from "@/lib/data/services";
 import { notFound } from "next/navigation";
@@ -11,6 +11,7 @@ import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export function generateStaticParams() {
   const params: { serviceSlug: string; subServiceSlug: string }[] = [];
@@ -39,7 +40,7 @@ export async function generateMetadata({
   if (!service || !subService) return {};
 
   return {
-    title: `🚨 ${subService.title} Belgique — Devis Gratuit & Intervention 30 Min ⚡`,
+    title: getProfessionMetaTitle(subService.slug, "Belgique"),
     description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} Techniciens agrées avec intervention en urgence 24h/24 et 7j/7 partout en Belgique.`,
     keywords: `${subService.title} Belgique, ${subService.title} urgent, expert ${subService.title.toLowerCase()}, dépannage 24h/24, ${service.title} Belgique`,
     alternates: {
@@ -316,6 +317,21 @@ export default async function SubServicePage({
 
               {serviceInfo.slug === "peinture" ? (
                 <PaintingGallery />
+              ) : serviceInfo.slug === "debouchage-canalisation" ? (
+                <>
+                  <DebouchageGallery
+                    initialType={
+                      subServiceInfo.slug === "debouchage-wc-toilettes" ? "wc" :
+                      subServiceInfo.slug === "debouchage-egout-et-canalisations" ? "canalisation" :
+                      subServiceInfo.slug === "debouchage-evier-et-lavabo" ? "evier" :
+                      subServiceInfo.slug === "inspection-camera-canalisation" ? "camera" : "all"
+                    }
+                  />
+                  <div className="bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl mb-10">
+                    <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">Demander une intervention</h3>
+                    <ContactForm />
+                  </div>
+                </>
               ) : (
                 <div className="bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl mb-10">
                   <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tight">Demander une intervention</h3>

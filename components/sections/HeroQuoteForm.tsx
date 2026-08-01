@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   User,
   Phone,
+  Mail,
   MapPin,
   Wrench,
   Send,
@@ -24,6 +25,7 @@ export function HeroQuoteForm() {
 
   const [nom, setNom] = useState("");
   const [telephone, setTelephone] = useState("");
+  const [email, setEmail] = useState("");
   const [service, setService] = useState("plomberie");
   const [ville, setVille] = useState("");
   const [message, setMessage] = useState("");
@@ -48,6 +50,14 @@ export function HeroQuoteForm() {
       );
       return;
     }
+    if (!email.trim() || !email.includes("@")) {
+      setErrorMsg(
+        isNl
+          ? "Vul een geldig e-mailadres in *"
+          : "Veuillez indiquer une adresse email valide *"
+      );
+      return;
+    }
     if (!ville.trim()) {
       setErrorMsg(
         isNl
@@ -66,14 +76,45 @@ export function HeroQuoteForm() {
         body: JSON.stringify({
           nom,
           telephone,
+          email,
           service,
           ville,
-          message: message || "Demande de devis rapide via la page d'accueil.",
+          message: message || "Demande de devis rapide via le formulaire principal.",
         }),
       });
 
       if (res.ok) {
         setSubmitted(true);
+        if (typeof window !== "undefined") {
+          try {
+            const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+            if (AudioContext) {
+              const ctx = new AudioContext();
+              const osc1 = ctx.createOscillator();
+              const osc2 = ctx.createOscillator();
+              const gain = ctx.createGain();
+              osc1.type = "sine";
+              osc2.type = "sine";
+              const now = ctx.currentTime;
+              osc1.frequency.setValueAtTime(880, now);
+              osc1.frequency.exponentialRampToValueAtTime(1320, now + 0.08);
+              osc2.frequency.setValueAtTime(1320, now + 0.1);
+              osc2.frequency.exponentialRampToValueAtTime(1760, now + 0.22);
+              gain.gain.setValueAtTime(0, now);
+              gain.gain.linearRampToValueAtTime(0.3, now + 0.02);
+              gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+              osc1.connect(gain);
+              osc2.connect(gain);
+              gain.connect(ctx.destination);
+              osc1.start(now);
+              osc1.stop(now + 0.1);
+              osc2.start(now + 0.1);
+              osc2.stop(now + 0.3);
+            }
+          } catch {
+            // Audio context fallback
+          }
+        }
       } else {
         const data = await res.json().catch(() => ({}));
         setErrorMsg(
@@ -150,12 +191,13 @@ export function HeroQuoteForm() {
         {/* Nom & Téléphone */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <div>
-            <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="hero-name-input" className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
               {isNl ? "Naam *" : "Nom complet *"}
             </label>
             <div className="relative">
               <User className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
               <input
+                id="hero-name-input"
                 type="text"
                 required
                 placeholder={isNl ? "Jan Dupont" : "Jean Dupont"}
@@ -167,12 +209,13 @@ export function HeroQuoteForm() {
           </div>
 
           <div>
-            <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="hero-phone-input" className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
               {isNl ? "Telefoon *" : "Téléphone *"}
             </label>
             <div className="relative">
               <Phone className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
               <input
+                id="hero-phone-input"
                 type="tel"
                 required
                 placeholder="04XX XX XX XX"
@@ -184,39 +227,34 @@ export function HeroQuoteForm() {
           </div>
         </div>
 
-        {/* Service & Localité */}
+        {/* Email & Localité */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <div>
-            <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
-              {isNl ? "Dienst *" : "Service *"}
+            <label htmlFor="hero-email-input" className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+              {isNl ? "E-mail *" : "Adresse Email *"}
             </label>
             <div className="relative">
-              <Wrench className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
-              <select
-                value={service}
-                onChange={(e) => setService(e.target.value)}
-                className="w-full pl-8 pr-6 py-2 rounded-lg bg-slate-800/90 border border-slate-700/80 text-white text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
-              >
-                <option value="plomberie">{isNl ? "Plomberie & Fuites" : "Plomberie & Recherche Fuite"}</option>
-                <option value="debouchage">{isNl ? "Débouchage Urgent" : "Débouchage Urgent WC/Évier"}</option>
-                <option value="chauffage">{isNl ? "Chauffage & Chaudière" : "Chauffage & Chaudière"}</option>
-                <option value="electricite">{isNl ? "Électricité & Dépannage" : "Électricité & Dépannage"}</option>
-                <option value="climatisation">{isNl ? "Climatisation / VMC" : "Climatisation / VMC"}</option>
-                <option value="fosse">{isNl ? "Vidange Fosse Septique" : "Vidange Fosse Septique"}</option>
-                <option value="construction">{isNl ? "Rénovation & Construction" : "Construction & Rénovation"}</option>
-                <option value="vitres">{isNl ? "Nettoyage Vitres & Toiture" : "Nettoyage Vitres & Toiture"}</option>
-              </select>
-              <span className="absolute right-2.5 top-2.5 text-[10px] text-slate-400 pointer-events-none">▼</span>
+              <Mail className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
+              <input
+                id="hero-email-input"
+                type="email"
+                required
+                placeholder={isNl ? "naam@voorbeeld.be" : "exemple@email.com"}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full pl-8 pr-2.5 py-2 rounded-lg bg-slate-800/90 border border-slate-700/80 text-white placeholder-slate-500 text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+              />
             </div>
           </div>
 
           <div>
-            <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="hero-ville-input" className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
               {isNl ? "Stad / Postcode *" : "Localité / Code Postal *"}
             </label>
             <div className="relative">
               <MapPin className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
               <input
+                id="hero-ville-input"
                 type="text"
                 required
                 placeholder={isNl ? "1000 Brussel..." : "1000 Bruxelles..."}
@@ -228,9 +266,42 @@ export function HeroQuoteForm() {
           </div>
         </div>
 
+        {/* Service Dropdown with ALL 14 Services */}
+        <div>
+          <label htmlFor="hero-service-select" className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+            {isNl ? "Dienst *" : "Service requis *"}
+          </label>
+          <div className="relative">
+            <Wrench className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
+            <select
+              id="hero-service-select"
+              aria-label={isNl ? "Dienst" : "Service requis"}
+              value={service}
+              onChange={(e) => setService(e.target.value)}
+              className="w-full pl-8 pr-6 py-2 rounded-lg bg-slate-800/90 border border-slate-700/80 text-white text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+            >
+              <option value="plomberie">{isNl ? "Loodgieterij & Lekdetectie" : "Plomberie & Recherche Fuite"}</option>
+              <option value="debouchage">{isNl ? "Ontstoppingsdienst Urgent" : "Débouchage Urgent WC/Évier"}</option>
+              <option value="chauffage">{isNl ? "Verwarming & Ketel" : "Chauffage & Chaudière"}</option>
+              <option value="gaz">{isNl ? "Gas & Conformiteit" : "Gaz & Conformité CERGA"}</option>
+              <option value="electricite">{isNl ? "Elektriciteit & Depannage" : "Électricité & Dépannage"}</option>
+              <option value="peinture">{isNl ? "Schilderwerken & Afwerking" : "Peinture & Finitions"}</option>
+              <option value="installation-panneaux-solaires">{isNl ? "Zonnepanelen & Batterij" : "Installation Panneaux Solaires"}</option>
+              <option value="travaux-de-toiture">{isNl ? "Dakwerken & Herstelling" : "Travaux de Toiture & Couverture"}</option>
+              <option value="installation-cameras-surveillance">{isNl ? "Bewakingscamera's & Alarm" : "Caméras de Surveillance & Alarme"}</option>
+              <option value="travaux-de-construction-gros-oeuvre">{isNl ? "Bouwwerken & Ruwbouw" : "Construction & Gros Œuvre"}</option>
+              <option value="nettoyage-de-vitres">{isNl ? "Ruitenwasser & Reiniging" : "Nettoyage de Vitres & Châssis"}</option>
+              <option value="travaux-de-jardinage-elagage">{isNl ? "Tuinman & Snoeiwerken" : "Jardinage & Élagage d'Arbres"}</option>
+              <option value="climatisation">{isNl ? "Airco & VMC Ventilatie" : "Climatisation & VMC"}</option>
+              <option value="vidange-fosse-septique">{isNl ? "Ruimen Septische Put" : "Vidange Fosse Septique"}</option>
+            </select>
+            <span className="absolute right-2.5 top-2.5 text-[10px] text-slate-400 pointer-events-none">▼</span>
+          </div>
+        </div>
+
         {/* Message / Details */}
         <div>
-          <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+          <label htmlFor="hero-message-textarea" className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
             {isNl ? "Details " : "Message "}
             <span className="font-normal text-slate-500 text-[10px] lowercase">
               ({isNl ? "optioneel" : "optionnel"})
@@ -239,6 +310,7 @@ export function HeroQuoteForm() {
           <div className="relative">
             <FileText className="w-3.5 h-3.5 text-blue-400 absolute left-3 top-2.5 pointer-events-none" />
             <textarea
+              id="hero-message-textarea"
               rows={2}
               placeholder={isNl ? "Korte beschrijving van uw probleem..." : "Description rapide de votre demande..."}
               value={message}

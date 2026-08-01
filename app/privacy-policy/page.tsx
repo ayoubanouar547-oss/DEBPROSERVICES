@@ -26,15 +26,15 @@ export default function PrivacyPolicyPage() {
           protéger vos données personnelles. La présente politique de
           confidentialité vous informe sur la collecte, le traitement et la
           conservation de vos données dans le cadre de l'utilisation de notre
-          site web debservices.canalrose.be.
+          site debservices.canalrose.be, fonctionnant comme une plateforme de mise en relation (Marketplace).
         </p>
 
-        <h2 className="text-white">1. Collecte des données personnelles</h2>
+        <h2 className="text-white">1. Collecte et transmission des données personnelles</h2>
         <p>
-          Nous collectons les données suivantes via notre formulaire de contact
-          : nom, adresse email, téléphone, ville et détails de votre demande.
-          Ces informations sont nécessaires pour répondre à vos demandes
-          d'intervention ou de devis.
+          Nous collectons les données suivantes via nos formulaires : nom, adresse email, téléphone, ville et détails de votre demande de service. En tant que Marketplace (plateforme de mise en relation), ces données sont transmises de façon sécurisée à nos techniciens ou artisans partenaires indépendants agréés afin de leur permettre de traiter votre demande et d'intervenir chez vous ou de vous envoyer un devis.
+        </p>
+        <p>
+          Chaque artisan ou technicien partenaire est un tiers indépendant qui traite vos données conformément à ses propres obligations légales. PRO SERVICES décline toute responsabilité quant aux actions, omissions ou services fournis par ces tiers indépendants.
         </p>
 
         <h2 className="text-white">2. Utilisation des données</h2>

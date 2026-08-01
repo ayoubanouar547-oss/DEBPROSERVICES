@@ -9,6 +9,9 @@ import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
+import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
+import { PaintingGallery } from "@/components/sections/PaintingGallery";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 const serviceIcons: Record<string, any> = {
   renovation: Home,
@@ -58,7 +61,7 @@ export async function generateMetadata({
   const frSlugPath = getAlternatePath(`/nl/${resolvedParams.serviceSlug}/${resolvedParams.subServiceSlug}`, 'fr');
 
   return {
-    title: `🚨 ${subService.title} België — Gratis Offerte & Interventie 30 Min ⚡`,
+    title: getProfessionMetaTitle(subService.slug, "België", true),
     description: `Nood aan een expert voor ${subService.title.toLowerCase()}? ${subService.desc} Erkende technici met 24/7 spoedinterventie in heel België.`,
     keywords: `${subService.title} België, ${subService.title} spoed, expert ${subService.title.toLowerCase()}, reparatie 24h/24, ${service.title} België`,
     alternates: {
@@ -342,31 +345,45 @@ export default async function SubServicePage({
                 Professionele expertise in {subServiceInfo.title}
               </h2>
 
-              {/* Secondary Images Gallery */}
-              <div className="grid grid-cols-2 gap-4 mb-12">
-                <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
-                  <Image
-                    src={
-                      serviceInfo.subServices[0]?.imageUrl ||
-                      heroImage
-                    }
-                    alt={`Interventie techniek ${subServiceInfo.title}`}
-                    fill
-                    className="object-cover"
-                  />
+              {serviceInfo.slug === "peinture" ? (
+                <PaintingGallery />
+              ) : serviceInfo.slug === "debouchage-canalisation" ? (
+                <DebouchageGallery
+                  isNl={true}
+                  initialType={
+                    subServiceInfo.slug === "debouchage-wc-toilettes" ? "wc" :
+                    subServiceInfo.slug === "debouchage-egout-et-canalisations" ? "canalisation" :
+                    subServiceInfo.slug === "debouchage-evier-et-lavabo" ? "evier" :
+                    subServiceInfo.slug === "inspection-camera-canalisation" ? "camera" : "all"
+                  }
+                />
+              ) : (
+                /* Secondary Images Gallery */
+                <div className="grid grid-cols-2 gap-4 mb-12">
+                  <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
+                    <Image
+                      src={
+                        serviceInfo.subServices[0]?.imageUrl ||
+                        heroImage
+                      }
+                      alt={`Interventie techniek ${subServiceInfo.title}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
+                    <Image
+                      src={
+                        serviceInfo.subServices[1]?.imageUrl ||
+                        heroImage
+                      }
+                      alt={`Professionele herstelling ${subServiceInfo.title}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
-                <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden border border-white/10">
-                  <Image
-                    src={
-                      serviceInfo.subServices[1]?.imageUrl ||
-                      heroImage
-                    }
-                    alt={`Professionele herstelling ${subServiceInfo.title}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+              )}
 
               <div className="prose prose-xl prose-invert text-white max-w-none">
                 <p className="text-2xl font-medium text-blue-200 mb-8 leading-relaxed">

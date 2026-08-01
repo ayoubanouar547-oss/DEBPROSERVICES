@@ -11,6 +11,8 @@ import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
 import { matchServiceAndCity } from "@/lib/service-matcher";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 
 // Helper function to dynamically parse service and city combinations for all of Belgium
 function parseServiceAndCity(slug: string) {
@@ -53,13 +55,7 @@ export async function generateMetadata({
     const isRoofService = service.slug === "travaux-de-toiture";
     const isCameraService = service.slug === "installation-cameras-surveillance";
 
-    const title = isSolarService
-      ? `☀️ Installateur Panneaux Solaires ${cityInfo.name} — Devis & Étude Gratuite 🔋`
-      : isRoofService
-      ? `🏠 Couvreur ${cityInfo.name} — Rénovation de Toiture & Réparation de Fuite 🌧️`
-      : isCameraService
-      ? `🛡️ Installation Caméras de Surveillance ${cityInfo.name} — Sécurité Professionnelle 📹`
-      : `🚨 ${matchedTerm} ${cityInfo.name} — Devis Gratuit & Intervention 30 Min ⚡`;
+    const title = getProfessionMetaTitle(service.slug, cityInfo.name);
 
     const description = `Besoin d'un expert en ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? PRO SERVICES propose des interventions rapides, devis gratuit et prestations de haute qualité.`;
 
@@ -532,7 +528,13 @@ export default async function ServicePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <PaintingGallery />
+              {serviceInfo.slug === "peinture" ? (
+                <PaintingGallery />
+              ) : serviceInfo.slug === "debouchage-canalisation" ? (
+                <DebouchageGallery initialType="all" />
+              ) : (
+                <PaintingGallery />
+              )}
               {/* Trust Badge */}
               <div className="absolute -bottom-6 -right-6 bg-blue-600 p-8 rounded-2xl shadow-2xl z-20 border-4 border-[#000814]">
                 <div className="text-4xl font-black text-white mb-1">15+</div>

@@ -24,37 +24,26 @@ export default function MentionsLegalesPage() {
           Dernière mise à jour : {new Date().toLocaleDateString("fr-FR")}
         </p>
 
-        <h2 className="text-white">1. Informations sur l'entreprise</h2>
+        <h2 className="text-white">1. Informations sur la plateforme</h2>
         <p>
-          <strong>Nom de la société :</strong> PRO SERVICES
-          <br />
-          <strong>Forme juridique :</strong> SRL (Société à Responsabilité Limitée)
-          <br />
-          <strong>Siège social :</strong> Madeliefjesstraat 1/B006, 1850 Grimbergen, Belgique
-          <br />
-          <strong>Numéro d'entreprise (BCE) / TVA :</strong> BE 1034.012.476
+          <strong>Nom de la plateforme :</strong> PRO SERVICES
           <br />
           <strong>Téléphone :</strong> 0498 35 25 88
           <br />
           <strong>Email :</strong> debproservices@canalrose.be
         </p>
 
-        <h2 className="text-white">2. Hébergement du site</h2>
+        <h2 className="text-white">2. Modèle de mise en relation (Marketplace)</h2>
         <p>
-          Le site est hébergé par Vercel Inc.
-          <br />
-          340 S Lemon Ave #4133
-          <br />
-          Walnut, CA 91789
+          PRO SERVICES fonctionne exclusivement comme un espace de mise en relation (Marketplace) qui met en contact des utilisateurs avec des techniciens, artisans et prestataires de services indépendants agréés en Belgique. Chaque intervenant ou artisan exerce son activité à titre totalement indépendant sous sa propre entreprise et sa responsabilité exclusive.
+        </p>
+        <p>
+          En aucun cas PRO SERVICES ne peut être tenu responsable d'éventuels litiges, dommages, retards ou malfaçons résultant des travaux ou des services effectués par les prestataires indépendants listés sur notre site ou mis en relation via nos formulaires et numéros de téléphone.
         </p>
 
-        <h2 className="text-white">3. Responsabilité</h2>
+        <h2 className="text-white">3. Responsabilité et Contenu</h2>
         <p>
-          PRO SERVICES s'efforce d'assurer au mieux la mise à jour des
-          informations diffusées sur ce site, dont elle se réserve le droit de
-          corriger le contenu à tout moment et sans préavis. Les devis et
-          estimations fournis en ligne sont donnés à titre indicatif et ne
-          remplacent pas l'expertise sur place.
+          PRO SERVICES s'efforce d'assurer au mieux la mise à jour des informations diffusées sur ce site, dont elle se réserve le droit de corriger le contenu à tout moment et sans préavis. Les estimations de prix ou de délais fournies en ligne ou par téléphone sont indicatives et ne l'engagent pas de manière contractuelle.
         </p>
       </div>
     </div>

@@ -9,6 +9,9 @@ import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
+import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
+import { PaintingGallery } from "@/components/sections/PaintingGallery";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 const serviceIcons: Record<string, any> = {
   renovation: Home,
@@ -51,13 +54,7 @@ export async function generateMetadata({
     const isRoofService = service.slug === "dakwerken";
     const isCameraService = service.slug === "camerabewaking";
 
-    const title = isSolarService
-      ? `☀️ Installateur Zonnepanelen ${cityInfo.name} — Gratis Offerte & Studie 🔋`
-      : isRoofService
-      ? `🏠 Dakdekker ${cityInfo.name} — Dakrenovatie & Lekherstelling 🌧️`
-      : isCameraService
-      ? `🛡️ Camerabewaking Installatie ${cityInfo.name} — Professionele Beveiliging 📹`
-      : `🚨 ${matchedTerm} ${cityInfo.name} — Gratis Offerte & Interventie 30 Min ⚡`;
+    const title = getProfessionMetaTitle(service.id || service.slug, cityInfo.name, true);
 
     const description = `Nood aan een expert in ${matchedTerm.toLowerCase()} in ${cityInfo.name}? PRO SERVICES biedt snelle interventies, gratis offertes en hoogwaardige diensten.`;
 
@@ -511,53 +508,59 @@ export default async function ServicePage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
-                    <Image
-                      src={
-                        serviceInfo.subServices[0]?.imageUrl ||
-                        heroImage
-                      }
-                      alt="Expertise PRO SERVICES"
-                      fill
-                      className="object-cover"
-                    />
+              {serviceInfo.slug === "peinture" ? (
+                <PaintingGallery />
+              ) : serviceInfo.slug === "debouchage-canalisation" ? (
+                <DebouchageGallery isNl={true} initialType="all" />
+              ) : (
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-4">
+                    <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
+                      <Image
+                        src={
+                          serviceInfo.subServices[0]?.imageUrl ||
+                          heroImage
+                        }
+                        alt="Expertise PRO SERVICES"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
+                      <Image
+                        src={
+                          serviceInfo.subServices[1]?.imageUrl ||
+                          heroImage
+                        }
+                        alt="Interventie techniek"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
-                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
-                    <Image
-                      src={
-                        serviceInfo.subServices[1]?.imageUrl ||
-                        heroImage
-                      }
-                      alt="Interventie techniek"
-                      fill
-                      className="object-cover"
-                    />
+                  <div className="pt-8 space-y-4">
+                    <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
+                      <Image
+                        src={
+                          serviceInfo.subServices[2]?.imageUrl ||
+                          heroImage
+                        }
+                        alt="Professioneel materiaal"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
+                      <Image
+                        src={heroImage}
+                        alt="Klantendienst"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="pt-8 space-y-4">
-                  <div className="relative h-48 rounded-3xl overflow-hidden border border-white/10">
-                    <Image
-                      src={
-                        serviceInfo.subServices[2]?.imageUrl ||
-                        heroImage
-                      }
-                      alt="Professioneel materiaal"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative h-64 rounded-3xl overflow-hidden border border-white/10">
-                    <Image
-                      src={heroImage}
-                      alt="Klantendienst"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
+              )}
               {/* Trust Badge */}
               <div className="absolute -bottom-6 -right-6 bg-blue-600 p-8 rounded-2xl shadow-2xl z-20 border-4 border-[#000814]">
                 <div className="text-4xl font-black text-white mb-1">15+</div>

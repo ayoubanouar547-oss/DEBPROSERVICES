@@ -15,7 +15,9 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
-import { buildLongNlClusterText } from "@/lib/utils/seo-content-generator";
+import { paintingImages } from "@/lib/data/gallery-images";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
+import { buildLongNlClusterText, getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { frToNlCitySlugMap, frToNlCityNameMap, dutchServices } from "@/lib/data/translations";
 
 interface UnifiedParams {
@@ -46,7 +48,7 @@ export async function generateMetadata({
   const keywords = `${titleToUse}, ${cityInfo ? cityInfo.name : "België"}, spoedinterventie, reparatie 24/7, gratis offerte`;
 
   if (dutchSubService && cityInfo) {
-    const title = `🚨 Devis Gratuit for ${titleToUse} in ${cityInfo.name} ⚡ Interventie 30 Min`;
+    const title = getProfessionMetaTitle(serviceSlug, cityInfo.name, true);
     const description = `Expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie in heel België 24/7. Erkende technici. Gratis offerte ☎ 0498 35 25 88`;
     return {
       title,
@@ -78,7 +80,7 @@ export async function generateMetadata({
   }
 
   if (cityInfo) {
-    const title = `🚨 ${titleToUse} in ${cityInfo.name} ⚡ Interventie 30 Min | Devis Gratuit`;
+    const title = getProfessionMetaTitle(serviceSlug, cityInfo.name, true);
     const description = `Erkend expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie 24/7. Gratis offerte ☎ 0498 35 25 88`;
     return {
       title,
@@ -306,7 +308,7 @@ export default async function NlUnifiedZonePage({
                 <MapPin className="w-4 h-4" />
                 Lokale technicus in {activeCity.name}
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-8xl font-black leading-[1.05] mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tighter">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tight">
                 {titleToUse} <br />
                 <span className="text-blue-500">{activeCity.name}</span>
               </h1>
@@ -392,6 +394,53 @@ export default async function NlUnifiedZonePage({
                   ))}
                 </div>
               </div>
+
+              {/* Multiple Images Gallery Section */}
+              {(dutchService.id === "peinture" || serviceSlug === "peinture") ? (
+                <div className="py-12 border-t border-white/10">
+                  <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">
+                    Foto&apos;s van onze interventies
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {paintingImages.map((img, idx) => (
+                      <div
+                        key={idx}
+                        className="relative h-64 sm:h-72 rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-xl group"
+                      >
+                        <Image
+                          src={img.url}
+                          alt={`${img.title || img.category} - ${activeCity.name}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                          <div>
+                            <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block mb-1">
+                              {img.category === "Intérieur" ? "Interieur" : img.category === "Extérieur" ? "Exterieur" : img.category === "Boiseries" ? "Houtwerk" : img.category === "Cuisines" ? "Keukens" : img.category === "Sols" ? "Vloeren" : img.category}
+                            </span>
+                            <h4 className="text-sm font-bold text-white uppercase tracking-tight">
+                              {img.title}
+                            </h4>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (dutchService.id === "debouchage" || serviceSlug === "debouchage-canalisation") ? (
+                <div className="py-12 border-t border-white/10">
+                  <DebouchageGallery
+                    isNl={true}
+                    initialType={
+                      dutchSubService?.slug === "debouchage-wc-toilettes" ? "wc" :
+                      dutchSubService?.slug === "debouchage-egout-et-canalisations" ? "canalisation" :
+                      dutchSubService?.slug === "debouchage-evier-et-lavabo" ? "evier" :
+                      dutchSubService?.slug === "inspection-camera-canalisation" ? "camera" : "all"
+                    }
+                  />
+                </div>
+              ) : null}
 
               <div className="mt-16 prose prose-xl prose-invert text-white">
                 <div

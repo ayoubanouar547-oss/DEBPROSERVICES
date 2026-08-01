@@ -49,6 +49,46 @@ const QUICK_QUESTIONS: { label: string; text: string }[] = [];
 const SOFIA_AVATAR_URL = "https://deb-pro-service.odoo.com/web/image/615-d11d282d/Woman_assistant_looking_ahead_202607222344.jpeg";
 const SOFIA_AVATAR_REMOTE_FALLBACK = "https://deb-pro-service.odoo.com/web/image/615-d11d282d/Woman_assistant_looking_ahead_202607222344.jpeg";
 
+const playNotificationSound = () => {
+  if (typeof window === "undefined") return;
+  try {
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    if (ctx.state === "suspended") {
+      ctx.resume();
+    }
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc1.type = "sine";
+    osc2.type = "sine";
+
+    const now = ctx.currentTime;
+    osc1.frequency.setValueAtTime(880, now); // A5
+    osc1.frequency.exponentialRampToValueAtTime(1320, now + 0.08); // E6
+
+    osc2.frequency.setValueAtTime(1320, now + 0.1);
+    osc2.frequency.exponentialRampToValueAtTime(1760, now + 0.22); // A6
+
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.3, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc1.start(now);
+    osc1.stop(now + 0.1);
+    osc2.start(now + 0.1);
+    osc2.stop(now + 0.3);
+  } catch {
+    // Audio context may be restricted by browser policy if un-interacted
+  }
+};
+
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -61,6 +101,7 @@ export default function ChatBot() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowTooltip(true);
+      playNotificationSound();
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
@@ -421,93 +462,124 @@ export default function ChatBot() {
       <AnimatePresence>
         {!isOpen && showTooltip && (
           <>
-            {/* Desktop Full Tooltip */}
+            {/* Desktop Full Tooltip (iOS Banner Style) */}
             <motion.div
-              initial={{ opacity: 0, y: 15, scale: 0.9 }}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.9 }}
-              transition={{ duration: 0.3, type: "spring" }}
+              exit={{ opacity: 0, y: 15, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 350, damping: 25 }}
               onClick={() => {
                 setIsOpen(true);
                 setShowTooltip(false);
               }}
-              className="pointer-events-auto cursor-pointer mb-2.5 bg-[#000d26]/95 backdrop-blur-md border border-cyan-400/70 text-white p-4 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] w-80 relative hidden sm:flex items-start gap-3 hover:border-cyan-300 transition-all group"
+              className="pointer-events-auto cursor-pointer mb-3 bg-[#1c1c1e]/90 backdrop-blur-xl border border-white/10 text-white p-3.5 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] w-[340px] relative hidden sm:flex flex-col gap-2 transition-all hover:bg-[#2c2c2e]/90 group active:scale-[0.98]"
             >
-              <div className="relative flex-shrink-0">
-                <div className="w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-md relative overflow-hidden">
+              {/* iOS Header */}
+              <div className="flex items-center gap-2 w-full select-none">
+                {/* App Icon (Rounded square like iOS) */}
+                <div className="relative w-5 h-5 rounded-[5px] overflow-hidden shadow-sm flex-shrink-0 bg-[#000814]">
                   <Image
                     src={SOFIA_AVATAR_URL}
-                    alt="Assistant Sofia"
+                    alt="App Icon"
                     fill
-                    sizes="48px"
-                    className="rounded-full object-cover"
+                    sizes="20px"
+                    className="object-cover"
                     referrerPolicy="no-referrer"
                   />
                 </div>
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-[#000d26] rounded-full animate-pulse"></span>
+                <span className="text-[11px] font-semibold text-slate-400 tracking-wider uppercase font-sans">
+                  {isNl ? "BERICHT" : "MESSAGE"}
+                </span>
+                <span className="text-[11px] text-slate-500 font-medium font-sans ml-auto pr-6">
+                  {isNl ? "nu" : "maintenant"}
+                </span>
               </div>
-              <div className="flex-1 pr-3">
-                <p className="font-semibold text-cyan-300 mb-0.5 flex items-center gap-1.5 text-sm">
-                  Assistant Sofia
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                </p>
-                <p className="text-white text-sm font-medium leading-relaxed">
-                  {isNl
-                    ? "Hallo! Waarmee kan ik u vandaag helpen?"
-                    : "Salut, comment puis-je vous aider aujourd'hui ?"}
-                </p>
+
+              {/* iOS Body */}
+              <div className="flex items-start gap-3">
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-[14px] text-white flex items-center gap-1.5 font-sans leading-none mb-1">
+                    Sofia
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  </p>
+                  <p className="text-[13px] text-slate-200 font-normal leading-snug font-sans break-words">
+                    {isNl
+                      ? "Hallo! Ik ben Sofia. Waarmee kan ik u vandaag helpen met uw loodgieterij, verwarming of elektriciteit?"
+                      : "Bonjour ! Je suis Sofia de PRO SERVICES. Comment puis-je vous aider aujourd'hui ?"}
+                  </p>
+                </div>
               </div>
+
+              {/* iOS Close Button (Circle X) */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowTooltip(false);
                 }}
-                className="absolute top-2 right-2 text-slate-400 hover:text-white transition-colors p-1"
+                className="absolute top-3.5 right-3.5 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full w-5 h-5 flex items-center justify-center transition-all"
                 aria-label="Fermer"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3 h-3" />
               </button>
             </motion.div>
 
-            {/* Mobile Small Notification */}
+            {/* Mobile Small Notification (Mini iOS Banner Style) */}
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
+              initial={{ opacity: 0, y: 15, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 5, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 350, damping: 25 }}
               onClick={() => {
                 setIsOpen(true);
                 setShowTooltip(false);
               }}
-              className="pointer-events-auto cursor-pointer flex sm:hidden mb-2 bg-[#000d26]/95 backdrop-blur-md border border-cyan-400/70 text-white px-3 py-2 rounded-full shadow-lg relative items-center gap-2 hover:border-cyan-300 transition-all"
+              className="pointer-events-auto cursor-pointer flex sm:hidden mb-3 bg-[#1c1c1e]/90 backdrop-blur-xl border border-white/10 text-white p-3 rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.5)] relative flex-col gap-1.5 w-[280px] active:scale-[0.98] transition-all hover:bg-[#2c2c2e]/90"
             >
-              <div className="relative flex-shrink-0 w-6 h-6 rounded-full p-[1px] bg-gradient-to-tr from-cyan-500 to-blue-600">
-                <div className="relative w-full h-full rounded-full overflow-hidden bg-slate-900">
+              {/* iOS Header */}
+              <div className="flex items-center gap-2 w-full select-none">
+                <div className="relative w-4.5 h-4.5 rounded-[4px] overflow-hidden shadow-sm flex-shrink-0 bg-[#000814]">
                   <Image
                     src={SOFIA_AVATAR_URL}
-                    alt="Assistant Sofia"
+                    alt="App Icon"
                     fill
-                    sizes="24px"
-                    className="rounded-full object-cover"
+                    sizes="18px"
+                    className="object-cover"
                     referrerPolicy="no-referrer"
                   />
                 </div>
+                <span className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase font-sans">
+                  {isNl ? "BERICHT" : "MESSAGE"}
+                </span>
+                <span className="text-[10px] text-slate-500 font-medium font-sans ml-auto pr-5">
+                  {isNl ? "nu" : "maintenant"}
+                </span>
               </div>
-              <div className="flex items-center gap-1.5 pr-2 pl-0.5">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
-                <p className="text-[13px] font-medium text-cyan-50 whitespace-nowrap">
-                  {isNl ? "1 Nieuw bericht" : "1 Nouveau message"}
-                </p>
+              
+              {/* iOS Body */}
+              <div className="flex items-start gap-2.5">
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-[13px] text-white flex items-center gap-1 font-sans leading-none mb-0.5">
+                    Sofia
+                    <span className="inline-block w-1.2 h-1.2 rounded-full bg-emerald-500 animate-pulse" />
+                  </p>
+                  <p className="text-[12px] text-slate-200 font-normal leading-tight font-sans truncate">
+                    {isNl
+                      ? "Hallo! Waarmee kan ik u vandaag helpen?"
+                      : "Salut ! Comment puis-je vous aider aujourd'hui ?"}
+                  </p>
+                </div>
               </div>
+
+              {/* iOS Close Button */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowTooltip(false);
                 }}
-                className="ml-1 text-slate-400 hover:text-white p-1 rounded-full bg-white/5"
+                className="absolute top-3 right-3 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full w-[18px] h-[18px] flex items-center justify-center transition-all"
                 aria-label="Fermer"
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-2.5 h-2.5" />
               </button>
             </motion.div>
           </>
@@ -945,6 +1017,7 @@ function InlineChatForm({
           <label htmlFor={`cb-srv-${type}`} className="block text-[10px] text-slate-400 mb-1">Service demandé *</label>
           <select
             id={`cb-srv-${type}`}
+            aria-label="Service demandé"
             value={service}
             onChange={(e) => setService(e.target.value)}
             className="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-cyan-500 text-[11px]"

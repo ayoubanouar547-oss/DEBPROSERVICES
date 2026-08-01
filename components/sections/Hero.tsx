@@ -92,7 +92,7 @@ export function Hero() {
                     repeat: Infinity,
                     ease: "linear",
                   }}
-                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[92px] font-black tracking-tighter uppercase text-transparent bg-clip-text bg-[linear-gradient(90deg,#60a5fa,#38bdf8,#818cf8,#38bdf8,#60a5fa)] bg-[length:300%_300%] drop-shadow-[0_10px_25px_rgba(37,99,235,0.4)]"
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[92px] font-black tracking-tighter uppercase text-transparent bg-clip-text bg-[linear-gradient(90deg,#ef4444,#3b82f6,#ff2222,#1e40af,#ef4444)] bg-[length:300%_300%] drop-shadow-[0_10px_30px_rgba(239,68,68,0.45)]"
                 >
                   PRO SERVICE
                 </motion.span>

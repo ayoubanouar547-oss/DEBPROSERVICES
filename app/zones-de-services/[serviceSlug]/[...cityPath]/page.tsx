@@ -1,4 +1,4 @@
-import { buildLongClusterText } from "@/lib/utils/seo-content-generator";
+import { buildLongClusterText, getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { services } from "@/lib/data/services";
@@ -18,6 +18,8 @@ import { HeroQuoteForm } from "@/components/sections/HeroQuoteForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
+import { paintingImages } from "@/lib/data/gallery-images";
+import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 interface UnifiedParams {
   serviceSlug: string;
@@ -80,7 +82,7 @@ export async function generateMetadata({
 
   if (subService && cityInfo) {
     const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
-    const title = `🚨 Devis Gratuit pour ${subService.title} à ${cityInfo.name} ⚡ Intervention 30 Min`;
+    const title = getProfessionMetaTitle(subService.slug, cityInfo.name);
     const description = `Expert en ${subService.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`;
     return {
       title,
@@ -113,7 +115,7 @@ export async function generateMetadata({
 
   if (cityInfo) {
     const cityDataObj = cityData[cityInfo.slug] ?? getFallbackCityData(cityInfo.name, cityInfo.province);
-    const title = `🚨 Devis Gratuit pour ${service.title} à ${cityInfo.name} ⚡ Intervention 30 Min`;
+    const title = getProfessionMetaTitle(service.slug, cityInfo.name);
     const description = `Expert en ${service.title} à ${cityInfo.name}. Intervention en moins de ${cityDataObj.interventionTime}, 24h/24. Techniciens agréés. Devis gratuit ☎ 0498 35 25 88`;
     return {
       title,
@@ -429,7 +431,7 @@ export default async function UnifiedZonePage({
                 <MapPin className="w-4 h-4" />
                 Technicien local dispatché à {cityInfo.name}
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-8xl font-black leading-[1.05] mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tighter">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tight">
                 {titleToUse} <br />
                 <span className="text-blue-500">{cityInfo.name}</span>
               </h1>
@@ -547,44 +549,90 @@ export default async function UnifiedZonePage({
 
               {/* Multiple Images Gallery Section */}
               <div className="py-12 border-t border-white/10">
-                <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">
-                  Photos de nos interventions
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
-                    <Image
-                      src={
-                        serviceInfo.subServices[0]?.imageUrl ||
-                        serviceInfo.imageUrl
-                      }
-                      alt={`Intervention ${titleToUse} ${cityInfo.name}`}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
-                    <Image
-                      src={
-                        serviceInfo.subServices[1]?.imageUrl ||
-                        serviceInfo.imageUrl
-                      }
-                      alt={`Technicien ${serviceInfo.title} ${cityInfo.name}`}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group hidden md:block">
-                    <Image
-                      src={
-                        serviceInfo.subServices[2]?.imageUrl ||
-                        serviceInfo.imageUrl
-                      }
-                      alt={`Dépannage urgent ${cityInfo.name}`}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
+                {serviceInfo.id === "peinture" || serviceSlug === "peinture" ? (
+                  <>
+                    <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">
+                      Photos de nos interventions
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                      {paintingImages.map((img, idx) => (
+                        <div
+                          key={idx}
+                          className="relative h-64 sm:h-72 rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-xl group"
+                        >
+                          <Image
+                            src={img.url}
+                            alt={`${img.title || img.category} - ${cityInfo.name}`}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            referrerPolicy="no-referrer"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <div>
+                              <span className="text-xs font-bold text-blue-400 uppercase tracking-widest block mb-1">
+                                {img.category}
+                              </span>
+                              <h4 className="text-sm font-bold text-white uppercase tracking-tight">
+                                {img.title}
+                              </h4>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : serviceInfo.id === "debouchage" || serviceSlug === "debouchage-canalisation" ? (
+                  <DebouchageGallery
+                    initialType={
+                      subServiceInfo?.slug === "debouchage-wc-toilettes" ? "wc" :
+                      subServiceInfo?.slug === "debouchage-egout-et-canalisations" ? "canalisation" :
+                      subServiceInfo?.slug === "debouchage-evier-et-lavabo" ? "evier" :
+                      subServiceInfo?.slug === "inspection-camera-canalisation" ? "camera" : "all"
+                    }
+                  />
+                ) : (
+                  <>
+                    <h3 className="text-3xl font-black mb-8 text-white uppercase tracking-tight">
+                      Photos de nos interventions
+                    </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
+                        <Image
+                          src={
+                            subServiceInfo?.imageUrl ||
+                            serviceInfo.subServices[0]?.imageUrl ||
+                            serviceInfo.imageUrl
+                          }
+                          alt={`Intervention ${titleToUse} ${cityInfo.name}`}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group">
+                        <Image
+                          src={
+                            serviceInfo.subServices[1]?.imageUrl ||
+                            serviceInfo.imageUrl
+                          }
+                          alt={`Technicien ${serviceInfo.title} ${cityInfo.name}`}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group hidden md:block">
+                        <Image
+                          src={
+                            serviceInfo.subServices[2]?.imageUrl ||
+                            serviceInfo.imageUrl
+                          }
+                          alt={`Dépannage urgent ${cityInfo.name}`}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="bg-blue-600/10 border border-blue-500/20 rounded-3xl p-10">
