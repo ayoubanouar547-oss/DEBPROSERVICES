@@ -158,6 +158,25 @@ export default function RootLayout({
             `,
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                try {
+                  if (typeof window !== 'undefined') {
+                    var h = window.location.hostname || '';
+                    if (h.indexOf('run.app') !== -1 || h.indexOf('localhost') !== -1 || h.indexOf('127.0.0.1') !== -1 || h.indexOf('ais-') !== -1) {
+                      return;
+                    }
+                  }
+                } catch(e) {}
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "wjxyfzz68l");
+            `,
+          }}
+        />
       </head>
       <body
         className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
