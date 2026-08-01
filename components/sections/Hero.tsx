@@ -72,9 +72,8 @@ export function Hero() {
 
         <div className="space-y-6">
           <motion.h1
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
             className="font-black leading-tight mb-6 relative group"
           >
             {/* Background Glow */}
