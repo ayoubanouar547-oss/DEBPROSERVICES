@@ -11,7 +11,14 @@ export const metadata: Metadata = {
   keywords:
     "urgence plombier Belgique, SOS débouchage canalisation, réparation chaudière nuit, électricien urgent 24h/24",
   alternates: {
-    canonical: "/urgence",
+    canonical: "https://debservices.canalrose.be/urgence",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be/urgence",
+      "fr": "https://debservices.canalrose.be/urgence",
+      "nl-BE": "https://debservices.canalrose.be/nl/urgence",
+      "nl": "https://debservices.canalrose.be/nl/urgence",
+      "x-default": "https://debservices.canalrose.be/urgence",
+    },
   },
   openGraph: {
     title: "🚨 Dépannage d'Urgence 24/7 — Action Rapide ⚡",
@@ -71,9 +78,9 @@ export default function UrgencePage() {
           <div className="flex justify-center">
             <a
               href="tel:0498 35 25 88"
-              className="flex items-center gap-3 bg-white text-accent hover:bg-gray-100 px-10 py-5 rounded-full font-bold text-2xl md:text-3xl transition shadow-2xl"
+              className="flex items-center gap-3 bg-white text-accent hover:bg-gray-100 px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-bold text-lg sm:text-2xl transition shadow-xl"
             >
-              <PhoneCall className="w-8 h-8" /> 0498 35 25 88
+              <PhoneCall className="w-5 h-5 sm:w-7 sm:h-7" /> 0498 35 25 88
             </a>
           </div>
         </div>

@@ -116,8 +116,7 @@ export default function ZonesDeServicesClient({ isNl = false }: { isNl?: boolean
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-black mb-4 md:mb-6 tracking-tight uppercase">
-                {isNl ? "Interventiezones" : "Zones d'Intervention"} <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                {isNl ? "Interventiezones" : "Zones d'Intervention"} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
                   {isNl ? "over heel België" : "sur toute la Belgique"}
                 </span>
               </h1>

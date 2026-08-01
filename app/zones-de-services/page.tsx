@@ -8,7 +8,14 @@ export const metadata: Metadata = {
   keywords:
     "zones intervention Belgique, plombier Bruxelles, chauffagiste Liège, débouchage Anvers, service de proximité Belgique",
   alternates: {
-    canonical: "/zones-de-services",
+    canonical: "https://debservices.canalrose.be/zones-de-services",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be/zones-de-services",
+      "fr": "https://debservices.canalrose.be/zones-de-services",
+      "nl-BE": "https://debservices.canalrose.be/nl/zones-de-services",
+      "nl": "https://debservices.canalrose.be/nl/zones-de-services",
+      "x-default": "https://debservices.canalrose.be/zones-de-services",
+    },
   },
   openGraph: {
     title: "🚨 Zones d'Intervention — Action Rapide ⚡",

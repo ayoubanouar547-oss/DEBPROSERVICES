@@ -42,6 +42,13 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://debservices.canalrose.be",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be",
+      "fr": "https://debservices.canalrose.be",
+      "nl-BE": "https://debservices.canalrose.be/nl",
+      "nl": "https://debservices.canalrose.be/nl",
+      "x-default": "https://debservices.canalrose.be",
+    },
   },
   openGraph: {
     title:
@@ -106,28 +113,56 @@ export default function RootLayout({
       className={`${inter.variable} ${oswald.variable}`}
       suppressHydrationWarning
     >
-      <body
-        className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
-        suppressHydrationWarning
-      >
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
+      <head>
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-                  var savedTheme = localStorage.getItem(\x27theme\x27);
-                  if (savedTheme === \x27light\x27) {
-                    document.documentElement.classList.add(\x27light-theme\x27);
+                  if (typeof window !== 'undefined') {
+                    var _fetch = window.fetch;
+                    var setFetch = function(v) { _fetch = v; };
+                    var getFetch = function() { return _fetch; };
+                    
+                    try {
+                      Object.defineProperty(window, 'fetch', {
+                        get: getFetch,
+                        set: setFetch,
+                        configurable: true,
+                        enumerable: true
+                      });
+                    } catch (e) {}
+
+                    if (typeof Window !== 'undefined' && Window.prototype) {
+                      try {
+                        Object.defineProperty(Window.prototype, 'fetch', {
+                          get: getFetch,
+                          set: setFetch,
+                          configurable: true,
+                          enumerable: true
+                        });
+                      } catch (e) {}
+                    }
+                  }
+                } catch (e) {}
+
+                try {
+                  var savedTheme = localStorage.getItem('theme');
+                  if (savedTheme === 'light') {
+                    document.documentElement.classList.add('light-theme');
                   } else {
-                    document.documentElement.classList.remove(\x27light-theme\x27);
+                    document.documentElement.classList.remove('light-theme');
                   }
                 } catch (e) {}
               })();
-            `
+            `,
           }}
         />
+      </head>
+      <body
+        className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
+        suppressHydrationWarning
+      >
         {/* Advanced Background Animation blobs - Professional Blue/Cyan Palette */}
         <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#000814]">
           <div className="absolute top-[-20%] left-[-10%] w-[900px] h-[900px] bg-blue-700/20 rounded-full blur-[150px] animate-blob"></div>
@@ -206,26 +241,6 @@ export default function RootLayout({
         <Footer />
         <ClientWidgets />
         <MobileBottomNav />
-        <Script
-          id="microsoft-clarity"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              if (typeof window !== "undefined" && 
-                  window.self === window.top && 
-                  !window.location.hostname.includes("localhost") && 
-                  !window.location.hostname.includes("127.0.0.1") && 
-                  !window.location.hostname.includes("run.app") && 
-                  !window.location.hostname.includes("ais-")) {
-                (function(c,l,a,r,i,t,y){
-                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "wjxyfzz68l");
-              }
-            `,
-          }}
-        />
       </body>
     </html>
   );

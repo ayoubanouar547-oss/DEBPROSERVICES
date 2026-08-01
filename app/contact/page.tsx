@@ -8,7 +8,14 @@ export const metadata: Metadata = {
   keywords:
     "contact plombier Belgique, devis débouchage, urgence chauffage contact, téléphone",
   alternates: {
-    canonical: "/contact",
+    canonical: "https://debservices.canalrose.be/contact",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be/contact",
+      "fr": "https://debservices.canalrose.be/contact",
+      "nl-BE": "https://debservices.canalrose.be/nl/contact",
+      "nl": "https://debservices.canalrose.be/nl/contact",
+      "x-default": "https://debservices.canalrose.be/contact",
+    },
   },
   openGraph: {
     title: "🚨 Contactez l'Expert Plomberie & Chauffage ⚡",

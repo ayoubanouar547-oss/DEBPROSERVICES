@@ -8,7 +8,14 @@ export const metadata: Metadata = {
   keywords:
     "devis gratuit plombier, estimation prix débouchage, prix chauffagiste Belgique, devis électricité rapide",
   alternates: {
-    canonical: "/devis",
+    canonical: "https://debservices.canalrose.be/devis",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be/devis",
+      "fr": "https://debservices.canalrose.be/devis",
+      "nl-BE": "https://debservices.canalrose.be/nl/devis",
+      "nl": "https://debservices.canalrose.be/nl/devis",
+      "x-default": "https://debservices.canalrose.be/devis",
+    },
   },
   openGraph: {
     title: "🚨 Obtenez votre Devis Gratuit en 5 Min ⚡",

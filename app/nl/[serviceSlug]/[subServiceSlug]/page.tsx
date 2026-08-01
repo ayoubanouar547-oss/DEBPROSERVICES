@@ -76,8 +76,11 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://debservices.canalrose.be/nl/${service.slug}/${subService.slug}`,
       languages: {
-        'fr': `https://debservices.canalrose.be${frSlugPath}`,
-        'nl': `https://debservices.canalrose.be/nl/${service.slug}/${subService.slug}`
+        "fr-BE": `https://debservices.canalrose.be${frSlugPath}`,
+        "fr": `https://debservices.canalrose.be${frSlugPath}`,
+        "nl-BE": `https://debservices.canalrose.be/nl/${service.slug}/${subService.slug}`,
+        "nl": `https://debservices.canalrose.be/nl/${service.slug}/${subService.slug}`,
+        "x-default": `https://debservices.canalrose.be${frSlugPath}`,
       }
     },
       openGraph: {
@@ -297,14 +300,14 @@ export default async function SubServicePage({
               <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-red-600/30 hover:-translate-y-0.5 text-xs sm:text-base group"
                 >
-                  <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse group-hover:scale-110 transition-transform" />
                   <div className="text-left">
-                    <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
+                    <span className="block text-[9px] sm:text-[10px] opacity-80 uppercase tracking-widest font-bold">
                       SOS Oproep 24/7
                     </span>
-                    <span className="block text-lg md:text-xl">
+                    <span className="block text-sm sm:text-base font-bold">
                       0498 35 25 88
                     </span>
                   </div>

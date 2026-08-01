@@ -315,35 +315,30 @@ export default async function NlUnifiedZonePage({
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-widest text-white border border-blue-400/30 mb-8 shadow-2xl shadow-blue-600/30">
-                <MapPin className="w-4 h-4" />
-                Lokale technicus in {activeCity.name}
-              </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 md:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tight">
-                {titleToUse} <br />
-                <span className="text-blue-500">{activeCity.name}</span>
+                {titleToUse} <span className="text-blue-500">{activeCity.name}</span>
               </h1>
               <p className="text-lg md:text-2xl text-blue-100/70 mb-8 md:mb-10 leading-relaxed max-w-2xl">
                 Nood aan een expert voor <strong>{titleToUse.toLowerCase()}</strong> in {activeCity.name}? Onze technici komen binnen 30 tot 60 minuten ter plaatse, 24/7. Gratis offerte zonder verplichting.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-6">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-4 md:px-10 md:py-6 rounded-2xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-base md:text-lg group"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-red-600/30 hover:-translate-y-0.5 text-xs sm:text-base group"
                 >
-                  <PhoneCall className="w-6 h-6 md:w-7 md:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse group-hover:scale-110 transition-transform" />
                   <div className="text-left">
-                    <span className="block text-[10px] md:text-xs opacity-80 uppercase tracking-widest font-bold">
+                    <span className="block text-[9px] sm:text-[10px] opacity-80 uppercase tracking-widest font-bold">
                       SOS Oproep 24/7
                     </span>
-                    <span className="block text-lg md:text-xl">
+                    <span className="block text-sm sm:text-base font-bold">
                       0498 35 25 88
                     </span>
                   </div>
                 </a>
                 <a
                   href="#contact"
-                  className="w-full sm:w-auto text-center bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-6 py-4 md:px-10 md:py-6 rounded-2xl border border-white/20 transition text-base md:text-lg"
+                  className="w-full sm:w-auto text-center bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl border border-white/20 transition text-xs sm:text-base"
                 >
                   Snel Offerte
                 </a>

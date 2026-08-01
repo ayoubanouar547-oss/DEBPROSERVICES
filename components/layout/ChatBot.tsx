@@ -472,7 +472,7 @@ export default function ChatBot() {
                 setIsOpen(true);
                 setShowTooltip(false);
               }}
-              className="pointer-events-auto cursor-pointer mb-3 bg-[#1c1c1e]/90 backdrop-blur-xl border border-white/10 text-white p-3.5 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] w-[340px] relative hidden sm:flex flex-col gap-2 transition-all hover:bg-[#2c2c2e]/90 group active:scale-[0.98]"
+              className="pointer-events-auto cursor-pointer mb-3 bg-[#1c1c1e]/90 backdrop-blur-xl border border-white/10 text-white p-3.5 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.5)] w-[340px] relative hidden md:flex flex-col gap-2 transition-all hover:bg-[#2c2c2e]/90 group active:scale-[0.98]"
             >
               {/* iOS Header */}
               <div className="flex items-center gap-2 w-full select-none">
@@ -522,76 +522,19 @@ export default function ChatBot() {
                 <X className="w-3 h-3" />
               </button>
             </motion.div>
-
-            {/* Mobile Small Notification (Mini iOS Banner Style) */}
-            <motion.div
-              initial={{ opacity: 0, y: 15, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 350, damping: 25 }}
-              onClick={() => {
-                setIsOpen(true);
-                setShowTooltip(false);
-              }}
-              className="pointer-events-auto cursor-pointer flex sm:hidden mb-3 bg-[#1c1c1e]/90 backdrop-blur-xl border border-white/10 text-white p-3 rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.5)] relative flex-col gap-1.5 w-[280px] active:scale-[0.98] transition-all hover:bg-[#2c2c2e]/90"
-            >
-              {/* iOS Header */}
-              <div className="flex items-center gap-2 w-full select-none">
-                <div className="relative w-4.5 h-4.5 rounded-[4px] overflow-hidden shadow-sm flex-shrink-0 bg-[#000814]">
-                  <Image
-                    src={SOFIA_AVATAR_URL}
-                    alt="App Icon"
-                    fill
-                    sizes="18px"
-                    className="object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <span className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase font-sans">
-                  {isNl ? "BERICHT" : "MESSAGE"}
-                </span>
-                <span className="text-[10px] text-slate-500 font-medium font-sans ml-auto pr-5">
-                  {isNl ? "nu" : "maintenant"}
-                </span>
-              </div>
-              
-              {/* iOS Body */}
-              <div className="flex items-start gap-2.5">
-                <div className="flex-1 min-w-0">
-                  <p className="font-bold text-[13px] text-white flex items-center gap-1 font-sans leading-none mb-0.5">
-                    Sofia
-                    <span className="inline-block w-1.2 h-1.2 rounded-full bg-emerald-500 animate-pulse" />
-                  </p>
-                  <p className="text-[12px] text-slate-200 font-normal leading-tight font-sans truncate">
-                    {isNl
-                      ? "Hallo! Waarmee kan ik u vandaag helpen?"
-                      : "Salut ! Comment puis-je vous aider aujourd'hui ?"}
-                  </p>
-                </div>
-              </div>
-
-              {/* iOS Close Button */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowTooltip(false);
-                }}
-                className="absolute top-3 right-3 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full w-[18px] h-[18px] flex items-center justify-center transition-all"
-                aria-label="Fermer"
-              >
-                <X className="w-2.5 h-2.5" />
-              </button>
-            </motion.div>
           </>
         )}
       </AnimatePresence>
 
-      {/* MOBILE TRIGGER BUTTON: Strictly ROUND (w-14 h-14 rounded-full), NO 'Discuter avec un expert' text */}
+      {/* MOBILE TRIGGER BUTTON: Strictly ROUND (w-14 h-14 rounded-full), WITH RED NOTIFICATION BADGE ONLY */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="pointer-events-auto flex md:hidden items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 via-cyan-600 to-blue-700 text-white shadow-2xl shadow-cyan-950/90 border-2 border-cyan-400/80 ring-2 ring-cyan-500/30 p-0.5"
+        onClick={() => {
+          setIsOpen(!isOpen);
+          if (showTooltip) setShowTooltip(false);
+        }}
+        className="pointer-events-auto flex md:hidden items-center justify-center w-14 h-14 rounded-full bg-gradient-to-tr from-blue-600 via-cyan-600 to-blue-700 text-white shadow-2xl shadow-cyan-950/90 border-2 border-cyan-400/80 ring-2 ring-cyan-500/30 p-0.5 relative"
         aria-label="Assistant Sofia"
       >
         {isOpen ? (
@@ -613,6 +556,16 @@ export default function ChatBot() {
               <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-[#000d26]"></span>
             </span>
           </div>
+        )}
+
+        {/* Red notification dot / badge on mobile when message tooltip is active */}
+        {!isOpen && showTooltip && (
+          <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center z-20">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+            <span className="relative inline-flex items-center justify-center rounded-full h-5 w-5 bg-red-600 border-2 border-[#000d26] text-[10px] font-black text-white shadow-lg">
+              1
+            </span>
+          </span>
         )}
       </motion.button>
 

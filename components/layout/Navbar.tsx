@@ -139,10 +139,10 @@ export function Navbar() {
                 <WaterSplash />
                 <Image
                   src="https://deb-pro-service.odoo.com/web/image/679-4360ef3d/PRO%20SERVICE.png"
-                  alt="PRO SERVICE - Logo officiel Plomberie et Débouchage en Belgique"
+                  alt="PRO SERVICES - Logo officiel Plomberie et Débouchage en Belgique"
                   width={240}
                   height={80}
-                  className="h-16 md:h-20 lg:h-22 w-auto object-contain transition-transform duration-300 group-hover:scale-105 relative z-10"
+                  className="h-16 xs:h-18 md:h-20 lg:h-22 w-auto object-contain transition-transform duration-300 group-hover:scale-105 relative z-10"
                   referrerPolicy="no-referrer"
                   priority
                 />

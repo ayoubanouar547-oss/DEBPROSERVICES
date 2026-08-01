@@ -1,6 +1,23 @@
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import dynamic from "next/dynamic";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "PRO SERVICES België 🚀 Loodgieter, Ontstopping, Verwarming, Elektriciteit, Gas & Airco 24/7",
+  description:
+    "PRO SERVICES in België: Loodgieter, ontstopping van leidingen, verwarming, gas, elektriciteit, airco, camerabewaking, zonnepanelen, septische put leegmaken & renovatie. Snelle interventie 24/7.",
+  alternates: {
+    canonical: "https://debservices.canalrose.be/nl",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be",
+      "fr": "https://debservices.canalrose.be",
+      "nl-BE": "https://debservices.canalrose.be/nl",
+      "nl": "https://debservices.canalrose.be/nl",
+      "x-default": "https://debservices.canalrose.be",
+    },
+  },
+};
 
 const ServiceZones = dynamic(() => import("@/components/sections/ServiceZones").then(m => m.ServiceZones));
 const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(m => m.Testimonials));

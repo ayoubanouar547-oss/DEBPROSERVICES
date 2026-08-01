@@ -64,8 +64,11 @@ export async function generateMetadata({
       alternates: {
         canonical: `https://debservices.canalrose.be/nl/${resolvedParams.serviceSlug}`,
         languages: {
-          'fr': `https://debservices.canalrose.be${frSlugPath}`,
-          'nl': `https://debservices.canalrose.be/nl/${resolvedParams.serviceSlug}`
+          "fr-BE": `https://debservices.canalrose.be${frSlugPath}`,
+          "fr": `https://debservices.canalrose.be${frSlugPath}`,
+          "nl-BE": `https://debservices.canalrose.be/nl/${resolvedParams.serviceSlug}`,
+          "nl": `https://debservices.canalrose.be/nl/${resolvedParams.serviceSlug}`,
+          "x-default": `https://debservices.canalrose.be${frSlugPath}`,
         }
       },
       openGraph: {
@@ -153,8 +156,11 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://debservices.canalrose.be/nl/${service.slug}`,
       languages: {
-        'fr': `https://debservices.canalrose.be${frSlugPath}`,
-        'nl': `https://debservices.canalrose.be/nl/${service.slug}`
+        "fr-BE": `https://debservices.canalrose.be${frSlugPath}`,
+        "fr": `https://debservices.canalrose.be${frSlugPath}`,
+        "nl-BE": `https://debservices.canalrose.be/nl/${service.slug}`,
+        "nl": `https://debservices.canalrose.be/nl/${service.slug}`,
+        "x-default": `https://debservices.canalrose.be${frSlugPath}`,
       }
     },
     openGraph: {
@@ -429,9 +435,9 @@ export default async function ServicePage({
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-4 md:px-8 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-red-600/30 text-xs sm:text-sm"
                 >
-                  <PhoneCall className="w-5 h-5" /> Urgentie {matchedTerm}
+                  <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5" /> Urgentie {matchedTerm}
                 </a>
               </div>
             </div>
@@ -475,11 +481,11 @@ export default async function ServicePage({
 
                 <div className="p-8 pt-6 flex flex-col flex-grow relative z-10">
                   <h3
-                    className={`text-2xl font-bold mb-3 group-hover:${serviceInfo.color.text} transition-colors uppercase tracking-tight text-white`}
+                    className={`text-xl sm:text-2xl font-bold mb-3 group-hover:${serviceInfo.color.text} transition-colors uppercase tracking-tight text-white`}
                   >
                     {sub.title}
                   </h3>
-                  <p className="text-white mb-6 text-sm leading-relaxed flex-grow">
+                  <p className="text-white mb-6 text-base sm:text-sm leading-relaxed flex-grow">
                     {sub.desc}
                   </p>
                   <div className="flex items-center text-sm font-bold uppercase tracking-wider text-white group-hover:text-blue-400 mt-auto transition-colors">
@@ -598,9 +604,9 @@ export default async function ServicePage({
               <div className="mt-10">
                 <a
                   href="tel:0498 35 25 88"
-                  className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-10 py-5 rounded-2xl hover:bg-slate-100 transition shadow-2xl"
+                  className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl hover:bg-slate-100 transition shadow-xl text-sm sm:text-base"
                 >
-                  <PhoneCall className="w-6 h-6" /> BEL UW EXPERT: 0498 35 25 88
+                  <PhoneCall className="w-5 h-5 sm:w-6 sm:h-6" /> BEL UW EXPERT: 0498 35 25 88
                 </a>
               </div>
             </div>

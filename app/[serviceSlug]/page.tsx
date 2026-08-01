@@ -13,6 +13,7 @@ import { matchServiceAndCity } from "@/lib/service-matcher";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
+import { getAlternatePath } from "@/lib/data/translations";
 
 // Helper function to dynamically parse service and city combinations for all of Belgium
 function parseServiceAndCity(slug: string) {
@@ -59,11 +60,20 @@ export async function generateMetadata({
 
     const description = `Besoin d'un expert en ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? PRO SERVICES propose des interventions rapides, devis gratuit et prestations de haute qualité.`;
 
+    const nlSlugPath = getAlternatePath(`/${resolvedParams.serviceSlug}`, 'nl');
+
     return {
       title,
       description,
       alternates: {
-        canonical: `/${resolvedParams.serviceSlug}`,
+        canonical: `https://debservices.canalrose.be/${resolvedParams.serviceSlug}`,
+        languages: {
+          "fr-BE": `https://debservices.canalrose.be/${resolvedParams.serviceSlug}`,
+          "fr": `https://debservices.canalrose.be/${resolvedParams.serviceSlug}`,
+          "nl-BE": `https://debservices.canalrose.be${nlSlugPath}`,
+          "nl": `https://debservices.canalrose.be${nlSlugPath}`,
+          "x-default": `https://debservices.canalrose.be/${resolvedParams.serviceSlug}`,
+        },
       },
       openGraph: {
         title,
@@ -156,12 +166,21 @@ export async function generateMetadata({
     ? `🌳 Jardinier & Élagage Belgique — Entretien d'Espaces Verts 🍃`
     : `🚨 Expert ${service.title} Belgique — Devis Gratuit ⚡`;
 
+  const defaultNlPath = getAlternatePath(`/${service.slug}`, 'nl');
+
   return {
     title: metaTitle,
     description,
     keywords: `${service.title} Belgique, ${service.title} 24h/24, expert ${service.title}, devis gratuit ${service.title}, installation solaire belgique, toiture belgique, couvreur belgique, cameras de surveillance belgique, securite maison belgique`,
     alternates: {
-      canonical: `/${service.slug}`,
+      canonical: `https://debservices.canalrose.be/${service.slug}`,
+      languages: {
+        "fr-BE": `https://debservices.canalrose.be/${service.slug}`,
+        "fr": `https://debservices.canalrose.be/${service.slug}`,
+        "nl-BE": `https://debservices.canalrose.be${defaultNlPath}`,
+        "nl": `https://debservices.canalrose.be${defaultNlPath}`,
+        "x-default": `https://debservices.canalrose.be/${service.slug}`,
+      },
     },
     openGraph: {
       title: ogTitle,
@@ -458,7 +477,7 @@ export default async function ServicePage({
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-xl shadow-red-600/30 text-sm sm:text-base"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-red-600/30 text-xs sm:text-sm"
                 >
                   <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5" /> Urgence {matchedTerm}
                 </a>
@@ -505,11 +524,11 @@ export default async function ServicePage({
 
                 <div className="p-8 pt-6 flex flex-col flex-grow relative z-10">
                   <h3
-                    className={`text-2xl font-bold mb-3 group-hover:${serviceInfo.color.text} transition-colors uppercase tracking-tight text-white`}
+                    className={`text-xl sm:text-2xl font-bold mb-3 group-hover:${serviceInfo.color.text} transition-colors uppercase tracking-tight text-white`}
                   >
                     {sub.title}
                   </h3>
-                  <p className="text-white mb-6 text-sm leading-relaxed flex-grow">
+                  <p className="text-white mb-6 text-base sm:text-sm leading-relaxed flex-grow">
                     {sub.desc}
                   </p>
                   <div className="flex items-center text-sm font-bold uppercase tracking-wider text-white group-hover:text-blue-400 mt-auto transition-colors">
@@ -591,9 +610,9 @@ export default async function ServicePage({
               <div className="mt-10">
                 <a
                   href="tel:0498 35 25 88"
-                  className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-10 py-5 rounded-2xl hover:bg-slate-100 transition shadow-2xl"
+                  className="inline-flex items-center gap-3 bg-white text-[#1A3A8F] font-black px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl hover:bg-slate-100 transition shadow-xl text-sm sm:text-base"
                 >
-                  <PhoneCall className="w-6 h-6" /> APPELEZ VOTRE EXPERT : 0498 35 25 88
+                  <PhoneCall className="w-5 h-5 sm:w-6 sm:h-6" /> APPELEZ VOTRE EXPERT : 0498 35 25 88
                 </a>
               </div>
             </div>

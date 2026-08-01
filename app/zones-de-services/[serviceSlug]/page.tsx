@@ -79,8 +79,7 @@ export default async function ServiceZonesPage({
             Couverture Nationale
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6">
-            Zones d'Intervention <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+            Zones d'Intervention <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
               {serviceInfo.title}
             </span>
           </h1>

@@ -1,6 +1,7 @@
 import { buildLongClusterText, getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { services } from "@/lib/data/services";
+import { getAlternatePath } from "@/lib/data/translations";
 import { notFound } from "next/navigation";
 import { PhoneCall, ChevronRight, CheckCircle } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -48,12 +49,21 @@ export async function generateMetadata({
 
   if (!service || !subService) return {};
 
+  const nlSubPath = getAlternatePath(`/${service.slug}/${subService.slug}`, 'nl');
+
   return {
     title: getProfessionMetaTitle(subService.slug, "Belgique"),
     description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} Techniciens agrées avec intervention en urgence 24h/24 et 7j/7 partout en Belgique.`,
     keywords: `${subService.title} Belgique, ${subService.title} urgent, expert ${subService.title.toLowerCase()}, dépannage 24h/24, ${service.title} Belgique`,
     alternates: {
-      canonical: `/${service.slug}/${subService.slug}`,
+      canonical: `https://debservices.canalrose.be/${service.slug}/${subService.slug}`,
+      languages: {
+        "fr-BE": `https://debservices.canalrose.be/${service.slug}/${subService.slug}`,
+        "fr": `https://debservices.canalrose.be/${service.slug}/${subService.slug}`,
+        "nl-BE": `https://debservices.canalrose.be${nlSubPath}`,
+        "nl": `https://debservices.canalrose.be${nlSubPath}`,
+        "x-default": `https://debservices.canalrose.be/${service.slug}/${subService.slug}`,
+      },
     },
     openGraph: {
       title: `🚨 ${subService.title} Belgique — Action Rapide ⚡`,
@@ -267,14 +277,14 @@ export default async function SubServicePage({
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3.5 sm:px-10 sm:py-6 rounded-2xl flex items-center justify-center gap-3 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-sm sm:text-lg group"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-red-600/30 hover:-translate-y-0.5 text-xs sm:text-base group"
                 >
-                  <PhoneCall className="w-5 h-5 sm:w-7 sm:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse group-hover:scale-110 transition-transform" />
                   <div className="text-left">
-                    <span className="block text-[10px] sm:text-xs opacity-80 uppercase tracking-widest font-bold">
+                    <span className="block text-[9px] sm:text-[10px] opacity-80 uppercase tracking-widest font-bold">
                       Appel SOS 24/7
                     </span>
-                    <span className="block text-base sm:text-xl">
+                    <span className="block text-sm sm:text-base font-bold">
                       0498 35 25 88
                     </span>
                   </div>

@@ -80,7 +80,7 @@ export function Hero() {
             <div className="absolute -left-10 -top-10 w-72 h-36 bg-blue-600/30 rounded-full blur-3xl pointer-events-none animate-pulse" />
 
             <div className="flex flex-col gap-2 relative z-10">
-              {/* Main "PRO SERVICE" Animated Display */}
+              {/* Main "PRO SERVICES" Animated Display */}
               <div className="relative inline-block py-2">
                 <motion.span
                   animate={{
@@ -91,9 +91,9 @@ export function Hero() {
                     repeat: Infinity,
                     ease: "linear",
                   }}
-                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[92px] font-black tracking-tighter uppercase text-transparent bg-clip-text bg-[linear-gradient(90deg,#ef4444,#3b82f6,#ff2222,#1e40af,#ef4444)] bg-[length:300%_300%] drop-shadow-[0_10px_30px_rgba(239,68,68,0.45)]"
+                  className="text-6xl sm:text-7xl md:text-8xl lg:text-[92px] font-black tracking-tighter uppercase text-transparent bg-clip-text bg-[linear-gradient(90deg,#ef4444,#3b82f6,#ff2222,#1e40af,#ef4444)] bg-[length:300%_300%] drop-shadow-[0_10px_30px_rgba(239,68,68,0.45)] leading-tight"
                 >
-                  PRO SERVICE
+                  PRO SERVICES
                 </motion.span>
               </div>
 

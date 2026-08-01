@@ -436,13 +436,8 @@ export default async function UnifiedZonePage({
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-600 rounded-full text-xs font-black uppercase tracking-wider text-white border border-blue-400/30 mb-6 sm:mb-8 shadow-2xl shadow-blue-600/30">
-                <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                Technicien local dispatché à {cityInfo.name}
-              </div>
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-snug sm:leading-tight mb-4 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200 uppercase tracking-tight break-words">
-                {titleToUse} <br />
-                <span className="text-blue-500">{cityInfo.name}</span>
+                {titleToUse} <span className="text-blue-500">{cityInfo.name}</span>
               </h1>
               <p className="text-sm sm:text-lg md:text-2xl text-blue-100/80 mb-6 sm:mb-10 leading-relaxed max-w-2xl">
                 Besoin d'un expert pour{" "}
@@ -453,21 +448,21 @@ export default async function UnifiedZonePage({
               <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
                 <a
                   href="tel:0498 35 25 88"
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-6 py-3.5 sm:px-10 sm:py-6 rounded-2xl flex items-center justify-center gap-3 sm:gap-4 transition-all shadow-2xl shadow-red-600/40 hover:-translate-y-1 text-sm sm:text-lg group"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-black px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-red-600/30 hover:-translate-y-0.5 text-xs sm:text-base group"
                 >
-                  <PhoneCall className="w-5 h-5 sm:w-7 sm:h-7 animate-pulse group-hover:scale-110 transition-transform" />
+                  <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5 animate-pulse group-hover:scale-110 transition-transform" />
                   <div className="text-left">
-                    <span className="block text-[10px] sm:text-xs opacity-80 uppercase tracking-widest font-bold">
+                    <span className="block text-[9px] sm:text-[10px] opacity-80 uppercase tracking-widest font-bold">
                       Dépannage Urgent
                     </span>
-                    <span className="block text-base sm:text-xl">
+                    <span className="block text-sm sm:text-base font-bold">
                       0498 35 25 88
                     </span>
                   </div>
                 </a>
                 <a
                   href="#contact"
-                  className="w-full sm:w-auto text-center bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-6 py-3.5 sm:px-10 sm:py-6 rounded-2xl border border-white/20 transition text-sm sm:text-lg"
+                  className="w-full sm:w-auto text-center bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-bold px-5 py-3 sm:px-7 sm:py-3.5 rounded-xl border border-white/20 transition text-xs sm:text-base"
                 >
                   Demander un Devis
                 </a>
@@ -507,10 +502,10 @@ export default async function UnifiedZonePage({
                         href={`/zones-de-services/${serviceInfo.slug}/${sub.slug}/${cityInfo.slug}`}
                         className="p-6 bg-white/5 border border-white/10 rounded-2xl hover:border-blue-500/50 transition-all group"
                       >
-                        <h4 className="font-bold text-lg mb-2 group-hover:text-blue-400">
+                        <h4 className="font-bold text-xl sm:text-lg mb-2 group-hover:text-blue-400">
                           {sub.title}
                         </h4>
-                        <p className="text-sm text-slate-400">{sub.desc}</p>
+                        <p className="text-base sm:text-sm text-slate-300 sm:text-slate-400 leading-relaxed">{sub.desc}</p>
                       </Link>
                     ))}
                   </div>

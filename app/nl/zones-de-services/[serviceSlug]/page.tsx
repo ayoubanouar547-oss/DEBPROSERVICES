@@ -67,8 +67,7 @@ export default async function NlServiceZoneCategoryPage({
 
         <div className="mb-16">
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6">
-            Actiezones voor <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+            Actiezones voor <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
               {dutchService.title}
             </span>
           </h1>

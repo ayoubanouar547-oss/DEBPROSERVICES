@@ -8,7 +8,14 @@ export const metadata: Metadata = {
   keywords:
     "gratis offerte loodgieter, prijsindicatie ontstopping, prijs verwarmingsmonteur België, snelle offerte elektriciteit",
   alternates: {
-    canonical: "/nl/devis",
+    canonical: "https://debservices.canalrose.be/nl/devis",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be/devis",
+      "fr": "https://debservices.canalrose.be/devis",
+      "nl-BE": "https://debservices.canalrose.be/nl/devis",
+      "nl": "https://debservices.canalrose.be/nl/devis",
+      "x-default": "https://debservices.canalrose.be/devis",
+    },
   },
   openGraph: {
     title: "🚨 Ontvang uw Gratis Offerte in 5 Minuten ⚡",

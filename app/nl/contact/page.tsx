@@ -8,7 +8,14 @@ export const metadata: Metadata = {
   keywords:
     "contact loodgieter België, offerte ontstopping, spoedverwarming contact, telefoon",
   alternates: {
-    canonical: "/nl/contact",
+    canonical: "https://debservices.canalrose.be/nl/contact",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be/contact",
+      "fr": "https://debservices.canalrose.be/contact",
+      "nl-BE": "https://debservices.canalrose.be/nl/contact",
+      "nl": "https://debservices.canalrose.be/nl/contact",
+      "x-default": "https://debservices.canalrose.be/contact",
+    },
   },
   openGraph: {
     title: "🚨 Contacteer de Loodgieter & Verwarmings-expert ⚡",

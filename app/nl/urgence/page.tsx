@@ -11,7 +11,14 @@ export const metadata: Metadata = {
   keywords:
     "spoed loodgieter België, SOS ontstopping leiding, reparatie verwarmingsketel nacht, elektricien spoed 24u/24",
   alternates: {
-    canonical: "/nl/urgence",
+    canonical: "https://debservices.canalrose.be/nl/urgence",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be/urgence",
+      "fr": "https://debservices.canalrose.be/urgence",
+      "nl-BE": "https://debservices.canalrose.be/nl/urgence",
+      "nl": "https://debservices.canalrose.be/nl/urgence",
+      "x-default": "https://debservices.canalrose.be/urgence",
+    },
   },
   openGraph: {
     title: "🚨 Spoedinterventie 24/7 — Snelle Service ⚡",
@@ -71,9 +78,9 @@ export default function UrgencePage() {
           <div className="flex justify-center">
             <a
               href="tel:0498 35 25 88"
-              className="flex items-center gap-3 bg-white text-red-700 hover:bg-gray-100 px-8 py-4 md:px-10 md:py-5 rounded-2xl font-black text-xl md:text-2xl transition shadow-2xl active:scale-95"
+              className="flex items-center gap-3 bg-white text-red-700 hover:bg-gray-100 px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl font-black text-lg sm:text-2xl transition shadow-xl active:scale-95"
             >
-              <PhoneCall className="w-6 h-6 md:w-8 md:h-8 animate-pulse" /> 0498 35 25 88
+              <PhoneCall className="w-5 h-5 sm:w-7 sm:h-7 animate-pulse" /> 0498 35 25 88
             </a>
           </div>
         </div>

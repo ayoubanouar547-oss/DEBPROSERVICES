@@ -8,6 +8,16 @@ export const metadata: Metadata = {
     "PRO SERVICES en Belgique : plomberie, débouchage, chauffage, gaz, électricité, climatisation, ventilation VMC, caméras de surveillance, panneaux solaires, vidange fosse septique, toiture, rénovation, jardinage & vitres. Intervention rapide 24/7.",
   keywords:
     "plomberie Belgique, électricité Belgique, gaz Belgique, climatisation Belgique, ventilation VMC, caméras de surveillance, panneaux solaires photovoltaïques, débouchage canalisation, chauffage urgence, vidange fosse septique, rénovation maison, toiture, Belgique 24/7",
+  alternates: {
+    canonical: "https://debservices.canalrose.be",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be",
+      "fr": "https://debservices.canalrose.be",
+      "nl-BE": "https://debservices.canalrose.be/nl",
+      "nl": "https://debservices.canalrose.be/nl",
+      "x-default": "https://debservices.canalrose.be",
+    },
+  },
   openGraph: {
     title: "PRO SERVICES Belgique 🚀 Tous vos Services & Dépannages 24h/24",
     description:

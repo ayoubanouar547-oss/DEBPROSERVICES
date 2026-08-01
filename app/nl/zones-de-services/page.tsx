@@ -8,7 +8,14 @@ export const metadata: Metadata = {
   keywords:
     "interventiezones België, loodgieter Brussel, verwarmingsmonteur Luik, ontstopping Antwerpen, lokale service België",
   alternates: {
-    canonical: "/nl/zones-de-services",
+    canonical: "https://debservices.canalrose.be/nl/zones-de-services",
+    languages: {
+      "fr-BE": "https://debservices.canalrose.be/zones-de-services",
+      "fr": "https://debservices.canalrose.be/zones-de-services",
+      "nl-BE": "https://debservices.canalrose.be/nl/zones-de-services",
+      "nl": "https://debservices.canalrose.be/nl/zones-de-services",
+      "x-default": "https://debservices.canalrose.be/zones-de-services",
+    },
   },
   openGraph: {
     title: "🚨 Interventiezones — Snelle Actie ⚡",
