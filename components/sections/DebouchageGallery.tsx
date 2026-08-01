@@ -75,16 +75,6 @@ export function DebouchageGallery({ initialType = 'all', isNl = false }: Debouch
               className="object-cover group-hover:scale-105 transition-transform duration-500"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-              <div>
-                <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest block mb-1">
-                  {isNl ? img.categoryNl : img.category}
-                </span>
-                <h4 className="text-sm font-bold text-white uppercase tracking-tight">
-                  {isNl ? img.titleNl : img.title}
-                </h4>
-              </div>
-            </div>
           </div>
         ))}
       </div>
