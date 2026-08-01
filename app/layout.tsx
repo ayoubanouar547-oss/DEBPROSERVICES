@@ -5,9 +5,9 @@ import dynamic from "next/dynamic";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 import { ClientWidgets } from "@/components/layout/ClientWidgets";
 
+const MobileBottomNav = dynamic(() => import("@/components/layout/MobileBottomNav").then(m => m.MobileBottomNav));
 const PreFooterLinks = dynamic(() => import("@/components/layout/PreFooterLinks").then(m => m.PreFooterLinks));
 
 const inter = Inter({
@@ -140,7 +140,10 @@ export default function RootLayout({
           }}
         />
         <meta name="2bf92fe70e4abb4" content="6595b8b2d915664eda2b1efb495cd6e6" />
-
+        <link rel="dns-prefetch" href="https://debouchageexpress24hh.odoo.com" />
+        <link rel="dns-prefetch" href="https://deb-pro-service.odoo.com" />
+        <link rel="preconnect" href="https://debouchageexpress24hh.odoo.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.debouchageexpress24-24h.be" crossOrigin="anonymous" />
       </head>
       <body
         className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"

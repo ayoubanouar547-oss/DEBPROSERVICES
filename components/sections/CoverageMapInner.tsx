@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { Phone, MapPin, CheckCircle, ShieldAlert } from "lucide-react";
 
 // Geocoordinates and descriptions for our key service areas in Belgium
