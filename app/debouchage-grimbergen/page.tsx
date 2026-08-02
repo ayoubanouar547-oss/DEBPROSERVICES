@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -8,8 +9,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Déboucheur à Grimbergen — Débouchage Canalisation 24/7",
-  description: "Canalisation ou WC bouché à Grimbergen ? Intervention rapide en 30 min par nos déboucheurs agréés 24/7.",
+  title: ensureTitleLength("Déboucheur à Grimbergen — Débouchage Canalisation 24/7"),
+  description: ensureDescriptionLength("Canalisation ou WC bouché à Grimbergen ? Intervention rapide en 30 min par nos déboucheurs agréés 24/7."),
   alternates: {
     canonical: "/debouchage-grimbergen",
   },

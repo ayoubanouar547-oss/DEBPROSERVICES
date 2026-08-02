@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import ZonesDeServicesClient from "./ZonesDeServicesClient";
 
 export const metadata: Metadata = {
-  title: "Zones d'Intervention en Belgique — Service 24/7",
+  title: "Zones d'Intervention en Belgique — Plombier & Chauffagiste 24h",
   description:
-    "Villes et communes couvertes en Belgique pour la plomberie, le chauffage et le débouchage. Intervention rapide en 30 min.",
+    "Découvrez toutes les villes et communes couvertes en Belgique pour vos dépannages de plomberie, chauffage ou débouchage. Intervention express en 30 min.",
   keywords:
     "zones intervention Belgique, plombier Bruxelles, chauffagiste Liège, débouchage Anvers, service de proximité Belgique",
   alternates: {

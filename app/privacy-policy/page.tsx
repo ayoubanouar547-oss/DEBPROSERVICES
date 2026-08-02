@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politique de Confidentialité — RGPD",
+  title: "Politique de Confidentialité & Gestion des Données — RGPD Belge",
   description:
-    "Notre politique de confidentialité et de gestion des données personnelles (RGPD) en Belgique.",
+    "Consultez notre politique de confidentialité de PRO SERVICES. Protection complète de vos données personnelles et conformité RGPD pour nos clients belges.",
   alternates: {
     canonical: "/privacy-policy",
   },

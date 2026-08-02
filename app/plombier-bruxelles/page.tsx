@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin, ArrowRight } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -8,8 +9,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Plombier à Bruxelles — Dépannage & Urgence 24/7",
-  description: "Urgence plomberie à Bruxelles-Capitale ? Intervention en 30 min pour fuites d'eau, sanitaires et débouchages 24/7.",
+  title: ensureTitleLength("Plombier à Bruxelles — Dépannage & Urgence 24/7"),
+  description: ensureDescriptionLength("Urgence plomberie à Bruxelles-Capitale ? Intervention en 30 min pour fuites d'eau, sanitaires et débouchages 24/7."),
   alternates: {
     canonical: "/plombier-bruxelles",
   },

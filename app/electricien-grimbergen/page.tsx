@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Zap, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -6,8 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Électricien à Grimbergen — Dépannage & Conformité 24/7",
-  description: "Panne de courant ou mise en conformité AREI à Grimbergen. Électricien agréé disponible 24/7. Intervention rapide.",
+  title: ensureTitleLength("Électricien à Grimbergen — Dépannage & Conformité 24/7"),
+  description: ensureDescriptionLength("Panne de courant ou mise en conformité AREI à Grimbergen. Électricien agréé disponible 24/7. Intervention rapide."),
   alternates: {
     canonical: "/electricien-grimbergen",
   },

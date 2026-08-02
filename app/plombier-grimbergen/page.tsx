@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -8,8 +9,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Plombier à Grimbergen — Dépannage Rapide 24/7",
-  description: "Urgence plomberie à Grimbergen et Strombeek-Bever ? Intervention rapide en 30 min pour fuites d'eau et débouchages.",
+  title: ensureTitleLength("Plombier à Grimbergen — Dépannage Rapide 24/7"),
+  description: ensureDescriptionLength("Urgence plomberie à Grimbergen et Strombeek-Bever ? Intervention rapide en 30 min pour fuites d'eau et débouchages."),
   alternates: {
     canonical: "/plombier-grimbergen",
   },

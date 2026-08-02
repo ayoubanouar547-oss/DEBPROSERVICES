@@ -3,9 +3,9 @@ import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "À Propos — Plomberie & Chauffage en Belgique",
+  title: "À Propos de PRO SERVICES — Experts Plombiers & Chauffagistes",
   description:
-    "Experts en plomberie, chauffage et débouchage en Belgique depuis 15 ans. Techniciens agréés disponibles 24/7.",
+    "Découvrez l'histoire de PRO SERVICES, experts en plomberie, chauffage et débouchage en Belgique. Nos techniciens agréés belges sont disponibles 24/7.",
   keywords:
     "entreprise plomberie Belgique, plombier Bruxelles expert, chauffagiste Wallonie certifié, histoire",
   alternates: {

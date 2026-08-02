@@ -4,6 +4,7 @@ import { belgianCities } from "@/lib/data/cities";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight, MapPin, Search } from "lucide-react";
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 
 export function generateStaticParams() {
   return services.map((service) => ({
@@ -22,9 +23,12 @@ export async function generateMetadata({
   if (!service) return {};
 
   const path = `/zones-de-services/${service.slug}`;
+  const finalTitle = ensureTitleLength(`${service.title} Belgique — Zones d'Intervention 24/7`);
+  const finalDesc = ensureDescriptionLength(`Découvrez les villes couvertes en Belgique pour vos travaux de ${service.title.toLowerCase()}. Intervention rapide 24/7.`);
+
   return {
-    title: `${service.title} Belgique — Zones d'Intervention 24/7`,
-    description: `Découvrez les villes couvertes en Belgique pour vos travaux de ${service.title.toLowerCase()}. Intervention rapide 24/7.`,
+    title: finalTitle,
+    description: finalDesc,
     keywords: `zones intervention ${service.title.toLowerCase()}, plombier ${service.title}, dépannage ${service.title} Belgique`,
     alternates: {
       canonical: path,

@@ -9,7 +9,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
-import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
+import { getProfessionMetaTitle, ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
@@ -56,7 +56,7 @@ export async function generateMetadata({
 
     const title = getProfessionMetaTitle(service.id || service.slug, cityInfo.name, true);
 
-    const description = `Nood aan een expert in ${matchedTerm.toLowerCase()} in ${cityInfo.name}? PRO SERVICES biedt snelle interventies, gratis offertes en hoogwaardige diensten.`;
+    const description = ensureDescriptionLength(`Nood aan een expert in ${matchedTerm.toLowerCase()} in ${cityInfo.name}? PRO SERVICES biedt snelle interventies, gratis offertes en hoogwaardige diensten.`);
 
     return {
       title,
@@ -149,9 +149,12 @@ export async function generateMetadata({
 
   const ogTitle = metaTitle;
 
+  const finalTitle = ensureTitleLength(metaTitle);
+  const finalDesc = ensureDescriptionLength(description);
+
   return {
-    title: metaTitle,
-    description,
+    title: finalTitle,
+    description: finalDesc,
     keywords: `${service.title} België, ${service.title} 24h/24, expert ${service.title}, gratis offerte ${service.title}, zonnepanelen installatie, dakwerken belgie, ruitenwasser belgie, camerabewaking belgie, metselwerk belgie`,
     alternates: {
       canonical: `https://debservices.canalrose.be/nl/${service.slug}`,
@@ -165,7 +168,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: ogTitle,
-      description,
+      description: finalDesc,
       url: `https://debservices.canalrose.be/nl/${service.slug}`,
       images: [
         {

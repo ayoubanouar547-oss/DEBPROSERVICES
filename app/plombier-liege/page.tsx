@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Clock, ShieldCheck, MapPin, ChevronRight } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -8,8 +9,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Plombier à Liège — Dépannage & Urgence 24/7",
-  description: "Besoin d'un plombier à Liège ? Intervention rapide en 30 min pour fuites d'eau, débouchages et sanitaires 24/7.",
+  title: ensureTitleLength("Plombier à Liège — Dépannage & Urgence 24/7"),
+  description: ensureDescriptionLength("Besoin d'un plombier à Liège ? Intervention rapide en 30 min pour fuites d'eau, débouchages et sanitaires 24/7."),
   alternates: {
     canonical: "/plombier-liege",
   },

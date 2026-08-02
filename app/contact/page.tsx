@@ -2,9 +2,9 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact & Dépannage Rapide 24/7 Belgique",
+  title: "Contactez-nous pour un Dépannage Rapide 24/7 en Belgique — Devis",
   description:
-    "Contactez nos techniciens agréés pour vos travaux et urgences en plomberie, chauffage et débouchage en Belgique.",
+    "Contactez dès maintenant nos techniciens belges agréés pour tous vos travaux de plomberie, chauffage, électricité et débouchage. Devis gratuit immédiat.",
   keywords:
     "contact plombier Belgique, devis débouchage, urgence chauffage contact, téléphone",
   alternates: {

@@ -12,7 +12,7 @@ import Image from "next/image";
 import { matchServiceAndCity } from "@/lib/service-matcher";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
-import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
+import { getProfessionMetaTitle, ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { getAlternatePath } from "@/lib/data/translations";
 
 // Helper function to dynamically parse service and city combinations for all of Belgium
@@ -58,7 +58,7 @@ export async function generateMetadata({
 
     const title = getProfessionMetaTitle(service.slug, cityInfo.name);
 
-    const description = `Besoin d'un expert en ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? PRO SERVICES propose des interventions rapides, devis gratuit et prestations de haute qualité.`;
+    const description = ensureDescriptionLength(`Besoin d'un expert en ${matchedTerm.toLowerCase()} à ${cityInfo.name} ? PRO SERVICES propose des interventions rapides, devis gratuit et prestations de haute qualité.`);
 
     const nlSlugPath = getAlternatePath(`/${resolvedParams.serviceSlug}`, 'nl');
 
@@ -168,9 +168,12 @@ export async function generateMetadata({
 
   const defaultNlPath = getAlternatePath(`/${service.slug}`, 'nl');
 
+  const finalTitle = ensureTitleLength(metaTitle);
+  const finalDesc = ensureDescriptionLength(description);
+
   return {
-    title: metaTitle,
-    description,
+    title: finalTitle,
+    description: finalDesc,
     keywords: `${service.title} Belgique, ${service.title} 24h/24, expert ${service.title}, devis gratuit ${service.title}, installation solaire belgique, toiture belgique, couvreur belgique, cameras de surveillance belgique, securite maison belgique`,
     alternates: {
       canonical: `https://debservices.canalrose.be/${service.slug}`,
@@ -184,7 +187,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: ogTitle,
-      description,
+      description: finalDesc,
       url: `https://debservices.canalrose.be/${service.slug}`,
       images: [
         {

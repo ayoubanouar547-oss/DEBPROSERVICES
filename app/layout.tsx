@@ -113,8 +113,13 @@ export default function RootLayout({
       className={`${inter.variable} ${oswald.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <script
+      <body
+        className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
+        suppressHydrationWarning
+      >
+        <Script
+          id="theme-loader"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -158,7 +163,9 @@ export default function RootLayout({
             `,
           }}
         />
-        <script
+        <Script
+          id="clarity-script"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function(c,l,a,r,i,t,y){
@@ -177,11 +184,7 @@ export default function RootLayout({
             `,
           }}
         />
-      </head>
-      <body
-        className="antialiased font-body min-h-screen flex flex-col selection:bg-primary selection:text-white relative bg-[#000814] text-white"
-        suppressHydrationWarning
-      >
+
         {/* Advanced Background Animation blobs - Professional Blue/Cyan Palette */}
         <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#000814]">
           <div className="absolute top-[-20%] left-[-10%] w-[900px] h-[900px] bg-blue-700/20 rounded-full blur-[150px] animate-blob"></div>

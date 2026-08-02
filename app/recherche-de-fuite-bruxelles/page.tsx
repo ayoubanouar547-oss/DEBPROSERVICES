@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Search, Droplet, MapPin, ShieldCheck, ArrowRight } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -8,8 +9,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Recherche de Fuite à Bruxelles — Détection Non Destructive 24/7",
-  description: "Fuite d'eau invisible à Bruxelles ? Détection non destructive sans casse. Rapport officiel pour assurance.",
+  title: ensureTitleLength("Recherche de Fuite à Bruxelles — Détection Non Destructive 24/7"),
+  description: ensureDescriptionLength("Fuite d'eau invisible à Bruxelles ? Détection non destructive sans casse. Rapport officiel pour assurance."),
   alternates: {
     canonical: "/recherche-de-fuite-bruxelles",
   },

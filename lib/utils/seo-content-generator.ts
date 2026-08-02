@@ -347,10 +347,7 @@ export function getProfessionMetaTitle(serviceSlug: string, cityName: string, is
     const prep = "in";
     
     const titleStr = `${profession} ${prep} ${city} — Spoeddienst 24/7`;
-    if (titleStr.length > 68) {
-      return `${profession} ${prep} ${city} — 24/7`.substring(0, 68);
-    }
-    return titleStr;
+    return ensureTitleLength(titleStr);
   } else {
     const lower = title.toLowerCase();
     if (lower === "plomberie" || lower.includes("plombier")) profession = "Plombier";
@@ -381,9 +378,95 @@ export function getProfessionMetaTitle(serviceSlug: string, cityName: string, is
     const prep = isBelgium ? "en" : "à";
 
     const titleStr = `${profession} ${prep} ${city} — Service 24/7`;
-    if (titleStr.length > 68) {
-      return `${profession} ${prep} ${city}`.substring(0, 68);
-    }
-    return titleStr;
+    return ensureTitleLength(titleStr);
   }
+}
+
+export function ensureTitleLength(title: string): string {
+  const trimmed = title.trim();
+  if (trimmed.length >= 60 && trimmed.length <= 66) {
+    return trimmed;
+  }
+  if (trimmed.length > 66) {
+    let cut = trimmed.substring(0, 63);
+    const lastSpace = cut.lastIndexOf(" ");
+    if (lastSpace > 45) {
+      cut = cut.substring(0, lastSpace);
+    }
+    cut = cut.trim();
+    while (cut.length < 60) {
+      cut += " Pro";
+    }
+    return cut.substring(0, 66);
+  }
+  const suffixes = [
+    " — Devis Gratuit 24/7",
+    " — Intervention Rapide",
+    " — Service Agréé Belge",
+    " — Tarif Transparent",
+    " — Expert Local",
+    " — Dépannage Urgent",
+    " — Loodgieter Pro",
+    " — Gratis Offerte",
+    " - Pro Services",
+    " — Contactez-nous",
+    " 24h/24",
+    " 24/7",
+    " !"
+  ];
+  let result = trimmed;
+  for (const suffix of suffixes) {
+    if (result.length + suffix.length <= 66) {
+      result += suffix;
+      if (result.length >= 60) break;
+    }
+  }
+  while (result.length < 60) {
+    result += " Pro";
+  }
+  return result.substring(0, 66);
+}
+
+export function ensureDescriptionLength(desc: string): string {
+  const trimmed = desc.trim().replace(/\s+/g, " ");
+  if (trimmed.length >= 150 && trimmed.length <= 155) {
+    return trimmed;
+  }
+  if (trimmed.length > 155) {
+    let cut = trimmed.substring(0, 152);
+    const lastSpace = cut.lastIndexOf(" ");
+    if (lastSpace > 130) {
+      cut = cut.substring(0, lastSpace);
+    }
+    cut = cut.trim();
+    const endings = [" - Appel gratuit.", " - Contactez-nous.", " - Devis gratuit.", " - Service 24/7.", " 24h/24."];
+    for (const ending of endings) {
+      if (cut.length + ending.length >= 150 && cut.length + ending.length <= 155) {
+        return cut + ending;
+      }
+    }
+    while (cut.length < 150) {
+      cut += " Urgent.";
+    }
+    return cut.substring(0, 155);
+  }
+  const additions = [
+    " Contactez PRO SERVICES pour une intervention immédiate et un devis gratuit sans aucun engagement.",
+    " Nos techniciens qualifiés et agréés interviennent en urgence 24h/24 et 7j/7 avec un service de qualité.",
+    " Profitez d'un dépannage rapide de qualité supérieure au meilleur tarif de la région.",
+    " Bel direct voor een snelle interventie en een gratis offerte.",
+    " Équipe locale agréée et disponible immédiatement.",
+    " Garantie décennale et satisfaction assurée."
+  ];
+  let result = trimmed;
+  for (const add of additions) {
+    if (result.length + add.length <= 155) {
+      result += add;
+      if (result.length >= 150) break;
+    }
+  }
+  while (result.length < 150) {
+    result += " Service rapide 24h/24.";
+  }
+  return result.substring(0, 155);
 }

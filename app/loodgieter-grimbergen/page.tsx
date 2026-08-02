@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -8,8 +9,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Loodgieter in Grimbergen — Spoeddienst 24/7",
-  description: "Dringende loodgieter nodig in Grimbergen? Binnen 30 minuten ter plaatse voor lekken, sanitair en ontstoppingen.",
+  title: ensureTitleLength("Loodgieter in Grimbergen — Spoeddienst 24/7"),
+  description: ensureDescriptionLength("Dringende loodgieter nodig in Grimbergen? Binnen 30 minuten ter plaatse voor lekken, sanitair en ontstoppingen."),
   alternates: {
     canonical: "/loodgieter-grimbergen",
   },

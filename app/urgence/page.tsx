@@ -5,9 +5,9 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dépannage d'Urgence 24/7 — Plomberie Belgique",
+  title: "Dépannage d'Urgence 24/7 en Belgique — Plomberie & Chauffage",
   description:
-    "Dépannage d'urgence 24/7 en Belgique : plomberie, chauffage et débouchage. Techniciens agréés sur place en 30 minutes.",
+    "PRO SERVICES : Dépannage d'urgence 24/7 en Belgique pour plomberie, chauffage, électricité et débouchage. Techniciens belges agréés sur place en 30 min.",
   keywords:
     "urgence plombier Belgique, SOS débouchage canalisation, réparation chaudière nuit, électricien urgent 24h/24",
   alternates: {

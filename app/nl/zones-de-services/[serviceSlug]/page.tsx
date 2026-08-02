@@ -7,6 +7,7 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import { frToNlCitySlugMap, frToNlCityNameMap } from "@/lib/data/translations";
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 
 export function generateStaticParams() {
   return [];
@@ -24,9 +25,12 @@ export async function generateMetadata({
     "nl"
   );
 
+  const finalTitle = ensureTitleLength(`${dutchService.title} België — Interventiezones 24/7`);
+  const finalDesc = ensureDescriptionLength(`Ontdek alle steden in België voor uw ${dutchService.title.toLowerCase()}. Erkende technici en snelle 24/7 service.`);
+
   return {
-    title: `${dutchService.title} België — Interventiezones 24/7`,
-    description: `Ontdek alle steden in België voor uw ${dutchService.title.toLowerCase()}. Erkende technici en snelle 24/7 service.`,
+    title: finalTitle,
+    description: finalDesc,
     alternates: { canonical: `/nl/zones-de-services/${resolvedParams.serviceSlug}` },
   };
 }

@@ -4,9 +4,9 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Loodgieter, Ontstopping & Verwarming België 24/7",
+  title: "Loodgieter, Ontstopping & Verwarming België — PRO SERVICES 24/7",
   description:
-    "Spoeddienst 24/7 in België: loodgieter, ontstopping, verwarming en elektriciteit. Erkende vakmensen ter plaatse in 30 minuten.",
+    "PRO SERVICES België: Loodgieter, ontstopping en verwarming spoeddienst 24/7. Onze erkende vakmensen zijn snel ter plaatse met een hoogwaardige service.",
   alternates: {
     canonical: "https://debservices.canalrose.be/nl",
     languages: {

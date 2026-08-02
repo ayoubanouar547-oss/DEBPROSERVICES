@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentions Légales — Plateforme d'Artisans Agréés",
+  title: "Mentions Légales & Conditions de PRO SERVICES — Artisans Belges",
   description:
-    "Informations juridiques légales sur notre société, expert en dépannage en Belgique.",
+    "Consultez les informations juridiques et mentions légales concernant la société PRO SERVICES, votre plateforme d'artisans dépanneurs agréés en Belgique.",
   alternates: {
     canonical: "/mentions-legales",
   },

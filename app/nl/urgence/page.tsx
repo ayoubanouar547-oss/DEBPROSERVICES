@@ -5,9 +5,9 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Spoeddienst 24/7 — Loodgieter & Verwarming België",
+  title: "Spoeddienst 24/7 in België — Loodgieter, Verwarming & Ontstopping",
   description:
-    "Dringende ontstopping, loodgieter en verwarming in België 24/7. Technici ter plaatse binnen 30 minuten.",
+    "PRO SERVICES: Spoeddienst 24/7 in België voor dringende ontstopping, loodgieter, verwarming of elektriciteit. Onze technici zijn binnen 30 min ter plaatse.",
   keywords:
     "spoed loodgieter België, SOS ontstopping leiding, reparatie verwarmingsketel nacht, elektricien spoed 24u/24",
   alternates: {

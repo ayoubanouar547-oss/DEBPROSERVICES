@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Flame, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -6,8 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Chauffagiste à Grimbergen — Dépannage & Entretien 24/7",
-  description: "Dépannage chaudière à Grimbergen et Strombeek-Bever. Chauffagiste agréé pour entretien, pannes et installations 24/7.",
+  title: ensureTitleLength("Chauffagiste à Grimbergen — Dépannage & Entretien 24/7"),
+  description: ensureDescriptionLength("Dépannage chaudière à Grimbergen et Strombeek-Bever. Chauffagiste agréé pour entretien, pannes et installations 24/7."),
   alternates: {
     canonical: "/chauffagiste-grimbergen",
   },

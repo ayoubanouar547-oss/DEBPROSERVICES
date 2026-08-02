@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Building, MapPin, Wind } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -6,8 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Installateur VMC Belgique — Pose & Entretien Ventilation",
-  description: "Installation et entretien de VMC simple et double flux en Belgique. Techniciens agréés pour une ventilation optimale.",
+  title: ensureTitleLength("Installateur VMC Belgique — Pose & Entretien Ventilation"),
+  description: ensureDescriptionLength("Installation et entretien de VMC simple et double flux en Belgique. Techniciens agréés pour une ventilation optimale."),
   alternates: {
     canonical: "/installateur-vmc",
   },

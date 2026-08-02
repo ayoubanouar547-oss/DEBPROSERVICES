@@ -1,4 +1,4 @@
-import { buildLongClusterText, getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
+import { buildLongClusterText, getProfessionMetaTitle, ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { services } from "@/lib/data/services";
 import { getAlternatePath } from "@/lib/data/translations";
@@ -51,9 +51,12 @@ export async function generateMetadata({
 
   const nlSubPath = getAlternatePath(`/${service.slug}/${subService.slug}`, 'nl');
 
+  const finalTitle = getProfessionMetaTitle(subService.slug, "Belgique");
+  const finalDesc = ensureDescriptionLength(`Besoin d'un expert pour : ${subService.title} ? ${subService.desc} Techniciens agrées avec intervention en urgence 24h/24 et 7j/7 partout en Belgique.`);
+
   return {
-    title: getProfessionMetaTitle(subService.slug, "Belgique"),
-    description: `Besoin d'un expert pour : ${subService.title} ? ${subService.desc} Techniciens agrées avec intervention en urgence 24h/24 et 7j/7 partout en Belgique.`,
+    title: finalTitle,
+    description: finalDesc,
     keywords: `${subService.title} Belgique, ${subService.title} urgent, expert ${subService.title.toLowerCase()}, dépannage 24h/24, ${service.title} Belgique`,
     alternates: {
       canonical: `https://debservices.canalrose.be/${service.slug}/${subService.slug}`,

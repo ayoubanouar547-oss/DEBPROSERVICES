@@ -9,7 +9,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import Link from "next/link";
 import { belgianCities } from "@/lib/data/cities";
 import Image from "next/image";
-import { getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
+import { getProfessionMetaTitle, ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { PaintingGallery } from "@/components/sections/PaintingGallery";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
@@ -69,9 +69,12 @@ export async function generateMetadata({
 
   const frSlugPath = getAlternatePath(`/nl/${resolvedParams.serviceSlug}/${resolvedParams.subServiceSlug}`, 'fr');
 
+  const finalTitle = getProfessionMetaTitle(subService.slug, "België", true);
+  const finalDesc = ensureDescriptionLength(`Nood aan een expert voor ${subService.title.toLowerCase()}? ${subService.desc} Erkende technici met 24/7 spoedinterventie in heel België.`);
+
   return {
-    title: getProfessionMetaTitle(subService.slug, "België", true),
-    description: `Nood aan een expert voor ${subService.title.toLowerCase()}? ${subService.desc} Erkende technici met 24/7 spoedinterventie in heel België.`,
+    title: finalTitle,
+    description: finalDesc,
     keywords: `${subService.title} België, ${subService.title} spoed, expert ${subService.title.toLowerCase()}, reparatie 24h/24, ${service.title} België`,
     alternates: {
       canonical: `https://debservices.canalrose.be/nl/${service.slug}/${subService.slug}`,

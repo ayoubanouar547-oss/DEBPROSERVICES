@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -8,8 +9,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Vidange Fosse Septique Liège — Pompage & Curage 24/7",
-  description: "Fosse septique pleine à Liège ? Intervention rapide 24h/24 pour vidange, pompage et curage. Camion hydrocureur.",
+  title: ensureTitleLength("Vidange Fosse Septique Liège — Pompage & Curage 24/7"),
+  description: ensureDescriptionLength("Fosse septique pleine à Liège ? Intervention rapide 24h/24 pour vidange, pompage et curage. Camion hydrocureur."),
   alternates: {
     canonical: "/vidange-fosse-septique-liege",
   },

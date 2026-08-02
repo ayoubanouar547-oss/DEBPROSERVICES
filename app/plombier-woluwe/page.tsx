@@ -1,3 +1,4 @@
+import { ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { Metadata } from "next";
 import { PhoneCall, CheckCircle, Wrench, Droplet, Building, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -8,8 +9,8 @@ import Link from "next/link";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
 export const metadata: Metadata = {
-  title: "Plombier à Woluwe — Dépannage Rapide 24/7",
-  description: "Urgence plomberie à Woluwe-Saint-Pierre et Woluwe-Saint-Lambert ? Intervention en 30 min pour fuites et débouchages.",
+  title: ensureTitleLength("Plombier à Woluwe — Dépannage Rapide 24/7"),
+  description: ensureDescriptionLength("Urgence plomberie à Woluwe-Saint-Pierre et Woluwe-Saint-Lambert ? Intervention en 30 min pour fuites et débouchages."),
   alternates: {
     canonical: "/plombier-woluwe",
   },

@@ -16,7 +16,7 @@ import { ServiceSeoText } from "@/components/sections/ServiceSeoText";
 import { FAQ } from "@/components/sections/FAQ";
 import Image from "next/image";
 import { paintingImages } from "@/lib/data/gallery-images";
-import { buildLongNlClusterText, getProfessionMetaTitle } from "@/lib/utils/seo-content-generator";
+import { buildLongNlClusterText, getProfessionMetaTitle, ensureTitleLength, ensureDescriptionLength } from "@/lib/utils/seo-content-generator";
 import { frToNlCitySlugMap, frToNlCityNameMap, dutchServices } from "@/lib/data/translations";
 import { DebouchageGallery } from "@/components/sections/DebouchageGallery";
 
@@ -59,7 +59,7 @@ export async function generateMetadata({
   if (dutchSubService && cityInfo) {
     const subSlug = dutchSubService.slug || serviceSlug;
     const title = getProfessionMetaTitle(subSlug, cityInfo.name, true);
-    const description = `Expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie 24/7 door erkende technici.`;
+    const description = ensureDescriptionLength(`Expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle interventie 24/7 door erkende technici.`);
     return {
       title,
       description,
@@ -76,7 +76,7 @@ export async function generateMetadata({
   if (dutchSubService) {
     const subSlug = dutchSubService.slug || serviceSlug;
     const title = getProfessionMetaTitle(subSlug, "België", true);
-    const description = `Ontdek alle Belgische steden waar wij tussenbeide komen voor uw ${titleToUse.toLowerCase()}. Snelle service 24u/24.`;
+    const description = ensureDescriptionLength(`Ontdek alle Belgische steden waar wij tussenbeide komen voor uw ${titleToUse.toLowerCase()}. Snelle service 24u/24.`);
     return {
       title,
       description,
@@ -92,7 +92,7 @@ export async function generateMetadata({
 
   if (cityInfo) {
     const title = getProfessionMetaTitle(serviceSlug, cityInfo.name, true);
-    const description = `Erkend expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle 24/7 interventie door professionele technici.`;
+    const description = ensureDescriptionLength(`Erkend expert in ${titleToUse.toLowerCase()} in ${cityInfo.name}. Snelle 24/7 interventie door professionele technici.`);
     return {
       title,
       description,
@@ -108,7 +108,7 @@ export async function generateMetadata({
 
   return {
     title: getProfessionMetaTitle(serviceSlug, "België", true),
-    description: `Expert in ${dutchService.title.toLowerCase()} in heel België. Transparante tarieven en 24/7 spoed service.`,
+    description: ensureDescriptionLength(`Expert in ${dutchService.title.toLowerCase()} in heel België. Transparante tarieven en 24/7 spoed service.`),
     alternates: { canonical: path },
   };
 }
